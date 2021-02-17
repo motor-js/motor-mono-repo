@@ -17,11 +17,6 @@
 - Easy flag to expose the Capability APIs
 
 
-## What is Motor js
-
-A collection of Hooks, Utilities and a few Components which hugely simplify how to build Qlik mashups in React. Check out our Docs for more information and details of how to get started.
-
-
 ## Previous Version
 
 - You can find our previous release, including charts & components here, and documentation here. 
