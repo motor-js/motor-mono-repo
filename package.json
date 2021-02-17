@@ -1,0 +1,18 @@
+{
+  "name": "mono-test",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "microbundle": "^0.13.0"
+  },
+  "scripts": {
+    "start": "lerna run start --parallel"
+  }
+}
