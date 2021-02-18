@@ -43,7 +43,6 @@ const Child = ({ engine }) => {
     select,
     applyPatches,
   } = useHyperCube({
-    engine,
     cols,
     //qColumnOrder: columnOrder,
     //qCalcCondition: calcCondition,
