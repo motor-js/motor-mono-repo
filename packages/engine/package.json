@@ -1,5 +1,7 @@
 {
   "name": "@motor-js/engine",
+  "license": "Apache 2.0",
+  "private": false,
   "version": "0.0.1-alpha.0",
   "main": "lib/index.js",
   "umd:main": "lib/engine.js",
@@ -14,5 +16,6 @@
   },
   "dependencies": {
     "enigma.js": "^2.6.3"
-  }
+  },
+  "gitHead": "20fae298e39d0aa348fbc58fd5e65ece75f21822"
 }
