@@ -3,16 +3,17 @@ import {
   LAYOUT_TYPE,
   LAYOUT_TYPE_FULL,
   NAV_STYLE,
-  NAV_STYLE_FIXED,
+  NAV_STYLE_ABOVE_HEADER,
   THEME_COLOR,
   THEME_TYPE,
-  THEME_TYPE_SEMI_DARK
+  NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
+  THEME_TYPE_LITE
 } from "constants/ThemeSetting";
 
 const initialSettings = {
-  navStyle: NAV_STYLE_FIXED,
+  navStyle: NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
   layoutType: LAYOUT_TYPE_FULL,
-  themeType: THEME_TYPE_SEMI_DARK,
+  themeType: THEME_TYPE_LITE,
   themeColor: THEME_COLOR,
 
   isDirectionRTL: false,
