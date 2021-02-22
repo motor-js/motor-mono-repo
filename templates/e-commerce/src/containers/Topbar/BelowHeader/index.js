@@ -7,10 +7,9 @@ import SearchBox from "components/SearchBox";
 import UserInfo from "components/UserInfo";
 import AppNotification from "components/AppNotification";
 import MailNotification from "components/MailNotification";
-import {switchLanguage, toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
+import {toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
 import HorizontalNav from "../HorizontalNav";
 import {Link} from "react-router-dom";
-import IntlMessages from "util/IntlMessages";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
 
 const {Header} = Layout;
@@ -44,10 +43,8 @@ const BelowHeader = () => {
     <CustomScrollbars className="gx-popover-lang-scroll">
       <ul className="gx-sub-popover">
         {languageData.map(language =>
-          <li className="gx-media gx-pointer" key={JSON.stringify(language)} onClick={(e) =>
-            dispatch(switchLanguage(language))
-          }>
-            <i className={`flag flag-24 gx-mr-2 flag-${language.icon}`}/>
+          <li className="gx-media gx-pointer" key={JSON.stringify(language)}>
+            {/*<i className={`flag flag-24 gx-mr-2 flag-${language.icon}`}/> */}
             <span className="gx-language-text">{language.name}</span>
           </li>
         )}
@@ -65,7 +62,7 @@ const BelowHeader = () => {
           <div className="gx-header-horizontal-top-flex">
             <div className="gx-header-horizontal-top-left">
               <i className="icon icon-alert gx-mr-3"/>
-              <p className="gx-mb-0 gx-text-truncate"><IntlMessages id="app.announced"/></p>
+              <p className="gx-mb-0 gx-text-truncate"></p>
             </div>
             <ul className="gx-login-list">
               <li>Login</li>
@@ -141,9 +138,9 @@ const BelowHeader = () => {
               <li className="gx-language">
                 <Popover overlayClassName="gx-popover-horizantal" placement="bottomRight"
                          content={languageMenu()} trigger="click">
-              <span className="gx-pointer gx-flex-row gx-align-items-center"><i
-                className={`flag flag-24 flag-${locale.icon}`}/>
-              </span>
+             {/* <span className="gx-pointer gx-flex-row gx-align-items-center"><i
+                className={`flag flag-24 flag-${locale.icon}`}/> 
+              </span> */}
                 </Popover>
               </li>
               <li className="gx-user-nav"><UserInfo/></li>

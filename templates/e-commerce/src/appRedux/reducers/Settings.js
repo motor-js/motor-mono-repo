@@ -7,22 +7,17 @@ import {
   THEME_COLOR,
   THEME_TYPE,
   NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
+  NAV_STYLE_BELOW_HEADER,
   THEME_TYPE_LITE
 } from "constants/ThemeSetting";
 
 const initialSettings = {
-  navStyle: NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
+  navStyle: NAV_STYLE_BELOW_HEADER,
   layoutType: LAYOUT_TYPE_FULL,
   themeType: THEME_TYPE_LITE,
   themeColor: THEME_COLOR,
 
   isDirectionRTL: false,
-  locale: {
-    languageId: 'english',
-    locale: 'en',
-    name: 'English',
-    icon: 'us'
-  }
 };
 
 const settings = (state = initialSettings, action) => {
@@ -51,12 +46,6 @@ const settings = (state = initialSettings, action) => {
         layoutType: action.layoutType
       };
 
-    case SWITCH_LANGUAGE:
-      return {
-        ...state,
-        locale: action.payload,
-
-      };
     default:
       return state;
   }

@@ -4,7 +4,6 @@ import URLSearchParams from "url-search-params";
 import { Redirect, Route } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import { IntlProvider } from "react-intl";
-import AppLocale from "lngProvider";
 import MainApp from "./MainApp";
 import {
   onLayoutTypeChange,
@@ -92,16 +91,9 @@ const App = (props) => {
 
   setNavStyle(navStyle);
   
-  const currentAppLocale = AppLocale[locale.locale];
-  
   return (
     <ConfigProvider>
-    <IntlProvider
-        locale={currentAppLocale.locale}
-        messages={currentAppLocale.messages}
-      >
         <Route path={`${match.url}`} component={MainApp} />
-      </IntlProvider>  
     </ConfigProvider>
   );
 };

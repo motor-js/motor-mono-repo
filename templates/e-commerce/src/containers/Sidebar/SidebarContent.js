@@ -11,7 +11,6 @@ import {
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
   THEME_TYPE_LITE,
 } from "constants/ThemeSetting";
-import IntlMessages from "util/IntlMessages";
 import { useSelector } from "react-redux";
 
 const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
@@ -59,7 +58,7 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               <Link to="/crypto">
                 <i className="icon icon-crypto" />
                 <span>
-                  { <IntlMessages id="sidebar.dashboard.crypto" /> }
+                  {/* <IntlMessages id="sidebar.dashboard.crypto" /> */}
                   Crypto
                 </span>
               </Link>
@@ -68,7 +67,7 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               <Link to="/crm">
                 <i className="icon icon-crm" />
                 <span>
-                  { <IntlMessages id="sidebar.dashboard.crm" /> }
+                  {/* <IntlMessages id="sidebar.dashboard.crm" /> */}
                   CRM
                 </span>
               </Link>

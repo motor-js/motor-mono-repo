@@ -10,8 +10,7 @@ import AppNotification from "components/AppNotification";
 import MailNotification from "components/MailNotification";
 import {Link} from "react-router-dom";
 import HorizontalNav from "../HorizontalNav";
-import {switchLanguage, toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
-import IntlMessages from "util/IntlMessages";
+import {toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
 
 const {Header} = Layout;
 
@@ -45,9 +44,7 @@ const HorizontalDark = () => {
     <CustomScrollbars className="gx-popover-lang-scroll">
       <ul className="gx-sub-popover">
         {languageData.map(language =>
-          <li className="gx-media gx-pointer" key={JSON.stringify(language)} onClick={(e) =>
-            dispatch(switchLanguage(language))
-          }>
+          <li className="gx-media gx-pointer" key={JSON.stringify(language)}>
             <i className={`flag flag-24 gx-mr-2 flag-${language.icon}`}/>
             <span className="gx-language-text">{language.name}</span>
           </li>
@@ -66,7 +63,7 @@ const HorizontalDark = () => {
           <div className="gx-header-horizontal-top-flex">
             <div className="gx-header-horizontal-top-left">
               <i className="icon icon-alert gx-mr-3"/>
-              <p className="gx-mb-0 gx-text-truncate"><IntlMessages id="app.announced"/></p>
+              <p className="gx-mb-0 gx-text-truncate"></p>
             </div>
             <ul className="gx-login-list">
               <li>Login</li>

@@ -10,7 +10,7 @@ import AppNotification from "components/AppNotification";
 import MailNotification from "components/MailNotification";
 import HorizontalNav from "../HorizontalNav";
 import {Link} from "react-router-dom";
-import {switchLanguage, toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
+import {toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
 
 const {Header} = Layout;
 const Option = Select.Option;
@@ -42,9 +42,7 @@ const HorizontalDefault = () => {
     <CustomScrollbars className="gx-popover-lang-scroll">
       <ul className="gx-sub-popover">
         {languageData.map(language =>
-          <li className="gx-media gx-pointer" key={JSON.stringify(language)} onClick={(e) =>
-            dispatch(switchLanguage(language))
-          }>
+          <li className="gx-media gx-pointer" key={JSON.stringify(language)}>
             <i className={`flag flag-24 gx-mr-2 flag-${language.icon}`}/>
             <span className="gx-language-text">{language.name}</span>
           </li>
