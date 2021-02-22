@@ -1,4 +1,4 @@
-import {SWITCH_LANGUAGE, TOGGLE_COLLAPSED_NAV, WINDOW_WIDTH} from "constants/ActionTypes";
+import {TOGGLE_COLLAPSED_NAV, WINDOW_WIDTH} from "constants/ActionTypes";
 import {LAYOUT_TYPE, NAV_STYLE, THEME_COLOR, THEME_TYPE} from "constants/ThemeSetting";
 
 export function toggleCollapsedSideNav(navCollapsed) {
@@ -37,11 +37,3 @@ export function onLayoutTypeChange(layoutType) {
   }
 }
 
-export function switchLanguage(locale) {
-  return (dispatch) => {
-    dispatch({
-      type: SWITCH_LANGUAGE,
-      payload: locale
-    });
-  }
-}

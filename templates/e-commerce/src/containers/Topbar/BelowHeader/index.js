@@ -36,7 +36,6 @@ const BelowHeader = () => {
   const dispatch = useDispatch();
 
   const [searchText, setSearchText] = useState('');
-  const locale = useSelector(({settings}) => settings.locale);
   const { navCollapsed} = useSelector(({common}) => common);
 
   const languageMenu = () => (
@@ -57,21 +56,6 @@ const BelowHeader = () => {
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-below-header-horizontal">
-      <div className="gx-header-horizontal-top">
-        <div className="gx-container">
-          <div className="gx-header-horizontal-top-flex">
-            <div className="gx-header-horizontal-top-left">
-              <i className="icon icon-alert gx-mr-3"/>
-              <p className="gx-mb-0 gx-text-truncate"></p>
-            </div>
-            <ul className="gx-login-list">
-              <li>Login</li>
-              <li>Signup</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
 
       <Header
         className="gx-header-horizontal-main">

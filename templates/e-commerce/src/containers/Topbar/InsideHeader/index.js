@@ -9,7 +9,7 @@ import AppNotification from "components/AppNotification";
 import MailNotification from "components/MailNotification";
 import HorizontalNav from "../HorizontalNav";
 import {Link} from "react-router-dom";
-import {switchLanguage, toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
+import {toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
 
 const {Header} = Layout;
@@ -38,9 +38,7 @@ const InsideHeader = () => {
     <CustomScrollbars className="gx-popover-lang-scroll">
       <ul className="gx-sub-popover">
         {languageData.map(language =>
-          <li className="gx-media gx-pointer" key={JSON.stringify(language)} onClick={(e) =>
-            dispatch(switchLanguage(language))
-          }>
+          <li className="gx-media gx-pointer" key={JSON.stringify(language)} >
             <i className={`flag flag-24 gx-mr-2 flag-${language.icon}`}/>
             <span className="gx-language-text">{language.name}</span>
           </li>
@@ -54,22 +52,7 @@ const InsideHeader = () => {
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-inside-header-horizontal">
-      <div className="gx-header-horizontal-top">
-        <div className="gx-container">
-          <div className="gx-header-horizontal-top-flex">
-            <div className="gx-header-horizontal-top-left">
-              <i className="icon icon-alert gx-mr-3"/>
-             {/*} <p className="gx-mb-0 gx-text-truncate"><IntlMessages id="app.announced"/></p>*/}
-            </div>
-            <ul className="gx-login-list">
-              <li>Login</li>
-              <li>Signup</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-
+      
       <Header
         className="gx-header-horizontal-main">
         <div className="gx-container">
@@ -147,4 +130,4 @@ const mapStateToProps = ({settings,common }) => {
   const {locale} = settings;
   return {locale, navCollapsed}
 };
-export default connect(mapStateToProps, {toggleCollapsedSideNav, switchLanguage})(InsideHeader);
+export default connect(mapStateToProps, {toggleCollapsedSideNav})(InsideHeader);
