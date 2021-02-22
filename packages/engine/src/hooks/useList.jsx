@@ -10,6 +10,7 @@ const initialState = {
   qDoc: null,
   qObject: null,
   qData: null,
+  mData: null,
   qLayout: null,
   selections: null,
 }
@@ -17,13 +18,13 @@ const initialState = {
 function reducer(state, action) {
   const {
     payload: {
-      qData, qLayout, selections, qDoc,
+      qData, mData, qLayout, selections, qDoc,
     }, type,
   } = action
   switch (type) {
     case 'update':
       return {
-        ...state, qData, qLayout, selections,
+        ...state, qData, mData, qLayout, selections,
       }
     case 'init':
       return {
@@ -59,7 +60,7 @@ const useList = props => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const {
-    qData, qLayout, selections,
+    qData, mData, qLayout, selections,
   } = state
 
   const qObject = useRef(null)
@@ -103,15 +104,33 @@ const useList = props => {
     return qDataPages[0]
   }, [])
 
+  const structureData = useCallback(async () => {
+
+    let data = []
+    const qDataPages = await qObject.current.getListObjectData('/qListObjectDef', [qPage.current])
+
+    qDataPages[0].qMatrix.map((d, i) => {
+      data.push({
+        key: d[0].qElemNumber,
+        text: d[0].qText,
+        value: d[0].qText
+      })
+    })
+
+    return data
+  }, [])
+
   const update = useCallback(async () => {
     const _qLayout = await getLayout()
     const _qData = await getData()
+    const _mData = await structureData()
     if (_qData && _isMounted.current) {
       const _selections = await _qData.qMatrix.filter(row => row[0].qState === 'S')
       dispatch({
         type: 'update',
         payload: {
           qData: _qData,
+          mData: _mData,
           qLayout: _qLayout,
           selections: _selections,
         },
@@ -122,6 +141,7 @@ const useList = props => {
         payload:
         {
           qData: _qData,
+          mData: _mData,
           qLayout: _qLayout,
         },
       })
@@ -169,9 +189,11 @@ const useList = props => {
 
   useEffect(() => () => _isMounted.current = false, [])
 
+
   return {
     qLayout,
     qData,
+    mData,
     changePage,
     select,
     beginSelections,

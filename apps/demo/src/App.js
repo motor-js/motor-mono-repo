@@ -1,6 +1,8 @@
 import { useContext } from 'react'
 import { useList, EngineContext } from "@motor-js/engine"
-import Child from './Child'
+import HC from './HC'
+import List from './List'
+import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   
@@ -9,7 +11,7 @@ function App() {
   return (
     <div className="App">
       {engine && 
-        <Child engine={engine}/>
+        <HC />
       }
       hi
     </div>
