@@ -53,7 +53,7 @@ const HC = () => {
   console.log('header: ',headerGroup)
   console.log('data: ',qData)
 
-  const renderTableHeader = () =>
+  const renderTableHeader = () => {
   
   }
 
