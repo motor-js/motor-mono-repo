@@ -5,19 +5,14 @@
  <a href="https://bundlephobia.com/result?p=@motor-js/engine" title="Motor.js latest minified+gzip size"><img src="https://badgen.net/bundlephobia/minzip/@motor-js/engine" alt="gzip size"></a>
 # The React Framework for Qlik Sense Mashups
 
+## Find docs, gudes, the API and more at  [motor-js.io](https://motor-js.io)
+
 ## Commands
 
 ### From Root
 - Publish new packages / commit repo's that are private: lerna publish 
 - Start all packages: yarn start
-- Start specific package: lerna run start --scope=<package-name>
-
-
-
-
-
-## Find docs, gudes, the API and more at  [motor-js.io](https://motor-js.io)
-
+- Start specific package: lerna run start --scope=package-name
 
 ## Quick Features
 
