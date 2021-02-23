@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import URLSearchParams from "url-search-params";
 import { Redirect, Route } from "react-router-dom";
 import { ConfigProvider } from "antd";
-import { IntlProvider } from "react-intl";
 import MainApp from "./MainApp";
 import {
   onLayoutTypeChange,
