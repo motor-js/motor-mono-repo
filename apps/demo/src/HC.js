@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useList, useHyperCube, useTable } from "@motor-js/engine"
 
 const HC = () => {
@@ -7,36 +7,30 @@ const HC = () => {
   const qPage = {
     qTop: 0,
     qLeft: 0,
-    qWidth: 5,
-    qHeight: 300,
+    qWidth: 4,
+    qHeight: 10,
   };
 
   const cols= [
     { 
-      qLibraryId: "mMvekw",
-      qType: "dimension",
-      qField: ''
-      //qField: "[country]",
-     // qLabel: "county" 
+    qField: "country",
+    qLabel: "Country" 
+    },
+    { 
+      qField: "province",
+      qLabel: "Province" 
     },
     {
      qField: "=1",
-      qLabel: "Points" 
+      qLabel: "1 Point" 
     },
     {
-      qField: "=5",
-     qLabel: "Points" 
-     },
-    { 
-      qLibraryId: "mMvekw",
-      qType: "dimension",
-      qField: ''
-      //qField: "[country]",
-     // qLabel: "county" 
+    qField: "=5",
+     qLabel: "5 Points" 
     },
   ] 
 
-  const columnOrder =  [3,2,1,0]  //[2,1,0,3]
+ // const columnOrder =  [3,2,1,0]  //[2,1,0,3]
   //const columnSort = [2,1,0,3]
 
   const {
@@ -46,13 +40,14 @@ const HC = () => {
   } = useTable({
     cols,
     qPage,
-    qColumnOrder: columnOrder,
+  //  qColumnOrder: columnOrder,
   //  qInterColumnSortOrder: columnSort
   });
 
-  console.log('header: ',headerGroup)
-  console.log('data: ',qData)
+  //console.log('header: ',headerGroup)
+  //console.log('data: ',qData)
 
+  
   const renderTableHeader = () => {
   
   }

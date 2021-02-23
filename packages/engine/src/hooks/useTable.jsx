@@ -1,6 +1,7 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from '../contexts/EngineProvider'
+import createDef from "../utils/hookUtils/createDef"
 
 const initialState = {
   qData: null,
@@ -113,255 +114,24 @@ const useTable = (props) => {
   }
 
   const generateQProp = useCallback(() => {
-    const qProp = {
-      qInfo: { qType: "visualization" },
-    };
-
-    if (qHyperCubeDef) {
-      const _qHyperCubeDef = qHyperCubeDef;
-      if (cols && cols[1]) {
-        _qHyperCubeDef.qMeasures[0].qDef = {
-          qDef: cols[1],
-        };
-      }
-      if (cols && cols[0])
-        _qHyperCubeDef.qDimensions[0].qDef.qFieldDefs = [cols[0]];
-      qProp.qInfo.qType = "HyperCube";
-      qProp.qHyperCubeDef = _qHyperCubeDef;
-
-      return qProp;
-    }
-    const myqInterColumnSortOrder = qInterColumnSortOrder || [];
-    const qInterColumnSortOrderSet = !!qInterColumnSortOrder;
-    let sortIndex = 0;
-
-
-    const qDimensions = cols
-      .filter((col, i) => {
-        const isDimension =
-          (typeof col === "string" && !col.startsWith("=")) ||
-          (typeof col === "object" && col.qDef && col.qDef.qFieldDefs) ||
-          (typeof col === "object" &&
-            col.qLibraryId &&
-            col.qType &&
-            col.qType === "dimension") ||
-          (typeof col === "object" && !col.qField.startsWith("="));
-
-        if (isDimension && !qInterColumnSortOrderSet) {
-          myqInterColumnSortOrder[i] = sortIndex;
-          sortIndex += 1;
-        }
-
-        return isDimension;
-      })
-      .map((col) => {
-       // console.log('dim',col)
-        if (typeof col === "string") {
-          return {
-            qDef: {
-              qFieldDefs: [col],
-              qSortCriterias: [
-                {
-                  qSortByAscii,
-                  qSortByLoadOrder,
-                },
-              ],
-            },
-            qNullSuppression: true,
-            qSuppressMissing: true,
-            qShowTotalsAbove: true,
-          };
-        }
-        if (typeof col === "object" && !col.qLibraryId) {
-          return {
-            qDef: {
-              qFieldDefs: [col.qField],
-              qFieldLabels: [col.qLabel],
-              qSortCriterias: col.qSortCriterias
-                ? [col.qSortCriterias]
-                : [
-                    {
-                      qSortByLoadOrder,
-                      qSortByAscii,
-                    },
-                  ],
-            },
-            qOtherTotalSpec: totalSpec,
-            qOtherLabel:
-              qOtherTotalSpec !== undefined
-                ? qOtherTotalSpec.qOtherLabel
-                : "Others",
-            qAttributeExpressions: [
-              {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
-                // chart fill color
-                qExpression: col.qCondChartColor,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "colorTheme",
-              },
-            ],
-            qNullSuppression: col.qNullSuppression
-              ? col.qNullSuppression
-              : true,
-            qSuppressMissing: true,
-            qShowTotalsAbove: true,
-          };
-        }
-        if (typeof col === "object" && col.qLibraryId) {
-          return {
-            qLibraryId: col.qLibraryId,
-            qType: col.qType,
-            qOtherTotalSpec: totalSpec,
-            qOtherLabel:
-              qOtherTotalSpec !== undefined
-                ? qOtherTotalSpec.qOtherLabel
-                : "Others",
-            qAttributeExpressions: [
-              {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
-                // chart fill color
-                qExpression: col.qCondChartColor,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "colorTheme",
-              },
-            ],
-            qNullSuppression: col.qNullSuppression
-              ? col.qNullSuppression
-              : true,
-            qSuppressMissing: true,
-            qShowTotalsAbove: true,
-          };
-        }
-
-        return col;
-      });
-
-    const qMeasures = cols
-      .filter((col, i) => {
-        const isMeasure =
-          (typeof col === "string" && col.startsWith("=")) ||
-          (typeof col === "object" && col.qDef && col.qDef.qDef) ||
-          (typeof col === "object" &&
-            col.qLibraryId &&
-            col.qType &&
-            col.qType === "measure") ||
-          (typeof col === "object" && col.qField.startsWith("="));
-        if (isMeasure && !qInterColumnSortOrderSet) {
-          myqInterColumnSortOrder[i] = sortIndex;
-          sortIndex += 1;
-        }
-
-        return isMeasure;
-      })
-      .map((col) => {
-       // console.log('mea',col)
-        if (typeof col === "string") {
-          return {
-            qDef: {
-              qDef: col,
-              qNumFormat: col.qNumFormat,
-            },
-            qSortBy: {
-              qSortByNumeric,
-              qSortByExpression,
-              qExpression,
-              qSuppressMissing,
-            },
-          };
-        }
-        if (typeof col === "object") {
-          return {
-            qDef: {
-              qDef: col.qField,
-              qLabel: col.qLabel,
-              qNumFormat: {
-                qType: col.qNumType || "U",
-                qUseThou: 1,
-                qFmt: col.qNumFmt,
-                qDec: ".",
-                qThou: ",",
-              },
-            },
-            qSortBy: {
-              qSortByNumeric,
-              qSortByExpression,
-              qExpression,
-              qSuppressMissing,
-            },
-            qAttributeExpressions: [
-              {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
-                // chart fill color
-                qExpression: col.qCondChartColor,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "colorTheme",
-              },
-            ],
-            qChartType: col.qChartType,
-            qShowPoints: col.qShowPoints,
-            qCurve: col.qCurve,
-            qFillStyle: col.qFillStyle,
-            qLegendShape: col.qLegendShape,
-          };
-        }
-
-        return col;
-      });
-
-    qProp.qHyperCubeDef = {
-      qDimensions,
-      qMeasures,
+    const qProp = createDef(
+      cols,
+      qHyperCubeDef,
+      qSortByAscii,
+      qSortByLoadOrder,
       qInterColumnSortOrder,
       qSuppressZero,
+      qSortByNumeric,
+      qSortByExpression,
       qSuppressMissing,
+      qExpression,
       qColumnOrder,
       qCalcCondition,
-    };
+      qOtherTotalSpec,
+      totalSpec,
+      )
 
-   // console.log(qProp)
-    return qProp;
+    return qProp
   }, [
     cols,
     qExpression,
@@ -371,6 +141,7 @@ const useTable = (props) => {
     qSortByExpression,
     qSortByLoadOrder,
     qSuppressMissing,
+    qOtherTotalSpec,
     qSuppressZero,
   ]);
 
@@ -411,8 +182,8 @@ const useTable = (props) => {
     qLayout
       ? [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
-              Header: col.qFallbackTitle,
-              accessor: (d) => d[index].qText,
+              header: col.qFallbackTitle,
+              //accessor: (d) => d[index].qText,
               defaultSortDesc: col.qSortIndicator === "D",
               qInterColumnIndex: index,
               qPath: `/qHyperCubeDef/qDimensions/${index}`,
@@ -422,9 +193,9 @@ const useTable = (props) => {
               qColumnType: "dim",
             })),
             ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
-              Header: col.qFallbackTitle,
-              accessor: (d) =>
-                d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
+              header: col.qFallbackTitle,
+              //accessor: (d) =>
+              //  d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
               defaultSortDesc: col.qSortIndicator === "D",
               qInterColumnIndex:
                 index + qLayout.qHyperCube.qDimensionInfo.length,
@@ -444,10 +215,38 @@ const useTable = (props) => {
     return orderedHeader
   }
 
+  const structureData = useCallback(async (layout) => {
+
+    let data = []
+    let obj = {}
+
+    const qDataPages = await qObject.current.getHyperCubeData(
+      "/qHyperCubeDef",
+      [qPage.current]
+    );
+
+    //console.log('d: ',qDataPages[0])
+
+    qDataPages[0].qMatrix.map((d, i) => {
+
+      console.log(d)
+      data.push({
+        country: d[0].qText,
+        province: d[1].qText,
+        [1 point]: d[2].qText,
+        [5 point]: d[3].qText,
+      })
+    })
+
+    return data
+  }, [])
+
   const update = useCallback(
     async (measureInfo) => {
       const _qLayout = await getLayout();
       const _qData = await getData();
+      const _mData = await structureData(_qLayout)
+      console.log('mD: ',_mData)
       const _headerGroup = await getHeader(_qLayout)
       const _orderHeader = await getOrder(_headerGroup)
       if (_qData && _isMounted.current) {
@@ -538,11 +337,9 @@ const useTable = (props) => {
     []
   );
 
-
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
     async (column) => {
-      setLoading(true);
       // If no sort is set, we need to set a default sort order
       if (column.qSortIndicator === "N") {
         if (column.qPath.includes("qDimensions")) {

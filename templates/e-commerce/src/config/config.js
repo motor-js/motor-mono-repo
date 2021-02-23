@@ -4,7 +4,7 @@ export const config = {
   secure: true,
   port: null,
   prefix: '',
-  appId: '79b4f41e-f680-423d-a088-1ae81d1bc8fc',
+  appId: '865fb37c-1e6f-44b5-a7cb-14a42c5c112c',
   webIntId: '4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i',
   qcs: true,
 }

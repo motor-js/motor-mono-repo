@@ -9,9 +9,9 @@ import {config} from './config/config.js';
 
   ReactDOM.render(
     // Wrap App inside AppContainer
-    /*<Motor config={config}>*/
+    <Motor config={config}>
         <NextApp />
-   /* </Motor>*/,
+    </Motor>,
     document.getElementById('root')
   );
 // If you want to start measuring performance in your app, pass a function
