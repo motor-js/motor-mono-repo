@@ -1,6 +1,7 @@
-import React from 'react'
-import {useTable} from '@motor-js/engine'
-import Widget from "components/Widget/index";
+import React from "react";
+import {Table} from "antd";
+import { useTable } from "@motor-js/engine"
+import Widget from "components/Widget";
 
 const columns = [
   {
@@ -18,9 +19,6 @@ const columns = [
   {
     title: 'FEE',
     dataIndex: 'fee',
-    render: (text) => {
-      return <span className="gx-text-red">{text}</span>
-    },
   }
 ];
 
@@ -62,8 +60,42 @@ const data = [
   }
 ];
 
+const QlikTable = () => {
 
-const Table = () => {
+  const cols= [
+    { 
+    qField: "key",
+    qLabel: "key" 
+    },
+    { 
+      qField: "currency",
+      qLabel: "currency" 
+    },
+    {
+      qField: "rate",
+      qLabel: "rate" 
+    },
+    {
+      qField: "date",
+      qLabel: "date" 
+    },
+    {
+      qField: "fee",
+      qLabel: "fee" 
+    },
+  ] 
+
+  const {
+    qLayout,
+    qData,
+    mData,
+    headerGroup
+  } = useTable({
+    cols,
+  });
+
+  console.log(mData)
+  console.log(headerGroup)
 
   return (
     <Widget styleName="gx-order-history"
@@ -74,12 +106,11 @@ const Table = () => {
       <p className="gx-text-primary gx-mb-0 gx-pointer">Detailed History</p>
     }>
       <div className="gx-table-responsive">
-        <Table className="gx-table-no-bordered" columns={columns} dataSource={data} pagination={false} bordered={false}
+        <Table className="gx-table-no-bordered" columns={headerGroup} dataSource={mData} pagination={false} bordered={false}
                size="small"/>
       </div>
     </Widget>
   );
+};
 
-}
-
-export default Table
+export default QlikTable;

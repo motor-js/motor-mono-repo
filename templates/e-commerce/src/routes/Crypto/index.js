@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row } from "antd";
 import Auxiliary from "util/Auxiliary";
+import QlikTable from "qlikComponents/QlikTable/QlikTable";
 
 /*
 import {
@@ -23,7 +24,13 @@ import OrderHistory from "components/dashboard/Crypto/OrderHistory";
 
 const Crypto = () => {
   return (
-    <Auxiliary>hi
+    <Auxiliary>
+    <Row>
+      <Col xl={24} lg={24} md={24} sm={24} xs={24}>
+        <QlikTable />
+       </Col>
+    </Row>
+
       {/* 
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>

@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import reportWebVitals from './reportWebVitals';
 import NextApp from './NextApp';
 
-import {Motor} from '@motor-js/engine';
-import {config} from './config/config.js';
+import { Motor } from '@motor-js/engine';
+import { config } from './config/config.js';
 
   ReactDOM.render(
     // Wrap App inside AppContainer

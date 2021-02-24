@@ -218,7 +218,8 @@ export const getHeader = (qLayout) => (
   qLayout
     ? [
       ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
-            header: col.qFallbackTitle,
+            title: col.qFallbackTitle,
+            dataIndex: col.qFallbackTitle,
             //accessor: (d) => d[index].qText,
             defaultSortDesc: col.qSortIndicator === "D",
             qInterColumnIndex: index,
@@ -229,7 +230,8 @@ export const getHeader = (qLayout) => (
             qColumnType: "dim",
           })),
           ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
-            header: col.qFallbackTitle,
+            title: col.qFallbackTitle,
+            dataIndex: col.qFallbackTitle,
             //accessor: (d) =>
             //  d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
             defaultSortDesc: col.qSortIndicator === "D",
