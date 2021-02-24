@@ -14,6 +14,11 @@
 - Start all packages: yarn start
 - Start specific package: lerna run start --scope=package-name
 
+### From Project Directory
+- Install dependencies: npm install
+- Start package: npm run start
+- Link engine package: lerna add @motor-js/engine --scope=package-name
+
 ## Quick Features
 
 - Simple, opinionated API for interacting with the Qlik engine
