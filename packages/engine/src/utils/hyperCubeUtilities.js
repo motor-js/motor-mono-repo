@@ -11,7 +11,7 @@ export function hyperCubeTransform(
   const measureNames = getMeasureNames(qHyperCube);
   const dimensionNames = getDimensionNames(qHyperCube);
 
-  const transformedData = qData.qMatrix.map((d) => {
+  const transformedData = qData.qMatrix.map((d,i) => {
     let data = {};
     d.forEach((item, index) => {
       // check if more than 2 dimensions
@@ -26,10 +26,12 @@ export function hyperCubeTransform(
                   ? d[index].qNum
                   : d[index].qText,
               [`elemNumber${index !== 0 ? index : ""}`]: d[index].qElemNumber,
+              key: i
             }
           : {
               [measureNames[index - qNoOfDiemnsions]]:
                 d[index].qNum !== "NaN" ? d[index].qNum : 0,
+                key: i
             };
       data = { ...data, ...pair };
     });

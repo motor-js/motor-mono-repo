@@ -187,7 +187,6 @@ const useTable = (props) => {
 
   const structureData = useCallback(async (layout, data) => {
     let useNumonFirstDim
-
     const mData = hyperCubeTransform(  
       data,
       layout.qHyperCube,
