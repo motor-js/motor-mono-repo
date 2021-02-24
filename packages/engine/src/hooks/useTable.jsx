@@ -1,7 +1,14 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from '../contexts/EngineProvider'
-import createDef from "../utils/hookUtils/createDef"
+import createDef from "../utils/createHCDef"
+import {
+  getMeasureNames,
+  getDimensionNames,
+  getHeader,
+  getOrder,
+  hyperCubeTransform
+} from '../utils/hyperCubeUtilities'
 
 const initialState = {
   qData: null,
@@ -15,7 +22,7 @@ const initialState = {
 
 function reducer(state, action) {
   const {
-    payload: { qData, qRData, headerGroup, qLayout, selections },
+    payload: { qData, mData, qRData, headerGroup, qLayout, selections },
     type,
   } = action;
 
@@ -24,6 +31,7 @@ function reducer(state, action) {
       return {
         ...state,
         qData,
+        mData,
         headerGroup,
         qLayout,
         selections,
@@ -83,7 +91,7 @@ const useTable = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { qData, qRData, headerGroup, qLayout, selections } = state;
+  const { qData, mData, qRData, headerGroup, qLayout, selections } = state;
 
   // load engine from props
   //const myEngine = props.engine;
@@ -177,78 +185,25 @@ const useTable = (props) => {
     []
   );
 
+  const structureData = useCallback(async (layout, data) => {
+    let useNumonFirstDim
 
-  const getHeader = (qLayout) => (
-    qLayout
-      ? [
-        ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
-              header: col.qFallbackTitle,
-              //accessor: (d) => d[index].qText,
-              defaultSortDesc: col.qSortIndicator === "D",
-              qInterColumnIndex: index,
-              qPath: `/qHyperCubeDef/qDimensions/${index}`,
-              qSortIndicator: col.qSortIndicator,
-              qReverseSort: col.qReverseSort,
-              qGrandTotals: { qText: null, qNum: null },
-              qColumnType: "dim",
-            })),
-            ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
-              header: col.qFallbackTitle,
-              //accessor: (d) =>
-              //  d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
-              defaultSortDesc: col.qSortIndicator === "D",
-              qInterColumnIndex:
-                index + qLayout.qHyperCube.qDimensionInfo.length,
-              qPath: `/qHyperCubeDef/qMeasures/${index}`,
-              qSortIndicator: col.qSortIndicator,
-              qReverseSort: col.qReverseSort,
-              qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
-              qColumnType: "meas",
-            })),
-        ]
-    : []
-  )
+    const mData = hyperCubeTransform(  
+      data,
+      layout.qHyperCube,
+      useNumonFirstDim
+    )
 
-  //Change order of header groups
-  const getOrder = (headerGroup) => {
-    const orderedHeader = headerGroup.sort((a, b) => qColumnOrder.indexOf(a.qInterColumnIndex) - qColumnOrder.indexOf(b.qInterColumnIndex))
-    return orderedHeader
-  }
-
-  const structureData = useCallback(async (layout) => {
-
-    let data = []
-    let obj = {}
-
-    const qDataPages = await qObject.current.getHyperCubeData(
-      "/qHyperCubeDef",
-      [qPage.current]
-    );
-
-    //console.log('d: ',qDataPages[0])
-
-    qDataPages[0].qMatrix.map((d, i) => {
-
-      console.log(d)
-      data.push({
-        country: d[0].qText,
-        province: d[1].qText,
-        [1 point]: d[2].qText,
-        [5 point]: d[3].qText,
-      })
-    })
-
-    return data
+    return mData
   }, [])
 
   const update = useCallback(
     async (measureInfo) => {
       const _qLayout = await getLayout();
       const _qData = await getData();
-      const _mData = await structureData(_qLayout)
-      console.log('mD: ',_mData)
+      const _mData = await structureData(_qLayout, _qData)
       const _headerGroup = await getHeader(_qLayout)
-      const _orderHeader = await getOrder(_headerGroup)
+      const _orderHeader = await getOrder(_headerGroup, qColumnOrder)
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(
           (row) => row[0].qState === "S"
@@ -267,11 +222,11 @@ const useTable = (props) => {
             }
           });
         }
-
         dispatch({
           type: "update",
           payload: {
             qData: _qData,
+            mData: _mData,
             headerGroup: _orderHeader,
             qLayout: _qLayout,
             selections: _selections,
@@ -282,6 +237,7 @@ const useTable = (props) => {
           type: "update",
           payload: {
             qData: _qData,
+            mData: _mData,
             headerGroup: _orderHeader,
             qLayout: _qLayout,
           },
@@ -411,6 +367,7 @@ const useTable = (props) => {
     endSelections,
     qLayout,
     qData,
+    mData,
     headerGroup,
     handleSortChange,
     qRData,

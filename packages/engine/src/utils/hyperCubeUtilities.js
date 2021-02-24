@@ -1,4 +1,3 @@
-// export function hyperCubeTransform(qData, qHyperCube) {
 export function hyperCubeTransform(
   qData,
   qHyperCube,
@@ -40,6 +39,8 @@ export function hyperCubeTransform(
 
   return transformedData;
 }
+
+
 
 export function groupHyperCubeData(qData) {
   const data = [];
@@ -212,5 +213,42 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
 
   return direction;
 };
+
+export const getHeader = (qLayout) => (
+  qLayout
+    ? [
+      ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
+            header: col.qFallbackTitle,
+            //accessor: (d) => d[index].qText,
+            defaultSortDesc: col.qSortIndicator === "D",
+            qInterColumnIndex: index,
+            qPath: `/qHyperCubeDef/qDimensions/${index}`,
+            qSortIndicator: col.qSortIndicator,
+            qReverseSort: col.qReverseSort,
+            qGrandTotals: { qText: null, qNum: null },
+            qColumnType: "dim",
+          })),
+          ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
+            header: col.qFallbackTitle,
+            //accessor: (d) =>
+            //  d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
+            defaultSortDesc: col.qSortIndicator === "D",
+            qInterColumnIndex:
+              index + qLayout.qHyperCube.qDimensionInfo.length,
+            qPath: `/qHyperCubeDef/qMeasures/${index}`,
+            qSortIndicator: col.qSortIndicator,
+            qReverseSort: col.qReverseSort,
+            qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
+            qColumnType: "meas",
+          })),
+      ]
+  : []
+)
+
+  //Change order of header groups
+  export const getOrder = (headerGroup, qColumnOrder) => {
+    const orderedHeader = headerGroup.sort((a, b) => qColumnOrder.indexOf(a.qInterColumnIndex) - qColumnOrder.indexOf(b.qInterColumnIndex))
+    return orderedHeader
+  }
 
 export default hyperCubeTransform;

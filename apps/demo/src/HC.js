@@ -21,7 +21,7 @@ const HC = () => {
       qLabel: "Province" 
     },
     {
-     qField: "=1",
+      qField: "=1",
       qLabel: "1 Point" 
     },
     {
@@ -36,6 +36,7 @@ const HC = () => {
   const {
     qLayout,
     qData,
+    mData,
     headerGroup
   } = useTable({
     cols,
@@ -44,9 +45,7 @@ const HC = () => {
   //  qInterColumnSortOrder: columnSort
   });
 
-  //console.log('header: ',headerGroup)
-  //console.log('data: ',qData)
-
+  console.log(mData)
   
   const renderTableHeader = () => {
   
