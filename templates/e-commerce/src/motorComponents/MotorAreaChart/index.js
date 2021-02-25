@@ -1,36 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
-import { useTable } from "@motor-js/engine";
-import Widget from "components/Widget";
+// import { Table } from "antd";
+// import { useTable } from "@motor-js/engine";
+// import { useData } from "../../hooks/useData";
+import useData from "../../hooks/useData";
+// import Widget from "components/Widget";
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import { increamentData } from "../../routes/Crypto/data";
+// import { useHyperCube } from "@motor-js/engine";
 
 const MotorAreaChart = () => {
   const [loading, setLoading] = useState(true);
 
-  // const cols = [
-  //   {
-  //     qField: "currency",
-  //     qLabel: "currency",
-  //   },
-  //   {
-  //     qField: "rate",
-  //     qLabel: "rate",
-  //   },
-  //   {
-  //     qField: "date",
-  //     qLabel: "date",
-  //   },
-  //   {
-  //     qField: "fee",
-  //     qLabel: "fee",
-  //   },
-  // ];
+  const cols = [
+    { qField: "[name]", qLabel: "name" },
+    {
+      qField: "=Sum({$<coin={'bitcoin'}>} price)",
+      qLabel: "price",
+    },
+  ];
 
   // const { mData, headerGroup } = useTable({
   //   cols,
   // });
+
+  const {
+    // qLayout,
+    qData,
+    mData,
+    // endSelections,
+    // beginSelections,
+    // changePage,
+    // selections,
+    // select,
+    // applyPatches,
+  } = useData({
+    cols,
+    //qColumnOrder: columnOrder,
+    //qCalcCondition: calcCondition,
+    // qPage,
+    //qInterColumnSortOrder: columnSortOrder,
+    // qSupressMissing: true,
+    // qSuppressZero: true,
+  });
+
+  console.log(mData);
 
   // useEffect(() => {
   //   mData && setLoading(false);

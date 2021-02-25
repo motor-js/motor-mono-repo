@@ -1,11 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Row } from "antd";
 import Auxiliary from "util/Auxiliary";
-import MotorTable from "motorComponents/MotorTable"
-import MotorFilter from "motorComponents/MotorFilter"
-import MotorButton from "motorComponents/MotorButton"
 
-/*
 import {
   Area,
   AreaChart,
@@ -21,25 +17,89 @@ import BalanceHistory from "components/dashboard/Crypto/BalanceHistory";
 import SendMoney from "components/dashboard/Crypto/SendMoney";
 import RewardCard from "components/dashboard/Crypto/RewardCard";
 import CurrencyCalculator from "components/dashboard/Crypto/CurrencyCalculator";
-import OrderHistory from "components/dashboard/Crypto/OrderHistory";
-*/
+// import OrderHistory from "components/dashboard/Crypto/OrderHistory";
+
+import MotorTable from "motorComponents/MotorTable";
+// import MotorFilter from "motorComponents/MotorFilter";
+// import MotorButton from "motorComponents/MotorButton";
+
+// import { useHyperCube, EngineContext } from "@motor-js/engine";
 
 const Crypto = () => {
+  // const { engine, engineError } = useContext(EngineContext);
+
+  // const cols = [
+  //   { qField: "[name]", qLabel: "name" },
+  //   {
+  //     qField: "=Sum({$<coin={'bitcoin'}>} price)",
+  //     qLabel: "price",
+  //   },
+  // ];
+
+  // let newData = [];
+
+  // const {
+  //   // qLayout,
+  //   qData,
+  //   // endSelections,
+  //   // beginSelections,
+  //   // changePage,
+  //   // selections,
+  //   // select,
+  //   // applyPatches,
+  // } = useHyperCube({
+  //   cols,
+  //   //qColumnOrder: columnOrder,
+  //   //qCalcCondition: calcCondition,
+  //   // qPage,
+  //   //qInterColumnSortOrder: columnSortOrder,
+  //   // qSupressMissing: true,
+  //   // qSuppressZero: true,
+  // });
+
+  // if (qData) {
+  //   // qData.qMatrix.map((d, i) => {
+  //   //   qText.push(d[0].qText);
+  //   //   qElemNumber.push(d[0].qElemNumber);
+  //   // });
+  //   // console.log(qData);
+
+  //   qData.qMatrix.map((d, i) => {
+  //     newData.push({
+  //       // key: d[0].qElemNumber,
+  //       name: d[0].qText,
+  //       price: d[1].qNum,
+  //       // pv: d[2].qNum,
+  //     });
+  //   });
+  // }
+
+  // const CustomTooltip = ({ active, payload, label }) => {
+  //   // Label is value supplied by Axis
+
+  //   if (active) {
+  //     console.log(payload);
+  //     return (
+  //       <div className="custom-tooltip">
+  //         {/* <p className="label">{`${label} : ${payload[0].value}`}</p> */}
+  //         {/* <p className="intro">{getIntroOfPage(label)}</p> */}
+  //         {/* <p className="desc">Anything you want can be displayed here.</p> */}
+  //         <p className="label">{`${payload ? payload[0].value : null}`}</p>
+  //         <p className="intro">{`${
+  //           payload ? payload[0].payload.name : null
+  //         }`}</p>
+  //       </div>
+  //     );
+  //   }
+
+  //   return null;
+  // };
+
+  // console.log(newData);
+  // console.log(increamentData);
+
   return (
     <Auxiliary>
-    <Row>
-      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-        <MotorButton />
-      </Col>
-      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-        <MotorFilter />
-      </Col>
-      <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-        <MotorTable />
-      </Col>
-    </Row>
-
-      {/* 
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartCard
@@ -52,6 +112,8 @@ const Crypto = () => {
                   data={increamentData}
                   margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
                 >
+                  {/* <XAxis dataKey="name" /> */}
+                  {/* <Tooltip content={<CustomTooltip />} /> */}
                   <Tooltip />
                   <defs>
                     <linearGradient id="color3" x1="0" y1="0" x2="1" y2="0">
@@ -85,8 +147,7 @@ const Crypto = () => {
             icon="etherium"
             children={
               <ResponsiveContainer width="100%" height={75}>
-                
-              <AreaChart
+                <AreaChart
                   data={increamentData}
                   margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
                 >
@@ -111,7 +172,6 @@ const Crypto = () => {
                     fillOpacity={1}
                   />
                 </AreaChart>
-
               </ResponsiveContainer>
             }
             styleName="up"
@@ -196,10 +256,10 @@ const Crypto = () => {
           <CurrencyCalculator />
         </Col>
         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-          <OrderHistory />
+          {/* <OrderHistory /> */}
+          <MotorTable />
         </Col>
       </Row>
-      */}
     </Auxiliary>
   );
 };
