@@ -1,20 +1,36 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
+import { EngineContext } from '@motor-js/engine'
 
 let qDoc = null
 let qObject = null
 
-const useSelectionObject = ({ engine }) => {
+const useSelectionObject = () => {
+
+  const { engine, engineError } = useContext(EngineContext) || {};
+
   const _isMounted = useRef(true)
-  const [qLayout, setQLatout] = useState(null)
+  const [qLayout, setQLayout] = useState(null)
   // const { qLayout } = state
   // const [qLayout, setQLayout] = useState(null)
 
   const update = async () => {
     const _qLayout = await qObject.getLayout()
+    const _Selections = await getSelections(_qLayout)
     if (_isMounted.current) {
-      setQLatout(_qLayout)
+      setQLayout(_qLayout)
     }
   }
+
+  const getSelections = (v) => {
+    const selections = v.qSelectionObject.qSelections
+
+    if (selections.length > 0) {
+      console.log(selections)
+
+    }
+
+  }
+
 
   const clearSelections = async (field, value) => {
     

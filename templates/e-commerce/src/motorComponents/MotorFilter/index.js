@@ -1,29 +1,30 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
-import { useList } from "@motor-js/engine"
+//import { useList } from "@motor-js/engine"
+import useList from '../../hooks/useList'
 import Widget from "components/Widget";
-import SelectionsContext from '../../store'
+import { SelectionsContext } from '../../store'
+import useSelectionObject from '../../hooks/useSelectionObject'
 
 const MotorFilter = () => {
 
-  const [state, dispatch] = useContext(SelectionsContext);
+  const value = useContext(SelectionsContext);
 
   const [children, setChildren] = useState([])
   const [selected, setSelected] = useState([])
 
-  console.log('state: ',state)
-  const firstUpdate = useRef(true);
-
   const dimension = ['currency']
-  const label = ['Currency']
+  const label = 'Currency'
 
   const { 
     mData,
-    select
+    select,
+    selections
   } = useList({
     dimension
   })
 
+  console.log('sel1: ',selections)
   const { Option } = Select;
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const MotorFilter = () => {
       child.push(<Option key={d.key} value={d.key}>{d.text}</Option>)
     )
     setChildren(child)
+
   },[mData])
 
   function handleChange(v) {
@@ -71,6 +73,9 @@ const MotorFilter = () => {
           onClear={v => handleClear(v)}
           onDeselect={v => handleDeselect(v)}
           onDropdownVisibleChange={handleOpen}
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
       >
         {children}
       </Select>

@@ -2,7 +2,7 @@ import {
   useCallback, useRef, useReducer, useEffect, useContext
 } from 'react'
 import { deepMerge } from '../utils/object'
-import { EngineContext } from '../contexts/EngineProvider'
+import { EngineContext } from '@motor-js/engine'
 
 // import useSequencer from './useSequencer';
 
@@ -105,7 +105,6 @@ const useList = props => {
   }, [])
 
   const structureData = useCallback(async () => {
-
     let data = []
     const qDataPages = await qObject.current.getListObjectData('/qListObjectDef', [qPage.current])
 
@@ -120,12 +119,17 @@ const useList = props => {
     return data
   }, [])
 
+  const getSelections = (data) => {
+    return data.qMatrix.filter(row => row[0].qState === 'S')
+
+  }
+
   const update = useCallback(async () => {
     const _qLayout = await getLayout()
     const _qData = await getData()
     const _mData = await structureData()
     if (_qData && _isMounted.current) {
-      const _selections = await _qData.qMatrix.filter(row => row[0].qState === 'S')
+      const _selections = await getSelections(_qData)
       dispatch({
         type: 'update',
         payload: {
