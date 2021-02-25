@@ -22,9 +22,82 @@ import CurrencyCalculator from "components/dashboard/Crypto/CurrencyCalculator";
 import MotorTable from "motorComponents/MotorTable";
 // import MotorFilter from "motorComponents/MotorFilter";
 // import MotorButton from "motorComponents/MotorButton";
-import MotorAreaChart from "motorComponents/MotorAreaChart";
+
+// import { useHyperCube, EngineContext } from "@motor-js/engine";
 
 const Crypto = () => {
+  // const { engine, engineError } = useContext(EngineContext);
+
+  // const cols = [
+  //   { qField: "[name]", qLabel: "name" },
+  //   {
+  //     qField: "=Sum({$<coin={'bitcoin'}>} price)",
+  //     qLabel: "price",
+  //   },
+  // ];
+
+  // let newData = [];
+
+  // const {
+  //   // qLayout,
+  //   qData,
+  //   // endSelections,
+  //   // beginSelections,
+  //   // changePage,
+  //   // selections,
+  //   // select,
+  //   // applyPatches,
+  // } = useHyperCube({
+  //   cols,
+  //   //qColumnOrder: columnOrder,
+  //   //qCalcCondition: calcCondition,
+  //   // qPage,
+  //   //qInterColumnSortOrder: columnSortOrder,
+  //   // qSupressMissing: true,
+  //   // qSuppressZero: true,
+  // });
+
+  // if (qData) {
+  //   // qData.qMatrix.map((d, i) => {
+  //   //   qText.push(d[0].qText);
+  //   //   qElemNumber.push(d[0].qElemNumber);
+  //   // });
+  //   // console.log(qData);
+
+  //   qData.qMatrix.map((d, i) => {
+  //     newData.push({
+  //       // key: d[0].qElemNumber,
+  //       name: d[0].qText,
+  //       price: d[1].qNum,
+  //       // pv: d[2].qNum,
+  //     });
+  //   });
+  // }
+
+  // const CustomTooltip = ({ active, payload, label }) => {
+  //   // Label is value supplied by Axis
+
+  //   if (active) {
+  //     console.log(payload);
+  //     return (
+  //       <div className="custom-tooltip">
+  //         {/* <p className="label">{`${label} : ${payload[0].value}`}</p> */}
+  //         {/* <p className="intro">{getIntroOfPage(label)}</p> */}
+  //         {/* <p className="desc">Anything you want can be displayed here.</p> */}
+  //         <p className="label">{`${payload ? payload[0].value : null}`}</p>
+  //         <p className="intro">{`${
+  //           payload ? payload[0].payload.name : null
+  //         }`}</p>
+  //       </div>
+  //     );
+  //   }
+
+  //   return null;
+  // };
+
+  // console.log(newData);
+  // console.log(increamentData);
+
   return (
     <Auxiliary>
       <Row>
@@ -33,7 +106,36 @@ const Crypto = () => {
             prize="$9,626"
             title="23"
             icon="bitcoin"
-            children={<MotorAreaChart />}
+            children={
+              <ResponsiveContainer width="100%" height={75}>
+                <AreaChart
+                  data={increamentData}
+                  margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                >
+                  {/* <XAxis dataKey="name" /> */}
+                  {/* <Tooltip content={<CustomTooltip />} /> */}
+                  <Tooltip />
+                  <defs>
+                    <linearGradient id="color3" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="5%" stopColor="#163469" stopOpacity={0.9} />
+                      <stop
+                        offset="95%"
+                        stopColor="#FE9E15"
+                        stopOpacity={0.9}
+                      />
+                    </linearGradient>
+                  </defs>
+                  <Area
+                    dataKey="price"
+                    strokeWidth={0}
+                    stackId="2"
+                    stroke="#4D95F3"
+                    fill="url(#color3)"
+                    fillOpacity={1}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            }
             styleName="up"
             desc="Bitcoin Price"
           />
