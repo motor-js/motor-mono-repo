@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-// import { Table } from "antd";
-// import { useTable } from "@motor-js/engine";
-// import { useData } from "../../hooks/useData";
 import useData from "../../hooks/useData";
 // import Widget from "components/Widget";
-import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { increamentData } from "../../routes/Crypto/data";
-// import { useHyperCube } from "@motor-js/engine";
+// import { increamentData } from "../../routes/Crypto/data";
 
-const MotorAreaChart = () => {
+const MotorLineChart = () => {
   const [loading, setLoading] = useState(true);
 
   const cols = [
@@ -19,10 +15,6 @@ const MotorAreaChart = () => {
       qLabel: "price",
     },
   ];
-
-  // const { mData, headerGroup } = useTable({
-  //   cols,
-  // });
 
   const {
     // qLayout,
@@ -51,25 +43,16 @@ const MotorAreaChart = () => {
 
   return (
     <ResponsiveContainer width="100%" height={75}>
-      <AreaChart data={mData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+      <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
         <Tooltip />
-        <defs>
-          <linearGradient id="color3" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="5%" stopColor="#163469" stopOpacity={0.9} />
-            <stop offset="95%" stopColor="#FE9E15" stopOpacity={0.9} />
-          </linearGradient>
-        </defs>
-        <Area
+        <Line
           dataKey="price"
-          strokeWidth={0}
-          stackId="2"
-          stroke="#4D95F3"
-          fill="url(#color3)"
-          fillOpacity={1}
+          stroke="#038FDE"
+          dot={{ stroke: "#FEA931", strokeWidth: 2 }}
         />
-      </AreaChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 };
 
-export default MotorAreaChart;
+export default MotorLineChart;

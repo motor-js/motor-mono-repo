@@ -23,6 +23,7 @@ import MotorTable from "motorComponents/MotorTable";
 // import MotorFilter from "motorComponents/MotorFilter";
 // import MotorButton from "motorComponents/MotorButton";
 import MotorAreaChart from "motorComponents/MotorAreaChart";
+import MotorLineChart from "motorComponents/MotorLineChart";
 
 const Crypto = () => {
   return (
@@ -129,21 +130,7 @@ const Crypto = () => {
             prize="$849"
             title="47"
             icon="litcoin"
-            children={
-              <ResponsiveContainer width="100%" height={75}>
-                <LineChart
-                  data={lineData}
-                  margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-                >
-                  <Tooltip />
-                  <Line
-                    dataKey="price"
-                    stroke="#038FDE"
-                    dot={{ stroke: "#FEA931", strokeWidth: 2 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            }
+            children={<MotorLineChart />}
             styleName="down"
             desc="Litecoin Price"
           />
