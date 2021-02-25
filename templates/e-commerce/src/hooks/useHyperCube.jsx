@@ -82,8 +82,6 @@ const useHyperCube = (props) => {
 
   const { qData, qRData, qLayout, selections } = state;
 
-  // load engine from props
-  //const myEngine = props.engine;
   const { engine, engineError } = useContext(EngineContext) || {};
 
   const qObject = useRef(null);
@@ -357,15 +355,15 @@ const useHyperCube = (props) => {
 
     return qProp;
   }, [
-    cols,
-    qExpression,
-    qHyperCubeDef,
-    qInterColumnSortOrder,
-    qSortByAscii,
-    qSortByExpression,
-    qSortByLoadOrder,
-    qSuppressMissing,
-    qSuppressZero,
+      cols,
+      qExpression,
+      qHyperCubeDef,
+      qInterColumnSortOrder,
+      qSortByAscii,
+      qSortByExpression,
+      qSortByLoadOrder,
+      qSuppressMissing,
+      qSuppressZero,
   ]);
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);

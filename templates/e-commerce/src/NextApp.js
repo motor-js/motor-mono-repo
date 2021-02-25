@@ -8,15 +8,18 @@ import "./styles/wieldy.less";
 import configureStore, { history } from './appRedux/store';
 import App from "./containers/App/index";
 
+import SelectionsStore from './store'
 const store = configureStore(/ provide initial state if any /);
 
 const NextApp = () =>
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/" component={App}/>
-      </Switch>
-    </ConnectedRouter>
+    <SelectionsStore>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route path="/" component={App}/>
+        </Switch>
+      </ConnectedRouter>
+    </SelectionsStore>
   </Provider>;
 
 

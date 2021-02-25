@@ -1,12 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
 import { useList } from "@motor-js/engine"
 import Widget from "components/Widget";
+import SelectionsContext from '../../store'
 
 const MotorFilter = () => {
 
+  const [state, dispatch] = useContext(SelectionsContext);
+
   const [children, setChildren] = useState([])
+  const [selected, setSelected] = useState([])
+
+  console.log('state: ',state)
+  const firstUpdate = useRef(true);
+
   const dimension = ['currency']
+  const label = ['Currency']
 
   const { 
     mData,
@@ -24,14 +33,23 @@ const MotorFilter = () => {
     )
     setChildren(child)
   },[mData])
-  
 
-  function handleChange(v, i) {
+  function handleChange(v) {
+    console.log('v',v)
+    select(v)
+    setSelected(v)
+  }
+
+  function handleClear(v) {
+    console.log('clear',v)
+   // setSelected(v)
     select(v)
   }
 
-  function handleClear(value) {
-    
+  function handleDeselect(v) {
+    console.log('deselect',v)
+   // setSelected([v])
+   // select(v)
   }
 
   function handleOpen(val) {
@@ -46,11 +64,12 @@ const MotorFilter = () => {
       <Select
           mode="multiple"
           allowClear
+          onChange={handleChange} 
+          value={selected}
           style={{ width: '100%' }}
-          placeholder="Please select"
-          // defaultValue={['China']}
-          onChange={handleChange}
-          onClear={handleClear}
+          placeholder="Currency"
+          onClear={v => handleClear(v)}
+          onDeselect={v => handleDeselect(v)}
           onDropdownVisibleChange={handleOpen}
       >
         {children}

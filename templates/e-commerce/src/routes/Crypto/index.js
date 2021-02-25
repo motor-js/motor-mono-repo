@@ -3,6 +3,7 @@ import { Col, Row } from "antd";
 import Auxiliary from "util/Auxiliary";
 import MotorTable from "motorComponents/MotorTable"
 import MotorFilter from "motorComponents/MotorFilter"
+import MotorButton from "motorComponents/MotorButton"
 
 /*
 import {
@@ -27,6 +28,9 @@ const Crypto = () => {
   return (
     <Auxiliary>
     <Row>
+      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        <MotorButton />
+      </Col>
       <Col xl={6} lg={12} md={12} sm={12} xs={24}>
         <MotorFilter />
       </Col>
@@ -107,7 +111,7 @@ const Crypto = () => {
                     fillOpacity={1}
                   />
                 </AreaChart>
-                
+
               </ResponsiveContainer>
             }
             styleName="up"
