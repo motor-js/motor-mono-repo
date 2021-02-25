@@ -26,7 +26,7 @@ const MotorAreaChart = () => {
 
   const {
     // qLayout,
-    qData,
+    // qData,
     mData,
     // endSelections,
     // beginSelections,
@@ -44,18 +44,14 @@ const MotorAreaChart = () => {
     // qSuppressZero: true,
   });
 
-  console.log(mData);
-
-  // useEffect(() => {
-  //   mData && setLoading(false);
-  // }, [mData]);
+  useEffect(() => {
+    // mData && console.log(mData);
+    mData && setLoading(false);
+  }, [mData]);
 
   return (
     <ResponsiveContainer width="100%" height={75}>
-      <AreaChart
-        data={increamentData}
-        margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-      >
+      <AreaChart data={mData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
         <Tooltip />
         <defs>
           <linearGradient id="color3" x1="0" y1="0" x2="1" y2="0">
