@@ -1,8 +1,15 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
 //import { useList } from "@motor-js/engine"
+<<<<<<< HEAD
 import useList from "../../hooks/useList";
 import Widget from "components/Widget";
+=======
+import useList from "../../dev-resources/hooks/useList";
+import Widget from "dev-resources/components/Widget";
+import { SelectionsContext } from "../../store";
+import useSelectionObject from "../../dev-resources/hooks/useSelectionObject";
+>>>>>>> origin/development
 
 
 const MotorFilter = ({ dimension }) => {

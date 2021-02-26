@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { Table } from "antd";
 // import { useTable } from "@motor-js/engine";
 // import { useData } from "../../hooks/useData";
-import useData from "../../hooks/useData";
+import useData from "../../dev-resources/hooks/useData";
 // import Widget from "components/Widget";
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 

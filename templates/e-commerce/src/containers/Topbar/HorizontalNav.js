@@ -39,7 +39,7 @@ const HorizontalNav = () => {
       selectedKeys={[selectedKeys]}
       mode="horizontal"
     >
-      <SubMenu
+      {/* <SubMenu
         className={getNavStyleSubMenuClass(navStyle)}
         key="main"
         title="Menu 1"
@@ -54,27 +54,27 @@ const HorizontalNav = () => {
               Sub Menu 1
             </span>
           }
-        >
-          <Menu.Item key="main/dashboard/crypto">
-            <Link to="/Crypto">
-              <i className="icon icon-crypto" />
-              Crypo
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="main/dashboard/crm">
-            <Link to="/CRM">
-              <i className="icon icon-crm" />
-              CRM
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="main/dashboard/listing">
-            <Link to="/main/dashboard/listing">
-              <i className="icon icon-listing-dbrd" />
-              Listing
-            </Link>
-          </Menu.Item>
-        </SubMenu>
-      </SubMenu>
+        > */}
+      <Menu.Item key="main/dashboard/crypto">
+        <Link to="/Crypto">
+          <i className="icon icon-crypto" />
+          Crypo
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="main/dashboard/crm">
+        <Link to="/CRM">
+          <i className="icon icon-crm" />
+          CRM
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="main/dashboard/listing">
+        <Link to="/main/dashboard/listing">
+          <i className="icon icon-listing-dbrd" />
+          Listing
+        </Link>
+      </Menu.Item>
+      {/* </SubMenu>
+      </SubMenu> */}
     </Menu>
   );
 };
