@@ -66,6 +66,8 @@ const useList = props => {
   const qObject = useRef(null)
   const qPage = useRef(qPageProp)
 
+  console.log('useList')
+  
   /** Generate the Definition file */
   const generateQProp = useCallback((currentColumn = 0) => {
     const qProp = { qInfo: { qType: 'visualization' } }
@@ -120,7 +122,15 @@ const useList = props => {
   }, [])
 
   const getSelections = (data) => {
-    return data.qMatrix.filter(row => row[0].qState === 'S')
+    const sel = data.qMatrix.filter(row => row[0].qState === 'S')
+    const arr = []
+    sel.map(d => {
+      const t = d[0].qElemNumber
+      arr.push(t)
+    })
+    return arr
+
+    //return data.qMatrix.filter(row => row[0].qState === 'S')
 
   }
 
@@ -150,7 +160,7 @@ const useList = props => {
         },
       })
     }
-  }, [getData, getLayout])
+  }, [getData, getLayout, structureData])
 
   const changePage = useCallback(newPage => {
     qPage.current = { ...qPage.current, ...newPage }
@@ -168,6 +178,7 @@ const useList = props => {
     // await state.qEngine.abortModal(true)
     await qObject.current.endSelections(qAccept)
   }
+
   const select = useCallback((qElemNumber, toggle = true, ignoreLock = false) => qObject.current.selectListObjectValues('/qListObjectDef', qElemNumber, toggle, ignoreLock), [])
 
   const searchListObjectFor = useCallback(string => qObject.current.searchListObjectFor('/qListObjectDef', string), [])

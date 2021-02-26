@@ -43,7 +43,7 @@ const MotorLineChart = () => {
 
   return (
     <ResponsiveContainer width="100%" height={75}>
-      <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+      <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}> 
         <Tooltip />
         <Line
           dataKey="price"

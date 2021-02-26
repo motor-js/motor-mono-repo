@@ -3,17 +3,13 @@ import { Select } from "antd";
 //import { useList } from "@motor-js/engine"
 import useList from "../../hooks/useList";
 import Widget from "components/Widget";
-import { SelectionsContext } from "../../store";
-import useSelectionObject from "../../hooks/useSelectionObject";
 
-const MotorFilter = () => {
-  const value = useContext(SelectionsContext);
+
+const MotorFilter = ({ dimension }) => {
 
   const [children, setChildren] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState();
 
-  const dimension = ["currency"];
-  const label = "Currency";
 
   const { mData, select, selections } = useList({
     dimension,
@@ -33,18 +29,19 @@ const MotorFilter = () => {
         )
       );
     setChildren(child);
+    setSelected(selections)
   }, [mData]);
 
   function handleChange(v) {
-    console.log("v", v);
-    select(v);
-    setSelected(v);
+    console.log('handleChange')
+    const newSel = v.filter( el => !selections.includes(el))
+    select(newSel);
   }
 
   function handleClear(v) {
-    console.log("clear", v);
+   // console.log("clear", v);
     // setSelected(v)
-    select(v);
+   // select(v);
   }
 
   function handleDeselect(v) {
@@ -66,7 +63,7 @@ const MotorFilter = () => {
         onChange={handleChange}
         value={selected}
         style={{ width: "100%" }}
-        placeholder="Currency"
+        placeholder={dimension[0]}
         onClear={(v) => handleClear(v)}
         onDeselect={(v) => handleDeselect(v)}
         onDropdownVisibleChange={handleOpen}
