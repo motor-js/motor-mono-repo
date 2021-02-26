@@ -30,7 +30,7 @@ const Crypto = () => {
   return (
     <Auxiliary>
       <MotorFilter dimension={['currency']} />
-      
+      <MotorTable />
       {/* <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <MotorButton />
@@ -153,7 +153,7 @@ const Crypto = () => {
         </Col>
         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
           {/* <OrderHistory /> */}
-          <MotorTable />
+
         </Col>
       </Row>
     </Auxiliary>

@@ -1,15 +1,8 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
 //import { useList } from "@motor-js/engine"
-<<<<<<< HEAD
-import useList from "../../hooks/useList";
-import Widget from "components/Widget";
-=======
 import useList from "../../dev-resources/hooks/useList";
 import Widget from "dev-resources/components/Widget";
-import { SelectionsContext } from "../../store";
-import useSelectionObject from "../../dev-resources/hooks/useSelectionObject";
->>>>>>> origin/development
 
 
 const MotorFilter = ({ dimension }) => {
@@ -18,7 +11,14 @@ const MotorFilter = ({ dimension }) => {
   const [selected, setSelected] = useState();
 
 
-  const { mData, select, selections, beginSelections, endSelections } = useList({
+  const { 
+    mData,
+    select,
+    selections,
+    beginSelections,
+    endSelections,
+    clearSelections
+  } = useList({
     dimension,
   });
 
@@ -39,26 +39,25 @@ const MotorFilter = ({ dimension }) => {
   }, [mData]);
 
   async function handleChange(v) {
-    //beginSelections()
-    console.log('handleChange')
     const newSel = await v.filter( el => !selections.includes(el))
     select(newSel)
-    //endSelections(true)
+    endSelections(true)
   }
 
   function handleClear(v) {
-   // console.log("clear", v);
-    // setSelected(v)
-   // select(v);
+    clearSelections()
   }
 
-  function handleDeselect(v) {
+  async function handleDeselect(v) {
     console.log("deselect", v);
-    // setSelected([v])
-    // select(v)
+    const newSel = await v.filter( el => !selections.includes(el))
+    select(newSel)
+    endSelections(true)
   }
 
-  function handleOpen(val) {}
+  function handleOpen(val) {
+    beginSelections()
+  }
 
   return (
     <Widget
@@ -72,7 +71,7 @@ const MotorFilter = ({ dimension }) => {
         value={selected}
         style={{ width: "100%" }}
         placeholder={dimension[0]}
-        onClear={(v) => handleClear(v)}
+        onClear={ handleClear}
         onDeselect={(v) => handleDeselect(v)}
         onDropdownVisibleChange={handleOpen}
         filterOption={(input, option) =>
