@@ -20,10 +20,11 @@ import CurrencyCalculator from "components/dashboard/Crypto/CurrencyCalculator";
 // import OrderHistory from "components/dashboard/Crypto/OrderHistory";
 
 import MotorTable from "motorComponents/MotorTable";
-// import MotorFilter from "motorComponents/MotorFilter";
-// import MotorButton from "motorComponents/MotorButton";
+import MotorFilter from "motorComponents/MotorFilter";
+import MotorButton from "motorComponents/MotorButton";
 import MotorAreaChart from "motorComponents/MotorAreaChart";
 import MotorLineChart from "motorComponents/MotorLineChart";
+import MotorKPI from "motorComponents/MotorKPI";
 
 const Crypto = () => {
   return (
@@ -35,13 +36,10 @@ const Crypto = () => {
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <MotorFilter />
         </Col>
-        <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-          <MotorTable />
-        </Col>
       </Row> */}
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartCard
+          <MotorKPI
             prize="$9,626"
             title="23"
             icon="bitcoin"
