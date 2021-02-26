@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useData from "../../hooks/useData";
+import useData from "../../dev-resources/hooks/useData";
 // import Widget from "components/Widget";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 

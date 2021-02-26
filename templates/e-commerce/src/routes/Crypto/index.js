@@ -11,12 +11,12 @@ import {
   Tooltip,
 } from "recharts";
 import { increamentData, lineData } from "./data";
-import ChartCard from "components/dashboard/Crypto/ChartCard";
-import Portfolio from "components/dashboard/Crypto/Portfolio";
-import BalanceHistory from "components/dashboard/Crypto/BalanceHistory";
-import SendMoney from "components/dashboard/Crypto/SendMoney";
-import RewardCard from "components/dashboard/Crypto/RewardCard";
-import CurrencyCalculator from "components/dashboard/Crypto/CurrencyCalculator";
+import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
+import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
+import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
+import SendMoney from "dev-resources/components/dashboard/Crypto/SendMoney";
+import RewardCard from "dev-resources/components/dashboard/Crypto/RewardCard";
+import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/CurrencyCalculator";
 // import OrderHistory from "components/dashboard/Crypto/OrderHistory";
 
 import MotorTable from "motorComponents/MotorTable";

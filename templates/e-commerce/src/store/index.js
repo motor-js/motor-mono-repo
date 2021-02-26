@@ -1,24 +1,24 @@
-import React, {createContext, useReducer} from "react";
-import Reducer from '../reducer'
-import useSelectionObject from '../hooks/useSelectionObject'
+import React, { createContext, useReducer } from "react";
+import Reducer from "../reducer";
+import useSelectionObject from "../dev-resources/hooks/useSelectionObject";
 
 /*const initialState = {
     selections: [],
     error: null
 };*/
 
-const SelectionsStore = ({children}) => {
-    //const [state, dispatch] = useReducer(Reducer, initialState);
+const SelectionsStore = ({ children }) => {
+  //const [state, dispatch] = useReducer(Reducer, initialState);
 
-    const { qLayout } = useSelectionObject()
+  const { qLayout } = useSelectionObject();
 
-    const selections = qLayout
+  const selections = qLayout;
 
-    return (
-        <SelectionsContext.Provider value={qLayout}>
-            {children}
-        </SelectionsContext.Provider>
-    )
+  return (
+    <SelectionsContext.Provider value={qLayout}>
+      {children}
+    </SelectionsContext.Provider>
+  );
 };
 
 export const SelectionsContext = createContext();
