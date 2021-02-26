@@ -19,12 +19,12 @@ import RewardCard from "dev-resources/components/dashboard/Crypto/RewardCard";
 import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/CurrencyCalculator";
 // import OrderHistory from "components/dashboard/Crypto/OrderHistory";
 
-import MotorTable from "motorComponents/MotorTable";
-import MotorFilter from "motorComponents/MotorFilter";
-import MotorButton from "motorComponents/MotorButton";
-import MotorAreaChart from "motorComponents/MotorAreaChart";
-import MotorLineChart from "motorComponents/MotorLineChart";
-import MotorKPI from "motorComponents/MotorKPI";
+import MotorTable from "components/engine/MotorTable";
+import MotorFilter from "components/engine/MotorFilter";
+import MotorButton from "components/engine/MotorButton";
+import MotorAreaChart from "components/engine/MotorAreaChart";
+import MotorLineChart from "components/engine/MotorLineChart";
+import MotorKPI from "components/engine/MotorKPI";
 
 const Crypto = () => {
   return (
