@@ -11,20 +11,19 @@ const initialState = {
   qObject: null,
   qData: null,
   mData: null,
-  qLayout: null,
   selections: null,
 }
 
 function reducer(state, action) {
   const {
     payload: {
-      qData, mData, qLayout, selections, qDoc,
+      qData, mData,selections, qDoc,
     }, type,
   } = action
   switch (type) {
     case 'update':
       return {
-        ...state, qData, mData, qLayout, selections,
+        ...state, qData, mData, selections,
       }
     case 'init':
       return {
@@ -55,19 +54,19 @@ const useList = props => {
     qPage: qPageProp, dimension, qListObjectDef, qSortByAscii, qSortByLoadOrder, autoSortByState,
   } = deepMerge(initialProps, props)
   
+  
+
   const { engine, engineError } = useContext(EngineContext) || {};
   const _isMounted = useRef(true)
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const {
-    qData, mData, qLayout, selections,
+    mData, selections,
   } = state
 
   const qObject = useRef(null)
   const qPage = useRef(qPageProp)
 
-  console.log('useList')
-  
   /** Generate the Definition file */
   const generateQProp = useCallback((currentColumn = 0) => {
     const qProp = { qInfo: { qType: 'visualization' } }
@@ -97,16 +96,16 @@ const useList = props => {
     return qProp
   }, [autoSortByState, dimension, qListObjectDef, qSortByAscii, qSortByLoadOrder])
 
-  const getLayout = useCallback(() => qObject.current.getLayout(), [])
-
   // Edit to extract all data
   const getData = useCallback(async () => {
     const qDataPages = await qObject.current.getListObjectData('/qListObjectDef', [qPage.current])
-
+    console.log('structure data!')
     return qDataPages[0]
   }, [])
 
   const structureData = useCallback(async () => {
+    console.log(state.mData)
+    if(!mData) {
     let data = []
     const qDataPages = await qObject.current.getListObjectData('/qListObjectDef', [qPage.current])
 
@@ -117,11 +116,13 @@ const useList = props => {
         value: d[0].qText
       })
     })
-
+    console.log('structure data!')
     return data
+  }
   }, [])
 
   const getSelections = (data) => {
+    console.log('called')
     const sel = data.qMatrix.filter(row => row[0].qState === 'S')
     const arr = []
     sel.map(d => {
@@ -135,7 +136,7 @@ const useList = props => {
   }
 
   const update = useCallback(async () => {
-    const _qLayout = await getLayout()
+    console.log('update callback!')
     const _qData = await getData()
     const _mData = await structureData()
     if (_qData && _isMounted.current) {
@@ -143,9 +144,7 @@ const useList = props => {
       dispatch({
         type: 'update',
         payload: {
-          qData: _qData,
           mData: _mData,
-          qLayout: _qLayout,
           selections: _selections,
         },
       })
@@ -154,13 +153,11 @@ const useList = props => {
         type: 'update',
         payload:
         {
-          qData: _qData,
           mData: _mData,
-          qLayout: _qLayout,
         },
       })
     }
-  }, [getData, getLayout, structureData])
+  }, [getData, structureData])
 
   const changePage = useCallback(newPage => {
     qPage.current = { ...qPage.current, ...newPage }
@@ -206,8 +203,6 @@ const useList = props => {
 
 
   return {
-    qLayout,
-    qData,
     mData,
     changePage,
     select,

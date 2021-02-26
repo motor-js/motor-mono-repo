@@ -11,11 +11,10 @@ const MotorFilter = ({ dimension }) => {
   const [selected, setSelected] = useState();
 
 
-  const { mData, select, selections } = useList({
+  const { mData, select, selections, beginSelections, endSelections } = useList({
     dimension,
   });
 
-  console.log("sel1: ", selections);
   const { Option } = Select;
 
   useEffect(() => {
@@ -29,13 +28,15 @@ const MotorFilter = ({ dimension }) => {
         )
       );
     setChildren(child);
-    setSelected(selections)
+    setSelected(selections);
   }, [mData]);
 
-  function handleChange(v) {
+  async function handleChange(v) {
+    //beginSelections()
     console.log('handleChange')
-    const newSel = v.filter( el => !selections.includes(el))
-    select(newSel);
+    const newSel = await v.filter( el => !selections.includes(el))
+    select(newSel)
+    //endSelections(true)
   }
 
   function handleClear(v) {
