@@ -2,34 +2,27 @@ import React from "react";
 import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget";
+import AreaChart from "components/engine/AreaChart";
 
-const ChartKPI = ({ children, styleName, icon }) => {
-  const cols = [
-    {
-      qField: "[name]",
-      qLabel: "name",
-      // qCondBackgroundFormat: "sum([price])",
-    },
-    {
-      qField: "=Sum({$<coin={'bitcoin'}>} price)",
-      qLabel: "price",
-    },
-  ];
+const ChartKPI = ({ dataProps }) => {
+  const { cols, qTitle, qMetrics, icon, styleName, chart } = dataProps;
 
-  const qMetrics = [
-    {
-      qName: "prize",
-      qExpr: "num(Sum(price),'$#,##0')",
-      qType: "qStringExpression",
-    },
-    {
-      qName: "desc",
-      qExpr: "num(Count(distinct coin)/100,'#,##0%')",
-      qType: "qStringExpression",
-    },
-  ];
+  const { type, margin } = chart;
 
-  const qTitle = "='There are ' & count(distinct coin) & ' coins'";
+  let Chart = null;
+
+  switch (type) {
+    case "area":
+      Chart = AreaChart;
+      break;
+    case "Mangoes":
+    case "Papayas":
+      console.log("Mangoes and papayas are $2.79 a pound.");
+      // expected output: "Mangoes and papayas are $2.79 a pound."
+      break;
+    default:
+      Chart = AreaChart;
+  }
 
   const {
     qLayout,
@@ -75,7 +68,8 @@ const ChartKPI = ({ children, styleName, icon }) => {
           <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
         </div>
       )}
-      {React.cloneElement(children, { data: mData })}
+      {/* {React.cloneElement(children, { data: mData })} */}
+      <Chart data={mData} margin={margin} />
     </Widget>
   );
 };

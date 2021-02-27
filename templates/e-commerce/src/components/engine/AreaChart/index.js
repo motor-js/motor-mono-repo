@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import Widget from "components/Widget";
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 
-const MotorAreaChart = ({ data }) => {
+const MotorAreaChart = ({ data, margin }) => {
   const [loading, setLoading] = useState(true);
 
   // useEffect(() => {
@@ -13,7 +13,8 @@ const MotorAreaChart = ({ data }) => {
 
   return (
     <ResponsiveContainer width="100%" height={75}>
-      <AreaChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+      {/* <AreaChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}> */}
+      <AreaChart data={data} margin={margin}>
         <Tooltip />
         <defs>
           <linearGradient id="color3" x1="0" y1="0" x2="1" y2="0">

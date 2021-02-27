@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { increamentData, lineData } from "./data";
+import { increamentData, lineData, bitCoinKPI } from "./data";
 import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
 import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
@@ -22,7 +22,7 @@ import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/Curren
 import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/MotorFilter";
 import MotorButton from "components/engine/MotorButton";
-import MotorAreaChart from "components/engine/AreaChart";
+
 import MotorLineChart from "components/engine/LineChart";
 import ChartKPI from "components/engine/ChartKPI";
 
@@ -39,14 +39,7 @@ const Crypto = () => {
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI
-            // prize="$9,626"
-            // title="23"
-            icon="bitcoin"
-            children={<MotorAreaChart />}
-            styleName="up"
-            // desc="Bitcoin Price"
-          />
+          <ChartKPI dataProps={bitCoinKPI} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartCard
