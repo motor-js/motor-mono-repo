@@ -34,20 +34,6 @@ const ChartCard = ({ prize, title, children, styleName, icon }) => {
       },
     },
   ];
-  // const cols = [
-  //   // {
-  //   //   qField: "[name]",
-  //   //   qLabel: "name",
-  //   //   // qCondBackgroundFormat: "sum([price])",
-  //   // },
-  //   {
-  //     qField: "=Sum({$<coin={'bitcoin'}>} price)",
-  //     qLabel: "price",
-  //   },
-  // ];
-
-  // qCondBackgroundFormat:'if(sum([Sales Margin Amount])<0, red())',
-  //         qCondTextFormat: 'if(sum([Sales Margin Amount])<0, white())',
 
   const chartTitle = "='There are ' & count(distinct coin) & ' coins'";
 
