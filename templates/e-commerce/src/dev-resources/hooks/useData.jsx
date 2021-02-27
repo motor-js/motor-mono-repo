@@ -71,7 +71,7 @@ const initialProps = {
 const useData = (props) => {
   const {
     cols,
-    title: qTitle,
+    qTitle,
     qHyperCubeDef,
     qPage: qPageProp,
     qSortByAscii,

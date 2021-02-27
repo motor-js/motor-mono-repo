@@ -35,7 +35,7 @@ const ChartCard = ({ prize, title, children, styleName, icon }) => {
     },
   ];
 
-  const chartTitle = "='There are ' & count(distinct coin) & ' coins'";
+  const qTitle = "='There are ' & count(distinct coin) & ' coins'";
 
   const {
     qLayout,
@@ -50,7 +50,7 @@ const ChartCard = ({ prize, title, children, styleName, icon }) => {
     // applyPatches,
   } = useData({
     cols,
-    title: chartTitle,
+    qTitle,
     //qColumnOrder: columnOrder,
     //qCalcCondition: calcCondition,
     // qPage,
