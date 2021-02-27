@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useData from "../../dev-resources/hooks/useData";
+import useData from "../../../dev-resources/hooks/useData";
 // import Widget from "components/Widget";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
@@ -15,7 +15,6 @@ const MotorLineChart = () => {
       qLabel: "price",
     },
   ];
-
 
   const {
     // qLayout,
@@ -37,16 +36,16 @@ const MotorLineChart = () => {
     // qSuppressZero: true,
   });
 
-  console.log('mData: ',mData)
+  console.log("mData: ", mData);
   return (
     <ResponsiveContainer width="100%" height={75}>
-      <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}> 
+      <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
         <Tooltip />
         <Line
           dataKey="price"
           stroke="#038FDE"
           dot={{ stroke: "#FEA931", strokeWidth: 2 }}
-        /> 
+        />
       </LineChart>
     </ResponsiveContainer>
   );

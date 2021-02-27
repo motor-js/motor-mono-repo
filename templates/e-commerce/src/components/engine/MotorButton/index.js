@@ -1,6 +1,6 @@
 import { Button } from "antd";
 // import useButton from '../../hooks/useButton'
-import useButton from "../../dev-resources/hooks/useButton";
+import useButton from "../../../dev-resources/hooks/useButton";
 
 const MotorButton = () => {
   const { clearSelections } = useButton();

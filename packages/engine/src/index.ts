@@ -1,5 +1,5 @@
 //Components
-export { default as Motor } from "./components/Motor";
+export { default as Motor } from "./components/engine/Motor";
 
 //Hooks
 export { default as useEngine } from "./hooks/useEngine";
