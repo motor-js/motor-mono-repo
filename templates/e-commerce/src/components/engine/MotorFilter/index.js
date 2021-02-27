@@ -3,23 +3,22 @@ import { Select } from "antd";
 //import { useList } from "@motor-js/engine"
 import useList from "../../../dev-resources/hooks/useList";
 import Widget from "dev-resources/components/Widget";
-import { SelectionsContext } from "../../../store";
-import useSelectionObject from "../../../dev-resources/hooks/useSelectionObject";
 
-const MotorFilter = () => {
-  const value = useContext(SelectionsContext);
-
+const MotorFilter = ({ dimension }) => {
   const [children, setChildren] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState();
 
-  const dimension = ["currency"];
-  const label = "Currency";
-
-  const { mData, select, selections } = useList({
+  const {
+    mData,
+    select,
+    selections,
+    beginSelections,
+    endSelections,
+    clearSelections,
+  } = useList({
     dimension,
   });
 
-  console.log("sel1: ", selections);
   const { Option } = Select;
 
   useEffect(() => {
@@ -33,27 +32,29 @@ const MotorFilter = () => {
         )
       );
     setChildren(child);
+    setSelected(selections);
   }, [mData]);
 
-  function handleChange(v) {
-    console.log("v", v);
-    select(v);
-    setSelected(v);
+  async function handleChange(v) {
+    const newSel = await v.filter((el) => !selections.includes(el));
+    select(newSel);
+    endSelections(true);
   }
 
   function handleClear(v) {
-    console.log("clear", v);
-    // setSelected(v)
-    select(v);
+    clearSelections();
   }
 
-  function handleDeselect(v) {
+  async function handleDeselect(v) {
     console.log("deselect", v);
-    // setSelected([v])
-    // select(v)
+    const newSel = await v.filter((el) => !selections.includes(el));
+    select(newSel);
+    endSelections(true);
   }
 
-  function handleOpen(val) {}
+  function handleOpen(val) {
+    beginSelections();
+  }
 
   return (
     <Widget
@@ -66,8 +67,8 @@ const MotorFilter = () => {
         onChange={handleChange}
         value={selected}
         style={{ width: "100%" }}
-        placeholder="Currency"
-        onClear={(v) => handleClear(v)}
+        placeholder={dimension[0]}
+        onClear={handleClear}
         onDeselect={(v) => handleDeselect(v)}
         onDropdownVisibleChange={handleOpen}
         filterOption={(input, option) =>
