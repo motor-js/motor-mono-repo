@@ -58,10 +58,6 @@ const MotorFilter = ({ dimension }) => {
     endSelections(true)
   }
 
-  function handleOpen(val) {
-    
-  }
-
   return (
     <Widget
       styleName="gx-order-history"
@@ -76,7 +72,6 @@ const MotorFilter = ({ dimension }) => {
         placeholder={dimension[0]}
         onClear={handleClear}
         onDeselect={(v) => handleDeselect(v)}
-        onDropdownVisibleChange={handleOpen}
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }

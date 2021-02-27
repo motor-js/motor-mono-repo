@@ -6,7 +6,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 // import { increamentData } from "../../routes/Crypto/data";
 
 const MotorLineChart = () => {
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const cols = [
     { qField: "[name]", qLabel: "name" },
@@ -15,6 +15,7 @@ const MotorLineChart = () => {
       qLabel: "price",
     },
   ];
+
 
   const {
     // qLayout,
@@ -36,7 +37,7 @@ const MotorLineChart = () => {
     // qSuppressZero: true,
   });
 
-  console.log(mData)
+  console.log('mData: ',mData)
   return (
     <ResponsiveContainer width="100%" height={75}>
       <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}> 
@@ -45,7 +46,7 @@ const MotorLineChart = () => {
           dataKey="price"
           stroke="#038FDE"
           dot={{ stroke: "#FEA931", strokeWidth: 2 }}
-        />
+        /> 
       </LineChart>
     </ResponsiveContainer>
   );
