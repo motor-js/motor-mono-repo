@@ -1,8 +1,37 @@
 import React from "react";
+import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget";
 
 const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
+  const cols = [
+    { qField: "[name]", qLabel: "name" },
+    {
+      qField: "=Sum({$<coin={'bitcoin'}>} price)",
+      qLabel: "price",
+    },
+  ];
+
+  const {
+    // qLayout,
+    // qData,
+    mData,
+    // endSelections,
+    // beginSelections,
+    // changePage,
+    // selections,
+    // select,
+    // applyPatches,
+  } = useData({
+    cols,
+    //qColumnOrder: columnOrder,
+    //qCalcCondition: calcCondition,
+    // qPage,
+    //qInterColumnSortOrder: columnSortOrder,
+    // qSupressMissing: true,
+    // qSuppressZero: true,
+  });
+
   return (
     <Widget styleName="gx-card-full">
       <div className="gx-actchart gx-px-3 gx-pt-3">
@@ -21,7 +50,8 @@ const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
         </div>
         <p className="gx-mb-0 gx-fs-sm gx-text-grey">{desc}</p>
       </div>
-      {children}
+      {/* {children} */}
+      {React.cloneElement(children, { data: mData })}
     </Widget>
   );
 };
