@@ -3,7 +3,7 @@ import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget";
 
-const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
+const ChartCard = ({ prize, title, children, styleName, icon }) => {
   const cols = [
     {
       qField: "[name]",
@@ -55,6 +55,7 @@ const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
     qLayout,
     qData,
     mData,
+    title: desc,
     // endSelections,
     // beginSelections,
     // changePage,
