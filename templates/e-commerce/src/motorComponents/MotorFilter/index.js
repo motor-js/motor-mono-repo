@@ -4,17 +4,19 @@ import { Select } from "antd";
 import useList from "../../dev-resources/hooks/useList";
 import Widget from "dev-resources/components/Widget";
 
+
 const MotorFilter = ({ dimension }) => {
+
   const [children, setChildren] = useState([]);
   const [selected, setSelected] = useState();
 
-  const {
+  const { 
     mData,
     select,
     selections,
     beginSelections,
     endSelections,
-    clearSelections,
+    clearSelections
   } = useList({
     dimension,
   });
@@ -32,28 +34,28 @@ const MotorFilter = ({ dimension }) => {
         )
       );
     setChildren(child);
-    if (!selections) return;
+    if(!selections) return
     setSelected(selections);
   }, [mData]);
 
   async function handleChange(v) {
-    beginSelections();
-    const newSel = await v.filter((el) => !selections.includes(el));
-    select(newSel);
-    endSelections(true);
+    beginSelections()
+    const newSel = await v.filter( el => !selections.includes(el))
+    select(newSel)
+    endSelections(true)
   }
 
   function handleClear(v) {
-    beginSelections();
-    clearSelections();
-    endSelections(true);
+    beginSelections()
+    clearSelections()
+    endSelections(true)
   }
 
   async function handleDeselect(v) {
-    beginSelections();
-    const sel = [v];
-    select(sel);
-    endSelections(true);
+    beginSelections()
+    const sel = [v]
+    select(sel)
+    endSelections(true)
   }
 
   return (
