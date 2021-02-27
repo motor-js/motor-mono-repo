@@ -10,7 +10,6 @@ const MotorFilter = ({ dimension }) => {
   const [children, setChildren] = useState([]);
   const [selected, setSelected] = useState();
 
-
   const { 
     mData,
     select,
@@ -35,28 +34,32 @@ const MotorFilter = ({ dimension }) => {
         )
       );
     setChildren(child);
+    if(!selections) return
     setSelected(selections);
   }, [mData]);
 
   async function handleChange(v) {
+    beginSelections()
     const newSel = await v.filter( el => !selections.includes(el))
     select(newSel)
     endSelections(true)
   }
 
   function handleClear(v) {
+    beginSelections()
     clearSelections()
+    endSelections(true)
   }
 
   async function handleDeselect(v) {
-    console.log("deselect", v);
-    const newSel = await v.filter( el => !selections.includes(el))
-    select(newSel)
+    beginSelections()
+    const sel = [v]
+    select(sel)
     endSelections(true)
   }
 
   function handleOpen(val) {
-    beginSelections()
+    
   }
 
   return (
@@ -71,7 +74,7 @@ const MotorFilter = ({ dimension }) => {
         value={selected}
         style={{ width: "100%" }}
         placeholder={dimension[0]}
-        onClear={ handleClear}
+        onClear={handleClear}
         onDeselect={(v) => handleDeselect(v)}
         onDropdownVisibleChange={handleOpen}
         filterOption={(input, option) =>

@@ -45,7 +45,7 @@ const initialProps = {
     qTop: 0,
     qLeft: 0,
     qWidth: 1,
-    qHeight: 100,
+    qHeight: 10000,
   },
 }
 
@@ -99,12 +99,10 @@ const useList = props => {
   // Edit to extract all data
   const getData = useCallback(async () => {
     const qDataPages = await qObject.current.getListObjectData('/qListObjectDef', [qPage.current])
-    console.log('structure data!')
     return qDataPages[0]
   }, [])
 
   const structureData = useCallback(async () => {
-    console.log(state.mData)
     if(!mData) {
     let data = []
     const qDataPages = await qObject.current.getListObjectData('/qListObjectDef', [qPage.current])
@@ -116,13 +114,11 @@ const useList = props => {
         value: d[0].qText
       })
     })
-    console.log('structure data!')
     return data
   }
-  }, [])
+  }, [mData])
 
   const getSelections = (data) => {
-    console.log('called')
     const sel = data.qMatrix.filter(row => row[0].qState === 'S')
     const arr = []
     sel.map(d => {
@@ -136,7 +132,6 @@ const useList = props => {
   }
 
   const update = useCallback(async () => {
-    console.log('update callback!')
     const _qData = await getData()
     const _mData = await structureData()
     if (_qData && _isMounted.current) {

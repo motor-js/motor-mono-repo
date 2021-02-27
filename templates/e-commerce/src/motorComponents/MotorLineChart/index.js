@@ -36,11 +36,7 @@ const MotorLineChart = () => {
     // qSuppressZero: true,
   });
 
-  // useEffect(() => {
-  //   // mData && console.log(mData);
-  //   mData && setLoading(false);
-  // }, [mData]);
-
+  console.log(mData)
   return (
     <ResponsiveContainer width="100%" height={75}>
       <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}> 
