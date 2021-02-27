@@ -46,9 +46,14 @@ export const bitCoinKPI = {
         qExpr: "num(Count(distinct coin)/100,'#,##0%')",
         qType: "qStringExpression",
       },
+      {
+        qName: "styleName",
+        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qType: "qStringExpression",
+      },
     ],
     qTitle: "='There are ' & count(distinct coin) & ' coins'",
   },
   icon: "bitcoin",
-  styleName: "up",
+  // styleName: "up",
 };
