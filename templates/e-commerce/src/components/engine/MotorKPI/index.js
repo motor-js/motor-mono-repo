@@ -24,8 +24,8 @@ const ChartCard = ({ children, styleName, icon }) => {
     },
     {
       qName: "desc",
-      qExpr: "Count(distinct coin)",
-      qType: "qValueExpression",
+      qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+      qType: "qStringExpression",
     },
   ];
 
@@ -65,7 +65,7 @@ const ChartCard = ({ children, styleName, icon }) => {
               <span
                 className={`gx-mb-0 gx-ml-2 gx-pt-xl-2 gx-fs-lg gx-chart-${styleName}`}
               >
-                {metrics.desc}% <i className="icon icon-menu-up gx-fs-sm" />
+                {metrics.desc} <i className="icon icon-menu-up gx-fs-sm" />
               </span>
             </h2>
             <i
