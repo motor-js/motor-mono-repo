@@ -5,16 +5,55 @@ import Widget from "dev-resources/components/Widget";
 
 const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
   const cols = [
-    { qField: "[name]", qLabel: "name" },
+    {
+      qField: "[name]",
+      qLabel: "name",
+      // qCondBackgroundFormat: "sum([price])",
+    },
     {
       qField: "=Sum({$<coin={'bitcoin'}>} price)",
       qLabel: "price",
     },
   ];
 
+  const metrics = [
+    {
+      numberOfCoinTypes: {
+        qStringExpression: {
+          // This will evaluate to a formatted string.
+          qExpr: "Count(distinct coin)",
+        },
+      },
+    },
+    {
+      salesValue: {
+        qValueExpression: {
+          // Same as above but will evaluate as number.
+          qExpr: "Sum(price)",
+        },
+      },
+    },
+  ];
+  // const cols = [
+  //   // {
+  //   //   qField: "[name]",
+  //   //   qLabel: "name",
+  //   //   // qCondBackgroundFormat: "sum([price])",
+  //   // },
+  //   {
+  //     qField: "=Sum({$<coin={'bitcoin'}>} price)",
+  //     qLabel: "price",
+  //   },
+  // ];
+
+  // qCondBackgroundFormat:'if(sum([Sales Margin Amount])<0, red())',
+  //         qCondTextFormat: 'if(sum([Sales Margin Amount])<0, white())',
+
+  const chartTitle = "='There are ' & count(distinct coin) & ' coins'";
+
   const {
-    // qLayout,
-    // qData,
+    qLayout,
+    qData,
     mData,
     // endSelections,
     // beginSelections,
@@ -24,6 +63,7 @@ const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
     // applyPatches,
   } = useData({
     cols,
+    title: chartTitle,
     //qColumnOrder: columnOrder,
     //qCalcCondition: calcCondition,
     // qPage,
@@ -31,6 +71,8 @@ const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
     // qSupressMissing: true,
     // qSuppressZero: true,
   });
+
+  console.log(qLayout);
 
   return (
     <Widget styleName="gx-card-full">

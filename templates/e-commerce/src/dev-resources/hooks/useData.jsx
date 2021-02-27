@@ -63,12 +63,14 @@ const initialProps = {
   qSortByNumeric: -1,
   qColumnOrder: [],
   qCalcCondition: undefined,
+  qTitle: null,
   qOtherTotalSpec: "",
 };
 
 const useData = (props) => {
   const {
     cols,
+    title: qTitle,
     qHyperCubeDef,
     qPage: qPageProp,
     qSortByAscii,
@@ -359,11 +361,13 @@ const useData = (props) => {
       qSuppressMissing,
       qColumnOrder,
       qCalcCondition,
+      qTitle,
     };
 
     return qProp;
   }, [
     cols,
+    qTitle,
     qExpression,
     qHyperCubeDef,
     qInterColumnSortOrder,
