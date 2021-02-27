@@ -3,7 +3,7 @@ import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget";
 
-const ChartCard = ({ prize, title, children, styleName, icon }) => {
+const ChartCard = ({ children, styleName, icon }) => {
   const cols = [
     {
       qField: "[name]",
@@ -16,22 +16,16 @@ const ChartCard = ({ prize, title, children, styleName, icon }) => {
     },
   ];
 
-  const metrics = [
+  const qMetrics = [
     {
-      numberOfCoinTypes: {
-        qStringExpression: {
-          // This will evaluate to a formatted string.
-          qExpr: "Count(distinct coin)",
-        },
-      },
+      qName: "prize",
+      qExpr: "='$' & Sum(price)",
+      qType: "qStringExpression",
     },
     {
-      salesValue: {
-        qValueExpression: {
-          // Same as above but will evaluate as number.
-          qExpr: "Sum(price)",
-        },
-      },
+      qName: "desc",
+      qExpr: "Count(distinct coin)",
+      qType: "qValueExpression",
     },
   ];
 
@@ -40,8 +34,9 @@ const ChartCard = ({ prize, title, children, styleName, icon }) => {
   const {
     qLayout,
     qData,
+    title,
     mData,
-    title: desc,
+    metrics,
     // endSelections,
     // beginSelections,
     // changePage,
@@ -51,6 +46,7 @@ const ChartCard = ({ prize, title, children, styleName, icon }) => {
   } = useData({
     cols,
     qTitle,
+    qMetrics,
     //qColumnOrder: columnOrder,
     //qCalcCondition: calcCondition,
     // qPage,
@@ -59,27 +55,26 @@ const ChartCard = ({ prize, title, children, styleName, icon }) => {
     // qSuppressZero: true,
   });
 
-  console.log(qLayout);
-
   return (
     <Widget styleName="gx-card-full">
-      <div className="gx-actchart gx-px-3 gx-pt-3">
-        <div className="ant-row-flex">
-          <h2 className="gx-mb-0 gx-fs-xxl gx-font-weight-medium">
-            {prize}
-            <span
-              className={`gx-mb-0 gx-ml-2 gx-pt-xl-2 gx-fs-lg gx-chart-${styleName}`}
-            >
-              {title}% <i className="icon icon-menu-up gx-fs-sm" />
-            </span>
-          </h2>
-          <i
-            className={`icon icon-${icon} gx-fs-xl gx-ml-auto gx-text-primary gx-fs-xxxl`}
-          />
+      {metrics && (
+        <div className="gx-actchart gx-px-3 gx-pt-3">
+          <div className="ant-row-flex">
+            <h2 className="gx-mb-0 gx-fs-xxl gx-font-weight-medium">
+              {metrics.prize}
+              <span
+                className={`gx-mb-0 gx-ml-2 gx-pt-xl-2 gx-fs-lg gx-chart-${styleName}`}
+              >
+                {metrics.desc}% <i className="icon icon-menu-up gx-fs-sm" />
+              </span>
+            </h2>
+            <i
+              className={`icon icon-${icon} gx-fs-xl gx-ml-auto gx-text-primary gx-fs-xxxl`}
+            />
+          </div>
+          <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
         </div>
-        <p className="gx-mb-0 gx-fs-sm gx-text-grey">{desc}</p>
-      </div>
-      {/* {children} */}
+      )}
       {React.cloneElement(children, { data: mData })}
     </Widget>
   );

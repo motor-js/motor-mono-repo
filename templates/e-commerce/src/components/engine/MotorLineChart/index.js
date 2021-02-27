@@ -36,7 +36,7 @@ const MotorLineChart = () => {
     // qSuppressZero: true,
   });
 
-  console.log("mData: ", mData);
+  // console.log("mData: ", mData);
   return (
     <ResponsiveContainer width="100%" height={75}>
       <LineChart data={mData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>

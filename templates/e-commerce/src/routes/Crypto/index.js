@@ -29,15 +29,14 @@ import MotorKPI from "components/engine/MotorKPI";
 const Crypto = () => {
   return (
     <Auxiliary>
-      <MotorFilter dimension={["coin"]} />
-      {/* <Row>
+      <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorButton />
+          <MotorFilter dimension={["name"]} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorFilter />
+          <MotorFilter dimension={["coin"]} />
         </Col>
-      </Row> */}
+      </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <MotorKPI
