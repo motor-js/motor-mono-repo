@@ -3,7 +3,7 @@ import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget";
 
-const ChartCard = ({ children, styleName, icon }) => {
+const ChartKPI = ({ children, styleName, icon }) => {
   const cols = [
     {
       qField: "[name]",
@@ -80,4 +80,4 @@ const ChartCard = ({ children, styleName, icon }) => {
   );
 };
 
-export default ChartCard;
+export default ChartKPI;

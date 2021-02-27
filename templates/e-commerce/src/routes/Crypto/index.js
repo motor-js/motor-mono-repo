@@ -22,9 +22,9 @@ import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/Curren
 import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/MotorFilter";
 import MotorButton from "components/engine/MotorButton";
-import MotorAreaChart from "components/engine/MotorAreaChart";
-import MotorLineChart from "components/engine/MotorLineChart";
-import MotorKPI from "components/engine/MotorKPI";
+import MotorAreaChart from "components/engine/AreaChart";
+import MotorLineChart from "components/engine/LineChart";
+import ChartKPI from "components/engine/ChartKPI";
 
 const Crypto = () => {
   return (
@@ -39,13 +39,13 @@ const Crypto = () => {
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorKPI
-            prize="$9,626"
-            title="23"
+          <ChartKPI
+            // prize="$9,626"
+            // title="23"
             icon="bitcoin"
             children={<MotorAreaChart />}
             styleName="up"
-            desc="Bitcoin Price"
+            // desc="Bitcoin Price"
           />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
