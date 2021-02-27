@@ -12,38 +12,6 @@ import { increamentData } from "../../routes/Crypto/data";
 const MotorAreaChart = () => {
   const [loading, setLoading] = useState(true);
 
-  const cols = [
-    { qField: "[name]", qLabel: "name" },
-    {
-      qField: "=Sum({$<coin={'bitcoin'}>} price)",
-      qLabel: "price",
-    },
-  ];
-
-  // const { mData, headerGroup } = useTable({
-  //   cols,
-  // });
-
-  const {
-    // qLayout,
-    // qData,
-    mData,
-    // endSelections,
-    // beginSelections,
-    // changePage,
-    // selections,
-    // select,
-    // applyPatches,
-  } = useData({
-    cols,
-    //qColumnOrder: columnOrder,
-    //qCalcCondition: calcCondition,
-    // qPage,
-    //qInterColumnSortOrder: columnSortOrder,
-    // qSupressMissing: true,
-    // qSuppressZero: true,
-  });
-
   // useEffect(() => {
   //   // mData && console.log(mData);
   //   mData && setLoading(false);
@@ -51,7 +19,7 @@ const MotorAreaChart = () => {
 
   return (
     <ResponsiveContainer width="100%" height={75}>
-      <AreaChart data={mData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+      <AreaChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
         <Tooltip />
         <defs>
           <linearGradient id="color3" x1="0" y1="0" x2="1" y2="0">

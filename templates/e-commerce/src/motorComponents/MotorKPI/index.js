@@ -1,8 +1,66 @@
 import React from "react";
+import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget/index";
 
-const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
+const ChartCard = ({ prize, title, children, styleName, icon }) => {
+  const cols = [
+    {
+      qField: "[name]",
+      qLabel: "name",
+      // qCondBackgroundFormat: "sum([price])",
+    },
+    {
+      qField: "=Sum({$<coin={'bitcoin'}>} price)",
+      qLabel: "price",
+    },
+  ];
+
+  const metrics = [
+    {
+      numberOfCoinTypes: {
+        qStringExpression: {
+          // This will evaluate to a formatted string.
+          qExpr: "Count(distinct coin)",
+        },
+      },
+    },
+    {
+      salesValue: {
+        qValueExpression: {
+          // Same as above but will evaluate as number.
+          qExpr: "Sum(price)",
+        },
+      },
+    },
+  ];
+
+  const chartTitle = "='There are ' & count(distinct coin) & ' coins'";
+
+  const {
+    qLayout,
+    qData,
+    mData,
+    title: desc,
+    // endSelections,
+    // beginSelections,
+    // changePage,
+    // selections,
+    // select,
+    // applyPatches,
+  } = useData({
+    cols,
+    title: chartTitle,
+    //qColumnOrder: columnOrder,
+    //qCalcCondition: calcCondition,
+    // qPage,
+    //qInterColumnSortOrder: columnSortOrder,
+    // qSupressMissing: true,
+    // qSuppressZero: true,
+  });
+
+  console.log(qLayout);
+
   return (
     <Widget styleName="gx-card-full">
       <div className="gx-actchart gx-px-3 gx-pt-3">
@@ -21,7 +79,8 @@ const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
         </div>
         <p className="gx-mb-0 gx-fs-sm gx-text-grey">{desc}</p>
       </div>
-      {children}
+      {/* {children} */}
+      {React.cloneElement(children, { data: mData })}
     </Widget>
   );
 };

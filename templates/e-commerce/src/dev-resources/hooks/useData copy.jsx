@@ -20,7 +20,7 @@ const initialState = {
 
 function reducer(state, action) {
   const {
-    payload: { qData, mData, title, qRData, qLayout, selections },
+    payload: { qData, mData, qRData, qLayout, selections },
     type,
   } = action;
 
@@ -29,7 +29,6 @@ function reducer(state, action) {
       return {
         ...state,
         qData,
-        title,
         mData,
         qLayout,
         selections,
@@ -91,7 +90,7 @@ const useData = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { qData, mData, title, qRData, qLayout, selections } = state;
+  const { qData, mData, qRData, qLayout, selections } = state;
 
   const { engine, engineError } = useContext(EngineContext) || {};
 
@@ -418,41 +417,35 @@ const useData = (props) => {
     return mData;
   }, []);
 
-  const getTitle = useCallback(async (layout) => {
-    return layout.qHyperCube.qTitle;
-  }, []);
-
   const update = useCallback(
     async (measureInfo) => {
       const _qLayout = await getLayout();
       const _qData = await getData();
       const _mData = await structureData(_qLayout, _qData);
-      const _qTitle = await getTitle(_qLayout);
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(
           (row) => row[0].qState === "S"
         );
 
-        // if (measureInfo) {
-        //   measureInfo.map((d, i) => {
-        //     if (_qLayout.qHyperCube.qMeasureInfo[i]) {
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qChartType = d.qChartType;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape = d.qLegendShape;
-        //       // _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
-        //       //   d.qLegendShape === "dashed" ? "5,2" : null;
-        //     }
-        //   });
-        // }
+        if (measureInfo) {
+          measureInfo.map((d, i) => {
+            if (_qLayout.qHyperCube.qMeasureInfo[i]) {
+              _qLayout.qHyperCube.qMeasureInfo[i].qChartType = d.qChartType;
+              _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
+              _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
+              _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
+              _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape = d.qLegendShape;
+              // _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
+              //   d.qLegendShape === "dashed" ? "5,2" : null;
+            }
+          });
+        }
 
         dispatch({
           type: "update",
           payload: {
             qData: _qData,
             mData: _mData,
-            title: _qTitle,
             qLayout: _qLayout,
             selections: _selections,
           },
@@ -462,7 +455,6 @@ const useData = (props) => {
           type: "update",
           payload: {
             qData: _qData,
-            title: _qTitle,
             mData: _mData,
             qLayout: _qLayout,
           },
@@ -550,7 +542,6 @@ const useData = (props) => {
     qLayout,
     qData,
     mData,
-    title,
     qRData,
     changePage,
     selections,
