@@ -19,7 +19,11 @@ export const increamentData = [
 // ];
 
 export const bitCoinKPI = {
-  chart: { type: "area", margin: { top: 0, right: 0, left: 0, bottom: 0 } },
+  chart: {
+    type: "area",
+    margin: { top: 0, right: 0, left: 0, bottom: 0 },
+    height: 75,
+  },
   cols: [
     {
       qField: "[name]",

@@ -7,7 +7,7 @@ import AreaChart from "components/engine/AreaChart";
 const ChartKPI = ({ dataProps }) => {
   const { cols, qTitle, qMetrics, icon, styleName, chart } = dataProps;
 
-  const { type, margin } = chart;
+  const { type, margin, height } = chart;
 
   let Chart = null;
 
@@ -69,7 +69,7 @@ const ChartKPI = ({ dataProps }) => {
         </div>
       )}
       {/* {React.cloneElement(children, { data: mData })} */}
-      <Chart data={mData} margin={margin} />
+      <Chart data={mData} margin={margin} height={height} />
     </Widget>
   );
 };
