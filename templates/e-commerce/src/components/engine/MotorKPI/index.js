@@ -19,7 +19,7 @@ const ChartCard = ({ children, styleName, icon }) => {
   const qMetrics = [
     {
       qName: "prize",
-      qExpr: "='$' & Sum(price)",
+      qExpr: "num(Sum(price),'$#,##0')",
       qType: "qStringExpression",
     },
     {
