@@ -25,7 +25,7 @@ const useSelectionObject = () => {
     const selections = v.qSelectionObject.qSelections
 
     if (selections.length > 0) {
-      console.log(selections)
+     // console.log(selections)
 
     }
 
@@ -57,7 +57,7 @@ const useSelectionObject = () => {
         update()
       })()
     }
-  }, [engine])
+  }, [engine, update])
 
   useEffect(() => (() => _isMounted.current = false), [])
 
