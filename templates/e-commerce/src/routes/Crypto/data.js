@@ -24,29 +24,31 @@ export const bitCoinKPI = {
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
     height: 75,
   },
-  cols: [
-    {
-      qField: "[name]",
-      qLabel: "name",
-    },
-    {
-      qField: "=Sum({$<coin={'bitcoin'}>} price)",
-      qLabel: "price",
-    },
-  ],
-  qMetrics: [
-    {
-      qName: "prize",
-      qExpr: "num(Sum(price),'$#,##0')",
-      qType: "qStringExpression",
-    },
-    {
-      qName: "desc",
-      qExpr: "num(Count(distinct coin)/100,'#,##0%')",
-      qType: "qStringExpression",
-    },
-  ],
-  qTitle: "='There are ' & count(distinct coin) & ' coins'",
+  data: {
+    cols: [
+      {
+        qField: "[name]",
+        qLabel: "name",
+      },
+      {
+        qField: "=Sum({$<coin={'bitcoin'}>} price)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle: "='There are ' & count(distinct coin) & ' coins'",
+  },
   icon: "bitcoin",
   styleName: "up",
 };

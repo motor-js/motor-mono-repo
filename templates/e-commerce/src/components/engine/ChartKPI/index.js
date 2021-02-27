@@ -5,8 +5,9 @@ import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
 
 const ChartKPI = ({ dataProps }) => {
-  const { cols, qTitle, qMetrics, icon, styleName, chart } = dataProps;
+  const { data, icon, styleName, chart } = dataProps;
 
+  const { cols, qTitle, qMetrics } = data;
   const { type, margin, height } = chart;
 
   let Chart = null;
