@@ -240,7 +240,11 @@ export const BalanceHistory = {
   chartConfig: {
     chartType: "area",
     margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
     height: 180,
+    xAxisDataKey: "name",
     dataKey: "price",
     type: "monotone",
     strokeWidth: 0,

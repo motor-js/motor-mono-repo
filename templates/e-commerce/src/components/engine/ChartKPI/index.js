@@ -50,6 +50,10 @@ const ChartKPI = ({ dataProps }) => {
     // qSuppressZero: true,
   });
 
+  chartConfig.showXAxis = chartConfig.showXAxis || false;
+  chartConfig.ShowYAxis = chartConfig.ShowYAxis || false;
+  chartConfig.showGrid = chartConfig.showGrid || false;
+
   useEffect(() => {
     if (!mData) return;
 

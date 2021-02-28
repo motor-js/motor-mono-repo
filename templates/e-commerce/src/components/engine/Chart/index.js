@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Skeleton, Card } from "antd";
 import useData from "../../../dev-resources/hooks/useData";
 
-import Widget from "dev-resources/components/Widget";
+// import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
 
 const ChartComponent = ({ dataProps }) => {
   const [hasData, setHasData] = useState(false);
-  const { data, icon, chartConfig } = dataProps;
+  const { data, chartConfig } = dataProps;
 
   const { cols, qTitle, qMetrics } = data;
   const { chartType } = chartConfig;
