@@ -6,7 +6,7 @@ import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
 
 const ChartKPI = ({ dataProps }) => {
-  const [selected, setSelected] = useState(false);
+  const [hasData, setHasData] = useState(false);
   const { data, icon, chartConfig } = dataProps;
 
   const { cols, qTitle, qMetrics } = data;
@@ -54,12 +54,12 @@ const ChartKPI = ({ dataProps }) => {
   useEffect(() => {
     if (!mData) return;
 
-    setSelected(true);
+    setHasData(true);
   }, [mData]);
 
   return (
     <>
-      {selected ? (
+      {hasData ? (
         <Widget styleName="gx-card-full">
           <div className="gx-actchart gx-px-3 gx-pt-3">
             <div className="ant-row-flex">
