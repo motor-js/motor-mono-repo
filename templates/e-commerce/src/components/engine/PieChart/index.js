@@ -1,8 +1,8 @@
 import React from "react";
 
 import {
-  BarChart,
-  Bar,
+  PieChart,
+  Pie,
   ResponsiveContainer,
   Tooltip,
   CartesianGrid,
@@ -10,7 +10,7 @@ import {
   YAxis,
 } from "recharts";
 
-const MotorBarChart = ({ data, config }) => {
+const MotorPieChart = ({ data, config }) => {
   const {
     type,
     showXAxis = true,
@@ -34,20 +34,30 @@ const MotorBarChart = ({ data, config }) => {
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <BarChart
-        data={data}
-        margin={{ top: 10, right: 0, left: -15, bottom: 0 }}
-      >
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
+      <PieChart>
+        <Pie
+          dataKey="price"
+          isAnimationActive={false}
+          data={data}
+          cx="35%"
+          cy="50%"
+          outerRadius={80}
+          fill="#003366"
+          label
+        />
+        {/* <Pie
+          dataKey="value"
+          data={data02}
+          cx="70%"
+          cy="50%"
+          innerRadius={40}
+          outerRadius={80}
+          fill="#FE9E15"
+        /> */}
         <Tooltip />
-        {/* <Legend /> */}
-        <Bar dataKey="price" fill="#003366" />
-        {/* <Bar dataKey="uv" fill="#FE9E15" /> */}
-      </BarChart>
+      </PieChart>
     </ResponsiveContainer>
   );
 };
 
-export default MotorBarChart;
+export default MotorPieChart;
