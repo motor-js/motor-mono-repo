@@ -225,3 +225,60 @@ export const litecoinKPI = {
   },
   icon: "litecoin",
 };
+
+//   <XAxis dataKey="name" />
+//   <YAxis />
+//   <CartesianGrid strokeDasharray="3 3" />
+//   <Tooltip />
+//   <Area
+//     dataKey="uv"
+//     fillOpacity={1}
+
+//   />
+
+export const BalanceHistory = {
+  chartConfig: {
+    chartType: "area",
+    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    height: 180,
+    dataKey: "price",
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: "#003366",
+    fillOpacity: 1,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[name]",
+        qLabel: "name",
+      },
+      {
+        qField: "=Sum({$<coin={'ripple'}>} price)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle:
+      "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+  },
+  icon: "ripple",
+  // styleName: "up",
+};

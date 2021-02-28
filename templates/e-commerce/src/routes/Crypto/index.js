@@ -2,10 +2,16 @@ import React, { useContext } from "react";
 import { Col, Row } from "antd";
 import Auxiliary from "util/Auxiliary";
 
-import { bitCoinKPI, etheriumKPI, rippleKPI, litecoinKPI } from "./data";
-import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
+import {
+  bitCoinKPI,
+  etheriumKPI,
+  rippleKPI,
+  litecoinKPI,
+  BalanceHistory,
+} from "./data";
+// import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
-import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
+// import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
 import SendMoney from "dev-resources/components/dashboard/Crypto/SendMoney";
 import RewardCard from "dev-resources/components/dashboard/Crypto/RewardCard";
 import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/CurrencyCalculator";
@@ -15,8 +21,8 @@ import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/MotorFilter";
 import MotorButton from "components/engine/MotorButton";
 
-import MotorLineChart from "components/engine/LineChart";
 import ChartKPI from "components/engine/ChartKPI";
+import Chart from "components/engine/Chart";
 
 const Crypto = () => {
   return (
@@ -46,7 +52,8 @@ const Crypto = () => {
           <Portfolio />
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          <BalanceHistory />
+          {/* <BalanceHistory /> */}
+          <Chart dataProps={BalanceHistory} />
         </Col>
 
         <Col xl={9} lg={24} md={24} sm={24} xs={24}>

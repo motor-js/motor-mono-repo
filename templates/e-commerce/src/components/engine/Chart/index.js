@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Skeleton } from "antd";
+import { Skeleton, Card } from "antd";
 import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
 
-const ChartKPI = ({ dataProps }) => {
+const ChartComponent = ({ dataProps }) => {
   const [hasData, setHasData] = useState(false);
   const { data, icon, chartConfig } = dataProps;
 
@@ -59,26 +59,9 @@ const ChartKPI = ({ dataProps }) => {
   return (
     <>
       {hasData ? (
-        <Widget styleName="gx-card-full">
-          <div className="gx-actchart gx-px-3 gx-pt-3">
-            <div className="ant-row-flex">
-              <h2 className="gx-mb-0 gx-fs-xxl gx-font-weight-medium">
-                {metrics.prize}
-                <span
-                  className={`gx-mb-0 gx-ml-2 gx-pt-xl-2 gx-fs-lg gx-chart-${metrics.styleName}`}
-                >
-                  {metrics.desc} <i className="icon icon-menu-up gx-fs-sm" />
-                </span>
-              </h2>
-              <i
-                className={`icon icon-${icon} gx-fs-xl gx-ml-auto gx-text-primary gx-fs-xxxl`}
-              />
-            </div>
-            <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
-          </div>
-          {/* {React.cloneElement(children, { data: mData })} */}
+        <Card className="gx-card" title={title}>
           <Chart data={mData} config={chartConfig} />
-        </Widget>
+        </Card>
       ) : (
         <Skeleton active />
       )}
@@ -86,4 +69,4 @@ const ChartKPI = ({ dataProps }) => {
   );
 };
 
-export default ChartKPI;
+export default ChartComponent;

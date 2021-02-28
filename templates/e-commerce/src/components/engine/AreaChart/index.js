@@ -15,7 +15,28 @@ const MotorAreaChart = ({ data, config }) => {
     fill,
     fillOpacity,
   } = config;
-  const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = gradient;
+
+  let id, x1, y1, x2, y2, offsetStart, offsetEnd;
+
+  if (gradient) {
+    const {
+      id: gradinetId,
+      x1: gradientx1,
+      y1: gradienty1,
+      x2: gradientx2,
+      y2: gradienty2,
+      offsetStart: gradientOffsetStart,
+      offsetEnd: gradientOffsetEnd,
+    } = gradient;
+
+    id = gradinetId;
+    x1 = gradientx1;
+    y1 = gradienty1;
+    x2 = gradientx2;
+    y2 = gradienty2;
+    offsetStart = gradientOffsetStart;
+    offsetEnd = gradientOffsetEnd;
+  }
 
   return (
     <ResponsiveContainer width="100%" height={height}>
@@ -23,16 +44,20 @@ const MotorAreaChart = ({ data, config }) => {
         <Tooltip />
         <defs>
           <linearGradient id={id} x1={x1} y1={y1} x2={x2} y2={y2}>
-            <stop
-              offset={offsetStart.offset}
-              stopColor={offsetStart.stopColor}
-              stopOpacity={offsetStart.stopOpacity}
-            />
-            <stop
-              offset={offsetEnd.offset}
-              stopColor={offsetEnd.stopColor}
-              stopOpacity={offsetEnd.stopOpacity}
-            />
+            {offsetStart && (
+              <stop
+                offset={offsetStart.offset}
+                stopColor={offsetStart.stopColor}
+                stopOpacity={offsetStart.stopOpacity}
+              />
+            )}
+            {offsetEnd && (
+              <stop
+                offset={offsetEnd.offset}
+                stopColor={offsetEnd.stopColor}
+                stopOpacity={offsetEnd.stopOpacity}
+              />
+            )}
           </linearGradient>
         </defs>
         <Area
