@@ -38,33 +38,6 @@ const Crypto = () => {
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={rippleKPI} />
-          {/* <ChartCard
-          
-                  <Tooltip />
-                  <defs>
-                    <linearGradient id="color5" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#e81a24" stopOpacity={0.8} />
-                      <stop
-                        offset="95%"
-                        stopColor="#FEEADA"
-                        stopOpacity={0.8}
-                      />
-                    </linearGradient>
-                  </defs>
-                  <Area
-                    dataKey="price"
-                    strokeWidth={0}
-                    stackId="2"
-                    stroke="#FEEADA"
-                    fill="url(#color5)"
-                    fillOpacity={1}
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            }
-            styleName="down"
-            desc="Ripple Price"
-          /> */}
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartCard

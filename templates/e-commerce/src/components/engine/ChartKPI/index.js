@@ -4,6 +4,7 @@ import useData from "../../../dev-resources/hooks/useData";
 
 import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
+import LineChart from "components/engine/LineChart";
 
 const ChartKPI = ({ dataProps }) => {
   const [hasData, setHasData] = useState(false);
@@ -18,10 +19,8 @@ const ChartKPI = ({ dataProps }) => {
     case "area":
       Chart = AreaChart;
       break;
-    case "Mangoes":
-    case "Papayas":
-      console.log("Mangoes and papayas are $2.79 a pound.");
-      // expected output: "Mangoes and papayas are $2.79 a pound."
+    case "line":
+      Chart = LineChart;
       break;
     default:
       Chart = AreaChart;

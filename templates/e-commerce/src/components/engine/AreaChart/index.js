@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-// import Widget from "components/Widget";
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 
 const MotorAreaChart = ({ data, config }) => {
-  const [loading, setLoading] = useState(true);
-
   const {
     type,
     margin,
@@ -19,11 +16,6 @@ const MotorAreaChart = ({ data, config }) => {
     fillOpacity,
   } = config;
   const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = gradient;
-
-  // useEffect(() => {
-  //   // mData && console.log(mData);
-  //   mData && setLoading(false);
-  // }, [mData]);
 
   return (
     <ResponsiveContainer width="100%" height={height}>

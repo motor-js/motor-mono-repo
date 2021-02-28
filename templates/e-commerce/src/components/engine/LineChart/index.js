@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useData from "../../../dev-resources/hooks/useData";
-// import Widget from "components/Widget";
+
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
-// import { increamentData } from "../../routes/Crypto/data";
-
-const MotorLineChart = () => {
-  //const [loading, setLoading] = useState(true);
-
+const MotorLineChart = ({ data, config }) => {
   const cols = [
     { qField: "[name]", qLabel: "name" },
     {
