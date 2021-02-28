@@ -5,6 +5,7 @@ import useData from "../../../dev-resources/hooks/useData";
 // import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
+import BarChart from "components/engine/BarChart";
 
 const ChartComponent = ({ dataProps }) => {
   const [hasData, setHasData] = useState(false);
@@ -21,6 +22,9 @@ const ChartComponent = ({ dataProps }) => {
       break;
     case "line":
       Chart = LineChart;
+      break;
+    case "bar":
+      Chart = BarChart;
       break;
     default:
       Chart = AreaChart;

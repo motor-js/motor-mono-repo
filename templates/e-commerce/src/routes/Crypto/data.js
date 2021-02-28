@@ -238,7 +238,7 @@ export const litecoinKPI = {
 
 export const BalanceHistory = {
   chartConfig: {
-    chartType: "line",
+    chartType: "bar",
     margin: { top: 10, right: 0, left: -15, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
