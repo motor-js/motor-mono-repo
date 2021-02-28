@@ -44,7 +44,7 @@ const MotorBarChart = ({ data, config }) => {
         <Tooltip />
         {/* <Legend /> */}
         <Bar dataKey="price" fill="#003366" />
-        <Bar dataKey="uv" fill="#FE9E15" />
+        {/* <Bar dataKey="uv" fill="#FE9E15" /> */}
       </BarChart>
     </ResponsiveContainer>
   );
