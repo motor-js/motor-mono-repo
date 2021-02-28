@@ -7,10 +7,10 @@ import AreaChart from "components/engine/AreaChart";
 
 const ChartKPI = ({ dataProps }) => {
   const [selected, setSelected] = useState(false);
-  const { data, icon, chart } = dataProps;
+  const { data, icon, chartConfig } = dataProps;
 
   const { cols, qTitle, qMetrics } = data;
-  const { type, margin, height } = chart;
+  const { type } = chartConfig;
 
   let Chart = null;
 
@@ -78,7 +78,7 @@ const ChartKPI = ({ dataProps }) => {
             <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
           </div>
           {/* {React.cloneElement(children, { data: mData })} */}
-          <Chart data={mData} margin={margin} height={height} />
+          <Chart data={mData} config={chartConfig} />
         </Widget>
       ) : (
         <Skeleton active />

@@ -19,10 +19,23 @@ export const increamentData = [
 // ];
 
 export const bitCoinKPI = {
-  chart: {
+  chartConfig: {
     type: "area",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
     height: 75,
+    gradient: {
+      id: "color3",
+      x1: "0",
+      y1: "0",
+      x2: "1",
+      y2: "0",
+      offsetStart: {
+        offset: "5%",
+        stopColor: "#163469",
+        stopOpacity: 0.9,
+      },
+      offsetEnd: { offset: "95%", stopColor: "#FE9E15", stopOpacity: 0.9 },
+    },
   },
   data: {
     cols: [
