@@ -1,18 +1,42 @@
 import React from "react";
 
-import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const MotorLineChart = ({ data, config }) => {
-  const { margin, height, dataKey, stroke, dot } = config;
+  const {
+    margin,
+    height,
+    dataKey,
+    stroke,
+    dot,
+    showXAxis = true,
+    xAxisDataKey,
+    ShowYAxis = true,
+    showGrid = true,
+  } = config;
 
   return (
     <ResponsiveContainer width="100%" height={height}>
       <LineChart data={data} margin={margin}>
+        {showXAxis && <XAxis dataKey={xAxisDataKey} />}
+        {ShowYAxis && <YAxis />}
+        {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         <Line
           dataKey={dataKey}
           stroke={stroke}
-          dot={{ stroke: dot.stroke, strokeWidth: dot.strokeWidth }}
+          dot={{
+            stroke: dot ? dot.stroke : null,
+            strokeWidth: dot ? dot.strokeWidth : null,
+          }}
         />
       </LineChart>
     </ResponsiveContainer>
