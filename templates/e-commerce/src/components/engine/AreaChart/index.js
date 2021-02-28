@@ -1,6 +1,14 @@
 import React from "react";
 
-import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  Tooltip,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const MotorAreaChart = ({ data, config }) => {
   const {
@@ -23,6 +31,7 @@ const MotorAreaChart = ({ data, config }) => {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <AreaChart data={data} margin={margin}>
+        {/* <YAxis /> */}
         <Tooltip />
         <defs>
           <linearGradient id={id} x1={x1} y1={y1} x2={x2} y2={y2}>
