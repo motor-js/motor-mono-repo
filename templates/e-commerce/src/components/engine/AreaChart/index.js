@@ -16,27 +16,9 @@ const MotorAreaChart = ({ data, config }) => {
     fillOpacity,
   } = config;
 
-  let id, x1, y1, x2, y2, offsetStart, offsetEnd;
+  const chartGradient = gradient || {};
 
-  if (gradient) {
-    const {
-      id: gradinetId,
-      x1: gradientx1,
-      y1: gradienty1,
-      x2: gradientx2,
-      y2: gradienty2,
-      offsetStart: gradientOffsetStart,
-      offsetEnd: gradientOffsetEnd,
-    } = gradient;
-
-    id = gradinetId;
-    x1 = gradientx1;
-    y1 = gradienty1;
-    x2 = gradientx2;
-    y2 = gradienty2;
-    offsetStart = gradientOffsetStart;
-    offsetEnd = gradientOffsetEnd;
-  }
+  const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = chartGradient;
 
   return (
     <ResponsiveContainer width="100%" height={height}>
