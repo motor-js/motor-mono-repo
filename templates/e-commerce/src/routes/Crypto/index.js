@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { increamentData, lineData, bitCoinKPI } from "./data";
+import { increamentData, lineData, bitCoinKPI, etheriumKPI } from "./data";
 import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
 import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";

@@ -10,11 +10,11 @@ const ChartKPI = ({ dataProps }) => {
   const { data, icon, chartConfig } = dataProps;
 
   const { cols, qTitle, qMetrics } = data;
-  const { type } = chartConfig;
+  const { chartType } = chartConfig;
 
   let Chart = null;
 
-  switch (type) {
+  switch (chartType) {
     case "area":
       Chart = AreaChart;
       break;

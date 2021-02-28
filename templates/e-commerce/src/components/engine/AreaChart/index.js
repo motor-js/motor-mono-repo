@@ -6,23 +6,24 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 const MotorAreaChart = ({ data, config }) => {
   const [loading, setLoading] = useState(true);
 
-  const { type, margin, height, gradient } = config;
+  const {
+    type,
+    margin,
+    height,
+    gradient,
+    dataKey,
+    strokeWidth,
+    stackId,
+    stroke,
+    fill,
+    fillOpacity,
+  } = config;
   const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = gradient;
 
   // useEffect(() => {
   //   // mData && console.log(mData);
   //   mData && setLoading(false);
   // }, [mData]);
-
-  //     <Area
-  //       dataKey="price"
-  //       type="monotone"
-  //       strokeWidth={0}
-  //       stackId="2"
-  //       stroke="#4D95F3"
-  //       fill="url(#color4)"
-  //       fillOpacity={1}
-  //     />
 
   return (
     <ResponsiveContainer width="100%" height={height}>
@@ -43,12 +44,13 @@ const MotorAreaChart = ({ data, config }) => {
           </linearGradient>
         </defs>
         <Area
-          dataKey="price"
-          strokeWidth={0}
-          stackId="2"
-          stroke="#4D95F3"
-          fill="url(#color3)"
-          fillOpacity={1}
+          dataKey={dataKey}
+          type={type}
+          strokeWidth={strokeWidth}
+          stackId={stackId}
+          stroke={stroke}
+          fill={fill}
+          fillOpacity={fillOpacity}
         />
       </AreaChart>
     </ResponsiveContainer>

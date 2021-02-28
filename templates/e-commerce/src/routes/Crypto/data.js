@@ -20,7 +20,7 @@ export const increamentData = [
 
 export const bitCoinKPI = {
   chartConfig: {
-    type: "area",
+    chartType: "area",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
     height: 75,
     gradient: {
@@ -36,6 +36,13 @@ export const bitCoinKPI = {
       },
       offsetEnd: { offset: "95%", stopColor: "#FE9E15", stopOpacity: 0.9 },
     },
+    dataKey: "price",
+    strokeWidth: 0,
+    stackId: 2,
+    type: null,
+    stroke: "#4D95F3",
+    fill: "url(#color3)",
+    fillOpacity: 1,
   },
   data: {
     cols: [
@@ -65,7 +72,69 @@ export const bitCoinKPI = {
         qType: "qStringExpression",
       },
     ],
-    qTitle: "='There are ' & count(distinct coin) & ' coins'",
+    qTitle:
+      "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
+  },
+  icon: "bitcoin",
+  // styleName: "up",
+};
+
+export const etheriumKPI = {
+  chartConfig: {
+    chartType: "area",
+    margin: { top: 0, right: 0, left: 0, bottom: 0 },
+    height: 75,
+    gradient: {
+      id: "color3",
+      x1: "0",
+      y1: "0",
+      x2: "1",
+      y2: "0",
+      offsetStart: {
+        offset: "5%",
+        stopColor: "#163469",
+        stopOpacity: 0.9,
+      },
+      offsetEnd: { offset: "95%", stopColor: "#FE9E15", stopOpacity: 0.9 },
+    },
+    dataKey: "price",
+    strokeWidth: 0,
+    stackId: 2,
+    type: null,
+    stroke: "#4D95F3",
+    fill: "url(#color3)",
+    fillOpacity: 1,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[name]",
+        qLabel: "name",
+      },
+      {
+        qField: "=Sum({$<coin={'bitcoin'}>} price)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle:
+      "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
   },
   icon: "bitcoin",
   // styleName: "up",
