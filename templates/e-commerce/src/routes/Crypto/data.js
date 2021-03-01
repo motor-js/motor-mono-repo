@@ -1,23 +1,3 @@
-// export const increamentData = [
-//   { name: "Page A", price: 200 },
-//   { name: "Page B", price: 1200 },
-//   { name: "Page C", price: 600 },
-//   { name: "Page D", price: 1600 },
-//   { name: "Page D", price: 1000 },
-//   { name: "Page H", price: 2260 },
-//   { name: "Page K", price: 800 },
-// ];
-
-// export const lineData = [
-//   { name: "Page A", price: 200 },
-//   { name: "Page B", price: 1100 },
-//   { name: "Page C", price: 800 },
-//   { name: "Page D", price: 1700 },
-//   { name: "Page D", price: 600 },
-//   { name: "Page D", price: 1800 },
-//   { name: "Page D", price: 600 },
-// ];
-
 export const bitCoinKPI = {
   chartConfig: {
     chartType: "area",
@@ -59,7 +39,7 @@ export const bitCoinKPI = {
       {
         qName: "prize",
         qExpr: "num(Sum(price),'$#,##0')",
-        qType: "qStringExpression",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
       },
       {
         qName: "desc",
@@ -166,6 +146,110 @@ export const rippleKPI = {
     stackId: 2,
     stroke: "#FEEADA",
     fill: "url(#color5)",
+    fillOpacity: 1,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[name]",
+        qLabel: "name",
+      },
+      {
+        qField: "=Sum({$<coin={'ripple'}>} price)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle:
+      "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+  },
+  icon: "ripple",
+  // styleName: "up",
+};
+
+export const litecoinKPI = {
+  chartConfig: {
+    chartType: "line",
+    margin: { top: 0, right: 0, left: 0, bottom: 0 },
+    height: 75,
+    dataKey: "price",
+    stroke: "#038FDE",
+    dot: { stroke: "#FEA931", strokeWidth: 2 },
+  },
+  data: {
+    cols: [
+      {
+        qField: "[name]",
+        qLabel: "name",
+      },
+      {
+        qField: "=Sum({$<coin={'litecoin'}>} price)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr: "if(Count(distinct coin)>=0,'down','up')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle:
+      "='Litecoin Max Price : ' & Num(Max({$<coin={'litecoin'}>}price),'$#,##0')",
+  },
+  icon: "litecoin",
+};
+
+//   <XAxis dataKey="name" />
+//   <YAxis />
+//   <CartesianGrid strokeDasharray="3 3" />
+//   <Tooltip />
+//   <Area
+//     dataKey="uv"
+//     fillOpacity={1}
+
+//   />
+
+export const BalanceHistory = {
+  chartConfig: {
+    chartType: "area",
+    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    height: 180,
+    xAxisDataKey: "name",
+    dataKey: "price",
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: "#003366",
     fillOpacity: 1,
   },
   data: {

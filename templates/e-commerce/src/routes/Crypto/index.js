@@ -2,10 +2,16 @@ import React, { useContext } from "react";
 import { Col, Row } from "antd";
 import Auxiliary from "util/Auxiliary";
 
-import { bitCoinKPI, etheriumKPI, rippleKPI } from "./data";
-import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
+import {
+  bitCoinKPI,
+  etheriumKPI,
+  rippleKPI,
+  litecoinKPI,
+  BalanceHistory,
+} from "./data";
+// import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
-import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
+// import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
 import SendMoney from "dev-resources/components/dashboard/Crypto/SendMoney";
 import RewardCard from "dev-resources/components/dashboard/Crypto/RewardCard";
 import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/CurrencyCalculator";
@@ -15,8 +21,8 @@ import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/MotorFilter";
 import MotorExport from "components/engine/MotorExport";
 
-import MotorLineChart from "components/engine/LineChart";
 import ChartKPI from "components/engine/ChartKPI";
+import Chart from "components/engine/Chart";
 
 const Crypto = () => {
   return (
@@ -41,20 +47,14 @@ const Crypto = () => {
           <ChartKPI dataProps={rippleKPI} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartCard
-            prize="$849"
-            title="47"
-            icon="litcoin"
-            children={<MotorLineChart />}
-            styleName="down"
-            desc="Litecoin Price"
-          />
+          <ChartKPI dataProps={litecoinKPI} />
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <Portfolio />
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          <BalanceHistory />
+          {/* <BalanceHistory /> */}
+          <Chart dataProps={BalanceHistory} />
         </Col>
 
         <Col xl={9} lg={24} md={24} sm={24} xs={24}>

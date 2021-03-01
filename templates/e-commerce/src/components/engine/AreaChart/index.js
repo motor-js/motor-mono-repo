@@ -1,10 +1,22 @@
 import React from "react";
 
-import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  Tooltip,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const MotorAreaChart = ({ data, config }) => {
   const {
     type,
+    showXAxis = true,
+    xAxisDataKey,
+    ShowYAxis = true,
+    showGrid = true,
     margin,
     height,
     gradient,
@@ -15,24 +27,34 @@ const MotorAreaChart = ({ data, config }) => {
     fill,
     fillOpacity,
   } = config;
-  const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = gradient;
+
+  const chartGradient = gradient || {};
+
+  const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = chartGradient;
 
   return (
     <ResponsiveContainer width="100%" height={height}>
       <AreaChart data={data} margin={margin}>
+        {showXAxis && <XAxis dataKey={xAxisDataKey} />}
+        {ShowYAxis && <YAxis />}
+        {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         <defs>
           <linearGradient id={id} x1={x1} y1={y1} x2={x2} y2={y2}>
-            <stop
-              offset={offsetStart.offset}
-              stopColor={offsetStart.stopColor}
-              stopOpacity={offsetStart.stopOpacity}
-            />
-            <stop
-              offset={offsetEnd.offset}
-              stopColor={offsetEnd.stopColor}
-              stopOpacity={offsetEnd.stopOpacity}
-            />
+            {offsetStart && (
+              <stop
+                offset={offsetStart.offset}
+                stopColor={offsetStart.stopColor}
+                stopOpacity={offsetStart.stopOpacity}
+              />
+            )}
+            {offsetEnd && (
+              <stop
+                offset={offsetEnd.offset}
+                stopColor={offsetEnd.stopColor}
+                stopOpacity={offsetEnd.stopOpacity}
+              />
+            )}
           </linearGradient>
         </defs>
         <Area
