@@ -5,6 +5,7 @@ import {
   Bar,
   ResponsiveContainer,
   Tooltip,
+  Legend,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -32,6 +33,10 @@ const MotorBarChart = ({ data, config }) => {
 
   const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = chartGradient;
 
+  // @TOTO
+  // Gradient
+  //Legend - show hide on other objetcs as well
+
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={margin}>
@@ -39,8 +44,8 @@ const MotorBarChart = ({ data, config }) => {
         {ShowYAxis && <YAxis />}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
-        {/* <Legend /> */}
-        <Bar dataKey="price" fill="#003366" />
+        <Legend />
+        <Bar dataKey={dataKey} fill={fill} />
         {/* <Bar dataKey="uv" fill="#FE9E15" /> */}
       </BarChart>
     </ResponsiveContainer>
