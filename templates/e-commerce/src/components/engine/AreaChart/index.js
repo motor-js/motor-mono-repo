@@ -5,6 +5,7 @@ import {
   AreaChart,
   ResponsiveContainer,
   Tooltip,
+  Legend,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -17,6 +18,7 @@ const MotorAreaChart = ({ data, config }) => {
     xAxisDataKey,
     ShowYAxis = true,
     showGrid = true,
+    showLegend = true,
     margin,
     height,
     gradient,
@@ -39,6 +41,7 @@ const MotorAreaChart = ({ data, config }) => {
         {ShowYAxis && <YAxis />}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
+        {showLegend && <Legend />}
         <defs>
           <linearGradient id={id} x1={x1} y1={y1} x2={x2} y2={y2}>
             {offsetStart && (

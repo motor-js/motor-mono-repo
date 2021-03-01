@@ -61,6 +61,7 @@ const ChartKPI = ({ dataProps }) => {
   chartConfig.showXAxis = chartConfig.showXAxis || false;
   chartConfig.ShowYAxis = chartConfig.ShowYAxis || false;
   chartConfig.showGrid = chartConfig.showGrid || false;
+  chartConfig.showLegend = chartConfig.showLegend || false;
 
   useEffect(() => {
     if (!mData) return;

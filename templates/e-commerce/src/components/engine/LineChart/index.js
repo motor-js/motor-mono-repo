@@ -5,6 +5,7 @@ import {
   LineChart,
   ResponsiveContainer,
   Tooltip,
+  Legend,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -21,6 +22,7 @@ const MotorLineChart = ({ data, config }) => {
     xAxisDataKey,
     ShowYAxis = true,
     showGrid = true,
+    showLegend = true,
   } = config;
 
   return (
@@ -30,6 +32,7 @@ const MotorLineChart = ({ data, config }) => {
         {ShowYAxis && <YAxis />}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
+        {showLegend && <Legend />}
         <Line
           dataKey={dataKey}
           stroke={stroke}

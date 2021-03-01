@@ -226,16 +226,6 @@ export const litecoinKPI = {
   icon: "litecoin",
 };
 
-//   <XAxis dataKey="name" />
-//   <YAxis />
-//   <CartesianGrid strokeDasharray="3 3" />
-//   <Tooltip />
-//   <Area
-//     dataKey="uv"
-//     fillOpacity={1}
-
-//   />
-
 export const BalanceHistory = {
   chartConfig: {
     chartType: "area",
@@ -243,6 +233,7 @@ export const BalanceHistory = {
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
+    // showLegend: false,
     height: 180,
     xAxisDataKey: "name",
     dataKey: "price",
