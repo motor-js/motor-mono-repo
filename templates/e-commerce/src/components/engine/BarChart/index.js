@@ -34,13 +34,10 @@ const MotorBarChart = ({ data, config }) => {
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <BarChart
-        data={data}
-        margin={{ top: 10, right: 0, left: -15, bottom: 0 }}
-      >
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
+      <BarChart data={data} margin={margin}>
+        {showXAxis && <XAxis dataKey={xAxisDataKey} />}
+        {ShowYAxis && <YAxis />}
+        {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {/* <Legend /> */}
         <Bar dataKey="price" fill="#003366" />
