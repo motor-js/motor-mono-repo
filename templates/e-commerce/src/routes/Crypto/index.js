@@ -13,7 +13,7 @@ import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/Curren
 
 import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/MotorFilter";
-import MotorButton from "components/engine/MotorButton";
+import MotorExport from "components/engine/MotorExport";
 
 import MotorLineChart from "components/engine/LineChart";
 import ChartKPI from "components/engine/ChartKPI";
@@ -23,6 +23,7 @@ const Crypto = () => {
     <Auxiliary>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+          <MotorExport />
           <MotorFilter dimension={["name"]} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>

@@ -340,7 +340,7 @@ const useTable = (props) => {
           ),
         },
       ]);
-      setPage(0);
+     // setPage(0);
     },
     [applyPatches, qLayout]
   );
