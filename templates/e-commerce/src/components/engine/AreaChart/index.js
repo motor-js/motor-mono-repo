@@ -19,7 +19,7 @@ const MotorAreaChart = ({ data, config }) => {
     ShowYAxis = true,
     showGrid = true,
     showLegend = true,
-    isAnimationActive = false,
+    isAnimationActive = true,
     margin,
     height,
     gradient,
