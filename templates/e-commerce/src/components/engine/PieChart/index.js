@@ -1,56 +1,42 @@
 import React from "react";
 
-import {
-  PieChart,
-  Pie,
-  ResponsiveContainer,
-  Tooltip,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
 const MotorPieChart = ({ data, config }) => {
   const {
-    type,
-    showXAxis = true,
-    xAxisDataKey,
-    ShowYAxis = true,
-    showGrid = true,
+    showLegend = true,
     margin,
     height,
-    gradient,
     dataKey,
-    strokeWidth,
-    stackId,
-    stroke,
     fill,
-    fillOpacity,
+    label = true,
+    isAnimationActive = true,
+    cx = "35%",
+    cy = "50%",
+    outerRadius = 80,
+    innerRadius = 0,
   } = config;
-
-  const chartGradient = gradient || {};
-
-  const { id, x1, y1, x2, y2, offsetStart, offsetEnd } = chartGradient;
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <PieChart>
+      <PieChart margin={margin}>
+        {showLegend && <Legend />}
         <Pie
-          dataKey="price"
-          isAnimationActive={false}
+          dataKey={dataKey}
+          isAnimationActive={isAnimationActive}
           data={data}
-          cx="35%"
-          cy="50%"
-          outerRadius={80}
-          fill="#003366"
-          label
+          cx={cx}
+          cy={cy}
+          outerRadius={outerRadius}
+          innerRadius={innerRadius}
+          fill={fill}
+          label={label}
         />
         {/* <Pie
           dataKey="value"
           data={data02}
           cx="70%"
           cy="50%"
-          innerRadius={40}
           outerRadius={80}
           fill="#FE9E15"
         /> */}

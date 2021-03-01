@@ -187,6 +187,7 @@ export const litecoinKPI = {
   chartConfig: {
     chartType: "line",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
+
     height: 75,
     dataKey: "price",
     stroke: "#038FDE",
@@ -228,13 +229,14 @@ export const litecoinKPI = {
 
 export const BalanceHistory = {
   chartConfig: {
-    chartType: "area",
+    chartType: "bar",
     margin: { top: 10, right: 0, left: -15, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
-    // showLegend: false,
+    showLegend: false,
     height: 180,
+    isAnimationActive: true,
     xAxisDataKey: "name",
     dataKey: "price",
     type: "monotone",
@@ -274,6 +276,53 @@ export const BalanceHistory = {
     qTitle:
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
-  icon: "ripple",
-  // styleName: "up",
+};
+
+export const pieData = {
+  chartConfig: {
+    chartType: "pie",
+    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    showLegend: false,
+    height: 180,
+    dataKey: "price",
+    strokeWidth: 0,
+    fill: "#003366",
+    label: true,
+    isAnimationActive: true,
+    cx: "35%",
+    cy: "50%",
+    outerRadius: 60,
+    innerRadius: 40,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[name]",
+        qLabel: "name",
+      },
+      {
+        qField: "=Sum({$<coin={'ripple'}>} price)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle:
+      "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+  },
 };

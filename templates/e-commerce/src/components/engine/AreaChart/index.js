@@ -19,6 +19,7 @@ const MotorAreaChart = ({ data, config }) => {
     ShowYAxis = true,
     showGrid = true,
     showLegend = true,
+    isAnimationActive = false,
     margin,
     height,
     gradient,
@@ -68,6 +69,7 @@ const MotorAreaChart = ({ data, config }) => {
           stroke={stroke}
           fill={fill}
           fillOpacity={fillOpacity}
+          isAnimationActive={isAnimationActive}
         />
       </AreaChart>
     </ResponsiveContainer>

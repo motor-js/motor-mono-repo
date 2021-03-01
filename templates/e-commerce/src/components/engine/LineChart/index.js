@@ -23,6 +23,7 @@ const MotorLineChart = ({ data, config }) => {
     ShowYAxis = true,
     showGrid = true,
     showLegend = true,
+    isAnimationActive = true,
   } = config;
 
   return (
@@ -34,6 +35,7 @@ const MotorLineChart = ({ data, config }) => {
         <Tooltip />
         {showLegend && <Legend />}
         <Line
+          isAnimationActive={isAnimationActive}
           dataKey={dataKey}
           stroke={stroke}
           dot={{

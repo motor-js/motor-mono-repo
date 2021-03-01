@@ -19,6 +19,7 @@ const MotorBarChart = ({ data, config }) => {
     ShowYAxis = true,
     showGrid = true,
     showLegend = true,
+    isAnimationActive = true,
     margin,
     height,
     dataKey,
@@ -33,7 +34,11 @@ const MotorBarChart = ({ data, config }) => {
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
-        <Bar dataKey={dataKey} fill={fill} />
+        <Bar
+          dataKey={dataKey}
+          fill={fill}
+          isAnimationActive={isAnimationActive}
+        />
         {/* <Bar dataKey="uv" fill="#FE9E15" /> */}
       </BarChart>
     </ResponsiveContainer>
