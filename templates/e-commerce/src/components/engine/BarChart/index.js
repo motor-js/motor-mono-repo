@@ -27,7 +27,7 @@ const MotorBarChart = ({ dataSet, config }) => {
     fill,
   } = config;
 
-  // console.log(dataKey, measureInfo);
+  // console.log("dataSet", dataSet);
 
   return (
     <ResponsiveContainer width="100%" height={height}>

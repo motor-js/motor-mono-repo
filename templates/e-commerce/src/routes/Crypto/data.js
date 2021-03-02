@@ -255,6 +255,10 @@ export const BalanceHistory = {
         qField: "=Sum({$<coin={'ripple'}>} price)",
         qLabel: "price",
       },
+      {
+        qField: "=count({$<coin={'ripple'}>} price)",
+        qLabel: "count",
+      },
     ],
     qMetrics: [
       {

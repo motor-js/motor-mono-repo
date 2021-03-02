@@ -70,7 +70,6 @@ const ChartKPI = ({ dataProps }) => {
 
   //   setHasData(true);
   // }, [mData]);
-  console.log(dataSet);
 
   return (
     <>

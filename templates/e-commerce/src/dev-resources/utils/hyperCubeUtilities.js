@@ -140,9 +140,10 @@ export const getMeasureNames = (qHyperCube) =>
   });
 
 export const getMeasureDetails = (qHyperCube) => {
-  let measure = {};
+  let measures = [];
 
   qHyperCube.qMeasureInfo.map((d, i) => {
+    let measure = {};
     const qMeasurePosition = i !== 0 ? i : "";
 
     measure.name = d.qFallbackTitle.startsWith("=")
@@ -152,8 +153,9 @@ export const getMeasureDetails = (qHyperCube) => {
     measure.max = d.qMax;
     measure.min = d.qMin;
     measure.calcCondMsg = d.qCalcCondMsg;
+    measures.push(measure);
   });
-  return measure;
+  return measures;
 };
 
 export const getDimensionNames = (qHyperCube) =>

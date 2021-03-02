@@ -67,8 +67,6 @@ const ChartComponent = ({ dataProps }) => {
   //   setHasData(true);
   // }, [mData]);
 
-  // console.log(measureInfo);
-
   return (
     <>
       {dataSet ? (
