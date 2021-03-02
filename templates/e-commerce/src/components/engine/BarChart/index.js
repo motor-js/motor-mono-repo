@@ -27,8 +27,6 @@ const MotorBarChart = ({ dataSet, config }) => {
     fill,
   } = config;
 
-  // console.log("dataSet", dataSet);
-
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={margin}>
@@ -37,13 +35,17 @@ const MotorBarChart = ({ dataSet, config }) => {
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
-        <Bar
-          dataKey={dataKey}
-          // dataKey={measureInfo[0]}
-          fill={fill}
-          isAnimationActive={isAnimationActive}
-        />
-        {/* <Bar dataKey="uv" fill="#FE9E15" /> */}
+        {measureInfo &&
+          measureInfo.map((measure, index) => (
+            <Bar
+              key={index}
+              dataKey={measure.name}
+              fill={measure.fill || fill}
+              isAnimationActive={
+                isAnimationActive.isAnimationActive || isAnimationActive
+              }
+            />
+          ))}
       </BarChart>
     </ResponsiveContainer>
   );

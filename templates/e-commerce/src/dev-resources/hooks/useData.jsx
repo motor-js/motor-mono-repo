@@ -233,25 +233,18 @@ const useData = (props) => {
                 : "Others",
             qAttributeExpressions: [
               {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
                 // chart fill color
-                qExpression: col.qCondChartColor,
+                qExpression: col.qFillStyle,
                 qLibraryId: "",
                 qAttribute: false,
-                id: "colorTheme",
+                id: "fill",
+              },
+              {
+                // chart stroke width
+                qExpression: col.qStroke,
+                qLibraryId: "",
+                qAttribute: false,
+                id: "stroke",
               },
             ],
             qNullSuppression: col.qNullSuppression
@@ -272,25 +265,18 @@ const useData = (props) => {
                 : "Others",
             qAttributeExpressions: [
               {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
                 // chart fill color
-                qExpression: col.qCondChartColor,
+                qExpression: col.qFillStyle,
                 qLibraryId: "",
                 qAttribute: false,
-                id: "colorTheme",
+                id: "fill",
+              },
+              {
+                // chart stroke width
+                qExpression: col.qStroke,
+                qLibraryId: "",
+                qAttribute: false,
+                id: "stroke",
               },
             ],
             qNullSuppression: col.qNullSuppression
@@ -357,32 +343,25 @@ const useData = (props) => {
             },
             qAttributeExpressions: [
               {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
                 // chart fill color
-                qExpression: col.qCondChartColor,
+                qExpression: col.qFillStyle,
                 qLibraryId: "",
                 qAttribute: false,
-                id: "colorTheme",
+                id: "fill",
+              },
+              {
+                // chart stroke width
+                qExpression: col.qStroke,
+                qLibraryId: "",
+                qAttribute: false,
+                id: "stroke",
               },
             ],
-            qChartType: col.qChartType,
-            qShowPoints: col.qShowPoints,
-            qCurve: col.qCurve,
-            qFillStyle: col.qFillStyle,
-            qLegendShape: col.qLegendShape,
+            // qChartType: col.qChartType,
+            // qShowPoints: col.qShowPoints,
+            // qCurve: col.qCurve,
+            // qFillStyle: col.qFillStyle,
+            // qLegendShape: col.qLegendShape,
           };
         }
 
