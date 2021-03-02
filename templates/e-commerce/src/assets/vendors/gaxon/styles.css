@@ -302,6 +302,10 @@
   content: "\24";
 }
 
+.icon-trash:before {
+	content: "\e07d";
+}
+
 .icon-collapse:before {
   content: "\25";
 }

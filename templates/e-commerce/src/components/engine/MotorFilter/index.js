@@ -37,23 +37,26 @@ const MotorFilter = ({ dimension }) => {
   }, [mData]);
 
   async function handleChange(v) {
-    beginSelections();
+    await beginSelections();
     const newSel = await v.filter((el) => !selections.includes(el));
-    select(newSel);
-    endSelections(true);
+    await select(newSel);
+    await endSelections(true);
   }
 
-  function handleClear(v) {
-    beginSelections();
-    clearSelections();
-    endSelections(true);
+  const handleClear = async(v) => {
+  // await beginSelections();
+  clearSelections();
+  // await endSelections(true);
   }
 
   async function handleDeselect(v) {
-    beginSelections();
     const sel = [v];
     select(sel);
-    endSelections(true);
+  }
+
+  const handleVisibleChange = (toggle) => {
+  //  toggle && beginSelections() 
+  //  !toggle && endSelections(true)
   }
 
   return (
@@ -70,6 +73,7 @@ const MotorFilter = ({ dimension }) => {
         placeholder={dimension[0]}
         onClear={handleClear}
         onDeselect={(v) => handleDeselect(v)}
+        onDropdownVisibleChange={(toggle)=> handleVisibleChange(toggle)}
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }

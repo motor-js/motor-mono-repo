@@ -5,7 +5,7 @@ import Sidebar from "../Sidebar/index";
 import HorizontalDefault from "../Topbar/HorizontalDefault/index";
 import HorizontalDark from "../Topbar/HorizontalDark/index";
 import InsideHeader from "../Topbar/InsideHeader/index";
-import AboveHeader from "../Topbar/AboveHeader/index";
+//import AboveHeader from "../Topbar/AboveHeader/index";
 import BelowHeader from "../Topbar/BelowHeader/index";
 
 import Topbar from "../Topbar/index";
@@ -13,7 +13,7 @@ import {footerText} from "util/config";
 import App from "routes/index";
 import {useSelector} from "react-redux";
 import {
-  NAV_STYLE_ABOVE_HEADER,
+ // NAV_STYLE_ABOVE_HEADER,
   NAV_STYLE_BELOW_HEADER,
   NAV_STYLE_DARK_HORIZONTAL,
   NAV_STYLE_DEFAULT_HORIZONTAL,
@@ -42,8 +42,8 @@ const MainApp = (props) => {
         return "gx-container-wrap";
       case NAV_STYLE_BELOW_HEADER:
         return "gx-container-wrap";
-      case NAV_STYLE_ABOVE_HEADER:
-        return "gx-container-wrap";
+   //   case NAV_STYLE_ABOVE_HEADER:
+   //     return "gx-container-wrap";
       default :
         return ""
     }
@@ -56,8 +56,8 @@ const MainApp = (props) => {
         return <HorizontalDark/>;
       case NAV_STYLE_INSIDE_HEADER_HORIZONTAL :
         return <InsideHeader/>;
-      case NAV_STYLE_ABOVE_HEADER :
-        return <AboveHeader/>;
+   //   case NAV_STYLE_ABOVE_HEADER :
+   //     return <AboveHeader/>;
       case NAV_STYLE_BELOW_HEADER :
         return <BelowHeader/>;
       case NAV_STYLE_FIXED :
