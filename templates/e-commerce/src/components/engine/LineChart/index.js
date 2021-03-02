@@ -35,15 +35,22 @@ const MotorLineChart = ({ dataSet, config }) => {
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
-        <Line
-          isAnimationActive={isAnimationActive}
-          dataKey={dataKey}
-          stroke={stroke}
-          dot={{
-            stroke: dot ? dot.stroke : null,
-            strokeWidth: dot ? dot.strokeWidth : null,
-          }}
-        />
+        {measureInfo &&
+          measureInfo.map((measure, index) => (
+            <Line
+              key={index}
+              dataKey={measure.name}
+              stroke={measure.stroke || stroke}
+              isAnimationActive={
+                isAnimationActive.isAnimationActive || isAnimationActive
+              }
+              dot={{
+                // os use mesaureInfo
+                stroke: dot ? dot.stroke : null,
+                strokeWidth: dot ? dot.strokeWidth : null,
+              }}
+            />
+          ))}
       </LineChart>
     </ResponsiveContainer>
   );

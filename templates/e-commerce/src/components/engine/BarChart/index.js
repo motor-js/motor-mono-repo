@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 const MotorBarChart = ({ dataSet, config }) => {
-  const { data, measureInfo } = dataSet;
+  const { data, dimensionInfo, measureInfo } = dataSet;
   const {
     type,
     showXAxis = true,
@@ -26,6 +26,8 @@ const MotorBarChart = ({ dataSet, config }) => {
     dataKey,
     fill,
   } = config;
+
+  console.log(dimensionInfo);
 
   return (
     <ResponsiveContainer width="100%" height={height}>

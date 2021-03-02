@@ -154,23 +154,32 @@ export const getMeasureDetails = (qHyperCube) => {
     measure.min = d.qMin;
     measure.calcCondMsg = d.qCalcCondMsg;
 
-    // console.log(d);
-
     d.qAttrExprInfo.map((item, i) => {
-      // d.qMeasureInfo[i].qChartType = "bar";
-      // _measureDetails[i] = "bar";
-      // console.log(item);
       if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
-      // d.qMeasureInfo[i].qShowPoints = d.qShowPoints;
-      // d.qMeasureInfo[i].qCurve = d.qCurve;
-      // d.qMeasureInfo[i].qFillStyle = d.qFillStyle;
-      // d.qMeasureInfo[i].qLegendShape = d.qLegendShape;
-      // d.qMeasureInfo[i].qLegendShape =
-      //   d.qLegendShape === "dashed" ? "5,2" : null;
     });
     measures.push(measure);
   });
   return measures;
+};
+
+export const getDimensionDetails = (qHyperCube) => {
+  let dimensions = [];
+
+  qHyperCube.qDimensionInfo.map((d, i) => {
+    let dimension = {};
+    console.log(d);
+
+    dimension.name = d.qFallbackTitle;
+
+    // dimension.calcCondMsg = d.qCalcCondMsg;
+
+    // what is qAttrDimInfo used for ?
+    d.qAttrExprInfo.map((item, i) => {
+      if (item.qFallbackTitle) dimension[item.id] = item.qFallbackTitle;
+    });
+    dimensions.push(dimension);
+  });
+  return dimensions;
 };
 
 export const getDimensionNames = (qHyperCube) =>
