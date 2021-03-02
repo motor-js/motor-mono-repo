@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "antd";
-import useData from "../../../dev-resources/hooks/useData";
-
+import useData from "dev-resources/hooks/useData";
 import Widget from "dev-resources/components/Widget";
+
 import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
 import BarChart from "components/engine/BarChart";
 import PieChart from "components/engine/PieChart";
 
 const ChartKPI = ({ dataProps }) => {
-  const [hasData, setHasData] = useState(false);
+  // const [hasData, setHasData] = useState(false);
   const { data, icon, chartConfig } = dataProps;
 
   const { cols, qTitle, qMetrics } = data;
@@ -37,9 +37,11 @@ const ChartKPI = ({ dataProps }) => {
   const {
     // qLayout,
     // qData,
+    dataSet,
     title,
-    mData,
     metrics,
+    // measureInfo,
+    // mData,
     // endSelections,
     // beginSelections,
     // changePage,
@@ -61,16 +63,17 @@ const ChartKPI = ({ dataProps }) => {
   chartConfig.showXAxis = chartConfig.showXAxis || false;
   chartConfig.ShowYAxis = chartConfig.ShowYAxis || false;
   chartConfig.showGrid = chartConfig.showGrid || false;
+  chartConfig.showLegend = chartConfig.showLegend || false;
 
-  useEffect(() => {
-    if (!mData) return;
+  // useEffect(() => {
+  //   if (!mData) return;
 
-    setHasData(true);
-  }, [mData]);
+  //   setHasData(true);
+  // }, [mData]);
 
   return (
     <>
-      {hasData ? (
+      {metrics ? (
         <Widget styleName="gx-card-full">
           <div className="gx-actchart gx-px-3 gx-pt-3">
             <div className="ant-row-flex">
@@ -89,7 +92,7 @@ const ChartKPI = ({ dataProps }) => {
             <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
           </div>
           {/* {React.cloneElement(children, { data: mData })} */}
-          <Chart data={mData} config={chartConfig} />
+          <Chart dataSet={dataSet} config={chartConfig} />
         </Widget>
       ) : (
         <Skeleton active />

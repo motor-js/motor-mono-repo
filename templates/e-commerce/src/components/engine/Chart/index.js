@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Skeleton, Card } from "antd";
-import useData from "../../../dev-resources/hooks/useData";
+import useData from "dev-resources/hooks/useData";
 
 // import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
@@ -9,7 +9,7 @@ import BarChart from "components/engine/BarChart";
 import PieChart from "components/engine/PieChart";
 
 const ChartComponent = ({ dataProps }) => {
-  const [hasData, setHasData] = useState(false);
+  // const [hasData, setHasData] = useState(false);
   const { data, chartConfig } = dataProps;
 
   const { cols, qTitle, qMetrics } = data;
@@ -37,9 +37,12 @@ const ChartComponent = ({ dataProps }) => {
   const {
     // qLayout,
     // qData,
+    // measureInfo,
+    dataSet,
     title,
-    mData,
-    metrics,
+    // mData,
+
+    // metrics,
     // endSelections,
     // beginSelections,
     // changePage,
@@ -58,17 +61,17 @@ const ChartComponent = ({ dataProps }) => {
     // qSuppressZero: true,
   });
 
-  useEffect(() => {
-    if (!mData) return;
+  // useEffect(() => {
+  //   if (!mData) return;
 
-    setHasData(true);
-  }, [mData]);
+  //   setHasData(true);
+  // }, [mData]);
 
   return (
     <>
-      {hasData ? (
+      {dataSet ? (
         <Card className="gx-card" title={title}>
-          <Chart data={mData} config={chartConfig} />
+          <Chart dataSet={dataSet} config={chartConfig} />
         </Card>
       ) : (
         <Skeleton active />

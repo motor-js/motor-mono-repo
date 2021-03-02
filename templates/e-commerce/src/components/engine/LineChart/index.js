@@ -5,12 +5,14 @@ import {
   LineChart,
   ResponsiveContainer,
   Tooltip,
+  Legend,
   CartesianGrid,
   XAxis,
   YAxis,
 } from "recharts";
 
-const MotorLineChart = ({ data, config }) => {
+const MotorLineChart = ({ dataSet, config }) => {
+  const { data, measureInfo } = dataSet;
   const {
     margin,
     height,
@@ -21,6 +23,8 @@ const MotorLineChart = ({ data, config }) => {
     xAxisDataKey,
     ShowYAxis = true,
     showGrid = true,
+    showLegend = true,
+    isAnimationActive = true,
   } = config;
 
   return (
@@ -30,7 +34,9 @@ const MotorLineChart = ({ data, config }) => {
         {ShowYAxis && <YAxis />}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
+        {showLegend && <Legend />}
         <Line
+          isAnimationActive={isAnimationActive}
           dataKey={dataKey}
           stroke={stroke}
           dot={{
