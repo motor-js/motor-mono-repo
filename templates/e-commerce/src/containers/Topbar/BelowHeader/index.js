@@ -11,6 +11,7 @@ import HorizontalNav from "../HorizontalNav";
 import { Link } from "react-router-dom";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
 import SelectOutlined from "@ant-design/icons/lib/icons/SelectOutlined";
+import useSelections from 'dev-resources/hooks/useSelections'
 
 const { Header } = Layout;
 
@@ -37,22 +38,13 @@ const BelowHeader = () => {
   const [searchText, setSearchText] = useState("");
   const { navCollapsed } = useSelector(({ common }) => common);
 
-  const languageMenu = () => (
-    <CustomScrollbars className="gx-popover-lang-scroll">
-      <ul className="gx-sub-popover">
-        {languageData.map((language) => (
-          <li className="gx-media gx-pointer" key={JSON.stringify(language)}>
-            {/*<i className={`flag flag-24 gx-mr-2 flag-${language.icon}`}/> */}
-            <span className="gx-language-text">{language.name}</span>
-          </li>
-        ))}
-      </ul>
-    </CustomScrollbars>
-  );
+  const { selections, clearSelections } = useSelections()
 
   const updateSearchChatUser = (evt) => {
     setSearchText(evt.target.value);
   };
+
+  const handleClear = field => clearSelections(field)
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-below-header-horizontal">
@@ -129,12 +121,15 @@ const BelowHeader = () => {
                 <Popover
                   overlayClassName="gx-popover-horizantal"
                   placement="bottomRight"
-                  content={<Selections />}
+                  content={<Selections selections={selections} handleClear={handleClear}/>}
                   trigger="click"
                 >
                   <span className="gx-pointer gx-status-pos gx-d-block">
                     <SelectOutlined />
-                    <span className="gx-status gx-status-rtl gx-small gx-orange" />
+                    { selections && selections.length > 0 ? 
+                      <span className="gx-status gx-status-rtl gx-small gx-orange" /> :
+                      <span className="gx-status gx-status-rtl gx-small" />
+                    }
                   </span>
                 </Popover>
               </li>

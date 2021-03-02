@@ -54,11 +54,6 @@ const MotorFilter = ({ dimension }) => {
     select(sel);
   }
 
-  const handleVisibleChange = (toggle) => {
-  //  toggle && beginSelections() 
-  //  !toggle && endSelections(true)
-  }
-
   return (
     <Widget
       styleName="gx-order-history"
@@ -73,7 +68,7 @@ const MotorFilter = ({ dimension }) => {
         placeholder={dimension[0]}
         onClear={handleClear}
         onDeselect={(v) => handleDeselect(v)}
-        onDropdownVisibleChange={(toggle)=> handleVisibleChange(toggle)}
+        //onDropdownVisibleChange={(toggle)=> handleVisibleChange(toggle)}
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }

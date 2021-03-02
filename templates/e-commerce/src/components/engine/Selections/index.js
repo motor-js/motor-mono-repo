@@ -4,11 +4,7 @@ import CustomScrollbars from 'util/CustomScrollbars'
 import Auxiliary from "util/Auxiliary";
 import useSelections from 'dev-resources/hooks/useSelections'
 
-const Selections = () => {
-
-  const { selections, clearSelections } = useSelections()
-
-  const handleClear = field => clearSelections(field)
+const Selections = ({ selections, handleClear }) => {
 
   return (
     <Auxiliary>
