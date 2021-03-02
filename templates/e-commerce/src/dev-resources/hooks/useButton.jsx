@@ -2,15 +2,13 @@ import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "@motor-js/engine";
 import { deepMerge } from "../utils/object";
 import createDef from "../utils/createHCDef"
-import { removeModuleScopePlugin } from "customize-cra";
-import { UnderlineOutlined, UnorderedListOutlined } from "@ant-design/icons";
 
 const initialProps = {
   qPage: {
     qTop: 0,
     qLeft: 0,
     qWidth: 1,
-    qHeight: 10000,
+    qHeight: 1000,
   },
   cols: null,
   qHyperCubeDef: null,
@@ -66,7 +64,6 @@ const useButton = (props) => {
     engine && engine.forward()
   };
 
-  /*
   const exportData = (
     filename,
     ) => {  
@@ -77,22 +74,20 @@ const useButton = (props) => {
     const _secure = secure ? 'https://' : 'http://'
     const _port = port ? `:${port}` : ''
     const server = _secure + host + _port + prefix
-    console.log(server)
     engine.getObject(id).then(model => {
-      console.log(model)
-    //  model.exportData('CSV_C', '/qHyperCubeDef',filenameExport, 'P').then(url => {
-   //     window.open(server + url.qUrl, '_blank')
-  //    })
+      model.exportData('CSV_C', '/qHyperCubeDef','Test', 'P').then(url => {
+        console.log(url.qUrl, url.qWarnings)
+       // window.open(server + url.qUrl, '_blank')
+      })
     })
   }
-  */
 
   return {
     clearSelections,
     previousSelection,
     nextSelection,
     qLayout,
-   // exportData
+    exportData
   };
 };
 
