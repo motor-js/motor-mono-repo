@@ -11,7 +11,8 @@ import {
   YAxis,
 } from "recharts";
 
-const MotorAreaChart = ({ data, config }) => {
+const MotorAreaChart = ({ dataSet, config }) => {
+  const { data, measureInfo } = dataSet;
   const {
     type,
     showXAxis = true,

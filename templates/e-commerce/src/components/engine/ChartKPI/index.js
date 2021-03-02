@@ -37,10 +37,11 @@ const ChartKPI = ({ dataProps }) => {
   const {
     // qLayout,
     // qData,
-    measureInfo,
+    dataSet,
     title,
-    mData,
     metrics,
+    // measureInfo,
+    // mData,
     // endSelections,
     // beginSelections,
     // changePage,
@@ -69,10 +70,11 @@ const ChartKPI = ({ dataProps }) => {
 
   //   setHasData(true);
   // }, [mData]);
+  console.log(dataSet);
 
   return (
     <>
-      {mData ? (
+      {metrics ? (
         <Widget styleName="gx-card-full">
           <div className="gx-actchart gx-px-3 gx-pt-3">
             <div className="ant-row-flex">
@@ -91,7 +93,7 @@ const ChartKPI = ({ dataProps }) => {
             <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
           </div>
           {/* {React.cloneElement(children, { data: mData })} */}
-          <Chart data={mData} config={chartConfig} />
+          <Chart dataSet={dataSet} config={chartConfig} />
         </Widget>
       ) : (
         <Skeleton active />

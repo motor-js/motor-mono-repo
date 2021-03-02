@@ -2,7 +2,8 @@ import React from "react";
 
 import { PieChart, Pie, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
-const MotorPieChart = ({ data, config }) => {
+const MotorPieChart = ({ dataSet, config }) => {
+  const { data, measureInfo } = dataSet;
   const {
     showLegend = true,
     margin,

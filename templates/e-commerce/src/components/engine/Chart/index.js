@@ -37,9 +37,10 @@ const ChartComponent = ({ dataProps }) => {
   const {
     // qLayout,
     // qData,
-    measureInfo,
+    // measureInfo,
+    dataSet,
     title,
-    mData,
+    // mData,
 
     // metrics,
     // endSelections,
@@ -66,13 +67,13 @@ const ChartComponent = ({ dataProps }) => {
   //   setHasData(true);
   // }, [mData]);
 
-  console.log(measureInfo);
+  // console.log(measureInfo);
 
   return (
     <>
-      {mData ? (
+      {dataSet ? (
         <Card className="gx-card" title={title}>
-          <Chart data={mData} measureInfo={measureInfo} config={chartConfig} />
+          <Chart dataSet={dataSet} config={chartConfig} />
         </Card>
       ) : (
         <Skeleton active />

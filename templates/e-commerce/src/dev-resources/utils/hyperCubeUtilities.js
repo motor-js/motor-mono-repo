@@ -143,7 +143,6 @@ export const getMeasureDetails = (qHyperCube) => {
   let measure = {};
 
   qHyperCube.qMeasureInfo.map((d, i) => {
-    console.log(d);
     const qMeasurePosition = i !== 0 ? i : "";
 
     measure.name = d.qFallbackTitle.startsWith("=")

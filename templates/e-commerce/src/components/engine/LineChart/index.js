@@ -11,7 +11,8 @@ import {
   YAxis,
 } from "recharts";
 
-const MotorLineChart = ({ data, config }) => {
+const MotorLineChart = ({ dataSet, config }) => {
+  const { data, measureInfo } = dataSet;
   const {
     margin,
     height,
