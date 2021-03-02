@@ -3,6 +3,7 @@ import { deepMerge } from "../utils/object";
 import { EngineContext } from "@motor-js/engine";
 import {
   getMeasureNames,
+  getMeasureDetails,
   getDimensionNames,
   getHeader,
   getOrder,
@@ -20,7 +21,16 @@ const initialState = {
 
 function reducer(state, action) {
   const {
-    payload: { title, metrics, qData, mData, qRData, qLayout, selections },
+    payload: {
+      title,
+      metrics,
+      qData,
+      mData,
+      measureInfo,
+      qRData,
+      qLayout,
+      selections,
+    },
     type,
   } = action;
 
@@ -32,6 +42,7 @@ function reducer(state, action) {
         metrics,
         qData,
         mData,
+        measureInfo,
         qLayout,
         selections,
       };
@@ -94,7 +105,16 @@ const useData = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { title, metrics, qData, mData, qRData, qLayout, selections } = state;
+  const {
+    title,
+    metrics,
+    qData,
+    mData,
+    measureInfo,
+    qRData,
+    qLayout,
+    selections,
+  } = state;
 
   const { engine, engineError } = useContext(EngineContext) || {};
 
@@ -433,6 +453,10 @@ const useData = (props) => {
     return mData;
   }, []);
 
+  const getMeasureInfo = useCallback(async (layout) => {
+    return getMeasureDetails(layout.qHyperCube);
+  }, []);
+
   const getTitle = useCallback(async (layout) => {
     return layout.qHyperCube.qTitle;
   }, []);
@@ -452,6 +476,7 @@ const useData = (props) => {
       const _qLayout = await getLayout();
       const _qData = await getData();
       const _mData = await structureData(_qLayout, _qData);
+      const _measureDetails = await getMeasureInfo(_qLayout);
       const _qTitle = await getTitle(_qLayout);
       const _qMetrics = await getMetrics(_qLayout, qMetrics);
       if (_qData && _isMounted.current) {
@@ -460,15 +485,17 @@ const useData = (props) => {
         );
 
         // if (measureInfo) {
+        //   console.log("d", measureInfo);
         //   measureInfo.map((d, i) => {
         //     if (_qLayout.qHyperCube.qMeasureInfo[i]) {
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qChartType = d.qChartType;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
-        //       _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape = d.qLegendShape;
-        //       // _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
-        //       //   d.qLegendShape === "dashed" ? "5,2" : null;
+        //     _qLayout.qHyperCube.qMeasureInfo[i].qChartType = "bar";
+        //     _measureDetails[i] = "bar";
+        //     _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
+        //     _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
+        //     _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
+        //     _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape = d.qLegendShape;
+        //     // _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
+        //     //   d.qLegendShape === "dashed" ? "5,2" : null;
         //     }
         //   });
         // }
@@ -479,6 +506,7 @@ const useData = (props) => {
             title: _qTitle,
             qData: _qData,
             mData: _mData,
+            measureInfo: _measureDetails,
             metrics: _qMetrics,
             qLayout: _qLayout,
             selections: _selections,
@@ -578,6 +606,8 @@ const useData = (props) => {
     qLayout,
     qData,
     mData,
+    measureInfo,
+    dataSet: { data: mData, measureInfo },
     title,
     metrics,
     qRData,

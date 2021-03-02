@@ -11,7 +11,7 @@ export function hyperCubeTransform(
   const measureNames = getMeasureNames(qHyperCube);
   const dimensionNames = getDimensionNames(qHyperCube);
 
-  const transformedData = qData.qMatrix.map((d,i) => {
+  const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
     d.forEach((item, index) => {
       // check if more than 2 dimensions
@@ -26,12 +26,12 @@ export function hyperCubeTransform(
                   ? d[index].qNum
                   : d[index].qText,
               [`elemNumber${index !== 0 ? index : ""}`]: d[index].qElemNumber,
-              key: i
+              key: i,
             }
           : {
               [measureNames[index - qNoOfDiemnsions]]:
                 d[index].qNum !== "NaN" ? d[index].qNum : 0,
-                key: i
+              key: i,
             };
       data = { ...data, ...pair };
     });
@@ -41,8 +41,6 @@ export function hyperCubeTransform(
 
   return transformedData;
 }
-
-
 
 export function groupHyperCubeData(qData) {
   const data = [];
@@ -141,6 +139,24 @@ export const getMeasureNames = (qHyperCube) =>
       : d.qFallbackTitle;
   });
 
+export const getMeasureDetails = (qHyperCube) => {
+  let measure = {};
+
+  qHyperCube.qMeasureInfo.map((d, i) => {
+    console.log(d);
+    const qMeasurePosition = i !== 0 ? i : "";
+
+    measure.name = d.qFallbackTitle.startsWith("=")
+      ? `value${qMeasurePosition}`
+      : d.qFallbackTitle;
+
+    measure.max = d.qMax;
+    measure.min = d.qMin;
+    measure.calcCondMsg = d.qCalcCondMsg;
+  });
+  return measure;
+};
+
 export const getDimensionNames = (qHyperCube) =>
   qHyperCube.qDimensionInfo.map((d, i) => d.qFallbackTitle);
 
@@ -216,43 +232,45 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
   return direction;
 };
 
-export const getHeader = (qLayout) => (
+export const getHeader = (qLayout) =>
   qLayout
     ? [
-      ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
-            title: col.qFallbackTitle,
-            dataIndex: col.qFallbackTitle,
-            //accessor: (d) => d[index].qText,
-            defaultSortDesc: col.qSortIndicator === "D",
-            qInterColumnIndex: index,
-            qPath: `/qHyperCubeDef/qDimensions/${index}`,
-            qSortIndicator: col.qSortIndicator,
-            qReverseSort: col.qReverseSort,
-            qGrandTotals: { qText: null, qNum: null },
-            qColumnType: "dim",
-          })),
-          ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
-            title: col.qFallbackTitle,
-            dataIndex: col.qFallbackTitle,
-            //accessor: (d) =>
-            //  d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
-            defaultSortDesc: col.qSortIndicator === "D",
-            qInterColumnIndex:
-              index + qLayout.qHyperCube.qDimensionInfo.length,
-            qPath: `/qHyperCubeDef/qMeasures/${index}`,
-            qSortIndicator: col.qSortIndicator,
-            qReverseSort: col.qReverseSort,
-            qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
-            qColumnType: "meas",
-          })),
+        ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
+          title: col.qFallbackTitle,
+          dataIndex: col.qFallbackTitle,
+          //accessor: (d) => d[index].qText,
+          defaultSortDesc: col.qSortIndicator === "D",
+          qInterColumnIndex: index,
+          qPath: `/qHyperCubeDef/qDimensions/${index}`,
+          qSortIndicator: col.qSortIndicator,
+          qReverseSort: col.qReverseSort,
+          qGrandTotals: { qText: null, qNum: null },
+          qColumnType: "dim",
+        })),
+        ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
+          title: col.qFallbackTitle,
+          dataIndex: col.qFallbackTitle,
+          //accessor: (d) =>
+          //  d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
+          defaultSortDesc: col.qSortIndicator === "D",
+          qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
+          qPath: `/qHyperCubeDef/qMeasures/${index}`,
+          qSortIndicator: col.qSortIndicator,
+          qReverseSort: col.qReverseSort,
+          qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
+          qColumnType: "meas",
+        })),
       ]
-  : []
-)
+    : [];
 
-  //Change order of header groups
-  export const getOrder = (headerGroup, qColumnOrder) => {
-    const orderedHeader = headerGroup.sort((a, b) => qColumnOrder.indexOf(a.qInterColumnIndex) - qColumnOrder.indexOf(b.qInterColumnIndex))
-    return orderedHeader
-  }
+//Change order of header groups
+export const getOrder = (headerGroup, qColumnOrder) => {
+  const orderedHeader = headerGroup.sort(
+    (a, b) =>
+      qColumnOrder.indexOf(a.qInterColumnIndex) -
+      qColumnOrder.indexOf(b.qInterColumnIndex)
+  );
+  return orderedHeader;
+};
 
 export default hyperCubeTransform;

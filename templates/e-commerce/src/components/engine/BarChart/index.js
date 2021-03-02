@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-const MotorBarChart = ({ data, config }) => {
+const MotorBarChart = ({ data, measureInfo, config }) => {
   const {
     type,
     showXAxis = true,
@@ -26,6 +26,8 @@ const MotorBarChart = ({ data, config }) => {
     fill,
   } = config;
 
+  console.log(dataKey, measureInfo);
+
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={margin}>
@@ -36,6 +38,7 @@ const MotorBarChart = ({ data, config }) => {
         {showLegend && <Legend />}
         <Bar
           dataKey={dataKey}
+          // dataKey={measureInfo[0]}
           fill={fill}
           isAnimationActive={isAnimationActive}
         />
