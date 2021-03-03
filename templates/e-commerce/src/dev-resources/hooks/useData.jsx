@@ -5,6 +5,7 @@ import {
   getMeasureNames,
   getMeasureDetails,
   getDimensionNames,
+  getDimensionDetails,
   getHeader,
   getOrder,
   hyperCubeTransform,
@@ -27,6 +28,7 @@ function reducer(state, action) {
       qData,
       mData,
       measureInfo,
+      dimensionInfo,
       qRData,
       qLayout,
       selections,
@@ -42,6 +44,7 @@ function reducer(state, action) {
         metrics,
         qData,
         mData,
+        dimensionInfo,
         measureInfo,
         qLayout,
         selections,
@@ -110,6 +113,7 @@ const useData = (props) => {
     metrics,
     qData,
     mData,
+    dimensionInfo,
     measureInfo,
     qRData,
     qLayout,
@@ -233,25 +237,18 @@ const useData = (props) => {
                 : "Others",
             qAttributeExpressions: [
               {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
                 // chart fill color
-                qExpression: col.qCondChartColor,
+                qExpression: col.qFillStyle,
                 qLibraryId: "",
                 qAttribute: false,
-                id: "colorTheme",
+                id: "fill",
+              },
+              {
+                // chart stroke width
+                qExpression: col.qStroke,
+                qLibraryId: "",
+                qAttribute: false,
+                id: "stroke",
               },
             ],
             qNullSuppression: col.qNullSuppression
@@ -272,25 +269,18 @@ const useData = (props) => {
                 : "Others",
             qAttributeExpressions: [
               {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
                 // chart fill color
-                qExpression: col.qCondChartColor,
+                qExpression: col.qFillStyle,
                 qLibraryId: "",
                 qAttribute: false,
-                id: "colorTheme",
+                id: "fill",
+              },
+              {
+                // chart stroke width
+                qExpression: col.qStroke,
+                qLibraryId: "",
+                qAttribute: false,
+                id: "stroke",
               },
             ],
             qNullSuppression: col.qNullSuppression
@@ -357,32 +347,25 @@ const useData = (props) => {
             },
             qAttributeExpressions: [
               {
-                // cell background color
-                qExpression: col.qCondBackgroundFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellBackgroundColor",
-              },
-              {
-                // cell text color
-                qExpression: col.qCondTextFormat,
-                qLibraryId: "",
-                qAttribute: false,
-                id: "cellForegroundColor",
-              },
-              {
                 // chart fill color
-                qExpression: col.qCondChartColor,
+                qExpression: col.qFillStyle,
                 qLibraryId: "",
                 qAttribute: false,
-                id: "colorTheme",
+                id: "fill",
+              },
+              {
+                // chart stroke width
+                qExpression: col.qStroke,
+                qLibraryId: "",
+                qAttribute: false,
+                id: "stroke",
               },
             ],
-            qChartType: col.qChartType,
-            qShowPoints: col.qShowPoints,
-            qCurve: col.qCurve,
-            qFillStyle: col.qFillStyle,
-            qLegendShape: col.qLegendShape,
+            // qChartType: col.qChartType,
+            // qShowPoints: col.qShowPoints,
+            // qCurve: col.qCurve,
+            // qFillStyle: col.qFillStyle,
+            // qLegendShape: col.qLegendShape,
           };
         }
 
@@ -457,6 +440,10 @@ const useData = (props) => {
     return getMeasureDetails(layout.qHyperCube);
   }, []);
 
+  const getDimensionInfo = useCallback(async (layout) => {
+    return getDimensionDetails(layout.qHyperCube);
+  }, []);
+
   const getTitle = useCallback(async (layout) => {
     return layout.qHyperCube.qTitle;
   }, []);
@@ -477,6 +464,7 @@ const useData = (props) => {
       const _qData = await getData();
       const _mData = await structureData(_qLayout, _qData);
       const _measureDetails = await getMeasureInfo(_qLayout);
+      const _dimensionDetails = await getDimensionInfo(_qLayout);
       const _qTitle = await getTitle(_qLayout);
       const _qMetrics = await getMetrics(_qLayout, qMetrics);
       if (_qData && _isMounted.current) {
@@ -506,6 +494,7 @@ const useData = (props) => {
             title: _qTitle,
             qData: _qData,
             mData: _mData,
+            dimensionInfo: _dimensionDetails,
             measureInfo: _measureDetails,
             metrics: _qMetrics,
             qLayout: _qLayout,
@@ -606,8 +595,9 @@ const useData = (props) => {
     qLayout,
     qData,
     mData,
+    dimensionInfo,
     measureInfo,
-    dataSet: { data: mData, measureInfo },
+    dataSet: { data: mData, dimensionInfo, measureInfo },
     title,
     metrics,
     qRData,

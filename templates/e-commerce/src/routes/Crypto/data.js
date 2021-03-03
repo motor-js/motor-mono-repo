@@ -254,31 +254,56 @@ export const BalanceHistory = {
       {
         qField: "=Sum({$<coin={'ripple'}>} price)",
         qLabel: "price",
+        qFillStyle: "orange",
       },
       {
-        qField: "=count({$<coin={'ripple'}>} price)",
+        qField: "=Sum({$<coin={'ripple'}>} price)*2.1",
         qLabel: "count",
       },
     ],
-    qMetrics: [
-      {
-        qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
-        qType: "qStringExpression",
-      },
-      {
-        qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
-        qType: "qStringExpression",
-      },
-      {
-        qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'up','down')",
-        qType: "qStringExpression",
-      },
-    ],
+
     qTitle:
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+  },
+};
+
+export const BalanceHistoryMultiDim = {
+  chartConfig: {
+    chartType: "bar",
+    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    showLegend: false,
+    height: 180,
+    isAnimationActive: true,
+    xAxisDataKey: "name",
+    dataKey: "price",
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: "#003366",
+    fillOpacity: 1,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[name]",
+        qLabel: "name",
+      },
+      {
+        qField: "[coin]",
+        qLabel: "coin",
+      },
+      {
+        qField: "=Sum(price)",
+        qLabel: "price",
+        qFillStyle: "orange",
+      },
+    ],
+
+    qTitle:
+      "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
 };
 

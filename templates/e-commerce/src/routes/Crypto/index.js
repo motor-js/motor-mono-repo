@@ -8,6 +8,7 @@ import {
   rippleKPI,
   litecoinKPI,
   BalanceHistory,
+  BalanceHistoryMultiDim,
   pieData,
 } from "./data";
 // import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
@@ -59,7 +60,8 @@ const Crypto = () => {
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           {/* <BalanceHistory /> */}
-          <Chart dataProps={pieData} />
+          {/* <Chart dataProps={pieData} /> */}
+          <Chart dataProps={BalanceHistoryMultiDim} />
         </Col>
 
         <Col xl={9} lg={24} md={24} sm={24} xs={24}>

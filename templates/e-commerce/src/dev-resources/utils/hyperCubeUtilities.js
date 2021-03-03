@@ -153,9 +153,33 @@ export const getMeasureDetails = (qHyperCube) => {
     measure.max = d.qMax;
     measure.min = d.qMin;
     measure.calcCondMsg = d.qCalcCondMsg;
+
+    d.qAttrExprInfo.map((item, i) => {
+      if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
+    });
     measures.push(measure);
   });
   return measures;
+};
+
+export const getDimensionDetails = (qHyperCube) => {
+  let dimensions = [];
+
+  qHyperCube.qDimensionInfo.map((d, i) => {
+    let dimension = {};
+    console.log(d);
+
+    dimension.name = d.qFallbackTitle;
+
+    // dimension.calcCondMsg = d.qCalcCondMsg;
+
+    // what is qAttrDimInfo used for ?
+    d.qAttrExprInfo.map((item, i) => {
+      if (item.qFallbackTitle) dimension[item.id] = item.qFallbackTitle;
+    });
+    dimensions.push(dimension);
+  });
+  return dimensions;
 };
 
 export const getDimensionNames = (qHyperCube) =>
