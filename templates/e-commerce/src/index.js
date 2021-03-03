@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Motor } from "@motor-js/engine";
 
 import reportWebVitals from "./reportWebVitals";
 import NextApp from "./NextApp";
-
-import { Motor } from "@motor-js/engine";
-import { config } from "./config/config.js";
+import { qlikConfig } from "settings";
+import Store from "store"
 
 ReactDOM.render(
   // Wrap App inside AppContainer
-  <Motor config={config}>
-    <NextApp />
+  <Motor config={qlikConfig}>
+    <Store>
+      <NextApp />
+    </Store>
   </Motor>,
   document.getElementById("root")
 );

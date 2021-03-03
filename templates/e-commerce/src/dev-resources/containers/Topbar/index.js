@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, Popover } from "antd";
 import { Link } from "react-router-dom";
 
-import { toggleCollapsedSideNav } from "appRedux/actions";
+import { toggleCollapsedSideNav } from "dev-resources/appRedux/actions";
 import SearchBox from "dev-resources/components/SearchBox";
 import UserInfo from "dev-resources/components/UserInfo";
 import Auxiliary from "util/Auxiliary";

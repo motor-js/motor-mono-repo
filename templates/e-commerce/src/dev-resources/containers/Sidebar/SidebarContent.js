@@ -9,7 +9,7 @@ import {
   NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
   THEME_TYPE_LITE,
-} from "constants/ThemeSetting";
+} from "dev-resources/constants/ThemeSetting";
 import { useSelector } from "react-redux";
 
 const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {

@@ -2,7 +2,7 @@ import React from "react";
 
 import Widget from "dev-resources/components/Widget/index";
 import { connect } from "react-redux";
-import { THEME_TYPE_DARK } from "../../../constants/ThemeSetting";
+import { THEME_TYPE_DARK } from "../../constants/ThemeSetting";
 
 const IconWithTextCard = (props) => {
   const { icon, title, subTitle } = props;

@@ -167,7 +167,7 @@ export const getDimensionDetails = (qHyperCube) => {
 
   qHyperCube.qDimensionInfo.map((d, i) => {
     let dimension = {};
-    console.log(d);
+    //console.log(d);
 
     dimension.name = d.qFallbackTitle;
 

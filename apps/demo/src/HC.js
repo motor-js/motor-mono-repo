@@ -45,7 +45,7 @@ const HC = () => {
   //  qInterColumnSortOrder: columnSort
   });
 
-  console.log(mData)
+  //console.log(mData)
   
   const renderTableHeader = () => {
   

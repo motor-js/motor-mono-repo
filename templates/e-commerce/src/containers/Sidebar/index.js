@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Drawer, Layout} from "antd";
 
 import SidebarContent from "./SidebarContent";
-import {toggleCollapsedSideNav, updateWindowWidth} from "../../appRedux/actions/Setting";
+//import {toggleCollapsedSideNav, updateWindowWidth} from "../../appRedux/actions/Setting";
 import {
   NAV_STYLE_DRAWER,
   NAV_STYLE_FIXED,
@@ -25,7 +25,7 @@ const Sidebar = () => {
   const {navCollapsed, width} = useSelector(({common}) => common);
 
   const onToggleCollapsedNav = () => {
-    dispatch(toggleCollapsedSideNav(!navCollapsed));
+   // dispatch(toggleCollapsedSideNav(!navCollapsed));
   };
 
   useEffect(()=>{
@@ -34,13 +34,14 @@ const Sidebar = () => {
 
   useEffect(() => {
     window.addEventListener('resize', () => {
-      dispatch(updateWindowWidth(window.innerWidth));
+      //dispatch(updateWindowWidth(window.innerWidth));
     })
   }, [dispatch]);
 
 
   let drawerStyle = "gx-collapsed-sidebar";
 
+  /*
   if (navStyle === NAV_STYLE_FIXED) {
     drawerStyle = "";
   } else if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR) {
@@ -56,6 +57,8 @@ const Sidebar = () => {
     || navStyle === NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR) && width < TAB_SIZE) {
     drawerStyle = "gx-collapsed-sidebar"
   }
+  */
+
   return (
     <Sider
       className={`gx-app-sidebar ${drawerStyle} ${themeType !== THEME_TYPE_LITE ? 'gx-layout-sider-dark' : null}`}
