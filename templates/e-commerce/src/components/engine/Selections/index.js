@@ -2,7 +2,6 @@ import React from "react";
 import SelectionItem from "./SelectionItem";
 import CustomScrollbars from 'util/CustomScrollbars'
 import Auxiliary from "util/Auxiliary";
-import useSelections from 'dev-resources/hooks/useSelections'
 
 const Selections = ({ selections, handleClear }) => {
 

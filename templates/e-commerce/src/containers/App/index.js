@@ -27,7 +27,6 @@ const App = (props) => {
 
   const dispatch = useDispatch();
 
-  const locale = useSelector(({ settings }) => settings.locale);
   const navStyle = useSelector(({ settings }) => settings.navStyle);
   const themeType = useSelector(({ settings }) => settings.themeType);
   const layoutType = useSelector(({ settings }) => settings.layoutType);

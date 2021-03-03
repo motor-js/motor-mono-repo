@@ -40,11 +40,12 @@ const BelowHeader = () => {
 
   const { selections, clearSelections } = useSelections()
 
+  const handleClear = field => clearSelections(field)
+  
   const updateSearchChatUser = (evt) => {
     setSearchText(evt.target.value);
   };
 
-  const handleClear = field => clearSelections(field)
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-below-header-horizontal">

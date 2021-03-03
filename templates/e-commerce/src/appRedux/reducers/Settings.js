@@ -1,9 +1,8 @@
-import {SWITCH_LANGUAGE} from "constants/ActionTypes";
 import {
   LAYOUT_TYPE,
   LAYOUT_TYPE_FULL,
   NAV_STYLE,
-  NAV_STYLE_ABOVE_HEADER,
+  NAV_STYLE_DRAWER,
   THEME_COLOR,
   THEME_TYPE,
   NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
@@ -12,7 +11,7 @@ import {
 } from "constants/ThemeSetting";
 
 const initialSettings = {
-  navStyle: NAV_STYLE_BELOW_HEADER,
+  navStyle: NAV_STYLE_DRAWER,
   layoutType: LAYOUT_TYPE_FULL,
   themeType: THEME_TYPE_LITE,
   themeColor: THEME_COLOR,

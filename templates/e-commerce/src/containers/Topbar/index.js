@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Layout, Popover } from "antd";
 import { Link } from "react-router-dom";
 
-import CustomScrollbars from "util/CustomScrollbars";
-import languageData from "./languageData";
-import { toggleCollapsedSideNav } from "../../appRedux/actions";
-import SearchBox from "../../dev-resources/components/SearchBox";
-import UserInfo from "../../dev-resources/components/UserInfo";
-import AppNotification from "../../dev-resources/components/AppNotification";
-import MailNotification from "../../dev-resources/components/MailNotification";
+import { toggleCollapsedSideNav } from "appRedux/actions";
+import SearchBox from "dev-resources/components/SearchBox";
+import UserInfo from "dev-resources/components/UserInfo";
 import Auxiliary from "util/Auxiliary";
+import Selections from "components/engine/Selections";
+import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
+import useSelections from 'dev-resources/hooks/useSelections'
+
+import logo from 'assets/images/motor-black.png'
 
 import {
   NAV_STYLE_DRAWER,
@@ -24,25 +25,12 @@ const { Header } = Layout;
 const Topbar = () => {
   const { locale, navStyle } = useSelector(({ settings }) => settings);
   const { navCollapsed, width } = useSelector(({ common }) => common);
-  const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch();
 
-  const languageMenu = () => (
-    <CustomScrollbars className="gx-popover-lang-scroll">
-      <ul className="gx-sub-popover">
-        {languageData.map((language) => (
-          <li className="gx-media gx-pointer" key={JSON.stringify(language)}>
-            <i className={`flag flag-24 gx-mr-2 flag-${language.icon}`} />
-            <span className="gx-language-text">{language.name}</span>
-          </li>
-        ))}
-      </ul>
-    </CustomScrollbars>
-  );
+  const { selections, clearSelections } = useSelections()
 
-  const updateSearchChatUser = (evt) => {
-    setSearchText(evt.target.value);
-  };
+  const handleClear = field => clearSelections(field)
+
   return (
     <Header>
       {navStyle === NAV_STYLE_DRAWER ||
@@ -58,14 +46,12 @@ const Topbar = () => {
         </div>
       ) : null}
       <Link to="/" className="gx-d-block gx-d-lg-none gx-pointer">
-        <img alt="" src={require("assets/images/w-logo.png")} />
+        <img src={logo} alt="Logo" style={{ height: '30px', width: '95px'}} />
       </Link>
 
       <SearchBox
         styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
         placeholder="Search in app..."
-        onChange={updateSearchChatUser}
-        value={searchText}
       />
       <ul className="gx-header-notifications gx-ml-auto">
         <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
@@ -76,8 +62,6 @@ const Topbar = () => {
               <SearchBox
                 styleName="gx-popover-search-bar"
                 placeholder="Search in app..."
-                onChange={updateSearchChatUser}
-                value={searchText}
               />
             }
             trigger="click"
@@ -87,49 +71,21 @@ const Topbar = () => {
             </span>
           </Popover>
         </li>
-        {width >= TAB_SIZE ? null : (
-          <Auxiliary>
-            <li className="gx-notify">
-              <Popover
-                overlayClassName="gx-popover-horizantal"
-                placement="bottomRight"
-                content={<AppNotification />}
-                trigger="click"
-              >
-                <span className="gx-pointer gx-d-block">
-                  <i className="icon icon-notification" />
-                </span>
-              </Popover>
-            </li>
-
-            <li className="gx-msg">
-              <Popover
-                overlayClassName="gx-popover-horizantal"
-                placement="bottomRight"
-                content={<MailNotification />}
-                trigger="click"
-              >
-                <span className="gx-pointer gx-status-pos gx-d-block">
-                  <i className="icon icon-chat-new" />
-                  <span className="gx-status gx-status-rtl gx-small gx-orange" />
-                </span>
-              </Popover>
-            </li>
-          </Auxiliary>
-        )}
         <li className="gx-language">
-          <Popover
-            overlayClassName="gx-popover-horizantal"
-            placement="bottomRight"
-            content={languageMenu()}
-            trigger="click"
+        <Popover
+          overlayClassName="gx-popover-horizantal"
+          placement="bottomRight"
+          content={<Selections selections={selections} handleClear={handleClear}/>}
+          trigger="click"
           >
-            <span className="gx-pointer gx-flex-row gx-align-items-center">
-              <i className={`flag flag-24 flag-${locale.icon}`} />
-              <span className="gx-pl-2 gx-language-name">{locale.name}</span>
-              <i className="icon icon-chevron-down gx-pl-2" />
-            </span>
+            <span className="gx-pointer gx-status-pos gx-d-block">
+            <FilterOutlined style={{ fontSize: '18px' }} />
+            { selections && selections.length > 0 ? 
+              <span className="gx-status gx-status-rtl gx-small gx-orange" /> :
+              <span className="gx-status gx-status-rtl gx-small" /> }
+            </span>          
           </Popover>
+
         </li>
         {width >= TAB_SIZE ? null : (
           <Auxiliary>

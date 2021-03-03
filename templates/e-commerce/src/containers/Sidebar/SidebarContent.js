@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import CustomScrollbars from "util/CustomScrollbars";
 import SidebarLogo from "./SidebarLogo";
 import UserProfile from "./UserProfile";
-import AppsNavigation from "./AppsNavigation";
 import {
   NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
@@ -26,12 +25,7 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
     }
     return "";
   };
-  // const getNavStyleSubMenuClass = (navStyle) => {
-  //   if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR) {
-  //     return "gx-no-header-submenu-popup";
-  //   }
-  //   return "";
-  // };
+
   const selectedKeys = pathname.substr(1);
   const defaultOpenKeys = selectedKeys.split("/")[1];
   return (
@@ -44,10 +38,9 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
         <div
           className={`gx-sidebar-notifications ${getNoHeaderClass(navStyle)}`}
         >
-          <UserProfile />
-          <AppsNavigation />
+        { /*  <UserProfile /> */}
         </div>
-        <CustomScrollbars className="gx-layout-sider-scrollbar">
+        <CustomScrollbars className="gx-layout-sider-scrollbar"> 
           <Menu
             defaultOpenKeys={[defaultOpenKeys]}
             selectedKeys={[selectedKeys]}
