@@ -61,13 +61,13 @@ const Crypto = () => {
           {/* <BalanceHistory /> */}
           {/* <Chart dataProps={pieData} /> */}
           <Tabs defaultActiveKey="1" type="card" size={"Default"}>
-            <TabPane tab="Multiple Measures" key="1">
-              <Chart dataProps={BalanceHistory} />
-              {/* Content of card tab 1 */}
-            </TabPane>
-            <TabPane tab="Multiple Dimensions" key="2">
+            <TabPane tab="Multiple Dimensions" key="1">
               <Chart dataProps={BalanceHistoryMultiDim} />
               {/* Content of card tab 2 */}
+            </TabPane>
+            <TabPane tab="Multiple Measures" key="2">
+              <Chart dataProps={BalanceHistory} />
+              {/* Content of card tab 1 */}
             </TabPane>
             <TabPane tab="Card Tab 3" key="3">
               Content of card tab 3

@@ -468,11 +468,9 @@ const useData = (props) => {
     []
   );
 
-  const structureData = useCallback(async (layout, listData, data) => {
+  const structureData = useCallback(async (layout, data) => {
     let useNumonFirstDim;
-    const mData = listData
-      ? null
-      : hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
+    const mData = hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
 
     return mData;
   }, []);
@@ -509,7 +507,7 @@ const useData = (props) => {
       const _qData = await getData();
 
       const _qListData = await getListData();
-      const _mData = await structureData(_qLayout, _qListData, _qData);
+      const _mData = await structureData(_qLayout, _qData);
 
       // const _measureDetails = await getMeasureInfo(_qLayout);
       // const _dimensionDetails = await getDimensionInfo(_qLayout);

@@ -33,12 +33,18 @@ export function hyperCubeTransform(
                 d[index].qNum !== "NaN" ? d[index].qNum : 0,
               key: i,
             };
+      // : {
+      //     [qNoOfDiemnsions === 1
+      //       ? measureNames[index - qNoOfDiemnsions]
+      //       : d[1].qText]: d[index].qNum !== "NaN" ? d[index].qNum : 0,
+      //     key: i,
+      //   };
       data = { ...data, ...pair };
     });
 
     return data;
   });
-
+  console.log(transformedData);
   return transformedData;
 }
 
