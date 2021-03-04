@@ -10,6 +10,7 @@ import {
   getHeader,
   getOrder,
   hyperCubeTransform,
+  multiDimHyperCubeTransform,
 } from "../utils/hyperCubeUtilities";
 
 const initialState = {
@@ -470,7 +471,10 @@ const useData = (props) => {
 
   const structureData = useCallback(async (layout, data) => {
     let useNumonFirstDim;
-    const mData = hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
+    const mData =
+      layout.qHyperCube.qDimensionInfo.length === 1
+        ? hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim)
+        : multiDimHyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
 
     return mData;
   }, []);
