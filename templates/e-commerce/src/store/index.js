@@ -1,5 +1,5 @@
 import React, {createContext, useReducer} from "react";
-import Reducer from 'reducers'
+import ThemeReducer from 'reducers/theme'
 import { appSettings } from 'settings'
 
 const { theme } = appSettings
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const Store = ({children}) => {
-    const [state, dispatch] = useReducer(Reducer, initialState);
+    const [state, dispatch] = useReducer(ThemeReducer, initialState);
     
     return (
         <ThemeContext.Provider value={[state, dispatch]}>
