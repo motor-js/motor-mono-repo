@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 const MotorBarChart = ({ dataSet, config }) => {
-  const { data, dimensionInfo, measureInfo } = dataSet;
+  const { data, dataKeys } = dataSet;
   const {
     type,
     showXAxis = true,
@@ -27,7 +27,8 @@ const MotorBarChart = ({ dataSet, config }) => {
     fill,
   } = config;
 
-  console.log(dimensionInfo);
+  // console.log(dimensionInfo);
+  // console.log(dataKeys, data);
 
   return (
     <ResponsiveContainer width="100%" height={height}>
@@ -37,8 +38,8 @@ const MotorBarChart = ({ dataSet, config }) => {
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
-        {measureInfo &&
-          measureInfo.map((measure, index) => (
+        {dataKeys &&
+          dataKeys.map((measure, index) => (
             <Bar
               key={index}
               dataKey={measure.name}

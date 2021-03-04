@@ -139,48 +139,79 @@ export const getMeasureNames = (qHyperCube) =>
       : d.qFallbackTitle;
   });
 
-export const getMeasureDetails = (qHyperCube) => {
-  let measures = [];
+export const getDatKeyInfo = (listData, measureInfo) => {
+  let dataKeys = [];
 
-  qHyperCube.qMeasureInfo.map((d, i) => {
-    let measure = {};
-    const qMeasurePosition = i !== 0 ? i : "";
-
-    measure.name = d.qFallbackTitle.startsWith("=")
-      ? `value${qMeasurePosition}`
-      : d.qFallbackTitle;
-
-    measure.max = d.qMax;
-    measure.min = d.qMin;
-    measure.calcCondMsg = d.qCalcCondMsg;
-
-    d.qAttrExprInfo.map((item, i) => {
-      if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
+  if (listData) {
+    listData.qMatrix.map((d, i) => {
+      const dataKey = {};
+      dataKey.name = d[0].qText;
+      dataKeys.push(dataKey);
     });
-    measures.push(measure);
-  });
-  return measures;
+  } else {
+    measureInfo.map((d, i) => {
+      let measure = {};
+      const qMeasurePosition = i !== 0 ? i : "";
+
+      measure.name = d.qFallbackTitle.startsWith("=")
+        ? `value${qMeasurePosition}`
+        : d.qFallbackTitle;
+
+      measure.max = d.qMax;
+      measure.min = d.qMin;
+      measure.calcCondMsg = d.qCalcCondMsg;
+
+      d.qAttrExprInfo.map((item, i) => {
+        if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
+      });
+      dataKeys.push(measure);
+    });
+  }
+
+  return dataKeys;
 };
 
-export const getDimensionDetails = (qHyperCube) => {
-  let dimensions = [];
+// export const getMeasureDetails = (qHyperCube) => {
+//   let measures = [];
 
-  qHyperCube.qDimensionInfo.map((d, i) => {
-    let dimension = {};
-    console.log(d);
+//   qHyperCube.qMeasureInfo.map((d, i) => {
+//     let measure = {};
+//     const qMeasurePosition = i !== 0 ? i : "";
 
-    dimension.name = d.qFallbackTitle;
+//     measure.name = d.qFallbackTitle.startsWith("=")
+//       ? `value${qMeasurePosition}`
+//       : d.qFallbackTitle;
 
-    // dimension.calcCondMsg = d.qCalcCondMsg;
+//     measure.max = d.qMax;
+//     measure.min = d.qMin;
+//     measure.calcCondMsg = d.qCalcCondMsg;
 
-    // what is qAttrDimInfo used for ?
-    d.qAttrExprInfo.map((item, i) => {
-      if (item.qFallbackTitle) dimension[item.id] = item.qFallbackTitle;
-    });
-    dimensions.push(dimension);
-  });
-  return dimensions;
-};
+//     d.qAttrExprInfo.map((item, i) => {
+//       if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
+//     });
+//     measures.push(measure);
+//   });
+//   return measures;
+// };
+
+// export const getDimensionDetails = (qHyperCube) => {
+//   let dimensions = [];
+
+//   qHyperCube.qDimensionInfo.map((d, i) => {
+//     let dimension = {};
+
+//     dimension.name = d.qFallbackTitle;
+
+//     // dimension.calcCondMsg = d.qCalcCondMsg;
+
+//     // what is qAttrDimInfo used for ?
+//     d.qAttrExprInfo.map((item, i) => {
+//       if (item.qFallbackTitle) dimension[item.id] = item.qFallbackTitle;
+//     });
+//     dimensions.push(dimension);
+//   });
+//   return dimensions;
+// };
 
 export const getDimensionNames = (qHyperCube) =>
   qHyperCube.qDimensionInfo.map((d, i) => d.qFallbackTitle);

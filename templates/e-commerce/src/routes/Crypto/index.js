@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Tabs } from "antd";
 import Auxiliary from "util/Auxiliary";
 
 import {
@@ -26,6 +26,7 @@ import MotorButton from "components/engine/MotorButton";
 import ChartKPI from "components/engine/ChartKPI";
 import Chart from "components/engine/Chart";
 
+const { TabPane } = Tabs;
 const Crypto = () => {
   return (
     <Auxiliary>
@@ -50,17 +51,28 @@ const Crypto = () => {
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={litecoinKPI} />
         </Col>
-        {/* <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <Portfolio />
+        </Col>
+        {/* <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+          <BalanceHistory />
         </Col> */}
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           {/* <BalanceHistory /> */}
-          <Chart dataProps={BalanceHistory} />
-        </Col>
-        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          {/* <BalanceHistory /> */}
           {/* <Chart dataProps={pieData} /> */}
-          <Chart dataProps={BalanceHistoryMultiDim} />
+          <Tabs defaultActiveKey="1" type="card" size={"Default"}>
+            <TabPane tab="Multiple Measures" key="1">
+              <Chart dataProps={BalanceHistory} />
+              {/* Content of card tab 1 */}
+            </TabPane>
+            <TabPane tab="Multiple Dimensions" key="2">
+              <Chart dataProps={BalanceHistoryMultiDim} />
+              {/* Content of card tab 2 */}
+            </TabPane>
+            <TabPane tab="Card Tab 3" key="3">
+              Content of card tab 3
+            </TabPane>
+          </Tabs>
         </Col>
 
         <Col xl={9} lg={24} md={24} sm={24} xs={24}>

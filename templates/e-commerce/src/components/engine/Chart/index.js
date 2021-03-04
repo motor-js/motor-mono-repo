@@ -12,7 +12,7 @@ const ChartComponent = ({ dataProps }) => {
   // const [hasData, setHasData] = useState(false);
   const { data, chartConfig } = dataProps;
 
-  const { cols, qTitle, qMetrics } = data;
+  const { cols, qTitle, qMetrics, qDimField } = data;
   const { chartType } = chartConfig;
 
   let Chart = null;
@@ -35,8 +35,8 @@ const ChartComponent = ({ dataProps }) => {
   }
 
   const {
-    // qLayout,
-    // qData,
+    qLayout,
+    qData,
     // measureInfo,
     dataSet,
     title,
@@ -53,6 +53,7 @@ const ChartComponent = ({ dataProps }) => {
     cols,
     qTitle,
     qMetrics,
+    qDimField,
     //qColumnOrder: columnOrder,
     //qCalcCondition: calcCondition,
     // qPage,
@@ -66,6 +67,8 @@ const ChartComponent = ({ dataProps }) => {
 
   //   setHasData(true);
   // }, [mData]);
+  // console.log(qLayout);
+  // console.log(qData);
 
   return (
     <>
