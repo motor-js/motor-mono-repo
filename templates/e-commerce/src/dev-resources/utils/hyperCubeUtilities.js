@@ -44,7 +44,7 @@ export function hyperCubeTransform(
 
     return data;
   });
-  console.log(transformedData);
+  // console.log(transformedData);
   return transformedData;
 }
 
