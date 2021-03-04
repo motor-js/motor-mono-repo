@@ -168,7 +168,7 @@ const HorizontalDark = () => {
                   </span>
                 </Popover>
               </li>
-              <li className="gx-language">
+              <li className="gx-nav-icon">
                 <Popover
                   overlayClassName="gx-popover-horizantal"
                   placement="bottomRight"

@@ -48,9 +48,8 @@ const Topbar = () => {
       <Link to="/" className="gx-d-block gx-d-lg-none gx-pointer">
         <img src={logo} alt="Logo" style={{ height: '30px', width: '95px'}} />
       </Link>
-
       <SearchBox
-        styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
+        styleName="gx-ml-auto gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
         placeholder="Search in app..."
       />
       <ul className="gx-header-notifications gx-ml-auto">
@@ -71,7 +70,7 @@ const Topbar = () => {
             </span>
           </Popover>
         </li>
-        <li className="gx-language">
+        <li className="gx-nav-icon">
         <Popover
           overlayClassName="gx-popover-horizantal"
           placement="bottomRight"

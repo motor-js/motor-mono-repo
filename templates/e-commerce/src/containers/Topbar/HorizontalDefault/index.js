@@ -2,24 +2,21 @@ import React, { useState, useContext } from "react";
 import { Layout, Popover, Switch } from "antd";
 import { Link } from "react-router-dom";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
-
-//import SearchBox from "dev-resources/components/SearchBox";
-//import UserInfo from "dev-resources/components/UserInfo";
-import Auxiliary from "util/Auxiliary";
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/MotorSearch"
 import useSelections from 'dev-resources/hooks/useSelections'
 import { ThemeContext } from 'store'
 import { appSettings } from 'settings'
 
-import logo from 'assets/images/motor-black.png'
+import logoRed from 'assets/images/motor-red.png'
+import logoWhite from 'assets/images/motor-white.png'
 
 const { Header } = Layout;
 
 const Topbar = () => {
 
   const [searchText, setSearchText] = useState("");
-  const [state, dispatch] = useContext(ThemeContext);
+  const [themeState, themeDispatch] = useContext(ThemeContext);
 
   const { selections, clearSelections } = useSelections()
   const { showThemeSwitch } = appSettings
@@ -30,44 +27,48 @@ const Topbar = () => {
     setSearchText(evt.target.value);
   };
 
-  const handleSwitch = () => dispatch({type: 'TOGGLE_THEME', payload: state.theme === 'light' ? 'dark' : 'light'})
+  const handleSwitch = () => themeDispatch({type: 'TOGGLE_THEME', payload: themeState.theme === 'light' ? 'dark' : 'light'})
 
   return (
     <Header>
-      {/*navStyle === NAV_STYLE_DRAWER ||
-      ((navStyle === NAV_STYLE_FIXED || navStyle === NAV_STYLE_MINI_SIDEBAR) &&
-        width < TAB_SIZE) ? (
-        <div className="gx-linebar gx-mr-3">
-          <i
-            className="gx-icon-btn icon icon-menu"
-            onClick={() => {
-              dispatch(toggleCollapsedSideNav(!navCollapsed));
-            }}
-          />
-        </div>
-          ) : null*/}
-      <Link to="/" className="gx-d-block gx-d-lg-none gx-pointer">
-        <img src={logo} alt="Logo" style={{ height: '30px', width: '95px'}} />
+      <Link to="/" className="gx-d-block gx-pointer">
+        { themeState.theme === 'light' ? 
+          <img src={logoRed} alt="Logo" style={{ height: '40px', width: '120px'}} />
+          :
+          <img src={logoWhite} alt="Logo" style={{ height: '40px', width: '120px'}} />
+        }
       </Link>
-      <MotorSearch
-        styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
-        placeholder="Search in app..."
-        onChange={handleSearch}
-        value={searchText}
-      />
-      <ul className="gx-header-notifications gx-ml-auto">
+      <ul className="gx-header-notifications">
+        <li className="gx-nav-icon gx-ml-auto">
+          <MotorSearch
+            styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
+            placeholder="Search in app..."
+            onChange={handleSearch}
+            value={searchText}
+          />
+        </li>
         <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
           <Popover
             overlayClassName="gx-popover-horizantal"
             placement="bottomRight"
             trigger="click"
+            content={
+              <div className="gx-d-flex">
+              <MotorSearch
+                styleName="gx-popover-search-bar"
+                placeholder="Search in app..."
+                onChange={handleSearch}
+                value={searchText}
+              />
+            </div>
+            }
           >
             <span className="gx-pointer gx-d-block">
               <i className="icon icon-search-new" />
             </span>
           </Popover>
         </li>
-        <li className="gx-language">
+        <li className="gx-nav-icon">
         <Popover
           overlayClassName="gx-popover-horizantal"
           placement="bottomRight"
@@ -83,17 +84,10 @@ const Topbar = () => {
           </Popover>
         </li>
         { showThemeSwitch && 
-          <li className="gx-language">
+          <li className="gx-nav-icon">
           <Switch onChange={handleSwitch}/> 
           </li>
         }
-        {/*width >= TAB_SIZE ? null : (
-          <Auxiliary>
-            <li className="gx-user-nav">
-              <UserInfo />
-            </li>
-          </Auxiliary>
-        )*/}
       </ul>
     </Header>
   );
