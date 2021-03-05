@@ -37,7 +37,7 @@ export function hyperCubeTransform(
 
     return data;
   });
-  // console.log(transformedData);
+
   return transformedData;
 }
 
@@ -55,10 +55,12 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
   qData.qMatrix.map((d, i) => {
     let key = null;
     let value = null;
+    let qElemNumber = null;
 
     d.forEach((item, index) => {
       if (index < qNoOfDiemnsions && index !== 0) {
         key = d[index].qText;
+        qElemNumber = d[index].qElemNumber;
       } else if (index !== 0) {
         value = d[index].qNum;
       }
@@ -69,6 +71,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
         series[dimensionNames[0]] = d[0].qText;
         series["qElemNumber"] = d[0].qElemNumber;
         series[key] = value;
+        series[`${key}-qElemNumber`] = qElemNumber;
       }
       transformedData.push(series);
       series = {};
@@ -76,6 +79,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
       series[dimensionNames[0]] = d[0].qText;
       series["qElemNumber"] = d[0].qElemNumber;
       series[key] = value;
+      series[`${key}-qElemNumber`] = qElemNumber;
     }
     parentText = d[0].qText;
   });
