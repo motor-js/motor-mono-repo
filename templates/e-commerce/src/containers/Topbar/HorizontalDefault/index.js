@@ -2,14 +2,15 @@ import React, { useState, useContext } from "react";
 import { Layout, Popover, Switch } from "antd";
 import { Link } from "react-router-dom";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
+
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/MotorSearch"
 import useSelections from 'dev-resources/hooks/useSelections'
 import { ThemeContext } from 'store'
 import { appSettings } from 'settings'
 
-import logoRed from 'assets/images/motor-red.png'
-import logoWhite from 'assets/images/motor-white.png'
+import logoLight from 'assets/images/motor-red.png'
+import logoDark from 'assets/images/motor-white.png'
 
 const { Header } = Layout;
 
@@ -33,9 +34,9 @@ const Topbar = () => {
     <Header>
       <Link to="/" className="gx-d-block gx-pointer">
         { themeState.theme === 'light' ? 
-          <img src={logoRed} alt="Logo" style={{ height: '40px', width: '120px'}} />
+          <img src={logoLight} alt="Logo" style={{ height: '40px', width: '120px'}} />
           :
-          <img src={logoWhite} alt="Logo" style={{ height: '40px', width: '120px'}} />
+          <img src={logoDark} alt="Logo" style={{ height: '40px', width: '120px'}} />
         }
       </Link>
       <ul className="gx-header-notifications">

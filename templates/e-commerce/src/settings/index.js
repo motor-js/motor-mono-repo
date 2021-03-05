@@ -16,4 +16,5 @@ export const qlikConfig = {
 export const appSettings = {
   theme: 'light', // light or dark
   showThemeSwitch: true,
+  layout: 'SINGLE_PAGE',
 }

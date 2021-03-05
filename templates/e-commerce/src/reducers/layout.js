@@ -1,9 +1,9 @@
 export const LayoutReducer = (state, action) => {
   switch (action.type) {
-    case 'TOGGLE_THEME':
+    case 'SINGLE_PAGE':
       return {
         ...state,
-        theme: action.payload
+        layout: action.payload
       };
   };
 };
