@@ -67,7 +67,7 @@ function reducer(state, action) {
 
 const initialProps = {
   cols: null,
-  qDimField: null,
+  qLists: [],
   qHyperCubeDef: null,
   qPage: {
     qTop: 0,
@@ -94,7 +94,7 @@ const initialProps = {
 const useData = (props) => {
   const {
     cols,
-    qDimField,
+    qLists,
     qTitle,
     qMetrics,
     qHyperCubeDef,
@@ -173,27 +173,33 @@ const useData = (props) => {
       });
     }
 
-    qProp.qListObjectDef = {
-      qStateName: "$",
-      qLibraryId: "",
-      qDef: {
-        qFieldDefs: [qDimField],
-        qFieldLabels: ["Field Label"],
-        qSortCriterias: [
-          {
-            qSortByLoadOrder: 1,
+    qProp.qListObjects = [];
+    qLists.map((list) => {
+      const listDef = {
+        qListObjectDef: {
+          qStateName: "$",
+          qLibraryId: "",
+          qDef: {
+            qFieldDefs: [Object.values(list)[0]],
+            qFieldLabels: [Object.keys(list)[0]],
+            qSortCriterias: [
+              {
+                qSortByLoadOrder: 1,
+              },
+            ],
           },
-        ],
-      },
-      qInitialDataFetch: [
-        {
-          qTop: 0,
-          qHeight: 1,
-          qLeft: 0,
-          qWidth: 1,
+          qInitialDataFetch: [
+            {
+              qTop: 0,
+              qHeight: 1,
+              qLeft: 0,
+              qWidth: 1,
+            },
+          ],
         },
-      ],
-    };
+      };
+      qProp.qListObjects.push(listDef);
+    });
 
     if (qHyperCubeDef) {
       const _qHyperCubeDef = qHyperCubeDef;
@@ -440,12 +446,17 @@ const useData = (props) => {
     return qDataPages[0];
   }, []);
 
-  const getListData = useCallback(async () => {
-    const qDataPages = await qObject.current.getListObjectData(
-      "/qListObjectDef",
+  const getListDataNew = useCallback(async (i) => {
+    return await qObject.current.getListObjectData(
+      `/qListObjects/${i}/qListObjectDef`,
       [qPage.current]
     );
-    return qDataPages[0];
+  });
+
+  const getListData = useCallback(async (layout) => {
+    return await Promise.all(
+      layout.qListObjects.map(async (list, i) => getListDataNew(i))
+    );
   }, []);
 
   const getReducedData = useCallback(
@@ -487,8 +498,15 @@ const useData = (props) => {
   //   return getDimensionDetails(layout.qHyperCube);
   // }, []);
 
-  const getDataKeys = useCallback(async (listData, measureInfo) => {
-    return getDatKeyInfo(listData, measureInfo);
+  const getDataKeys = useCallback(async (listData, layout, measureInfo) => {
+    let dataKeyIndex = 0;
+
+    layout.qListObjects.map((item, index) => {
+      if (item.qListObject.qDimensionInfo.qFallbackTitle === "dataKey")
+        dataKeyIndex = index;
+    });
+
+    return getDatKeyInfo(listData[dataKeyIndex], measureInfo);
   }, []);
 
   const getTitle = useCallback(async (layout) => {
@@ -505,21 +523,34 @@ const useData = (props) => {
     return metricObj;
   }, []);
 
+  const getDataKeyList = useCallback(async (layout, metrics) => {
+    if (!metrics) return;
+    let metricObj = {};
+
+    metrics.map((metric) => {
+      metricObj[metric.qName] = layout[metric.qName];
+    });
+    return metricObj;
+  }, []);
+
   const update = useCallback(
     async (measureInfo) => {
       const _qLayout = await getLayout();
       const _qData = await getData();
 
-      const _qListData = await getListData();
+      const _qListData = await getListData(_qLayout);
       const _mData = await structureData(_qLayout, _qData);
 
       // const _measureDetails = await getMeasureInfo(_qLayout);
       // const _dimensionDetails = await getDimensionInfo(_qLayout);
       const _dataKeys = await getDataKeys(
         _qListData,
+        _qLayout,
         _qLayout.qHyperCube.qMeasureInfo
       );
+
       const _qTitle = await getTitle(_qLayout);
+
       const _qMetrics = await getMetrics(_qLayout, qMetrics);
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(

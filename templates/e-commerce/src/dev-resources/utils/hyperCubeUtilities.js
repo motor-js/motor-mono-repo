@@ -189,9 +189,9 @@ export const getDatKeyInfo = (listData, measureInfo) => {
   let dataKeys = [];
 
   if (listData) {
-    listData.qMatrix.map((d, i) => {
+    listData[0].qMatrix.map((d, i) => {
       const dataKey = {};
-      dataKey.name = d[0].qText;
+      dataKey.dataKey = d[0].qText;
       dataKeys.push(dataKey);
     });
   } else {
@@ -199,7 +199,7 @@ export const getDatKeyInfo = (listData, measureInfo) => {
       let measure = {};
       const qMeasurePosition = i !== 0 ? i : "";
 
-      measure.name = d.qFallbackTitle.startsWith("=")
+      measure.dataKey = d.qFallbackTitle.startsWith("=")
         ? `value${qMeasurePosition}`
         : d.qFallbackTitle;
 

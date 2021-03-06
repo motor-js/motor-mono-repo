@@ -286,7 +286,8 @@ export const BalanceHistoryMultiDim = {
     fillOpacity: 1,
   },
   data: {
-    qDimField: "[coin]",
+    // qDimField: "[coin]",
+    qLists: [{ dataKey: "[coin]" }, { name: "[name]" }],
     cols: [
       {
         qField: "[name]",

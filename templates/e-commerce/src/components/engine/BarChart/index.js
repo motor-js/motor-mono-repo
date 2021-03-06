@@ -27,9 +27,6 @@ const MotorBarChart = ({ dataSet, config }) => {
     fill,
   } = config;
 
-  // console.log(dimensionInfo);
-  // console.log(dataKeys, data);
-
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={margin}>
@@ -42,7 +39,7 @@ const MotorBarChart = ({ dataSet, config }) => {
           dataKeys.map((measure, index) => (
             <Bar
               key={index}
-              dataKey={measure.name}
+              dataKey={measure.dataKey}
               fill={measure.fill || fill}
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
