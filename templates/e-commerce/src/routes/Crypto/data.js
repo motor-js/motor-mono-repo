@@ -270,7 +270,8 @@ export const BalanceHistory = {
 export const BalanceHistoryMultiDim = {
   chartConfig: {
     chartType: "bar",
-    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 10, left: 0, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -284,6 +285,12 @@ export const BalanceHistoryMultiDim = {
     stroke: "#003366",
     fill: "#003366",
     fillOpacity: 1,
+    buttons: [
+      { type: "measure", label: "Sum", value: "=Sum(price)" },
+      { type: "measure", label: "Count", value: "=count(price)" },
+      { type: "dimension", label: "Name", value: "[name]" },
+      { type: "dimension", label: "Price", value: "price" },
+    ],
   },
   data: {
     // qDimField: "[coin]",

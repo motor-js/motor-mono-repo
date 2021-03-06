@@ -1,5 +1,5 @@
-import React from "react";
-import { Skeleton, Card } from "antd";
+import React, { useState } from "react";
+import { Skeleton, Card, PageHeader, Select, Radio } from "antd";
 import useData from "dev-resources/hooks/useData";
 
 // import Widget from "dev-resources/components/Widget";
@@ -7,13 +7,16 @@ import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
 import BarChart from "components/engine/BarChart";
 import PieChart from "components/engine/PieChart";
+import Widget from "dev-resources/components/Widget";
 
 const ChartComponent = ({ dataProps }) => {
   // const [hasData, setHasData] = useState(false);
   const { data, chartConfig } = dataProps;
 
   const { cols, qTitle, qMetrics, qLists } = data;
-  const { chartType } = chartConfig;
+  const { chartType, buttons } = chartConfig;
+
+  const [chartValue, setChartValue] = useState(buttons ? buttons[0].value : []);
 
   let Chart = null;
 
@@ -40,6 +43,7 @@ const ChartComponent = ({ dataProps }) => {
     // measureInfo,
     dataSet,
     title,
+    subTitle,
     // mData,
 
     // metrics,
@@ -48,7 +52,7 @@ const ChartComponent = ({ dataProps }) => {
     // changePage,
     // selections,
     // select,
-    // applyPatches,
+    applyPatches,
   } = useData({
     cols,
     qTitle,
@@ -62,12 +66,58 @@ const ChartComponent = ({ dataProps }) => {
     // qSuppressZero: true,
   });
 
+  const onChange = (e) => {
+    setChartValue(e.target.value);
+
+    const selectedButton = buttons.filter(
+      (button) => button.value === e.target.value
+    );
+
+    applyPatches([
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/${
+          selectedButton[0].value.startsWith("=") ? "qMeasures" : "qDimensions"
+        }/0/qDef/${
+          selectedButton[0].value.startsWith("=") ? "qDef" : "qFieldDefs"
+        }`,
+        qValue: JSON.stringify(
+          selectedButton[0].value.startsWith("=")
+            ? selectedButton[0].value
+            : [selectedButton[0].value]
+        ),
+      },
+    ]);
+  };
+
   return (
     <>
       {dataSet ? (
-        <Card className="gx-card" title={title}>
+        // <Card className="gx-card" title={title}>
+        <Widget styleName="gx-card-full">
+          {/* <h2 className="h4 gx-mb-3">Balance History</h2> */}
+          {(title || subTitle) && (
+            <PageHeader
+              className="site-page-header"
+              // onBack={() => null}
+              title={title}
+              subTitle={subTitle}
+            />
+          )}
+          <div className="ant-row-flex gx-px-4 gx-pt-4">
+            <div className="gx-ml-auto">
+              {buttons && (
+                <Radio.Group
+                  options={buttons}
+                  onChange={onChange}
+                  value={chartValue}
+                  optionType="button"
+                />
+              )}
+            </div>
+          </div>
           <Chart dataSet={dataSet} config={chartConfig} />
-        </Card>
+        </Widget>
       ) : (
         <Skeleton active />
       )}
