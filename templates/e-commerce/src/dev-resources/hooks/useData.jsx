@@ -687,7 +687,7 @@ const useData = (props) => {
     // dimensionInfo,
     // measureInfo,
     dataKeys,
-    dataSet: { data: mData, dataKeys },
+    dataSet: { data: mData, dataKeys, qListData },
     title,
     metrics,
     qRData,
