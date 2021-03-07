@@ -13,10 +13,10 @@ import {
 
 const MotorLineChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
+
   const {
     margin,
     height,
-    dataKey,
     stroke,
     dot,
     showXAxis = true,
@@ -36,11 +36,11 @@ const MotorLineChart = ({ dataSet, config }) => {
         <Tooltip />
         {showLegend && <Legend />}
         {dataKeys &&
-          dataKeys.map((measure, index) => (
+          dataKeys.map((key, index) => (
             <Line
               key={index}
-              dataKey={measure.name}
-              stroke={measure.stroke || stroke}
+              dataKey={key}
+              stroke={stroke}
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
