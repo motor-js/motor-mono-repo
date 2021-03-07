@@ -1,14 +1,21 @@
 import React from "react";
 
-import { PieChart, Pie, ResponsiveContainer, Tooltip, Legend } from "recharts";
+import {
+  PieChart,
+  Pie,
+  ResponsiveContainer,
+  Tooltip,
+  Legend,
+  Cell,
+} from "recharts";
 
 const MotorPieChart = ({ dataSet, config }) => {
-  const { data, measureInfo } = dataSet;
+  const { data, dataKeys } = dataSet;
+
   const {
     showLegend = true,
     margin,
     height,
-    dataKey,
     fill,
     label = true,
     isAnimationActive = true,
@@ -22,17 +29,24 @@ const MotorPieChart = ({ dataSet, config }) => {
     <ResponsiveContainer width="100%" height={height}>
       <PieChart margin={margin}>
         {showLegend && <Legend />}
-        <Pie
-          dataKey={dataKey}
-          isAnimationActive={isAnimationActive}
-          data={data}
-          cx={cx}
-          cy={cy}
-          outerRadius={outerRadius}
-          innerRadius={innerRadius}
-          fill={fill}
-          label={label}
-        />
+        {dataKeys &&
+          dataKeys.map((key, index) => (
+            <Pie
+              key={index}
+              dataKey={key}
+              isAnimationActive={isAnimationActive}
+              data={data}
+              cx={cx}
+              cy={cy}
+              outerRadius={outerRadius}
+              innerRadius={innerRadius}
+              label={label}
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={fill[index]} />
+              ))}
+            </Pie>
+          ))}
         {/* <Pie
           dataKey="value"
           data={data02}

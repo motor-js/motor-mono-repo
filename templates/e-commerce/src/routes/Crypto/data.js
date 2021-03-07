@@ -156,10 +156,10 @@ export const rippleKPI = {
         qField: "=Sum({$<coin={'ripple'}>} price)",
         qLabel: "price",
       },
-      {
-        qField: "=Sum({$<coin={'bitcoin'}>} price)",
-        qLabel: "price",
-      },
+      // {
+      //   qField: "=Sum({$<coin={'bitcoin'}>} price)",
+      //   qLabel: "price",
+      // },
     ],
     qMetrics: [
       {
@@ -329,7 +329,7 @@ export const pieData = {
     height: 180,
     // dataKey: "price",
     strokeWidth: 0,
-    fill: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
     label: true,
     isAnimationActive: true,
     cx: "35%",
