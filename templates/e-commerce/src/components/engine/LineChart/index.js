@@ -35,7 +35,7 @@ const MotorLineChart = ({ dataSet, config }) => {
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
-        {/* {dataKeys &&
+        {dataKeys &&
           dataKeys.map((measure, index) => (
             <Line
               key={index}
@@ -50,7 +50,7 @@ const MotorLineChart = ({ dataSet, config }) => {
                 strokeWidth: dot ? dot.strokeWidth : null,
               }}
             />
-          ))} */}
+          ))}
       </LineChart>
     </ResponsiveContainer>
   );

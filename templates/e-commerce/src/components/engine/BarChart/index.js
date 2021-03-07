@@ -15,7 +15,6 @@ const MotorBarChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
 
   const {
-    type,
     showXAxis = true,
     xAxisDataKey,
     ShowYAxis = true,
@@ -24,8 +23,8 @@ const MotorBarChart = ({ dataSet, config }) => {
     isAnimationActive = true,
     margin,
     height,
-    dataKey,
     fill,
+    stacked,
   } = config;
 
   return (
@@ -41,7 +40,7 @@ const MotorBarChart = ({ dataSet, config }) => {
             <Bar
               key={index}
               dataKey={key}
-              // stackId="a"
+              stackId={stacked ? "a" : null}
               fill={fill[index]}
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive

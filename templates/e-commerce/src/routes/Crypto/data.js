@@ -243,6 +243,7 @@ export const BalanceHistory = {
     strokeWidth: 0,
     stroke: "#003366",
     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    stacked: true,
     fillOpacity: 1,
   },
   data: {
@@ -284,6 +285,7 @@ export const BalanceHistoryMultiDim = {
     strokeWidth: 0,
     stroke: "#003366",
     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+
     fillOpacity: 1,
     buttons: [
       { type: "measure", label: "Sum", value: "=Sum(price)" },
