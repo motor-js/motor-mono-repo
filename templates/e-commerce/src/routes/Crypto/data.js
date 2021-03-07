@@ -118,7 +118,6 @@ export const etheriumKPI = {
       "='Etherium Max Price : ' & Num(Max({$<coin={'etherium'}>}price),'$#,##0')",
   },
   icon: "etherium",
-  // styleName: "up",
 };
 
 export const rippleKPI = {
@@ -140,13 +139,12 @@ export const rippleKPI = {
       },
       offsetEnd: { offset: "95%", stopColor: "#FEEADA", stopOpacity: 0.8 },
     },
-    // dataKey: "price",
-    // type: "monotone",
     strokeWidth: 0,
     stackId: 2,
     stroke: "#FEEADA",
     fill: "url(#color5)",
     fillOpacity: 1,
+    // stacked: true,
   },
   data: {
     cols: [
@@ -156,6 +154,10 @@ export const rippleKPI = {
       },
       {
         qField: "=Sum({$<coin={'ripple'}>} price)",
+        qLabel: "price",
+      },
+      {
+        qField: "=Sum({$<coin={'bitcoin'}>} price)",
         qLabel: "price",
       },
     ],
@@ -180,16 +182,13 @@ export const rippleKPI = {
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
   icon: "ripple",
-  // styleName: "up",
 };
 
 export const litecoinKPI = {
   chartConfig: {
     chartType: "line",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
-
     height: 75,
-    // dataKey: "price",
     stroke: "#038FDE",
     dot: { stroke: "#FEA931", strokeWidth: 2 },
   },

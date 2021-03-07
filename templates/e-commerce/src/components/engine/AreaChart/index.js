@@ -25,7 +25,7 @@ const MotorAreaChart = ({ dataSet, config }) => {
     margin,
     height,
     gradient,
-    dataKey,
+    stacked,
     strokeWidth,
     stackId,
     stroke,
@@ -68,6 +68,7 @@ const MotorAreaChart = ({ dataSet, config }) => {
             <Area
               key={index}
               dataKey={key}
+              stackId={stacked ? "a" : null}
               type={type}
               strokeWidth={strokeWidth}
               stackId={stackId}
