@@ -676,6 +676,43 @@ const useData = (props) => {
     []
   );
 
+  // takes column data and sorted the table, applies reverse sort
+  const handlerChange = useCallback(
+    async (isMeasure, value) => {
+      // If no sort is set, we need to set a default sort order
+      // if (column.qSortIndicator === "N") {
+      //   if (column.qPath.includes("qDimensions")) {
+      //     await applyPatches([
+      //       {
+      //         qOp: "add",
+      //         qPath: `${column.qPath}/qDef/qSortCriterias`,
+      //         qValue: JSON.stringify([{ qSortByLoadOrder: 1 }]),
+      //       },
+      //     ]);
+      //   }
+      //   if (column.qPath.includes("qMeasures")) {
+      //     await applyPatches([
+      //       {
+      //         qOp: "add",
+      //         qPath: `${column.qPath}/qSortBy`,
+      //         qValue: JSON.stringify({ qSortByLoadOrder: 1 }),
+      //       },
+      //     ]);
+      //   }
+      // }
+      await applyPatches([
+        {
+          qOp: "replace",
+          qPath: `/qHyperCubeDef/${
+            isMeasure ? "qMeasures" : "qDimensions"
+          }/0/qDef/${isMeasure ? "qDef" : "qFieldDefs"}`,
+          qValue: JSON.stringify(isMeasure ? value : [value]),
+        },
+      ]);
+    },
+    [applyPatches, qLayout]
+  );
+
   useEffect(() => {
     if (!engine) return;
     if (qObject.current) return;
@@ -701,6 +738,7 @@ const useData = (props) => {
     qListData,
     // dimensionInfo,
     // measureInfo,
+    handlerChange,
     dataKeys,
     dataSet: { data: mData, dataKeys, qListData },
     title,
