@@ -173,8 +173,8 @@ const useData = (props) => {
       });
     }
 
-    qProp.qListObjects = [];
     if (qLists) {
+      qProp.qListObjects = [];
       qLists.map((list) => {
         const listDef = {
           qListObjectDef: {
@@ -456,6 +456,7 @@ const useData = (props) => {
   });
 
   const getListData = useCallback(async (layout) => {
+    if (!layout.qListObjects) return;
     return await Promise.all(
       layout.qListObjects.map(async (list, i) => getListsFromData(i))
     );
@@ -514,7 +515,7 @@ const useData = (props) => {
 
   const getDataKeys = useCallback(async (listData, layout, measureInfo) => {
     let dataKeyIndex = 0;
-
+    if (!layout.qListObjects) return getDatKeyInfo(null, measureInfo);
     layout.qListObjects.map((item, index) => {
       if (item.qListObject.qDimensionInfo.qFallbackTitle === "dataKey")
         dataKeyIndex = index;
