@@ -1,5 +1,5 @@
 import React from "react";
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 
 const Biography = () => {
   return (

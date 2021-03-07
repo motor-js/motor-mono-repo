@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Dropdown, Menu } from "antd";
 
-import Widget from "dev-resources/components/Widget/index";
+import Widget from "components/Widget/index";
 
 const menu = (
   <Menu>

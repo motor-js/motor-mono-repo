@@ -1,7 +1,7 @@
 import React from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 
 const data = [
   { name: "Normal", value: 58 },

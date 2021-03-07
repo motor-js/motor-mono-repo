@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useTable } from "@motor-js/engine";
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 
 const MotorTable = () => {
   const [loading, setLoading] = useState(true);

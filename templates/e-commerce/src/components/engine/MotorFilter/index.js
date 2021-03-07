@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
 //import { useList } from "@motor-js/engine"
 import useList from "../../../dev-resources/hooks/useList";
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 
 const MotorFilter = ({ dimension }) => {
   const [children, setChildren] = useState([]);

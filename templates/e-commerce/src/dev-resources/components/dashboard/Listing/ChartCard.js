@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Widget from "dev-resources/components/Widget/index";
+import Widget from "components/Widget/index";
 
 const ChartCard = (props) => {
   const [isHide, setHide] = useState(false);

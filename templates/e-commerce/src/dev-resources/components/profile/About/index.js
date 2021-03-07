@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row, Tabs } from "antd";
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 import { aboutList } from "../../../routes/socialApps/Profile/data";
 import AboutItem from "./AboutItem";
 

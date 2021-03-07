@@ -1,5 +1,5 @@
 import React from "react";
-import Widget from "dev-resources/components/Widget/index";
+import Widget from "components/Widget/index";
 
 const IconCard = ({ color, icon }) => {
   return (

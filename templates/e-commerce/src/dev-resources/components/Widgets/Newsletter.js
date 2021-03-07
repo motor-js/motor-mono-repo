@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 
-import Widget from "dev-resources/components/Widget/index";
+import Widget from "components/Widget/index";
 
 const Newsletter = () => {
   return (

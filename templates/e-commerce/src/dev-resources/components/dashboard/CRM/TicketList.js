@@ -1,6 +1,6 @@
 import React from "react";
 
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 import { ticketList } from "../../../../routes/CRM/data";
 import TicketItem from "./TicketItem";
 

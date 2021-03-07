@@ -7,7 +7,7 @@ import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
 import BarChart from "components/engine/BarChart";
 import PieChart from "components/engine/PieChart";
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 
 const ChartComponent = ({ dataProps }) => {
   // const [hasData, setHasData] = useState(false);
