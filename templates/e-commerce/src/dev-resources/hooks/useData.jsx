@@ -26,6 +26,7 @@ function reducer(state, action) {
   const {
     payload: {
       title,
+      subTitle,
       metrics,
       qData,
       mData,
@@ -46,6 +47,7 @@ function reducer(state, action) {
       return {
         ...state,
         title,
+        subTitle,
         metrics,
         qData,
         mData,
@@ -89,6 +91,7 @@ const initialProps = {
   qColumnOrder: [],
   qCalcCondition: undefined,
   qTitle: null,
+  qSubTitle: null,
   qMetrics: null,
   qOtherTotalSpec: "",
 };
@@ -98,6 +101,7 @@ const useData = (props) => {
     cols,
     qLists,
     qTitle,
+    qSubTitle,
     qMetrics,
     qHyperCubeDef,
     qPage: qPageProp,
@@ -120,6 +124,7 @@ const useData = (props) => {
 
   const {
     title,
+    subTitle,
     metrics,
     qData,
     mData,
@@ -555,6 +560,7 @@ const useData = (props) => {
       );
 
       const _qTitle = await getTitle(_qLayout);
+      const _qSubTitle = qSubTitle;
 
       const _qMetrics = await getMetrics(_qLayout, qMetrics);
       if (_qData && _isMounted.current) {
@@ -582,6 +588,7 @@ const useData = (props) => {
           type: "update",
           payload: {
             title: _qTitle,
+            subTitle: _qSubTitle,
             qData: _qData,
             mData: _mData,
             qListData: _qListData,
@@ -599,6 +606,7 @@ const useData = (props) => {
           type: "update",
           payload: {
             title: _qTitle,
+            subTitle: _qSubTitle,
             metrics: _qMetrics,
             qData: _qData,
             mData: _mData,
@@ -736,6 +744,7 @@ const useData = (props) => {
     dataKeys,
     dataSet: { data: mData, dataKeys, dataList },
     title,
+    subTitle,
     metrics,
     qRData,
     changePage,

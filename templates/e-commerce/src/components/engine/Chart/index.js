@@ -13,7 +13,7 @@ const ChartComponent = ({ dataProps }) => {
   // const [hasData, setHasData] = useState(false);
   const { data, chartConfig } = dataProps;
 
-  const { cols, qTitle, qMetrics, qLists } = data;
+  const { cols, qTitle, qSubTitle, qMetrics, qLists } = data;
   const { chartType, buttons } = chartConfig;
 
   const [chartValue, setChartValue] = useState(buttons ? buttons[0].value : []);
@@ -57,6 +57,7 @@ const ChartComponent = ({ dataProps }) => {
   } = useData({
     cols,
     qTitle,
+    qSubTitle,
     qMetrics,
     qLists,
     //qColumnOrder: columnOrder,

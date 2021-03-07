@@ -318,6 +318,7 @@ export const BalanceHistoryMultiDim = {
 
     qTitle:
       "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+    // qSubTitle: "test",
   },
 };
 
