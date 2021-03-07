@@ -498,17 +498,12 @@ const useData = (props) => {
 
   const getDataKeys = useCallback(async (listData, measureInfo) => {
     if (!listData) {
-      const obj = {};
-      const items = [];
-      measureInfo.map((measure) => {
-        items.push(measure.qFallbackTitle);
-      });
-      obj.dataKey = items;
-      return obj;
+      return measureInfo.map((measure) => measure.qFallbackTitle);
     }
 
     const keys = listData.filter((item) => Object.keys(item)[0] === "dataKey");
-    return keys[0];
+
+    return keys[0].dataKey;
   }, []);
 
   const getDataKeyList = useCallback(async (listData, layout) => {
