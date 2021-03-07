@@ -13,6 +13,9 @@ import {
 
 const MotorBarChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
+
+  const keys = dataKeys ? dataKeys.dataKey : null;
+
   const {
     type,
     showXAxis = true,
@@ -35,12 +38,12 @@ const MotorBarChart = ({ dataSet, config }) => {
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
-        {dataKeys &&
-          dataKeys.map((measure, index) => (
+        {keys &&
+          keys.map((key, index) => (
             <Bar
               key={index}
-              dataKey={measure.dataKey}
-              fill={measure.fill || fill}
+              dataKey={key}
+              fill={fill[index]}
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }

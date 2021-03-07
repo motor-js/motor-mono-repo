@@ -185,37 +185,37 @@ export const getMeasureNames = (qHyperCube) =>
       : d.qFallbackTitle;
   });
 
-export const getDatKeyInfo = (listData, measureInfo) => {
-  let dataKeys = [];
+// export const getDatKeyInfo = (listData, measureInfo) => {
+//   let dataKeys = [];
 
-  if (listData) {
-    listData[0].qMatrix.map((d, i) => {
-      const dataKey = {};
-      dataKey.dataKey = d[0].qText;
-      dataKeys.push(dataKey);
-    });
-  } else {
-    measureInfo.map((d, i) => {
-      let measure = {};
-      const qMeasurePosition = i !== 0 ? i : "";
+//   if (listData) {
+//     listData[0].qMatrix.map((d, i) => {
+//       const dataKey = {};
+//       dataKey.dataKey = d[0].qText;
+//       dataKeys.push(dataKey);
+//     });
+//   } else {
+//     measureInfo.map((d, i) => {
+//       let measure = {};
+//       const qMeasurePosition = i !== 0 ? i : "";
 
-      measure.dataKey = d.qFallbackTitle.startsWith("=")
-        ? `value${qMeasurePosition}`
-        : d.qFallbackTitle;
+//       measure.dataKey = d.qFallbackTitle.startsWith("=")
+//         ? `value${qMeasurePosition}`
+//         : d.qFallbackTitle;
 
-      measure.max = d.qMax;
-      measure.min = d.qMin;
-      measure.calcCondMsg = d.qCalcCondMsg;
+//       measure.max = d.qMax;
+//       measure.min = d.qMin;
+//       measure.calcCondMsg = d.qCalcCondMsg;
 
-      d.qAttrExprInfo.map((item, i) => {
-        if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
-      });
-      dataKeys.push(measure);
-    });
-  }
+//       d.qAttrExprInfo.map((item, i) => {
+//         if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
+//       });
+//       dataKeys.push(measure);
+//     });
+//   }
 
-  return dataKeys;
-};
+//   return dataKeys;
+// };
 
 // export const getMeasureDetails = (qHyperCube) => {
 //   let measures = [];

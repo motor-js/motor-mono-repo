@@ -230,7 +230,7 @@ export const litecoinKPI = {
 export const BalanceHistory = {
   chartConfig: {
     chartType: "bar",
-    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 0, left: 0, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -242,7 +242,7 @@ export const BalanceHistory = {
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
     fillOpacity: 1,
   },
   data: {
@@ -283,7 +283,7 @@ export const BalanceHistoryMultiDim = {
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
     fillOpacity: 1,
     buttons: [
       { type: "measure", label: "Sum", value: "=Sum(price)" },

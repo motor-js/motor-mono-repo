@@ -32,6 +32,7 @@ function reducer(state, action) {
       qListData,
       // measureInfo,
       // dimensionInfo,
+      dataList,
       dataKeys,
       qRData,
       qLayout,
@@ -51,6 +52,7 @@ function reducer(state, action) {
         qListData,
         // dimensionInfo,
         // measureInfo,
+        dataList,
         dataKeys,
         qLayout,
         selections,
@@ -67,7 +69,7 @@ function reducer(state, action) {
 
 const initialProps = {
   cols: null,
-  qLists: [],
+  qLists: null,
   qHyperCubeDef: null,
   qPage: {
     qTop: 0,
@@ -124,6 +126,7 @@ const useData = (props) => {
     qListData,
     // dimensionInfo,
     // measureInfo,
+    dataList,
     dataKeys,
     qRData,
     qLayout,
@@ -462,18 +465,6 @@ const useData = (props) => {
     );
   }, []);
 
-  // const getLists = useCallback(async (listData, layout, measureInfo) => {
-  //   // AG under development
-
-  //   console.log(listData)
-
-  //   layout.qListObjects.map((item, index) => {
-  //     if (item.qListObject.qDimensionInfo.qFallbackTitle === "dataKey")
-  //   });
-
-  //   return getDatKeyInfo(listData[dataKeyIndex], measureInfo);
-  // }, []);
-
   const getReducedData = useCallback(
     () => async () => {
       const { qWidth } = qPage.current;
@@ -505,23 +496,36 @@ const useData = (props) => {
     return mData;
   }, []);
 
-  // const getMeasureInfo = useCallback(async (layout) => {
-  //   return getMeasureDetails(layout.qHyperCube);
-  // }, []);
+  const getDataKeys = useCallback(async (listData, measureInfo) => {
+    if (!listData) {
+      const obj = {};
+      const items = [];
+      measureInfo.map((measure) => {
+        items.push(measure.qFallbackTitle);
+      });
+      obj.dataKey = items;
+      return obj;
+    }
 
-  // const getDimensionInfo = useCallback(async (layout) => {
-  //   return getDimensionDetails(layout.qHyperCube);
-  // }, []);
+    const keys = listData.filter((item) => Object.keys(item)[0] === "dataKey");
+    return keys[0];
+  }, []);
 
-  const getDataKeys = useCallback(async (listData, layout, measureInfo) => {
-    let dataKeyIndex = 0;
-    if (!layout.qListObjects) return getDatKeyInfo(null, measureInfo);
+  const getDataKeyList = useCallback(async (listData, layout) => {
+    const listDetail = [];
+
+    if (!layout.qListObjects) return null;
+
     layout.qListObjects.map((item, index) => {
-      if (item.qListObject.qDimensionInfo.qFallbackTitle === "dataKey")
-        dataKeyIndex = index;
+      const obj = {};
+      const key = item.qListObject.qDimensionInfo.qFallbackTitle;
+      const items = listData[index][0].qMatrix.map((item) => item[0].qText);
+
+      obj[key] = items;
+      listDetail.push(obj);
     });
 
-    return getDatKeyInfo(listData[dataKeyIndex], measureInfo);
+    return listDetail;
   }, []);
 
   const getTitle = useCallback(async (layout) => {
@@ -538,16 +542,6 @@ const useData = (props) => {
     return metricObj;
   }, []);
 
-  // const getDataKeyList = useCallback(async (layout, metrics) => {
-  //   if (!metrics) return;
-  //   let metricObj = {};
-
-  //   metrics.map((metric) => {
-  //     metricObj[metric.qName] = layout[metric.qName];
-  //   });
-  //   return metricObj;
-  // }, []);
-
   const update = useCallback(
     async (measureInfo) => {
       const _qLayout = await getLayout();
@@ -558,9 +552,10 @@ const useData = (props) => {
 
       // const _measureDetails = await getMeasureInfo(_qLayout);
       // const _dimensionDetails = await getDimensionInfo(_qLayout);
+      const _dataList = await getDataKeyList(_qListData, _qLayout);
+
       const _dataKeys = await getDataKeys(
-        _qListData,
-        _qLayout,
+        _dataList,
         _qLayout.qHyperCube.qMeasureInfo
       );
 
@@ -597,6 +592,7 @@ const useData = (props) => {
             qListData: _qListData,
             // dimensionInfo: _dimensionDetails,
             // measureInfo: _measureDetails,
+            dataList: _dataList,
             dataKeys: _dataKeys,
             metrics: _qMetrics,
             qLayout: _qLayout,
@@ -612,6 +608,8 @@ const useData = (props) => {
             qData: _qData,
             mData: _mData,
             qListData: _qListData,
+            dataList: _dataList,
+            dataKeys: _dataKeys,
             qLayout: _qLayout,
           },
         });
@@ -738,9 +736,10 @@ const useData = (props) => {
     qListData,
     // dimensionInfo,
     // measureInfo,
+    dataList,
     handlerChange,
     dataKeys,
-    dataSet: { data: mData, dataKeys, qListData },
+    dataSet: { data: mData, dataKeys, dataList },
     title,
     metrics,
     qRData,
