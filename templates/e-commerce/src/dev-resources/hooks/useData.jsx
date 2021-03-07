@@ -174,32 +174,34 @@ const useData = (props) => {
     }
 
     qProp.qListObjects = [];
-    qLists.map((list) => {
-      const listDef = {
-        qListObjectDef: {
-          qStateName: "$",
-          qLibraryId: "",
-          qDef: {
-            qFieldDefs: [Object.values(list)[0]],
-            qFieldLabels: [Object.keys(list)[0]],
-            qSortCriterias: [
+    if (qLists) {
+      qLists.map((list) => {
+        const listDef = {
+          qListObjectDef: {
+            qStateName: "$",
+            qLibraryId: "",
+            qDef: {
+              qFieldDefs: [Object.values(list)[0]],
+              qFieldLabels: [Object.keys(list)[0]],
+              qSortCriterias: [
+                {
+                  qSortByLoadOrder: 1,
+                },
+              ],
+            },
+            qInitialDataFetch: [
               {
-                qSortByLoadOrder: 1,
+                qTop: 0,
+                qHeight: 1,
+                qLeft: 0,
+                qWidth: 1,
               },
             ],
           },
-          qInitialDataFetch: [
-            {
-              qTop: 0,
-              qHeight: 1,
-              qLeft: 0,
-              qWidth: 1,
-            },
-          ],
-        },
-      };
-      qProp.qListObjects.push(listDef);
-    });
+        };
+        qProp.qListObjects.push(listDef);
+      });
+    }
 
     if (qHyperCubeDef) {
       const _qHyperCubeDef = qHyperCubeDef;
@@ -446,7 +448,7 @@ const useData = (props) => {
     return qDataPages[0];
   }, []);
 
-  const getListDataNew = useCallback(async (i) => {
+  const getListsFromData = useCallback(async (i) => {
     return await qObject.current.getListObjectData(
       `/qListObjects/${i}/qListObjectDef`,
       [qPage.current]
@@ -455,9 +457,21 @@ const useData = (props) => {
 
   const getListData = useCallback(async (layout) => {
     return await Promise.all(
-      layout.qListObjects.map(async (list, i) => getListDataNew(i))
+      layout.qListObjects.map(async (list, i) => getListsFromData(i))
     );
   }, []);
+
+  // const getLists = useCallback(async (listData, layout, measureInfo) => {
+  //   // AG under development
+
+  //   console.log(listData)
+
+  //   layout.qListObjects.map((item, index) => {
+  //     if (item.qListObject.qDimensionInfo.qFallbackTitle === "dataKey")
+  //   });
+
+  //   return getDatKeyInfo(listData[dataKeyIndex], measureInfo);
+  // }, []);
 
   const getReducedData = useCallback(
     () => async () => {
@@ -523,15 +537,15 @@ const useData = (props) => {
     return metricObj;
   }, []);
 
-  const getDataKeyList = useCallback(async (layout, metrics) => {
-    if (!metrics) return;
-    let metricObj = {};
+  // const getDataKeyList = useCallback(async (layout, metrics) => {
+  //   if (!metrics) return;
+  //   let metricObj = {};
 
-    metrics.map((metric) => {
-      metricObj[metric.qName] = layout[metric.qName];
-    });
-    return metricObj;
-  }, []);
+  //   metrics.map((metric) => {
+  //     metricObj[metric.qName] = layout[metric.qName];
+  //   });
+  //   return metricObj;
+  // }, []);
 
   const update = useCallback(
     async (measureInfo) => {

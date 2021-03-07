@@ -73,18 +73,16 @@ const ChartComponent = ({ dataProps }) => {
       (button) => button.value === e.target.value
     );
 
+    const isMeasure = selectedButton[0].value.startsWith("=");
+
     applyPatches([
       {
         qOp: "replace",
         qPath: `/qHyperCubeDef/${
-          selectedButton[0].value.startsWith("=") ? "qMeasures" : "qDimensions"
-        }/0/qDef/${
-          selectedButton[0].value.startsWith("=") ? "qDef" : "qFieldDefs"
-        }`,
+          isMeasure ? "qMeasures" : "qDimensions"
+        }/0/qDef/${isMeasure ? "qDef" : "qFieldDefs"}`,
         qValue: JSON.stringify(
-          selectedButton[0].value.startsWith("=")
-            ? selectedButton[0].value
-            : [selectedButton[0].value]
+          isMeasure ? selectedButton[0].value : [selectedButton[0].value]
         ),
       },
     ]);
