@@ -4,12 +4,11 @@
   font-family: "gaxon";
   src: url("fonts/gaxon.eot");
   src: url("fonts/gaxon.eot?#iefix") format("embedded-opentype"),
-  url("fonts/gaxon.woff") format("woff"),
-  url("fonts/gaxon.ttf") format("truetype"),
-  url("fonts/gaxon.svg#gaxon") format("svg");
+    url("fonts/gaxon.woff") format("woff"),
+    url("fonts/gaxon.ttf") format("truetype"),
+    url("fonts/gaxon.svg#gaxon") format("svg");
   font-weight: normal;
   font-style: normal;
-
 }
 
 [data-icon]:before {
@@ -303,7 +302,7 @@
 }
 
 .icon-trash:before {
-	content: "\e07d";
+  content: "\e07d";
 }
 
 .icon-collapse:before {

@@ -1,4 +1,4 @@
-import getBoundsForNode from './getBoundsForNode'
+import getBoundsForNode from "./getBoundsForNode";
 
 /**
  * Given offsets, widths, and heights of two objects, determine if they collide (overlap).
@@ -12,22 +12,34 @@ import getBoundsForNode from './getBoundsForNode'
  * @param  {int} bHeight The height of the second object
  * @return {bool}
  */
-const coordsCollide = (aTop, aLeft, bTop, bLeft, aWidth, aHeight, bWidth, bHeight, tolerance) => {
-  if (typeof tolerance === 'undefined') {
-    	tolerance = 0
+const coordsCollide = (
+  aTop,
+  aLeft,
+  bTop,
+  bLeft,
+  aWidth,
+  aHeight,
+  bWidth,
+  bHeight,
+  tolerance
+) => {
+  if (typeof tolerance === "undefined") {
+    tolerance = 0;
   }
 
   return !(
-    	// 'a' bottom doesn't touch 'b' top
-    ((aTop + aHeight - tolerance) < bTop)
-        // 'a' top doesn't touch 'b' bottom
-        || ((aTop + tolerance) > (bTop + bHeight))
-        // 'a' right doesn't touch 'b' left
-        || ((aLeft + aWidth - tolerance) < bLeft)
-        // 'a' left doesn't touch 'b' right
-        || ((aLeft + tolerance) > (bLeft + bWidth))
-  )
-}
+    // 'a' bottom doesn't touch 'b' top
+    (
+      aTop + aHeight - tolerance < bTop ||
+      // 'a' top doesn't touch 'b' bottom
+      aTop + tolerance > bTop + bHeight ||
+      // 'a' right doesn't touch 'b' left
+      aLeft + aWidth - tolerance < bLeft ||
+      // 'a' left doesn't touch 'b' right
+      aLeft + tolerance > bLeft + bWidth
+    )
+  );
+};
 
 /**
  * Given two objects containing "top", "left", "offsetWidth" and "offsetHeight"
@@ -37,8 +49,8 @@ const coordsCollide = (aTop, aLeft, bTop, bLeft, aWidth, aHeight, bWidth, bHeigh
  * @return {bool}
  */
 export default (a, b, tolerance) => {
-  const aObj = (a instanceof HTMLElement) ? getBoundsForNode(a) : a
-		  const bObj = (b instanceof HTMLElement) ? getBoundsForNode(b) : b
+  const aObj = a instanceof HTMLElement ? getBoundsForNode(a) : a;
+  const bObj = b instanceof HTMLElement ? getBoundsForNode(b) : b;
 
   return coordsCollide(
     aObj.top,
@@ -49,6 +61,6 @@ export default (a, b, tolerance) => {
     aObj.offsetHeight,
     bObj.offsetWidth,
     bObj.offsetHeight,
-    tolerance,
-  )
-}
+    tolerance
+  );
+};

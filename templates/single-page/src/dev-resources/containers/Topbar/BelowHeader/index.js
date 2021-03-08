@@ -11,7 +11,7 @@ import HorizontalNav from "../HorizontalNav";
 import { Link } from "react-router-dom";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
 import SelectOutlined from "@ant-design/icons/lib/icons/SelectOutlined";
-import useSelections from 'dev-resources/hooks/useSelections'
+import useSelections from "dev-resources/hooks/useSelections";
 
 const { Header } = Layout;
 
@@ -38,14 +38,13 @@ const BelowHeader = () => {
   const [searchText, setSearchText] = useState("");
   const { navCollapsed } = useSelector(({ common }) => common);
 
-  const { selections, clearSelections } = useSelections()
+  const { selections, clearSelections } = useSelections();
 
-  const handleClear = field => clearSelections(field)
-  
+  const handleClear = (field) => clearSelections(field);
+
   const updateSearchChatUser = (evt) => {
     setSearchText(evt.target.value);
   };
-
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-below-header-horizontal">
@@ -122,15 +121,21 @@ const BelowHeader = () => {
                 <Popover
                   overlayClassName="gx-popover-horizantal"
                   placement="bottomRight"
-                  content={<Selections selections={selections} handleClear={handleClear}/>}
+                  content={
+                    <Selections
+                      selections={selections}
+                      handleClear={handleClear}
+                    />
+                  }
                   trigger="click"
                 >
                   <span className="gx-pointer gx-status-pos gx-d-block">
                     <SelectOutlined />
-                    { selections && selections.length > 0 ? 
-                      <span className="gx-status gx-status-rtl gx-small gx-orange" /> :
+                    {selections && selections.length > 0 ? (
+                      <span className="gx-status gx-status-rtl gx-small gx-orange" />
+                    ) : (
                       <span className="gx-status gx-status-rtl gx-small" />
-                    }
+                    )}
                   </span>
                 </Popover>
               </li>

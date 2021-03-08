@@ -37,7 +37,7 @@ body {
   height: 100vh;
 
   .framed-layout & {
-    height: calc(100vh~"-"2 * @framed-layout-base);
+    height: calc(100vh~ "-" 2 * @framed-layout-base);
     overflow: hidden;
     .box-shadow(@gx-card-shadow);
     .border-radius(12px);
@@ -69,7 +69,9 @@ a:focus {
   text-decoration: none;
 }
 
-ol, ul, dl {
+ol,
+ul,
+dl {
   padding-left: 30px;
   margin-bottom: 10px;
 }
@@ -139,7 +141,8 @@ img {
 }
 
 .@{class-prefix}-border-bottom-2 {
-  border-bottom: @border-style-base (@border-width-base + @border-width-base) @border-color;
+  border-bottom: @border-style-base (@border-width-base + @border-width-base)
+    @border-color;
 }
 
 .@{class-prefix}-border-left {
@@ -317,8 +320,7 @@ img {
   & li .anticon:hover,
   & li a:focus,
   & li .@{class-prefix}-link:focus,
-  & li i:focus
-  & li .anticon:focus {
+  & li i:focus & li .anticon:focus {
     color: @white-color;
     background: @primary-color;
   }

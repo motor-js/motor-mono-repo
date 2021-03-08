@@ -3,11 +3,11 @@ import { Button } from "antd";
 import useButton from "../../../dev-resources/hooks/useButton";
 
 const MotorButton = () => {
-  
   //const { clearSelections } = useButton();
 
   return (
-    <Button type="primary"// onClick={clearSelections}
+    <Button
+      type="primary" // onClick={clearSelections}
     >
       Primary Button
     </Button>

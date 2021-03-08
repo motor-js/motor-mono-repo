@@ -43,11 +43,11 @@ const MotorFilter = ({ dimension }) => {
     await endSelections(true);
   }
 
-  const handleClear = async(v) => {
-  // await beginSelections();
-  clearSelections();
-  // await endSelections(true);
-  }
+  const handleClear = async (v) => {
+    // await beginSelections();
+    clearSelections();
+    // await endSelections(true);
+  };
 
   async function handleDeselect(v) {
     const sel = [v];

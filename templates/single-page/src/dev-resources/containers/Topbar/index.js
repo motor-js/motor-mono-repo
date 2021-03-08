@@ -8,9 +8,9 @@ import UserInfo from "dev-resources/components/UserInfo";
 import Auxiliary from "util/Auxiliary";
 import Selections from "components/engine/Selections";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
-import useSelections from 'dev-resources/hooks/useSelections'
+import useSelections from "dev-resources/hooks/useSelections";
 
-import logo from 'assets/images/motor-black.png'
+import logo from "assets/images/motor-black.png";
 
 import {
   NAV_STYLE_DRAWER,
@@ -27,9 +27,9 @@ const Topbar = () => {
   const { navCollapsed, width } = useSelector(({ common }) => common);
   const dispatch = useDispatch();
 
-  const { selections, clearSelections } = useSelections()
+  const { selections, clearSelections } = useSelections();
 
-  const handleClear = field => clearSelections(field)
+  const handleClear = (field) => clearSelections(field);
 
   return (
     <Header>
@@ -46,7 +46,7 @@ const Topbar = () => {
         </div>
       ) : null}
       <Link to="/" className="gx-d-block gx-d-lg-none gx-pointer">
-        <img src={logo} alt="Logo" style={{ height: '30px', width: '95px'}} />
+        <img src={logo} alt="Logo" style={{ height: "30px", width: "95px" }} />
       </Link>
       <SearchBox
         styleName="gx-ml-auto gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
@@ -71,20 +71,23 @@ const Topbar = () => {
           </Popover>
         </li>
         <li className="gx-nav-icon">
-        <Popover
-          overlayClassName="gx-popover-horizantal"
-          placement="bottomRight"
-          content={<Selections selections={selections} handleClear={handleClear}/>}
-          trigger="click"
+          <Popover
+            overlayClassName="gx-popover-horizantal"
+            placement="bottomRight"
+            content={
+              <Selections selections={selections} handleClear={handleClear} />
+            }
+            trigger="click"
           >
             <span className="gx-pointer gx-status-pos gx-d-block">
-            <FilterOutlined style={{ fontSize: '18px' }} />
-            { selections && selections.length > 0 ? 
-              <span className="gx-status gx-status-rtl gx-small gx-orange" /> :
-              <span className="gx-status gx-status-rtl gx-small" /> }
-            </span>          
+              <FilterOutlined style={{ fontSize: "18px" }} />
+              {selections && selections.length > 0 ? (
+                <span className="gx-status gx-status-rtl gx-small gx-orange" />
+              ) : (
+                <span className="gx-status gx-status-rtl gx-small" />
+              )}
+            </span>
           </Popover>
-
         </li>
         {width >= TAB_SIZE ? null : (
           <Auxiliary>

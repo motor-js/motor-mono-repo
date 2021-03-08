@@ -135,7 +135,9 @@
     padding-right: 0;
   }
 
-  ol, ul, dl {
+  ol,
+  ul,
+  dl {
     padding-left: 0;
     padding-right: 30px;
   }
@@ -209,7 +211,6 @@
 
   & .ant-menu-item,
   & .ant-menu-submenu-title {
-
     .@{iconfont-css-prefix} {
       margin-right: 0;
       margin-left: 20px;
@@ -219,7 +220,7 @@
   & .ant-menu-submenu {
     > .ant-menu.ant-menu-sub .ant-menu-item {
       padding-left: @sidebar-padding-lr !important;
-      padding-right: 2*@sidebar-padding-lr - 6px !important;
+      padding-right: 2 * @sidebar-padding-lr - 6px !important;
     }
   }
 
@@ -227,7 +228,7 @@
   & .ant-drawer .ant-menu-submenu {
     > .ant-menu.ant-menu-sub .ant-menu-item {
       padding-left: @sidebar-padding-lr !important;
-      padding-right: 2*@sidebar-padding-lr + 20px !important;
+      padding-right: 2 * @sidebar-padding-lr + 20px !important;
     }
   }
 
@@ -235,7 +236,7 @@
   & .ant-drawer .ant-menu-submenu {
     > .ant-menu.ant-menu-sub .ant-menu-sub .ant-menu-item {
       padding-left: @sidebar-padding-lr !important;
-      padding-right: 3*@sidebar-padding-lr + 16px !important;
+      padding-right: 3 * @sidebar-padding-lr + 16px !important;
     }
   }
 
@@ -249,7 +250,7 @@
   & .ant-menu-submenu-vertical,
   & .ant-menu-submenu-vertical-left,
   & .ant-menu-submenu-vertical-right,
-  & .ant-menu-submenu-inline  {
+  & .ant-menu-submenu-inline {
     > .ant-menu-submenu-title .ant-menu-submenu-arrow {
       right: auto;
       left: 16px;
@@ -303,7 +304,6 @@
   & .ant-drawer .ant-menu-vertical-left,
   & .ant-drawer .ant-menu-vertical-right,
   & .ant-drawer .ant-menu-inline {
-
     & .ant-menu-item,
     & .ant-menu-submenu-title {
       padding-left: @sidebar-padding-lr !important;
@@ -326,10 +326,9 @@
   & .ant-card .ant-menu-vertical-left,
   & .ant-card .ant-menu-vertical-right,
   & .ant-card .ant-menu-inline {
-
     &.ant-menu-sub .ant-menu-submenu-title {
       padding-left: @sidebar-padding-lr !important;
-      padding-right: 2*@sidebar-padding-lr - 6px !important;
+      padding-right: 2 * @sidebar-padding-lr - 6px !important;
     }
   }
 
@@ -341,10 +340,9 @@
   & .ant-drawer .ant-menu-vertical-left,
   & .ant-drawer .ant-menu-vertical-right,
   & .ant-drawer .ant-menu-inline {
-
     &.ant-menu-sub .ant-menu-submenu-title {
       padding-left: @sidebar-padding-lr !important;
-      padding-right: 2*@sidebar-padding-lr + 20px !important;
+      padding-right: 2 * @sidebar-padding-lr + 20px !important;
     }
   }
 
@@ -363,12 +361,11 @@
   }
 
   & .ant-menu-sub.ant-menu-inline .ant-menu-item-group-title {
-    padding: 0 (2*@sidebar-padding-lr + 20px) 0 @sidebar-padding-lr;
+    padding: 0 (2 * @sidebar-padding-lr + 20px) 0 @sidebar-padding-lr;
   }
 
   & .ant-layout-sider .ant-menu,
   & .ant-drawer .ant-menu {
-
     & .ant-menu-submenu .ant-menu-submenu .ant-menu-submenu-title .icon,
     & .ant-menu-submenu .ant-menu-item .icon {
       margin-right: 0;
@@ -441,7 +438,11 @@
     text-align: center;
   }
 
-  & .ant-table-thead > tr > th.ant-table-selection-column-custom .ant-table-selection {
+  &
+    .ant-table-thead
+    > tr
+    > th.ant-table-selection-column-custom
+    .ant-table-selection {
     margin-right: 0;
     margin-left: -15px;
   }
@@ -451,13 +452,22 @@
     margin-left: 4px !important;
   }
 
-  & .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters,
-  & .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-filters {
+  &
+    .ant-table-thead
+    > tr
+    > th.ant-table-column-has-actions.ant-table-column-has-sorters,
+  &
+    .ant-table-thead
+    > tr
+    > th.ant-table-column-has-actions.ant-table-column-has-filters {
     padding-right: 16px !important;
     padding-left: 30px !important;
   }
 
-  & .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters.ant-table-column-has-filters {
+  &
+    .ant-table-thead
+    > tr
+    > th.ant-table-column-has-actions.ant-table-column-has-sorters.ant-table-column-has-filters {
     padding-right: 16px !important;
     padding-left: 54px !important;
   }
@@ -467,7 +477,11 @@
     left: 6px;
   }
 
-  & .ant-table-thead > tr > th.ant-table-column-has-filters .ant-table-column-sorter {
+  &
+    .ant-table-thead
+    > tr
+    > th.ant-table-column-has-filters
+    .ant-table-column-sorter {
     right: auto;
     left: 34px;
   }
@@ -578,7 +592,6 @@
   }
 
   & .@{class-prefix}-task-item-content-left {
-
     @media screen and (max-width: @screen-xs-max) {
       padding-right: 0;
       padding-left: @size-60;
@@ -586,7 +599,6 @@
   }
 
   & .@{class-prefix}-card-ticketlist .@{class-prefix}-task-item-content-left {
-
     @media screen and (max-width: @screen-xs-max) {
       padding-left: 0;
     }
@@ -624,7 +636,6 @@
   }
 
   & .@{class-prefix}-act-task-content {
-
     & label.ant-checkbox-wrapper span.ant-checkbox {
       float: right;
       padding-right: 0;
@@ -720,7 +731,6 @@
   }
 
   & .@{class-prefix}-fillchart {
-
     &-content {
       left: auto;
       right: 0;
@@ -745,7 +755,6 @@
   }
 
   & .@{class-prefix}-featured {
-
     &-thumb {
       margin-right: 0;
       margin-left: @size-20 + 5px;
@@ -773,7 +782,6 @@
   }
 
   & .@{class-prefix}-card-profile .@{class-prefix}-featured-content-right {
-
     @media (max-width: @screen-lg-max) {
       text-align: right;
       margin-right: 0;
@@ -833,7 +841,6 @@
   }
 
   & .@{class-prefix}-dash-search {
-
     @media screen and (max-width: @screen-xs-max) {
       padding-right: 0;
       padding-left: @size-30;
@@ -904,15 +911,21 @@
     }
   }
 
-  & .@{class-prefix}-inside-header-horizontal .@{class-prefix}-header-notifications {
+  &
+    .@{class-prefix}-inside-header-horizontal
+    .@{class-prefix}-header-notifications {
     & > li:not(:last-child) {
       margin-right: 0;
       margin-left: 20px;
     }
   }
 
-  & .@{class-prefix}-header-horizontal-main .@{class-prefix}-header-notifications,
-  & .@{class-prefix}-header-horizontal-nav .@{class-prefix}-header-notifications {
+  &
+    .@{class-prefix}-header-horizontal-main
+    .@{class-prefix}-header-notifications,
+  &
+    .@{class-prefix}-header-horizontal-nav
+    .@{class-prefix}-header-notifications {
     & > li:not(:last-child) {
       margin-right: 0;
       margin-left: 30px;
@@ -936,7 +949,9 @@
     }
   }
 
-  & .@{class-prefix}-header-horizontal-main .@{class-prefix}-header-notifications {
+  &
+    .@{class-prefix}-header-horizontal-main
+    .@{class-prefix}-header-notifications {
     & > li.@{class-prefix}-notify {
       margin-right: 0;
       margin-left: 30px;
@@ -948,14 +963,18 @@
     }
   }
 
-  & .@{class-prefix}-inside-header-horizontal .@{class-prefix}-header-notifications {
+  &
+    .@{class-prefix}-inside-header-horizontal
+    .@{class-prefix}-header-notifications {
     & > li.@{class-prefix}-notify {
       margin-right: 0;
       margin-left: 20px;
     }
   }
 
-  & .@{class-prefix}-header-horizontal-main .@{class-prefix}-header-notifications {
+  &
+    .@{class-prefix}-header-horizontal-main
+    .@{class-prefix}-header-notifications {
     > li.@{class-prefix}-user-nav {
       margin-left: 0;
       margin-right: 50px;
@@ -966,9 +985,11 @@
     }
   }
 
-  & .@{class-prefix}-inside-header-horizontal .@{class-prefix}-header-horizontal-main .@{class-prefix}-header-notifications {
+  &
+    .@{class-prefix}-inside-header-horizontal
+    .@{class-prefix}-header-horizontal-main
+    .@{class-prefix}-header-notifications {
     > li.@{class-prefix}-user-nav {
-
       @media screen and (max-width: @screen-lg-max) {
         margin-right: 0;
       }
@@ -1019,9 +1040,7 @@
   }
 
   & .@{class-prefix}-header-horizontal-main {
-
     @media screen and (max-width: @screen-xs-max) {
-
       & .@{class-prefix}-w-logo {
         padding-left: 0;
       }
@@ -1047,7 +1066,6 @@
   }
 
   & .@{class-prefix}-header-horizontal-dark .@{class-prefix}-login-list {
-
     & li:not(:first-child) {
       border: 0 none;
     }
@@ -1083,9 +1101,8 @@
   }
 
   & .@{class-prefix}-no-header-horizontal {
-    padding-right: (2*@layout-main-content-padding + 15);
+    padding-right: (2 * @layout-main-content-padding + 15);
     padding-left: @layout-main-content-padding;
-
 
     .@{class-prefix}-linebar {
       left: auto;
@@ -1098,13 +1115,13 @@
     }
 
     @media screen and (max-width: @screen-xs-max) {
-      padding-right: 4*@layout-main-content-padding-res;
+      padding-right: 4 * @layout-main-content-padding-res;
       padding-left: @layout-main-content-padding-res;
     }
   }
 
   & .@{class-prefix}-layout-sider-header {
-    padding-right: (2*@sidebar-padding-lr + 10px);
+    padding-right: (2 * @sidebar-padding-lr + 10px);
     padding-left: @sidebar-padding-lr;
 
     & .@{class-prefix}-linebar {
@@ -1122,12 +1139,19 @@
     padding-left: @sidebar-padding-lr;
   }
 
-  & .@{class-prefix}-mini-custom-sidebar.ant-layout-sider-lite .@{class-prefix}-layout-sider-header,
-  & .@{class-prefix}-custom-sidebar.ant-layout-sider-lite .@{class-prefix}-layout-sider-header {
+  &
+    .@{class-prefix}-mini-custom-sidebar.ant-layout-sider-lite
+    .@{class-prefix}-layout-sider-header,
+  &
+    .@{class-prefix}-custom-sidebar.ant-layout-sider-lite
+    .@{class-prefix}-layout-sider-header {
     border-right: @border-width-base @border-style-base @border-color-split;
   }
 
-  & .ant-layout-sider-collapsed .@{class-prefix}-layout-sider-header .@{class-prefix}-linebar {
+  &
+    .ant-layout-sider-collapsed
+    .@{class-prefix}-layout-sider-header
+    .@{class-prefix}-linebar {
     left: auto;
     right: 20px;
   }
@@ -1151,8 +1175,6 @@
     left: auto;
     right: -10px;
   }
-
-
 }
 
 // Medium screen / desktop - 576
@@ -1413,9 +1435,9 @@
     }
 
     & .@{class-prefix}-mr-lg-2 {
-       margin-right: 0 !important;
+      margin-right: 0 !important;
       margin-left: 0.5rem !important;
-     }
+    }
 
     & .@{class-prefix}-ml-lg-2 {
       margin-left: 0 !important;

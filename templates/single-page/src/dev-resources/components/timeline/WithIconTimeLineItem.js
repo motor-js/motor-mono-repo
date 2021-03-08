@@ -1,7 +1,7 @@
 import React from "react";
 
-const WithIconTimeLineItem = ({styleName, color, timeLine, children}) => {
-  const {time, title, description} = timeLine;
+const WithIconTimeLineItem = ({ styleName, color, timeLine, children }) => {
+  const { time, title, description } = timeLine;
   return (
     <div className={`gx-timeline-item gx-timeline-time-item ${styleName}`}>
       <div className="gx-timeline-time">{time}</div>
@@ -11,6 +11,6 @@ const WithIconTimeLineItem = ({styleName, color, timeLine, children}) => {
         <p>{description}</p>
       </div>
     </div>
-  )
+  );
 };
 export default WithIconTimeLineItem;

@@ -11,18 +11,18 @@ const useSelectionObject = () => {
   const [qLayout, setQLayout] = useState(null);
   const [selections, setSelections] = useState(null);
 
-  const update = useCallback(async() => {
+  const update = useCallback(async () => {
     const _qLayout = await qObject.getLayout();
     const sel = await getSelections(_qLayout);
     if (_isMounted.current) {
       setQLayout(_qLayout);
-      setSelections(sel)
+      setSelections(sel);
     }
-  },[]);
+  }, []);
 
   const getSelections = (v) => {
     const selections = v.qSelectionObject.qSelections;
-    return selections
+    return selections;
   };
 
   const clearSelections = async (field, value) => {
