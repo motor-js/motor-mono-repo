@@ -12,7 +12,6 @@ import HorizontalDefault from "../Topbar/HorizontalDefault/index";
 import { footer } from "settings";
 import App from "routes";
 import { LayoutContext } from "store";
-import { appSettings } from "settings";
 
 const { Content, Footer } = Layout;
 
