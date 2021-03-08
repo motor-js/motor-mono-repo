@@ -11,7 +11,6 @@ import {
   BalanceHistoryMultiDim,
   pieData,
 } from "./data";
-
 // import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
 // import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
@@ -64,11 +63,9 @@ const Crypto = () => {
           <Tabs defaultActiveKey="1" type="card" size={"Default"}>
             <TabPane tab="Multiple Dimensions" key="1">
               <Chart dataProps={BalanceHistoryMultiDim} />
-              {/* Content of card tab 2 */}
             </TabPane>
             <TabPane tab="Multiple Measures" key="2">
               <Chart dataProps={BalanceHistory} />
-              {/* Content of card tab 1 */}
             </TabPane>
             <TabPane tab="Pie Chart" key="3">
               <Chart dataProps={pieData} />
