@@ -16,7 +16,7 @@ export const bitCoinKPI = {
       },
       offsetEnd: { offset: "95%", stopColor: "#FE9E15", stopOpacity: 0.9 },
     },
-    dataKey: "price",
+    // dataKey: "price",
     type: null,
     strokeWidth: 0,
     stackId: 2,
@@ -78,7 +78,7 @@ export const etheriumKPI = {
       },
       offsetEnd: { offset: "95%", stopColor: "#06BB8A", stopOpacity: 0.9 },
     },
-    dataKey: "price",
+    // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
     stackId: 2,
@@ -118,7 +118,6 @@ export const etheriumKPI = {
       "='Etherium Max Price : ' & Num(Max({$<coin={'etherium'}>}price),'$#,##0')",
   },
   icon: "etherium",
-  // styleName: "up",
 };
 
 export const rippleKPI = {
@@ -140,13 +139,12 @@ export const rippleKPI = {
       },
       offsetEnd: { offset: "95%", stopColor: "#FEEADA", stopOpacity: 0.8 },
     },
-    dataKey: "price",
-    // type: "monotone",
     strokeWidth: 0,
     stackId: 2,
     stroke: "#FEEADA",
     fill: "url(#color5)",
     fillOpacity: 1,
+    // stacked: true,
   },
   data: {
     cols: [
@@ -158,6 +156,10 @@ export const rippleKPI = {
         qField: "=Sum({$<coin={'ripple'}>} price)",
         qLabel: "price",
       },
+      // {
+      //   qField: "=Sum({$<coin={'bitcoin'}>} price)",
+      //   qLabel: "price",
+      // },
     ],
     qMetrics: [
       {
@@ -180,16 +182,13 @@ export const rippleKPI = {
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
   icon: "ripple",
-  // styleName: "up",
 };
 
 export const litecoinKPI = {
   chartConfig: {
     chartType: "line",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
-
     height: 75,
-    dataKey: "price",
     stroke: "#038FDE",
     dot: { stroke: "#FEA931", strokeWidth: 2 },
   },
@@ -203,6 +202,10 @@ export const litecoinKPI = {
         qField: "=Sum({$<coin={'litecoin'}>} price)",
         qLabel: "price",
       },
+      // {
+      //   qField: "=Sum({$<coin={'bitcoin'}>} price)",
+      //   qLabel: "bitcoin",
+      // },
     ],
     qMetrics: [
       {
@@ -230,7 +233,7 @@ export const litecoinKPI = {
 export const BalanceHistory = {
   chartConfig: {
     chartType: "bar",
-    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 0, left: 0, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -238,11 +241,12 @@ export const BalanceHistory = {
     height: 180,
     isAnimationActive: true,
     xAxisDataKey: "name",
-    dataKey: "price",
+    // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    stacked: true,
     fillOpacity: 1,
   },
   data: {
@@ -270,7 +274,8 @@ export const BalanceHistory = {
 export const BalanceHistoryMultiDim = {
   chartConfig: {
     chartType: "bar",
-    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 10, left: 0, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -278,14 +283,23 @@ export const BalanceHistoryMultiDim = {
     height: 180,
     isAnimationActive: true,
     xAxisDataKey: "name",
-    dataKey: "price",
+    // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+
     fillOpacity: 1,
+    buttons: [
+      { type: "measure", label: "Sum", value: "=Sum(price)" },
+      { type: "measure", label: "Count", value: "=count(price)" },
+      { type: "dimension", label: "Name", value: "[name]" },
+      { type: "dimension", label: "Price", value: "price" },
+    ],
   },
   data: {
+    // qDimField: "[coin]",
+    qLists: [{ dataKey: "[coin]" }, { name: "[name]" }],
     cols: [
       {
         qField: "[name]",
@@ -304,6 +318,7 @@ export const BalanceHistoryMultiDim = {
 
     qTitle:
       "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+    // qSubTitle: "test",
   },
 };
 
@@ -313,9 +328,9 @@ export const pieData = {
     margin: { top: 10, right: 0, left: -15, bottom: 0 },
     showLegend: false,
     height: 180,
-    dataKey: "price",
+    // dataKey: "price",
     strokeWidth: 0,
-    fill: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
     label: true,
     isAnimationActive: true,
     cx: "35%",

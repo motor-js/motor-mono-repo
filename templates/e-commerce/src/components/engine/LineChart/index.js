@@ -12,11 +12,11 @@ import {
 } from "recharts";
 
 const MotorLineChart = ({ dataSet, config }) => {
-  const { data, measureInfo } = dataSet;
+  const { data, dataKeys } = dataSet;
+
   const {
     margin,
     height,
-    dataKey,
     stroke,
     dot,
     showXAxis = true,
@@ -35,12 +35,12 @@ const MotorLineChart = ({ dataSet, config }) => {
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
-        {measureInfo &&
-          measureInfo.map((measure, index) => (
+        {dataKeys &&
+          dataKeys.map((key, index) => (
             <Line
               key={index}
-              dataKey={measure.name}
-              stroke={measure.stroke || stroke}
+              dataKey={key}
+              stroke={stroke}
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }

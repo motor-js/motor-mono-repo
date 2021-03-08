@@ -2,7 +2,7 @@ import React from "react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip } from "recharts";
 import { Col, Row } from "antd";
 
-import Widget from "dev-resources/components/Widget/index";
+import Widget from "components/Widget/index";
 
 const data = [
   { name: "Page A", uv: 500, price: 600, sv: 400 },

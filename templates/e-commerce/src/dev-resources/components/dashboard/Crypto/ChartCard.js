@@ -1,6 +1,6 @@
 import React from "react";
 
-import Widget from "dev-resources/components/Widget/index";
+import Widget from "components/Widget/index";
 
 const ChartCard = ({ prize, title, children, styleName, desc, icon }) => {
   return (

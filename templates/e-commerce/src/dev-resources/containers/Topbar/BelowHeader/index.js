@@ -3,7 +3,7 @@ import { Button, Dropdown, Layout, Menu, message, Popover, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import CustomScrollbars from "util/CustomScrollbars";
 import languageData from "../languageData";
-import SearchBox from "dev-resources/components/SearchBox";
+import SearchBox from "components/engine/SearchBox";
 import UserInfo from "dev-resources/components/UserInfo";
 import Selections from "components/engine/Selections";
 import { toggleCollapsedSideNav } from "../../../appRedux/actions/Setting";

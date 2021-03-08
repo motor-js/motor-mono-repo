@@ -14,12 +14,10 @@ export function hyperCubeTransform(
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
     d.forEach((item, index) => {
-      // check if more than 2 dimensions
       const pair =
         index < qNoOfDiemnsions
           ? {
               [dimensionNames[index]]:
-                // d[index].qText === undefined ? 'undefined' : d[index].qText,
                 d[index].qText === undefined
                   ? "undefined"
                   : index === 0 && useNumonFirstDim
@@ -33,6 +31,7 @@ export function hyperCubeTransform(
                 d[index].qNum !== "NaN" ? d[index].qNum : 0,
               key: i,
             };
+
       data = { ...data, ...pair };
     });
 
@@ -42,93 +41,140 @@ export function hyperCubeTransform(
   return transformedData;
 }
 
-export function groupHyperCubeData(qData) {
-  const data = [];
-  let currentItem = null;
-  const rangeBands = [];
-  let paddingShift = 0;
+export function multiDimHyperCubeTransform(qData, qHyperCube) {
+  const qNoOfDiemnsions =
+    qHyperCube !== undefined ? qHyperCube.qDimensionInfo.length : 1;
 
-  currentItem = qData[0][Object.keys(qData[0])[0]];
+  const measureNames = getMeasureNames(qHyperCube);
+  const dimensionNames = getDimensionNames(qHyperCube);
 
-  qData.forEach((d, i) => {
-    if (currentItem !== d[Object.keys(d)[0]]) {
-      currentItem = d[Object.keys(d)[0]];
-    } else if (i !== 0) {
-      paddingShift += 1;
-    }
+  let parentText = qData.qMatrix[0][0].qText;
+  let transformedData = [];
+  let series = {};
 
-    d.band = `${d[Object.keys(d)[0]]}|${d[Object.keys(d)[2]]}`;
-    rangeBands.push(d.band);
+  qData.qMatrix.map((d, i) => {
+    let key = null;
+    let value = null;
+    let qElemNumber = null;
 
-    d.paddingShift = +paddingShift;
-    data.push(d);
-  });
-
-  return [data, rangeBands, paddingShift];
-}
-
-export function stackHyperCubeData(qData, asPercentage = false) {
-  const data = [];
-  let currentObj = {};
-  let parentObject = {};
-  let cummulative = 0;
-  let currentItem = qData[0][Object.keys(qData[0])[0]];
-  let dimIndex = 0;
-
-  qData.forEach((d, i) => {
-    if (currentItem !== d[Object.keys(d)[0]]) {
-      if (asPercentage) {
-        Object.keys(currentObj).forEach((key) => {
-          currentObj[key] = currentObj[key] / cummulative;
-          currentObj[key] = isNaN(currentObj[key]) ? 0 : currentObj[key];
-        });
+    d.forEach((item, index) => {
+      if (index < qNoOfDiemnsions && index !== 0) {
+        key = d[index].qText;
+        qElemNumber = d[index].qElemNumber;
+      } else if (index !== 0) {
+        value = d[index].qNum;
       }
-
-      parentObject = {
-        ...parentObject,
-        ...currentObj,
-        total: asPercentage ? 1 : cummulative,
-        dimIndex,
-      };
-      dimIndex++;
-      data.push(parentObject);
-      currentItem = d[Object.keys(d)[0]];
-      cummulative = 0;
-      currentObj = {};
-    }
-
-    parentObject = {
-      [Object.keys(d)[0]]: d[Object.keys(d)[0]],
-      [Object.keys(d)[1]]: d[Object.keys(d)[1]],
-    };
-
-    currentObj = {
-      ...currentObj,
-      [d[Object.keys(d)[2]]]: d[Object.keys(d)[4]],
-    };
-
-    cummulative += d[Object.keys(d)[4]];
-  });
-
-  if (asPercentage) {
-    Object.keys(currentObj).forEach((key) => {
-      currentObj[key] = currentObj[key] / cummulative;
     });
-  }
 
-  parentObject = {
-    ...parentObject,
-    ...currentObj,
-    total: asPercentage ? 1 : cummulative,
-    dimIndex,
-  };
+    if (parentText !== d[0].qText) {
+      if (Object.keys(series).length === 0) {
+        series[dimensionNames[0]] = d[0].qText;
+        series["qElemNumber"] = d[0].qElemNumber;
+        series[key] = value;
+        series[`${key}-qElemNumber`] = qElemNumber;
+      }
+      transformedData.push(series);
+      series = {};
+    } else {
+      series[dimensionNames[0]] = d[0].qText;
+      series["qElemNumber"] = d[0].qElemNumber;
+      series[key] = value;
+      series[`${key}-qElemNumber`] = qElemNumber;
+    }
+    parentText = d[0].qText;
+  });
+  transformedData.push(series);
 
-  data.push(parentObject);
-
-  const rangeBands = [...new Set(qData.map((d) => d[Object.keys(d)[2]]))];
-
-  return [data, rangeBands];
+  return transformedData;
 }
+
+// export function groupHyperCubeData(qData) {
+//   const data = [];
+//   let currentItem = null;
+//   const rangeBands = [];
+//   let paddingShift = 0;
+
+//   currentItem = qData[0][Object.keys(qData[0])[0]];
+
+//   qData.forEach((d, i) => {
+//     if (currentItem !== d[Object.keys(d)[0]]) {
+//       currentItem = d[Object.keys(d)[0]];
+//     } else if (i !== 0) {
+//       paddingShift += 1;
+//     }
+
+//     d.band = `${d[Object.keys(d)[0]]}|${d[Object.keys(d)[2]]}`;
+//     rangeBands.push(d.band);
+
+//     d.paddingShift = +paddingShift;
+//     data.push(d);
+//   });
+
+//   return [data, rangeBands, paddingShift];
+// }
+
+// export function stackHyperCubeData(qData, asPercentage = false) {
+//   const data = [];
+//   let currentObj = {};
+//   let parentObject = {};
+//   let cummulative = 0;
+//   let currentItem = qData[0][Object.keys(qData[0])[0]];
+//   let dimIndex = 0;
+
+//   qData.forEach((d, i) => {
+//     if (currentItem !== d[Object.keys(d)[0]]) {
+//       if (asPercentage) {
+//         Object.keys(currentObj).forEach((key) => {
+//           currentObj[key] = currentObj[key] / cummulative;
+//           currentObj[key] = isNaN(currentObj[key]) ? 0 : currentObj[key];
+//         });
+//       }
+
+//       parentObject = {
+//         ...parentObject,
+//         ...currentObj,
+//         total: asPercentage ? 1 : cummulative,
+//         dimIndex,
+//       };
+//       dimIndex++;
+//       data.push(parentObject);
+//       currentItem = d[Object.keys(d)[0]];
+//       cummulative = 0;
+//       currentObj = {};
+//     }
+
+//     parentObject = {
+//       [Object.keys(d)[0]]: d[Object.keys(d)[0]],
+//       [Object.keys(d)[1]]: d[Object.keys(d)[1]],
+//     };
+
+//     currentObj = {
+//       ...currentObj,
+//       [d[Object.keys(d)[2]]]: d[Object.keys(d)[4]],
+//     };
+
+//     cummulative += d[Object.keys(d)[4]];
+//   });
+
+//   if (asPercentage) {
+//     Object.keys(currentObj).forEach((key) => {
+//       currentObj[key] = currentObj[key] / cummulative;
+//     });
+//   }
+
+//   parentObject = {
+//     ...parentObject,
+//     ...currentObj,
+//     total: asPercentage ? 1 : cummulative,
+//     dimIndex,
+//   };
+
+//   data.push(parentObject);
+
+//   const rangeBands = [...new Set(qData.map((d) => d[Object.keys(d)[2]]))];
+
+//   return [data, rangeBands];
+// }
 
 export const getMeasureNames = (qHyperCube) =>
   qHyperCube.qMeasureInfo.map((d, i) => {
@@ -139,48 +185,79 @@ export const getMeasureNames = (qHyperCube) =>
       : d.qFallbackTitle;
   });
 
-export const getMeasureDetails = (qHyperCube) => {
-  let measures = [];
+// export const getDatKeyInfo = (listData, measureInfo) => {
+//   let dataKeys = [];
 
-  qHyperCube.qMeasureInfo.map((d, i) => {
-    let measure = {};
-    const qMeasurePosition = i !== 0 ? i : "";
+//   if (listData) {
+//     listData[0].qMatrix.map((d, i) => {
+//       const dataKey = {};
+//       dataKey.dataKey = d[0].qText;
+//       dataKeys.push(dataKey);
+//     });
+//   } else {
+//     measureInfo.map((d, i) => {
+//       let measure = {};
+//       const qMeasurePosition = i !== 0 ? i : "";
 
-    measure.name = d.qFallbackTitle.startsWith("=")
-      ? `value${qMeasurePosition}`
-      : d.qFallbackTitle;
+//       measure.dataKey = d.qFallbackTitle.startsWith("=")
+//         ? `value${qMeasurePosition}`
+//         : d.qFallbackTitle;
 
-    measure.max = d.qMax;
-    measure.min = d.qMin;
-    measure.calcCondMsg = d.qCalcCondMsg;
+//       measure.max = d.qMax;
+//       measure.min = d.qMin;
+//       measure.calcCondMsg = d.qCalcCondMsg;
 
-    d.qAttrExprInfo.map((item, i) => {
-      if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
-    });
-    measures.push(measure);
-  });
-  return measures;
-};
+//       d.qAttrExprInfo.map((item, i) => {
+//         if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
+//       });
+//       dataKeys.push(measure);
+//     });
+//   }
 
-export const getDimensionDetails = (qHyperCube) => {
-  let dimensions = [];
+//   return dataKeys;
+// };
 
-  qHyperCube.qDimensionInfo.map((d, i) => {
-    let dimension = {};
-    //console.log(d);
+// export const getMeasureDetails = (qHyperCube) => {
+//   let measures = [];
 
-    dimension.name = d.qFallbackTitle;
+//   qHyperCube.qMeasureInfo.map((d, i) => {
+//     let measure = {};
+//     const qMeasurePosition = i !== 0 ? i : "";
 
-    // dimension.calcCondMsg = d.qCalcCondMsg;
+//     measure.name = d.qFallbackTitle.startsWith("=")
+//       ? `value${qMeasurePosition}`
+//       : d.qFallbackTitle;
 
-    // what is qAttrDimInfo used for ?
-    d.qAttrExprInfo.map((item, i) => {
-      if (item.qFallbackTitle) dimension[item.id] = item.qFallbackTitle;
-    });
-    dimensions.push(dimension);
-  });
-  return dimensions;
-};
+//     measure.max = d.qMax;
+//     measure.min = d.qMin;
+//     measure.calcCondMsg = d.qCalcCondMsg;
+
+//     d.qAttrExprInfo.map((item, i) => {
+//       if (item.qFallbackTitle) measure[item.id] = item.qFallbackTitle;
+//     });
+//     measures.push(measure);
+//   });
+//   return measures;
+// };
+
+// export const getDimensionDetails = (qHyperCube) => {
+//   let dimensions = [];
+
+//   qHyperCube.qDimensionInfo.map((d, i) => {
+//     let dimension = {};
+
+//     dimension.name = d.qFallbackTitle;
+
+//     // dimension.calcCondMsg = d.qCalcCondMsg;
+
+//     // what is qAttrDimInfo used for ?
+//     d.qAttrExprInfo.map((item, i) => {
+//       if (item.qFallbackTitle) dimension[item.id] = item.qFallbackTitle;
+//     });
+//     dimensions.push(dimension);
+//   });
+//   return dimensions;
+// };
 
 export const getDimensionNames = (qHyperCube) =>
   qHyperCube.qDimensionInfo.map((d, i) => d.qFallbackTitle);

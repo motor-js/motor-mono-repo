@@ -1,14 +1,14 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
-import { EngineContext } from '../contexts/EngineProvider'
-import createDef from "../utils/createHCDef"
+import { EngineContext } from "../contexts/EngineProvider";
+import createDef from "../utils/createHCDef";
 import {
   getMeasureNames,
   getDimensionNames,
   getHeader,
   getOrder,
-  hyperCubeTransform
-} from '../utils/hyperCubeUtilities'
+  hyperCubeTransform,
+} from "../utils/hyperCubeUtilities";
 
 const initialState = {
   qData: null,
@@ -136,10 +136,10 @@ const useTable = (props) => {
       qColumnOrder,
       qCalcCondition,
       qOtherTotalSpec,
-      totalSpec,
-      )
+      totalSpec
+    );
 
-    return qProp
+    return qProp;
   }, [
     cols,
     qExpression,
@@ -186,23 +186,19 @@ const useTable = (props) => {
   );
 
   const structureData = useCallback(async (layout, data) => {
-    let useNumonFirstDim
-    const mData = hyperCubeTransform(  
-      data,
-      layout.qHyperCube,
-      useNumonFirstDim
-    )
+    let useNumonFirstDim;
+    const mData = hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
 
-    return mData
-  }, [])
+    return mData;
+  }, []);
 
   const update = useCallback(
     async (measureInfo) => {
       const _qLayout = await getLayout();
       const _qData = await getData();
-      const _mData = await structureData(_qLayout, _qData)
-      const _headerGroup = await getHeader(_qLayout)
-      const _orderHeader = await getOrder(_headerGroup, qColumnOrder)
+      const _mData = await structureData(_qLayout, _qData);
+      const _headerGroup = await getHeader(_qLayout);
+      const _orderHeader = await getOrder(_headerGroup, qColumnOrder);
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(
           (row) => row[0].qState === "S"
@@ -346,18 +342,18 @@ const useTable = (props) => {
   );
 
   useEffect(() => {
-    if (!engine) return; 
+    if (!engine) return;
     if (qObject.current) return;
     (async () => {
-        const qProp = generateQProp();
-        const qDoc = await engine;
-        qObject.current = await qDoc.createSessionObject(qProp);
-        qObject.current.on("changed", () => {
-          update(qProp.qHyperCubeDef.qMeasures);
-        });
+      const qProp = generateQProp();
+      const qDoc = await engine;
+      qObject.current = await qDoc.createSessionObject(qProp);
+      qObject.current.on("changed", () => {
         update(qProp.qHyperCubeDef.qMeasures);
-      })();
-    }, [generateQProp, engine, update]);
+      });
+      update(qProp.qHyperCubeDef.qMeasures);
+    })();
+  }, [generateQProp, engine, update]);
 
   useEffect(() => () => (_isMounted.current = false), []);
 

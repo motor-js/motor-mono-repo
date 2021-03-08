@@ -3,12 +3,14 @@ import { deepMerge } from "../utils/object";
 import { EngineContext } from "@motor-js/engine";
 import {
   getMeasureNames,
-  getMeasureDetails,
+  // getMeasureDetails,
   getDimensionNames,
-  getDimensionDetails,
+  // getDimensionDetails,
+  getDatKeyInfo,
   getHeader,
   getOrder,
   hyperCubeTransform,
+  multiDimHyperCubeTransform,
 } from "../utils/hyperCubeUtilities";
 
 const initialState = {
@@ -24,11 +26,15 @@ function reducer(state, action) {
   const {
     payload: {
       title,
+      subTitle,
       metrics,
       qData,
       mData,
-      measureInfo,
-      dimensionInfo,
+      qListData,
+      // measureInfo,
+      // dimensionInfo,
+      dataList,
+      dataKeys,
       qRData,
       qLayout,
       selections,
@@ -41,11 +47,15 @@ function reducer(state, action) {
       return {
         ...state,
         title,
+        subTitle,
         metrics,
         qData,
         mData,
-        dimensionInfo,
-        measureInfo,
+        qListData,
+        // dimensionInfo,
+        // measureInfo,
+        dataList,
+        dataKeys,
         qLayout,
         selections,
       };
@@ -61,6 +71,7 @@ function reducer(state, action) {
 
 const initialProps = {
   cols: null,
+  qLists: null,
   qHyperCubeDef: null,
   qPage: {
     qTop: 0,
@@ -80,6 +91,7 @@ const initialProps = {
   qColumnOrder: [],
   qCalcCondition: undefined,
   qTitle: null,
+  qSubTitle: null,
   qMetrics: null,
   qOtherTotalSpec: "",
 };
@@ -87,7 +99,9 @@ const initialProps = {
 const useData = (props) => {
   const {
     cols,
+    qLists,
     qTitle,
+    qSubTitle,
     qMetrics,
     qHyperCubeDef,
     qPage: qPageProp,
@@ -110,11 +124,15 @@ const useData = (props) => {
 
   const {
     title,
+    subTitle,
     metrics,
     qData,
     mData,
-    dimensionInfo,
-    measureInfo,
+    qListData,
+    // dimensionInfo,
+    // measureInfo,
+    dataList,
+    dataKeys,
     qRData,
     qLayout,
     selections,
@@ -160,6 +178,36 @@ const useData = (props) => {
             qExpr: metric.qExpr,
           },
         };
+      });
+    }
+
+    if (qLists) {
+      qProp.qListObjects = [];
+      qLists.map((list) => {
+        const listDef = {
+          qListObjectDef: {
+            qStateName: "$",
+            qLibraryId: "",
+            qDef: {
+              qFieldDefs: [Object.values(list)[0]],
+              qFieldLabels: [Object.keys(list)[0]],
+              qSortCriterias: [
+                {
+                  qSortByLoadOrder: 1,
+                },
+              ],
+            },
+            qInitialDataFetch: [
+              {
+                qTop: 0,
+                qHeight: 1,
+                qLeft: 0,
+                qWidth: 1,
+              },
+            ],
+          },
+        };
+        qProp.qListObjects.push(listDef);
       });
     }
 
@@ -408,6 +456,20 @@ const useData = (props) => {
     return qDataPages[0];
   }, []);
 
+  const getListsFromData = useCallback(async (i) => {
+    return await qObject.current.getListObjectData(
+      `/qListObjects/${i}/qListObjectDef`,
+      [qPage.current]
+    );
+  });
+
+  const getListData = useCallback(async (layout) => {
+    if (!layout.qListObjects) return;
+    return await Promise.all(
+      layout.qListObjects.map(async (list, i) => getListsFromData(i))
+    );
+  }, []);
+
   const getReducedData = useCallback(
     () => async () => {
       const { qWidth } = qPage.current;
@@ -431,17 +493,39 @@ const useData = (props) => {
 
   const structureData = useCallback(async (layout, data) => {
     let useNumonFirstDim;
-    const mData = hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
+    const mData =
+      layout.qHyperCube.qDimensionInfo.length === 1
+        ? hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim)
+        : multiDimHyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
 
     return mData;
   }, []);
 
-  const getMeasureInfo = useCallback(async (layout) => {
-    return getMeasureDetails(layout.qHyperCube);
+  const getDataKeys = useCallback(async (listData, measureInfo) => {
+    if (!listData) {
+      return measureInfo.map((measure) => measure.qFallbackTitle);
+    }
+
+    const keys = listData.filter((item) => Object.keys(item)[0] === "dataKey");
+
+    return keys[0].dataKey;
   }, []);
 
-  const getDimensionInfo = useCallback(async (layout) => {
-    return getDimensionDetails(layout.qHyperCube);
+  const getDataKeyList = useCallback(async (listData, layout) => {
+    const listDetail = [];
+
+    if (!layout.qListObjects) return null;
+
+    layout.qListObjects.map((item, index) => {
+      const obj = {};
+      const key = item.qListObject.qDimensionInfo.qFallbackTitle;
+      const items = listData[index][0].qMatrix.map((item) => item[0].qText);
+
+      obj[key] = items;
+      listDetail.push(obj);
+    });
+
+    return listDetail;
   }, []);
 
   const getTitle = useCallback(async (layout) => {
@@ -462,10 +546,22 @@ const useData = (props) => {
     async (measureInfo) => {
       const _qLayout = await getLayout();
       const _qData = await getData();
+
+      const _qListData = await getListData(_qLayout);
       const _mData = await structureData(_qLayout, _qData);
-      const _measureDetails = await getMeasureInfo(_qLayout);
-      const _dimensionDetails = await getDimensionInfo(_qLayout);
+
+      // const _measureDetails = await getMeasureInfo(_qLayout);
+      // const _dimensionDetails = await getDimensionInfo(_qLayout);
+      const _dataList = await getDataKeyList(_qListData, _qLayout);
+
+      const _dataKeys = await getDataKeys(
+        _dataList,
+        _qLayout.qHyperCube.qMeasureInfo
+      );
+
       const _qTitle = await getTitle(_qLayout);
+      const _qSubTitle = qSubTitle;
+
       const _qMetrics = await getMetrics(_qLayout, qMetrics);
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(
@@ -492,10 +588,14 @@ const useData = (props) => {
           type: "update",
           payload: {
             title: _qTitle,
+            subTitle: _qSubTitle,
             qData: _qData,
             mData: _mData,
-            dimensionInfo: _dimensionDetails,
-            measureInfo: _measureDetails,
+            qListData: _qListData,
+            // dimensionInfo: _dimensionDetails,
+            // measureInfo: _measureDetails,
+            dataList: _dataList,
+            dataKeys: _dataKeys,
             metrics: _qMetrics,
             qLayout: _qLayout,
             selections: _selections,
@@ -506,9 +606,13 @@ const useData = (props) => {
           type: "update",
           payload: {
             title: _qTitle,
+            subTitle: _qSubTitle,
             metrics: _qMetrics,
             qData: _qData,
             mData: _mData,
+            qListData: _qListData,
+            dataList: _dataList,
+            dataKeys: _dataKeys,
             qLayout: _qLayout,
           },
         });
@@ -573,6 +677,43 @@ const useData = (props) => {
     []
   );
 
+  // takes column data and sorted the table, applies reverse sort
+  const handlerChange = useCallback(
+    async (isMeasure, value) => {
+      // If no sort is set, we need to set a default sort order
+      // if (column.qSortIndicator === "N") {
+      //   if (column.qPath.includes("qDimensions")) {
+      //     await applyPatches([
+      //       {
+      //         qOp: "add",
+      //         qPath: `${column.qPath}/qDef/qSortCriterias`,
+      //         qValue: JSON.stringify([{ qSortByLoadOrder: 1 }]),
+      //       },
+      //     ]);
+      //   }
+      //   if (column.qPath.includes("qMeasures")) {
+      //     await applyPatches([
+      //       {
+      //         qOp: "add",
+      //         qPath: `${column.qPath}/qSortBy`,
+      //         qValue: JSON.stringify({ qSortByLoadOrder: 1 }),
+      //       },
+      //     ]);
+      //   }
+      // }
+      await applyPatches([
+        {
+          qOp: "replace",
+          qPath: `/qHyperCubeDef/${
+            isMeasure ? "qMeasures" : "qDimensions"
+          }/0/qDef/${isMeasure ? "qDef" : "qFieldDefs"}`,
+          qValue: JSON.stringify(isMeasure ? value : [value]),
+        },
+      ]);
+    },
+    [applyPatches, qLayout]
+  );
+
   useEffect(() => {
     if (!engine) return;
     if (qObject.current) return;
@@ -595,10 +736,15 @@ const useData = (props) => {
     qLayout,
     qData,
     mData,
-    dimensionInfo,
-    measureInfo,
-    dataSet: { data: mData, dimensionInfo, measureInfo },
+    qListData,
+    // dimensionInfo,
+    // measureInfo,
+    dataList,
+    handlerChange,
+    dataKeys,
+    dataSet: { data: mData, dataKeys, dataList },
     title,
+    subTitle,
     metrics,
     qRData,
     changePage,

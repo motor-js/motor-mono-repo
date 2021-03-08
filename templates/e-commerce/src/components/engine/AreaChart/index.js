@@ -12,7 +12,8 @@ import {
 } from "recharts";
 
 const MotorAreaChart = ({ dataSet, config }) => {
-  const { data, measureInfo } = dataSet;
+  const { data, dataKeys } = dataSet;
+
   const {
     type,
     showXAxis = true,
@@ -24,7 +25,7 @@ const MotorAreaChart = ({ dataSet, config }) => {
     margin,
     height,
     gradient,
-    dataKey,
+    stacked,
     strokeWidth,
     stackId,
     stroke,
@@ -62,16 +63,21 @@ const MotorAreaChart = ({ dataSet, config }) => {
             )}
           </linearGradient>
         </defs>
-        <Area
-          dataKey={dataKey}
-          type={type}
-          strokeWidth={strokeWidth}
-          stackId={stackId}
-          stroke={stroke}
-          fill={fill}
-          fillOpacity={fillOpacity}
-          isAnimationActive={isAnimationActive}
-        />
+        {dataKeys &&
+          dataKeys.map((key, index) => (
+            <Area
+              key={index}
+              dataKey={key}
+              stackId={stacked ? "a" : null}
+              type={type}
+              strokeWidth={strokeWidth}
+              stackId={stackId}
+              stroke={stroke}
+              fill={fill}
+              fillOpacity={fillOpacity}
+              isAnimationActive={isAnimationActive}
+            />
+          ))}
       </AreaChart>
     </ResponsiveContainer>
   );

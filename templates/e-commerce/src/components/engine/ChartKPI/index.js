@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "antd";
 import useData from "dev-resources/hooks/useData";
-import Widget from "dev-resources/components/Widget";
+import Widget from "components/Widget";
 
 import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
