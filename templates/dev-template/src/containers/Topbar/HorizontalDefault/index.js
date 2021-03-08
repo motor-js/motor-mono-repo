@@ -34,27 +34,29 @@ const Topbar = () => {
 
   return (
     <Header>
-        {themeState.theme === "light" ? (
-          <img
-            src={logoLight}
-            alt="Logo"
-            style={{ height: "40px", width: "120px" }}
-          />
-        ) : (
-          <img
-            src={logoDark}
-            alt="Logo"
-            style={{ height: "40px", width: "120px" }}
-          />
-        )}
+      {themeState.theme === "light" ? (
+        <img
+          src={logoLight}
+          alt="Logo"
+          style={{ height: "40px", width: "120px" }}
+        />
+      ) : (
+        <img
+          src={logoDark}
+          alt="Logo"
+          style={{ height: "40px", width: "120px" }}
+        />
+      )}
       <ul className="gx-header-notifications">
         <li className="gx-nav-icon gx-ml-auto">
+          <div className="gx-header-search gx-d-none gx-d-lg-flex"></div>
           <MotorSearch
             styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
             placeholder="Search in app..."
             onChange={handleSearch}
             value={searchText}
           />
+          <div />
         </li>
         <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
           <Popover

@@ -68,18 +68,18 @@ const SearchBox = ({
     setSearchValue("");
   };
 
-  // // outside click functionality
-  // useOutsideClick(
-  //   searchRef,
-  //   () => {
-  //     const outsideClick = !searchRef.current.contains(event.target);
-  //     outsideClick &&
-  //       setSearchValue("") &&
-  //       setListOpen(false) &&
-  //       setLoading(true);
-  //   },
-  //   []
-  // );
+  // outside click functionality
+  useOutsideClick(
+    searchRef,
+    () => {
+      const outsideClick = !searchRef.current.contains(event.target);
+      outsideClick &&
+        setSearchValue("") &&
+        setListOpen(false) &&
+        setLoading(true);
+    },
+    []
+  );
 
   // handle loading indicator
   useEffect(() => {
@@ -87,36 +87,6 @@ const SearchBox = ({
       searchResults.qSearchGroupArray.length > 0 &&
       setLoading(false);
   }, [searchResults]);
-
-  // <SearchWrapper width={width} margin={margin} ref={searchRef}>
-  //   <SearchBar>
-  //     <SearchIcon size={15} />
-  //     <SearchInput
-  //       size={size}
-  //       data-testid="search-bar"
-  //       type="text"
-  //       placeholder="Search application..."
-  //       value={searchValue}
-  //       onChange={(e) => handleInputChange(e)}
-  //     />
-  //     {searchValue !== "" && <XIcon onClick={clearSearch} size={15} />}
-  //   </SearchBar>
-  //   {listOpen && engine && (
-  //     <Suggestions
-  //       searchResults={searchResults}
-  //       dimensions={dimensions}
-  //       qCount={qCount}
-  //       qGroupItemCount={qGroupItemCount}
-  //       loadSearchTermsCallback={loadSearchTerms}
-  //       loadSearchItemsCallback={loadSearchItems}
-  //       selectCallback={handleSelect}
-  //       loading={loading}
-  //       width={width}
-  //       dropHeight={dropHeight}
-  //       size={size}
-  //     />
-  //   )}
-  // </SearchWrapper>;
 
   return (
     <div
