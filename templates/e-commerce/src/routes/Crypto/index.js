@@ -11,6 +11,7 @@ import {
   BalanceHistoryMultiDim,
   pieData,
 } from "./data";
+
 // import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
 // import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";

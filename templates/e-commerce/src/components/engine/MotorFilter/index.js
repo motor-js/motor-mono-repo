@@ -34,7 +34,7 @@ const MotorFilter = ({ dimension }) => {
     setChildren(child);
     if (!selections) return;
     setSelected(selections);
-  }, [mData]);
+  }, [mData, selections]);
 
   async function handleChange(v) {
     await beginSelections();
@@ -44,9 +44,7 @@ const MotorFilter = ({ dimension }) => {
   }
 
   const handleClear = async(v) => {
-  // await beginSelections();
   clearSelections();
-  // await endSelections(true);
   }
 
   async function handleDeselect(v) {
@@ -56,8 +54,8 @@ const MotorFilter = ({ dimension }) => {
 
   return (
     <Widget
-      styleName="gx-order-history"
-      //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Table Component</h2> }
+      //styleName="gx-order-history"
+      //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Name</h2> }
     >
       <Select
         mode="multiple"
@@ -68,7 +66,6 @@ const MotorFilter = ({ dimension }) => {
         placeholder={dimension[0]}
         onClear={handleClear}
         onDeselect={(v) => handleDeselect(v)}
-        //onDropdownVisibleChange={(toggle)=> handleVisibleChange(toggle)}
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
