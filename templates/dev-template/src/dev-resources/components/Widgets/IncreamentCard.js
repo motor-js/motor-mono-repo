@@ -1,7 +1,7 @@
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const data = [
   { name: "Page A", increment: 200 },

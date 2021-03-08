@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./assets/vendors/style";
 import "./styles/wieldy.less";
 
-import App from "containers/App/index";
+import App from "containers/App";
 
 const NextApp = () => (
   <BrowserRouter>

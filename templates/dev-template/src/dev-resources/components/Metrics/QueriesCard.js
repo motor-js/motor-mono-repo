@@ -2,7 +2,7 @@ import { Col, Row } from "antd";
 import React from "react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const data = [
   { name: "Page A", queries: 400 },

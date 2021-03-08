@@ -1,5 +1,5 @@
 import React from "react";
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 import { Button, Col, Row } from "antd";
 import LineIndicator from "./LineIndicator";
 

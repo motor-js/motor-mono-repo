@@ -1,6 +1,6 @@
 import React from "react";
 
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 import EventItem from "./EventItem";
 import { eventList } from "../../../routes/socialApps/Profile/data";
 

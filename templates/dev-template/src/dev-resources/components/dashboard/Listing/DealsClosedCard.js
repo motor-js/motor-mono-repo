@@ -1,6 +1,6 @@
 import React from "react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 import { Badge } from "antd";
 
 const data = [

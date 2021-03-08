@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import CircularProgress from "dev-resources/components/CircularProgress/index";
+import CircularProgress from "dev-resources/components/CircularProgress";
 import Auxiliary from "util/Auxiliary";
 import { useDispatch, useSelector } from "react-redux";
 import { hideMessage } from "dev-resources/appRedux/actions/Common";

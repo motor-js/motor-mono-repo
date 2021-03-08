@@ -1,5 +1,5 @@
 import React from "react";
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const GrowthCard = ({
   title,

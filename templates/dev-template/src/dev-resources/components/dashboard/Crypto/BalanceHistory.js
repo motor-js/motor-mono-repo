@@ -2,7 +2,7 @@ import React from "react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { Select } from "antd";
 
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const data = [
   { name: "", balance: 200 },

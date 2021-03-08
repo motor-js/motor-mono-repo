@@ -9,7 +9,7 @@ import HorizontalDefault from "../Topbar/HorizontalDefault/index";
 //import BelowHeader from "../Topbar/BelowHeader/index";
 //import Topbar from "../Topbar/index";
 
-import { footer } from "settings/index";
+import { footer } from "settings";
 import App from "routes";
 import { LayoutContext } from "store";
 import { appSettings } from "settings";

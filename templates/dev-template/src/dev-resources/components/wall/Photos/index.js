@@ -1,5 +1,5 @@
 import React from "react";
-import WidgetHeader from "dev-resources/components/WidgetHeader/index";
+import WidgetHeader from "dev-resources/components/WidgetHeader";
 
 const Photos = ({ photoList, title }) => {
   return (

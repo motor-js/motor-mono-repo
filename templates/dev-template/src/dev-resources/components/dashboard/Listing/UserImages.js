@@ -1,7 +1,7 @@
 import React from "react";
 
 import Aux from "util/Auxiliary.js";
-import WidgetHeader from "dev-resources/components/WidgetHeader/index";
+import WidgetHeader from "dev-resources/components/WidgetHeader";
 
 const userImageList = [
   {

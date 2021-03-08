@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Input, Select } from "antd";
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const Option = Select.Option;
 const FormItem = Form.Item;

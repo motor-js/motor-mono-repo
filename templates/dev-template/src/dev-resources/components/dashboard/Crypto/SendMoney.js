@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "antd";
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const columns = [
   {

@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar } from "antd";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
 
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const data = [
   { name: "Page A", price: 200 },

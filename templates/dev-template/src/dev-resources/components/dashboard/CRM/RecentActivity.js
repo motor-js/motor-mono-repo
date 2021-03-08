@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, Timeline } from "antd";
-import WidgetHeader from "dev-resources/components/WidgetHeader/index";
+import WidgetHeader from "dev-resources/components/WidgetHeader";
 import ActivityItem from "./ActivityItem";
 
 const TimeLineItem = Timeline.Item;

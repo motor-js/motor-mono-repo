@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import RoadMapItem from "./RoadMapItem";
 import { mediaList } from "../../routes/main/Widgets/data";
-import CardBox from "dev-resources/components/CardBox/index";
+import CardBox from "dev-resources/components/CardBox";
 
 const RoadMap = () => {
   const settings = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "antd";
 
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 
 const BuildingCard = () => {
   return (

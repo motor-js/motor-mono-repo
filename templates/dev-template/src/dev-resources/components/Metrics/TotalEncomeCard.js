@@ -2,7 +2,7 @@ import React from "react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 import { Col, Row } from "antd";
 
-import Widget from "components/Widget/index";
+import Widget from "components/Widget";
 import { trafficData } from "../../routes/main/Metrics/data";
 
 const TotalEncomeCard = () => {
