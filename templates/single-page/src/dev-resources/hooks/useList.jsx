@@ -1,6 +1,6 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
-import { EngineContext } from "@motor-js/engine";
+import { EngineContext } from "../contexts/EngineProvider";
 
 // import useSequencer from './useSequencer';
 

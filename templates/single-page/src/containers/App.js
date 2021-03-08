@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import HorizontalDefault from "../Topbar/HorizontalDefault/index";
+import Topbar from "./Topbar";
 import { Layout } from "antd";
 import { ThemeContext } from "store";
 import { footer } from "settings/index";
 
-import "./assets/vendors/style";
-import "./styles/wieldy.less";
+import "assets/vendors/style";
+import "styles/wieldy.less";
 
 const { Content, Footer } = Layout;
 
@@ -22,9 +22,8 @@ const App = () => {
 
   return (
     <Layout className="gx-app-layout">
-      {/*<Sidebar/>*/}
       <Layout>
-        <HorizontalDefault />
+        <Topbar />
         <Content className={`gx-layout-content gx-container-wrap`}>
           <Footer>
             <div className="gx-layout-footer-content">{footer.footerText}</div>

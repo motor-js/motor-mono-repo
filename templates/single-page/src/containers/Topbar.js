@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Layout, Popover, Switch } from "antd";
-import { Link } from "react-router-dom";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
 
 import Selections from "components/engine/Selections";
@@ -35,7 +34,6 @@ const Topbar = () => {
 
   return (
     <Header>
-      <Link to="/" className="gx-d-block gx-pointer">
         {themeState.theme === "light" ? (
           <img
             src={logoLight}
@@ -49,7 +47,6 @@ const Topbar = () => {
             style={{ height: "40px", width: "120px" }}
           />
         )}
-      </Link>
       <ul className="gx-header-notifications">
         <li className="gx-nav-icon gx-ml-auto">
           <MotorSearch

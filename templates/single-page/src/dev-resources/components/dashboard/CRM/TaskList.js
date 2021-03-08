@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tabs } from "antd";
-import Widget from "components/Widget";
+import Widget from "components/engine/Chart/node_modules/components/Widget";
 import TaskItem from "./TaskItem";
 
 const TabPane = Tabs.TabPane;

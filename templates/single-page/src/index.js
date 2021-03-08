@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Motor } from "@motor-js/engine";
 
 import reportWebVitals from "./reportWebVitals";
-import App from "./App";
+import App from "./containers/App";
 import { qlikConfig } from "settings";
 import Store from "store";
 

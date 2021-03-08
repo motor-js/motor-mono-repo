@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row, Tabs } from "antd";
-import Widget from "components/Widget";
+import Widget from "components/engine/Chart/node_modules/components/Widget";
 import { aboutList } from "../../../routes/socialApps/Profile/data";
 import AboutItem from "./AboutItem";
 
