@@ -43,9 +43,9 @@ const MotorFilter = ({ dimension }) => {
     await endSelections(true);
   }
 
-  const handleClear = async(v) => {
-  clearSelections();
-  }
+  const handleClear = async (v) => {
+    clearSelections();
+  };
 
   async function handleDeselect(v) {
     const sel = [v];
@@ -54,8 +54,8 @@ const MotorFilter = ({ dimension }) => {
 
   return (
     <Widget
-      //styleName="gx-order-history"
-      //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Name</h2> }
+    //styleName="gx-order-history"
+    //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Name</h2> }
     >
       <Select
         mode="multiple"

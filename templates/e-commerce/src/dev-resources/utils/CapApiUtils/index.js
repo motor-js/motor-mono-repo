@@ -1,4 +1,4 @@
-import Uid from './Uid';
+import Uid from "./Uid";
 
 const globals = {
   qlik: null,

@@ -1,29 +1,35 @@
-import React, {createContext, useReducer} from "react";
-import ThemeReducer from 'reducers/theme'
-import LayoutReducer from 'reducers/layout'
-import { appSettings } from 'settings'
+import React, { createContext, useReducer } from "react";
+import ThemeReducer from "reducers/theme";
+import LayoutReducer from "reducers/layout";
+import { appSettings } from "settings";
 
-const { theme, layout } = appSettings
+const { theme, layout } = appSettings;
 
 const initialThemeState = {
-    theme,
+  theme,
 };
 
 const initialLayoutState = {
-    layout,
+  layout,
 };
 
-const Store = ({children}) => {
-    const [themeState, themeDispatch] = useReducer(ThemeReducer, initialThemeState);
-    const [layoutState, layoutDispatch] = useReducer(LayoutReducer, initialLayoutState);
+const Store = ({ children }) => {
+  const [themeState, themeDispatch] = useReducer(
+    ThemeReducer,
+    initialThemeState
+  );
+  const [layoutState, layoutDispatch] = useReducer(
+    LayoutReducer,
+    initialLayoutState
+  );
 
-    return (
-        <ThemeContext.Provider value={[themeState, themeDispatch]}>
-            <LayoutContext.Provider value={[layoutState, layoutDispatch]}>
-            {children}
-            </LayoutContext.Provider>
-        </ThemeContext.Provider>
-    )
+  return (
+    <ThemeContext.Provider value={[themeState, themeDispatch]}>
+      <LayoutContext.Provider value={[layoutState, layoutDispatch]}>
+        {children}
+      </LayoutContext.Provider>
+    </ThemeContext.Provider>
+  );
 };
 
 export const ThemeContext = createContext(initialThemeState);

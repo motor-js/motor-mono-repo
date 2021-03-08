@@ -88,10 +88,10 @@ const App = (props) => {
   setLayoutType(layoutType);
 
   setNavStyle(navStyle);
-  
+
   return (
     <ConfigProvider>
-        <Route path={`${match.url}`} component={MainApp} />
+      <Route path={`${match.url}`} component={MainApp} />
     </ConfigProvider>
   );
 };

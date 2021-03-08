@@ -1,4 +1,4 @@
-function createDef(     
+function createDef(
   cols,
   qHyperCubeDef,
   qSortByAscii,
@@ -12,9 +12,8 @@ function createDef(
   qColumnOrder,
   qCalcCondition,
   qOtherTotalSpec,
-  totalSpec,
-  ) {
-
+  totalSpec
+) {
   const qProp = {
     qInfo: { qType: "visualization" },
   };
@@ -37,7 +36,6 @@ function createDef(
   const qInterColumnSortOrderSet = !!qInterColumnSortOrder;
   let sortIndex = 0;
 
-
   const qDimensions = cols
     .filter((col, i) => {
       const isDimension =
@@ -57,7 +55,7 @@ function createDef(
       return isDimension;
     })
     .map((col) => {
-    // console.log('dim',col)
+      // console.log('dim',col)
       if (typeof col === "string") {
         return {
           qDef: {
@@ -116,9 +114,7 @@ function createDef(
               id: "colorTheme",
             },
           ],
-          qNullSuppression: col.qNullSuppression
-            ? col.qNullSuppression
-            : true,
+          qNullSuppression: col.qNullSuppression ? col.qNullSuppression : true,
           qSuppressMissing: true,
           qShowTotalsAbove: true,
         };
@@ -155,9 +151,7 @@ function createDef(
               id: "colorTheme",
             },
           ],
-          qNullSuppression: col.qNullSuppression
-            ? col.qNullSuppression
-            : true,
+          qNullSuppression: col.qNullSuppression ? col.qNullSuppression : true,
           qSuppressMissing: true,
           qShowTotalsAbove: true,
         };
@@ -184,7 +178,7 @@ function createDef(
       return isMeasure;
     })
     .map((col) => {
-    // console.log('mea',col)
+      // console.log('mea',col)
       if (typeof col === "string") {
         return {
           qDef: {
@@ -263,7 +257,6 @@ function createDef(
   };
 
   return qProp;
-
 }
 
-export default createDef
+export default createDef;

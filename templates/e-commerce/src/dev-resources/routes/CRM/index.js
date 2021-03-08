@@ -1,5 +1,5 @@
 import React from "react";
-import {Col, Row} from "antd";
+import { Col, Row } from "antd";
 import Auxiliary from "util/Auxiliary";
 
 /*
@@ -23,7 +23,8 @@ import {recentActivity, taskList, trafficData} from "./data";
 
 const CRM = () => {
   return (
-    <Auxiliary>hi
+    <Auxiliary>
+      hi
       {/* 
       <Row>
         <Col span={24}>

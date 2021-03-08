@@ -5,7 +5,7 @@ import { Motor } from "@motor-js/engine";
 import reportWebVitals from "./reportWebVitals";
 import NextApp from "./NextApp";
 import { qlikConfig } from "settings";
-import Store from "store"
+import Store from "store";
 
 ReactDOM.render(
   // Wrap App inside AppContainer

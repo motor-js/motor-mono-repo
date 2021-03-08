@@ -105,7 +105,6 @@
       font-size: 14px;
 
       @media screen and (max-width: @screen-xs-max) {
-
         & .icon {
           display: none;
         }
@@ -119,13 +118,12 @@
     }
 
     @media screen and (max-width: @screen-xs-max) {
-
       &.@{class-prefix}-notify,
       &.@{class-prefix}-msg {
         margin-top: 2px;
       }
 
-      &.@{class-prefix}-nav-icon  {
+      &.@{class-prefix}-nav-icon {
         margin-bottom: 2px;
       }
     }
@@ -139,7 +137,6 @@
         }
 
         .@{class-prefix}-inside-header-horizontal & {
-
           @media screen and (max-width: @screen-lg-max) {
             margin-left: 0;
           }
@@ -149,7 +146,9 @@
   }
 }
 
-.@{class-prefix}-header-horizontal-main .@{class-prefix}-header-notifications li {
+.@{class-prefix}-header-horizontal-main
+  .@{class-prefix}-header-notifications
+  li {
   & > span {
     color: @text-color;
 
@@ -243,7 +242,7 @@
     color: @menu-dark-highlight-color;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       right: 169px;
       top: -212px;
@@ -325,7 +324,6 @@
     }
 
     @media screen and (max-width: @screen-xs-max) {
-
       & .@{class-prefix}-w-logo {
         padding-right: 0;
       }
@@ -496,7 +494,8 @@
 }
 
 .@{class-prefix}-no-header-horizontal {
-  padding: 14px @layout-main-content-padding 13px (2*@layout-main-content-padding + 15);
+  padding: 14px @layout-main-content-padding 13px
+    (2 * @layout-main-content-padding + 15);
   text-align: center;
   position: relative;
 
@@ -529,6 +528,7 @@
   }
 
   @media screen and (max-width: @screen-xs-max) {
-    padding: 14px @layout-main-content-padding-res 13px 4*@layout-main-content-padding-res;
+    padding: 14px @layout-main-content-padding-res 13px 4 *
+      @layout-main-content-padding-res;
   }
 }

@@ -23,7 +23,7 @@
     .framed-layout & {
       top: @framed-layout-base;
       bottom: @framed-layout-base;
-      height: calc(100vh~"-"2 * @framed-layout-base);
+      height: calc(100vh~ "-" 2 * @framed-layout-base);
       .border-radius(11px 0 0 11px);
       overflow: hidden;
 
@@ -51,7 +51,7 @@
       .framed-layout & {
         top: @framed-layout-base;
         bottom: @framed-layout-base;
-        height: calc(100vh~"-"2 * @framed-layout-base);
+        height: calc(100vh~ "-" 2 * @framed-layout-base);
         .border-radius(0 11px 11px 0);
         overflow: hidden;
 
@@ -86,7 +86,6 @@
   }
 
   &-open {
-
     &.ant-drawer-left,
     &.ant-drawer-right {
       .framed-layout &,
@@ -99,7 +98,7 @@
     }
 
     .framed-layout & {
-      width: calc(100%~"-"2 * @framed-layout-base);
+      width: calc(100%~ "-" 2 * @framed-layout-base);
 
       @media screen and (max-width: @screen-md-max) {
         width: 100%;
@@ -110,13 +109,11 @@
   &.ant-drawer-left,
   &.ant-drawer-right {
     .boxed-layout & {
-
       @media screen and (min-width: @screen-xxl-min) {
         position: absolute;
       }
     }
     .framed-layout & {
-
       @media screen and (min-width: @screen-md-max) {
         position: absolute;
       }
@@ -126,7 +123,6 @@
   &.ant-drawer-left,
   &.ant-drawer-right {
     .framed-layout & {
-
       @media screen and (max-width: @screen-md-max) {
         right: 20px;
         left: 20px;

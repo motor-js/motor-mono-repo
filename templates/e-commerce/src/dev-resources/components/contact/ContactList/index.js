@@ -2,17 +2,27 @@ import React from "react";
 
 import ContactCell from "./ContactCell/index";
 
-const ContactList = ({contactList, addFavourite, onContactSelect, onSaveContact, onDeleteContact}) => {
+const ContactList = ({
+  contactList,
+  addFavourite,
+  onContactSelect,
+  onSaveContact,
+  onDeleteContact,
+}) => {
   return (
     <div className="gx-contact-main-content">
-      {contactList.map((contact, index) =>
-        <ContactCell key={index} contact={contact} onDeleteContact={onDeleteContact}
-                     onSaveContact={onSaveContact}
-                     addFavourite={addFavourite} onContactSelect={onContactSelect}/>
-      )}
-
+      {contactList.map((contact, index) => (
+        <ContactCell
+          key={index}
+          contact={contact}
+          onDeleteContact={onDeleteContact}
+          onSaveContact={onSaveContact}
+          addFavourite={addFavourite}
+          onContactSelect={onContactSelect}
+        />
+      ))}
     </div>
-  )
+  );
 };
 
 export default ContactList;
