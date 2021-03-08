@@ -64,6 +64,7 @@ const useButton = (props) => {
     engine && engine.forward()
   };
 
+  /*
   const exportData = (
     filename,
     ) => {  
@@ -81,13 +82,14 @@ const useButton = (props) => {
       })
     })
   }
+  */
 
   return {
     clearSelections,
     previousSelection,
     nextSelection,
     qLayout,
-    exportData
+    //exportData
   };
 };
 

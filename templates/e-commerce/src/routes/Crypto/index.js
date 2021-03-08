@@ -13,7 +13,7 @@ import {
 } from "./data";
 
 // import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
-import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
+import Portfolio from 'dev-resources/components/dashboard/Crypto/Portfolio';
 // import BalanceHistory from "dev-resources/components/dashboard/Crypto/BalanceHistory";
 import SendMoney from "dev-resources/components/dashboard/Crypto/SendMoney";
 import RewardCard from "dev-resources/components/dashboard/Crypto/RewardCard";
@@ -34,6 +34,7 @@ const Crypto = () => {
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <MotorFilter dimension={["name"]} />
+
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <MotorFilter dimension={["coin"]} />
