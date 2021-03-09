@@ -42,7 +42,17 @@
 
     .ant-layout-header &,
     .ant-popover-content & {
-      border: 0 none;
+      // border: 0 none;
+      width: 85%;
+      outline: none;
+      // border: none;
+      border: 1px solid #ff7272;
+      // padding-left: 0.7em;
+      background-color: white;
+      &::placeholder {
+        // color: #868e96;
+        color: #ff7272;
+      }
     }
 
     &:focus {

@@ -28,17 +28,6 @@ const SearchBar = styled.div`
 
 const SearchInput = styled.input`
   ${globalStyle};
-  width: 85%;
-  outline: none;
-  border: none;
-  padding-left: 0.7em;
-  background-color: ${(props) =>
-    selectColor(props.theme.search.color.background, props.theme)};
-  color: ${(props) => selectColor(props.theme.search.color.font, props.theme)};
-  &::placeholder {
-    color: ${(props) =>
-      selectColor(props.theme.search.color.placeholder, props.theme)};
-  }
 `;
 
 const SearchIcon = styled(Search)`
