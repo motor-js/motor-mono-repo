@@ -106,148 +106,6 @@ body.dark-theme {
     color: @dark-theme-text-color;
   }
 
-  & .@{class-prefix}-header-horizontal {
-    background: darken(@dark-theme-primary-color, 5%);
-  }
-
-
-  & .@{class-prefix}-header-horizontal-dark {
-    &:before {
-      background: lighten(@dark-theme-primary-color, 5%);
-    }
-
-    &
-      .@{class-prefix}-header-search
-      .@{class-prefix}-lt-icon-search-bar-lg
-      input[type="search"] {
-      border-color: @border-color;
-    }
-  }
-
-  &
-    .@{class-prefix}-header-horizontal-nav-curve {
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item:hover
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu:hover
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-open
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-open
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-selected
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-selected
-      > .ant-menu-submenu-title:before {
-      color: darken(@dark-theme-primary-color, 5%);
-    }
-
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu:hover
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-open
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-open
-      > .ant-menu-submenu-title:before {
-      color: @menu-dark-highlight-color;
-    }
-  }
-
-  &
-    .@{class-prefix}-header-horizontal-nav-curve,
-  &
-    .@{class-prefix}-header-horizontal-nav-curve {
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item:hover
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu:hover
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-open
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-open
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-selected
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-selected
-      > .ant-menu-submenu-title:before {
-      color: @dark-theme-primary-color;
-    }
-
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu:hover
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-active
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-item-open
-      > .ant-menu-submenu-title:before,
-    &
-      .ant-menu-horizontal
-      > .ant-menu-submenu-open
-      > .ant-menu-submenu-title:before {
-      color: @menu-dark-highlight-color;
-    }
-  }
-
   & .@{class-prefix}-menu-horizontal {
     & .ant-menu-submenu:hover > .ant-menu-submenu-title,
     & .ant-menu-item-active > .ant-menu-submenu-title,
@@ -370,7 +228,7 @@ body.dark-theme {
     background: @dark-theme-primary-color;
   }
 
-  & .@{class-prefix}-header-horizontal-nav .ant-menu-horizontal {
+  & .ant-menu-horizontal {
     background: none;
   }
 
@@ -970,13 +828,6 @@ body.dark-theme {
   & .@{class-prefix}-sub-popover li:not(:last-child),
   & .@{class-prefix}-popover-header {
     border-bottom-color: @dark-theme-border-color;
-  }
-
-  & .@{class-prefix}-user-popover li {
-    &:hover,
-    &:focus {
-      background-color: lighten(@dark-theme-component-background, 5%);
-    }
   }
 
   & .ant-divider {
@@ -2239,25 +2090,6 @@ body.dark-theme {
           color: @white-color !important;
         }
       }
-    }
-  }
-
-  & .@{class-prefix}-header-search {
-    & .ant-select-selection {
-      background-color: darken(@dark-theme-component-background, 10%);
-      border-color: @border-color;
-      color: @dark-theme-text-color;
-      margin-left: -1px;
-
-      &:focus {
-        color: @dark-theme-text-color;
-        background-color: darken(@dark-theme-component-background, 15%);
-        border-color: @border-color;
-      }
-    }
-
-    & .ant-select-arrow {
-      color: @dark-theme-text-color;
     }
   }
 
