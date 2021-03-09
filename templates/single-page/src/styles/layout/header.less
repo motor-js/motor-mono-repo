@@ -20,34 +20,9 @@
   }
 }
 
-.@{class-prefix}-nav-header {
-  padding: @layout-header-padding;
-  border-bottom: @border-width-base @border-style-base (fade(@white-color, 50%));
-  background-color: @layout-header-background;
-
-  & .ant-menu-horizontal {
-    margin-bottom: -1px;
-    border-bottom-color: transparent;
-  }
-}
-
-.@{class-prefix}-nav-header-below {
-  .box-shadow(0 1px 2px 1px fade(@black-color, 28%));
-  position: relative;
-  z-index: 999;
-}
-
 .ant-dropdown-menu-item {
   .flex-display();
   .align-items(center);
-}
-
-.@{class-prefix}-linebar {
-  font-size: 20px;
-
-  .@{class-prefix}-header-horizontal-dark & {
-    color: @white-color;
-  }
 }
 
 .@{class-prefix}-header-notifications {
@@ -63,11 +38,6 @@
     &:not(:last-child) {
       margin-right: 42px;
 
-      .@{class-prefix}-inside-header-horizontal & {
-        margin-right: 20px;
-      }
-
-      .@{class-prefix}-header-horizontal-main &,
       .@{class-prefix}-header-horizontal-nav & {
         margin-right: 30px;
 
@@ -83,18 +53,6 @@
 
     &.@{class-prefix}-notify {
       margin-right: 22px;
-
-      .@{class-prefix}-header-horizontal-main & {
-        margin-right: 30px;
-
-        @media screen and (max-width: @screen-md-max) {
-          margin-right: 16px;
-        }
-      }
-
-      .@{class-prefix}-inside-header-horizontal & {
-        margin-right: 20px;
-      }
 
       @media screen and (max-width: @screen-md-max) {
         margin-right: 16px;
@@ -127,27 +85,10 @@
         margin-bottom: 2px;
       }
     }
-
-    &.@{class-prefix}-user-nav {
-      .@{class-prefix}-header-horizontal-main & {
-        margin-left: 50px;
-
-        @media screen and (max-width: @screen-md-max) {
-          margin-left: 0;
-        }
-
-        .@{class-prefix}-inside-header-horizontal & {
-          @media screen and (max-width: @screen-lg-max) {
-            margin-left: 0;
-          }
-        }
-      }
-    }
   }
 }
 
-.@{class-prefix}-header-horizontal-main
-  .@{class-prefix}-header-notifications
+.@{class-prefix}-header-notifications
   li {
   & > span {
     color: @text-color;
@@ -329,9 +270,6 @@
       }
     }
 
-    .@{class-prefix}-inside-header-horizontal & {
-      padding: 0;
-    }
   }
 
   &-nav {
@@ -342,39 +280,6 @@
       background-color: transparent;
     }
 
-    .@{class-prefix}-below-header-horizontal &,
-    .@{class-prefix}-above-header-horizontal & {
-      background-color: @layout-header-background;
-      color: lighten(@text-color, 15%);
-    }
-  }
-}
-
-.@{class-prefix}-inside-header-horizontal {
-  & .@{class-prefix}-logo {
-    margin-right: 25px;
-  }
-
-  &:before {
-    top: -230px;
-
-    @media screen and (max-width: @screen-lg-max) {
-      top: -190px;
-    }
-
-    @media screen and (max-width: @screen-md-max) {
-      top: -154px;
-    }
-  }
-}
-
-.@{class-prefix}-above-header-horizontal {
-  &:before {
-    top: -165px;
-
-    @media screen and (max-width: @screen-md-max) {
-      top: -154px;
-    }
   }
 }
 
@@ -514,17 +419,6 @@
 
   &-top-center {
     .flex-display(flex, row, nowrap);
-  }
-
-  .@{class-prefix}-linebar {
-    position: absolute;
-    left: @layout-main-content-padding;
-    top: 15px;
-    z-index: 1;
-
-    @media screen and (max-width: @screen-xs-max) {
-      left: @layout-main-content-padding-res;
-    }
   }
 
   @media screen and (max-width: @screen-xs-max) {

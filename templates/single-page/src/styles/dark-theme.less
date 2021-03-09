@@ -110,10 +110,6 @@ body.dark-theme {
     background: darken(@dark-theme-primary-color, 5%);
   }
 
-  & .@{class-prefix}-header-horizontal-main {
-    color: @dark-theme-text-color;
-    background: none;
-  }
 
   & .@{class-prefix}-header-horizontal-dark {
     &:before {
@@ -129,7 +125,6 @@ body.dark-theme {
   }
 
   &
-    .@{class-prefix}-above-header-horizontal
     .@{class-prefix}-header-horizontal-nav-curve {
     &
       .ant-menu-horizontal
@@ -191,10 +186,8 @@ body.dark-theme {
   }
 
   &
-    .@{class-prefix}-below-header-horizontal
     .@{class-prefix}-header-horizontal-nav-curve,
   &
-    .@{class-prefix}-inside-header-horizontal
     .@{class-prefix}-header-horizontal-nav-curve {
     &
       .ant-menu-horizontal
@@ -269,11 +262,6 @@ body.dark-theme {
     background: @dark-theme-primary-color;
     color: @dark-theme-text-color;
     border-top-color: @dark-theme-border-color;
-  }
-
-  & .@{class-prefix}-nav-header {
-    background-color: @dark-theme-primary-color;
-    border-bottom-color: @dark-theme-border-color;
   }
 
   & .ant-menu {
@@ -2810,182 +2798,6 @@ body.dark-theme {
     border-right-color: @dark-theme-border-color;
   }
 
-  & .rbc-event {
-    background-color: lighten(@dark-theme-component-background, 20%);
-  }
-
-  & .rbc-event.rbc-selected {
-    background-color: darken(@dark-theme-component-background, 10%);
-  }
-
-  & .rbc-slot-selection {
-    background-color: lighten(@dark-theme-component-background, 10%);
-  }
-
-  & .rbc-toolbar button {
-    color: @dark-theme-text-color;
-    border-color: @dark-theme-text-color;
-  }
-
-  & .rbc-toolbar button:active,
-  & .rbc-toolbar button.rbc-active,
-  & .rbc-toolbar button:active:hover,
-  & .rbc-toolbar button.rbc-active:hover,
-  & .rbc-toolbar button:active:focus,
-  & .rbc-toolbar button.rbc-active:focus,
-  & .rbc-toolbar button:focus,
-  & .rbc-toolbar button:hover {
-    color: @dark-theme-primary-color;
-    background-color: @dark-theme-text-color;
-    border-color: @dark-theme-text-color;
-  }
-
-  & .rbc-month-view,
-  & .rbc-time-view,
-  & .rbc-today {
-    background: @dark-theme-component-background;
-  }
-
-  & .rbc-date-cell {
-    & .@{class-prefix}-link {
-      color: @dark-theme-text-color;
-    }
-
-    & .@{class-prefix}-link:hover,
-    & .@{class-prefix}-link:focus {
-      color: @white-color;
-    }
-  }
-
-  & .rbc-off-range-bg {
-    background: lighten(@dark-theme-component-background, 10%);
-
-    & .@{class-prefix}-link {
-      color: darken(@dark-theme-text-color, 40%);
-    }
-
-    & .@{class-prefix}-link:hover,
-    & .@{class-prefix}-link:focus {
-      color: @dark-theme-text-color;
-    }
-  }
-
-  & .@{class-prefix}-com-calendar-card {
-    border-color: @dark-theme-border-color;
-  }
-
-  & .@{class-prefix}-chat-module-box {
-    background-color: @dark-theme-component-background;
-  }
-
-  & .@{class-prefix}-chat-sidenav {
-    border-right-color: @dark-theme-border-color;
-  }
-
-  & .@{class-prefix}-chat-sidenav-header {
-    background-color: lighten(@dark-theme-component-background, 5%);
-    border-bottom-color: @dark-theme-border-color;
-  }
-
-  & .@{class-prefix}-chat-sidenav-content {
-    background-color: @dark-theme-component-background;
-  }
-
-  & .@{class-prefix}-chat-sidenav-title {
-    color: @dark-theme-text-color;
-  }
-
-  & .@{class-prefix}-chat-tabs-header {
-    background-color: lighten(@dark-theme-component-background, 5%) !important;
-  }
-
-  & .@{class-prefix}-chat-user-item {
-    &:not(:last-child) {
-      border-bottom-color: @dark-theme-border-color;
-    }
-
-    &.active,
-    &:hover {
-      background-color: lighten(@dark-theme-component-background, 3%);
-    }
-  }
-
-  & .@{class-prefix}-chat-info-des {
-    color: @dark-theme-text-color;
-  }
-
-  & .@{class-prefix}-chat-main-header {
-    border-bottom-color: @dark-theme-border-color;
-    background-color: @dark-theme-component-background;
-  }
-
-  & .@{class-prefix}-chat-main-footer {
-    border-top-color: @dark-theme-border-color;
-    background-color: @dark-theme-component-background;
-  }
-
-  & .@{class-prefix}-chat-item {
-    & .@{class-prefix}-bubble {
-      background-color: lighten(@dark-theme-component-background, 2%);
-      border-color: @dark-theme-border-color;
-    }
-
-    &.@{class-prefix}-flex-row-reverse .@{class-prefix}-bubble {
-      background-color: lighten(@dark-theme-component-background, 5%);
-    }
-  }
-
-  & .@{class-prefix}-error-code {
-    color: @dark-theme-text-color;
-    text-shadow: 10px 6px 8px rgba(255, 117, 117, 0.8);
-  }
-
-  & .@{class-prefix}-btn-yellow,
-  & .@{class-prefix}-link.@{class-prefix}-btn-yellow {
-    color: @grey-9 !important;
-    background-color: @yellow-color !important;
-    border-color: @yellow-color !important;
-
-    &:hover,
-    &:focus {
-      color: @white-color !important;
-      background-color: darken(@yellow-color, 10%) !important;
-      border-color: darken(@yellow-color, 10%) !important;
-    }
-
-    &.disabled,
-    &:disabled {
-      background-color: @yellow-color !important;
-      border-color: @yellow-color !important;
-    }
-
-    &:not([disabled]):not(.disabled):active,
-    &:not([disabled]):not(.disabled).active {
-      color: @white-color !important;
-      background-color: darken(@yellow-color, 10%) !important;
-      border-color: darken(@yellow-color, 10%) !important;
-    }
-  }
-
-  & .@{class-prefix}-package {
-    background-color: @white-color;
-    color: @grey-8;
-  }
-
-  & .@{class-prefix}-package-header {
-    & > .@{class-prefix}-price {
-      color: @white-color;
-    }
-
-    &.@{class-prefix}-text-white {
-      color: @grey-8 !important;
-    }
-  }
-
-  & .@{class-prefix}-customizer-item:not(:last-child) {
-    border-bottom-color: @dark-theme-border-color;
-  }
-
   & .ant-layout-sider-dark,
   & .gx-drawer-sidebar-dark {
     & .@{class-prefix}-sidebar-notifications {
@@ -3140,7 +2952,6 @@ body.dark-theme {
   }
 
   &
-    .@{class-prefix}-header-horizontal-main
     .@{class-prefix}-header-notifications
     li
     > span {
