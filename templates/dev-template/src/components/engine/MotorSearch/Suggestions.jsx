@@ -13,7 +13,6 @@ const Suggestions = ({
   loading,
   dropHeight,
   width,
-  size,
 }) => {
   // load more search results callback
   const loadSearchTerms = (e) => {
@@ -50,14 +49,12 @@ const Suggestions = ({
           <div
             data-testid={`dim-${i}`}
             className="gx-suggestions-list-li-title"
-            size={size}
           >
             {r.qItems[0].qIdentifier}
           </div>
           <div
             data-testid={`value-${i}`}
             className="gx-suggestions-list-li-values"
-            size={size}
           >
             {r.qItems[0].qItemMatches
               .map((item) => {
@@ -71,17 +68,7 @@ const Suggestions = ({
             {numberOfItems > qGroupItemCount && (
               <div
                 onClick={(e) => loadItems(e)}
-                size={size}
-                style={{
-                  //               font-size: ${(props) => props.theme.global.size.subFont[props.size]};
-                  fontStyle: "italic",
-                  textDecoration: "underline",
-                  display: "inline-block",
-                  // &:hover {
-                  //   font-weight: bold;
-                  //   cursor: pointer;
-                  // }
-                }}
+                className="gx-suggestions-items-load"
               >
                 Load more
               </div>

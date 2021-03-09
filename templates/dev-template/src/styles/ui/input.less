@@ -58,6 +58,22 @@
   padding: 2px;
   color: #272727;
 }
+.@{class-prefix}-suggestions-items-load {
+  // font-size: ${(props) => props.theme.global.size.subFont[props.size]};
+  font-style: italic;
+  text-decoration: underline;
+  display: inline-block;
+  &:hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.@{class-prefix}-icon-close {
+  padding-right: 0.5em;
+  cursor: pointer;
+  // color: ${(props) => selectColor(props.theme.search.color.icon, props.theme)};
+}
 
 // Search Bar Style
 .@{class-prefix}-search-bar {
@@ -202,6 +218,46 @@
     font-size: 16px;
     left: 0;
     right: auto;
+    color: #ff7272;
+
+    @media screen and (max-width: @screen-md-max) {
+      height: 38px;
+      line-height: 40px;
+    }
+
+    .@{class-prefix}-header-search & {
+      height: 36px;
+      line-height: 40px;
+    }
+  }
+
+  & .@{class-prefix}-search-icon-close {
+    background-color: transparent;
+    border: 0 none;
+    color: lighten(@grey-6, 10%);
+    height: 32px;
+    width: 30px;
+    line-height: 36px;
+    text-align: center;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .@{class-prefix}-algolia-header & {
+      margin-top: 2px;
+      text-align: left;
+    }
+  }
+
+  & .@{class-prefix}-search-icon-close {
+    width: 35px;
+    height: 46px;
+    line-height: 50px;
+    font-size: 25px;
+    left: auto;
+    right: 0;
+    color: #ff7272;
 
     @media screen and (max-width: @screen-md-max) {
       height: 38px;

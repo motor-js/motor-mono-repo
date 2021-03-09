@@ -6,7 +6,7 @@ import useOutsideClick from "dev-resources/hooks/useOutsideClick";
 const SearchBox = ({
   engineError,
   dimensions,
-  size,
+  // size,
   width,
   margin,
   dropHeight,
@@ -90,7 +90,7 @@ const SearchBox = ({
   }, [searchResults]);
 
   return (
-    <div className={`gx-search-bar ${styleName}`}>
+    <div className={`gx-search-bar ${styleName}`} ref={searchRef}>
       <div className="gx-form-group">
         <input
           className="ant-input"
@@ -100,21 +100,13 @@ const SearchBox = ({
           value={searchValue}
         />
         <span className="gx-search-icon gx-pointer">
-          <i
-            className="icon icon-search"
-            style={{
-              paddingLeft: "1em",
-              height: "15px",
-              width: "30px",
-              // color: ${(props) => selectColor(props.theme.search.color.icon, props.theme)};
-            }}
-          />
-          {/* {searchValue !== "" && <XIcon onClick={clearSearch} size={15} 
-  //           padding-right: 0.5em;
-  // cursor: pointer;
-  // color: ${(props) => selectColor(props.theme.search.color.icon, props.theme)};
-          />} */}
+          <i className="icon icon-search" />
         </span>
+        {searchValue !== "" && (
+          <span className="gx-search-icon-close gx-pointer">
+            <i className="icon icon-close" onClick={clearSearch} s />
+          </span>
+        )}
       </div>
       {listOpen && (
         <Suggestions
@@ -128,7 +120,6 @@ const SearchBox = ({
           loading={loading}
           width={width}
           dropHeight={dropHeight}
-          size={size}
         />
       )}
     </div>
