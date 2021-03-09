@@ -795,10 +795,10 @@ const base = {
   filter: {
     color: {
       selected: "brand",
-      icon: "#868e96",
+      icon: "altGray6",
       backgroundColor: "white",
       selectedFont: "white",
-      fontTitle: "#868e96",
+      fontTitle: "altGray6",
       notSelected: "altGray4",
       altSelection: "altGray1",
     },
@@ -1137,8 +1137,10 @@ const base = {
   },
   search: {
     color: {
+      background: "white",
       font: "altDark",
-      icon: "#868e96",
+      placeholder: "altGray6",
+      icon: "altGray6",
     },
     title: {
       border: "1px solid",

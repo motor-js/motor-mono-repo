@@ -90,29 +90,8 @@ const SearchBox = ({
   }, [searchResults]);
 
   return (
-    <div
-      className={`gx-search-bar ${styleName}`}
-      //     width: ${(props) => props.width};
-      // margin: ${(props) => props.margin};
-      // display: flex;
-      // flex-direction: column;
-      // position: relative;
-    >
-      <div
-        className="gx-form-group"
-        // style={{
-        //   //       border: ${(props) => props.theme.search.title.border};
-        //   // border-color: ${(props) =>
-        //   //   selectColor(props.theme.search.title.borderColor, props.theme)};
-        //   // border-radius: ${(props) => props.theme.search.title.radius};
-        //   // background-color: ${(props) =>
-        //   //   selectColor(props.theme.search.color.background, props.theme)};
-        //   width: "100%",
-        //   padding: "0.6em 0 0.6em 0em",
-        //   display: "flex",
-        //   alignItems: "center",
-        // }}
-      >
+    <div className={`gx-search-bar ${styleName}`}>
+      <div className="gx-form-group">
         <input
           className="ant-input"
           type="search"

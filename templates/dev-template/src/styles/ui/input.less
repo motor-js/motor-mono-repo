@@ -25,6 +25,39 @@
 .@{class-prefix}-form-group {
   margin-bottom: 10px;
 }
+.@{class-prefix}-suggestions-list {
+  list-style: none;
+  padding: 0px;
+  margin-top: 2px;
+  border: 1px solid;
+  border-color: #ced4da;
+  border-radius: 8px;
+  background-color: white;
+  overflow: auto;
+  cursor: normal;
+  position: absolute;
+  width: 100%;
+}
+
+.@{class-prefix}-suggestions-list-li {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #ced4da;
+  &:hover {
+    background-color: #ced4da;
+  }
+}
+.@{class-prefix}-suggestions-list-li-title {
+  // font-size: ${(props) => props.theme.global.size.font[props.size]};
+  padding: 2px;
+  font-weight: bold;
+  color: #272727;
+}
+.@{class-prefix}-suggestions-list-li-values {
+  // font-size: ${(props) => props.theme.global.size.font[props.size]};
+  padding: 2px;
+  color: #272727;
+}
 
 // Search Bar Style
 .@{class-prefix}-search-bar {
@@ -34,6 +67,15 @@
     width: 100%;
     height: 100%;
     margin-bottom: 0;
+
+    // border: 1px solid;
+    // border-color: #ced4da;
+    // border-radius: 8px;
+    // background-color: white;
+    // width: 100%;
+    // padding: 0.6em 0 0.6em 0em;
+    // display: flex;
+    // align-items: center;
   }
 
   & input[type="search"] {
@@ -43,7 +85,8 @@
     .ant-layout-header &,
     .ant-popover-content & {
       // border: 0 none;
-      width: 85%;
+      // width: 85%;
+      width: 100%;
       outline: none;
       // border: none;
       border: 1px solid #ff7272;
@@ -115,6 +158,10 @@
 
 .@{class-prefix}-lt-icon-search-bar-lg {
   width: 350px;
+  // margin: ${(props) => props.margin};
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
   & input[type="search"] {
     .border-radius(@border-radius-sm);
