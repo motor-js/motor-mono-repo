@@ -22,8 +22,8 @@ function Motor({
     <EngineContext.Provider value={engine}>
       <CapabilityContext.Provider value={app}>
         <ConfigContext.Provider value={myConfig}>
-           {/* <Login logo={logo} logoHeight={logoHeight} logoWidth={logoWidth} /> */}
-            {/* <NotConnected />m*/}
+           {/*<Login logo={logo} logoHeight={logoHeight} logoWidth={logoWidth} />*/}
+            {/*<NotConnected />*/}
             {children}
         </ConfigContext.Provider>
       </CapabilityContext.Provider>

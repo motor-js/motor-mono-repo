@@ -1,23 +1,18 @@
-import {
-  useState, useEffect, useCallback, useRef,
-} from 'react'
+import { useState, useEffect, useCallback, useRef, useContext } from "react";
+import { EngineContext } from "@motor-js/engine";
 
-const useSearch = ({
-  engine,
-  searchValue,
-  dimensions,
-  qCount,
-  qGroupItemCount,
-}) => {
-  const [searchResults, setSearchResults] = useState()
-  const _isMounted = useRef(true)
+const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
+  const [searchResults, setSearchResults] = useState();
+  const _isMounted = useRef(true);
+
+  const { engine, engineError } = useContext(EngineContext) || {};
 
   useEffect(() => {
     if (engine === undefined) {
     } else {
       (async () => {
         try {
-          const qDoc = await engine
+          const qDoc = await engine;
           const search = await qDoc.searchResults(
             {
               qSearchFields: dimensions,
@@ -28,58 +23,45 @@ const useSearch = ({
               qCount,
               qGroupItemOptions: [
                 {
-                  qGroupItemType: 'FIELD',
+                  qGroupItemType: "FIELD",
                   qOffset: 0,
                   qCount: qGroupItemCount,
                 },
               ],
-            },
-          )
-          const res = await search
+            }
+          );
+          const res = await search;
           if (_isMounted.current) {
-            setSearchResults(res)
+            setSearchResults(res);
           }
         } catch (e) {
-          console.warn(e)
+          console.warn(e);
         }
-      })()
+      })();
     }
-  }, [engine, searchValue, qCount, qGroupItemCount])
+  }, [engine, searchValue, qCount, qGroupItemCount]);
 
-  useEffect(() => () => _isMounted.current = false, [])
+  useEffect(() => () => (_isMounted.current = false), []);
 
-  const select = useCallback(
-    id => (async () => {
-      const qDoc = await engine
+  const select = useCallback((id) =>
+    (async () => {
+      const qDoc = await engine;
+      // eslint-disable-next-line no-unused-expressions
       qDoc.selectAssociations(
         {
           qSearchFields: dimensions,
         },
         [searchValue],
-        id,
+        id
       ),
-      []
-    })(),
-  )
-
-  /*
-  const beginSelections = useCallback(
-    () => qObject.current.beginSelections(["/qHyperCubeDef"]),
-    [true]
+        [];
+    })()
   );
-
-  const endSelections = useCallback(
-    (qAccept) => qObject.current.endSelections(qAccept),
-    []
-  );
-*/
 
   return {
     searchResults,
     select,
-   // beginSelections,
-   // endSelections,
-  }
-}
+  };
+};
 
-export default useSearch
+export default useSearch;

@@ -1,6 +1,6 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
-import { EngineContext } from '../contexts/EngineProvider'
+import { EngineContext } from "../contexts/EngineProvider";
 
 const initialState = {
   qData: null,
@@ -82,8 +82,6 @@ const useHyperCube = (props) => {
 
   const { qData, qRData, qLayout, selections } = state;
 
-  // load engine from props
-  //const myEngine = props.engine;
   const { engine, engineError } = useContext(EngineContext) || {};
 
   const qObject = useRef(null);
@@ -501,18 +499,18 @@ const useHyperCube = (props) => {
   );
 
   useEffect(() => {
-    if (!engine) return; 
+    if (!engine) return;
     if (qObject.current) return;
     (async () => {
-        const qProp = generateQProp();
-        const qDoc = await engine;
-        qObject.current = await qDoc.createSessionObject(qProp);
-        qObject.current.on("changed", () => {
-          update(qProp.qHyperCubeDef.qMeasures);
-        });
+      const qProp = generateQProp();
+      const qDoc = await engine;
+      qObject.current = await qDoc.createSessionObject(qProp);
+      qObject.current.on("changed", () => {
         update(qProp.qHyperCubeDef.qMeasures);
-      })();
-    }, [generateQProp, engine, update]);
+      });
+      update(qProp.qHyperCubeDef.qMeasures);
+    })();
+  }, [generateQProp, engine, update]);
 
   useEffect(() => () => (_isMounted.current = false), []);
 
