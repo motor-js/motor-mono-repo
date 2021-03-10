@@ -15,5 +15,5 @@ export const qlikConfig = {
 
 export const appSettings = {
   theme: "light", // light or dark
-  showThemeSwitch: true,
+  showThemeSwitch: false,
 };

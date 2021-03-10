@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "antd";
-import useData from "dev-resources/hooks/useData";
+import useData from "@motor-js/engine";
 import Widget from "components/Widget";
 
 import AreaChart from "components/engine/AreaChart";

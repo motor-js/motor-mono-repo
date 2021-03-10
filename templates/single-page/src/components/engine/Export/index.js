@@ -1,9 +1,7 @@
 import { Button } from "antd";
-// import useButton from '../../hooks/useButton'
-import useButton from "../../../dev-resources/hooks/useButton";
-import { config } from "../../../config/config";
+import useButton from "@motor-js/engine";
 
-const MotorExport = () => {
+const Export = () => {
   const cols = [
     { qField: "[name]", qLabel: "name" },
     {
@@ -14,7 +12,6 @@ const MotorExport = () => {
 
   const { qLayout, exportData } = useButton({
     cols,
-    config,
     filename: "Data",
   });
 
@@ -25,4 +22,4 @@ const MotorExport = () => {
   );
 };
 
-export default MotorExport;
+export default Export;
