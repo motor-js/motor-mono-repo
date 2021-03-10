@@ -19,7 +19,7 @@ import RewardCard from "dev-resources/components/dashboard/Crypto/RewardCard";
 import CurrencyCalculator from "dev-resources/components/dashboard/Crypto/CurrencyCalculator";
 // import OrderHistory from "components/dashboard/Crypto/OrderHistory";
 
-import MotorTable from "components/engine/Table";
+import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/Filter";
 import MotorButton from "components/engine/ActionButton";
 

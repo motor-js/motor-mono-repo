@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Motor } from "components/engine/Table/node_modules/@motor-js/engine";
+import { Motor } from "@motor-js/engine";
 
 import reportWebVitals from "./reportWebVitals";
 import NextApp from "./NextApp";
