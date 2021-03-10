@@ -13,7 +13,6 @@ const Suggestions = ({
   loading,
   dropHeight,
   width,
-  size,
 }) => {
   // load more search results callback
   const loadSearchTerms = (e) => {
@@ -42,39 +41,20 @@ const Suggestions = ({
 
       return (
         <li
+          className="gx-suggestions-list-li"
           data-testid={`suggestion-${i}`}
           key={i}
           onClick={() => select(r)}
-          style={{
-            padding: "5px",
-            cursor: "pointer",
-            borderBottom: "1px solid var(--oc-gray-4)",
-            // &:hover {
-            //   background-color: ${(props) =>
-            //     selectColor(props.theme.search.suggestions.hoverColor, props.theme)};
-            // }
-          }}
         >
           <div
             data-testid={`dim-${i}`}
-            size={size}
-            style={{
-              // font-size: ${(props) => props.theme.global.size.font[props.size]};
-              padding: "2px",
-              fontWeight: "bold",
-              // color: ${(props) =>
-              //   selectColor(props.theme.search.suggestions.titleColor, props.theme)};
-            }}
+            className="gx-suggestions-list-li-title"
           >
             {r.qItems[0].qIdentifier}
           </div>
           <div
             data-testid={`value-${i}`}
-            size={size}
-            //           font-size: ${(props) => props.theme.global.size.font[props.size]};
-            // padding: 2px;
-            // color: ${(props) =>
-            //   selectColor(props.theme.search.suggestions.valueColor, props.theme)};
+            className="gx-suggestions-list-li-values"
           >
             {r.qItems[0].qItemMatches
               .map((item) => {
@@ -88,17 +68,7 @@ const Suggestions = ({
             {numberOfItems > qGroupItemCount && (
               <div
                 onClick={(e) => loadItems(e)}
-                size={size}
-                style={{
-                  //               font-size: ${(props) => props.theme.global.size.subFont[props.size]};
-                  fontStyle: "italic",
-                  textDecoration: "underline",
-                  display: "inline-block",
-                  // &:hover {
-                  //   font-weight: bold;
-                  //   cursor: pointer;
-                  // }
-                }}
+                className="gx-suggestions-items-load"
               >
                 Load more
               </div>
@@ -111,42 +81,12 @@ const Suggestions = ({
 
   loadSuggestions();
 
-  //   search: {
-  //   color: {
-  //     font: "altDark",
-  //     placeholder: "altGray6",
-  //     icon: "altGray6",
-  //   },
-
-  //   suggestions: {
-  //     hoverColor: "altGray4",
-  //     titleColor: "altDark",
-  //     valueColor: "altDark",
-  //   },
-  // },
-
   return (
     <div
       width={width}
       //   width: 100%;
     >
-      <ul
-        style={{
-          listStyle: "none",
-          padding: "0px",
-          marginTop: "2px",
-          border: "1px solid",
-          borderColor: "#ced4da",
-          borderRadius: "8px",
-          zIndex: 100,
-          backgroundColor: "white",
-          maxHeight: dropHeight,
-          overflow: "auto",
-          cursor: "normal",
-          position: "absolute",
-          width: "100%",
-        }}
-      >
+      <ul className="gx-suggestions-list">
         {/* {loading && <Spinner timeout={20000} />} */}
         {options}
         {options.length > 0 && searchterms > qCount && (
