@@ -3,9 +3,6 @@ import useSearch from "dev-resources/hooks/useSearch";
 import Suggestions from "./Suggestions";
 import useOutsideClick from "dev-resources/hooks/useOutsideClick";
 
-import { Input, Space } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-
 const Search = ({
   engineError,
   dimensions,
@@ -94,31 +91,37 @@ const Search = ({
 
   return (
     <div className={`gx-search-bar ${styleName}`} ref={searchRef}>
-      <Space direction="vertical" style={{ width: "100%" }}>
-        <Input
-          addonAfter={<SearchOutlined />}
-          // defaultValue="mysite"
-          allowClear
+      <div className="gx-form-group">
+        <input
+          className="ant-input"
+          type="search"
           placeholder={placeholder}
           onChange={handleInputChange}
           value={searchValue}
         />
-
-        {listOpen && (
-          <Suggestions
-            searchResults={searchResults}
-            dimensions={dimensions}
-            qCount={qCount}
-            qGroupItemCount={qGroupItemCount}
-            loadSearchTermsCallback={loadSearchTerms}
-            loadSearchItemsCallback={loadSearchItems}
-            selectCallback={handleSelect}
-            loading={loading}
-            width={width}
-            dropHeight={dropHeight}
-          />
+        <span className="gx-search-icon gx-pointer">
+          <i className="icon icon-search" />
+        </span>
+        {searchValue !== "" && (
+          <span className="gx-search-icon-close gx-pointer">
+            <i className="icon icon-close" onClick={clearSearch} />
+          </span>
         )}
-      </Space>
+      </div>
+      {listOpen && (
+        <Suggestions
+          searchResults={searchResults}
+          dimensions={dimensions}
+          qCount={qCount}
+          qGroupItemCount={qGroupItemCount}
+          loadSearchTermsCallback={loadSearchTerms}
+          loadSearchItemsCallback={loadSearchItems}
+          selectCallback={handleSelect}
+          loading={loading}
+          width={width}
+          dropHeight={dropHeight}
+        />
+      )}
     </div>
   );
 };
