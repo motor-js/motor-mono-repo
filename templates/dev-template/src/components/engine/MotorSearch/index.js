@@ -104,7 +104,7 @@ const SearchBox = ({
         </span>
         {searchValue !== "" && (
           <span className="gx-search-icon-close gx-pointer">
-            <i className="icon icon-close" onClick={clearSearch} s />
+            <i className="icon icon-close" onClick={clearSearch} />
           </span>
         )}
       </div>
