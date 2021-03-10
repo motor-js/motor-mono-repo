@@ -8,7 +8,7 @@ import { qlikConfig } from "settings";
 import Store from "store";
 
 ReactDOM.render(
-  // Wrap App inside AppContainer
+
   <Motor config={qlikConfig}>
     <Store>
       <App />

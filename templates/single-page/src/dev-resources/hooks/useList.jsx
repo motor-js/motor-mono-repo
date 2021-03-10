@@ -40,7 +40,6 @@ const initialProps = {
   qSortByAscii: 1,
   qSortByLoadOrder: 1,
   dimension: null,
-  label: null,
   qListObjectDef: null,
   qPage: {
     qTop: 0,
@@ -195,7 +194,7 @@ const useList = (props) => {
     await qObject.current.beginSelections(["/qListObjectDef"]);
   };
 
-  const endSelections = async (qAccept) => {
+  const endSelections = async (qAccept = true) => {
     // await state.qEngine.abortModal(true)
     await qObject.current.endSelections(qAccept);
   };
@@ -255,15 +254,16 @@ const useList = (props) => {
 
   return {
     mData,
-    changePage,
+    //changePage,
+    //applyPatches,
     select,
     beginSelections,
     endSelections,
-    searchListObjectFor,
-    acceptListObjectSearch,
-    applyPatches,
     selections,
     clearSelections,
+    searchListObjectFor,
+    acceptListObjectSearch,
+
   };
 };
 
