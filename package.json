@@ -15,6 +15,7 @@
     "microbundle": "^0.13.0"
   },
   "scripts": {
-    "start": "lerna run start --parallel"
+    "start": "lerna run start --parallel",
+    "publish": "lerna publish"
   }
 }

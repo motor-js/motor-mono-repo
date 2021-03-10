@@ -1,5 +1,5 @@
 import * as React from "react";
-import { configType } from "../../../utils";
+import { configType } from "../utils";
 
 export interface useCapabilityProps {
   config: configType;

@@ -1,7 +1,6 @@
-import * as React from "react";
 import {
   configType,
-} from '../../../utils'
+} from '../../utils'
 
 export interface MotorProps {
   config: configType,
