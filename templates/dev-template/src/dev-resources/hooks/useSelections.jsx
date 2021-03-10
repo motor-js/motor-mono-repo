@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext, useCallback } from "react";
-import { EngineContext } from "@motor-js/engine";
+import { EngineContext } from "components/engine/Table/node_modules/@motor-js/engine";
 
 let qDoc = null;
 let qObject = null;

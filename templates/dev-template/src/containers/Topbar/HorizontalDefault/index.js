@@ -3,7 +3,7 @@ import { Layout, Popover, Switch } from "antd";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
 
 import Selections from "components/engine/Selections";
-import MotorSearch from "components/engine/MotorSearch";
+import MotorSearch from "components/engine/Search";
 import useSelections from "dev-resources/hooks/useSelections";
 import { ThemeContext } from "store";
 import { appSettings } from "settings";

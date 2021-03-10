@@ -1,5 +1,5 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
-import { EngineContext } from "@motor-js/engine";
+import { EngineContext } from "components/engine/Table/node_modules/@motor-js/engine";
 import { deepMerge } from "../utils/object";
 import createDef from "../utils/createHCDef";
 

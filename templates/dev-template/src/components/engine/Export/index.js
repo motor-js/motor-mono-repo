@@ -3,7 +3,7 @@ import { Button } from "antd";
 import useButton from "../../../dev-resources/hooks/useButton";
 import { config } from "../../../config/config";
 
-const MotorExport = () => {
+const Export = () => {
   const cols = [
     { qField: "[name]", qLabel: "name" },
     {
@@ -25,4 +25,4 @@ const MotorExport = () => {
   );
 };
 
-export default MotorExport;
+export default Export;

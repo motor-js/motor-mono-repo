@@ -3,7 +3,7 @@ import useSearch from "dev-resources/hooks/useSearch";
 import Suggestions from "./Suggestions";
 import useOutsideClick from "dev-resources/hooks/useOutsideClick";
 
-const SearchBox = ({
+const Search = ({
   engineError,
   dimensions,
   // size,
@@ -125,9 +125,9 @@ const SearchBox = ({
     </div>
   );
 };
-export default SearchBox;
+export default Search;
 
-SearchBox.defaultProps = {
+Search.defaultProps = {
   styleName: "",
   value: "",
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useContext } from "react";
-import { EngineContext } from "@motor-js/engine";
+import { EngineContext } from "components/engine/Table/node_modules/@motor-js/engine";
 
 const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
   const [searchResults, setSearchResults] = useState();
