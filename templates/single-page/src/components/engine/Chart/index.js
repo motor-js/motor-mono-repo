@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Skeleton, Card, PageHeader, Select, Radio } from "antd";
+import { Skeleton, PageHeader, Radio } from "antd";
 import { useData } from "@motor-js/engine";
 
-// import Widget from "dev-resources/components/Widget";
 import AreaChart from "components/engine/AreaChart";
 import LineChart from "components/engine/LineChart";
 import BarChart from "components/engine/BarChart";
@@ -10,7 +9,7 @@ import PieChart from "components/engine/PieChart";
 import Widget from "components/Widget";
 
 const ChartComponent = ({ dataProps }) => {
-  // const [hasData, setHasData] = useState(false);
+
   const { data, chartConfig } = dataProps;
 
   const { cols, qTitle, qSubTitle, qMetrics, qLists } = data;
@@ -38,34 +37,16 @@ const ChartComponent = ({ dataProps }) => {
   }
 
   const {
-    qLayout,
-    qData,
-    // measureInfo,
     dataSet,
     title,
     subTitle,
-    // mData,
-
-    // metrics,
-    // endSelections,
-    // beginSelections,
-    // changePage,
-    // selections,
-    // select,
     handlerChange,
-    // applyPatches,
   } = useData({
     cols,
     qTitle,
     qSubTitle,
     qMetrics,
     qLists,
-    //qColumnOrder: columnOrder,
-    //qCalcCondition: calcCondition,
-    // qPage,
-    //qInterColumnSortOrder: columnSortOrder,
-    // qSupressMissing: true,
-    // qSuppressZero: true,
   });
 
   const onChange = (e) => {
@@ -84,13 +65,10 @@ const ChartComponent = ({ dataProps }) => {
   return (
     <>
       {dataSet ? (
-        // <Card className="gx-card" title={title}>
         <Widget styleName="gx-card-full">
-          {/* <h2 className="h4 gx-mb-3">Balance History</h2> */}
           {(title || subTitle) && (
             <PageHeader
               className="site-page-header"
-              // onBack={() => null}
               title={title}
               subTitle={subTitle}
             />

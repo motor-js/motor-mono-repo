@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Skeleton } from "antd";
 import useData from "@motor-js/engine";
 import Widget from "components/Widget";
