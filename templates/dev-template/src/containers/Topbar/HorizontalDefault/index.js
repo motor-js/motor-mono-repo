@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Layout, Popover, Switch } from "antd";
-import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
+import SelectOutlined from "@ant-design/icons/lib/icons/SelectOutlined";
 
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/Search";
@@ -89,7 +89,7 @@ const Topbar = () => {
             trigger="click"
           >
             <span className="gx-pointer gx-status-pos gx-d-block">
-              <FilterOutlined style={{ fontSize: "18px" }} />
+              <SelectOutlined style={{ fontSize: "18px" }} />
               {selections && selections.length > 0 ? (
                 <span className="gx-status gx-status-rtl gx-small gx-orange" />
               ) : (
