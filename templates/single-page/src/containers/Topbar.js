@@ -4,7 +4,7 @@ import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
 
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/MotorSearch";
-import useSelections from "dev-resources/hooks/useSelections";
+import { useSelections } from "@motor-js/engine";
 import { ThemeContext } from "store";
 import { appSettings } from "settings";
 
