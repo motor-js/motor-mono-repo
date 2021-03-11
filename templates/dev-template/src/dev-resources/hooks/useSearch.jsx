@@ -39,7 +39,7 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
         }
       })();
     }
-  }, [engine, searchValue, qCount, qGroupItemCount]);
+  }, [engine, searchValue, qCount, qGroupItemCount, dimensions]);
 
   useEffect(() => () => (_isMounted.current = false), []);
 
