@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
-//import { useList } from "@motor-js/engine"
-import useList from "../../../dev-resources/hooks/useList";
+import { useList } from "@motor-js/engine"
 import Widget from "components/Widget";
 
-const MotorFilter = ({ dimension }) => {
+const Filter = ({ dimension }) => {
   const [children, setChildren] = useState([]);
   const [selected, setSelected] = useState();
 
@@ -76,4 +75,4 @@ const MotorFilter = ({ dimension }) => {
   );
 };
 
-export default MotorFilter;
+export default Filter;

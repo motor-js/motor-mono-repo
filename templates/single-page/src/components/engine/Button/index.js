@@ -1,8 +1,8 @@
 import { Button } from "antd";
 // import useButton from '../../hooks/useButton'
-import useButton from "../../../dev-resources/hooks/useButton";
+import useButton from '@motor-js/engine';
 
-const MotorButton = () => {
+const Button = () => {
   
   const { clearSelections } = useButton();
 
@@ -16,4 +16,4 @@ const MotorButton = () => {
   );
 };
 
-export default MotorButton;
+export default Button;

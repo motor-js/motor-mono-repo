@@ -4,14 +4,7 @@ const SelectionItem = ({ selections, clear }) => {
   const { qField, qSelected, qSelectedCount } = selections;
 
   return (
-    <li className="gx-media">
-      <div className="gx-user-thumb gx-mr-3">
-        {qSelectedCount > 0 ? (
-          <span className="gx-badge gx-badge-danger gx-text-white gx-rounded-circle">
-            {qSelectedCount}
-          </span>
-        ) : null}
-      </div>
+    <li>
       <div className="gx-media-body">
         <div className="gx-flex-row gx-justify-content-between gx-align-items-center">
           <h5 className="gx-text-capitalize gx-user-name gx-mb-0">
