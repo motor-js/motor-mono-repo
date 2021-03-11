@@ -17,9 +17,19 @@ const StyledLogin = ({
   logoWidth,
   color,
 }) => {
-  const {
-    global: { login },
-  } = theme;
+  // const {
+  //   global: { login },
+  // } = theme;
+
+  const login = {
+    header: "Welcome to your motor js mashup",
+    body: "Please log on to access your application",
+    size: "medium",
+    buttonText: "Login",
+    backgroundColor: "white",
+    buttonFontColor: "white",
+    buttonColor: "brand",
+  };
 
   const tenantUri = config.host;
   const webIntegrationId = config.webIntId;
@@ -48,12 +58,12 @@ const StyledLogin = ({
         color={backgroundColor || login.backgroundColor}
         style={{
           display: "flex",
-          justifyContent: "center",
+          // justifyContent: "center",
           flexDirection: "column",
           position: "relative",
           margin: 0.2,
           padding: "5px",
-          backgroundColor: color,
+          backgroundColor: color || login.backgroundColor,
           border: "1px solid gray",
           borderRadius: "8px",
           width: "30%",
@@ -64,10 +74,12 @@ const StyledLogin = ({
         }}
       >
         <div
-          focusable={false}
-          width="100%"
-          border="bottom"
-          justifyContent="center"
+          style={{
+            // focusable={false}
+            width: "100%",
+            border: "bottom",
+            // justifyContent: "center",
+          }}
         >
           <div
             size={size || login.size}
@@ -86,20 +98,24 @@ const StyledLogin = ({
           </div>
         </div>
         <div
-          focusable={false}
-          width="100%"
-          justifyContent="center"
-          align="center"
-          direction="column"
-          padding="0.8rem"
+          style={{
+            // focusable={false}
+            width: "100%",
+            // justifyContent: "center",
+            align: "center",
+            direction: "column",
+            padding: "0.8rem",
+          }}
         >
-          <div size={size || login.size}>
-            {body || login.body} style={{ padding: "0.6rem" }}
+          <div size={size || login.size} style={{ padding: "0.6rem" }}>
+            {body || login.body}
           </div>
           <button
-            size={size || login.size}
-            fontColor={buttonFontColor || login.buttonFontColor}
-            color={buttonColor || login.buttonColor}
+            style={{
+              size: size || login.size,
+              fontColor: buttonFontColor || login.buttonFontColor,
+              color: buttonColor || login.buttonColor,
+            }}
             onClick={goToLogin}
           >
             {buttonText || login.buttonText}

@@ -21,7 +21,7 @@ const NotConnected = ({ config, ...rest }) => {
 
   return (
     <div
-      errorCode={errorCode}
+      // errorCode={errorCode}
       style={{ display: errorCode === -3 ? "" : "none" }}
     >
       {myConfig && errorCode && (

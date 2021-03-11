@@ -13,9 +13,19 @@ const StyledNotConnected = ({
   theme,
   color, // new
 }) => {
-  const {
-    global: { notConnected },
-  } = theme;
+  // const {
+  //   global: { notConnected },
+  // } = theme;
+
+  const notConnected = {
+    header: "Connection to server lost",
+    body: "Please reload the page to refresh the dashboard",
+    size: "medium",
+    buttonText: "Reload Page",
+    backgroundColor: "white",
+    buttonFontColor: "white",
+    buttonColor: "brand",
+  };
 
   return (
     <div
@@ -34,7 +44,7 @@ const StyledNotConnected = ({
         color={backgroundColor || notConnected.backgroundColor}
         style={{
           display: "flex",
-          justifyContent: "center",
+          // justifyContent: "center",
           flexDirection: "column",
           position: "relative",
           margin: 0.2,
@@ -53,7 +63,7 @@ const StyledNotConnected = ({
           focusable={false}
           width="100%"
           border="bottom"
-          justifyContent="center"
+          // justifyContent="center"
         >
           <div
             size={size || notConnected.size}
@@ -65,7 +75,7 @@ const StyledNotConnected = ({
         <div
           focusable={false}
           width="100%"
-          justifyContent="center"
+          // justifyContent="center"
           align="center"
           direction="column"
           padding="0.8rem"
@@ -75,8 +85,10 @@ const StyledNotConnected = ({
           </div>
           <button
             size={size || notConnected.size}
-            fontColor={buttonFontColor || notConnected.buttonFontColor}
-            color={buttonColor || notConnected.buttonColor}
+            style={{
+              fontColor: buttonFontColor || notConnected.buttonFontColor,
+              color: buttonColor || notConnected.buttonColor,
+            }}
             // eslint-disable-next-line  no-restricted-globals
             onClick={() => location.reload()}
           >

@@ -10,13 +10,14 @@ const Login = ({ config, ...rest }) => {
   // const myConfig = config || useContext(ConfigContext);
   const stdConfig = useContext(ConfigContext);
   const myConfig = config || stdConfig;
+
   // const myTheme = useContext(ThemeContext) || defaultTheme;
   const myTheme = null;
   const { errorCode } = useContext(EngineContext);
 
   return (
     <div
-      errorCode={errorCode}
+      // errorCode={errorCode}
       // style={{ display: props.errorCode === -1 ? "" : "none" }}
       style={{ display: errorCode === -1 ? "" : "none" }}
     >
