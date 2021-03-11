@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { EngineContext } from "../../contexts/EngineProvider";
 import { ConfigContext } from "../../contexts/ConfigProvider";
 // import { CapabilityContext } from '../../contexts/CapabilityProvider'
-//import Login from '../Login'
+import Login from "../Login";
 //import NotConnected from '../NotConnected'
 import useEngine from "../../hooks/useEngine";
 import useCapability from "../../hooks/useCapability";
@@ -28,7 +28,7 @@ function Motor({
     <EngineContext.Provider value={engine}>
       {/* <CapabilityContext.Provider value={app}> */}
       <ConfigContext.Provider value={myConfig}>
-        {/*<Login logo={logo} logoHeight={logoHeight} logoWidth={logoWidth} />*/}
+        {/* <Login logo={logo} logoHeight={logoHeight} logoWidth={logoWidth} /> */}
         {/*<NotConnected />*/}
         {children}
       </ConfigContext.Provider>
