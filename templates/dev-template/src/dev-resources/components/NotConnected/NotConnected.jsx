@@ -8,9 +8,8 @@ import { EngineContext } from "../../contexts/EngineProvider";
 import useEngine from "../../hooks/useEngine";
 
 const NotConnected = ({ config, ...rest }) => {
-  // const myConfig = config || useContext(ConfigContext);
-  const stdConfig = useContext(ConfigContext);
-  const myConfig = config || stdConfig;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const myConfig = config || useContext(ConfigContext);
 
   // const myTheme = useContext(ThemeContext) || defaultTheme;
   const myTheme = null;
