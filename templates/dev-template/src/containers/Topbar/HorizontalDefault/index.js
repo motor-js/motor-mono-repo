@@ -3,7 +3,7 @@ import { Layout, Popover, Switch } from "antd";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
 
 import Selections from "components/engine/Selections";
-import MotorSearch from "components/engine/Search";
+import MotorSearch from "components/engine/MotorSearch";
 import useSelections from "dev-resources/hooks/useSelections";
 import { ThemeContext } from "store";
 import { appSettings } from "settings";
@@ -20,6 +20,8 @@ const Topbar = () => {
   const { selections, clearSelections } = useSelections();
   const { showThemeSwitch } = appSettings;
 
+  console.log(selections)
+  
   const handleClear = (field) => clearSelections(field);
 
   const handleSearch = (evt) => {
