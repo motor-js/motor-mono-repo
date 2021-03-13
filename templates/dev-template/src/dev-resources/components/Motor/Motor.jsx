@@ -13,7 +13,15 @@ function Motor({
   logo,
   logoWidth,
   logoHeight,
+  header,
+  body,
+  size,
+  buttonText,
+  buttonFontColor,
+  buttonColor,
+  backgroundColor,
   capabilityAPI,
+  loginfontFamily,
 }) {
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
@@ -28,7 +36,19 @@ function Motor({
     <EngineContext.Provider value={engine}>
       <CapabilityContext.Provider value={app}>
         <ConfigContext.Provider value={myConfig}>
-          <Login logo={logo} logoHeight={logoHeight} logoWidth={logoWidth} />
+          <Login
+            logo={logo}
+            logoHeight={logoHeight}
+            logoWidth={logoWidth}
+            header={header}
+            body={body}
+            size={size}
+            backgroundColor={backgroundColor}
+            buttonText={buttonText}
+            buttonFontColor={buttonFontColor}
+            buttonColor={buttonColor}
+            loginfontFamily={loginfontFamily}
+          />
           <NotConnected />
           {children}
         </ConfigContext.Provider>

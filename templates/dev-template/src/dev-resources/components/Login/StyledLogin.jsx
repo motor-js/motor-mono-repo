@@ -1,6 +1,4 @@
 import React from "react";
-// import Button from "../Button";
-// import Box from "../Box";
 
 const StyledLogin = ({
   config,
@@ -11,26 +9,12 @@ const StyledLogin = ({
   backgroundColor,
   buttonFontColor,
   buttonColor,
-  theme,
   logo,
   logoHeight,
   logoWidth,
+  loginfontFamily,
   color,
 }) => {
-  // const {
-  //   global: { login },
-  // } = theme;
-
-  const login = {
-    header: "Welcome to your motor js mashup",
-    body: "Please log on to access your application",
-    size: "medium",
-    buttonText: "Login",
-    backgroundColor: "white",
-    buttonFontColor: "white",
-    buttonColor: "brand",
-  };
-
   const tenantUri = config.host;
   const webIntegrationId = config.webIntId;
 
@@ -55,7 +39,6 @@ const StyledLogin = ({
       }}
     >
       <div
-        color={backgroundColor || login.backgroundColor}
         style={{
           display: "flex",
           justifyContent: "center",
@@ -63,7 +46,7 @@ const StyledLogin = ({
           position: "relative",
           margin: 0.2,
           padding: "5px",
-          backgroundColor: "white",
+          backgroundColor,
           border: "1px solid gray",
           borderRadius: "8px",
           width: "30%",
@@ -75,7 +58,7 @@ const StyledLogin = ({
       >
         <div
           style={{
-            fontFamily: "Inter,sans-serif",
+            fontFamily: loginfontFamily,
             width: "100%",
             // display: "-webkit-box",
             // display: "-webkit-flex",
@@ -96,10 +79,7 @@ const StyledLogin = ({
             flex: "0 0 auto",
           }}
         >
-          <div
-            size={size || login.size}
-            style={{ padding: "0.6rem", fontSize: "18px" }}
-          >
+          <div size={size} style={{ padding: "0.6rem", fontSize: "18px" }}>
             {logo ? (
               <img
                 src={logo}
@@ -108,13 +88,13 @@ const StyledLogin = ({
                 alt="Logo"
               ></img>
             ) : (
-              header || login.header
+              header
             )}
           </div>
         </div>
         <div
           style={{
-            fontFamily: "Inter,sans-serif",
+            fontFamily: loginfontFamily,
             width: "100%",
             // display: -webkit-box;
             // display: -webkit-flex;
@@ -139,19 +119,17 @@ const StyledLogin = ({
             flex: "0 0 auto",
           }}
         >
-          <div style={{ padding: "0.6rem", fontSize: "14px" }}>
-            {body || login.body}
-          </div>
+          <div style={{ padding: "0.6rem", fontSize: "14px" }}>{body}</div>
           <button
             style={{
-              fontFamily: "Inter,sans-serif",
+              fontFamily: loginfontFamily,
               fontSize: "14px",
               cursor: "pointer",
               position: "relative",
               margin: "5px",
-              backgroundColor: "#ff6961",
+              backgroundColor: buttonColor,
               borderRadius: "8px",
-              color: "white",
+              color: buttonFontColor,
               border: 0,
               outline: "none",
               WebkitTransition: "none",
@@ -160,7 +138,7 @@ const StyledLogin = ({
             }}
             onClick={goToLogin}
           >
-            {buttonText || login.buttonText}
+            {buttonText}
           </button>
         </div>
       </div>

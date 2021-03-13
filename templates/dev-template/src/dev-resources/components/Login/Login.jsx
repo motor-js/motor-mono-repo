@@ -39,6 +39,8 @@ Login.propTypes = {
   logo: PropTypes.string,
   logoHeight: PropTypes.string,
   logoWidth: PropTypes.string,
+  header: PropTypes.string,
+  loginfontFamily: PropTypes.string,
 };
 
 Login.defaultProps = {
@@ -46,13 +48,14 @@ Login.defaultProps = {
   logo: null,
   logoHeight: null,
   logoWidth: null,
-  // header: 'Welcome to your motor js mashup',
-  // body: 'Please log on to access your application',
-  // size: 'medium',
-  // buttonText: 'Login',
-  // backgroundColor: 'white',
-  // buttonFontColor: 'white',
-  // buttonColor: 'brand',
+  header: "Welcome to your motor js mashup",
+  body: "Please log on to access your application",
+  size: "medium",
+  buttonText: "Login",
+  backgroundColor: "white",
+  buttonFontColor: "white",
+  buttonColor: "#ff6961",
+  loginfontFamily: "Inter,sans-serif",
 };
 
 export default Login;
