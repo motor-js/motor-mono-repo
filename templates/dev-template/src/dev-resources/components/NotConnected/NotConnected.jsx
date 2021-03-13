@@ -23,9 +23,7 @@ const NotConnected = ({ config, ...rest }) => {
       // errorCode={errorCode}
       style={{ display: errorCode === -3 ? "" : "none" }}
     >
-      {myConfig && errorCode && (
-        <StyledNotConnected theme={myTheme} {...rest} />
-      )}
+      {myConfig && errorCode && <StyledNotConnected {...rest} />}
     </div>
   );
 };
@@ -38,6 +36,18 @@ NotConnected.propTypes = {
   backgroundColor: PropTypes.string,
   buttonFontColor: PropTypes.string,
   buttonColor: PropTypes.string,
+  loginfontFamily: PropTypes.string,
+};
+
+NotConnected.defaultProps = {
+  header: "Connection to server lost",
+  body: "Please reload the page to refresh the dashboard",
+  size: "medium",
+  buttonText: "Reload Page",
+  backgroundColor: "white",
+  buttonFontColor: "white",
+  buttonColor: "#ff6961",
+  loginfontFamily: "Inter,sans-serif",
 };
 
 export default NotConnected;

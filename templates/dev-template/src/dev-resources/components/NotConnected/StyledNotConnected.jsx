@@ -10,23 +10,9 @@ const StyledNotConnected = ({
   backgroundColor,
   buttonFontColor,
   buttonColor,
-  theme,
+  loginfontFamily,
   color, // new
 }) => {
-  // const {
-  //   global: { notConnected },
-  // } = theme;
-
-  const notConnected = {
-    header: "Connection to server lost",
-    body: "Please reload the page to refresh the dashboard",
-    size: "medium",
-    buttonText: "Reload Page",
-    backgroundColor: "white",
-    buttonFontColor: "white",
-    buttonColor: "brand",
-  };
-
   return (
     <div
       style={{
@@ -41,15 +27,14 @@ const StyledNotConnected = ({
       }}
     >
       <div
-        color={backgroundColor || notConnected.backgroundColor}
         style={{
           display: "flex",
-          // justifyContent: "center",
+          justifyContent: "center",
           flexDirection: "column",
           position: "relative",
           margin: 0.2,
           padding: "5px",
-          backgroundColor: color,
+          backgroundColor,
           border: "1px solid gray",
           borderRadius: "8px",
           width: "30%",
@@ -60,16 +45,30 @@ const StyledNotConnected = ({
         }}
       >
         <div
-          focusable={false}
-          width="100%"
-          border="bottom"
-          // justifyContent="center"
+          style={{
+            fontFamily: loginfontFamily,
+            width: "100%",
+            // display: "-webkit-box",
+            // display: "-webkit-flex",
+            // display: "-ms-flexbox",
+            display: "flex",
+            boxSizing: "border-box",
+            borderBottom: "solid 1px #ced4da",
+            WebkitBoxPack: "center",
+            WebkitJustifyContent: "center",
+            msFlexPack: "center",
+            justifyContent: "center",
+            overflow: "visible",
+            WebkitFlexDirection: "row",
+            msFlexDirection: "row",
+            flexDirection: "row",
+            WebkitFlex: "0 0 auto",
+            msFlex: "0 0 auto",
+            flex: "0 0 auto",
+          }}
         >
-          <div
-            size={size || notConnected.size}
-            style={{ padding: "0.8rem", fontSize: "16px" }}
-          >
-            {header || notConnected.header}
+          <div size={size} style={{ padding: "0.8rem", fontSize: "16px" }}>
+            {header}
           </div>
         </div>
         <div
@@ -80,19 +79,29 @@ const StyledNotConnected = ({
           direction="column"
           padding="0.8rem"
         >
-          <div size={size || notConnected.size} style={{ padding: "0.6rem" }}>
-            {body || notConnected.body}
+          <div size={size} style={{ padding: "0.6rem", fontSize: "14px" }}>
+            {body}
           </div>
           <button
-            size={size || notConnected.size}
             style={{
-              fontColor: buttonFontColor || notConnected.buttonFontColor,
-              color: buttonColor || notConnected.buttonColor,
+              fontFamily: loginfontFamily,
+              fontSize: "14px",
+              cursor: "pointer",
+              position: "relative",
+              margin: "5px",
+              backgroundColor: buttonColor,
+              borderRadius: "8px",
+              color: buttonFontColor,
+              border: 0,
+              outline: "none",
+              WebkitTransition: "none",
+              transition: "none",
+              padding: "0.7em 1.7em",
             }}
             // eslint-disable-next-line  no-restricted-globals
             onClick={() => location.reload()}
           >
-            {buttonText || notConnected.buttonText}
+            {buttonText}
           </button>
         </div>
       </div>

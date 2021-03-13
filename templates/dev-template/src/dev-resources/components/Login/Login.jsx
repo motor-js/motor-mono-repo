@@ -20,9 +20,7 @@ const Login = ({ config, ...rest }) => {
       // style={{ display: props.errorCode === -1 ? "" : "none" }}
       style={{ display: errorCode === -1 ? "" : "none" }}
     >
-      {myConfig && errorCode && (
-        <StyledLogin config={myConfig} theme={myTheme} {...rest} />
-      )}
+      {myConfig && errorCode && <StyledLogin config={myConfig} {...rest} />}
     </div>
   );
 };
