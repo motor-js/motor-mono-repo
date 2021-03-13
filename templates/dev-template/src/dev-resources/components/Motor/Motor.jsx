@@ -22,6 +22,9 @@ function Motor({
   backgroundColor,
   capabilityAPI,
   loginfontFamily,
+  NotConnectedheader,
+  NotConnectedBody,
+  NotConnectedButonText,
 }) {
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
@@ -49,7 +52,16 @@ function Motor({
             buttonColor={buttonColor}
             loginfontFamily={loginfontFamily}
           />
-          <NotConnected />
+          <NotConnected
+            header={NotConnectedheader}
+            body={NotConnectedBody}
+            size={size}
+            buttonText={NotConnectedButonText}
+            backgroundColor={backgroundColor}
+            buttonFontColor={buttonFontColor}
+            buttonColor={buttonColor}
+            loginfontFamily={loginfontFamily}
+          />
           {children}
         </ConfigContext.Provider>
       </CapabilityContext.Provider>
