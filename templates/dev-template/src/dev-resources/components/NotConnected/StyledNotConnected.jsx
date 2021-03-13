@@ -79,7 +79,14 @@ const StyledNotConnected = ({
           direction="column"
           padding="0.8rem"
         >
-          <div size={size} style={{ padding: "0.6rem", fontSize: "14px" }}>
+          <div
+            size={size}
+            style={{
+              padding: "0.6rem",
+              fontSize: "14px",
+              fontFamily: loginfontFamily,
+            }}
+          >
             {body}
           </div>
           <button
