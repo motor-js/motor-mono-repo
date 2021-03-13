@@ -58,32 +58,47 @@ const StyledLogin = ({
         color={backgroundColor || login.backgroundColor}
         style={{
           display: "flex",
-          // justifyContent: "center",
+          justifyContent: "center",
           flexDirection: "column",
           position: "relative",
           margin: 0.2,
           padding: "5px",
-          backgroundColor: color || login.backgroundColor,
+          backgroundColor: "white",
           border: "1px solid gray",
           borderRadius: "8px",
           width: "30%",
           minWidth: "350px",
           top: "30%",
           left: "35%",
-          alignLelf: "flex-start",
+          alignSelf: "flex-start",
         }}
       >
         <div
           style={{
-            // focusable={false}
+            fontFamily: "Inter,sans-serif",
             width: "100%",
-            border: "bottom",
-            // justifyContent: "center",
+            // display: "-webkit-box",
+            // display: "-webkit-flex",
+            // display: "-ms-flexbox",
+            display: "flex",
+            boxSizing: "border-box",
+            borderBottom: "solid 1px #ced4da",
+            "-webkit-box-pack": "center",
+            /* -webkit-justify-content: center; */
+            // -ms-flex-pack: center;
+            justifyContent: "center",
+            overflow: "visible",
+            "-webkit-flex-direction": "row",
+            "-ms-flex-direction": "row",
+            flexDirection: "row",
+            "-webkit-flex": "0 0 auto",
+            "-ms-flex": "0 0 auto",
+            flex: "0 0 auto",
           }}
         >
           <div
             size={size || login.size}
-            style={{ padding: "0.6rem", fontSize: "16px" }}
+            style={{ padding: "0.6rem", fontSize: "18px" }}
           >
             {logo ? (
               <img
@@ -99,22 +114,49 @@ const StyledLogin = ({
         </div>
         <div
           style={{
-            // focusable={false}
+            fontFamily: "Inter,sans-serif",
             width: "100%",
-            // justifyContent: "center",
-            align: "center",
-            direction: "column",
+            // display: -webkit-box;
+            // display: -webkit-flex;
+            // display: -ms-flexbox;
+            display: "flex",
+            boxSizing: "border-box",
             padding: "0.8rem",
+            "-webkit-align-items": "center",
+            "-webkit-box-align": "center",
+            "-ms-flex-align": "center",
+            alignItems: "center",
+            "-webkit-box-pack": "center",
+            "-webkit-justify-content": "center",
+            "-ms-flex-pack": "center",
+            justifyContent: "center",
+            overflow: "visible",
+            "-webkit-flex-direction": "column",
+            "-ms-flex-direction": "column",
+            "flex-direction": "column",
+            "-webkit-flex": "column",
+            "-ms-flex": "0 0 auto",
+            flex: "0 0 auto",
           }}
         >
-          <div size={size || login.size} style={{ padding: "0.6rem" }}>
+          <div style={{ padding: "0.6rem", fontSize: "14px" }}>
             {body || login.body}
           </div>
           <button
             style={{
-              size: size || login.size,
-              fontColor: buttonFontColor || login.buttonFontColor,
-              color: buttonColor || login.buttonColor,
+              fontFamily: "Inter,sans-serif",
+              fontSize: "14px",
+              cursor: "pointer",
+              position: "relative",
+              margin: "5px",
+              backgroundColor: "#ff6961",
+              borderRadius: "8px",
+              color: "white",
+              border: 0,
+              outline: "none",
+              "-webkit-transition": "none",
+              transition: "none",
+              padding: "0.7em 1.7em",
             }}
             onClick={goToLogin}
           >
