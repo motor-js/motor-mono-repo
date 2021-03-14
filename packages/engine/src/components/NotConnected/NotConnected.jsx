@@ -1,24 +1,30 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { ThemeContext } from "styled-components";
+// import { ThemeContext } from "styled-components";
 import { ConfigContext } from "../../contexts/ConfigProvider";
-import defaultTheme from "../../themes/defaultTheme";
+// import defaultTheme from "../../themes/defaultTheme";
 import StyledNotConnected from "./StyledNotConnected";
 import { EngineContext } from "../../contexts/EngineProvider";
 import useEngine from "../../hooks/useEngine";
-import { NotConnectedWrapper } from "./NotConnectedTheme";
 
 const NotConnected = ({ config, ...rest }) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const myConfig = config || useContext(ConfigContext);
-  const myTheme = useContext(ThemeContext) || defaultTheme;
-  const { errorCode } = useContext(EngineContext) || useEngine(myConfig);
+
+  // const myTheme = useContext(ThemeContext) || defaultTheme;
+  const myTheme = null;
+  // const { errorCode } = useContext(EngineContext) || useEngine(myConfig);
+  const engineContext = useContext(EngineContext);
+  const engineConfigContext = useEngine(myConfig);
+  const { errorCode } = engineContext || engineConfigContext;
 
   return (
-    <NotConnectedWrapper errorCode={errorCode}>
-      {myConfig && errorCode && (
-        <StyledNotConnected theme={myTheme} {...rest} />
-      )}
-    </NotConnectedWrapper>
+    <div
+      // errorCode={errorCode}
+      style={{ display: errorCode === -3 ? "" : "none" }}
+    >
+      {myConfig && errorCode && <StyledNotConnected {...rest} />}
+    </div>
   );
 };
 
@@ -30,6 +36,18 @@ NotConnected.propTypes = {
   backgroundColor: PropTypes.string,
   buttonFontColor: PropTypes.string,
   buttonColor: PropTypes.string,
+  loginfontFamily: PropTypes.string,
+};
+
+NotConnected.defaultProps = {
+  header: "Connection to server lost",
+  body: "Please reload the page to refresh the dashboard",
+  size: "medium",
+  buttonText: "Reload Page",
+  backgroundColor: "white",
+  buttonFontColor: "white",
+  buttonColor: "#ff6961",
+  loginfontFamily: "Inter,sans-serif",
 };
 
 export default NotConnected;
