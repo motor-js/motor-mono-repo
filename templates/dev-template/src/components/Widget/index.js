@@ -2,15 +2,7 @@ import React from "react";
 import { Card } from "antd";
 import PropTypes from "prop-types";
 
-const Widget = ({
-  title,
-  children,
-  styleName,
-  cover,
-  extra,
-  actions,
-  style,
-}) => {
+const Widget = ({ title, children, styleName, cover, extra, actions }) => {
   return (
     <Card
       title={title}
@@ -18,7 +10,6 @@ const Widget = ({
       cover={cover}
       className={`gx-card-widget ${styleName}`}
       extra={extra}
-      style={style}
     >
       {children}
     </Card>
