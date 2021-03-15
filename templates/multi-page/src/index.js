@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Motor } from "@motor-js/engine";
 
 import reportWebVitals from "./reportWebVitals";
-import App from "./containers/App";
+import NextApp from "./NextApp";
 import { qlikConfig } from "settings";
 import Store from "store";
 
@@ -11,7 +11,7 @@ ReactDOM.render(
 
   <Motor config={qlikConfig}>
     <Store>
-      <App />
+      <NextApp />
     </Store>
   </Motor>,
   document.getElementById("root")
