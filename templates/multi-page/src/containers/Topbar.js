@@ -3,7 +3,7 @@ import { Layout, Popover, Switch } from "antd";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
 
 import Selections from "components/engine/Selections";
-import SearchBox from "components/engine/SearchBox";
+import MotorSearch from "components/engine/MotorSearch";
 
 import { useSelections } from "@motor-js/engine";
 import { ThemeContext } from "store";
@@ -50,7 +50,7 @@ const Topbar = () => {
         )}
       <ul className="gx-header-notifications">
         <li className="gx-nav-icon gx-ml-auto">
-          <SearchBox
+          <MotorSearch
             styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
             placeholder="Search in app..."
             onChange={handleSearch}
@@ -64,7 +64,7 @@ const Topbar = () => {
             trigger="click"
             content={
               <div className="gx-d-flex">
-                <SearchBox
+                <MotorSearch
                   styleName="gx-popover-search-bar"
                   placeholder="Search in app..."
                   onChange={handleSearch}
