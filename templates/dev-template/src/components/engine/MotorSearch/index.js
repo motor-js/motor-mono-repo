@@ -20,7 +20,7 @@ const MotorSearch = () => {
     qCount,
     qGroupItemCount
   })
-  console.log(groupedResults)
+
   const handleSearch = (value) => {
     setSearchValue(value)
   };
