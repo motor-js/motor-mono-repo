@@ -11,7 +11,7 @@ ReactDOM.render(
 
   <Motor config={qlikConfig}>
     <Store>
-      <NextApp />
+      {/*<NextApp />*/}
     </Store>
   </Motor>,
   document.getElementById("root")

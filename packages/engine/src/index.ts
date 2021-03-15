@@ -1,5 +1,7 @@
 //Components
 export { default as Motor } from "./components/Motor";
+export { default as Login } from "./components/Login";
+export { default as NotConnected } from "./components/NotConnected";
 //Hooks
 export { default as useEngine } from "./hooks/useEngine";
 export { default as useHyperCube } from "./hooks/useHyperCube";
