@@ -1,5 +1,5 @@
 {
-  "name": "single-page-mashup",
+  "name": "multi-page-mashup",
   "version": "0.1.4-alpha.0",
   "private": true,
   "dependencies": {
@@ -27,6 +27,7 @@
     "react-placeholder": "^4.1.0",
     "react-scripts": "4.0.2",
     "recharts": "^2.0.0-beta.1",
+    "url-search-params": "^1.1.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
