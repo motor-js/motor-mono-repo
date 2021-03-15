@@ -1,6 +1,6 @@
 import React from "react";
 // import Button from "../Button";
-import { Button } from "antd";
+import { Button, List } from "antd";
 // import Spinner from "../Spinner";
 
 const Suggestions = ({
@@ -40,41 +40,54 @@ const Suggestions = ({
       const numberOfItems = r.qItems[0].qTotalNumberOfMatches;
 
       return (
-        <li
-          className="gx-suggestions-list-li"
-          data-testid={`suggestion-${i}`}
-          key={i}
-          onClick={() => select(r)}
-        >
-          <div
-            data-testid={`dim-${i}`}
-            className="gx-suggestions-list-li-title"
-          >
-            {r.qItems[0].qIdentifier}
-          </div>
-          <div
-            data-testid={`value-${i}`}
-            className="gx-suggestions-list-li-values"
-          >
-            {r.qItems[0].qItemMatches
-              .map((item) => {
-                if (item.qText.length > 30) {
-                  return `${item.qText.substring(0, 20)}..`;
-                }
+        <List
+          itemLayout="horizontal"
+          dataSource={r.qItems[0].qItemMatches}
+          renderItem={(item, key) => (
+            <List.Item key={key} onClick={() => select(r)}>
+              <List.Item.Meta
+                // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                title={<a href="https://ant.design">{item.qText}</a>}
+                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              />
+            </List.Item>
+          )}
+        />
+        // <li
+        //   className="gx-suggestions-list-li"
+        //   data-testid={`suggestion-${i}`}
+        //   key={i}
+        //   onClick={() => select(r)}
+        // >
+        //   <div
+        //     data-testid={`dim-${i}`}
+        //     className="gx-suggestions-list-li-title"
+        //   >
+        //     {r.qItems[0].qIdentifier}
+        //   </div>
+        //   <div
+        //     data-testid={`value-${i}`}
+        //     className="gx-suggestions-list-li-values"
+        //   >
+        //     {r.qItems[0].qItemMatches
+        //       .map((item) => {
+        //         if (item.qText.length > 30) {
+        //           return `${item.qText.substring(0, 20)}..`;
+        //         }
 
-                return item.qText;
-              })
-              .join(", ")}
-            {numberOfItems > qGroupItemCount && (
-              <div
-                onClick={(e) => loadItems(e)}
-                className="gx-suggestions-items-load"
-              >
-                Load more
-              </div>
-            )}
-          </div>
-        </li>
+        //         return item.qText;
+        //       })
+        //       .join(", ")}
+        //     {numberOfItems > qGroupItemCount && (
+        //       <div
+        //         onClick={(e) => loadItems(e)}
+        //         className="gx-suggestions-items-load"
+        //       >
+        //         Load more
+        //       </div>
+        //     )}
+        //   </div>
+        // </li>
       );
     });
   };

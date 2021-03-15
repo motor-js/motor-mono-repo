@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
 import Topbar from "./Topbar";
-import { Layout } from "antd";
+import { Layout, Row, Col } from "antd";
 import { ThemeContext } from "store";
 import { footer } from "settings/index";
 
+import { bitCoinKPI, etheriumKPI, rippleKPI, litecoinKPI } from "./data";
+
 import "assets/vendors/style";
 import "styles/wieldy.less";
+
+import ChartKPI from "components/engine/ChartKPI";
 
 const { Content, Footer } = Layout;
 
@@ -25,10 +29,24 @@ const App = () => {
       <Layout>
         <Topbar />
         <Content className={`gx-layout-content gx-container-wrap`}>
-          <Footer>
-            <div className="gx-layout-footer-content">{footer.footerText}</div>
-          </Footer>
+          <Row>
+            <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+              <ChartKPI dataProps={bitCoinKPI} />
+            </Col>
+            <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+              <ChartKPI dataProps={etheriumKPI} />
+            </Col>
+            <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+              <ChartKPI dataProps={rippleKPI} />
+            </Col>
+            <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+              <ChartKPI dataProps={litecoinKPI} />
+            </Col>
+          </Row>
         </Content>
+        <Footer>
+          <div className="gx-layout-footer-content">{footer.footerText}</div>
+        </Footer>
       </Layout>
     </Layout>
   );

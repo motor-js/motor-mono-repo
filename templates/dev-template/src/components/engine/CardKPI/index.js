@@ -1,38 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Skeleton } from "antd";
-import { useData } from "@motor-js/engine";
+import useData from "dev-resources/hooks/useData";
 import Widget from "components/Widget";
 
-import AreaChart from "components/engine/AreaChart";
-import LineChart from "components/engine/LineChart";
-import BarChart from "components/engine/BarChart";
-import PieChart from "components/engine/PieChart";
-
-const ChartKPI = ({ dataProps }) => {
+const CardKPI = ({ dataProps }) => {
   // const [hasData, setHasData] = useState(false);
-  const { data, icon, chartConfig } = dataProps;
+  const { data, icon } = dataProps;
 
   const { cols, qTitle, qMetrics } = data;
-  const { chartType } = chartConfig;
-
-  let Chart = null;
-
-  switch (chartType) {
-    case "area":
-      Chart = AreaChart;
-      break;
-    case "line":
-      Chart = LineChart;
-      break;
-    case "bar":
-      Chart = BarChart;
-      break;
-    case "pie":
-      Chart = PieChart;
-      break;
-    default:
-      Chart = AreaChart;
-  }
 
   const {
     // qLayout,
@@ -60,11 +35,6 @@ const ChartKPI = ({ dataProps }) => {
     // qSuppressZero: true,
   });
 
-  chartConfig.showXAxis = chartConfig.showXAxis || false;
-  chartConfig.ShowYAxis = chartConfig.ShowYAxis || false;
-  chartConfig.showGrid = chartConfig.showGrid || false;
-  chartConfig.showLegend = chartConfig.showLegend || false;
-
   // useEffect(() => {
   //   if (!mData) return;
 
@@ -91,8 +61,6 @@ const ChartKPI = ({ dataProps }) => {
             </div>
             <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
           </div>
-          {/* {React.cloneElement(children, { data: mData })} */}
-          <Chart dataSet={dataSet} config={chartConfig} />
         </Widget>
       ) : (
         <Skeleton active />
@@ -101,4 +69,4 @@ const ChartKPI = ({ dataProps }) => {
   );
 };
 
-export default ChartKPI;
+export default CardKPI;
