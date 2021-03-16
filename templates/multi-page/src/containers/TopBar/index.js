@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Layout, Popover, Switch } from "antd";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
+import { Link } from "react-router-dom";
+import { useSelections } from "@motor-js/engine";
 
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/MotorSearch";
-
-import { useSelections } from "@motor-js/engine";
 import { ThemeContext } from "store";
 import { appSettings } from "settings";
 
@@ -35,6 +35,14 @@ const Topbar = () => {
 
   return (
     <Header>
+        <div className="gx-linebar gx-mr-3">
+          <i className="gx-icon-btn icon icon-menu"
+             onClick={() => {
+               /*dispatch(toggleCollapsedSideNav(!navCollapsed));*/
+             }}
+          />
+        </div>
+        <Link to="/" className="gx-d-block gx-pointer">
         {themeState.theme === "light" ? (
           <img
             src={logoLight}
@@ -48,6 +56,7 @@ const Topbar = () => {
             style={{ height: "40px", width: "120px" }}
           />
         )}
+        </Link>
       <ul className="gx-header-notifications">
         <li className="gx-nav-icon gx-ml-auto">
           <MotorSearch

@@ -1,10 +1,15 @@
 import React, { createContext, useReducer } from "react";
 import ThemeReducer from "reducers/theme";
+import LayoutReducer from "reducers/theme";
 import { appSettings } from "settings";
 
 const { theme } = appSettings;
 
 const initialThemeState = {
+  theme,
+};
+
+const initialLayoutState = {
   theme,
 };
 
@@ -14,12 +19,20 @@ const Store = ({ children }) => {
     initialThemeState
   );
 
+  const [layoutState, layoutDispatch] = useReducer(
+    LayoutReducer,
+    initialLayoutState
+  );
+
   return (
     <ThemeContext.Provider value={[themeState, themeDispatch]}>
-      {children}
+      <LayoutContext.Provider value={[layoutState, layoutDispatch]}>
+        {children}
+      </LayoutContext.Provider>
     </ThemeContext.Provider>
   );
 };
 
 export const ThemeContext = createContext(initialThemeState);
+export const LayoutContext = createContext(initialLayoutState);
 export default Store;

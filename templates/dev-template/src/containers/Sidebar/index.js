@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Drawer, Layout } from "antd";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Drawer, Layout} from "antd";
 
 import SidebarContent from "./SidebarContent";
-//import {toggleCollapsedSideNav, updateWindowWidth} from "../../appRedux/actions/Setting";
+import {toggleCollapsedSideNav, updateWindowWidth} from "appRedux/actions/Setting";
 import {
   NAV_STYLE_DRAWER,
   NAV_STYLE_FIXED,
@@ -11,35 +11,36 @@ import {
   NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
   TAB_SIZE,
-  THEME_TYPE_LITE,
+  THEME_TYPE_LITE
 } from "../../constants/ThemeSetting";
 
-const { Sider } = Layout;
+const {Sider} = Layout;
 
 const Sidebar = () => {
+
   const dispatch = useDispatch();
   let [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  const { themeType, navStyle } = useSelector(({ settings }) => settings);
-  const { navCollapsed, width } = useSelector(({ common }) => common);
+  const {themeType, navStyle} = useSelector(({settings}) => settings);
+  const {navCollapsed, width} = useSelector(({common}) => common);
 
   const onToggleCollapsedNav = () => {
-    // dispatch(toggleCollapsedSideNav(!navCollapsed));
+    dispatch(toggleCollapsedSideNav(!navCollapsed));
   };
 
-  useEffect(() => {
-    setSidebarCollapsed(navStyle === NAV_STYLE_MINI_SIDEBAR);
-  }, [navStyle]);
+  useEffect(()=>{
+    setSidebarCollapsed(navStyle===NAV_STYLE_MINI_SIDEBAR)
+  },[navStyle])
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      //dispatch(updateWindowWidth(window.innerWidth));
-    });
+    window.addEventListener('resize', () => {
+      dispatch(updateWindowWidth(window.innerWidth));
+    })
   }, [dispatch]);
+
 
   let drawerStyle = "gx-collapsed-sidebar";
 
-  /*
   if (navStyle === NAV_STYLE_FIXED) {
     drawerStyle = "";
   } else if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR) {
@@ -55,44 +56,25 @@ const Sidebar = () => {
     || navStyle === NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR) && width < TAB_SIZE) {
     drawerStyle = "gx-collapsed-sidebar"
   }
-  */
-
   return (
     <Sider
-      className={`gx-app-sidebar ${drawerStyle} ${
-        themeType !== THEME_TYPE_LITE ? "gx-layout-sider-dark" : null
-      }`}
+      className={`gx-app-sidebar ${drawerStyle} ${themeType !== THEME_TYPE_LITE ? 'gx-layout-sider-dark' : null}`}
       trigger={null}
-      collapsed={
-        width < TAB_SIZE
-          ? false
-          : sidebarCollapsed || navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR
-      }
+      collapsed={(width < TAB_SIZE ? false : sidebarCollapsed || navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR)}
       theme={themeType === THEME_TYPE_LITE ? "lite" : "dark"}
-      collapsible
-    >
-      {navStyle === NAV_STYLE_DRAWER || width < TAB_SIZE ? (
-        <Drawer
-          className={`gx-drawer-sidebar ${
-            themeType !== THEME_TYPE_LITE ? "gx-drawer-sidebar-dark" : null
-          }`}
-          placement="left"
-          closable={false}
-          onClose={onToggleCollapsedNav}
-          visible={navCollapsed}
-        >
-          <SidebarContent
-            sidebarCollapsed={sidebarCollapsed}
-            setSidebarCollapsed={setSidebarCollapsed}
-          />
-        </Drawer>
-      ) : (
-        <SidebarContent
-          sidebarCollapsed={sidebarCollapsed}
-          setSidebarCollapsed={setSidebarCollapsed}
-        />
-      )}
-    </Sider>
-  );
+      collapsible>
+      {
+        navStyle === NAV_STYLE_DRAWER || width < TAB_SIZE ?
+          <Drawer
+            className={`gx-drawer-sidebar ${themeType !== THEME_TYPE_LITE ? 'gx-drawer-sidebar-dark' : null}`}
+            placement="left"
+            closable={false}
+            onClose={onToggleCollapsedNav}
+            visible={navCollapsed}>
+            <SidebarContent sidebarCollapsed={sidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed}/>
+          </Drawer> :
+          <SidebarContent sidebarCollapsed={sidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed}/>
+      }
+    </Sider>)
 };
 export default Sidebar;
