@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import { Motor } from "@motor-js/engine";
-import Motor from "./dev-resources/components/Motor";
+import { Motor } from "@motor-js/engine";
+// import Motor from "./dev-resources/components/Motor";
 
 import reportWebVitals from "./reportWebVitals";
 import NextApp from "./NextApp";
