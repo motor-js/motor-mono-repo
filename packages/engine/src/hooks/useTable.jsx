@@ -22,7 +22,7 @@ const initialState = {
 
 function reducer(state, action) {
   const {
-    payload: { qData, mData, qRData, headerGroup, qLayout, selections },
+    payload: { title, qData, mData, qRData, headerGroup, qLayout, selections },
     type,
   } = action;
 
@@ -30,6 +30,7 @@ function reducer(state, action) {
     case "update":
       return {
         ...state,
+        title,
         qData,
         mData,
         headerGroup,
@@ -49,6 +50,7 @@ function reducer(state, action) {
 const initialProps = {
   cols: null,
   qHyperCubeDef: null,
+  qTitle: null,
   qPage: {
     qTop: 0,
     qLeft: 0,
@@ -72,6 +74,7 @@ const initialProps = {
 const useTable = (props) => {
   const {
     cols,
+    qTitle,
     qHyperCubeDef,
     qPage: qPageProp,
     qSortByAscii,
@@ -91,7 +94,15 @@ const useTable = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { qData, mData, qRData, headerGroup, qLayout, selections } = state;
+  const {
+    title,
+    qData,
+    mData,
+    qRData,
+    headerGroup,
+    qLayout,
+    selections,
+  } = state;
 
   // load engine from props
   //const myEngine = props.engine;
@@ -124,6 +135,7 @@ const useTable = (props) => {
   const generateQProp = useCallback(() => {
     const qProp = createDef(
       cols,
+      qTitle,
       qHyperCubeDef,
       qSortByAscii,
       qSortByLoadOrder,
@@ -142,6 +154,7 @@ const useTable = (props) => {
     return qProp;
   }, [
     cols,
+    qTitle,
     qExpression,
     qHyperCubeDef,
     qInterColumnSortOrder,
@@ -162,6 +175,10 @@ const useTable = (props) => {
     );
 
     return qDataPages[0];
+  }, []);
+
+  const getTitle = useCallback(async (layout) => {
+    return layout.qHyperCube.qTitle;
   }, []);
 
   const getReducedData = useCallback(
@@ -195,6 +212,7 @@ const useTable = (props) => {
   const update = useCallback(
     async (measureInfo) => {
       const _qLayout = await getLayout();
+      const _qTitle = await getTitle(_qLayout);
       const _qData = await getData();
       const _mData = await structureData(_qLayout, _qData);
       const _headerGroup = await getHeader(_qLayout);
@@ -220,6 +238,7 @@ const useTable = (props) => {
         dispatch({
           type: "update",
           payload: {
+            title: _qTitle,
             qData: _qData,
             mData: _mData,
             headerGroup: _orderHeader,
@@ -231,6 +250,7 @@ const useTable = (props) => {
         dispatch({
           type: "update",
           payload: {
+            title: _qTitle,
             qData: _qData,
             mData: _mData,
             headerGroup: _orderHeader,
@@ -360,6 +380,7 @@ const useTable = (props) => {
   return {
     beginSelections,
     endSelections,
+    title,
     qLayout,
     qData,
     mData,

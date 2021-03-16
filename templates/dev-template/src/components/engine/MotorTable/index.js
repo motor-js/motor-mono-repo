@@ -3,8 +3,9 @@ import { Table } from "antd";
 import { useTable } from "@motor-js/engine";
 import Widget from "components/Widget";
 
-const MotorTable = ({ cols }) => {
+const MotorTable = ({ tableConfig }) => {
   const [loading, setLoading] = useState(true);
+  const { qTitle, cols } = tableConfig;
 
   // const cols = [
   //   {
@@ -25,8 +26,9 @@ const MotorTable = ({ cols }) => {
   //   },
   // ];
 
-  const { mData, headerGroup } = useTable({
+  const { title, mData, headerGroup } = useTable({
     cols,
+    qTitle,
   });
 
   useEffect(() => {

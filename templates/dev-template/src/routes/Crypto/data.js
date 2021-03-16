@@ -1,21 +1,24 @@
-export const tableCols = [
-  {
-    qField: "currency",
-    qLabel: "currency",
-  },
-  {
-    qField: "rate",
-    qLabel: "rate",
-  },
-  {
-    qField: "date",
-    qLabel: "date",
-  },
-  {
-    qField: "fee",
-    qLabel: "fee",
-  },
-];
+export const tableCols = {
+  qTitle: "test",
+  cols: [
+    {
+      qField: "currency",
+      qLabel: "currency",
+    },
+    {
+      qField: "rate",
+      qLabel: "rate",
+    },
+    {
+      qField: "date",
+      qLabel: "date",
+    },
+    {
+      qField: "fee",
+      qLabel: "fee",
+    },
+  ],
+};
 
 export const bitCoinKPI = {
   chartConfig: {

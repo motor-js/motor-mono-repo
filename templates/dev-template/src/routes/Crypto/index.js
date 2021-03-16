@@ -61,7 +61,7 @@ const Crypto = () => {
           </Tabs>
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          <MotorTable cols={tableCols} />
+          <MotorTable tableConfig={tableCols} />
         </Col>
       </Row>
     </Auxiliary>

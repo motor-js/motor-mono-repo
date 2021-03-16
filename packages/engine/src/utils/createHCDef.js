@@ -1,5 +1,6 @@
 function createDef(
   cols,
+  qTitle,
   qHyperCubeDef,
   qSortByAscii,
   qSortByLoadOrder,
@@ -254,6 +255,7 @@ function createDef(
     qSuppressMissing,
     qColumnOrder,
     qCalcCondition,
+    qTitle,
   };
 
   return qProp;
