@@ -3,11 +3,11 @@ import { Drawer, Layout } from "antd";
 import { ThemeContext, NavContext } from "store";
 
 import SidebarContent from "./SidebarContent";
+import { findLastKey } from "lodash";
 
 const { Sider } = Layout;
 
 const Sidebar = () => {
-  let [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   
   const [themeState] = useContext(ThemeContext);
   const [navState, navDispatch] = useContext(NavContext);
@@ -30,7 +30,7 @@ const Sidebar = () => {
         theme !== "light" ? "gx-layout-sider-dark" : null
       }`}
       trigger={null}
-      collapsed={sidebarCollapsed}
+      collapsed={!nav}
       theme={theme === "light" ? "light" : "dark"}
       collapsible
     >
@@ -44,8 +44,8 @@ const Sidebar = () => {
         visible={nav}
       >
         <SidebarContent
-          sidebarCollapsed={sidebarCollapsed}
-          setSidebarCollapsed={setSidebarCollapsed}
+          sidebarCollapsed={!nav}
+       //   setSidebarCollapsed={setSidebarCollapsed}
         />
         </Drawer>
     </Sider>

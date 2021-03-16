@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef, useContext } from "react";
 import { EngineContext } from "@motor-js/engine";
 
 const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
-console.log('test')
+  
   const [groupResults, setGroupResults] = useState([]);
   const [flatResults, setFlatResults] = useState([]);
   const _isMounted = useRef(true);

@@ -46,7 +46,6 @@
 .@{class-prefix}-layout-sider-header {
   padding: 10px @sidebar-padding-lr 10px (2 * @sidebar-padding-lr + 10px);
   height: @layout-header-height;
-  .box-shadow(@gx-card-shadow-lg);
   position: relative;
   z-index: 1;
   .flex-display(flex, row, nowrap);
@@ -68,22 +67,6 @@
     }
   }
 
-  & .@{class-prefix}-linebar {
-    position: absolute;
-    left: @sidebar-padding-lr - 10px;
-    z-index: 1;
-    top: 15px;
-    .transition(all 0.3s ease-out);
-
-    .ant-layout-sider-collapsed & {
-      left: 20px;
-    }
-
-    @media screen and (max-width: @screen-md-max) {
-      display: none;
-    }
-  }
-
   .ant-layout-sider-collapsed & {
     padding-left: 20px;
     padding-right: 20px;
@@ -94,7 +77,7 @@
   }
 
   .@{class-prefix}-drawer-sidebar-dark & {
-    background-color: fade(@black-color, 30%);
+    background-color: transparent;
   }
 
   .@{class-prefix}-layout-sider-dark & {
@@ -124,7 +107,8 @@
 }
 
 .@{class-prefix}-sidebar-content {
-  border-right: @border-width-base @border-style-base @border-color-split;
+  border-top: @border-width-base @border-style-base @border-color-split;
+  padding-top: 10px;
 
   .@{class-prefix}-layout-sider-dark &,
   .@{class-prefix}-drawer-sidebar-dark & {
@@ -198,27 +182,6 @@
 
     @media screen and (max-width: @screen-xs-max) {
       height: calc(100vh~ "-" @layout-header-height-res ~"-" 145px) !important;
-    }
-  }
-}
-
-.@{class-prefix}-sidebar-notifications {
-  padding: @sidebar-padding-lr 10px 10px;
-  margin: 0 (@sidebar-padding-lr - 10px) 10px;
-  border-bottom: @border-style-base @border-width-base @border-color;
-
-  .ant-layout-sider-dark &,
-  .gx-drawer-sidebar-dark & {
-    border-bottom-color: @nav-dark-text-color;
-  }
-
-  @media screen and (max-width: @screen-md-max) {
-    display: none;
-  }
-
-  &.@{class-prefix}-no-header-notifications {
-    @media screen and (max-width: @screen-md-max) {
-      display: block;
     }
   }
 }

@@ -6,7 +6,7 @@ import { useSelections } from "@motor-js/engine";
 
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/MotorSearch";
-import { ThemeContext, NavContext } from "store";
+import { ThemeContext, NavContext, LayoutContext } from "store";
 import { appSettings } from "settings";
 
 import logoLight from "assets/images/motor-red.png";
@@ -17,6 +17,7 @@ const { Header } = Layout;
 const Topbar = () => {
   const [searchText, setSearchText] = useState("");
   const [themeState, themeDispatch] = useContext(ThemeContext);
+  const [layoutState, layoutDispatch] = useContext(LayoutContext)
   const [navState, navDispatch] = useContext(NavContext);
   
   const { selections, clearSelections } = useSelections();
@@ -35,7 +36,7 @@ const Topbar = () => {
       type: "TOGGLE_THEME",
       payload: themeState.theme === "light" ? "dark" : "light",
     });
-
+  
   return (
     <Header>
         <div className="gx-linebar gx-mr-3">
@@ -48,7 +49,7 @@ const Topbar = () => {
             }
           />
         </div>
-        <Link to="/" className="gx-d-block gx-pointer">
+        <Link to="/" className="gx-d-block gx-mr-auto gx-pointer">
         {themeState.theme === "light" ? (
           <img
             src={logoLight}
@@ -63,60 +64,60 @@ const Topbar = () => {
           />
         )}
         </Link>
-      <ul className="gx-header-notifications">
-        <li className="gx-nav-icon gx-ml-auto">
-          <MotorSearch
-            styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
-            placeholder="Search in app..."
-            onChange={handleSearch}
-            value={searchText}
-          />
-        </li>
-        <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
-          <Popover
-            overlayClassName="gx-popover-horizantal"
-            placement="bottomRight"
-            trigger="click"
-            content={
-              <div className="gx-d-flex">
-                <MotorSearch
-                  styleName="gx-popover-search-bar"
-                  placeholder="Search in app..."
-                  onChange={handleSearch}
-                  value={searchText}
-                />
-              </div>
-            }
-          >
-            <span className="gx-pointer gx-d-block">
-              <i className="icon icon-search-new" />
-            </span>
-          </Popover>
-        </li>
-        <li className="gx-nav-icon">
-          <Popover
-            overlayClassName="gx-popover-horizantal"
-            placement="bottomRight"
-            content={
-              <Selections selections={selections} handleClear={handleClear} />
-            }
-            trigger="click"
-          >
-            <span className="gx-pointer gx-status-pos gx-d-block">
-              <FilterOutlined style={{ fontSize: "18px" }} />
-              {selections && selections.length > 0 ? (
-                <span className="gx-status gx-status-rtl gx-small gx-orange" />
-              ) : (
-                <span className="gx-status gx-status-rtl gx-small" />
-              )}
-            </span>
-          </Popover>
-        </li>
-        {showThemeSwitch && (
-          <li className="gx-nav-icon">
-            <Switch onChange={handleSwitch} />
+        <ul className="gx-header-notifications">
+          <li className="gx-nav-icon gx-ml-auto">
+            <MotorSearch
+              styleName="gx-d-none gx-d-lg-block"
+              placeholder="Search in app..."
+              onChange={handleSearch}
+              value={searchText}
+            />
           </li>
-        )}
+          <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
+            <Popover
+              overlayClassName="gx-popover-horizantal"
+              placement="bottomRight"
+              trigger="click"
+              content={
+                <div className="gx-d-flex">
+                  <MotorSearch
+                    styleName="gx-popover-search-bar"
+                    placeholder="Search in app..."
+                    onChange={handleSearch}
+                    value={searchText}
+                  />
+                </div>
+              }
+            >
+              <span className="gx-pointer gx-d-block">
+                <i className="icon icon-search-new" />
+              </span>
+            </Popover>
+          </li>
+          <li className="gx-nav-icon">
+            <Popover
+              overlayClassName="gx-popover-horizantal"
+              placement="bottomRight"
+              content={
+                <Selections selections={selections} handleClear={handleClear} />
+              }
+              trigger="click"
+            >
+              <span className="gx-pointer gx-status-pos gx-d-block">
+                <FilterOutlined style={{ fontSize: "18px" }} />
+                {selections && selections.length > 0 ? (
+                  <span className="gx-status gx-status-rtl gx-small gx-orange" />
+                ) : (
+                  <span className="gx-status gx-status-rtl gx-small" />
+                )}
+              </span>
+            </Popover>
+          </li>
+          {showThemeSwitch && (
+            <li className="gx-nav-icon">
+              <Switch onChange={handleSwitch} />
+            </li>
+          )}
       </ul>
     </Header>
   );
