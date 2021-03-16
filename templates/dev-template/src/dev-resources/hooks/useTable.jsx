@@ -87,6 +87,7 @@ const useTable = (props) => {
     getQRData,
     qOtherTotalSpec,
   } = deepMerge(initialProps, props);
+  console.log("cols", cols);
 
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);

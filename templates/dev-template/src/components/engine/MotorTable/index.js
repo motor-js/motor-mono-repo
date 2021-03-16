@@ -3,27 +3,27 @@ import { Table } from "antd";
 import { useTable } from "@motor-js/engine";
 import Widget from "components/Widget";
 
-const MotorTable = () => {
+const MotorTable = ({ cols }) => {
   const [loading, setLoading] = useState(true);
 
-  const cols = [
-    {
-      qField: "currency",
-      qLabel: "currency",
-    },
-    {
-      qField: "rate",
-      qLabel: "rate",
-    },
-    {
-      qField: "date",
-      qLabel: "date",
-    },
-    {
-      qField: "fee",
-      qLabel: "fee",
-    },
-  ];
+  // const cols = [
+  //   {
+  //     qField: "currency",
+  //     qLabel: "currency",
+  //   },
+  //   {
+  //     qField: "rate",
+  //     qLabel: "rate",
+  //   },
+  //   {
+  //     qField: "date",
+  //     qLabel: "date",
+  //   },
+  //   {
+  //     qField: "fee",
+  //     qLabel: "fee",
+  //   },
+  // ];
 
   const { mData, headerGroup } = useTable({
     cols,
