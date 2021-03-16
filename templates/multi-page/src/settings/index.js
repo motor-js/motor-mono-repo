@@ -16,5 +16,6 @@ export const qlikConfig = {
 export const appSettings = {
   theme: "light", // light or dark
   layout: "sidebar_collapse", // sidebar_collapse or topbar
+  nav: false,
   showThemeSwitch: true,
 };

@@ -6,7 +6,7 @@ import { useSelections } from "@motor-js/engine";
 
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/MotorSearch";
-import { ThemeContext } from "store";
+import { ThemeContext, NavContext } from "store";
 import { appSettings } from "settings";
 
 import logoLight from "assets/images/motor-red.png";
@@ -17,9 +17,12 @@ const { Header } = Layout;
 const Topbar = () => {
   const [searchText, setSearchText] = useState("");
   const [themeState, themeDispatch] = useContext(ThemeContext);
-
+  const [navState, navDispatch] = useContext(NavContext);
+  
   const { selections, clearSelections } = useSelections();
   const { showThemeSwitch } = appSettings;
+  
+  const { nav } = navState
 
   const handleClear = (field) => clearSelections(field);
 
@@ -38,8 +41,11 @@ const Topbar = () => {
         <div className="gx-linebar gx-mr-3">
           <i className="gx-icon-btn icon icon-menu"
              onClick={() => {
-               /*dispatch(toggleCollapsedSideNav(!navCollapsed));*/
-             }}
+               navDispatch({
+                type: "TOGGLE_NAV",
+                payload: !nav,
+              })}
+            }
           />
         </div>
         <Link to="/" className="gx-d-block gx-pointer">

@@ -11,32 +11,19 @@ import Sidebar from "../Sidebar/index";
 import Topbar from "../TopBar";
 
 import { footer } from "settings";
-import App from "routes";
+import App from "routes/index";
 
 const { Content, Footer } = Layout;
 
 const MainApp = (props) => {
   const { match } = props;
- // const [layoutState] = useContext(LayoutContext);
 
-  //const { layout } = layoutState;
-/*
-  const getNavStyles = (layout) => {
-    switch (layout) {
-      case "SINGLE_PAGE":
-        return <HorizontalDefault />;
-      default:
-        return null;
-    }
-  };
-*/
   const getSidebar = () => {};
 
   return (
     <Layout className="gx-app-layout">
       <Sidebar/>
       <Layout>
-        {/*getNavStyles(layout)*/}
         <Topbar />
         <Content className={`gx-layout-content gx-container-wrap`}>
           <App match={match} />

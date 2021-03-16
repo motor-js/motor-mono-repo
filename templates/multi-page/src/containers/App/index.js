@@ -21,7 +21,7 @@ const App = (props) => {
   }
 
   if (location.pathname === "/") {
-    return <Redirect to={"/crypto"} />;
+    return <Redirect to={"/home"} />;
   }
 
   return (

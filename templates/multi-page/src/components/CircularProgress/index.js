@@ -6,4 +6,5 @@ const CircularProgress = ({ className }) => (
     <img src={loader} alt="loader" />
   </div>
 );
+
 export default CircularProgress;
