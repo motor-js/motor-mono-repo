@@ -1,69 +1,4 @@
-/* Ant Layout Style */
-.ant-layout {
-  position: relative;
-  background: none;
-
-  & > .@{class-prefix}-layout-content {
-    overflow-x: hidden;
-    .flex-display(flex, column, nowrap);
-
-    .full-scroll & {
-      overflow-x: inherit;
-    }
-  }
-
-  &.ant-layout-has-sider > .ant-layout {
-    position: relative;
-    background: @body-background;
-  }
-  .framed-layout &,
-  .boxed-layout & {
-    background: @body-background;
-  }
-
-  .framed-layout &,
-  .boxed-layout & {
-    background: @body-background;
-  }
-
-  &.@{class-prefix}-app-layout {
-    height: 100vh;
-
-    .framed-layout & {
-      height: calc(100vh~"-"2 * @framed-layout-base);
-
-      @media screen and (max-width: @screen-md-max) {
-        height: 100vh;
-      }
-    }
-
-    .framed-layout.full-scroll &,
-    .boxed-layout.full-scroll & {
-      overflow-y: scroll;
-    }
-
-    & > .ant-layout {
-      height: 100vh;
-
-      .framed-layout & {
-        height: calc(100vh~"-"2 * @framed-layout-base);
-
-        @media screen and (max-width: @screen-md-max) {
-          height: 100vh;
-        }
-      }
-    }
-  }
-
-  &.ant-layout-has-sider > .ant-layout,
-  &.ant-layout-has-sider > .ant-layout-content {
-
-    .full-scroll & {
-      overflow-x: inherit;
-    }
-  }
-}
-
+// APP LAYOUT
 .@{class-prefix}-main-content-wrapper {
   padding: @layout-main-content-padding @layout-main-content-padding 0;
   flex: 1;
@@ -73,7 +8,6 @@
   }
 
   .@{class-prefix}-container-wrap & {
-    width: 94vw;
     margin-left: auto;
     margin-right: auto;
     padding-left: 16px;
@@ -134,5 +68,3 @@
     width: (@screen-xxl-min - 200);//1400
   }
 }
-
-
