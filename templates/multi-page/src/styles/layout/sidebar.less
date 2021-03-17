@@ -37,12 +37,13 @@
 }
 
 .@{class-prefix}-layout-sider-header {
-  padding: 10px @sidebar-padding-lr 10px (2 * @sidebar-padding-lr + 10px);
+  padding: 10px @sidebar-padding-lr 10px @sidebar-padding-lr;
   height: @layout-header-height;
   position: relative;
   z-index: 1;
   .flex-display(flex, row, nowrap);
   .align-items(center);
+  .justify-content(center);
 
   @media screen and (max-width: @screen-xs-max) {
     height: @layout-header-height-res;
@@ -74,11 +75,6 @@
 .@{class-prefix}-sidebar-content {
   border-top: @border-width-base @border-style-base @border-color-split;
   padding-top: 10px;
-
-  .@{class-prefix}-layout-sider-dark &,
-  .@{class-prefix}-drawer-sidebar-dark & {
-    border-right: 0 none;
-  }
 }
 
 .@{class-prefix}-layout-sider-scrollbar {

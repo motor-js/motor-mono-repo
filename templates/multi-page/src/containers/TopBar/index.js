@@ -122,7 +122,7 @@ const Topbar = ({ topNav }) => {
               <Switch onChange={handleSwitch} />
             </li>
           )}
-      </ul>
+        </ul>
     </Header>
   );
 };
