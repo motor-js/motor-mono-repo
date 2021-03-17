@@ -43,10 +43,7 @@ const Sidebar = () => {
         onClose={onToggleCollapsedNav}
         visible={nav}
       >
-        <SidebarContent
-          sidebarCollapsed={!nav}
-       //   setSidebarCollapsed={setSidebarCollapsed}
-        />
+        <SidebarContent sidebarCollapsed={!nav} />
         </Drawer>
     </Sider>
   );

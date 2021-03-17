@@ -14,10 +14,10 @@ import logoDark from "assets/images/motor-white.png";
 
 const { Header } = Layout;
 
-const Topbar = () => {
+const Topbar = ({ topNav }) => {
+
   const [searchText, setSearchText] = useState("");
   const [themeState, themeDispatch] = useContext(ThemeContext);
-  const [layoutState, layoutDispatch] = useContext(LayoutContext)
   const [navState, navDispatch] = useContext(NavContext);
   
   const { selections, clearSelections } = useSelections();
@@ -31,18 +31,22 @@ const Topbar = () => {
     setSearchText(evt.target.value);
   };
 
-  const handleSwitch = () =>
+  const handleSwitch = () => (
     themeDispatch({
       type: "TOGGLE_THEME",
       payload: themeState.theme === "light" ? "dark" : "light",
-    });
+    })
+  )
   
   return (
     <Header>
-        <div className="gx-linebar gx-mr-3">
+        <div className={ 
+            topNav ? "gx-d-block gx-d-lg-none gx-linebar gx-mr-xs-3" 
+            : "gx-linebar gx-mr-3"
+          }>
           <i className="gx-icon-btn icon icon-menu"
-             onClick={() => {
-               navDispatch({
+            onClick={() => {
+              navDispatch({
                 type: "TOGGLE_NAV",
                 payload: !nav,
               })}
@@ -122,5 +126,9 @@ const Topbar = () => {
     </Header>
   );
 };
+
+Topbar.defaultProps = {
+  topNav: false
+}
 
 export default Topbar;

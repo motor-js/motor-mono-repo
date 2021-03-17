@@ -9,8 +9,6 @@ const SidebarLogo = () => {
   
   const [themeState] = useContext(ThemeContext);
   
-  const { theme } = themeState;
-
   return (
     <div className="gx-layout-sider-header">
       <Link to="/" className="gx-site-logo">

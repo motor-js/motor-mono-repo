@@ -36,7 +36,7 @@ const { theme } = themeState;
             </Menu.Item>
             <Menu.Item key="components">
               <Link to="/components">
-                <i className="icon icon-crm" />
+                <i className="icon icon-components" />
                 <span>
                   Components
                 </span>

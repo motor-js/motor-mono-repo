@@ -3,7 +3,7 @@ export const LayoutReducer = (state, action) => {
     case "TOGGLE_LAYOUT":
       return {
         ...state,
-        theme: action.payload,
+        layout: action.payload,
       };
   }
 };

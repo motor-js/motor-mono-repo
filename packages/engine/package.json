@@ -6,6 +6,7 @@
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
   "source": "src/index.ts",
+  "files": ["lib"],
   "peerDependencies": {
     "react": "^17.0.1"
   },
