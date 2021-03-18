@@ -6,15 +6,11 @@ import MainApp from "./MainApp";
 import { ThemeContext } from "store";
 
 const App = (props) => {
-  const [state] = useContext(ThemeContext);
-
-  const { theme } = state;
-
+  const [themeState] = useContext(ThemeContext)
+  const { theme } = themeState;
   const { match, location } = props;
 
-  const themeType = theme;
-
-  if (themeType === "dark") {
+  if (theme === "dark") {
     document.body.classList.add("dark-theme");
   } else {
     document.body.classList.remove("dark-theme");

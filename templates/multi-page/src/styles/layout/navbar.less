@@ -1,0 +1,254 @@
+/* Ant Menu Style */
+
+.ant-menu {
+  color: @menu-item-color;
+  background: @menu-bg;
+
+  &-horizontal {
+    background: none;
+  }
+
+  &-item-group-title {
+    color: @menu-item-group-title-color;
+    font-size: (@font-size-sm - 1);
+    line-height: @line-height-base;
+    padding: 10px @sidebar-padding-lr;
+
+    .ant-menu-submenu-popup & {
+      padding-left: (@sidebar-padding-lr - 10px);
+    }
+
+    .ant-layout-sider & {
+      padding-top: (@sidebar-padding-lr + 10px);
+    }
+  }
+
+  &-item:active,
+  &-submenu-title:active {
+    background: @menu-item-active-bg;
+  }
+  &-item .icon {
+    min-width: 14px;
+    margin-right: 20px;
+    display: inline-block;
+    vertical-align: middle;
+
+    &[class^="icon-"]::before,
+    &[class*=" icon-"]::before {
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  &-sub &-item .icon {
+    font-size: 12px;
+  }
+
+  &-item > a {
+    color: @menu-item-color;
+    &:hover {
+      color: @menu-highlight-color;
+    }
+  }
+
+  &-item-divider {
+    background-color: @border-color-split;
+  }
+
+  &-submenu-inline {
+    .transition(all 0.3s ease-out);
+  }
+
+  &-item:hover,
+  &-item-active,
+  &:not(.ant-menu-inline) &-submenu-open,
+  &-submenu-active,
+  &-submenu-title:hover {
+    color: @menu-highlight-color;
+  }
+
+  &-horizontal > &-item:hover,
+  &-horizontal > &-item-active,
+  &-horizontal > &-submenu &-submenu-title:hover {
+    background-color: transparent;
+  }
+
+  &-item-selected {
+    color: @menu-highlight-color;
+    > a {
+      color: @menu-item-color;
+    }
+
+    > a:hover {
+      color: @menu-highlight-color;
+    }
+  }
+
+  &:not(.ant-menu-horizontal) &-item-selected {
+    background-color: @menu-item-active-bg;
+  }
+
+  &-inline,
+  &-vertical,
+  &-vertical-left {
+    border-right: @border-width-base @border-style-base @border-color-split;
+
+    .ant-layout-sider &,
+    .@{class-prefix}-drawer-sidebar & {
+      border-right: 0 none;
+    }
+  }
+  &-vertical-right {
+    border-left: @border-width-base @border-style-base @border-color-split;
+  }
+
+  &-item,
+  &-submenu-title {
+    padding: 0 20px;
+
+    .@{class-prefix}-inside-header-horizontal & {
+      padding: 0 10px;
+
+      @media screen and (max-width: @screen-lg-max) {
+        padding: 0 6px;
+      }
+    }
+
+    .@{iconfont-css-prefix} {
+      margin-right: 20px;
+    }
+  }
+
+  & > &-item-divider {
+    background-color: @border-color-split;
+  }
+
+  &-sub {
+    & > li {
+      & > a {
+        position: relative;
+      }
+    }
+  }
+
+
+  &-vertical &-submenu-selected,
+  &-vertical-left &-submenu-selected,
+  &-vertical-right &-submenu-selected {
+    color: @menu-highlight-color;
+    > a {
+      color: @menu-highlight-color;
+    }
+  }
+
+  &-horizontal {
+    border-bottom: @border-width-base @border-style-base @border-color-split;
+    line-height: 46px;
+    padding: 0;
+
+    .ant-layout-header & {
+      border-bottom: 0 none;
+      line-height: @layout-header-height - 2px;
+    }
+
+    > .ant-menu-item,
+    > .ant-menu-submenu {
+      border-bottom: 2px @border-style-base transparent;
+
+      &:hover,
+      &-active,
+      &-open,
+      &-selected {
+        border-bottom: 2px @border-style-base @menu-highlight-color;
+        color: @menu-highlight-color;
+      }
+
+      > a {
+        color: @menu-item-color;
+        &:hover {
+          color: @menu-highlight-color;
+        }
+        &:before {
+          bottom: -2px;
+        }
+      }
+    }
+  }
+
+  &-vertical,
+  &-vertical-left,
+  &-vertical-right,
+  &-inline {
+    .ant-menu-item {
+      &:not(:last-child) {
+        margin-bottom: 0;
+      }
+      &:after {
+        border-right: 3px @border-style-base @menu-highlight-color;
+      }
+    }
+
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+      padding: 0 @sidebar-padding-lr 0 (@sidebar-padding-lr - 10px) !important;
+      font-size: @font-size-base;
+      margin-top: 0;
+      margin-bottom: 0;
+      text-overflow: inherit;
+
+      .ant-layout-sider &,
+      .ant-drawer & {
+        padding-left: @sidebar-padding-lr + 10px !important;
+      }
+
+      .icon {
+        min-width: 14px;
+        margin-right: 20px;
+
+        &[class^="icon-"]::before,
+        &[class*=" icon-"]::before {
+          position: relative;
+          top: 2px;
+        }
+
+        & + span {
+          .ant-layout-sider-collapsed & {
+            max-width: 0;
+            display: inline-block;
+            opacity: 0;
+          }
+        }
+      }
+
+      .@{menu-prefix-cls}-submenu-arrow {
+        .ant-layout-sider-collapsed & {
+          display: none;
+        }
+      }
+
+      .ant-layout-sider-collapsed & {
+        padding: 0 (@menu-collapsed-width - 16px) / 2 !important;
+      }
+    }
+
+    &.ant-menu-sub .ant-menu-submenu-title {
+      .ant-card & {
+        padding-left: 2 * @sidebar-padding-lr - 6px !important;
+      }
+    }
+
+    &.ant-menu-sub .ant-menu-submenu-title {
+      .ant-layout-sider &,
+      .ant-drawer & {
+        padding-left: 2 * @sidebar-padding-lr + 20px !important;
+      }
+    }
+  }
+
+  &-inline {
+    .ant-menu-submenu-title {
+      padding-right: @sidebar-padding-lr !important;
+    }
+  }
+
+}

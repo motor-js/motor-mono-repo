@@ -29,6 +29,7 @@ const App = () => {
       <Layout>
         <Topbar />
         <Content className={`gx-layout-content gx-container-wrap`}>
+        <div className="gx-main-content-wrapper">
           <Row>
             <Col xl={6} lg={12} md={12} sm={12} xs={24}>
               <ChartKPI dataProps={bitCoinKPI} />
@@ -43,6 +44,7 @@ const App = () => {
               <ChartKPI dataProps={litecoinKPI} />
             </Col>
           </Row>
+          </div>
         </Content>
         <Footer>
           <div className="gx-layout-footer-content">{footer.footerText}</div>
