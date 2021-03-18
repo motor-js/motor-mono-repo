@@ -35,7 +35,7 @@ const Topbar = () => {
 
   return (
     <Header>
-<<<<<<< HEAD
+      {/* <div className="gx-header-horizontal-main-flex">*/}
       {themeState.theme === "light" ? (
         <img
           src={logoLight}
@@ -99,77 +99,11 @@ const Topbar = () => {
           </Popover>
         </li>
         {showThemeSwitch && (
-=======
-     {/* <div className="gx-header-horizontal-main-flex">*/}
-          {themeState.theme === "light" ? (
-            <img
-              src={logoLight}
-              alt="Logo"
-              style={{ height: "40px", width: "120px" }}
-            />
-          ) : (
-            <img
-              src={logoDark}
-              alt="Logo"
-              style={{ height: "40px", width: "120px" }}
-            />
-          )}
-        <ul className="gx-header-notifications">
-          <li className="gx-nav-icon gx-ml-auto">
-            <MotorSearch
-              styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
-              placeholder="Search in app..."
-              onChange={handleSearch}
-              value={searchText}
-            />
-          </li>
-          <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
-            <Popover
-              overlayClassName="gx-popover-horizantal"
-              placement="bottomRight"
-              trigger="click"
-              content={
-                <div className="gx-d-flex">
-                  <MotorSearch
-                    styleName="gx-popover-search-bar"
-                    placeholder="Search in app..."
-                    onChange={handleSearch}
-                    value={searchText}
-                  />
-                </div>
-              }
-            >
-              <span className="gx-pointer gx-d-block">
-                <i className="icon icon-search-new" />
-              </span>
-            </Popover>
-          </li>
->>>>>>> be2b8f5b0ecc492977ca2f3f8e1b261411673e0d
           <li className="gx-nav-icon">
-            <Popover
-              overlayClassName="gx-popover-horizantal"
-              placement="bottomRight"
-              content={
-                <Selections selections={selections} handleClear={handleClear} />
-              }
-              trigger="click"
-            >
-              <span className="gx-pointer gx-status-pos gx-d-block">
-                <FilterOutlined style={{ fontSize: "18px" }} />
-                {selections && selections.length > 0 ? (
-                  <span className="gx-status gx-status-rtl gx-small gx-orange" />
-                ) : (
-                  <span className="gx-status gx-status-rtl gx-small" />
-                )}
-              </span>
-            </Popover>
+            <Switch onChange={handleSwitch} />
           </li>
-          {showThemeSwitch && (
-            <li className="gx-nav-icon">
-              <Switch onChange={handleSwitch} />
-            </li>
-          )}
-        </ul>
+        )}
+      </ul>
       {/*</div>*/}
     </Header>
   );

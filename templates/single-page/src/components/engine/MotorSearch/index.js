@@ -1,43 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Input, AutoComplete } from 'antd';
+import { Input, AutoComplete } from "antd";
 //import searchResults from './searchResults'
-import { useSearch } from "@motor-js/engine"
+import { useSearch } from "@motor-js/engine";
 
-<<<<<<< HEAD
-const MotorSearch = () => {
-=======
-const MotorSearch = ({
-  styleName,
-  placeholder,
-}) => {
->>>>>>> be2b8f5b0ecc492977ca2f3f8e1b261411673e0d
-
+const MotorSearch = ({ styleName, placeholder }) => {
   const [options, setOptions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   const qCount = 100;
   const qGroupItemCount = 100;
 
-  const { 
-    flatResults,
-    flatSelect,
-  } = useSearch({ 
+  const { flatResults, flatSelect } = useSearch({
     searchValue,
     qCount,
-    qGroupItemCount
-  })
+    qGroupItemCount,
+  });
 
   const handleSearch = (value) => {
-    setSearchValue(value)
+    setSearchValue(value);
   };
 
   const onSelect = (val, obj) => {
-    flatSelect(obj.dimension,val)
+    flatSelect(obj.dimension, val);
   };
 
   useEffect(() => {
-    setOptions(flatResults)
-  },[flatResults])
+    setOptions(flatResults);
+  }, [flatResults]);
 
   return (
     <div className={`gx-search-bar ${styleName}`}>
@@ -51,7 +40,7 @@ const MotorSearch = ({
         <Input.Search size="medium" placeholder={placeholder} />
       </AutoComplete>
     </div>
-  )
-}
+  );
+};
 
 export default MotorSearch;
