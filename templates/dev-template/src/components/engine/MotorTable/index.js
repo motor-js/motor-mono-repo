@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Skeleton, Card, PageHeader, Select, Radio } from "antd";
-import { useTable } from "@motor-js/engine";
+// import { useTable } from "@motor-js/engine";
+import useTable from "../../../dev-resources/hooks/useTable";
 import Widget from "components/Widget";
 
 const MotorTable = ({ tableConfig }) => {
