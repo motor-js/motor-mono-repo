@@ -2,20 +2,21 @@ export const tableCols = {
   qTitle: "test",
   cols: [
     {
-      qField: "currency",
-      qLabel: "currency",
+      qField: "Image",
+      qLabel: "image",
+      qImage: true,
     },
     {
-      qField: "rate",
-      qLabel: "rate",
+      qField: "Name",
+      qLabel: "Name",
     },
     {
-      qField: "date",
-      qLabel: "date",
+      qField: "Company...Country",
+      qLabel: "Country",
     },
     {
-      qField: "fee",
-      qLabel: "fee",
+      qField: "Category",
+      qLabel: "Category",
     },
   ],
 };

@@ -49,6 +49,7 @@ function reducer(state, action) {
 
 const initialProps = {
   cols: null,
+  imageRender: null,
   qHyperCubeDef: null,
   qTitle: null,
   qPage: {
@@ -74,6 +75,7 @@ const initialProps = {
 const useTable = (props) => {
   const {
     cols,
+    imageRender,
     qTitle,
     qHyperCubeDef,
     qPage: qPageProp,
@@ -215,7 +217,7 @@ const useTable = (props) => {
       const _qTitle = await getTitle(_qLayout);
       const _qData = await getData();
       const _mData = await structureData(_qLayout, _qData);
-      const _headerGroup = await getHeader(_qLayout);
+      const _headerGroup = await getHeader(_qLayout, imageRender);
       const _orderHeader = await getOrder(_headerGroup, qColumnOrder);
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(

@@ -3,33 +3,24 @@ import { Table, Skeleton, Card, PageHeader, Select, Radio } from "antd";
 // import { useTable } from "@motor-js/engine";
 import useTable from "../../../dev-resources/hooks/useTable";
 import Widget from "components/Widget";
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 const MotorTable = ({ tableConfig }) => {
   const [loading, setLoading] = useState(true);
   const { qTitle, cols } = tableConfig;
 
-  // const cols = [
-  //   {
-  //     qField: "currency",
-  //     qLabel: "currency",
-  //   },
-  //   {
-  //     qField: "rate",
-  //     qLabel: "rate",
-  //   },
-  //   {
-  //     qField: "date",
-  //     qLabel: "date",
-  //   },
-  //   {
-  //     qField: "fee",
-  //     qLabel: "fee",
-  //   },
-  // ];
+  const imageRender = (text, data) => {
+    return (
+      <div>
+        <img src={data.image} />
+      </div>
+    );
+  };
 
   const { title, mData, headerGroup } = useTable({
     cols,
     qTitle,
+    imageRender,
   });
 
   useEffect(() => {

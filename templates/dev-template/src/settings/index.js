@@ -8,7 +8,8 @@ export const qlikConfig = {
   secure: true,
   port: null,
   prefix: "",
-  appId: "865fb37c-1e6f-44b5-a7cb-14a42c5c112c",
+  // appId: "865fb37c-1e6f-44b5-a7cb-14a42c5c112c",
+  appId: "cd9f6c4e-0b19-440f-8030-69393bd5a514",
   webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
   qcs: true,
 };
