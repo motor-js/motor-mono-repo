@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Layout, Popover, Switch } from "antd";
 import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
+import SelectOutlined from "@ant-design/icons/lib/icons/SelectOutlined";
 
 import Selections from "components/engine/Selections";
+import Filters from "components/engine/Filters";
 import MotorSearch from "components/engine/MotorSearch";
 
 import { useSelections } from "@motor-js/engine";
@@ -84,12 +86,33 @@ const Topbar = () => {
             overlayClassName="gx-popover-horizantal"
             placement="bottomRight"
             content={
-              <Selections selections={selections} handleClear={handleClear} />
+              // <Selections selections={selections} handleClear={handleClear} />
+              // <MotorFilter dimension={["Country"]} />
+              <Filters />
             }
             trigger="click"
           >
             <span className="gx-pointer gx-status-pos gx-d-block">
               <FilterOutlined style={{ fontSize: "18px" }} />
+              {selections && selections.length > 0 ? (
+                <span className="gx-status gx-status-rtl gx-small gx-orange" />
+              ) : (
+                <span className="gx-status gx-status-rtl gx-small" />
+              )}
+            </span>
+          </Popover>
+        </li>
+        <li className="gx-nav-icon">
+          <Popover
+            overlayClassName="gx-popover-horizantal"
+            placement="bottomRight"
+            content={
+              <Selections selections={selections} handleClear={handleClear} />
+            }
+            trigger="click"
+          >
+            <span className="gx-pointer gx-status-pos gx-d-block">
+              <SelectOutlined style={{ fontSize: "18px" }} />
               {selections && selections.length > 0 ? (
                 <span className="gx-status gx-status-rtl gx-small gx-orange" />
               ) : (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
-import { useList } from "@motor-js/engine"
+import { useList } from "@motor-js/engine";
 import Widget from "components/Widget";
 
 const Filter = ({ dimension }) => {
@@ -52,26 +52,26 @@ const Filter = ({ dimension }) => {
   }
 
   return (
-    <Widget
-    //styleName="gx-order-history"
-    //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Name</h2> }
+    // <Widget
+    // //styleName="gx-order-history"
+    // //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Name</h2> }
+    // >
+    <Select
+      mode="multiple"
+      allowClear
+      onChange={handleChange}
+      value={selected}
+      style={{ width: "100%" }}
+      placeholder={dimension[0]}
+      onClear={handleClear}
+      onDeselect={(v) => handleDeselect(v)}
+      filterOption={(input, option) =>
+        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      }
     >
-      <Select
-        mode="multiple"
-        allowClear
-        onChange={handleChange}
-        value={selected}
-        style={{ width: "100%" }}
-        placeholder={dimension[0]}
-        onClear={handleClear}
-        onDeselect={(v) => handleDeselect(v)}
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-      >
-        {children}
-      </Select>
-    </Widget>
+      {children}
+    </Select>
+    // </Widget>
   );
 };
 
