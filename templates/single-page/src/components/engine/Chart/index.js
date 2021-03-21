@@ -56,10 +56,9 @@ const ChartComponent = ({ dataProps }) => {
     );
   };
 
-  console.log("dataSet", dataSet);
   return (
     <>
-      {dataSet ? (
+      {dataSet.data ? (
         <Widget styleName="gx-card-full">
           {(title || subTitle) && (
             <PageHeader

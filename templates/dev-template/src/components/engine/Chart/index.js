@@ -83,7 +83,7 @@ const ChartComponent = ({ dataProps }) => {
 
   return (
     <>
-      {dataSet ? (
+      {dataSet.data ? (
         // <Card className="gx-card" title={title}>
         <Widget styleName="gx-card-full">
           {/* <h2 className="h4 gx-mb-3">Balance History</h2> */}
