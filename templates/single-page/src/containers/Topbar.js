@@ -12,6 +12,7 @@ import { appSettings } from "settings";
 
 import logoLight from "assets/images/motor-red.png";
 import logoDark from "assets/images/motor-white.png";
+import logoSymbol from "assets/images/m-logo.png";
 
 const { Header } = Layout;
 
@@ -39,17 +40,31 @@ const Topbar = () => {
       <Header>
         {/* <div className="gx-header-horizontal-main-flex">*/}
         {themeState.theme === "light" ? (
-          <img
-            src={logoLight}
-            alt="Logo"
-            style={{ height: "40px", width: "120px" }}
-          />
+          <div>
+            <img
+              src={logoSymbol}
+              alt="Logo"
+              style={{ height: "40px", width: "40px", marginRight: "10px" }}
+            />
+            <img
+              src={logoLight}
+              alt="Logo"
+              style={{ height: "40px", width: "120px" }}
+            />
+          </div>
         ) : (
-          <img
-            src={logoDark}
-            alt="Logo"
-            style={{ height: "40px", width: "120px" }}
-          />
+          <div>
+            <img
+              src={logoSymbol}
+              alt="Logo"
+              style={{ height: "40px", width: "40px", marginRight: "10px" }}
+            />
+            <img
+              src={logoDark}
+              alt="Logo"
+              style={{ height: "40px", width: "120px" }}
+            />
+          </div>
         )}
         <ul className="gx-header-notifications">
           <li className="gx-nav-icon gx-ml-auto">

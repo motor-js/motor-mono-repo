@@ -1,4 +1,4 @@
-export const bitCoinKPI = {
+export const FitnessKpi = {
   chartConfig: {
     chartType: "area",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
@@ -27,11 +27,11 @@ export const bitCoinKPI = {
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[OrderDateMonth]",
+        qLabel: "Month",
       },
       {
-        qField: "=Sum({$<coin={'bitcoin'}>} price)",
+        qField: "=Sum({$<Category={'Fitness'}>} Quantity)",
         qLabel: "price",
       },
     ],
@@ -55,7 +55,7 @@ export const bitCoinKPI = {
     qTitle:
       "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
   },
-  icon: "bitcoin",
+  icon: "growth",
   // styleName: "up",
 };
 
@@ -369,4 +369,35 @@ export const pieData = {
     qTitle:
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
+};
+
+export const tableCols = {
+  // qTitle: "=Count(Name)",
+  qTitle: "Title",
+  imageRender: (text, data) => {
+    return (
+      <div>
+        <img src={data.image} />
+      </div>
+    );
+  },
+  cols: [
+    // {
+    //   qField: "Image",
+    //   qLabel: "image",
+    //   qImage: true,
+    // },
+    {
+      qField: "Name",
+      qLabel: "Name",
+    },
+    {
+      qField: "Country",
+      qLabel: "Country",
+    },
+    {
+      qField: "Category",
+      qLabel: "Category",
+    },
+  ],
 };
