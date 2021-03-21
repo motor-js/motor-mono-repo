@@ -37,7 +37,7 @@ const Topbar = () => {
 
   return (
     <>
-      <Header>
+      <Header style={{ position: "sticky", top: "0" }}>
         {/* <div className="gx-header-horizontal-main-flex">*/}
         {themeState.theme === "light" ? (
           <div>

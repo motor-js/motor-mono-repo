@@ -63,7 +63,7 @@ const App = () => {
             </Row>
           </div>
         </Content>
-        <Footer>
+        <Footer style={{ position: "sticky", bottom: "0" }}>
           <div className="gx-layout-footer-content">{footer.footerText}</div>
         </Footer>
       </Layout>
