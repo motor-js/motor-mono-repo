@@ -10,6 +10,7 @@ import {
   rippleKPI,
   litecoinKPI,
   tableCols,
+  BalanceHistoryMultiDim,
 } from "./data";
 
 import "assets/vendors/style";
@@ -17,6 +18,7 @@ import "styles/wieldy.less";
 
 import ChartKPI from "components/engine/ChartKPI";
 import MotorTable from "components/engine/TableComponent";
+import Chart from "components/engine/Chart";
 
 const { Content, Footer } = Layout;
 
@@ -49,6 +51,9 @@ const App = () => {
               </Col>
               <Col xl={6} lg={12} md={12} sm={12} xs={24}>
                 <ChartKPI dataProps={litecoinKPI} />
+              </Col>
+              <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+                <Chart dataProps={BalanceHistoryMultiDim} />
               </Col>
             </Row>
             <Row>
