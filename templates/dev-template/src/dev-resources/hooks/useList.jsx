@@ -137,6 +137,8 @@ const useList = (props) => {
         [qPage.current]
       );
 
+      if (!qDataPages[0]) return null;
+
       qDataPages[0].qMatrix.map((d, i) => {
         data.push({
           key: d[0].qElemNumber,
