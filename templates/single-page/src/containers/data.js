@@ -271,7 +271,7 @@ export const BalanceHistory = {
   },
 };
 
-export const BalanceHistoryMultiDim = {
+export const ordersByCategory = {
   chartConfig: {
     chartType: "bar",
     // margin: { top: 10, right: 0, left: -15, bottom: 0 },
@@ -309,6 +309,57 @@ export const BalanceHistoryMultiDim = {
       //   qField: "[coin]",
       //   qLabel: "coin",
       // },
+      {
+        qField: "=Sum(Quantity)",
+        qLabel: "price",
+        qFillStyle: "orange",
+      },
+    ],
+
+    qTitle:
+      "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+    // qSubTitle: "test",
+  },
+};
+export const orderAnalysis = {
+  chartConfig: {
+    chartType: "line",
+    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 40, left: 0, bottom: 0 },
+    dot: { stroke: "#FEA931", strokeWidth: 2 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    showLegend: false,
+    height: 220,
+    isAnimationActive: true,
+    xAxisDataKey: "Category",
+    // dataKey: "price",
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    // stacked: true,
+    fillOpacity: 1,
+    // buttons: [
+    //   { type: "measure", label: "Sum", value: "=Sum(price)" },
+    //   { type: "measure", label: "Count", value: "=count(price)" },
+    //   { type: "dimension", label: "Name", value: "[name]" },
+    //   { type: "dimension", label: "Price", value: "price" },
+    // ],
+  },
+  data: {
+    // qDimField: "[coin]",
+    qLists: [{ dataKey: "[Category]" }],
+    cols: [
+      {
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
+      },
+      {
+        qField: "[Category]",
+        qLabel: "Category",
+      },
       {
         qField: "=Sum(Quantity)",
         qLabel: "price",

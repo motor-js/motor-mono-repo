@@ -10,7 +10,8 @@ import {
   rippleKPI,
   litecoinKPI,
   tableCols,
-  BalanceHistoryMultiDim,
+  ordersByCategory,
+  orderAnalysis,
 } from "./data";
 
 import "assets/vendors/style";
@@ -53,12 +54,18 @@ const App = () => {
                 <ChartKPI dataProps={litecoinKPI} />
               </Col>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-                <Chart dataProps={BalanceHistoryMultiDim} />
+                <Chart dataProps={ordersByCategory} />
+              </Col>
+              <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+                <Chart dataProps={orderAnalysis} />
               </Col>
             </Row>
             <Row>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                 <MotorTable tableConfig={tableCols} />
+              </Col>
+              <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+                <Chart dataProps={orderAnalysis} />
               </Col>
             </Row>
           </div>
