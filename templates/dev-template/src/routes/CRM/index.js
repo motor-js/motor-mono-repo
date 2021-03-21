@@ -31,10 +31,10 @@ const Crypto = () => {
     <Auxiliary>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorFilter dimension={["Company...Country"]} />
+          <MotorFilter dimension={["Country"]} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorFilter dimension={["coin"]} />
+          <MotorFilter dimension={["City"]} />
         </Col>
       </Row>
       <Row>

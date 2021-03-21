@@ -19,7 +19,7 @@ export const tableCols = {
       qLabel: "Name",
     },
     {
-      qField: "Company...Country",
+      qField: "Country",
       qLabel: "Country",
     },
     {
