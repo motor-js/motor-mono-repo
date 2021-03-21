@@ -1,9 +1,22 @@
 export const tableCols = {
-  qTitle: "test",
+  // qTitle: "=Count(Name)",
+  qTitle: "Title",
+  imageRender: (text, data) => {
+    return (
+      <div>
+        <img src={data.image} />
+      </div>
+    );
+  },
   cols: [
     {
       qField: "Image",
       qLabel: "image",
+      qImage: true,
+    },
+    {
+      qField: "Name",
+      qLabel: "Name",
     },
     {
       qField: "Company...Country",
@@ -12,10 +25,6 @@ export const tableCols = {
     {
       qField: "Category",
       qLabel: "Category",
-    },
-    {
-      qField: "Name",
-      qLabel: "Name",
     },
   ],
 };

@@ -7,15 +7,7 @@ import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 const MotorTable = ({ tableConfig }) => {
   const [loading, setLoading] = useState(true);
-  const { qTitle, cols } = tableConfig;
-
-  const imageRender = (text, data) => {
-    return (
-      <div>
-        <img src={data.image} />
-      </div>
-    );
-  };
+  const { qTitle, imageRender, cols } = tableConfig;
 
   const { title, mData, headerGroup } = useTable({
     cols,
