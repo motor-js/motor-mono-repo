@@ -520,7 +520,9 @@ const useData = (props) => {
     layout.qListObjects.map((item, index) => {
       const obj = {};
       const key = item.qListObject.qDimensionInfo.qFallbackTitle;
-      const items = listData[index][0].qMatrix.map((item) => item[0].qText);
+      const items = listData[index][0]
+        ? listData[index][0].qMatrix.map((item) => item[0].qText)
+        : null;
 
       obj[key] = items;
       listDetail.push(obj);

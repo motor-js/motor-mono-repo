@@ -38,7 +38,7 @@ const Crypto = () => {
         </Col>
       </Row>
       <Row>
-        {/*     <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={bitCoinKPI} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
@@ -59,7 +59,7 @@ const Crypto = () => {
               <Chart dataProps={pieData} />
             </TabPane>
           </Tabs>
-        </Col> */}
+        </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <MotorTable tableConfig={tableCols} />
         </Col>
