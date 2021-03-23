@@ -378,7 +378,7 @@ export const pieData = {
     chartType: "pie",
     margin: { top: 10, right: 0, left: -15, bottom: 0 },
     showLegend: false,
-    height: 180,
+    height: 205,
     // dataKey: "price",
     strokeWidth: 0,
     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],

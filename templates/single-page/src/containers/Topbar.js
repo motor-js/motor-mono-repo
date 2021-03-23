@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Layout, Popover, Switch } from "antd";
+import { Layout, Popover, Row, Switch, Col } from "antd";
 import SelectOutlined from "@ant-design/icons/lib/icons/SelectOutlined";
 
 import Selections from "components/engine/Selections";
@@ -67,6 +67,12 @@ const Topbar = () => {
           </div>
         )}
         <ul className="gx-header-notifications">
+          <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
+            <Filter dimension={["Country"]} />
+          </li>
+          <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
+            <Filter dimension={["City"]} />
+          </li>
           <li className="gx-nav-icon gx-ml-auto">
             <MotorSearch
               styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
@@ -144,10 +150,16 @@ const Topbar = () => {
         </ul>
         {/*</div>*/}
       </Header>
-      <Header>
-        <Filter dimension={["Country"]} style={{ width: "50%" }} />
-        <Filter dimension={["City"]} />
-      </Header>
+      {/* <Row>
+        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+          <Filter dimension={["Country"]} style={{ width: "50%" }} />
+        </Col>
+        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+          <Filter dimension={["City"]} />
+        </Col>
+      </Row> */}
+      {/* <Header> */}
+      {/* </Header> */}
     </>
   );
 };
