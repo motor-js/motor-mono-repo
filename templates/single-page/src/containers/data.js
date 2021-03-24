@@ -1,3 +1,24 @@
+// const colourPalette = [
+//   "#F6C860",
+//   "#6F4E7B",
+//   "#9DD967",
+//   "#CB472F",
+//   "#FFA056",
+//   "#0984A5",
+// ];
+const colourPalette = [
+  "#1abc9c",
+  "#2ecc71",
+  "#3498db",
+  "#9b59b6",
+  "#34495e",
+  "#16a085",
+  "#27ae60",
+  "#2980b9",
+  "#8e44ad",
+  "#2c3e50",
+];
+
 export const FitnessKpi = {
   chartConfig: {
     chartType: "area",
@@ -11,16 +32,23 @@ export const FitnessKpi = {
       y2: "0",
       offsetStart: {
         offset: "5%",
-        stopColor: "#163469",
+        // stopColor: "#163469",
+        stopColor: colourPalette[0],
         stopOpacity: 0.9,
       },
-      offsetEnd: { offset: "95%", stopColor: "#FE9E15", stopOpacity: 0.9 },
+      offsetEnd: {
+        offset: "95%",
+        stopColor: colourPalette[1],
+        stopOpacity: 0.9,
+      },
     },
     // dataKey: "price",
-    type: null,
+    // type: null,
+    // type: "monotone",
     strokeWidth: 0,
     stackId: 2,
-    stroke: "#4D95F3",
+    // stroke: "#4D95F3",
+    stroke: colourPalette[1],
     fill: "url(#color3)",
     fillOpacity: 1,
   },
@@ -38,22 +66,26 @@ export const FitnessKpi = {
     qMetrics: [
       {
         qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
+        qExpr: "num(Sum({$<Category={'Fitness'}>} Quantity*Price),'$#,##0')",
         qType: "qStringExpression", // qValueExpression if a pure number is to be returned
       },
       {
         qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        // qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qExpr:
+          "num(Sum({$<Category={'Fitness'}>} Quantity*Price)/Sum( Quantity*Price),'#,##0%')",
         qType: "qStringExpression",
       },
       {
         qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qExpr:
+          "if(Sum({$<Category={'Fitness'}>} Quantity*Price)/Sum( Quantity*Price)>=0,'up','down')",
         qType: "qStringExpression",
       },
     ],
     qTitle:
-      "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
+      // "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
+      "Fitness Orders",
   },
   icon: "growth",
   // styleName: "up",
@@ -287,7 +319,8 @@ export const ordersByCategory = {
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    // fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    fill: colourPalette,
 
     fillOpacity: 1,
     // buttons: [
@@ -321,6 +354,7 @@ export const ordersByCategory = {
     // qSubTitle: "test",
   },
 };
+
 export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
