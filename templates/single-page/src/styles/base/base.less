@@ -331,6 +331,32 @@ img {
   }
 }
 
+.@{class-prefix}-pink-purple-gradient-reverse {
+  .horizontal-gradient(#872776, #352883);
+}
+
+.@{class-prefix}-bg-dark-primary {
+  background-color: @primary-color;
+  position: relative;
+  overflow: hidden;
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: fade(@black-color, 72%);
+  }
+}
+
 .@{class-prefix}-float-left {
   float: left !important;
 }
