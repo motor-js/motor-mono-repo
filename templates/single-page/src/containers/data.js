@@ -348,14 +348,12 @@ export const ordersByCategory = {
     ],
 
     qTitle: "=Num(Count(TransactionItemID),'#,##0') & ' Orders by Category'",
-    // qSubTitle: "test",
   },
 };
 
 export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
-    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
     margin: { top: 10, right: 40, left: 10, bottom: 0 },
     dot: { stroke: "#FEA931", strokeWidth: 2 },
     showXAxis: true,
