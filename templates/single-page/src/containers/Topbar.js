@@ -68,10 +68,10 @@ const Topbar = () => {
         )}
         <ul className="gx-header-notifications">
           <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
-            <Filter dimension={["Country"]} />
+            <Filter dimension={["Country"]} maxTagCount={1} />
           </li>
           <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
-            <Filter dimension={["City"]} />
+            <Filter dimension={["City"]} maxTagCount={1} />
           </li>
           <li className="gx-nav-icon gx-ml-auto">
             <MotorSearch

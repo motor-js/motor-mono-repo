@@ -3,7 +3,7 @@ import { Select } from "antd";
 import { useList } from "@motor-js/engine";
 import Widget from "components/Widget";
 
-const Filter = ({ dimension }) => {
+const Filter = ({ dimension, maxTagCount = 10 }) => {
   const [children, setChildren] = useState([]);
   const [selected, setSelected] = useState();
 
@@ -64,6 +64,7 @@ const Filter = ({ dimension }) => {
       style={{ width: "100%" }}
       placeholder={dimension[0]}
       onClear={handleClear}
+      maxTagCount={maxTagCount}
       onDeselect={(v) => handleDeselect(v)}
       filterOption={(input, option) =>
         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
