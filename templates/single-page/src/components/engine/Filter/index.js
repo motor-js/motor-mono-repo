@@ -18,6 +18,8 @@ const Filter = ({ dimension }) => {
     dimension,
   });
 
+  console.log(mData)
+
   const { Option } = Select;
 
   useEffect(() => {

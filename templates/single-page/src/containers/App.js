@@ -10,6 +10,7 @@ import "assets/vendors/style";
 import "styles/wieldy.less";
 
 import ChartKPI from "components/engine/ChartKPI";
+import Filter from "components/engine/Filter"
 
 const { Content, Footer } = Layout;
 
@@ -31,6 +32,7 @@ const App = () => {
         <Content className={`gx-layout-content gx-container-wrap`}>
         <div className="gx-main-content-wrapper">
           <Row>
+            <Filter dimension={['name']} />
             <Col xl={6} lg={12} md={12} sm={12} xs={24}>
               <ChartKPI dataProps={bitCoinKPI} />
             </Col>
