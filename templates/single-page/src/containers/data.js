@@ -340,19 +340,14 @@ export const ordersByCategory = {
         qField: "[Category]",
         qLabel: "Category",
       },
-      // {
-      //   qField: "[coin]",
-      //   qLabel: "coin",
-      // },
       {
-        qField: "=Sum(Quantity)",
+        qField: "=Count(TransactionItemID)",
         qLabel: "price",
         qFillStyle: "orange",
       },
     ],
 
-    qTitle:
-      "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+    qTitle: "=Num(Count(TransactionItemID),'#,##0') & ' Orders by Category'",
     // qSubTitle: "test",
   },
 };
@@ -361,7 +356,7 @@ export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
     // margin: { top: 10, right: 0, left: -15, bottom: 0 },
-    margin: { top: 10, right: 40, left: 0, bottom: 0 },
+    margin: { top: 10, right: 40, left: 10, bottom: 0 },
     dot: { stroke: "#FEA931", strokeWidth: 2 },
     showXAxis: true,
     showXAxis: true,
@@ -374,7 +369,7 @@ export const orderAnalysis = {
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    fill: colourPalette,
     // stacked: true,
     fillOpacity: 1,
     // buttons: [
@@ -386,25 +381,26 @@ export const orderAnalysis = {
   },
   data: {
     // qDimField: "[coin]",
-    qLists: [{ dataKey: "[Category]" }],
+    qLists: [{ dataKey: "[Country]" }],
     cols: [
       {
         qField: "[OrderDateMonth]",
         qLabel: "Order Date",
       },
       {
-        qField: "[Category]",
-        qLabel: "Category",
+        qField: "[Country",
+        qLabel: "Body Location",
       },
       {
-        qField: "=Sum(Quantity)",
+        qField: "=Sum(Price*Quantity)",
         qLabel: "price",
         qFillStyle: "orange",
       },
     ],
 
     qTitle:
-      "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      // "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      "Monthly Sales by Country",
     // qSubTitle: "test",
   },
 };
@@ -417,22 +413,22 @@ export const pieData = {
     height: 205,
     // dataKey: "price",
     strokeWidth: 0,
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    fill: colourPalette,
     label: true,
     isAnimationActive: true,
     cx: "35%",
     cy: "50%",
-    outerRadius: 60,
-    innerRadius: 40,
+    // outerRadius: 60,
+    // innerRadius: 40,
   },
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[Body Location]",
+        qLabel: "Location",
       },
       {
-        qField: "=Sum({$<coin={'ripple'}>} price)",
+        qField: "=Sum(Quantity*Price)",
         qLabel: "price",
       },
     ],
@@ -454,7 +450,8 @@ export const pieData = {
       },
     ],
     qTitle:
-      "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      // "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      "Sales by Body Location",
   },
 };
 
