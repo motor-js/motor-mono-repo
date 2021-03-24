@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import { Layout, Popover, Switch } from "antd";
-import FilterOutlined from "@ant-design/icons/lib/icons/FilterOutlined";
+import { Layout, Popover, Row, Switch, Col } from "antd";
+import SelectOutlined from "@ant-design/icons/lib/icons/SelectOutlined";
 
 import Selections from "components/engine/Selections";
 import MotorSearch from "components/engine/MotorSearch";
+import Filter from "components/engine/Filter";
 
 import { useSelections } from "@motor-js/engine";
 import { ThemeContext } from "store";
@@ -11,6 +12,7 @@ import { appSettings } from "settings";
 
 import logoLight from "assets/images/motor-red.png";
 import logoDark from "assets/images/motor-white.png";
+import logoSymbol from "assets/images/m-logo.png";
 
 const { Header } = Layout;
 
@@ -34,22 +36,43 @@ const Topbar = () => {
     });
 
   return (
-    <Header>
-     {/* <div className="gx-header-horizontal-main-flex">*/}
-          {themeState.theme === "light" ? (
+    <>
+      <Header style={{ position: "sticky", top: "0" }}>
+        {/* <div className="gx-header-horizontal-main-flex">*/}
+        {themeState.theme === "light" ? (
+          <div>
+            <img
+              src={logoSymbol}
+              alt="Logo"
+              style={{ height: "40px", width: "40px", marginRight: "10px" }}
+            />
             <img
               src={logoLight}
               alt="Logo"
               style={{ height: "40px", width: "120px" }}
             />
-          ) : (
+          </div>
+        ) : (
+          <div>
+            <img
+              src={logoSymbol}
+              alt="Logo"
+              style={{ height: "40px", width: "40px", marginRight: "10px" }}
+            />
             <img
               src={logoDark}
               alt="Logo"
               style={{ height: "40px", width: "120px" }}
             />
-          )}
+          </div>
+        )}
         <ul className="gx-header-notifications">
+          <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
+            <Filter dimension={["Country"]} />
+          </li>
+          <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
+            <Filter dimension={["City"]} />
+          </li>
           <li className="gx-nav-icon gx-ml-auto">
             <MotorSearch
               styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
@@ -79,6 +102,27 @@ const Topbar = () => {
               </span>
             </Popover>
           </li>
+          {/* <li className="gx-nav-icon">
+            <Popover
+              overlayClassName="gx-popover-horizantal"
+              placement="bottomRight"
+              content={
+                // <Selections selections={selections} handleClear={handleClear} />
+                // <MotorFilter dimension={["Country"]} />
+                <Filters />
+              }
+              trigger="click"
+            >
+              <span className="gx-pointer gx-status-pos gx-d-block">
+                <FilterOutlined style={{ fontSize: "18px" }} />
+                {selections && selections.length > 0 ? (
+                  <span className="gx-status gx-status-rtl gx-small gx-orange" />
+                ) : (
+                  <span className="gx-status gx-status-rtl gx-small" />
+                )}
+              </span>
+            </Popover>
+          </li> */}
           <li className="gx-nav-icon">
             <Popover
               overlayClassName="gx-popover-horizantal"
@@ -89,7 +133,7 @@ const Topbar = () => {
               trigger="click"
             >
               <span className="gx-pointer gx-status-pos gx-d-block">
-                <FilterOutlined style={{ fontSize: "18px" }} />
+                <SelectOutlined style={{ fontSize: "18px" }} />
                 {selections && selections.length > 0 ? (
                   <span className="gx-status gx-status-rtl gx-small gx-orange" />
                 ) : (
@@ -104,8 +148,19 @@ const Topbar = () => {
             </li>
           )}
         </ul>
-      {/*</div>*/}
-    </Header>
+        {/*</div>*/}
+      </Header>
+      {/* <Row>
+        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+          <Filter dimension={["Country"]} style={{ width: "50%" }} />
+        </Col>
+        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+          <Filter dimension={["City"]} />
+        </Col>
+      </Row> */}
+      {/* <Header> */}
+      {/* </Header> */}
+    </>
   );
 };
 

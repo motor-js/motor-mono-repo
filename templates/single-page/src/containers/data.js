@@ -1,4 +1,4 @@
-export const bitCoinKPI = {
+export const FitnessKpi = {
   chartConfig: {
     chartType: "area",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
@@ -27,11 +27,11 @@ export const bitCoinKPI = {
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[OrderDateMonth]",
+        qLabel: "Month",
       },
       {
-        qField: "=Sum({$<coin={'bitcoin'}>} price)",
+        qField: "=Sum({$<Category={'Fitness'}>} Quantity)",
         qLabel: "price",
       },
     ],
@@ -55,7 +55,7 @@ export const bitCoinKPI = {
     qTitle:
       "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
   },
-  icon: "bitcoin",
+  icon: "growth",
   // styleName: "up",
 };
 
@@ -271,18 +271,18 @@ export const BalanceHistory = {
   },
 };
 
-export const BalanceHistoryMultiDim = {
+export const ordersByCategory = {
   chartConfig: {
     chartType: "bar",
     // margin: { top: 10, right: 0, left: -15, bottom: 0 },
-    margin: { top: 10, right: 10, left: 0, bottom: 0 },
+    margin: { top: 10, right: 40, left: 0, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
     showLegend: false,
-    height: 180,
+    height: 220,
     isAnimationActive: true,
-    xAxisDataKey: "name",
+    xAxisDataKey: "Category",
     // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
@@ -290,27 +290,78 @@ export const BalanceHistoryMultiDim = {
     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
 
     fillOpacity: 1,
-    buttons: [
-      { type: "measure", label: "Sum", value: "=Sum(price)" },
-      { type: "measure", label: "Count", value: "=count(price)" },
-      { type: "dimension", label: "Name", value: "[name]" },
-      { type: "dimension", label: "Price", value: "price" },
-    ],
+    // buttons: [
+    //   { type: "measure", label: "Sum", value: "=Sum(price)" },
+    //   { type: "measure", label: "Count", value: "=count(price)" },
+    //   { type: "dimension", label: "Name", value: "[name]" },
+    //   { type: "dimension", label: "Price", value: "price" },
+    // ],
   },
   data: {
     // qDimField: "[coin]",
-    qLists: [{ dataKey: "[coin]" }, { name: "[name]" }],
+    // qLists: [{ dataKey: "[coin]" }, { name: "[name]" }],
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[Category]",
+        qLabel: "Category",
+      },
+      // {
+      //   qField: "[coin]",
+      //   qLabel: "coin",
+      // },
+      {
+        qField: "=Sum(Quantity)",
+        qLabel: "price",
+        qFillStyle: "orange",
+      },
+    ],
+
+    qTitle:
+      "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+    // qSubTitle: "test",
+  },
+};
+export const orderAnalysis = {
+  chartConfig: {
+    chartType: "line",
+    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 40, left: 0, bottom: 0 },
+    dot: { stroke: "#FEA931", strokeWidth: 2 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    showLegend: false,
+    height: 220,
+    isAnimationActive: true,
+    xAxisDataKey: "Category",
+    // dataKey: "price",
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    // stacked: true,
+    fillOpacity: 1,
+    // buttons: [
+    //   { type: "measure", label: "Sum", value: "=Sum(price)" },
+    //   { type: "measure", label: "Count", value: "=count(price)" },
+    //   { type: "dimension", label: "Name", value: "[name]" },
+    //   { type: "dimension", label: "Price", value: "price" },
+    // ],
+  },
+  data: {
+    // qDimField: "[coin]",
+    qLists: [{ dataKey: "[Category]" }],
+    cols: [
+      {
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
       },
       {
-        qField: "[coin]",
-        qLabel: "coin",
+        qField: "[Category]",
+        qLabel: "Category",
       },
       {
-        qField: "=Sum(price)",
+        qField: "=Sum(Quantity)",
         qLabel: "price",
         qFillStyle: "orange",
       },
@@ -327,7 +378,7 @@ export const pieData = {
     chartType: "pie",
     margin: { top: 10, right: 0, left: -15, bottom: 0 },
     showLegend: false,
-    height: 180,
+    height: 205,
     // dataKey: "price",
     strokeWidth: 0,
     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
@@ -369,4 +420,35 @@ export const pieData = {
     qTitle:
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
+};
+
+export const tableCols = {
+  // qTitle: "=Count(Name)",
+  qTitle: "Title",
+  imageRender: (text, data) => {
+    return (
+      <div>
+        <img src={data.image} />
+      </div>
+    );
+  },
+  cols: [
+    // {
+    //   qField: "Image",
+    //   qLabel: "image",
+    //   qImage: true,
+    // },
+    {
+      qField: "Name",
+      qLabel: "Name",
+    },
+    {
+      qField: "Country",
+      qLabel: "Country",
+    },
+    {
+      qField: "Category",
+      qLabel: "Category",
+    },
+  ],
 };

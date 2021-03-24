@@ -1,7 +1,9 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
+// import { EngineContext } from "@motor-js/engine";
 import { EngineContext } from "../contexts/EngineProvider";
 
+// import useSequencer from './useSequencer';
 
 const initialState = {
   qDoc: null,
@@ -39,6 +41,7 @@ const initialProps = {
   qSortByAscii: 1,
   qSortByLoadOrder: 1,
   dimension: null,
+  label: null,
   qListObjectDef: null,
   qPage: {
     qTop: 0,
@@ -59,6 +62,7 @@ const useList = (props) => {
   } = deepMerge(initialProps, props);
 
   const { engine, engineError } = useContext(EngineContext) || {};
+
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -133,6 +137,8 @@ const useList = (props) => {
         [qPage.current]
       );
 
+      if (!qDataPages[0]) return null;
+
       qDataPages[0].qMatrix.map((d, i) => {
         data.push({
           key: d[0].qElemNumber,
@@ -193,7 +199,7 @@ const useList = (props) => {
     await qObject.current.beginSelections(["/qListObjectDef"]);
   };
 
-  const endSelections = async (qAccept = true) => {
+  const endSelections = async (qAccept) => {
     // await state.qEngine.abortModal(true)
     await qObject.current.endSelections(qAccept);
   };
@@ -253,16 +259,15 @@ const useList = (props) => {
 
   return {
     mData,
-    //changePage,
-    //applyPatches,
+    changePage,
     select,
     beginSelections,
     endSelections,
-    selections,
-    clearSelections,
     searchListObjectFor,
     acceptListObjectSearch,
-
+    applyPatches,
+    selections,
+    clearSelections,
   };
 };
 

@@ -7,6 +7,7 @@ import {
   etheriumKPI,
   rippleKPI,
   litecoinKPI,
+  tableCols,
   BalanceHistory,
   BalanceHistoryMultiDim,
   pieData,
@@ -58,6 +59,9 @@ const Crypto = () => {
               <Chart dataProps={pieData} />
             </TabPane>
           </Tabs>
+        </Col>
+        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+          <MotorTable tableConfig={tableCols} />
         </Col>
       </Row>
     </Auxiliary>

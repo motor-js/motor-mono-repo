@@ -9,7 +9,6 @@ import PieChart from "components/engine/PieChart";
 import Widget from "components/Widget";
 
 const ChartComponent = ({ dataProps }) => {
-
   const { data, chartConfig } = dataProps;
 
   const { cols, qTitle, qSubTitle, qMetrics, qLists } = data;
@@ -36,12 +35,7 @@ const ChartComponent = ({ dataProps }) => {
       Chart = AreaChart;
   }
 
-  const {
-    dataSet,
-    title,
-    subTitle,
-    handlerChange,
-  } = useData({
+  const { dataSet, title, subTitle, handlerChange } = useData({
     cols,
     qTitle,
     qSubTitle,
@@ -64,7 +58,7 @@ const ChartComponent = ({ dataProps }) => {
 
   return (
     <>
-      {dataSet ? (
+      {dataSet.data ? (
         <Widget styleName="gx-card-full">
           {(title || subTitle) && (
             <PageHeader

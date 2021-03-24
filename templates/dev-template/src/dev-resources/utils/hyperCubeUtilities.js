@@ -334,12 +334,14 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
   return direction;
 };
 
-export const getHeader = (qLayout) =>
+export const getHeader = (qLayout, imageRender) =>
   qLayout
     ? [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
           title: col.qFallbackTitle,
           dataIndex: col.qFallbackTitle,
+          // render: col.qFallbackTitle === "image" ? imageRender : null,
+          render: col.qImage ? imageRender : null,
           //accessor: (d) => d[index].qText,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,

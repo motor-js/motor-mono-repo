@@ -1,5 +1,6 @@
 function createDef(
   cols,
+  qTitle,
   qHyperCubeDef,
   qSortByAscii,
   qSortByLoadOrder,
@@ -55,7 +56,6 @@ function createDef(
       return isDimension;
     })
     .map((col) => {
-      // console.log('dim',col)
       if (typeof col === "string") {
         return {
           qDef: {
@@ -75,6 +75,7 @@ function createDef(
       if (typeof col === "object" && !col.qLibraryId) {
         return {
           qDef: {
+            qImage: col.qImage,
             qFieldDefs: [col.qField],
             qFieldLabels: [col.qLabel],
             qSortCriterias: col.qSortCriterias
@@ -178,7 +179,6 @@ function createDef(
       return isMeasure;
     })
     .map((col) => {
-      // console.log('mea',col)
       if (typeof col === "string") {
         return {
           qDef: {
@@ -254,6 +254,7 @@ function createDef(
     qSuppressMissing,
     qColumnOrder,
     qCalcCondition,
+    qTitle,
   };
 
   return qProp;
