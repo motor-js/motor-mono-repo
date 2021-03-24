@@ -83,7 +83,7 @@ export const FitnessKpi = {
       },
     ],
     qTitle:
-      "='Fitness Orders :' & Num(Count({$<Category={'Fitness'}>}TransactionItemID),'#,##0') ",
+      "='Fitness Orders : ' & Num(Count({$<Category={'Fitness'}>}TransactionItemID),'#,##0') ",
   },
   icon: "growth",
   // styleName: "up",
