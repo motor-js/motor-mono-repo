@@ -29,7 +29,7 @@ const MotorSearch = ({ styleName, placeholder }) => {
   }, [flatResults]);
 
   return (
-    <div className={`gx-search-bar ${styleName}`}>
+    <div className={`${styleName}`}>
       <AutoComplete
         dropdownMatchSelectWidth={252}
         style={{ width: 300 }}

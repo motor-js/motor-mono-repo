@@ -75,7 +75,7 @@ const Topbar = () => {
           </li>
           <li className="gx-nav-icon gx-ml-auto">
             <MotorSearch
-              styleName="gx-d-none gx-d-lg-block gx-lt-icon-search-bar-lg"
+              styleName="gx-d-none gx-d-lg-block"
               placeholder="Search in app..."
               onChange={handleSearch}
               value={searchText}
