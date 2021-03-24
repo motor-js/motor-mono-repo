@@ -13,7 +13,7 @@ import OrderHistory from "components/OrderHistory";
 
 import {
   FitnessKpi,
-  etheriumKPI,
+  garminKPI,
   rippleKPI,
   litecoinKPI,
   tableCols,
@@ -50,7 +50,7 @@ const App = () => {
                 <ChartKPI dataProps={FitnessKpi} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-                <ChartKPI dataProps={etheriumKPI} />
+                <ChartKPI dataProps={garminKPI} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={12} xs={24}>
                 <ChartKPI dataProps={rippleKPI} />

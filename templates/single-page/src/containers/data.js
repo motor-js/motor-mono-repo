@@ -71,7 +71,6 @@ export const FitnessKpi = {
       },
       {
         qName: "desc",
-        // qExpr: "num(Count(distinct coin)/100,'#,##0%')",
         qExpr:
           "num(Sum({$<Category={'Fitness'}>} Quantity*Price)/Sum( Quantity*Price),'#,##0%')",
         qType: "qStringExpression",
@@ -84,14 +83,13 @@ export const FitnessKpi = {
       },
     ],
     qTitle:
-      // "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
-      "Fitness Orders",
+      "='Fitness Orders :' & Num(Count({$<Category={'Fitness'}>}TransactionItemID),'#,##0') ",
   },
   icon: "growth",
   // styleName: "up",
 };
 
-export const etheriumKPI = {
+export const garminKPI = {
   chartConfig: {
     chartType: "area",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
@@ -105,10 +103,14 @@ export const etheriumKPI = {
       y2: "0",
       offsetStart: {
         offset: "5%",
-        stopColor: "#4ECDE4",
+        stopColor: colourPalette[2],
         stopOpacity: 0.9,
       },
-      offsetEnd: { offset: "95%", stopColor: "#06BB8A", stopOpacity: 0.9 },
+      offsetEnd: {
+        offset: "95%",
+        stopColor: colourPalette[3],
+        stopOpacity: 0.9,
+      },
     },
     // dataKey: "price",
     type: "monotone",
@@ -121,33 +123,36 @@ export const etheriumKPI = {
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[OrderDateMonth]",
+        qLabel: "Month",
       },
       {
-        qField: "=Sum({$<coin={'etherium'}>} price)",
+        qField: "=Sum({$<[Company Name]={'Garmin'}>} Quantity)",
         qLabel: "price",
       },
     ],
     qMetrics: [
       {
         qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
-        qType: "qStringExpression",
+        qExpr:
+          "num(Sum({$<[Company Name]={'Garmin'}>} Quantity*Price),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
       },
       {
         qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qExpr:
+          "num(Sum({$<[Company Name]={'Garmin'}>} Quantity*Price)/Sum( Quantity*Price),'#,##0%')",
         qType: "qStringExpression",
       },
       {
         qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qExpr:
+          "if(Sum({$<[Company Name]={'Garmin'}>} Quantity*Price)/Sum( Quantity*Price)>=0,'up','down')",
         qType: "qStringExpression",
       },
     ],
     qTitle:
-      "='Etherium Max Price : ' & Num(Max({$<coin={'etherium'}>}price),'$#,##0')",
+      "='Garmin Orders :' & Num(Count({$<[Company Name]={'Garmin'}>}TransactionItemID),'#,##0') ",
   },
   icon: "etherium",
 };
