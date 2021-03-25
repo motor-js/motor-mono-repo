@@ -524,7 +524,7 @@ export const reverseCardData = {
 
 export const tableCols = {
   // qTitle: "=Count(Name)",
-  qTitle: "Title",
+  qTitle: "Products",
   imageRender: (text, data) => {
     return (
       <div>
@@ -533,11 +533,11 @@ export const tableCols = {
     );
   },
   cols: [
-    // {
-    //   qField: "Image",
-    //   qLabel: "image",
-    //   qImage: true,
-    // },
+    {
+      qField: "_Image",
+      qLabel: "image",
+      qImage: true,
+    },
     {
       qField: "Name",
       qLabel: "Name",
@@ -550,5 +550,33 @@ export const tableCols = {
       qField: "Category",
       qLabel: "Category",
     },
+  ],
+};
+
+export const orderHistory = {
+  qTitle: "Top 5 Orders",
+  qPage: {
+    qTop: 0,
+    qLeft: 0,
+    qWidth: 10,
+    qHeight: 5,
+  },
+  cols: [
+    {
+      qField: "Company Name",
+      qLabel: "Company Name",
+    },
+    {
+      qField: "=Sum(Quantity)",
+      qLabel: "Quantity",
+    },
+    // {
+    //   qField: "Country",
+    //   qLabel: "Country",
+    // },
+    // {
+    //   qField: "Category",
+    //   qLabel: "Category",
+    // },
   ],
 };

@@ -21,6 +21,7 @@ import {
   orderAnalysis,
   pieData,
   reverseCardData,
+  orderHistory,
 } from "./data";
 
 import "assets/vendors/style";
@@ -103,6 +104,7 @@ const App = () => {
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
                 <DownloadMobileApps />
+                <TableComponent tableConfig={orderHistory} />
                 <OrderHistory />
               </Col>
             </Row>
