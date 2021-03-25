@@ -18,7 +18,7 @@ const Filter = ({ dimension }) => {
     dimension,
   });
 
-  console.log(mData)
+  console.log(selections)
 
   const { Option } = Select;
 
@@ -38,6 +38,7 @@ const Filter = ({ dimension }) => {
   }, [mData, selections]);
 
   async function handleChange(v) {
+    console.log('CALLED')
     await beginSelections();
     const newSel = await v.filter((el) => !selections.includes(el));
     await select(newSel);
@@ -68,7 +69,9 @@ const Filter = ({ dimension }) => {
       onClear={handleClear}
       onDeselect={(v) => handleDeselect(v)}
       filterOption={(input, option) =>
-        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        console.log(option)
+        //console.log(input)
+       // input && option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }
     >
       {children}
