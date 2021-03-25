@@ -494,20 +494,20 @@ export const reverseCardData = {
     ],
     qMetrics: [
       {
-        qName: "expensiveProduct",
-        qExpr: "FirstSortedValue(Name, -Aggr(Sum(Price), Name))",
+        qName: "bestSelling",
+        qExpr: "FirstSortedValue(Name,-Aggr(Sum(Price*Quantity),  Name))",
         qType: "qStringExpression",
       },
       {
         qName: "companyName",
         qExpr:
-          "FirstSortedValue([Company Name], -Aggr(Sum(Price), [Company Name]))",
+          "FirstSortedValue([Company Name], -Aggr(Sum(Price*Quantity), [Company Name]))",
         qType: "qStringExpression",
       },
       {
-        qName: "styleName",
+        qName: "price",
         qExpr:
-          "if(Sum({$<[Body Location]={'Wrist'}>} Quantity)/Sum( Quantity)>=0,'down','up')",
+          "Num(FirstSortedValue([Price], -Aggr(Sum(Price*Quantity), [Price])),'$#,##0.00')",
         qType: "qStringExpression",
       },
     ],

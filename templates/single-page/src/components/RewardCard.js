@@ -23,14 +23,14 @@ const RewardCard = ({ dataProps }) => {
       {metrics ? (
         <Widget styleName="gx-bg-dark-primary">
           <div className="gx-flex-row gx-justify-content-center gx-mb-3 gx-mb-md-4">
-            <i className={`icon icon-refer gx-fs-xlxl gx-text-white`} />
+            <i className={`icon icon-alert gx-fs-xlxl gx-text-white`} />
           </div>
           <div className="gx-text-center">
-            <h2 className="h3 gx-mb-3 gx-text-white">Reffer and Get Reward</h2>
+            <h2 className="h3 gx-mb-3 gx-text-white">Best Selling Product</h2>
             <p className="gx-text-white gx-mb-3">
               {/* Reffer us to your friends and earn bonus when they join. */}
-              Our most expensive product is {metrics.expensiveProduct} and is
-              supplied by {metrics.companyName}
+              Our best selling product is {metrics.bestSelling} and is supplied
+              by {metrics.companyName} at a a price of {metrics.price}
             </p>
             <Button
               size="large"
