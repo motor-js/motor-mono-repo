@@ -555,11 +555,8 @@ export const tableCols = {
 
 export const orderHistory = {
   qTitle: "Top 5 Orders",
-  qPage: {
-    qTop: 0,
-    qLeft: 0,
-    qWidth: 10,
-    qHeight: 5,
+  imageRender: (text) => {
+    return <span className="gx-text-red">{text}</span>;
   },
   cols: [
     {
@@ -568,7 +565,11 @@ export const orderHistory = {
     },
     {
       qField: "=Sum(Quantity)",
-      qLabel: "Quantity",
+      qLabel: "Quantity Sold",
+    },
+    {
+      qField: "=Num(Sum(Price  * Quantity),'$#,##0.00')",
+      qLabel: "Total Sales",
     },
     // {
     //   qField: "Country",
