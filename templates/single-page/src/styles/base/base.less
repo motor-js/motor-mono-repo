@@ -331,8 +331,44 @@ img {
   }
 }
 
+// .@{class-prefix}-pink-purple-gradient-reverse {
+//   .horizontal-gradient(#872776, #352883);
+// }
+
 .@{class-prefix}-pink-purple-gradient-reverse {
-  .horizontal-gradient(#872776, #352883);
+  background-color: #872776;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#872776),
+    to(#352883)
+  );
+  background: -webkit-linear-gradient(left, #872776, #352883);
+  background: -moz-linear-gradient(left, #872776, #352883);
+  background: -ms-linear-gradient(left, #872776, #352883);
+  background: -o-linear-gradient(left, #872776, #352883);
+}
+
+.@{class-prefix}-app-thumb {
+  display: inline-block;
+}
+
+.@{class-prefix}-chart-up {
+  color: @green-color;
+
+  .@{class-prefix}-bg-geekblue & {
+    color: @white-color;
+  }
+}
+
+.@{class-prefix}-chart-down {
+  color: @red-6;
+
+  & .icon {
+    .rotate(180deg);
+    display: inline-block;
+  }
 }
 
 .@{class-prefix}-bg-dark-primary {

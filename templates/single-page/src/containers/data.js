@@ -1,3 +1,37 @@
+// const colourPalette = [
+//   "#F6C860",
+//   "#6F4E7B",
+//   "#9DD967",
+//   "#CB472F",
+//   "#FFA056",
+//   "#0984A5",
+// ];
+// const colourPalette = [
+//   "#1abc9c",
+//   "#2ecc71",
+//   "#3498db",
+//   "#9b59b6",
+//   "#34495e",
+//   "#16a085",
+//   "#27ae60",
+//   "#2980b9",
+//   "#8e44ad",
+//   "#2c3e50",
+// ];
+const colourPalette = [
+  "#00a8ff",
+  "#9c88ff",
+  "#fbc531",
+  "#4cd137",
+  "#487eb0",
+  "#0097e6",
+  "#27ae60",
+  "#e1b12c",
+  "#44bd32",
+  "#40739e",
+  "#e84118",
+];
+
 export const FitnessKpi = {
   chartConfig: {
     chartType: "area",
@@ -11,16 +45,23 @@ export const FitnessKpi = {
       y2: "0",
       offsetStart: {
         offset: "5%",
-        stopColor: "#163469",
+        // stopColor: "#163469",
+        stopColor: colourPalette[0],
         stopOpacity: 0.9,
       },
-      offsetEnd: { offset: "95%", stopColor: "#FE9E15", stopOpacity: 0.9 },
+      offsetEnd: {
+        offset: "95%",
+        stopColor: colourPalette[1],
+        stopOpacity: 0.9,
+      },
     },
     // dataKey: "price",
-    type: null,
+    // type: null,
+    // type: "monotone",
     strokeWidth: 0,
     stackId: 2,
-    stroke: "#4D95F3",
+    // stroke: "#4D95F3",
+    stroke: colourPalette[1],
     fill: "url(#color3)",
     fillOpacity: 1,
   },
@@ -38,28 +79,30 @@ export const FitnessKpi = {
     qMetrics: [
       {
         qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
+        qExpr: "num(Sum({$<Category={'Fitness'}>} Quantity*Price),'$#,##0')",
         qType: "qStringExpression", // qValueExpression if a pure number is to be returned
       },
       {
         qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qExpr:
+          "num(Sum({$<Category={'Fitness'}>} Quantity*Price)/Sum( Quantity*Price),'#,##0%')",
         qType: "qStringExpression",
       },
       {
         qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qExpr:
+          "if(Sum({$<Category={'Fitness'}>} Quantity*Price)/Sum( Quantity*Price)>=0,'up','down')",
         qType: "qStringExpression",
       },
     ],
     qTitle:
-      "='Bitcoin Max Price : ' & Num(Max({$<coin={'bitcoin'}>}price),'$#,##0')",
+      "='Fitness Orders : ' & Num(Count({$<Category={'Fitness'}>}TransactionItemID),'#,##0') ",
   },
   icon: "growth",
   // styleName: "up",
 };
 
-export const etheriumKPI = {
+export const garminKPI = {
   chartConfig: {
     chartType: "area",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
@@ -73,10 +116,14 @@ export const etheriumKPI = {
       y2: "0",
       offsetStart: {
         offset: "5%",
-        stopColor: "#4ECDE4",
+        stopColor: colourPalette[2],
         stopOpacity: 0.9,
       },
-      offsetEnd: { offset: "95%", stopColor: "#06BB8A", stopOpacity: 0.9 },
+      offsetEnd: {
+        offset: "95%",
+        stopColor: colourPalette[3],
+        stopOpacity: 0.9,
+      },
     },
     // dataKey: "price",
     type: "monotone",
@@ -89,102 +136,103 @@ export const etheriumKPI = {
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[OrderDateMonth]",
+        qLabel: "Month",
       },
       {
-        qField: "=Sum({$<coin={'etherium'}>} price)",
+        qField: "=Sum({$<[Company Name]={'Garmin'}>} Quantity)",
         qLabel: "price",
       },
     ],
     qMetrics: [
       {
         qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
-        qType: "qStringExpression",
+        qExpr:
+          "num(Sum({$<[Company Name]={'Garmin'}>} Quantity*Price),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
       },
       {
         qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qExpr:
+          "num(Sum({$<[Company Name]={'Garmin'}>} Quantity*Price)/Sum( Quantity*Price),'#,##0%')",
         qType: "qStringExpression",
       },
       {
         qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qExpr:
+          "if(Sum({$<[Company Name]={'Garmin'}>} Quantity*Price)/Sum( Quantity*Price)>=0,'up','down')",
         qType: "qStringExpression",
       },
     ],
     qTitle:
-      "='Etherium Max Price : ' & Num(Max({$<coin={'etherium'}>}price),'$#,##0')",
+      "='Garmin Orders :' & Num(Count({$<[Company Name]={'Garmin'}>}TransactionItemID),'#,##0') ",
   },
   icon: "etherium",
 };
 
-export const rippleKPI = {
+export const bodyLocationKPI = {
   chartConfig: {
-    chartType: "area",
+    chartType: "bar",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
     height: 75,
 
-    gradient: {
-      id: "color5",
-      x1: "0",
-      y1: "0",
-      x2: "0",
-      y2: "1",
-      offsetStart: {
-        offset: "5%",
-        stopColor: "#e81a24",
-        stopOpacity: 0.8,
-      },
-      offsetEnd: { offset: "95%", stopColor: "#FEEADA", stopOpacity: 0.8 },
-    },
+    // gradient: {
+    //   id: "color5",
+    //   x1: "0",
+    //   y1: "0",
+    //   x2: "0",
+    //   y2: "1",
+    //   offsetStart: {
+    //     offset: "5%",
+    //     stopColor: "#e81a24",
+    //     stopOpacity: 0.8,
+    //   },
+    //   offsetEnd: { offset: "95%", stopColor: "#FEEADA", stopOpacity: 0.8 },
+    // },
     strokeWidth: 0,
     stackId: 2,
     stroke: "#FEEADA",
-    fill: "url(#color5)",
+    // fill: "url(#color5)",
+    fill: colourPalette,
     fillOpacity: 1,
     // stacked: true,
   },
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[Body Location]",
+        qLabel: "Month",
       },
       {
-        qField: "=Sum({$<coin={'ripple'}>} price)",
+        qField: "=Count(Quantity)",
         qLabel: "price",
       },
-      // {
-      //   qField: "=Sum({$<coin={'bitcoin'}>} price)",
-      //   qLabel: "price",
-      // },
     ],
     qMetrics: [
       {
         qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
+        qExpr: "num(Sum(Quantity*Price),'$#,##0')",
         qType: "qStringExpression",
       },
       {
         qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qExpr:
+          "num(Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)/Sum( Quantity*Price),'#,##0%')",
         qType: "qStringExpression",
       },
       {
         qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qExpr:
+          "if(Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)/Sum( Quantity*Price)>=0,'up','down')",
         qType: "qStringExpression",
       },
     ],
-    qTitle:
-      "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+    qTitle: "Orders by Body Location",
   },
   icon: "ripple",
 };
 
-export const litecoinKPI = {
+export const wristKPI = {
   chartConfig: {
     chartType: "line",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
@@ -195,37 +243,36 @@ export const litecoinKPI = {
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[OrderDateMonth]",
+        qLabel: "Month",
       },
       {
-        qField: "=Sum({$<coin={'litecoin'}>} price)",
+        qField: "=Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)",
         qLabel: "price",
       },
-      // {
-      //   qField: "=Sum({$<coin={'bitcoin'}>} price)",
-      //   qLabel: "bitcoin",
-      // },
     ],
     qMetrics: [
       {
         qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
+        qExpr:
+          "num(Sum({$<[Body Location]={'Wrist'}>} Quantity*Price),'$#,##0')",
         qType: "qStringExpression",
       },
       {
         qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qExpr:
+          "num(Sum({$<[Body Location]={'Wrist'}>} Quantity)/Sum( Quantity),'#,##0%')",
         qType: "qStringExpression",
       },
       {
         qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'down','up')",
+        qExpr:
+          "if(Sum({$<[Body Location]={'Wrist'}>} Quantity)/Sum( Quantity)>=0,'down','up')",
         qType: "qStringExpression",
       },
     ],
     qTitle:
-      "='Litecoin Max Price : ' & Num(Max({$<coin={'litecoin'}>}price),'$#,##0')",
+      "='Wrist Items Sales: '& Num(Count({$<[Body Location]={'Wrist'}>}TransactionItemID),'#,##0') & ' orders'",
   },
   icon: "litecoin",
 };
@@ -287,7 +334,8 @@ export const ordersByCategory = {
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    // fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    fill: colourPalette,
 
     fillOpacity: 1,
     // buttons: [
@@ -305,27 +353,21 @@ export const ordersByCategory = {
         qField: "[Category]",
         qLabel: "Category",
       },
-      // {
-      //   qField: "[coin]",
-      //   qLabel: "coin",
-      // },
       {
-        qField: "=Sum(Quantity)",
+        qField: "=Count(TransactionItemID)",
         qLabel: "price",
         qFillStyle: "orange",
       },
     ],
 
-    qTitle:
-      "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
-    // qSubTitle: "test",
+    qTitle: "=Num(Count(TransactionItemID),'#,##0') & ' Orders by Category'",
   },
 };
+
 export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
-    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
-    margin: { top: 10, right: 40, left: 0, bottom: 0 },
+    margin: { top: 10, right: 40, left: 10, bottom: 0 },
     dot: { stroke: "#FEA931", strokeWidth: 2 },
     showXAxis: true,
     showXAxis: true,
@@ -338,7 +380,7 @@ export const orderAnalysis = {
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    fill: colourPalette,
     // stacked: true,
     fillOpacity: 1,
     // buttons: [
@@ -350,25 +392,26 @@ export const orderAnalysis = {
   },
   data: {
     // qDimField: "[coin]",
-    qLists: [{ dataKey: "[Category]" }],
+    qLists: [{ dataKey: "[Country]" }],
     cols: [
       {
         qField: "[OrderDateMonth]",
         qLabel: "Order Date",
       },
       {
-        qField: "[Category]",
-        qLabel: "Category",
+        qField: "[Country",
+        qLabel: "Body Location",
       },
       {
-        qField: "=Sum(Quantity)",
+        qField: "=Sum(Price*Quantity)",
         qLabel: "price",
         qFillStyle: "orange",
       },
     ],
 
     qTitle:
-      "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      // "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      "Monthly Sales by Country",
     // qSubTitle: "test",
   },
 };
@@ -381,44 +424,96 @@ export const pieData = {
     height: 205,
     // dataKey: "price",
     strokeWidth: 0,
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    fill: colourPalette,
     label: true,
     isAnimationActive: true,
     cx: "35%",
     cy: "50%",
-    outerRadius: 60,
-    innerRadius: 40,
+    // outerRadius: 60,
+    // innerRadius: 40,
   },
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[Body Location]",
+        qLabel: "Location",
       },
       {
-        qField: "=Sum({$<coin={'ripple'}>} price)",
+        qField: "=Sum(Quantity*Price)",
+        qLabel: "price",
+      },
+    ],
+    // qMetrics: [
+    //   {
+    //     qName: "prize",
+    //     qExpr: "num(Sum(price),'$#,##0')",
+    //     qType: "qStringExpression",
+    //   },
+    //   {
+    //     qName: "desc",
+    //     qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+    //     qType: "qStringExpression",
+    //   },
+    //   {
+    //     qName: "styleName",
+    //     qExpr: "if(Count(distinct coin)>=0,'up','down')",
+    //     qType: "qStringExpression",
+    //   },
+    // ],
+    qTitle:
+      // "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      "Sales by Body Location",
+  },
+};
+export const reverseCardData = {
+  // chartConfig: {
+  //   chartType: "pie",
+  //   margin: { top: 10, right: 0, left: -15, bottom: 0 },
+  //   showLegend: false,
+  //   height: 205,
+  //   // dataKey: "price",
+  //   strokeWidth: 0,
+  //   fill: colourPalette,
+  //   label: true,
+  //   isAnimationActive: true,
+  //   cx: "35%",
+  //   cy: "50%",
+  //   // outerRadius: 60,
+  //   // innerRadius: 40,
+  // },
+  data: {
+    cols: [
+      {
+        qField: "[Body Location]",
+        qLabel: "Location",
+      },
+      {
+        qField: "=Sum(Quantity*Price)",
         qLabel: "price",
       },
     ],
     qMetrics: [
       {
-        qName: "prize",
-        qExpr: "num(Sum(price),'$#,##0')",
+        qName: "bestSelling",
+        qExpr: "FirstSortedValue(Name,-Aggr(Sum(Price*Quantity),  Name))",
         qType: "qStringExpression",
       },
       {
-        qName: "desc",
-        qExpr: "num(Count(distinct coin)/100,'#,##0%')",
+        qName: "companyName",
+        qExpr:
+          "FirstSortedValue([Company Name], -Aggr(Sum(Price*Quantity), [Company Name]))",
         qType: "qStringExpression",
       },
       {
-        qName: "styleName",
-        qExpr: "if(Count(distinct coin)>=0,'up','down')",
+        qName: "price",
+        qExpr:
+          "Num(FirstSortedValue([Price], -Aggr(Sum(Price*Quantity), [Price])),'$#,##0.00')",
         qType: "qStringExpression",
       },
     ],
     qTitle:
-      "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      // "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      "Sales by Body Location",
   },
 };
 

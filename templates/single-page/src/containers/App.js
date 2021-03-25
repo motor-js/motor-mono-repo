@@ -13,13 +13,14 @@ import OrderHistory from "components/OrderHistory";
 
 import {
   FitnessKpi,
-  etheriumKPI,
-  rippleKPI,
-  litecoinKPI,
+  garminKPI,
+  bodyLocationKPI,
+  wristKPI,
   tableCols,
   ordersByCategory,
   orderAnalysis,
   pieData,
+  reverseCardData,
 } from "./data";
 
 import "assets/vendors/style";
@@ -50,13 +51,13 @@ const App = () => {
                 <ChartKPI dataProps={FitnessKpi} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-                <ChartKPI dataProps={etheriumKPI} />
+                <ChartKPI dataProps={garminKPI} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-                <ChartKPI dataProps={rippleKPI} />
+                <ChartKPI dataProps={bodyLocationKPI} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-                <ChartKPI dataProps={litecoinKPI} />
+                <ChartKPI dataProps={wristKPI} />
               </Col>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                 <Chart dataProps={ordersByCategory} />
@@ -89,7 +90,7 @@ const App = () => {
                 <Chart dataProps={pieData} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={24} xs={24}>
-                <RewardCard />
+                <RewardCard dataProps={reverseCardData} />
               </Col>
               <Col xl={9} lg={12} md={12} sm={24} xs={24}>
                 <Chart dataProps={orderAnalysis} />

@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
+  Cell,
 } from "recharts";
 
 const MotorBarChart = ({ dataSet, config }) => {
@@ -45,7 +46,11 @@ const MotorBarChart = ({ dataSet, config }) => {
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
-            />
+            >
+              {data.map((entry, index) => (
+                <Cell key={index} fill={fill[index]} />
+              ))}
+            </Bar>
           ))}
       </BarChart>
     </ResponsiveContainer>
