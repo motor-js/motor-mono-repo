@@ -18,7 +18,7 @@ const DownloadMobileApps = () => {
           <div className="gx-flex-column gx-justify-content-center gx-h-100">
             <span className="gx-mb-2 gx-app-thumb">
               {/* <img src={require("assets/images/google.png")} alt="..." /> */}
-              <img img src={google} alt="..." />
+              <img src={google} alt="..." />
             </span>
             <span className="gx-app-thumb">
               <img src={apple} alt="..." />

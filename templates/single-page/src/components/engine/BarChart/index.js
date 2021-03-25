@@ -48,8 +48,7 @@ const MotorBarChart = ({ dataSet, config }) => {
               }
             >
               {data.map((entry, index) => (
-                // <Cell fill={data[index].color} />
-                <Cell fill={fill[index]} />
+                <Cell key={index} fill={fill[index]} />
               ))}
             </Bar>
           ))}

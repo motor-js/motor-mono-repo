@@ -20,6 +20,7 @@ import {
   ordersByCategory,
   orderAnalysis,
   pieData,
+  reverseCardData,
 } from "./data";
 
 import "assets/vendors/style";
@@ -89,7 +90,7 @@ const App = () => {
                 <Chart dataProps={pieData} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={24} xs={24}>
-                <RewardCard />
+                <RewardCard dataProps={reverseCardData} />
               </Col>
               <Col xl={9} lg={12} md={12} sm={24} xs={24}>
                 <Chart dataProps={orderAnalysis} />
