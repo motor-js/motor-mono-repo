@@ -5,7 +5,7 @@ import { ThemeContext } from "store";
 import { footer } from "settings/index";
 import Filter from "components/engine/Filter";
 import ChartKPI from "components/engine/ChartKPI";
-import MotorTable from "components/engine/TableComponent";
+import TableComponent from "components/engine/TableComponent";
 import Chart from "components/engine/Chart";
 import RewardCard from "components/RewardCard";
 import DownloadMobileApps from "components/DownloadMobileApps";
@@ -98,7 +98,7 @@ const App = () => {
             </Row>
             <Row>
               <Col xl={15} lg={24} md={24} sm={24} xs={24}>
-                <MotorTable tableConfig={tableCols} />
+                <TableComponent tableConfig={tableCols} />
                 {/* <CryptoNews /> */}
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
