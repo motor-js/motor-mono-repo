@@ -8,15 +8,13 @@ const RewardCard = ({ dataProps }) => {
 
   const { cols, qTitle, qSubTitle, qMetrics, qLists } = data;
 
-  const { dataSet, metrics, title, subTitle, handlerChange } = useData({
+  const { metrics } = useData({
     cols,
     qTitle,
     qSubTitle,
     qMetrics,
     qLists,
   });
-
-  console.log(metrics);
 
   return (
     <>
@@ -28,16 +26,19 @@ const RewardCard = ({ dataProps }) => {
           <div className="gx-text-center">
             <h2 className="h3 gx-mb-3 gx-text-white">Best Selling Product</h2>
             <p className="gx-text-white gx-mb-3">
-              {/* Reffer us to your friends and earn bonus when they join. */}
               Our best selling product is {metrics.bestSelling} and is supplied
               by {metrics.companyName} at a a price of {metrics.price}
             </p>
-            <Button
+            {/* <Button
               size="large"
               className="gx-btn-secondary gx-mt-md-5 gx-mb-1"
             >
               Invite Friends
-            </Button>
+            </Button> */}
+            <img
+              style={{ marginTop: "10px", borderRadius: "20px" }}
+              src={metrics.image}
+            />
           </div>
         </Widget>
       ) : (

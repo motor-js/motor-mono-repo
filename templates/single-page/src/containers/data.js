@@ -510,6 +510,11 @@ export const reverseCardData = {
           "Num(FirstSortedValue([Price], -Aggr(Sum(Price*Quantity), [Price])),'$#,##0.00')",
         qType: "qStringExpression",
       },
+      {
+        qName: "image",
+        qExpr: "FirstSortedValue(_Image, -Aggr(Sum(Price*Quantity), _Image))",
+        qType: "qStringExpression",
+      },
     ],
     qTitle:
       // "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
