@@ -55,10 +55,6 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
   }
 
   return (
-    // <Widget
-    // //styleName="gx-order-history"
-    // //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Name</h2> }
-    // >
     <Select
       mode="multiple"
       allowClear
@@ -70,9 +66,7 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
       maxTagCount={maxTagCount}
       onDeselect={(v) => handleDeselect(v)}
       filterOption={(input, option) =>
-        console.log(option)
-        //console.log(input)
-       // input && option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      option.children && option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }
     >
       {children}
