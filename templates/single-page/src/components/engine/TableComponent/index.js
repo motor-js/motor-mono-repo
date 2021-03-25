@@ -4,10 +4,10 @@ import { useTable } from "@motor-js/engine";
 import Widget from "components/Widget";
 import { ConsoleSqlOutlined } from "@ant-design/icons";
 
+
 const TableComponent = ({ tableConfig }) => {
   const [loading, setLoading] = useState(true);
   const { qTitle, imageRender, cols } = tableConfig;
-
   const { title, mData, headerGroup } = useTable({
     cols,
     qTitle,
@@ -38,7 +38,7 @@ const TableComponent = ({ tableConfig }) => {
                 className="gx-table-no-bordered"
                 columns={headerGroup}
                 dataSource={mData}
-                pagination={false}
+                pagination={{defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}}
                 bordered={false}
                 size="small"
               />
