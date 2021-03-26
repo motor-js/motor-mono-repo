@@ -1,21 +1,34 @@
 export const tableCols = {
-  qTitle: "test",
+  qTitle: "Products",
+  imageRender: (text, data) => {
+    return (
+      <div>
+        <img src={data.image} />
+      </div>
+    );
+  },
+  pagination: {
+    defaultPageSize: 10,
+    showSizeChanger: true,
+    pageSizeOptions: ["10", "20", "30"],
+  },
   cols: [
     {
-      qField: "Image",
+      qField: "_Image",
       qLabel: "image",
+      qImage: true,
     },
     {
-      qField: "Company...Country",
+      qField: "Name",
+      qLabel: "Name",
+    },
+    {
+      qField: "Country",
       qLabel: "Country",
     },
     {
       qField: "Category",
       qLabel: "Category",
-    },
-    {
-      qField: "Name",
-      qLabel: "Name",
     },
   ],
 };
