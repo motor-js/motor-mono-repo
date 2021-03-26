@@ -12,6 +12,7 @@ export const tableCols = {
     showSizeChanger: true,
     pageSizeOptions: ["10", "20", "30"],
   },
+  qInterColumnSortOrder: [3, 2, 1, 0],
   cols: [
     {
       qField: "_Image",

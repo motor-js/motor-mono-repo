@@ -6,12 +6,19 @@ import { useJsonToCsv } from "react-json-csv";
 
 const ComplexTable = ({ tableConfig }) => {
   const [loading, setLoading] = useState(true);
-  const { qTitle, imageRender, pagination, cols } = tableConfig;
+  const {
+    qTitle,
+    imageRender,
+    pagination,
+    cols,
+    qInterColumnSortOrder,
+  } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
   const { title, mData, headerGroup } = useTable({
     cols,
     qTitle,
     imageRender,
+    qInterColumnSortOrder,
   });
 
   useEffect(() => {

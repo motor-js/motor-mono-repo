@@ -6,10 +6,17 @@ import { useJsonToCsv } from "react-json-csv";
 
 const TableComponent = ({ tableConfig }) => {
   const [loading, setLoading] = useState(true);
-  const { qTitle, imageRender, cols, pagination } = tableConfig;
+  const {
+    qTitle,
+    imageRender,
+    cols,
+    pagination,
+    qInterColumnSortOrder,
+  } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
   const { title, mData, headerGroup } = useTable({
     cols,
+    qInterColumnSortOrder,
     qTitle,
     imageRender,
   });
