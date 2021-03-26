@@ -525,6 +525,11 @@ export const reverseCardData = {
 export const tableCols = {
   // qTitle: "=Count(Name)",
   qTitle: "Products",
+  pagination: {
+    defaultPageSize: 10,
+    showSizeChanger: true,
+    pageSizeOptions: ["10", "20", "30"],
+  },
   imageRender: (text, data) => {
     return (
       <div>
@@ -555,6 +560,7 @@ export const tableCols = {
 
 export const orderHistory = {
   qTitle: "Top 5 Orders",
+  pagination: false,
   imageRender: (text) => {
     return <span className="gx-text-red">{text}</span>;
   },
