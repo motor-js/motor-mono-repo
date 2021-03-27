@@ -560,7 +560,7 @@ export const tableCols = {
 
 export const orderHistory = {
   qTitle: "Top 5 Orders",
-  pagination: false,
+  // pagination: false,
   imageRender: (text) => {
     return <span className="gx-text-red">{text}</span>;
   },
