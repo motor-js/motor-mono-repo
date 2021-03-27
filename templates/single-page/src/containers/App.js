@@ -7,7 +7,7 @@ import Filter from "components/engine/Filter";
 import ChartKPI from "components/engine/ChartKPI";
 import TableComponent from "components/engine/TableComponent";
 import Chart from "components/engine/Chart";
-import RewardCard from "components/RewardCard";
+import RewardCard from "components/engine/RewardCard";
 import DownloadMobileApps from "components/DownloadMobileApps";
 import OrderHistory from "components/OrderHistory";
 
