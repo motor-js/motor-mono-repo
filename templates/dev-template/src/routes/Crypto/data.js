@@ -1,12 +1,5 @@
 export const tableCols = {
   qTitle: "Products",
-  imageRender: (text, data) => {
-    return (
-      <div>
-        <img src={data.image} />
-      </div>
-    );
-  },
   pagination: {
     defaultPageSize: 10,
     showSizeChanger: true,
@@ -17,7 +10,13 @@ export const tableCols = {
     {
       qField: "_Image",
       qLabel: "image",
-      qImage: true,
+      render: (text, data) => {
+        return (
+          <div>
+            <img src={data.image} />
+          </div>
+        );
+      },
     },
     {
       qField: "Name",
@@ -405,4 +404,37 @@ export const pieData = {
     qTitle:
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
+};
+
+export const orderHistory = {
+  qTitle: "Top 5 Orders",
+  imageRender: (text) => {
+    return <span className="gx-text-red">{text}</span>;
+  },
+  cols: [
+    {
+      qField: "Company Name",
+      qLabel: "Company Name",
+    },
+    {
+      qField: "=Sum(Quantity)",
+      qLabel: "Quantity Sold",
+    },
+    {
+      qField: "=Sum(Price  * Quantity)",
+      qLabel: "Total Sales",
+      qNumFmt: "$#,##0.00",
+      render: (text) => {
+        return <span className="gx-text-red">{text}</span>;
+      },
+    },
+    // {
+    //   qField: "Country",
+    //   qLabel: "Country",
+    // },
+    // {
+    //   qField: "Category",
+    //   qLabel: "Category",
+    // },
+  ],
 };

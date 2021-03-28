@@ -334,15 +334,13 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
   return direction;
 };
 
-export const getHeader = (qLayout, imageRender) =>
+export const getHeader = (qLayout, cols) =>
   qLayout
     ? [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
           title: col.qFallbackTitle,
           dataIndex: col.qFallbackTitle,
-          // render: col.qFallbackTitle === "image" ? imageRender : null,
-          render: col.qImage ? imageRender : null,
-          //accessor: (d) => d[index].qText,
+          render: cols[index].render,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,
           qPath: `/qHyperCubeDef/qDimensions/${index}`,
@@ -354,14 +352,13 @@ export const getHeader = (qLayout, imageRender) =>
         ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
           title: col.qFallbackTitle,
           dataIndex: col.qFallbackTitle,
-          //accessor: (d) =>
-          //  d[index + qLayout.qHyperCube.qDimensionInfo.length].qText,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
           qPath: `/qHyperCubeDef/qMeasures/${index}`,
           qSortIndicator: col.qSortIndicator,
           qReverseSort: col.qReverseSort,
           qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
+          render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
           qColumnType: "meas",
         })),
       ]

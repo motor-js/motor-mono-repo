@@ -1,18 +1,17 @@
 export const tableCols = {
   // qTitle: "=Count(Name)",
   qTitle: "Title",
-  imageRender: (text, data) => {
-    return (
-      <div>
-        <img src={data.image} />
-      </div>
-    );
-  },
   cols: [
     {
       qField: "Image",
       qLabel: "image",
-      qImage: true,
+      render: (text, data) => {
+        return (
+          <div>
+            <img src={data.image} />
+          </div>
+        );
+      },
     },
     {
       qField: "Name",

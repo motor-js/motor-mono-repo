@@ -9,7 +9,7 @@ const ComplexTable = ({ tableConfig }) => {
   const {
     qTitle,
     imageRender,
-    pagination,
+    pagination = false,
     cols,
     qInterColumnSortOrder,
   } = tableConfig;

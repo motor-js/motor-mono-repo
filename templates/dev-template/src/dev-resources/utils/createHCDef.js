@@ -75,7 +75,6 @@ function createDef(
       if (typeof col === "object" && !col.qLibraryId) {
         return {
           qDef: {
-            qImage: col.qImage,
             qFieldDefs: [col.qField],
             qFieldLabels: [col.qLabel],
             qSortCriterias: col.qSortCriterias
