@@ -431,7 +431,11 @@ export const orderHistory = {
       qNumType: "I",
       qNumFmt: "$#,##0.00",
       render: (text, data, i) => {
-        return <div className={i === 0 ? "gx-text-red" : ""}>{text}</div>;
+        return (
+          <div className={i === 0 ? "gx-text-green" : "gx-text-red"}>
+            {text}
+          </div>
+        );
       },
     },
     // {
