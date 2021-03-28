@@ -31,9 +31,9 @@ const { TabPane } = Tabs;
 const Crypto = () => {
   return (
     <Auxiliary>
-      <Row>
+      {/* <Row>
         <ComplexTable tableConfig={tableCols} />
-      </Row>
+      </Row> */}
       <Row>
         <ComplexTable tableConfig={orderHistory} />
       </Row>

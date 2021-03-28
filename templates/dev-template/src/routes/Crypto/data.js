@@ -418,7 +418,7 @@ export const orderHistory = {
       qLabel: "Quantity Sold",
     },
     {
-      qField: "=Sum(Price  * Quantity)",
+      qField: "=Num(Sum(Price  * Quantity),'$#,##0')",
       qLabel: "Total Sales",
       qNumFmt: "$#,##0.00",
       render: (text) => {

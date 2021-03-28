@@ -225,11 +225,17 @@ const useTable = (props) => {
         if (measureInfo) {
           measureInfo.map((d, i) => {
             if (_qLayout.qHyperCube.qMeasureInfo[i]) {
-              _qLayout.qHyperCube.qMeasureInfo[i].qChartType = d.qChartType;
-              _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
-              _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
-              _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
-              _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape = d.qLegendShape;
+              if (d.qChartType)
+                _qLayout.qHyperCube.qMeasureInfo[i].qChartType = d.qChartType;
+              if (d.qShowPoints)
+                _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
+              if (d.qCurve)
+                _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
+              if (d.qFillStyle)
+                _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
+              if (d.qLegendShape)
+                _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
+                  d.qLegendShape;
               // _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
               //   d.qLegendShape === "dashed" ? "5,2" : null;
             }
