@@ -408,9 +408,6 @@ export const pieData = {
 
 export const orderHistory = {
   qTitle: "Top 5 Orders",
-  imageRender: (text) => {
-    return <span className="gx-text-red">{text}</span>;
-  },
   cols: [
     {
       qField: "Company Name",
@@ -425,7 +422,7 @@ export const orderHistory = {
       qLabel: "Total Sales",
       qNumFmt: "$#,##0.00",
       render: (text) => {
-        return <span className="gx-text-red">{text}</span>;
+        return <div className={text > 1000 ? "gx-text-red" : ""}>{text}</div>;
       },
     },
     // {
