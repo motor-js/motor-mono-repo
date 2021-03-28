@@ -11,11 +11,13 @@ const ComplexTable = ({ tableConfig }) => {
     imageRender,
     pagination = false,
     cols,
+    qPage = {},
     qInterColumnSortOrder,
   } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
   const { title, mData, headerGroup } = useTable({
     cols,
+    qPage,
     qTitle,
     imageRender,
     qInterColumnSortOrder,

@@ -10,12 +10,14 @@ const TableComponent = ({ tableConfig }) => {
     qTitle,
     imageRender,
     cols,
+    qPage = {},
     pagination = false,
     qInterColumnSortOrder,
   } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
   const { title, mData, headerGroup } = useTable({
     cols,
+    qPage,
     qInterColumnSortOrder,
     qTitle,
     imageRender,

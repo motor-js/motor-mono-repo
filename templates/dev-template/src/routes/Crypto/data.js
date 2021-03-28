@@ -408,6 +408,13 @@ export const pieData = {
 
 export const orderHistory = {
   qTitle: "Top 5 Orders",
+  qPage: {
+    qTop: 0,
+    qLeft: 0,
+    qWidth: 10,
+    qHeight: 5,
+  },
+  qInterColumnSortOrder: [2, 1, 0],
   cols: [
     {
       qField: "Company Name",
@@ -418,11 +425,11 @@ export const orderHistory = {
       qLabel: "Quantity Sold",
     },
     {
-      qField: "=Num(Sum(Price  * Quantity),'$#,##0')",
+      qField: "=Sum(Price  * Quantity)",
       qLabel: "Total Sales",
       qNumFmt: "$#,##0.00",
-      render: (text) => {
-        return <div className={text > 1000 ? "gx-text-red" : ""}>{text}</div>;
+      render: (text, data, i) => {
+        return <div className={i === 0 ? "gx-text-red" : ""}>{text}</div>;
       },
     },
     // {
