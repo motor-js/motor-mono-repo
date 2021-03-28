@@ -1,7 +1,8 @@
 export function hyperCubeTransform(
   qData,
   qHyperCube,
-  useNumonFirstDim = false
+  useNumonFirstDim = false,
+  useFormatting = false
 ) {
   const qNoOfDiemnsions =
     qHyperCube !== undefined ? qHyperCube.qDimensionInfo.length : 1;
@@ -27,8 +28,11 @@ export function hyperCubeTransform(
               key: i,
             }
           : {
-              [measureNames[index - qNoOfDiemnsions]]:
-                d[index].qNum !== "NaN" ? d[index].qNum : 0,
+              [measureNames[index - qNoOfDiemnsions]]: useFormatting
+                ? d[index].qText
+                : d[index].qNum !== "NaN"
+                ? d[index].qNum
+                : 0,
               key: i,
             };
 

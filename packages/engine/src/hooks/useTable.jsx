@@ -49,6 +49,7 @@ function reducer(state, action) {
 
 const initialProps = {
   cols: null,
+  useFormatting: false,
   qHyperCubeDef: null,
   qTitle: null,
   qPage: {
@@ -74,6 +75,7 @@ const initialProps = {
 const useTable = (props) => {
   const {
     cols,
+    useFormatting,
     qTitle,
     qHyperCubeDef,
     qPage: qPageProp,
@@ -204,7 +206,12 @@ const useTable = (props) => {
 
   const structureData = useCallback(async (layout, data) => {
     let useNumonFirstDim;
-    const mData = hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
+    const mData = hyperCubeTransform(
+      data,
+      layout.qHyperCube,
+      useNumonFirstDim,
+      useFormatting
+    );
 
     return mData;
   }, []);
