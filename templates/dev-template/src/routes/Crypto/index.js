@@ -11,6 +11,7 @@ import {
   tableCols,
   BalanceHistory,
   BalanceHistoryMultiDim,
+  FitnessKpi,
   pieData,
   orderHistory,
 } from "./data";
@@ -39,14 +40,14 @@ const Crypto = () => {
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI dataProps={bitCoinKPI} />
+          <ChartKPI dataProps={FitnessKpi} />
         </Col>
-        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        {/* <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={etheriumKPI} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={rippleKPI} />
-        </Col>
+        </Col> */}
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <Tabs defaultActiveKey="1" type="card" size={"Default"}>
             <TabPane tab="Multiple Dimensions" key="1">
