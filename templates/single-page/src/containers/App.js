@@ -8,7 +8,7 @@ import ChartKPI from "components/engine/ChartKPI";
 import TableComponent from "components/engine/TableComponent";
 import Chart from "components/engine/Chart";
 import RewardCard from "components/RewardCard";
-import DownloadMobileApps from "components/DownloadMobileApps";
+import DownloadMobileApps from "components/Callout";
 import OrderHistory from "components/OrderHistory";
 
 import {
