@@ -524,7 +524,12 @@ export const reverseCardData = {
 
 export const tableCols = {
   // qTitle: "=Count(Name)",
-  qTitle: "Title",
+  qTitle: "Products",
+  pagination: {
+    defaultPageSize: 10,
+    showSizeChanger: true,
+    pageSizeOptions: ["10", "20", "30"],
+  },
   imageRender: (text, data) => {
     return (
       <div>
@@ -533,11 +538,11 @@ export const tableCols = {
     );
   },
   cols: [
-    // {
-    //   qField: "Image",
-    //   qLabel: "image",
-    //   qImage: true,
-    // },
+    {
+      qField: "_Image",
+      qLabel: "image",
+      qImage: true,
+    },
     {
       qField: "Name",
       qLabel: "Name",
@@ -550,5 +555,35 @@ export const tableCols = {
       qField: "Category",
       qLabel: "Category",
     },
+  ],
+};
+
+export const orderHistory = {
+  qTitle: "Top 5 Orders",
+  // pagination: false,
+  imageRender: (text) => {
+    return <span className="gx-text-red">{text}</span>;
+  },
+  cols: [
+    {
+      qField: "Company Name",
+      qLabel: "Company Name",
+    },
+    {
+      qField: "=Sum(Quantity)",
+      qLabel: "Quantity Sold",
+    },
+    {
+      qField: "=Num(Sum(Price  * Quantity),'$#,##0.00')",
+      qLabel: "Total Sales",
+    },
+    // {
+    //   qField: "Country",
+    //   qLabel: "Country",
+    // },
+    // {
+    //   qField: "Category",
+    //   qLabel: "Category",
+    // },
   ],
 };

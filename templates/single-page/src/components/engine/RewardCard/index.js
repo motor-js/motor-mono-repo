@@ -26,8 +26,12 @@ const RewardCard = ({ dataProps }) => {
           <div className="gx-text-center">
             <h2 className="h3 gx-mb-3 gx-text-white">Best Selling Product</h2>
             <p className="gx-text-white gx-mb-3">
-              Our best selling product is {metrics.bestSelling} and is supplied
-              by {metrics.companyName} at a a price of {metrics.price}
+              Our best selling product is{" "}
+              <span className="gx-reward-card-bestSelling">
+                {metrics.bestSelling}
+              </span>{" "}
+              and is supplied by {metrics.companyName} at a a price of{" "}
+              {metrics.price}
             </p>
             {/* <Button
               size="large"

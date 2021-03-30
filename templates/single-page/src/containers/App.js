@@ -7,8 +7,8 @@ import Filter from "components/engine/Filter";
 import ChartKPI from "components/engine/ChartKPI";
 import TableComponent from "components/engine/TableComponent";
 import Chart from "components/engine/Chart";
-import RewardCard from "components/RewardCard";
-import DownloadMobileApps from "components/Callout";
+import RewardCard from "components/engine/RewardCard";
+import DownloadMobileApps from "components/DownloadMobileApps";
 import OrderHistory from "components/OrderHistory";
 
 import {
@@ -21,6 +21,7 @@ import {
   orderAnalysis,
   pieData,
   reverseCardData,
+  orderHistory,
 } from "./data";
 
 import "assets/vendors/style";
@@ -103,6 +104,7 @@ const App = () => {
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
                 <DownloadMobileApps />
+                <TableComponent tableConfig={orderHistory} />
                 <OrderHistory />
               </Col>
             </Row>
