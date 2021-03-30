@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { EngineContext } from "../../contexts/EngineProvider";
-import { ConfigContext } from "../../contexts/ConfigProvider";
-import { CapabilityContext } from "../../contexts/CapabilityProvider";
 import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
-import useCapability from "../../hooks/useCapability";
 
 function Motor({
   children,
@@ -31,14 +28,8 @@ function Motor({
 
   const engine = useEngine(myConfig);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const app = capabilityAPI ? useCapability(myConfig) : {};
-
-  // eslint-disable-next-line react/react-in-jsx-scope
   return (
     <EngineContext.Provider value={engine}>
-      <CapabilityContext.Provider value={app}>
-        <ConfigContext.Provider value={myConfig}>
           <Login
             logo={logo}
             logoHeight={logoHeight}
@@ -63,8 +54,6 @@ function Motor({
             loginfontFamily={loginfontFamily}
           />
           {children}
-        </ConfigContext.Provider>
-      </CapabilityContext.Provider>
     </EngineContext.Provider>
   );
 }

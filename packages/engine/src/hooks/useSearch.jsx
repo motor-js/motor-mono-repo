@@ -84,7 +84,7 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
       qDoc.selectAssociations(
         {
           qSearchFields: dimensions,
-        //qContext: 'CurrentSelections'
+          qContext: 'CurrentSelections'
         },
         [searchValue],
         id
