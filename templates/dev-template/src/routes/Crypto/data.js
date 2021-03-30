@@ -415,7 +415,6 @@ export const orderHistory = {
     qHeight: 5,
   },
   qInterColumnSortOrder: [2, 1, 0],
-  useFormatting: true,
   cols: [
     {
       qField: "Company Name",
@@ -430,6 +429,7 @@ export const orderHistory = {
       qLabel: "Total Sales",
       qNumType: "I",
       qNumFmt: "$#,##0.00",
+      useFormatting: true,
       render: (text, data, i) => {
         return (
           <div className={i === 0 ? "gx-text-green" : "gx-text-red"}>
