@@ -8,7 +8,7 @@ import ChartKPI from "components/engine/ChartKPI";
 import TableComponent from "components/engine/TableComponent";
 import Chart from "components/engine/Chart";
 import RewardCard from "components/engine/RewardCard";
-import DownloadMobileApps from "components/DownloadMobileApps";
+import Callout from "components/Callout";
 import OrderHistory from "components/OrderHistory";
 
 import {
@@ -103,7 +103,7 @@ const App = () => {
                 {/* <CryptoNews /> */}
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
-                <DownloadMobileApps />
+                <Callout />
                 <TableComponent tableConfig={orderHistory} />
                 <OrderHistory />
               </Col>
