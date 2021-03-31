@@ -14,6 +14,8 @@ ReactDOM.render(
     logo={appSettings.logo}
     logoHeight={appSettings.logoHeight}
     logoWidth={appSettings.logoWidth}
+    buttonColor={appSettings.buttonColor}
+    buttonFontColor={appSettings.buttonFontColor}
     body={appSettings.body}
     loginfontFamily={appSettings.loginfontFamily}
     NotConnectedheader={appSettings.NotConnectedheader}

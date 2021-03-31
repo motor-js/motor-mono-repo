@@ -24,6 +24,8 @@ export const appSettings = {
   logo: "/static/media/motor-red.99524ab9.png", // Path to logo used for the Login box
   logoHeight: "40px", // Login logo height
   logoWidth: "120px", // Login logo width
+  buttonColor: '#FF7171', // Button color
+  buttonFontColor: 'white', // Button font color
   body: "Please login to get started 🎉'", // Login text
   loginfontFamily: '"NoirPro", sans-serif', //Login & Not Connected modal font
   NotConnectedheader: "Connection lost", // Not Connected header text
