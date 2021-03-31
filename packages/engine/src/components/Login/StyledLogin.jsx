@@ -13,7 +13,6 @@ const StyledLogin = ({
   logoHeight,
   logoWidth,
   loginfontFamily,
-  color,
 }) => {
   const tenantUri = config.host;
   const webIntegrationId = config.webIntId;

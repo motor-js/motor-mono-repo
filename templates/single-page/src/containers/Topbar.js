@@ -44,7 +44,7 @@ const Topbar = () => {
             <img
               src={logoSymbol}
               alt="Logo"
-              style={{ height: "40px", width: "40px", marginRight: "10px" }}
+              style={{ height: "40px", width: "40px" }}
             />
             <img
               src={logoLight}
@@ -57,7 +57,7 @@ const Topbar = () => {
             <img
               src={logoSymbol}
               alt="Logo"
-              style={{ height: "40px", width: "40px", marginRight: "10px" }}
+              style={{ height: "40px", width: "40px" }}
             />
             <img
               src={logoDark}
@@ -75,7 +75,7 @@ const Topbar = () => {
           </li>
           <li className="gx-nav-icon gx-ml-auto">
             <MotorSearch
-              styleName="gx-d-none gx-d-lg-block"
+              styleName="gx-d-none gx-d-lg-block "
               placeholder="Search in app..."
               onChange={handleSearch}
               value={searchText}
@@ -102,27 +102,6 @@ const Topbar = () => {
               </span>
             </Popover>
           </li>
-          {/* <li className="gx-nav-icon">
-            <Popover
-              overlayClassName="gx-popover-horizantal"
-              placement="bottomRight"
-              content={
-                // <Selections selections={selections} handleClear={handleClear} />
-                // <MotorFilter dimension={["Country"]} />
-                <Filters />
-              }
-              trigger="click"
-            >
-              <span className="gx-pointer gx-status-pos gx-d-block">
-                <FilterOutlined style={{ fontSize: "18px" }} />
-                {selections && selections.length > 0 ? (
-                  <span className="gx-status gx-status-rtl gx-small gx-orange" />
-                ) : (
-                  <span className="gx-status gx-status-rtl gx-small" />
-                )}
-              </span>
-            </Popover>
-          </li> */}
           <li className="gx-nav-icon">
             <Popover
               overlayClassName="gx-popover-horizantal"
@@ -132,14 +111,14 @@ const Topbar = () => {
               }
               trigger="click"
             >
-              <span className="gx-pointer gx-status-pos gx-d-block">
+              <li className="gx-pointer gx-status-pos gx-d-block">
                 <SelectOutlined style={{ fontSize: "18px" }} />
                 {selections && selections.length > 0 ? (
                   <span className="gx-status gx-status-rtl gx-small gx-orange" />
                 ) : (
                   <span className="gx-status gx-status-rtl gx-small" />
                 )}
-              </span>
+              </li>
             </Popover>
           </li>
           {showThemeSwitch && (

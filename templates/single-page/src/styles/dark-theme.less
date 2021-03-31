@@ -18,9 +18,14 @@ body.dark-theme {
   }
 }
 
+
 .dark-theme {
   color: @dark-theme-text-color;
   background-color: @dark-theme-primary-color;
+
+  .ant-input-search {
+    color: @dark-theme-text-color;
+  }
 
   & .@{class-prefix}-link {
     color: darken(@dark-theme-text-color, 10%);
@@ -113,6 +118,13 @@ body.dark-theme {
   & .@{class-prefix}-header-horizontal-main {
     color: @dark-theme-text-color;
     background: none;
+  }
+
+  .@{class-prefix}-header-notifications
+  li {
+  & > span {
+    color: @dark-theme-text-color;
+    }
   }
 
   & .@{class-prefix}-header-horizontal-dark {
@@ -2177,6 +2189,10 @@ body.dark-theme {
     border-color: darken(@dark-theme-component-background, 5%);
     color: @dark-theme-text-color;
 
+    &.ant-input-search-button  {
+      color: @dark-theme-text-color !important;
+    }
+
     &:hover,
     &:focus {
       color: @dark-theme-text-color;
@@ -3135,10 +3151,12 @@ body.dark-theme {
   &
     .@{class-prefix}-header-horizontal-main
     .@{class-prefix}-header-notifications
-    li
-    > span {
-    color: @dark-theme-text-color;
+    li {
+    & > span {
+      color: @dark-theme-text-color;
+    }
   }
+
 
   & .ant-dropdown-menu-item > a,
   & .ant-dropdown-menu-submenu-title > a {

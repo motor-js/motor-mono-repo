@@ -21,7 +21,7 @@ function Motor({
   loginfontFamily,
   NotConnectedheader,
   NotConnectedBody,
-  NotConnectedButonText,
+  NotConnectedButtonText,
 }) {
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
@@ -47,7 +47,7 @@ function Motor({
             header={NotConnectedheader}
             body={NotConnectedBody}
             size={size}
-            buttonText={NotConnectedButonText}
+            buttonText={NotConnectedButtonText}
             backgroundColor={backgroundColor}
             buttonFontColor={buttonFontColor}
             buttonColor={buttonColor}

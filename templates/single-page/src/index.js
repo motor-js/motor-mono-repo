@@ -4,12 +4,21 @@ import { Motor } from "@motor-js/engine";
 
 import reportWebVitals from "./reportWebVitals";
 import App from "./containers/App";
-import { qlikConfig } from "settings";
+import { qlikConfig, appSettings } from "settings";
 import Store from "store";
 
 ReactDOM.render(
 
-  <Motor config={qlikConfig}>
+  <Motor 
+    config={qlikConfig}
+    logo={appSettings.logo}
+    logoHeight={appSettings.logoHeight}
+    logoWidth={appSettings.logoWidth}
+    body={appSettings.body}
+    loginfontFamily={appSettings.loginfontFamily}
+    NotConnectedheader={appSettings.NotConnectedheader}
+    NotConnectedBody={appSettings.NotConnectedBody}
+  >
     <Store>
       <App />
     </Store>

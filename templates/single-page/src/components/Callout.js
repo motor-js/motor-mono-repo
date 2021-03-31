@@ -4,7 +4,7 @@ import { Col, Row, Button } from "antd";
 
 const Callout = () => {
   return (
-    <Widget styleName="gx-bg-primary gx-text-white">
+    <Widget styleName="gx-red-gradient gx-text-white">
       <Row>
         <Col xl={16} lg={14} md={12} sm={12} xs={12}>
           <p>Like what you see?</p>

@@ -1,8 +1,10 @@
 /*Button Styles*/
+
 .ant-btn {
   line-height: @btn-height-base - 2px;
   display: inline-block;
   vertical-align: middle;
+
 
   &-group-sm {
     & .ant-btn {
@@ -70,10 +72,6 @@
     }
   }
 
-  .ant-input-group-addon & {
-    margin-right: 0;
-  }
-
   @media screen and (max-width: @screen-xs-max) {
     margin-bottom: 10px;
   }
@@ -84,49 +82,8 @@
     margin-bottom: 0;
   }
 
-  .@{class-prefix}-customizer-option & {
-    padding: 0 @padding-md + 2px;
-    font-size: @font-size-lg + 2px;
-    height: @btn-height-lg + 2px;
-    line-height: @btn-height-lg + 2px;
-    margin: 0;
-    .box-shadow(@gx-card-shadow-md);
-    .border-radius(30px 0 0 30px);
-    .horizontal-gradient();
-    border: 0 none;
-    color: @white-color;
-
-    &:hover,
-    &:focus {
-      .horizontal-gradient(@red-6, @orange-6);
-    }
-
-    & .icon:before {
-      display: block;
-    }
-  }
-
   .horizontal-layout.full-scroll .@{class-prefix}-customizer-option & {
     margin-right: 0;
-  }
-
-  .@{class-prefix}-module-add-task & {
-    height: @btn-height-lg - 4px;
-
-    & .icon:before {
-      position: relative;
-      top: 2px;
-    }
-  }
-  .ant-modal-footer &,
-  .ant-modal-confirm-btns & {
-    margin-bottom: 0;
-  }
-
-  .@{class-prefix}-login-content & {
-    padding: 9px 20px !important;
-    height: auto;
-    line-height: 1;
   }
 
   .ant-btn-group & {
@@ -139,14 +96,6 @@
     }
   }
 
-  .@{class-prefix}-product-footer & {
-    @media (max-width: (@screen-xl-min + 166px)) {
-      padding: 0 10px;
-      height: 32px;
-      font-size: 12px;
-      line-height: 32px;
-    }
-  }
 }
 
 .ant-btn-background-ghost {
