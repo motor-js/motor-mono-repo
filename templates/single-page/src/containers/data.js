@@ -560,10 +560,13 @@ export const tableCols = {
 
 export const orderHistory = {
   qTitle: "Top 5 Orders",
-  // pagination: false,
-  imageRender: (text) => {
-    return <span className="gx-text-red">{text}</span>;
+  qPage: {
+    qTop: 0,
+    qLeft: 0,
+    qWidth: 10,
+    qHeight: 5,
   },
+  qInterColumnSortOrder: [2, 1, 0],
   cols: [
     {
       qField: "Company Name",
@@ -574,8 +577,14 @@ export const orderHistory = {
       qLabel: "Quantity Sold",
     },
     {
-      qField: "=Num(Sum(Price  * Quantity),'$#,##0.00')",
+      qField: "=Sum(Price  * Quantity)",
       qLabel: "Total Sales",
+      qNumType: "I",
+      qNumFmt: "$#,##0.00",
+      useFormatting: true,
+      render: (text, data, i) => {
+        return <div className={i === 0 ? "gx-text-red" : ""}>{text}</div>;
+      },
     },
     // {
     //   qField: "Country",

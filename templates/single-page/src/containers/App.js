@@ -9,7 +9,6 @@ import TableComponent from "components/engine/TableComponent";
 import Chart from "components/engine/Chart";
 import RewardCard from "components/engine/RewardCard";
 import Callout from "components/Callout";
-import OrderHistory from "components/OrderHistory";
 
 import {
   FitnessKpi,
@@ -105,7 +104,6 @@ const App = () => {
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
                 <Callout />
                 <TableComponent tableConfig={orderHistory} />
-                <OrderHistory />
               </Col>
             </Row>
           </div>

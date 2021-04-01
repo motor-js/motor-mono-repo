@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Col, Row, Tabs } from "antd";
 import Auxiliary from "util/Auxiliary";
-import ComplexTable from "../../components/engine/ComplexTable"
+import ComplexTable from "../../components/engine/ComplexTable";
 
 import {
   bitCoinKPI,
@@ -11,7 +11,9 @@ import {
   tableCols,
   BalanceHistory,
   BalanceHistoryMultiDim,
+  FitnessKpi,
   pieData,
+  orderHistory,
 } from "./data";
 // import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
@@ -30,19 +32,22 @@ const { TabPane } = Tabs;
 const Crypto = () => {
   return (
     <Auxiliary>
+      {/* <Row>
+        <ComplexTable tableConfig={tableCols} />
+      </Row> */}
       <Row>
-          <ComplexTable tableConfig={tableCols} />
+        <ComplexTable tableConfig={orderHistory} />
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI dataProps={bitCoinKPI} />
+          <ChartKPI dataProps={FitnessKpi} />
         </Col>
-        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        {/* <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={etheriumKPI} />
         </Col>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={rippleKPI} />
-        </Col>
+        </Col> */}
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <Tabs defaultActiveKey="1" type="card" size={"Default"}>
             <TabPane tab="Multiple Dimensions" key="1">
@@ -56,9 +61,9 @@ const Crypto = () => {
             </TabPane>
           </Tabs>
         </Col>
-        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+        {/* <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <MotorTable tableConfig={tableCols} />
-        </Col>
+        </Col> */}
       </Row>
     </Auxiliary>
   );
