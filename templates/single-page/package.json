@@ -1,11 +1,11 @@
 {
   "name": "single-page-mashup",
-  "version": "0.1.8-alpha.0",
+  "version": "0.1.8",
   "private": true,
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
     "@ant-design/icons": "^4.5.0",
-    "@motor-js/engine": "^0.0.13-alpha.0",
+    "@motor-js/engine": "^0.0.13",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
