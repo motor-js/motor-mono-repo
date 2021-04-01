@@ -530,18 +530,18 @@ export const tableCols = {
     showSizeChanger: true,
     pageSizeOptions: ["10", "20", "30"],
   },
-  imageRender: (text, data) => {
-    return (
-      <div>
-        <img src={data.image} />
-      </div>
-    );
-  },
+
   cols: [
     {
       qField: "_Image",
       qLabel: "image",
-      qImage: true,
+      render: (text, data) => {
+        return (
+          <div>
+            <img src={data.image} />
+          </div>
+        );
+      },
     },
     {
       qField: "Name",
@@ -583,7 +583,11 @@ export const orderHistory = {
       qNumFmt: "$#,##0.00",
       useFormatting: true,
       render: (text, data, i) => {
-        return <div className={i === 0 ? "gx-text-red" : ""}>{text}</div>;
+        return (
+          <div className={i === 0 ? "gx-text-red" : "gx-text-green"}>
+            {text}
+          </div>
+        );
       },
     },
     // {
