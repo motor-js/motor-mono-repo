@@ -1,21 +1,13 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-// import { ThemeContext } from "styled-components";
-import { ConfigContext } from "../../contexts/ConfigProvider";
-// import defaultTheme from "../../themes/defaultTheme";
 import StyledNotConnected from "./StyledNotConnected";
 import { EngineContext } from "../../contexts/EngineProvider";
 import useEngine from "../../hooks/useEngine";
 
 const NotConnected = ({ config, ...rest }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const myConfig = config || useContext(ConfigContext);
-
-  // const myTheme = useContext(ThemeContext) || defaultTheme;
-  const myTheme = null;
   // const { errorCode } = useContext(EngineContext) || useEngine(myConfig);
   const engineContext = useContext(EngineContext);
-  const engineConfigContext = useEngine(myConfig);
+  const engineConfigContext = useEngine(config);
   const { errorCode } = engineContext || engineConfigContext;
 
   return (
@@ -23,7 +15,7 @@ const NotConnected = ({ config, ...rest }) => {
       // errorCode={errorCode}
       style={{ display: errorCode === -3 ? "" : "none" }}
     >
-      {myConfig && errorCode && <StyledNotConnected {...rest} />}
+      {config && errorCode && <StyledNotConnected {...rest} />}
     </div>
   );
 };

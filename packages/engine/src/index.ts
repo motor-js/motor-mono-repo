@@ -15,5 +15,4 @@ export { default as useSelections } from "./hooks/useSelections";
 export { default as useCapability } from "./hooks/useCapability";
 
 //Contexts
-export { CapabilityContext } from "./contexts/CapabilityProvider";
 export { EngineContext } from "./contexts/EngineProvider";

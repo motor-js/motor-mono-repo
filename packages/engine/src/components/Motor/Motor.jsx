@@ -31,6 +31,7 @@ function Motor({
   return (
     <EngineContext.Provider value={engine}>
           <Login
+            config={myConfig}
             logo={logo}
             logoHeight={logoHeight}
             logoWidth={logoWidth}
@@ -44,6 +45,7 @@ function Motor({
             loginfontFamily={loginfontFamily}
           />
           <NotConnected
+            config={myConfig}
             header={NotConnectedheader}
             body={NotConnectedBody}
             size={size}

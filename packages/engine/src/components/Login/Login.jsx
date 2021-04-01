@@ -1,26 +1,15 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-// import { ThemeContext } from "styled-components";
-import { ConfigContext } from "../../contexts/ConfigProvider";
-// import defaultTheme from "../../themes/defaultTheme";
 import StyledLogin from "./StyledLogin";
 import { EngineContext } from "../../contexts/EngineProvider";
 
 const Login = ({ config, ...rest }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const myConfig = config || useContext(ConfigContext);
-
-  // const myTheme = useContext(ThemeContext) || defaultTheme;
-  const myTheme = null;
   const { errorCode } = useContext(EngineContext);
 
   return (
-    <div
-      // errorCode={errorCode}
-      // style={{ display: props.errorCode === -1 ? "" : "none" }}
-      style={{ display: errorCode === -1 ? "" : "none" }}
-    >
-      {myConfig && errorCode && <StyledLogin config={myConfig} {...rest} />}
+    <div style={{ display: errorCode === -1 ? "" : "none" }}>
+      {config && errorCode && <StyledLogin config={config} {...rest} />}
     </div>
   );
 };

@@ -1,6 +1,4 @@
 import React from "react";
-// import Button from "../Button";
-// import Box from "../Box";
 
 const StyledNotConnected = ({
   header,
@@ -11,7 +9,6 @@ const StyledNotConnected = ({
   buttonFontColor,
   buttonColor,
   loginfontFamily,
-  color, // new
 }) => {
   return (
     <div
