@@ -26,7 +26,7 @@ export const appSettings = {
   logoWidth: "120px", // Login logo width
   buttonColor: '#FF7171', // Button color
   buttonFontColor: 'white', // Button font color
-  body: "Please login to get started 🎉'", // Login text
+  body: "Please login to get started 🎉", // Login text
   loginfontFamily: '"NoirPro", sans-serif', //Login & Not Connected modal font
   NotConnectedheader: "Connection lost", // Not Connected header text
   NotConnectedBody: "Please refresh to continue", // Not Connected body text 
