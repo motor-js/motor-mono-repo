@@ -1,4 +1,4 @@
-import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
+import { useState, useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
 import createDef from "../utils/createHCDef";
@@ -94,6 +94,7 @@ const useTable = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
+
   const {
     title,
     qData,
@@ -109,8 +110,67 @@ const useTable = (props) => {
   const { engine, engineError } = useContext(EngineContext) || {};
 
   const qObject = useRef(null);
-
   const qPage = useRef(qPageProp);
+
+  //======================
+  // PAGING LOGIC
+
+  // page size
+  const [pageSize, setPageSize] = useState(qPage.current.qHeight);
+
+  // current page
+  const [page, _setPage] = useState(0);
+  const setPage = useCallback(
+    (_page) => {
+      _setPage(_page);
+      changePage({ qTop: _page * pageSize });
+    },
+    [changePage, pageSize]
+  );
+  window.setPage = setPage;
+
+  // calculated number of pages
+  const [pages, _setPages] = useState(0);
+  const setPages = useCallback(
+    (_pages) => {
+      if (page >= _pages) {
+        setPage(0);
+      }
+      _setPages(_pages);
+    },
+    [page, setPage]
+  );
+  
+
+  const handlePageChange = useCallback(
+    (pageIndex) => {
+      setPage(pageIndex);
+    },
+    [setPage]
+  );
+
+  // page increment
+  const incrementPage = () => {
+    console.log('ca;;ed')
+    const nextPage = page + 1;
+    handlePageChange(nextPage);
+  };
+
+  // page decrement
+  const decrementPage = () => {
+      const prevPage = page - 1;
+      handlePageChange(prevPage);
+  };
+
+  // Find the total size of the Hypercube
+  useEffect(() => {
+    if (!qLayout) return;
+    setPages(Math.ceil(qLayout.qHyperCube.qSize.qcy / pageSize));
+  }, [qLayout, pageSize, setPage, setPages]);
+
+
+  //======================
+
 
   // Build qOtherTotalSpec object
   let totalSpec;
@@ -226,26 +286,6 @@ const useTable = (props) => {
         const _selections = _qData.qMatrix.filter(
           (row) => row[0].qState === "S"
         );
-
-        // if (measureInfo) {
-        //   measureInfo.map((d, i) => {
-        //     if (_qLayout.qHyperCube.qMeasureInfo[i]) {
-        //       if (d.qChartType)
-        //         _qLayout.qHyperCube.qMeasureInfo[i].qChartType = d.qChartType;
-        //       if (d.qShowPoints)
-        //         _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
-        //       if (d.qCurve)
-        //         _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
-        //       if (d.qFillStyle)
-        //         _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
-        //       if (d.qLegendShape)
-        //         _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
-        //           d.qLegendShape;
-        //       // _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
-        //       //   d.qLegendShape === "dashed" ? "5,2" : null;
-        //     }
-        //   });
-        // }
         dispatch({
           type: "update",
           payload: {
@@ -402,6 +442,15 @@ const useTable = (props) => {
     selections,
     select,
     applyPatches,
+    incrementPage,
+    decrementPage,
+    handlePageChange,
+    //current page
+    page,
+    //page size
+    pageSize,
+    //number of pages
+    pages
   };
 };
 
