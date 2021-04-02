@@ -151,15 +151,20 @@ const useTable = (props) => {
 
   // page increment
   const incrementPage = () => {
-    console.log('ca;;ed')
     const nextPage = page + 1;
     handlePageChange(nextPage);
   };
 
   // page decrement
   const decrementPage = () => {
-      const prevPage = page - 1;
-      handlePageChange(prevPage);
+    console.log(page)
+      if(page == 0) {
+        console.log(pages)
+        handlePageChange(pages - 1);
+      } else {
+        const prevPage = page - 1;
+        handlePageChange(prevPage);
+      }
   };
 
   // Find the total size of the Hypercube
