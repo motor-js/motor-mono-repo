@@ -62,9 +62,13 @@ function createDef(
             qFieldDefs: [col],
             qSortCriterias: [
               {
-                qSortByAscii,
-                qSortByLoadOrder,
-              },
+                qSortByExpression: -1,
+                qExpression: {qv: "Sum(Sales)" }
+              }
+            //  {
+            //    qSortByAscii,
+            //    qSortByLoadOrder,
+            //  },
             ],
           },
           qNullSuppression: true,

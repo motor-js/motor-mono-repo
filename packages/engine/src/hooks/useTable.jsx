@@ -57,18 +57,20 @@ const initialProps = {
     qWidth: 10,
     qHeight: 300,
   },
-  qSortByAscii: 1,
-  qSortByLoadOrder: 1,
-  qInterColumnSortOrder: [],
+  sortCriteria: {
+    qInterColumnSortOrder: [],
+    qSortByAscii: 1,
+    qSortByLoadOrder: 1,
+    qExpression: null,
+    qSortByNumeric: 0,
+    qSortByExpression: 0,
+  },
   qSuppressZero: false,
-  qSortByExpression: 0,
   qSuppressMissing: true,
-  qExpression: null,
   getQRData: false,
-  qSortByNumeric: -1,
   qColumnOrder: [],
   qCalcCondition: undefined,
-  qOtherTotalSpec: "",
+  qOtherTotalSpec: ''
 };
 
 const useTable = (props) => {
@@ -77,23 +79,26 @@ const useTable = (props) => {
     qTitle,
     qHyperCubeDef,
     qPage: qPageProp,
-    qSortByAscii,
-    qSortByLoadOrder,
-    qInterColumnSortOrder,
+    sortCriteria,
     qSuppressZero,
-    qSortByNumeric,
-    qSortByExpression,
     qSuppressMissing,
-    qExpression,
     qColumnOrder,
     qCalcCondition,
     getQRData,
-    qOtherTotalSpec,
+    qOtherTotalSpec
   } = deepMerge(initialProps, props);
 
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const {
+    qInterColumnSortOrder,
+    qSortByAscii,
+    qSortByLoadOrder,
+    qExpression,
+    qSortByNumeric,
+    qSortByExpression
+  } = sortCriteria
 
   const {
     title,
@@ -450,12 +455,9 @@ const useTable = (props) => {
     incrementPage,
     decrementPage,
     handlePageChange,
-    //current page
-    page,
-    //page size
-    pageSize,
-    //number of pages
-    pages
+    page, //current page
+    pageSize, //page size
+    pages //number of pages
   };
 };
 
