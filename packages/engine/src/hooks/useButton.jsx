@@ -59,6 +59,24 @@ const useButton = (props) => {
     engine && engine.forward();
   };
 
+  const select = async (value, field) => {
+    const qDoc = await engine;
+    const qField = await qDoc.getField(field)
+    qField.select(value)
+  }
+
+  const selectValues = async (values, field, toggle=false) => {
+    const sel = await values.map(d => ({'qText': d}))
+    const qDoc = await engine;
+    const qField = await qDoc.getField(field)
+    qField.selectValues(sel,toggle)
+  }
+
+  const doReload = async (qMode, qPartial ) => {
+    const qDoc = await engine;
+    qDoc.doReload(qMode, qPartial, false)
+  }
+
   const exportData = (filename) => {
     const { host, secure, port, prefix } = config;
 
@@ -81,6 +99,9 @@ const useButton = (props) => {
     nextSelection,
     qLayout,
     exportData,
+    select,
+    selectValues,
+    doReload,
   };
 };
 

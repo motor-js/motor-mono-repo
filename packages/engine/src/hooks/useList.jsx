@@ -142,7 +142,7 @@ const useList = (props) => {
         data.push({
           key: d[0].qElemNumber,
           text: d[0].qText,
-          value: d[0].qText,
+          number: d[0].qNumber,
         });
       });
       return data;
