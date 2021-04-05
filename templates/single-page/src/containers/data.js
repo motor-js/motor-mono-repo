@@ -498,9 +498,9 @@ export const pieDataDonut = {
   chartConfig: {
     chartType: "pie",
     margin: { top: 10, right: 0, left: 0, bottom: 0 },
-    showLegend: false,
+    // showLegend: false,
     height: 356,
-    // dataKey: "price",
+    // dataKey: "Company Name",
     strokeWidth: 0,
     fill: colourPalette,
     label: true,
@@ -513,10 +513,16 @@ export const pieDataDonut = {
     labelLine: false,
   },
   data: {
+    qPage: {
+      qTop: 0,
+      qLeft: 0,
+      qWidth: 10,
+      qHeight: 5,
+    },
     cols: [
       {
-        qField: "[Body Location]",
-        qLabel: "Location",
+        qField: "[Company Name]",
+        qLabel: "name",
       },
       {
         qField: "=Sum(Quantity*Price)",
@@ -524,7 +530,7 @@ export const pieDataDonut = {
       },
     ],
 
-    qTitle: "Sales by Body Location",
+    qTitle: "Top 5 Sales by Company",
   },
 };
 export const reverseCardData = {

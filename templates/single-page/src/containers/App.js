@@ -70,10 +70,7 @@ const App = () => {
             <Row>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                 <Widget>
-                  <Filter
-                    dimension={["Company Name"]}
-                    // style={{ width: "50%" }}
-                  />
+                  <Filter dimension={["Company Name"]} />
                 </Widget>
               </Col>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>

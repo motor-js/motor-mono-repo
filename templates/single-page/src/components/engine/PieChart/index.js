@@ -27,10 +27,23 @@ const MotorPieChart = ({ dataSet, config }) => {
     renderLabel,
   } = config;
 
+  const renderLegend = (props) => {
+    const { payload } = props;
+    console.log(payload);
+
+    return (
+      <ul>
+        {payload.map((entry, index) => (
+          <li key={`item-${index}`}>{entry.payload.name}</li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <ResponsiveContainer width="100%" height={height}>
       <PieChart margin={margin}>
-        {showLegend && <Legend />}
+        {showLegend && <Legend iconSize={10} layout="horizontal" />}
         {dataKeys &&
           dataKeys.map((key, index) => (
             <Pie

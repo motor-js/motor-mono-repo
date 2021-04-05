@@ -11,7 +11,7 @@ import Widget from "components/Widget";
 const ChartComponent = ({ dataProps }) => {
   const { data, chartConfig } = dataProps;
 
-  const { cols, qTitle, qSubTitle, qMetrics, qLists } = data;
+  const { cols, qPage = {}, qTitle, qSubTitle, qMetrics, qLists } = data;
   const { chartType, buttons } = chartConfig;
 
   const [chartValue, setChartValue] = useState(buttons ? buttons[0].value : []);
@@ -37,6 +37,7 @@ const ChartComponent = ({ dataProps }) => {
 
   const { dataSet, title, subTitle, handlerChange } = useData({
     cols,
+    qPage,
     qTitle,
     qSubTitle,
     qMetrics,
