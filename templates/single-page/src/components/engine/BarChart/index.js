@@ -26,6 +26,7 @@ const MotorBarChart = ({ dataSet, config }) => {
     yAxisLabel,
     showGrid = true,
     showLegend = true,
+    legendProps,
     isAnimationActive = true,
     margin,
     height,
@@ -61,7 +62,17 @@ const MotorBarChart = ({ dataSet, config }) => {
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
-        {showLegend && <Legend />}
+        {showLegend && (
+          <Legend
+            iconSize={legendProps.iconSize}
+            iconType={legendProps.iconType}
+            width={legendProps.width}
+            height={legendProps.height}
+            layout={legendProps.layout}
+            verticalAlign={legendProps.verticalAlign}
+            wrapperStyle={legendProps.wrapperStyle}
+          />
+        )}
         {dataKeys &&
           dataKeys.map((key, index) => (
             <Bar

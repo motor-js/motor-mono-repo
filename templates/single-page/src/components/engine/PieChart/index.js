@@ -25,6 +25,7 @@ const MotorPieChart = ({ dataSet, config }) => {
     outerRadius = 80,
     innerRadius = 0,
     renderLabel,
+    legendProps,
   } = config;
 
   const renderLegend = (props) => {
@@ -43,7 +44,17 @@ const MotorPieChart = ({ dataSet, config }) => {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <PieChart margin={margin}>
-        {showLegend && <Legend iconSize={10} layout="horizontal" />}
+        {showLegend && (
+          <Legend
+            iconSize={legendProps.iconSize}
+            iconType={legendProps.iconType}
+            width={legendProps.width}
+            height={legendProps.height}
+            layout={legendProps.layout}
+            verticalAlign={legendProps.verticalAlign}
+            wrapperStyle={legendProps.wrapperStyle}
+          />
+        )}
         {dataKeys &&
           dataKeys.map((key, index) => (
             <Pie

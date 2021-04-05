@@ -29,6 +29,7 @@ const MotorLineChart = ({ dataSet, config }) => {
     yAxisLabel,
     showGrid = true,
     showLegend = true,
+    legendProps,
     isAnimationActive = true,
   } = config;
 
@@ -60,7 +61,17 @@ const MotorLineChart = ({ dataSet, config }) => {
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
-        {showLegend && <Legend />}
+        {showLegend && (
+          <Legend
+            iconSize={legendProps.iconSize}
+            iconType={legendProps.iconType}
+            width={legendProps.width}
+            height={legendProps.height}
+            layout={legendProps.layout}
+            verticalAlign={legendProps.verticalAlign}
+            wrapperStyle={legendProps.wrapperStyle}
+          />
+        )}
         {dataKeys &&
           dataKeys.map((key, index) => (
             <Line

@@ -511,6 +511,10 @@ export const pieDataDonut = {
     innerRadius: 60,
     renderLabel: renderCustomizedLabel,
     labelLine: false,
+    legendProps: {
+      iconType: "circle",
+      layout: "horizontal",
+    },
   },
   data: {
     qPage: {

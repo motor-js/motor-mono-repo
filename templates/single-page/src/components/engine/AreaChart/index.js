@@ -26,6 +26,7 @@ const MotorAreaChart = ({ dataSet, config }) => {
     yAxisLabel,
     showGrid = true,
     showLegend = true,
+    legendProps,
     isAnimationActive = true,
     margin,
     height,
@@ -70,7 +71,17 @@ const MotorAreaChart = ({ dataSet, config }) => {
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
-        {showLegend && <Legend />}
+        {showLegend && (
+          <Legend
+            iconSize={legendProps.iconSize}
+            iconType={legendProps.iconType}
+            width={legendProps.width}
+            height={legendProps.height}
+            layout={legendProps.layout}
+            verticalAlign={legendProps.verticalAlign}
+            wrapperStyle={legendProps.wrapperStyle}
+          />
+        )}
         <defs>
           <linearGradient id={id} x1={x1} y1={y1} x2={x2} y2={y2}>
             {offsetStart && (
