@@ -25,6 +25,8 @@ const MotorLineChart = ({ dataSet, config }) => {
     showXAxis = true,
     xAxisDataKey,
     ShowYAxis = true,
+    xAxisLabel,
+    yAxisLabel,
     showGrid = true,
     showLegend = true,
     isAnimationActive = true,
@@ -35,21 +37,25 @@ const MotorLineChart = ({ dataSet, config }) => {
       <LineChart data={data} margin={margin}>
         {showXAxis && (
           <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
-            <Label
-              value="Pages of my website"
-              offset={0}
-              position="insideBottom"
-            />
+            {xAxisLabel && (
+              <Label
+                value={xAxisLabel.value}
+                offset={xAxisLabel.offset}
+                position={xAxisLabel.position}
+              />
+            )}
           </XAxis>
         )}
         {ShowYAxis && (
           <YAxis tickFormatter={formatYAxis}>
-            <Label
-              value="Pages"
-              angle={-90}
-              offset={-20}
-              position="insideLeft"
-            />
+            {yAxisLabel && (
+              <Label
+                value={yAxisLabel.value}
+                angle={yAxisLabel.angle}
+                offset={yAxisLabel.offset}
+                position={yAxisLabel.position}
+              />
+            )}
           </YAxis>
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}

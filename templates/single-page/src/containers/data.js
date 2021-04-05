@@ -321,8 +321,7 @@ export const BalanceHistory = {
 export const ordersByCategory = {
   chartConfig: {
     chartType: "bar",
-    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
-    margin: { top: 10, right: 40, left: 0, bottom: 0 },
+    margin: { top: 10, right: 40, left: 20, bottom: 20 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -330,11 +329,20 @@ export const ordersByCategory = {
     height: 220,
     isAnimationActive: true,
     xAxisDataKey: "Category",
+    xAxisLabel: {
+      value: "Categpry",
+      offset: -10,
+      position: "insideBottom",
+    },
+    yAxisLabel: {
+      value: "Number of Orders",
+      angle: -90,
+      position: "insideBottomLeft",
+    },
     // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    // fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
     fill: colourPalette,
 
     fillOpacity: 1,
@@ -367,12 +375,23 @@ export const ordersByCategory = {
 export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
-    margin: { top: 10, right: 40, left: 35, bottom: 0 },
+    margin: { top: 10, right: 40, left: 35, bottom: 20 },
     dot: { stroke: "#FEA931", strokeWidth: 2 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
     showLegend: false,
+    xAxisLabel: {
+      value: "Month of Sale",
+      offset: -10,
+      position: "insideBottom",
+    },
+    yAxisLabel: {
+      value: "Pages",
+      angle: -90,
+      offset: -20,
+      position: "insideLeft",
+    },
     height: 220,
     isAnimationActive: true,
     xAxisDataKey: "Order Date",
