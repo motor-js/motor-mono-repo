@@ -1,6 +1,5 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
-// import { EngineContext } from "@motor-js/engine";
 import { EngineContext } from "../contexts/EngineProvider";
 
 // import useSequencer from './useSequencer';
@@ -42,6 +41,7 @@ const initialProps = {
   qSortByLoadOrder: 1,
   dimension: null,
   label: null,
+  undefinedText: "undefined",
   qListObjectDef: null,
   qPage: {
     qTop: 0,
@@ -55,6 +55,7 @@ const useList = (props) => {
   const {
     qPage: qPageProp,
     dimension,
+    undefinedText,
     qListObjectDef,
     qSortByAscii,
     qSortByLoadOrder,
@@ -142,8 +143,8 @@ const useList = (props) => {
       qDataPages[0].qMatrix.map((d, i) => {
         data.push({
           key: d[0].qElemNumber,
-          text: d[0].qText,
-          value: d[0].qText,
+          text: typeof d[0].qText !== "undefined" ? d[0].qText : undefinedText,
+          number: d[0].qNumber,
         });
       });
       return data;
