@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
+  Label,
 } from "recharts";
 
 import { formatYAxis, formatXAxis } from "../../../util/formatChart";
@@ -33,9 +34,27 @@ const MotorLineChart = ({ dataSet, config }) => {
     <ResponsiveContainer width="100%" height={height}>
       <LineChart data={data} margin={margin}>
         {showXAxis && (
-          <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis} />
+          <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
+            <Label
+              value="Pages of my website"
+              offset={0}
+              position="insideBottom"
+            />
+          </XAxis>
         )}
-        {ShowYAxis && <YAxis tickFormatter={formatYAxis} />}
+        {ShowYAxis && (
+          <YAxis
+            tickFormatter={formatYAxis}
+            // label={{ value: "pv of page", angle: -90, position: "insideLeft" }}
+          >
+            <Label
+              value="Pages"
+              angle={-90}
+              offset={-20}
+              position="insideLeft"
+            />
+          </YAxis>
+        )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}

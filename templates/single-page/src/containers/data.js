@@ -367,7 +367,7 @@ export const ordersByCategory = {
 export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
-    margin: { top: 10, right: 40, left: 10, bottom: 0 },
+    margin: { top: 10, right: 40, left: 35, bottom: 0 },
     dot: { stroke: "#FEA931", strokeWidth: 2 },
     showXAxis: true,
     showXAxis: true,
@@ -376,7 +376,6 @@ export const orderAnalysis = {
     height: 220,
     isAnimationActive: true,
     xAxisDataKey: "Order Date",
-    // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",

@@ -33,8 +33,6 @@ const MotorBarChart = ({ dataSet, config }) => {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={margin}>
-        {/* {showXAxis && <XAxis dataKey={xAxisDataKey} />}
-        {ShowYAxis && <YAxis />} */}
         {showXAxis && (
           <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis} />
         )}
