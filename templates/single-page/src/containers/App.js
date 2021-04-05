@@ -19,6 +19,7 @@ import {
   ordersByCategory,
   orderAnalysis,
   pieData,
+  pieDataDonut,
   reverseCardData,
   orderHistory,
 } from "./data";
@@ -92,7 +93,7 @@ const App = () => {
                 <RewardCard dataProps={reverseCardData} />
               </Col>
               <Col xl={9} lg={12} md={12} sm={24} xs={24}>
-                <Chart dataProps={orderAnalysis} />
+                <Chart dataProps={pieDataDonut} />
               </Col>
             </Row>
             <Row>

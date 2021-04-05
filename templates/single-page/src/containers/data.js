@@ -437,18 +437,20 @@ export const orderAnalysis = {
 export const pieData = {
   chartConfig: {
     chartType: "pie",
-    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 0, left: 0, bottom: 0 },
     showLegend: false,
-    height: 205,
+    height: 356,
     // dataKey: "price",
     strokeWidth: 0,
     fill: colourPalette,
     label: true,
     isAnimationActive: true,
-    cx: "35%",
+    cx: "50%",
     cy: "50%",
-    // outerRadius: 60,
-    // innerRadius: 40,
+    outerRadius: 130,
+    renderLabel: (entry) => {
+      return entry.payload.price.toLocaleString().split(".")[0];
+    },
   },
   data: {
     cols: [
@@ -461,44 +463,71 @@ export const pieData = {
         qLabel: "price",
       },
     ],
-    // qMetrics: [
-    //   {
-    //     qName: "prize",
-    //     qExpr: "num(Sum(price),'$#,##0')",
-    //     qType: "qStringExpression",
-    //   },
-    //   {
-    //     qName: "desc",
-    //     qExpr: "num(Count(distinct coin)/100,'#,##0%')",
-    //     qType: "qStringExpression",
-    //   },
-    //   {
-    //     qName: "styleName",
-    //     qExpr: "if(Count(distinct coin)>=0,'up','down')",
-    //     qType: "qStringExpression",
-    //   },
-    // ],
-    qTitle:
-      // "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
-      "Sales by Body Location",
+    qTitle: "Sales by Body Location",
+  },
+};
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor="middle"
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
+export const pieDataDonut = {
+  chartConfig: {
+    chartType: "pie",
+    margin: { top: 10, right: 0, left: 0, bottom: 0 },
+    showLegend: false,
+    height: 356,
+    // dataKey: "price",
+    strokeWidth: 0,
+    fill: colourPalette,
+    label: true,
+    isAnimationActive: true,
+    cx: "50%",
+    cy: "50%",
+    outerRadius: 130,
+    innerRadius: 60,
+    renderLabel: renderCustomizedLabel,
+    labelLine: false,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[Body Location]",
+        qLabel: "Location",
+      },
+      {
+        qField: "=Sum(Quantity*Price)",
+        qLabel: "price",
+      },
+    ],
+
+    qTitle: "Sales by Body Location",
   },
 };
 export const reverseCardData = {
-  // chartConfig: {
-  //   chartType: "pie",
-  //   margin: { top: 10, right: 0, left: -15, bottom: 0 },
-  //   showLegend: false,
-  //   height: 205,
-  //   // dataKey: "price",
-  //   strokeWidth: 0,
-  //   fill: colourPalette,
-  //   label: true,
-  //   isAnimationActive: true,
-  //   cx: "35%",
-  //   cy: "50%",
-  //   // outerRadius: 60,
-  //   // innerRadius: 40,
-  // },
   data: {
     cols: [
       {

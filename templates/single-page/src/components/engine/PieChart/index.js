@@ -18,11 +18,13 @@ const MotorPieChart = ({ dataSet, config }) => {
     height,
     fill,
     label = true,
+    labelLine = true,
     isAnimationActive = true,
     cx = "35%",
     cy = "50%",
     outerRadius = 80,
     innerRadius = 0,
+    renderLabel,
   } = config;
 
   return (
@@ -40,21 +42,14 @@ const MotorPieChart = ({ dataSet, config }) => {
               cy={cy}
               outerRadius={outerRadius}
               innerRadius={innerRadius}
-              label={label}
+              label={renderLabel}
+              labelLine={labelLine}
             >
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={fill[index]} />
               ))}
             </Pie>
           ))}
-        {/* <Pie
-          dataKey="value"
-          data={data02}
-          cx="70%"
-          cy="50%"
-          outerRadius={80}
-          fill="#FE9E15"
-        /> */}
         <Tooltip />
       </PieChart>
     </ResponsiveContainer>
