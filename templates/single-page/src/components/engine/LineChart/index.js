@@ -12,7 +12,11 @@ import {
   Label,
 } from "recharts";
 
-import { formatYAxis, formatXAxis } from "../../../util/formatChart";
+import {
+  formatYAxis,
+  formatXAxis,
+  tooltipNumFormat,
+} from "../../../util/formatChart";
 
 const MotorLineChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -75,6 +79,7 @@ const MotorLineChart = ({ dataSet, config }) => {
         {dataKeys &&
           dataKeys.map((key, index) => (
             <Line
+              formatter={tooltipNumFormat}
               key={index}
               dataKey={key}
               stroke={stroke}

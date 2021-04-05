@@ -456,7 +456,7 @@ export const pieData = {
     cols: [
       {
         qField: "[Body Location]",
-        qLabel: "Location",
+        qLabel: "name",
       },
       {
         qField: "=Sum(Quantity*Price)",
