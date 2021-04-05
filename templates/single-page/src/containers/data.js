@@ -375,7 +375,7 @@ export const orderAnalysis = {
     showLegend: false,
     height: 220,
     isAnimationActive: true,
-    xAxisDataKey: "Category",
+    xAxisDataKey: "Order Date",
     // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,

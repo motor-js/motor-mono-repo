@@ -86,7 +86,6 @@ const App = () => {
             </Row>
             <Row>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
-                {/* <SendMoney /> */}
                 <Chart dataProps={pieData} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={24} xs={24}>
@@ -99,7 +98,6 @@ const App = () => {
             <Row>
               <Col xl={15} lg={24} md={24} sm={24} xs={24}>
                 <TableComponent tableConfig={tableCols} />
-                {/* <CryptoNews /> */}
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
                 <Callout />

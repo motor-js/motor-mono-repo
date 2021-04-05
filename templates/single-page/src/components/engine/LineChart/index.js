@@ -11,6 +11,8 @@ import {
   YAxis,
 } from "recharts";
 
+import { formatYAxis, formatXAxis } from "../../../util/formatChart";
+
 const MotorLineChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
 
@@ -30,8 +32,10 @@ const MotorLineChart = ({ dataSet, config }) => {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <LineChart data={data} margin={margin}>
-        {showXAxis && <XAxis dataKey={xAxisDataKey} />}
-        {ShowYAxis && <YAxis />}
+        {showXAxis && (
+          <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis} />
+        )}
+        {ShowYAxis && <YAxis tickFormatter={formatYAxis} />}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
