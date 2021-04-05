@@ -43,10 +43,7 @@ const MotorLineChart = ({ dataSet, config }) => {
           </XAxis>
         )}
         {ShowYAxis && (
-          <YAxis
-            tickFormatter={formatYAxis}
-            // label={{ value: "pv of page", angle: -90, position: "insideLeft" }}
-          >
+          <YAxis tickFormatter={formatYAxis}>
             <Label
               value="Pages"
               angle={-90}
