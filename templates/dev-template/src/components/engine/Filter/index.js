@@ -4,7 +4,7 @@ import { Select } from "antd";
 import useList from "../../../dev-resources/hooks/useList";
 import Widget from "components/Widget";
 
-const Filter = ({ dimension, undefinedText = "Undefined" }) => {
+const Filter = ({ dimension }) => {
   const [children, setChildren] = useState([]);
   const [selected, setSelected] = useState();
 
@@ -17,7 +17,6 @@ const Filter = ({ dimension, undefinedText = "Undefined" }) => {
     clearSelections,
   } = useList({
     dimension,
-    undefinedText,
   });
 
   const { Option } = Select;

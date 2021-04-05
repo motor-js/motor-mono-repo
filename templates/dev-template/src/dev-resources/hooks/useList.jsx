@@ -41,7 +41,6 @@ const initialProps = {
   qSortByLoadOrder: 1,
   dimension: null,
   label: null,
-  undefinedText: "undefined",
   qListObjectDef: null,
   qPage: {
     qTop: 0,
@@ -55,7 +54,6 @@ const useList = (props) => {
   const {
     qPage: qPageProp,
     dimension,
-    undefinedText,
     qListObjectDef,
     qSortByAscii,
     qSortByLoadOrder,
@@ -143,7 +141,7 @@ const useList = (props) => {
       qDataPages[0].qMatrix.map((d, i) => {
         data.push({
           key: d[0].qElemNumber,
-          text: typeof d[0].qText !== "undefined" ? d[0].qText : undefinedText,
+          text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
           number: d[0].qNumber,
         });
       });

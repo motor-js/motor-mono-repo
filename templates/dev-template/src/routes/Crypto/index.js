@@ -43,7 +43,6 @@ const Crypto = () => {
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <MotorFilter
             dimension={["Country"]}
-            undefinedText="abc"
             // style={{ width: "50%" }}
           />
         </Col>
