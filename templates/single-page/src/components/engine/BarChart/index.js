@@ -122,7 +122,11 @@ const MotorBarChart = ({ dataSet, config }) => {
         {/* <Tooltip content={<CustomTooltip />} /> */}
 
         <Tooltip
-          wrapperStyle={{ backgroundColor: "white" }}
+          wrapperStyle={{
+            backgroundColor: "white",
+            borderColor: "white",
+            boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+          }}
           // labelStyle={{ color: "black" }}
           // itemStyle={{ color: "cyan" }}
           // contentStyle={{ color: "yellow" }}
