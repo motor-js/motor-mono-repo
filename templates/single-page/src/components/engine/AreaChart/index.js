@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
+  Label,
 } from "recharts";
 
 import { formatYAxis, formatXAxis } from "../../../util/formatChart";
@@ -21,6 +22,8 @@ const MotorAreaChart = ({ dataSet, config }) => {
     showXAxis = true,
     xAxisDataKey,
     ShowYAxis = true,
+    xAxisLabel,
+    yAxisLabel,
     showGrid = true,
     showLegend = true,
     isAnimationActive = true,
@@ -43,9 +46,28 @@ const MotorAreaChart = ({ dataSet, config }) => {
     <ResponsiveContainer width="100%" height={height}>
       <AreaChart data={data} margin={margin}>
         {showXAxis && (
-          <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis} />
+          <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
+            {xAxisLabel && (
+              <Label
+                value={xAxisLabel.value}
+                offset={xAxisLabel.offset}
+                position={xAxisLabel.position}
+              />
+            )}
+          </XAxis>
         )}
-        {ShowYAxis && <YAxis tickFormatter={formatYAxis} />}
+        {ShowYAxis && (
+          <YAxis tickFormatter={formatYAxis}>
+            {yAxisLabel && (
+              <Label
+                value={yAxisLabel.value}
+                angle={yAxisLabel.angle}
+                offset={yAxisLabel.offset}
+                position={yAxisLabel.position}
+              />
+            )}
+          </YAxis>
+        )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
         {showLegend && <Legend />}
