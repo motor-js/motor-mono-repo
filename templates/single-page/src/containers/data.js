@@ -512,6 +512,9 @@ export const pieDataDonut = {
     renderLabel: renderCustomizedLabel,
     labelLine: false,
     legendProps: {
+      wrapperStyle: {
+        padding: "10px",
+      },
       iconType: "circle",
       layout: "horizontal",
     },
@@ -587,7 +590,7 @@ export const tableCols = {
     showSizeChanger: true,
     pageSizeOptions: ["10", "20", "30"],
   },
-
+  scroll: { y: 284 },
   cols: [
     {
       qField: "_Image",
@@ -632,6 +635,12 @@ export const orderHistory = {
     {
       qField: "=Sum(Quantity)",
       qLabel: "Quantity Sold",
+      qNumType: "I",
+      qNumFmt: "#,##0",
+      useFormatting: true,
+      // render: (text, data, i) => {
+      //   return <div style={{ textAlign: "right" }}>{text}</div>;
+      // },
     },
     {
       qField: "=Sum(Price  * Quantity)",
