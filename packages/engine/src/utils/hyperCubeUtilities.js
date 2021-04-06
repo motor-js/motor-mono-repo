@@ -12,19 +12,24 @@ export function hyperCubeTransform(
   const measureNames = getMeasureNames(qHyperCube);
   const dimensionNames = getDimensionNames(qHyperCube);
 
-  //console.log(measureNames)
-  console.log(dimensionNames)
-
-  console.log(cols)
+  //Filter cols for the measure and dimension names. 
+  const measCols = cols.filter(cols => cols.qLabel ? measureNames.includes(cols.qLabel) : measureNames.includes(cols.qField))
+  const dimCols = cols.filter(cols => cols.qLabel ? dimensionNames.includes(cols.qLabel) : dimensionNames.includes(cols.qField))
 
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
+    let dimName;
+    let measName;
     d.forEach((item, index) => {
+      // if dataKey exists, set is as the object key name
+      dimName = dimCols[index] && 'dataKey' in dimCols[index] ? dimCols[index].dataKey : dimensionNames[index]
+      measName = measureNames[index - qNoOfDimensions] && 'dataKey' in measCols[index - qNoOfDimensions] ? measCols[index - qNoOfDimensions].dataKey : measureNames[index - qNoOfDimensions]
+
       const pair =
         index < qNoOfDimensions
           ? 
           {
-            [dimensionNames[index]]: {
+            [dimName]: {
               'value': d[index].qText === undefined
                 ? "undefined"
                 : index === 0 && useNumonFirstDim
@@ -35,7 +40,7 @@ export function hyperCubeTransform(
               'attrExp': d[index].qAttrExps,
             }
           } : {
-            [measureNames[index - qNoOfDimensions]]: {
+            [measName]: {
               'value': cols[index].useFormatting
                 ? d[index].qText
                 : d[index].qNum !== "NaN"
@@ -104,9 +109,10 @@ export const getMeasureNames = (qHyperCube) =>
   qHyperCube.qMeasureInfo.map((d, i) => {
     const qMeasurePosition = i !== 0 ? i : "";
 
-    return d.qFallbackTitle.startsWith("=")
+    return d.qFallbackTitle
+    /*.startsWith("=")
       ? `value${qMeasurePosition}`
-      : d.qFallbackTitle;
+      : d.qFallbackTitle;*/
   });
 
 export const getDimensionNames = (qHyperCube) =>

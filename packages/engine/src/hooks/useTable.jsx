@@ -22,7 +22,7 @@ const initialState = {
 
 function reducer(state, action) {
   const {
-    payload: { title, qData, mData, qRData, headerGroup, qLayout, selections },
+    payload: { title, qData, dataSet, qRData, headerGroup, qLayout, selections },
     type,
   } = action;
 
@@ -32,7 +32,7 @@ function reducer(state, action) {
         ...state,
         title,
         qData,
-        mData,
+        dataSet,
         headerGroup,
         qLayout,
         selections,
@@ -103,7 +103,7 @@ const useTable = (props) => {
   const {
     title,
     qData,
-    mData,
+    dataSet,
     qRData,
     headerGroup,
     qLayout,
@@ -274,14 +274,14 @@ const useTable = (props) => {
 
   const structureData = useCallback(async (layout, data) => {
     let useNumonFirstDim;
-    const mData = hyperCubeTransform(
+    const dataSet = hyperCubeTransform(
       data,
       layout.qHyperCube,
       useNumonFirstDim,
       cols
     );
 
-    return mData;
+    return dataSet;
   }, []);
 
   const update = useCallback(
@@ -289,7 +289,7 @@ const useTable = (props) => {
       const _qLayout = await getLayout();
       const _qTitle = await getTitle(_qLayout);
       const _qData = await getData();
-      const _mData = await structureData(_qLayout, _qData);
+      const _dataSet = await structureData(_qLayout, _qData);
       const _headerGroup = await getHeader(_qLayout, cols);
       const _orderHeader = await getOrder(_headerGroup, qColumnOrder);
       if (_qData && _isMounted.current) {
@@ -301,7 +301,7 @@ const useTable = (props) => {
           payload: {
             title: _qTitle,
             qData: _qData,
-            mData: _mData,
+            dataSet: _dataSet,
             headerGroup: _orderHeader,
             qLayout: _qLayout,
             selections: _selections,
@@ -313,7 +313,7 @@ const useTable = (props) => {
           payload: {
             title: _qTitle,
             qData: _qData,
-            mData: _mData,
+            dataSet: _dataSet,
             headerGroup: _orderHeader,
             qLayout: _qLayout,
           },
@@ -444,7 +444,7 @@ const useTable = (props) => {
     title,
     qLayout,
     qData,
-    mData,
+    dataSet,
     headerGroup,
     handleSortChange,
     qRData,
