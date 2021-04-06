@@ -329,6 +329,14 @@ export const ordersByCategory = {
     height: 220,
     isAnimationActive: true,
     xAxisDataKey: "Category",
+    tooltip: {
+      wrapperStyle: {
+        backgroundColor: "white",
+        borderColor: "white",
+        boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+        padding: "10px",
+      },
+    },
     xAxisLabel: {
       value: "Categpry",
       offset: -10,

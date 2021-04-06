@@ -23,6 +23,7 @@ const MotorBarChart = ({ dataSet, config }) => {
     xAxisDataKey,
     ShowYAxis = true,
     xAxisLabel,
+    tooltip = null,
     yAxisLabel,
     showGrid = true,
     showLegend = true,
@@ -94,13 +95,26 @@ const MotorBarChart = ({ dataSet, config }) => {
           </YAxis>
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
-        <Tooltip
+        {/* <Tooltip
           wrapperStyle={{
             backgroundColor: "white",
             borderColor: "white",
             boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
             padding: "10px",
           }}
+          // labelStyle={{ color: "black" }}
+          // itemStyle={{ color: "cyan" }}
+          // contentStyle={{ color: "yellow" }}
+          // formatter={function (value, name) {
+          //   return `${value}`;
+          // }}
+          // labelFormatter={function (value) {
+          //   return `label: ${value}`;
+          // }}
+          content={<CustomTooltip />}
+        /> */}
+        <Tooltip
+          wrapperStyle={tooltip && tooltip.wrapperStyle}
           // labelStyle={{ color: "black" }}
           // itemStyle={{ color: "cyan" }}
           // contentStyle={{ color: "yellow" }}
