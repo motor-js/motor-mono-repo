@@ -3,10 +3,7 @@ import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
 import createDef from "../utils/createHCDef";
 import {
-  getMeasureNames,
-  getDimensionNames,
   getHeader,
-  getOrder,
   hyperCubeTransform,
 } from "../utils/hyperCubeUtilities";
 
@@ -125,6 +122,7 @@ const useTable = (props) => {
 
   // current page
   const [page, _setPage] = useState(0);
+
   const setPage = useCallback(
     (_page) => {
       _setPage(_page);
@@ -146,7 +144,7 @@ const useTable = (props) => {
     [page, setPage]
   );
   
-
+  //handle page change
   const handlePageChange = useCallback(
     (pageIndex) => {
       setPage(pageIndex);
@@ -162,7 +160,6 @@ const useTable = (props) => {
 
   // page decrement
   const decrementPage = () => {
-    console.log(page)
       if(page == 0) {
         console.log(pages)
         handlePageChange(pages - 1);
@@ -172,11 +169,12 @@ const useTable = (props) => {
       }
   };
 
+  
   // Find the total size of the Hypercube
   useEffect(() => {
-    if (!qLayout) return;
+    if (!qLayout || !qData) return;
     setPages(Math.ceil(qLayout.qHyperCube.qSize.qcy / pageSize));
-  }, [qLayout, pageSize, setPage, setPages]);
+  }, [qLayout, qData, pageSize, setPage, setPages]);
 
 
   //======================
@@ -243,7 +241,6 @@ const useTable = (props) => {
       "/qHyperCubeDef",
       [qPage.current]
     );
-
     return qDataPages[0];
   }, []);
 
@@ -275,23 +272,22 @@ const useTable = (props) => {
   const structureData = useCallback(async (layout, data) => {
     let useNumonFirstDim;
     const dataSet = hyperCubeTransform(
-      data,
-      layout.qHyperCube,
-      useNumonFirstDim,
-      cols
-    );
+        data,
+        layout.qHyperCube,
+        useNumonFirstDim,
+        cols
+      )
 
     return dataSet;
   }, []);
 
   const update = useCallback(
-    async (measureInfo) => {
+    async () => {
       const _qLayout = await getLayout();
       const _qTitle = await getTitle(_qLayout);
       const _qData = await getData();
-      const _dataSet = await structureData(_qLayout, _qData);
-      const _headerGroup = await getHeader(_qLayout, cols);
-      const _orderHeader = await getOrder(_headerGroup, qColumnOrder);
+      const _dataSet =  _qData && await structureData(_qLayout, _qData);
+      const _headerGroup = _qData && await getHeader(_qLayout, cols );
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(
           (row) => row[0].qState === "S"
@@ -302,7 +298,7 @@ const useTable = (props) => {
             title: _qTitle,
             qData: _qData,
             dataSet: _dataSet,
-            headerGroup: _orderHeader,
+            headerGroup: _headerGroup,
             qLayout: _qLayout,
             selections: _selections,
           },
@@ -314,7 +310,7 @@ const useTable = (props) => {
             title: _qTitle,
             qData: _qData,
             dataSet: _dataSet,
-            headerGroup: _orderHeader,
+            headerGroup: _headerGroup,
             qLayout: _qLayout,
           },
         });
@@ -354,11 +350,11 @@ const useTable = (props) => {
   );
 
   const select = useCallback(
-    (qElemNumber, _selections, toggle = false) =>
+    (dimNo, qElemNumber, toggle = false) =>
       qObject.current.selectHyperCubeValues(
         "/qHyperCubeDef",
+        dimNo,
         qElemNumber,
-        _selections,
         toggle
       ),
     []
@@ -372,6 +368,7 @@ const useTable = (props) => {
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
     async (column) => {
+      console.log(column)
       // If no sort is set, we need to set a default sort order
       if (column.qSortIndicator === "N") {
         if (column.qPath.includes("qDimensions")) {
@@ -417,7 +414,7 @@ const useTable = (props) => {
           ),
         },
       ]);
-      // setPage(0);
+      setPage(0);
     },
     [applyPatches, qLayout]
   );

@@ -228,7 +228,7 @@ function createDef(
               qExpression: col.qCondTextFormat,
               qLibraryId: "",
               qAttribute: false,
-              id: "cellForegroundColor",
+              id: "cellTextColor",
             },
             {
               // chart fill color

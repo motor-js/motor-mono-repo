@@ -38,6 +38,7 @@ export function hyperCubeTransform(
               'elemNumber': d[index].qElemNumber,
               'state': d[index].qState,
               'attrExp': d[index].qAttrExps,
+              'columnId': index,
             }
           } : {
             [measName]: {
@@ -48,6 +49,7 @@ export function hyperCubeTransform(
                 : 0,
               'state': d[index].qState,
               'attrExp': d[index].qAttrExps,
+              'columnId': index,
             },
             key: i,
           } 
@@ -192,7 +194,7 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
   return direction;
 };
 
-export const getHeader = (qLayout, cols) =>
+export const getHeader = (qLayout, cols, data) =>
   qLayout
     ? [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
@@ -200,6 +202,7 @@ export const getHeader = (qLayout, cols) =>
           dataIndex: col.qFallbackTitle,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,
+          qPath: `/qHyperCubeDef/qDimensions/${index}`,
           qSortIndicator: col.qSortIndicator,
           qReverseSort: col.qReverseSort,
           qGrandTotals: { qText: null, qNum: null },
@@ -210,6 +213,7 @@ export const getHeader = (qLayout, cols) =>
           dataIndex: col.qFallbackTitle,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
+          qPath: `/qHyperCubeDef/qMeasures/${index}`,
           qSortIndicator: col.qSortIndicator,
           qReverseSort: col.qReverseSort,
           qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
@@ -217,15 +221,5 @@ export const getHeader = (qLayout, cols) =>
         })),
       ]
     : [];
-
-//Change order of header groups
-export const getOrder = (headerGroup, qColumnOrder) => {
-  const orderedHeader = headerGroup.sort(
-    (a, b) =>
-      qColumnOrder.indexOf(a.qInterColumnIndex) -
-      qColumnOrder.indexOf(b.qInterColumnIndex)
-  );
-  return orderedHeader;
-};
 
 export default hyperCubeTransform;
