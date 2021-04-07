@@ -10,7 +10,7 @@ import {
   getDatKeyInfo,
   getHeader,
   getOrder,
-  hyperCubeTransform,
+  hyperCubeChartTransform,
   multiDimHyperCubeTransform,
 } from "../utils/hyperCubeUtilities";
 
@@ -506,7 +506,12 @@ const useData = (props) => {
 
     const mData =
       layout.qHyperCube.qDimensionInfo.length === 1
-        ? hyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim, cols)
+        ? hyperCubeChartTransform(
+            data,
+            layout.qHyperCube,
+            useNumonFirstDim,
+            cols
+          )
         : multiDimHyperCubeTransform(data, layout.qHyperCube, useNumonFirstDim);
 
     return mData;
