@@ -11,6 +11,7 @@ import {
   tableCols,
   BalanceHistory,
   BalanceHistoryMultiDim,
+  bodyLocationKPI,
   ordersByCategory,
   FitnessKpi,
   pieData,
@@ -53,7 +54,8 @@ const Crypto = () => {
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI dataProps={FitnessKpi} />
+          {/* <ChartKPI dataProps={FitnessKpi} /> */}
+          <ChartKPI dataProps={bodyLocationKPI} />
         </Col>
         {/* <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={etheriumKPI} />

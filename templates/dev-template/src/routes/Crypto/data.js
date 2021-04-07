@@ -12,6 +12,68 @@ const colourPalette = [
   "#e84118",
 ];
 
+export const bodyLocationKPI = {
+  chartConfig: {
+    chartType: "bar",
+    margin: { top: 0, right: 0, left: 0, bottom: 0 },
+    height: 75,
+
+    // gradient: {
+    //   id: "color5",
+    //   x1: "0",
+    //   y1: "0",
+    //   x2: "0",
+    //   y2: "1",
+    //   offsetStart: {
+    //     offset: "5%",
+    //     stopColor: "#e81a24",
+    //     stopOpacity: 0.8,
+    //   },
+    //   offsetEnd: { offset: "95%", stopColor: "#FEEADA", stopOpacity: 0.8 },
+    // },
+    strokeWidth: 0,
+    stackId: 2,
+    stroke: "#FEEADA",
+    // fill: "url(#color5)",
+    fill: colourPalette,
+    fillOpacity: 1,
+    // stacked: true,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[Body Location]",
+        qLabel: "Location",
+      },
+      {
+        qField: "=Count(Quantity)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(Quantity*Price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr:
+          "num(Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)/Sum( Quantity*Price),'#,##0%')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr:
+          "if(Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)/Sum( Quantity*Price)>=0,'up','down')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle: "Orders by Body Location",
+  },
+  icon: "ripple",
+};
+
 export const tableCols = {
   qTitle: "Products",
   pagination: {
