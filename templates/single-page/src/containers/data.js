@@ -321,8 +321,7 @@ export const BalanceHistory = {
 export const ordersByCategory = {
   chartConfig: {
     chartType: "bar",
-    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
-    margin: { top: 10, right: 40, left: 0, bottom: 0 },
+    margin: { top: 10, right: 40, left: 20, bottom: 20 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -330,11 +329,20 @@ export const ordersByCategory = {
     height: 220,
     isAnimationActive: true,
     xAxisDataKey: "Category",
+    xAxisLabel: {
+      value: "Categpry",
+      offset: -10,
+      position: "insideBottom",
+    },
+    yAxisLabel: {
+      value: "Number of Orders",
+      angle: -90,
+      position: "insideBottomLeft",
+    },
     // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    // fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
     fill: colourPalette,
 
     fillOpacity: 1,
@@ -367,16 +375,26 @@ export const ordersByCategory = {
 export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
-    margin: { top: 10, right: 40, left: 10, bottom: 0 },
+    margin: { top: 10, right: 40, left: 35, bottom: 20 },
     dot: { stroke: "#FEA931", strokeWidth: 2 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
     showLegend: false,
+    xAxisLabel: {
+      value: "Month of Sale",
+      offset: -10,
+      position: "insideBottom",
+    },
+    yAxisLabel: {
+      value: "Pages",
+      angle: -90,
+      offset: -20,
+      position: "insideLeft",
+    },
     height: 220,
     isAnimationActive: true,
-    xAxisDataKey: "Category",
-    // dataKey: "price",
+    xAxisDataKey: "Order Date",
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
@@ -419,68 +437,107 @@ export const orderAnalysis = {
 export const pieData = {
   chartConfig: {
     chartType: "pie",
-    margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 0, left: 0, bottom: 0 },
     showLegend: false,
-    height: 205,
+    height: 356,
     // dataKey: "price",
     strokeWidth: 0,
     fill: colourPalette,
     label: true,
     isAnimationActive: true,
-    cx: "35%",
+    cx: "50%",
     cy: "50%",
-    // outerRadius: 60,
-    // innerRadius: 40,
+    outerRadius: 130,
+    renderLabel: (entry) => {
+      return entry.payload.price.toLocaleString().split(".")[0];
+    },
   },
   data: {
     cols: [
       {
         qField: "[Body Location]",
-        qLabel: "Location",
+        qLabel: "name",
       },
       {
         qField: "=Sum(Quantity*Price)",
         qLabel: "price",
       },
     ],
-    // qMetrics: [
-    //   {
-    //     qName: "prize",
-    //     qExpr: "num(Sum(price),'$#,##0')",
-    //     qType: "qStringExpression",
-    //   },
-    //   {
-    //     qName: "desc",
-    //     qExpr: "num(Count(distinct coin)/100,'#,##0%')",
-    //     qType: "qStringExpression",
-    //   },
-    //   {
-    //     qName: "styleName",
-    //     qExpr: "if(Count(distinct coin)>=0,'up','down')",
-    //     qType: "qStringExpression",
-    //   },
-    // ],
-    qTitle:
-      // "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
-      "Sales by Body Location",
+    qTitle: "Sales by Body Location",
+  },
+};
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor="middle"
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
+export const pieDataDonut = {
+  chartConfig: {
+    chartType: "pie",
+    margin: { top: 10, right: 0, left: 0, bottom: 0 },
+    // showLegend: false,
+    height: 356,
+    // dataKey: "Company Name",
+    strokeWidth: 0,
+    fill: colourPalette,
+    label: true,
+    isAnimationActive: true,
+    cx: "50%",
+    cy: "50%",
+    outerRadius: 130,
+    innerRadius: 60,
+    renderLabel: renderCustomizedLabel,
+    labelLine: false,
+    legendProps: {
+      iconType: "circle",
+      layout: "horizontal",
+    },
+  },
+  data: {
+    qPage: {
+      qTop: 0,
+      qLeft: 0,
+      qWidth: 10,
+      qHeight: 5,
+    },
+    cols: [
+      {
+        qField: "[Company Name]",
+        qLabel: "name",
+      },
+      {
+        qField: "=Sum(Quantity*Price)",
+        qLabel: "price",
+      },
+    ],
+
+    qTitle: "Top 5 Sales by Company",
   },
 };
 export const reverseCardData = {
-  // chartConfig: {
-  //   chartType: "pie",
-  //   margin: { top: 10, right: 0, left: -15, bottom: 0 },
-  //   showLegend: false,
-  //   height: 205,
-  //   // dataKey: "price",
-  //   strokeWidth: 0,
-  //   fill: colourPalette,
-  //   label: true,
-  //   isAnimationActive: true,
-  //   cx: "35%",
-  //   cy: "50%",
-  //   // outerRadius: 60,
-  //   // innerRadius: 40,
-  // },
   data: {
     cols: [
       {
@@ -530,18 +587,18 @@ export const tableCols = {
     showSizeChanger: true,
     pageSizeOptions: ["10", "20", "30"],
   },
-  imageRender: (text, data) => {
-    return (
-      <div>
-        <img src={data.image} />
-      </div>
-    );
-  },
+
   cols: [
     {
       qField: "_Image",
       qLabel: "image",
-      qImage: true,
+      render: (text, data) => {
+        return (
+          <div>
+            <img src={data.image} />
+          </div>
+        );
+      },
     },
     {
       qField: "Name",
@@ -583,7 +640,11 @@ export const orderHistory = {
       qNumFmt: "$#,##0.00",
       useFormatting: true,
       render: (text, data, i) => {
-        return <div className={i === 0 ? "gx-text-red" : ""}>{text}</div>;
+        return (
+          <div className={i === 0 ? "gx-text-red" : "gx-text-green"}>
+            {text}
+          </div>
+        );
       },
     },
     // {

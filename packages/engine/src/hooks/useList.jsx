@@ -139,7 +139,7 @@ const useList = (props) => {
       qDataPages[0].qMatrix.map((d, i) => {
         data.push({
           key: d[0].qElemNumber,
-          text: d[0].qText,
+          text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
           number: d[0].qNumber,
           state: d[0].qState,
         });

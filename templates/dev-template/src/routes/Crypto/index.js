@@ -32,9 +32,21 @@ const { TabPane } = Tabs;
 const Crypto = () => {
   return (
     <Auxiliary>
-      {/* <Row>
-        <ComplexTable tableConfig={tableCols} />
-      </Row> */}
+      <Row>
+        {/* <ComplexTable tableConfig={tableCols} /> */}
+        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+          <MotorFilter
+            dimension={["Company Name"]}
+            // style={{ width: "50%" }}
+          />
+        </Col>
+        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+          <MotorFilter
+            dimension={["Country"]}
+            // style={{ width: "50%" }}
+          />
+        </Col>
+      </Row>
       <Row>
         <ComplexTable tableConfig={orderHistory} />
       </Row>

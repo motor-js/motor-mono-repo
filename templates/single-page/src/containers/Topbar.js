@@ -111,14 +111,14 @@ const Topbar = () => {
               }
               trigger="click"
             >
-              <li className="gx-pointer gx-status-pos gx-d-block">
+              <div className="gx-pointer gx-status-pos gx-d-block">
                 <SelectOutlined style={{ fontSize: "18px" }} />
                 {selections && selections.length > 0 ? (
                   <span className="gx-status gx-status-rtl gx-small gx-bg-secondary" />
                 ) : (
                   <span className="gx-status gx-status-rtl gx-small" />
                 )}
-              </li>
+              </div>
             </Popover>
           </li>
           {showThemeSwitch && (

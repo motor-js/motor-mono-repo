@@ -18,7 +18,7 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
     dimension,
   });
 
-  console.log(selections)
+  // console.log(selections)
 
   const { Option } = Select;
 
@@ -38,7 +38,7 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
   }, [mData, selections]);
 
   async function handleChange(v) {
-    console.log('CALLED')
+    console.log("CALLED");
     await beginSelections();
     const newSel = await v.filter((el) => !selections.includes(el));
     await select(newSel);
@@ -66,7 +66,8 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
       maxTagCount={maxTagCount}
       onDeselect={(v) => handleDeselect(v)}
       filterOption={(input, option) =>
-      option.children && option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        option.children &&
+        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }
     >
       {children}

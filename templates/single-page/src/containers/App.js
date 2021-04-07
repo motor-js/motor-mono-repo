@@ -19,6 +19,7 @@ import {
   ordersByCategory,
   orderAnalysis,
   pieData,
+  pieDataDonut,
   reverseCardData,
   orderHistory,
 } from "./data";
@@ -69,10 +70,7 @@ const App = () => {
             <Row>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                 <Widget>
-                  <Filter
-                    dimension={["Company Name"]}
-                    // style={{ width: "50%" }}
-                  />
+                  <Filter dimension={["Company Name"]} />
                 </Widget>
               </Col>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
@@ -86,20 +84,18 @@ const App = () => {
             </Row>
             <Row>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
-                {/* <SendMoney /> */}
                 <Chart dataProps={pieData} />
               </Col>
               <Col xl={6} lg={12} md={12} sm={24} xs={24}>
                 <RewardCard dataProps={reverseCardData} />
               </Col>
               <Col xl={9} lg={12} md={12} sm={24} xs={24}>
-                <Chart dataProps={orderAnalysis} />
+                <Chart dataProps={pieDataDonut} />
               </Col>
             </Row>
             <Row>
               <Col xl={15} lg={24} md={24} sm={24} xs={24}>
                 <TableComponent tableConfig={tableCols} />
-                {/* <CryptoNews /> */}
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
                 <Callout />

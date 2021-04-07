@@ -9,7 +9,10 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
+  Label,
 } from "recharts";
+
+import { formatYAxis, formatXAxis } from "../../../util/formatChart";
 
 const MotorAreaChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -19,8 +22,11 @@ const MotorAreaChart = ({ dataSet, config }) => {
     showXAxis = true,
     xAxisDataKey,
     ShowYAxis = true,
+    xAxisLabel,
+    yAxisLabel,
     showGrid = true,
     showLegend = true,
+    legendProps,
     isAnimationActive = true,
     margin,
     height,
@@ -40,11 +46,42 @@ const MotorAreaChart = ({ dataSet, config }) => {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <AreaChart data={data} margin={margin}>
-        {showXAxis && <XAxis dataKey={xAxisDataKey} />}
-        {ShowYAxis && <YAxis />}
+        {showXAxis && (
+          <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
+            {xAxisLabel && (
+              <Label
+                value={xAxisLabel.value}
+                offset={xAxisLabel.offset}
+                position={xAxisLabel.position}
+              />
+            )}
+          </XAxis>
+        )}
+        {ShowYAxis && (
+          <YAxis tickFormatter={formatYAxis}>
+            {yAxisLabel && (
+              <Label
+                value={yAxisLabel.value}
+                angle={yAxisLabel.angle}
+                offset={yAxisLabel.offset}
+                position={yAxisLabel.position}
+              />
+            )}
+          </YAxis>
+        )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
         <Tooltip />
-        {showLegend && <Legend />}
+        {showLegend && (
+          <Legend
+            iconSize={legendProps.iconSize}
+            iconType={legendProps.iconType}
+            width={legendProps.width}
+            height={legendProps.height}
+            layout={legendProps.layout}
+            verticalAlign={legendProps.verticalAlign}
+            wrapperStyle={legendProps.wrapperStyle}
+          />
+        )}
         <defs>
           <linearGradient id={id} x1={x1} y1={y1} x2={x2} y2={y2}>
             {offsetStart && (
