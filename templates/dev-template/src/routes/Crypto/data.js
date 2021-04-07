@@ -1,3 +1,17 @@
+const colourPalette = [
+  "#00a8ff",
+  "#9c88ff",
+  "#fbc531",
+  "#4cd137",
+  "#487eb0",
+  "#0097e6",
+  "#27ae60",
+  "#e1b12c",
+  "#44bd32",
+  "#40739e",
+  "#e84118",
+];
+
 export const tableCols = {
   qTitle: "Products",
   pagination: {
@@ -488,15 +502,9 @@ export const orderHistory = {
   qInterColumnSortOrder: [2, 1, 0],
   cols: [
     {
-      qGrouping: "H",
-      qField: ["Country", "City"],
-      // qField: "Country",
-      qLabel: "Country",
+      qField: "Company Name",
+      qLabel: "Company Name",
     },
-    // {
-    //   qField: "City",
-    //   qLabel: "City",
-    // },
     {
       qField: "=Sum(Quantity)",
       qLabel: "Quantity Sold",
@@ -509,7 +517,7 @@ export const orderHistory = {
       useFormatting: true,
       render: (text, data, i) => {
         return (
-          <div className={i === 0 ? "gx-text-green" : "gx-text-red"}>
+          <div className={i === 0 ? "gx-text-red" : "gx-text-green"}>
             {text}
           </div>
         );
@@ -524,4 +532,66 @@ export const orderHistory = {
     //   qLabel: "Category",
     // },
   ],
+};
+
+export const ordersByCategory = {
+  chartConfig: {
+    chartType: "bar",
+    margin: { top: 10, right: 40, left: 20, bottom: 20 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    showLegend: false,
+    height: 220,
+    isAnimationActive: true,
+    xAxisDataKey: "Category",
+    tooltip: {
+      wrapperStyle: {
+        backgroundColor: "white",
+        borderColor: "white",
+        boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+        padding: "10px",
+      },
+    },
+    xAxisLabel: {
+      value: "Categpry",
+      offset: -10,
+      position: "insideBottom",
+    },
+    yAxisLabel: {
+      value: "Number of Orders",
+      angle: -90,
+      position: "insideBottomLeft",
+    },
+    // dataKey: "price",
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: colourPalette,
+
+    fillOpacity: 1,
+    // buttons: [
+    //   { type: "measure", label: "Sum", value: "=Sum(price)" },
+    //   { type: "measure", label: "Count", value: "=count(price)" },
+    //   { type: "dimension", label: "Name", value: "[name]" },
+    //   { type: "dimension", label: "Price", value: "price" },
+    // ],
+  },
+  data: {
+    // qDimField: "[coin]",
+    // qLists: [{ dataKey: "[coin]" }, { name: "[name]" }],
+    cols: [
+      {
+        qField: "[Category]",
+        qLabel: "Category",
+      },
+      {
+        qField: "=Count(TransactionItemID)",
+        qLabel: "price",
+        qFillStyle: "orange",
+      },
+    ],
+
+    qTitle: "=Num(Count(TransactionItemID),'#,##0') & ' Orders by Category'",
+  },
 };
