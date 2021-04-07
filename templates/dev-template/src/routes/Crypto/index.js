@@ -11,6 +11,7 @@ import {
   tableCols,
   BalanceHistory,
   BalanceHistoryMultiDim,
+  wristKPI,
   bodyLocationKPI,
   ordersByCategory,
   FitnessKpi,
@@ -61,7 +62,7 @@ const Crypto = () => {
           <ChartKPI dataProps={etheriumKPI} />
         </Col>*/}
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI dataProps={rippleKPI} />
+          <ChartKPI dataProps={wristKPI} />
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <Tabs defaultActiveKey="1" type="card" size={"Default"}>

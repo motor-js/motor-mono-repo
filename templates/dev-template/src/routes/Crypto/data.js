@@ -38,6 +38,14 @@ export const bodyLocationKPI = {
     fill: colourPalette,
     fillOpacity: 1,
     // stacked: true,
+    tooltip: {
+      wrapperStyle: {
+        backgroundColor: "white",
+        borderColor: "white",
+        boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+        padding: "10px",
+      },
+    },
   },
   data: {
     cols: [
@@ -594,6 +602,59 @@ export const orderHistory = {
     //   qLabel: "Category",
     // },
   ],
+};
+
+export const wristKPI = {
+  chartConfig: {
+    chartType: "line",
+    margin: { top: 0, right: 0, left: 0, bottom: 0 },
+    height: 75,
+    stroke: "#038FDE",
+    dot: { stroke: "#FEA931", strokeWidth: 2 },
+    tooltip: {
+      wrapperStyle: {
+        backgroundColor: "white",
+        borderColor: "white",
+        boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+        padding: "10px",
+      },
+    },
+  },
+  data: {
+    cols: [
+      {
+        qField: "[OrderDateMonth]",
+        qLabel: "Month",
+      },
+      {
+        qField: "=Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)",
+        qLabel: "price",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr:
+          "num(Sum({$<[Body Location]={'Wrist'}>} Quantity*Price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr:
+          "num(Sum({$<[Body Location]={'Wrist'}>} Quantity)/Sum( Quantity),'#,##0%')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr:
+          "if(Sum({$<[Body Location]={'Wrist'}>} Quantity)/Sum( Quantity)>=0,'down','up')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle:
+      "='Wrist Items Sales: '& Num(Count({$<[Body Location]={'Wrist'}>}TransactionItemID),'#,##0') & ' orders'",
+  },
+  icon: "litecoin",
 };
 
 export const ordersByCategory = {
