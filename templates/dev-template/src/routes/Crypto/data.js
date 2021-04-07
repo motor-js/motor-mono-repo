@@ -488,9 +488,15 @@ export const orderHistory = {
   qInterColumnSortOrder: [2, 1, 0],
   cols: [
     {
-      qField: "Company Name",
-      qLabel: "Company Name",
+      qGrouping: "H",
+      qField: ["Country", "City"],
+      // qField: "Country",
+      qLabel: "Country",
     },
+    // {
+    //   qField: "City",
+    //   qLabel: "City",
+    // },
     {
       qField: "=Sum(Quantity)",
       qLabel: "Quantity Sold",
