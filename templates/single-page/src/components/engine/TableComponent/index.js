@@ -68,7 +68,7 @@ const TableComponent = ({ tableConfig }) => {
                 className="gx-table-no-bordered"
                 columns={headerGroup}
                 dataSource={mData}
-                // pagination={{defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}}
+              //pagination={{defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}}
                 pagination={pagination}
                 bordered={false}
                 size="small"

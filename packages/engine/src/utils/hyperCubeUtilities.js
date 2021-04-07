@@ -4,32 +4,67 @@ export function hyperCubeTransform(
   useNumonFirstDim = false,
   cols
 ) {
-  const qNoOfDimensions =
-    qHyperCube !== undefined ? qHyperCube.qDimensionInfo.length : 1;
-  const qNoOfMeasures =
-    qHyperCube !== undefined ? qHyperCube.qMeasureInfo.length : 1;
 
-  const measureNames = getMeasureNames(qHyperCube);
-  const dimensionNames = getDimensionNames(qHyperCube);
+  let dim = [];
+  let meas = [];
 
-  //Filter cols for the measure and dimension names. 
-  const measCols = cols.filter(cols => cols.qLabel ? measureNames.includes(cols.qLabel) : measureNames.includes(cols.qField))
-  const dimCols = cols.filter(cols => cols.qLabel ? dimensionNames.includes(cols.qLabel) : dimensionNames.includes(cols.qField))
+  const getDims = cols => {
+    cols.filter((col, i) => {
+      const isDimension =
+        (typeof col === "object" &&
+          col.qLibraryId &&
+          col.qType &&
+          col.qType === "dimension") ||
+        Array.isArray(col.qField) ||
+        (typeof col === "object" && !col.qField.startsWith("="));
+
+      return isDimension;
+    }).map((col) => {
+      dim.push(col)
+      return col
+    })
+  }
+
+  const getMeas = cols => {
+    cols.filter((col, i) => {
+      const isMeasure =
+        (typeof col === "object" &&
+          col.qLibraryId &&
+          col.qType &&
+          col.qType === "measure") ||
+        (typeof col === "object" &&
+          !Array.isArray(col.qField) &&
+          col.qField.startsWith("="));
+
+      return isMeasure;
+      })
+      .map(col => {
+        meas.push(col)
+        return col
+    })
+  }
+
+  //get dimensions
+  getDims(cols)
+  // get measures
+  getMeas(cols)
+  //concatenate dimensions and measures
+  const orderedCols = dim.concat(meas)
+
+  const qNoOfDimensions = qHyperCube !== undefined ? qHyperCube.qDimensionInfo.length : 1;
 
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
     let dimName;
     let measName;
     d.forEach((item, index) => {
-      // if dataKey exists, set is as the object key name
-      dimName = dimCols[index] && 'dataKey' in dimCols[index] ? dimCols[index].dataKey : dimensionNames[index]
-      measName = measureNames[index - qNoOfDimensions] && 'dataKey' in measCols[index - qNoOfDimensions] ? measCols[index - qNoOfDimensions].dataKey : measureNames[index - qNoOfDimensions]
+      name = orderedCols[index].dataKey
 
       const pair =
         index < qNoOfDimensions
           ? 
           {
-            [dimName]: {
+            [name]: {
               'value': d[index].qText === undefined
                 ? "undefined"
                 : index === 0 && useNumonFirstDim
@@ -41,7 +76,7 @@ export function hyperCubeTransform(
               'columnId': index,
             }
           } : {
-            [measName]: {
+            [name]: {
               'value': cols[index].useFormatting
                 ? d[index].qText
                 : d[index].qNum !== "NaN"
@@ -221,5 +256,5 @@ export const getHeader = (qLayout, cols, data) =>
         })),
       ]
     : [];
-
+    
 export default hyperCubeTransform;
