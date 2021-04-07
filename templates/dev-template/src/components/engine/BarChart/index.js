@@ -14,6 +14,7 @@ import {
 } from "recharts";
 
 import { formatYAxis, formatXAxis } from "../../../util/formatChart";
+import { CustomTooltip } from "../../../util/CustomTooltip";
 
 const MotorBarChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -35,7 +36,7 @@ const MotorBarChart = ({ dataSet, config }) => {
     stacked,
   } = config;
 
-  // const CustomTooltip = ({ active, payload, label }) => {
+  // const customTooltip = ({ active, payload, label }) => {
   //   if (active && payload && payload.length) {
   //     return (
   //       <div className="custom-tooltip">
@@ -49,24 +50,23 @@ const MotorBarChart = ({ dataSet, config }) => {
   //   return null;
   // };
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      // console.log(payload, label, payload[0].payload.key);
-      return (
-        <div className="custom-tooltip">
-          {/*  <div className="recharts-tooltip-wrapper">*/}
-          <span
-            style={{ color: fill[payload[0].payload.key] }}
-            className="label"
-          >{`${payload[0].payload.label} : ${payload[0].value}`}</span>
-          {/* <p className="intro">{getIntroOfPage(label)}</p> */}
-          {/* <p className="desc">Anything you want can be displayed here.</p> */}
-        </div>
-      );
-    }
+  // const CustomTooltip = ({ active, payload, label, fill }) => {
+  //   if (active && payload && payload.length) {
+  //     return (
+  //       <div className="custom-tooltip">
+  //         {/*  <div className="recharts-tooltip-wrapper">*/}
+  //         <span
+  //           style={{ color: fill[payload[0].payload.key] }}
+  //           className="label"
+  //         >{`${payload[0].payload.label} : ${payload[0].value}`}</span>
+  //         {/* <p className="intro">{getIntroOfPage(label)}</p> */}
+  //         {/* <p className="desc">Anything you want can be displayed here.</p> */}
+  //       </div>
+  //     );
+  //   }
 
-    return null;
-  };
+  //   return null;
+  // };
 
   return (
     <ResponsiveContainer width="100%" height={height}>
@@ -111,16 +111,16 @@ const MotorBarChart = ({ dataSet, config }) => {
           // labelFormatter={function (value) {
           //   return `label: ${value}`;
           // }}
-          content={<CustomTooltip />}
+          content={<customTooltip />}
         /> */}
         <Tooltip
-          // wrapperStyle={tooltip && tooltip.wrapperStyle}
-          wrapperStyle={{
-            backgroundColor: "white",
-            borderColor: "white",
-            boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
-            padding: "10px",
-          }}
+          wrapperStyle={tooltip && tooltip.wrapperStyle}
+          // wrapperStyle={{
+          //   backgroundColor: "white",
+          //   borderColor: "white",
+          //   boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+          //   padding: "10px",
+          // }}
           // labelStyle={{ color: "black" }}
           // itemStyle={{ color: "cyan" }}
           // contentStyle={{ color: "yellow" }}
@@ -130,7 +130,7 @@ const MotorBarChart = ({ dataSet, config }) => {
           // labelFormatter={function (value) {
           //   return `label: ${value}`;
           // }}
-          content={<CustomTooltip />}
+          content={tooltip && <CustomTooltip fill={fill} />}
         />
         {showLegend && (
           <Legend
