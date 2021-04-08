@@ -1,3 +1,4 @@
+
 function createDef(
   cols,
   qTitle,
@@ -46,6 +47,7 @@ function createDef(
           col.qLibraryId &&
           col.qType &&
           col.qType === "dimension") ||
+        Array.isArray(col.qField) ||
         (typeof col === "object" && !col.qField.startsWith("="));
 
       if (isDimension && !qInterColumnSortOrderSet) {
@@ -62,13 +64,9 @@ function createDef(
             qFieldDefs: [col],
             qSortCriterias: [
               {
-                qSortByExpression: -1,
-                qExpression: {qv: "Sum(Sales)" }
-              }
-            //  {
-            //    qSortByAscii,
-            //    qSortByLoadOrder,
-            //  },
+                qSortByAscii,
+                qSortByLoadOrder,
+              },
             ],
           },
           qNullSuppression: true,
@@ -79,7 +77,10 @@ function createDef(
       if (typeof col === "object" && !col.qLibraryId) {
         return {
           qDef: {
-            qFieldDefs: [col.qField],
+            qGrouping: col.qGrouping || "N",
+            qFieldDefs: !Array.isArray(col.qField)
+              ? [col.qField]
+              : [...col.qField],
             qFieldLabels: [col.qLabel],
             qSortCriterias: col.qSortCriterias
               ? [col.qSortCriterias]
@@ -173,7 +174,9 @@ function createDef(
           col.qLibraryId &&
           col.qType &&
           col.qType === "measure") ||
-        (typeof col === "object" && col.qField.startsWith("="));
+        (typeof col === "object" &&
+          !Array.isArray(col.qField) &&
+          col.qField.startsWith("="));
       if (isMeasure && !qInterColumnSortOrderSet) {
         myqInterColumnSortOrder[i] = sortIndex;
         sortIndex += 1;

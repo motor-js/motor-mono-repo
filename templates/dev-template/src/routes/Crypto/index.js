@@ -11,6 +11,9 @@ import {
   tableCols,
   BalanceHistory,
   BalanceHistoryMultiDim,
+  wristKPI,
+  bodyLocationKPI,
+  ordersByCategory,
   FitnessKpi,
   pieData,
   orderHistory,
@@ -52,14 +55,15 @@ const Crypto = () => {
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI dataProps={FitnessKpi} />
+          {/* <ChartKPI dataProps={FitnessKpi} /> */}
+          <ChartKPI dataProps={bodyLocationKPI} />
         </Col>
         {/* <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={etheriumKPI} />
-        </Col>
+        </Col>*/}
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI dataProps={rippleKPI} />
-        </Col> */}
+          <ChartKPI dataProps={wristKPI} />
+        </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           <Tabs defaultActiveKey="1" type="card" size={"Default"}>
             <TabPane tab="Multiple Dimensions" key="1">
@@ -73,9 +77,10 @@ const Crypto = () => {
             </TabPane>
           </Tabs>
         </Col>
-        {/* <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          <MotorTable tableConfig={tableCols} />
-        </Col> */}
+        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
+          {/* <MotorTable tableConfig={tableCols} /> */}
+          <Chart dataProps={ordersByCategory} />
+        </Col>
       </Row>
     </Auxiliary>
   );
