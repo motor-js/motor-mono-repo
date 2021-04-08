@@ -13,6 +13,7 @@ const TableComponent = ({ tableConfig }) => {
     useFormatting,
     qPage = {},
     pagination = false,
+    scroll = null,
     qInterColumnSortOrder,
   } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
@@ -48,6 +49,7 @@ const TableComponent = ({ tableConfig }) => {
       {mData ? (
         <Widget
           styleName="gx-order-history"
+          style={{ width: "100%", height: "100px" }}
           title={
             <h2 className="h4 gx-text-capitalize gx-mb-0">{title || qTitle}</h2>
           }
@@ -65,10 +67,10 @@ const TableComponent = ({ tableConfig }) => {
               <div>loading</div>
             ) : (
               <Table
+                scroll={scroll}
                 className="gx-table-no-bordered"
                 columns={headerGroup}
                 dataSource={mData}
-                // pagination={{defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}}
                 pagination={pagination}
                 bordered={false}
                 size="small"

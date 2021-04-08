@@ -2,19 +2,17 @@ import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
 
-// import useSequencer from './useSequencer';
-
 const initialState = {
   qDoc: null,
   qObject: null,
   qData: null,
-  mData: null,
+  listData: null,
   selections: null,
 };
 
 function reducer(state, action) {
   const {
-    payload: { qData, mData, selections, qDoc },
+    payload: { qData, listData, selections, qDoc },
     type,
   } = action;
   switch (type) {
@@ -22,7 +20,7 @@ function reducer(state, action) {
       return {
         ...state,
         qData,
-        mData,
+        listData,
         selections,
       };
     case "init":
@@ -65,7 +63,7 @@ const useList = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { mData, selections } = state;
+  const { listData, selections } = state;
 
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
@@ -129,7 +127,7 @@ const useList = (props) => {
   }, []);
 
   const structureData = useCallback(async () => {
-    if (!mData) {
+    if (!listData) {
       let data = [];
       const qDataPages = await qObject.current.getListObjectData(
         "/qListObjectDef",
@@ -143,11 +141,12 @@ const useList = (props) => {
           key: d[0].qElemNumber,
           text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
           number: d[0].qNumber,
+          state: d[0].qState,
         });
       });
       return data;
     }
-  }, [mData]);
+  }, [listData]);
 
   const getSelections = (data) => {
     const sel = data.qMatrix.filter((row) => row[0].qState === "S");
@@ -163,13 +162,13 @@ const useList = (props) => {
 
   const update = useCallback(async () => {
     const _qData = await getData();
-    const _mData = await structureData();
+    const _listData = await structureData();
     if (_qData && _isMounted.current) {
       const _selections = await getSelections(_qData);
       dispatch({
         type: "update",
         payload: {
-          mData: _mData,
+          listData: _listData,
           selections: _selections,
         },
       });
@@ -177,7 +176,7 @@ const useList = (props) => {
       dispatch({
         type: "update",
         payload: {
-          mData: _mData,
+          listData: _listData,
         },
       });
     }
@@ -257,7 +256,7 @@ const useList = (props) => {
   useEffect(() => () => (_isMounted.current = false), []);
 
   return {
-    mData,
+    listData,
     changePage,
     select,
     beginSelections,

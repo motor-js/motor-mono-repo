@@ -1,10 +1,10 @@
-export function hyperCubeTransform(
+export function hyperCubeChartTransform(
   qData,
   qHyperCube,
   useNumonFirstDim = false,
   cols
 ) {
-  const qNoOfDimensions =
+  const qNoOfDiemnsions =
     qHyperCube !== undefined ? qHyperCube.qDimensionInfo.length : 1;
   const qNoOfMeasures =
     qHyperCube !== undefined ? qHyperCube.qMeasureInfo.length : 1;
@@ -12,40 +12,139 @@ export function hyperCubeTransform(
   const measureNames = getMeasureNames(qHyperCube);
   const dimensionNames = getDimensionNames(qHyperCube);
 
-  //console.log(measureNames)
-  console.log(dimensionNames)
-
-  console.log(cols)
-
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
     d.forEach((item, index) => {
       const pair =
-        index < qNoOfDimensions
-          ? 
-          {
-            [dimensionNames[index]]: {
-              'value': d[index].qText === undefined
-                ? "undefined"
-                : index === 0 && useNumonFirstDim
-                ? d[index].qNum
-                : d[index].qText,
-              'elemNumber': d[index].qElemNumber,
-              'state': d[index].qState,
-              'attrExp': d[index].qAttrExps,
+        index < qNoOfDiemnsions
+          ? {
+              [dimensionNames[index]]:
+                d[index].qText === undefined
+                  ? "undefined"
+                  : index === 0 && useNumonFirstDim
+                  ? d[index].qNum
+                  : d[index].qText,
+              [`elemNumber${index !== 0 ? index : ""}`]: d[index].qElemNumber,
+              key: i,
+              label:
+                d[index].qText === undefined
+                  ? "undefined"
+                  : index === 0 && useNumonFirstDim
+                  ? d[index].qNum
+                  : d[index].qText,
             }
-          } : {
-            [measureNames[index - qNoOfDimensions]]: {
-              'value': cols[index].useFormatting
+          : {
+              [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
                 ? d[index].qText
                 : d[index].qNum !== "NaN"
                 ? d[index].qNum
                 : 0,
-              'state': d[index].qState,
-              'attrExp': d[index].qAttrExps,
-            },
-            key: i,
-          } 
+              key: i,
+            };
+
+      data = { ...data, ...pair };
+    });
+
+    return data;
+  });
+
+  return transformedData;
+}
+
+export function hyperCubeTransform(
+  qData,
+  qHyperCube,
+  useNumonFirstDim = false,
+  cols
+) {
+  let dim = [];
+  let meas = [];
+
+  const getDims = (cols) => {
+    cols
+      .filter((col, i) => {
+        const isDimension =
+          (typeof col === "object" &&
+            col.qLibraryId &&
+            col.qType &&
+            col.qType === "dimension") ||
+          Array.isArray(col.qField) ||
+          (typeof col === "object" && !col.qField.startsWith("="));
+
+        return isDimension;
+      })
+      .map((col) => {
+        dim.push(col);
+        return col;
+      });
+  };
+
+  const getMeas = (cols) => {
+    cols
+      .filter((col, i) => {
+        const isMeasure =
+          (typeof col === "object" &&
+            col.qLibraryId &&
+            col.qType &&
+            col.qType === "measure") ||
+          (typeof col === "object" &&
+            !Array.isArray(col.qField) &&
+            col.qField.startsWith("="));
+
+        return isMeasure;
+      })
+      .map((col) => {
+        meas.push(col);
+        return col;
+      });
+  };
+
+  //get dimensions
+  getDims(cols);
+  // get measures
+  getMeas(cols);
+  //concatenate dimensions and measures
+  const orderedCols = dim.concat(meas);
+
+  const qNoOfDimensions =
+    qHyperCube !== undefined ? qHyperCube.qDimensionInfo.length : 1;
+
+  const transformedData = qData.qMatrix.map((d, i) => {
+    let data = {};
+    let dimName;
+    let measName;
+    d.forEach((item, index) => {
+      const name = orderedCols[index].dataKey;
+
+      const pair =
+        index < qNoOfDimensions
+          ? {
+              [name]: {
+                value:
+                  d[index].qText === undefined
+                    ? "undefined"
+                    : index === 0 && useNumonFirstDim
+                    ? d[index].qNum
+                    : d[index].qText,
+                elemNumber: d[index].qElemNumber,
+                state: d[index].qState,
+                attrExp: d[index].qAttrExps,
+                columnId: index,
+              },
+            }
+          : {
+              [name]: {
+                value: cols[index].useFormatting
+                  ? d[index].qText
+                  : d[index].qNum !== "NaN"
+                  ? d[index].qNum
+                  : 0,
+                state: d[index].qState,
+                attrExp: d[index].qAttrExps,
+                columnId: index,
+              },
+              key: i,
+            };
       data = { ...data, ...pair };
     });
     return data;
@@ -104,9 +203,10 @@ export const getMeasureNames = (qHyperCube) =>
   qHyperCube.qMeasureInfo.map((d, i) => {
     const qMeasurePosition = i !== 0 ? i : "";
 
-    return d.qFallbackTitle.startsWith("=")
+    return d.qFallbackTitle;
+    /*.startsWith("=")
       ? `value${qMeasurePosition}`
-      : d.qFallbackTitle;
+      : d.qFallbackTitle;*/
   });
 
 export const getDimensionNames = (qHyperCube) =>
@@ -129,7 +229,6 @@ export const validData = (qLayout, theme) => {
     ? theme.error
     : theme.global.chart.error;
 
-    
   const DimCheck = () => {
     //check if an array, to work with HyperCube & ListObject
     let _qDimensionInfo = Array.isArray(qDimensionInfo)
@@ -169,7 +268,6 @@ export const validData = (qLayout, theme) => {
   return { isValid, dataError };
 };
 
-
 export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
   let direction;
   switch (sortDirection.toUpperCase()) {
@@ -186,7 +284,7 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
   return direction;
 };
 
-export const getHeader = (qLayout, cols) =>
+export const getHeader = (qLayout, cols, data) =>
   qLayout
     ? [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
@@ -194,6 +292,7 @@ export const getHeader = (qLayout, cols) =>
           dataIndex: col.qFallbackTitle,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,
+          qPath: `/qHyperCubeDef/qDimensions/${index}`,
           qSortIndicator: col.qSortIndicator,
           qReverseSort: col.qReverseSort,
           qGrandTotals: { qText: null, qNum: null },
@@ -204,6 +303,7 @@ export const getHeader = (qLayout, cols) =>
           dataIndex: col.qFallbackTitle,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
+          qPath: `/qHyperCubeDef/qMeasures/${index}`,
           qSortIndicator: col.qSortIndicator,
           qReverseSort: col.qReverseSort,
           qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
@@ -211,15 +311,5 @@ export const getHeader = (qLayout, cols) =>
         })),
       ]
     : [];
-
-//Change order of header groups
-export const getOrder = (headerGroup, qColumnOrder) => {
-  const orderedHeader = headerGroup.sort(
-    (a, b) =>
-      qColumnOrder.indexOf(a.qInterColumnIndex) -
-      qColumnOrder.indexOf(b.qInterColumnIndex)
-  );
-  return orderedHeader;
-};
 
 export default hyperCubeTransform;
