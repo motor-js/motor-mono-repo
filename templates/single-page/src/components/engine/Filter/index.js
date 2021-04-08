@@ -7,7 +7,7 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
   const [selected, setSelected] = useState();
 
   const {
-    mData,
+    listData,
     select,
     selections,
     beginSelections,
@@ -21,8 +21,8 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
 
   useEffect(() => {
     let child = [];
-    mData &&
-      mData.map((d, i) =>
+    listData &&
+    listData.map((d, i) =>
         child.push(
           <Option key={d.key} value={d.key}>
             {d.text}
@@ -32,7 +32,7 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
     setChildren(child);
     if (!selections) return;
     setSelected(selections);
-  }, [mData, selections]);
+  }, [listData, selections]);
 
   async function handleChange(v) {
     console.log("CALLED");

@@ -5,7 +5,9 @@ import Widget from "components/Widget";
 import { useJsonToCsv } from "react-json-csv";
 
 const TableComponent = ({ tableConfig }) => {
+  
   const [loading, setLoading] = useState(true);
+
   const {
     qTitle,
     imageRender,
@@ -17,7 +19,7 @@ const TableComponent = ({ tableConfig }) => {
     qInterColumnSortOrder,
   } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
-  const { title, mData, headerGroup } = useTable({
+  const { title, dataSet, headerGroup } = useTable({
     cols,
     useFormatting,
     qPage,
@@ -27,14 +29,14 @@ const TableComponent = ({ tableConfig }) => {
   });
 
   useEffect(() => {
-    mData && setLoading(false);
-  }, [mData]);
+    dataSet && setLoading(false);
+  }, [dataSet]);
 
   const exportData = () => {
     //File name of the export
     const filename = "Data";
     //Data to be exported
-    const data = mData;
+    const data = dataSet;
     // List fields here for extract
     const fields = {
       Name: "Name",
@@ -46,7 +48,7 @@ const TableComponent = ({ tableConfig }) => {
 
   return (
     <>
-      {mData ? (
+      {dataSet ? (
         <Widget
           styleName="gx-order-history"
           style={{ width: "100%", height: "100px" }}
@@ -63,19 +65,19 @@ const TableComponent = ({ tableConfig }) => {
           }
         >
           <div className="gx-table-responsive">
-            {loading ? (
+          {/* {loading ? (
               <div>loading</div>
-            ) : (
+            ) : ({
               <Table
                 scroll={scroll}
                 className="gx-table-no-bordered"
                 columns={headerGroup}
-                dataSource={mData}
+                dataSource={dataSet}
                 pagination={pagination}
                 bordered={false}
                 size="small"
               />
-            )}
+            )*/}
           </div>
         </Widget>
       ) : (
