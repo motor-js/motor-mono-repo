@@ -30,6 +30,9 @@ const TableComponent = ({ tableConfig }) => {
 
   useEffect(() => {
     dataSet && setLoading(false);
+    console.log(dataSet)
+
+    //map through data set to get the value -> pass it into AntDesign
   }, [dataSet]);
 
   const exportData = () => {

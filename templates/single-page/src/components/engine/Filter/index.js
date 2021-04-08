@@ -35,7 +35,6 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
   }, [listData, selections]);
 
   async function handleChange(v) {
-    console.log("CALLED");
     await beginSelections();
     const newSel = await v.filter((el) => !selections.includes(el));
     await select(newSel);
@@ -69,7 +68,6 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
     >
       {children}
     </Select>
-    // </Widget>
   );
 };
 

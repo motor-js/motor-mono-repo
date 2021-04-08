@@ -5,6 +5,7 @@ import createDef from "../utils/createHCDef";
 import {
   getHeader,
   hyperCubeTransform,
+  hyperCubeChartTransform
 } from "../utils/hyperCubeUtilities";
 
 const initialState = {

@@ -111,40 +111,20 @@ export function hyperCubeTransform(
 
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
-    let dimName;
-    let measName;
     d.forEach((item, index) => {
       const name = orderedCols[index].dataKey;
-
-      const pair =
-        index < qNoOfDimensions
-          ? {
-              [name]: {
-                value:
-                  d[index].qText === undefined
-                    ? "undefined"
-                    : index === 0 && useNumonFirstDim
-                    ? d[index].qNum
-                    : d[index].qText,
-                elemNumber: d[index].qElemNumber,
-                state: d[index].qState,
-                attrExp: d[index].qAttrExps,
-                columnId: index,
-              },
-            }
-          : {
-              [name]: {
-                value: cols[index].useFormatting
-                  ? d[index].qText
-                  : d[index].qNum !== "NaN"
-                  ? d[index].qNum
-                  : 0,
-                state: d[index].qState,
-                attrExp: d[index].qAttrExps,
-                columnId: index,
-              },
-              key: i,
-            };
+      const pair = {
+        [name]: 
+          {
+            text: d[index].qText,
+            number: d[index].qNum,
+            elemNumber: d[index].qElemNumber,
+            state: d[index].qState,
+            attrExp: d[index].qAttrExps,
+            columnId: index,
+          },
+        key: i,
+      };
       data = { ...data, ...pair };
     });
     return data;
