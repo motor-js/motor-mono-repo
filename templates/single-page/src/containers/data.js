@@ -601,7 +601,6 @@ export const tableCols = {
   scroll: { y: 284 },
   cols: [
     {
-      dataKey: "img",
       qField: "_Image",
       qLabel: "image",
       render: (text, data) => {
@@ -613,21 +612,28 @@ export const tableCols = {
       },
     },
     {
-      dataKey: "name",
+      dataKey: "Name",
       qField: "Name",
       qLabel: "Name",
     },
     {
-      dataKey: "country",
+      dataKey: "Country",
       qField: "Country",
       qLabel: "Country",
     },
     {
-      dataKey: "category",
+      dataKey: "Category",
       qField: "Category",
       qLabel: "Category",
     },
   ],
+  exportFields: {
+    Image: "img",
+    Name: "Name",
+    Country: "Country",
+    Category: "Category",
+  },
+  exportFilename: 'Order History'
 };
 
 export const orderHistory = {

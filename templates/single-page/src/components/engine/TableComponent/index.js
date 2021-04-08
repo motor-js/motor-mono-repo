@@ -3,10 +3,12 @@ import { Table, Skeleton, Card, PageHeader, Select, Radio } from "antd";
 import { useTable } from "@motor-js/engine";
 import Widget from "components/Widget";
 import { useJsonToCsv } from "react-json-csv";
+import { flattenData } from "util/dataHelpers"
 
 const TableComponent = ({ tableConfig }) => {
   
   const [loading, setLoading] = useState(true);
+  const [tableData, setTableData] = useState(null)
 
   const {
     qTitle,
@@ -17,6 +19,8 @@ const TableComponent = ({ tableConfig }) => {
     pagination = false,
     scroll = null,
     qInterColumnSortOrder,
+    exportFilename,
+    exportFields
   } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
   const { title, dataSet, headerGroup } = useTable({
@@ -29,29 +33,27 @@ const TableComponent = ({ tableConfig }) => {
   });
 
   useEffect(() => {
+    const data = dataSet && flattenData(dataSet)
     dataSet && setLoading(false);
-    console.log(dataSet)
-
-    //map through data set to get the value -> pass it into AntDesign
+    setTableData(data)
   }, [dataSet]);
+
+  console.log(tableData)
+  console.log(headerGroup)
 
   const exportData = () => {
     //File name of the export
-    const filename = "Data";
+    const filename = exportFilename;
     //Data to be exported
-    const data = dataSet;
+    const data = tableData;
     // List fields here for extract
-    const fields = {
-      Name: "Name",
-      Country: "Country",
-      Category: "Category",
-    };
+    const fields = exportFields;
     saveAsCsv({ data, fields, filename });
   };
 
   return (
     <>
-      {dataSet ? (
+      {tableData ? (
         <Widget
           styleName="gx-order-history"
           style={{ width: "100%", height: "100px" }}
@@ -68,19 +70,19 @@ const TableComponent = ({ tableConfig }) => {
           }
         >
           <div className="gx-table-responsive">
-          {/* {loading ? (
+          {loading ? (
               <div>loading</div>
-            ) : ({
+            ) : (
               <Table
                 scroll={scroll}
                 className="gx-table-no-bordered"
                 columns={headerGroup}
-                dataSource={dataSet}
+                dataSource={tableData}
                 pagination={pagination}
                 bordered={false}
                 size="small"
               />
-            )*/}
+            )}
           </div>
         </Widget>
       ) : (
