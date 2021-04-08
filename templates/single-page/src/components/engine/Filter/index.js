@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
 import { useList } from "@motor-js/engine";
-import Widget from "components/Widget";
 
 const Filter = ({ dimension, maxTagCount = 10 }) => {
   const [children, setChildren] = useState([]);
@@ -17,8 +16,6 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
   } = useList({
     dimension,
   });
-
-  // console.log(selections)
 
   const { Option } = Select;
 
