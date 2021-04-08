@@ -12,11 +12,6 @@ export function hyperCubeTransform(
   const measureNames = getMeasureNames(qHyperCube);
   const dimensionNames = getDimensionNames(qHyperCube);
 
-  //console.log(measureNames)
-  console.log(dimensionNames)
-
-  console.log(cols)
-
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
     d.forEach((item, index) => {
