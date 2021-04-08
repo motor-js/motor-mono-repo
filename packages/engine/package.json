@@ -10,7 +10,8 @@
     "lib"
   ],
   "peerDependencies": {
-    "react": "^17.0.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "scripts": {
     "start": "microbundle --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx",
