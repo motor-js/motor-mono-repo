@@ -10,6 +10,7 @@ import {
   XAxis,
   YAxis,
   Label,
+  Tick
 } from "recharts";
 
 import {
@@ -44,6 +45,7 @@ const MotorLineChart = ({ dataSet, config }) => {
           <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
             {xAxisLabel && (
               <Label
+                className="gx-recharts-label"
                 value={xAxisLabel.value}
                 offset={xAxisLabel.offset}
                 position={xAxisLabel.position}
@@ -55,6 +57,7 @@ const MotorLineChart = ({ dataSet, config }) => {
           <YAxis tickFormatter={formatYAxis}>
             {yAxisLabel && (
               <Label
+                className="gx-recharts-label"
                 value={yAxisLabel.value}
                 angle={yAxisLabel.angle}
                 offset={yAxisLabel.offset}

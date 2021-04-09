@@ -12,16 +12,21 @@
 
 /*Base Styles*/
 body.dark-theme {
+
   &.framed-layout,
   &.boxed-layout {
     background-color: darken(@dark-theme-primary-color, 10%);
   }
 }
 
-
 .dark-theme {
   color: @dark-theme-text-color;
   background-color: @dark-theme-primary-color;
+
+  /*  Charts Styling */
+  .@{class-prefix}-recharts-label {
+    fill: @dark-theme-text-color
+  }
 
   .ant-input-search {
     color: @dark-theme-text-color;

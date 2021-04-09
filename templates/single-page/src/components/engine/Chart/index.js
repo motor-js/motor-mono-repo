@@ -60,14 +60,11 @@ const ChartComponent = ({ dataProps }) => {
   return (
     <>
       {dataSet.data ? (
-        <Widget styleName="gx-card-full">
-          {(title || subTitle) && (
-            <PageHeader
-              className="site-page-header"
-              title={title}
-              subTitle={subTitle}
-            />
-          )}
+        <Widget 
+          styleName="gx-card-full"
+          title={
+            <h2 className="h4 gx-text-capitalize gx-mb-0">{title || qTitle}</h2>
+          }>
           <div className="ant-row-flex gx-px-4 gx-pt-4">
             <div className="gx-ml-auto">
               {buttons && (
