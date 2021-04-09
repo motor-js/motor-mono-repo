@@ -5,7 +5,8 @@ import createDef from "../utils/createHCDef";
 import {
   getHeader,
   hyperCubeTransform,
-  hyperCubeChartTransform
+  hyperCubeChartTransform,
+  orderCols
 } from "../utils/hyperCubeUtilities";
 
 const initialState = {
@@ -270,7 +271,7 @@ const useTable = (props) => {
     []
   );
 
-  const structureData = useCallback(async (layout, data) => {
+  const structureData = useCallback(async (layout, data, cols) => {
     let useNumonFirstDim;
     const dataSet = hyperCubeTransform(
         data,
@@ -287,8 +288,10 @@ const useTable = (props) => {
       const _qLayout = await getLayout();
       const _qTitle = await getTitle(_qLayout);
       const _qData = await getData();
-      const _dataSet =  _qData && await structureData(_qLayout, _qData);
-      const _headerGroup = _qData && await getHeader(_qLayout, cols );
+      // Order colunns for dataKey
+      const _orderedCols = await orderCols(cols)
+      const _dataSet =  _qData && await structureData(_qLayout, _qData, _orderedCols);
+      const _headerGroup = _qData && await getHeader(_qLayout, _orderedCols );
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(
           (row) => row[0].qState === "S"

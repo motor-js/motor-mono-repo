@@ -125,6 +125,7 @@ function createDef(
         };
       }
       if (typeof col === "object" && col.qLibraryId) {
+        console.log('called!')
         return {
           qLibraryId: col.qLibraryId,
           qType: col.qType,
