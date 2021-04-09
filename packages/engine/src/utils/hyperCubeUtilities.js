@@ -57,9 +57,7 @@ export function hyperCubeTransform(
   useNumonFirstDim = false,
   cols
 ) {
-  console.log('cols: ', cols)
   const transformedData = qData.qMatrix.map((d, i) => {
-    console.log(d)
     let data = {};
     d.forEach((item, index) => {
       const name = cols[index].dataKey;
