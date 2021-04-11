@@ -532,6 +532,7 @@ export const pieDataDonut = {
       iconType: "circle",
       layout: "horizontal",
     },
+    tooltip,
   },
   data: {
     qPage: {
