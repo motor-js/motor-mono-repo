@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
   Label,
-  Tick
+  Tick,
 } from "recharts";
 
 import {
@@ -18,6 +18,8 @@ import {
   formatXAxis,
   tooltipNumFormat,
 } from "../../../util/formatChart";
+
+import { CustomTooltip } from "../../../util";
 
 const MotorLineChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -34,6 +36,7 @@ const MotorLineChart = ({ dataSet, config }) => {
     yAxisLabel,
     showGrid = true,
     showLegend = true,
+    tooltip = null,
     legendProps,
     isAnimationActive = true,
   } = config;
@@ -67,7 +70,10 @@ const MotorLineChart = ({ dataSet, config }) => {
           </YAxis>
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
-        <Tooltip />
+        <Tooltip
+          wrapperStyle={tooltip && tooltip.wrapperStyle}
+          content={tooltip && <CustomTooltip fill={stroke} />}
+        />
         {showLegend && (
           <Legend
             iconSize={legendProps.iconSize}

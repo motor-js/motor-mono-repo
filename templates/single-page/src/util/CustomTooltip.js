@@ -1,4 +1,6 @@
-export const CustomTooltip = ({ active, payload, label, fill }) => {
+import { tooltipNumFormat } from "./formatChart";
+
+const CustomTooltip = ({ active, payload, label, fill }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
@@ -6,7 +8,9 @@ export const CustomTooltip = ({ active, payload, label, fill }) => {
         <span
           style={{ color: fill[payload[0].payload.key] }}
           className="label"
-        >{`${payload[0].payload.label} : ${payload[0].value}`}</span>
+        >{`${payload[0].payload.label} : ${tooltipNumFormat(
+          payload[0].value
+        )}`}</span>
         {/* <p className="intro">{getIntroOfPage(label)}</p> */}
         {/* <p className="desc">Anything you want can be displayed here.</p> */}
       </div>
@@ -15,3 +19,5 @@ export const CustomTooltip = ({ active, payload, label, fill }) => {
 
   return null;
 };
+
+export default CustomTooltip;
