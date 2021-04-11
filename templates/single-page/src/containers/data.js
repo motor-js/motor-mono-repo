@@ -410,8 +410,8 @@ export const orderAnalysis = {
     xAxisDataKey: "Order Date",
     type: "monotone",
     strokeWidth: 0,
-    stroke: "#003366",
-    fill: colourPalette,
+    // stroke: "#003366",
+    stroke: colourPalette,
     // stacked: true,
     fillOpacity: 1,
     // buttons: [

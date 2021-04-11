@@ -91,7 +91,7 @@ const MotorLineChart = ({ dataSet, config }) => {
               formatter={tooltipNumFormat}
               key={index}
               dataKey={key}
-              stroke={stroke}
+              stroke={typeof stroke === "string" ? stroke : stroke[index]}
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
