@@ -97,7 +97,11 @@ const MotorLineChart = ({ dataSet, config }) => {
               }
               dot={{
                 // os use mesaureInfo
-                stroke: dot ? dot.stroke : null,
+                stroke: dot
+                  ? typeof dot.stroke === "string"
+                    ? dot.stroke
+                    : dot.stroke[index]
+                  : null,
                 strokeWidth: dot ? dot.strokeWidth : null,
               }}
             />
