@@ -8,7 +8,6 @@ import { qlikConfig, appSettings } from "settings";
 import Store from "store";
 
 ReactDOM.render(
-
   <Motor 
     config={qlikConfig}
     logo={appSettings.logo}

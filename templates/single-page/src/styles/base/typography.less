@@ -19,30 +19,6 @@ h6,
 h1,
 .h1 {
   font-size: @h1-font-size;
-
-  .framed-layout & {
-    font-size: @h2-font-size;
-
-    @media screen and (max-width: @screen-sm-max) {
-      font-size: @h3-font-size;
-    }
-  }
-
-  .boxed-layout & {
-    font-size: @h3-font-size;
-
-    @media screen and (max-width: @screen-sm-max) {
-      font-size: @h4-font-size;
-    }
-  }
-
-  @media screen and (min-width: @screen-xxl-min) {
-    font-size: @h1-font-size + 6px;
-
-    .boxed-layout & {
-      font-size: @h3-font-size;
-    }
-  }
 }
 
 h2,

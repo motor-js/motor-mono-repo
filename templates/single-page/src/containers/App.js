@@ -48,18 +48,17 @@ const App = () => {
         <Content className={`gx-layout-content gx-container-wrap`}>
           <div className="gx-main-content-wrapper">
             <Row>
-              <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+              <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                 <ChartKPI dataProps={FitnessKpi} />
               </Col>
-              <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-                <ChartKPI dataProps={garminKPI} />
-              </Col>
-              <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+              <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                 <ChartKPI dataProps={bodyLocationKPI} />
               </Col>
-              <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+              <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                 <ChartKPI dataProps={wristKPI} />
               </Col>
+              </Row>
+            <Row>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                 <Chart dataProps={ordersByCategory} />
               </Col>
@@ -75,10 +74,7 @@ const App = () => {
               </Col>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                 <Widget>
-                  <Filter
-                    dimension={["Body Location"]}
-                    // style={{ width: "50%" }}
-                  />
+                  <Filter dimension={["Body Location"]} />
                 </Widget>
               </Col>
             </Row>

@@ -10,15 +10,6 @@
 @dark-theme-sidebar-dark-hover-color: @dark-theme-component-background;
 @dark-theme-border-color: #495762;
 
-/*Base Styles*/
-body.dark-theme {
-
-  &.framed-layout,
-  &.boxed-layout {
-    background-color: darken(@dark-theme-primary-color, 10%);
-  }
-}
-
 .dark-theme {
   color: @dark-theme-text-color;
   background-color: @dark-theme-primary-color;
@@ -754,9 +745,6 @@ body.dark-theme {
     background-color: @dark-theme-component-background;
   }
 
-  & .@{class-prefix}-card-overview {
-    background-color: @dark-theme-component-background;
-  }
 
   & .@{class-prefix}-card-metrics,
   & .@{class-prefix}-card-widget {

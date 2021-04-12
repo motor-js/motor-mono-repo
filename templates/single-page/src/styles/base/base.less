@@ -5,49 +5,10 @@ body {
   width: 100% !important;
   position: relative;
   font-weight: @font-weight-normal;
-
-  &.framed-layout {
-    padding: @framed-layout-base;
-    background-color: @primary-color;
-
-    @media screen and (max-width: @screen-md-max) {
-      padding: 0;
-    }
-  }
-
-  &.boxed-layout {
-    background-color: @primary-color;
-    max-width: @screen-xl-min + 80px;
-    margin: 0 auto;
-    .box-shadow(@gx-card-shadow);
-
-    @media screen and (min-width: @screen-xxl-min) {
-      max-width: @screen-xl-min + 300px;
-    }
-  }
-
-  &.full-scroll {
-    & #root {
-      overflow: auto;
-    }
-  }
 }
 
 #root {
   height: 100vh;
-
-  .framed-layout & {
-    height: calc(100vh~ "-" 2 * @framed-layout-base);
-    overflow: hidden;
-    .box-shadow(@gx-card-shadow);
-    .border-radius(12px);
-
-    @media screen and (max-width: @screen-md-max) {
-      height: 100vh;
-      .box-shadow(none) !important;
-      .border-radius(0) !important;
-    }
-  }
 }
 
 .@{class-prefix}-pointer,
@@ -552,16 +513,6 @@ img {
   }
 }
 
-/*Media Object Classes*/
-.@{class-prefix}-media {
-  .flex-display(flex, row, wrap);
-  .align-items(flex-start);
-
-  &-body {
-    .flex-only(1);
-  }
-}
-
 /*Overflow styles*/
 .@{class-prefix}-overflow-auto {
   overflow: auto;
@@ -712,14 +663,6 @@ hr {
   }
 }
 
-.@{class-prefix}-object-cover {
-  object-fit: cover;
-}
-
-.cke_editable,
-.cke_editor_editor2 {
-  font-family: @font-family !important;
-}
 
 .@{class-prefix}-top2 {
   position: relative;
