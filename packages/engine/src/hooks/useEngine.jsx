@@ -101,7 +101,6 @@ function useEngine(config, capabilityAPI) {
         });
         const _global = await session.open();
         const _doc = await _global.openDoc(config.appId);
-        console.log('_doc: ',_doc)
         //const _app =  await getCapabilityAPIs(config)
         //setApp(_app)
         setEngine(_doc);
