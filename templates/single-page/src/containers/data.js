@@ -421,6 +421,7 @@ export const orderAnalysis = {
     //   { type: "dimension", label: "Name", value: "[name]" },
     //   { type: "dimension", label: "Price", value: "price" },
     // ],
+    tooltip,
   },
   data: {
     // qDimField: "[coin]",

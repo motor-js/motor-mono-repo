@@ -62,17 +62,16 @@ export function hyperCubeTransform(
     d.forEach((item, index) => {
       const name = cols[index].dataKey;
       const pair = {
-        [name]:
-          {
-            text: d[index].qText,
-            number: d[index].qNum,
-            elemNumber: d[index].qElemNumber,
-            state: d[index].qState,
-            attrExp: d[index].qAttrExps,
-            columnId: index,
-          },
+        [name]: {
+          text: d[index].qText,
+          number: d[index].qNum,
+          elemNumber: d[index].qElemNumber,
+          state: d[index].qState,
+          attrExp: d[index].qAttrExps,
+          columnId: index,
+        },
         key: i,
-      }
+      };
       data = { ...data, ...pair };
     });
     return data;
@@ -213,9 +212,8 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
 };
 
 export const orderCols = (cols) => {
-
-  let dim = []
-  let meas = []
+  let dim = [];
+  let meas = [];
 
   const getDims = (cols) => {
     cols
@@ -263,18 +261,17 @@ export const orderCols = (cols) => {
   //concatenate dimensions and measures
   const orderedCols = dim.concat(meas);
 
-  return orderedCols
-}
+  return orderedCols;
+};
 
-
-export const getHeader = (qLayout, cols, data) => 
+export const getHeader = (qLayout, cols, data) =>
   qLayout
-    ? 
-    [
+    ? [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
           title: col.qFallbackTitle,
           dataIndex: col.qFallbackTitle,
           dataKey: cols[index].dataKey,
+          render: cols[index].render,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,
           qPath: `/qHyperCubeDef/qDimensions/${index}`,
@@ -292,6 +289,7 @@ export const getHeader = (qLayout, cols, data) =>
           qSortIndicator: col.qSortIndicator,
           qReverseSort: col.qReverseSort,
           qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
+          render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
           qColumnType: "meas",
         })),
       ]

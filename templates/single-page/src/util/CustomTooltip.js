@@ -2,6 +2,10 @@ import { tooltipNumFormat, tooltipValueFormat } from "./formatChart";
 
 const CustomTooltip = ({ active, payload, label, fill }) => {
   if (active && payload && payload.length) {
+    console.log("payload", payload.length, payload);
+
+    if (payload.length !== 1) return null;
+
     return (
       <div className="custom-tooltip">
         {/*  <div className="recharts-tooltip-wrapper">*/}

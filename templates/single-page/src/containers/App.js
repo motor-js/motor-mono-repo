@@ -98,8 +98,8 @@ const App = () => {
                 <TableComponent tableConfig={tableCols} />
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
-                <Callout />
-               {/*} <TableComponent tableConfig={orderHistory} /> */}
+                {/* <Callout /> */}
+                <TableComponent tableConfig={orderHistory} />
               </Col>
             </Row>
           </div>
