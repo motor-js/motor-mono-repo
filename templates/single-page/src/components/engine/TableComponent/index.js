@@ -34,7 +34,6 @@ const TableComponent = ({ tableConfig }) => {
 
   useEffect(() => {
     const data = dataSet && flattenData(dataSet)
-    console.log(data)
     dataSet && setLoading(false);
     setTableData(data)
   }, [dataSet]);
@@ -48,8 +47,6 @@ const TableComponent = ({ tableConfig }) => {
     const fields = exportFields;
     saveAsCsv({ data, fields, filename });
   };
-
-  console.log(headerGroup)
 
   return (
     <>
