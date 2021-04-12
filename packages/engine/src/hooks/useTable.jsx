@@ -291,7 +291,7 @@ const useTable = (props) => {
       // Order colunns for dataKey
       const _orderedCols = await orderCols(cols)
       const _dataSet =  _qData && await structureData(_qLayout, _qData, _orderedCols);
-      const _headerGroup = _qData && await getHeader(_qLayout, _orderedCols );
+      const _headerGroup = _qData && await getHeader(_qLayout, _orderedCols);
       if (_qData && _isMounted.current) {
         const _selections = _qData.qMatrix.filter(
           (row) => row[0].qState === "S"
