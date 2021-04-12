@@ -441,6 +441,79 @@ export const BalanceHistoryMultiDim = {
   },
 };
 
+const tooltip = {
+  wrapperStyle: {
+    backgroundColor: "white",
+    borderColor: "white",
+    boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+    padding: "10px",
+  },
+};
+
+export const orderAnalysis = {
+  chartConfig: {
+    chartType: "line",
+    margin: { top: 10, right: 40, left: 35, bottom: 20 },
+    // dot: { stroke: "#FEA931", strokeWidth: 2 },
+    dot: { stroke: colourPalette, strokeWidth: 10 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    showLegend: false,
+    xAxisLabel: {
+      value: "Month of Sale",
+      offset: -10,
+      position: "insideBottom",
+    },
+    yAxisLabel: {
+      value: "Pages",
+      angle: -90,
+      offset: -20,
+      position: "insideLeft",
+    },
+    height: 220,
+    isAnimationActive: true,
+    xAxisDataKey: "Order Date",
+    type: "monotone",
+    strokeWidth: 0,
+    // stroke: "#003366",
+    stroke: colourPalette,
+    // stacked: true,
+    fillOpacity: 1,
+    // buttons: [
+    //   { type: "measure", label: "Sum", value: "=Sum(price)" },
+    //   { type: "measure", label: "Count", value: "=count(price)" },
+    //   { type: "dimension", label: "Name", value: "[name]" },
+    //   { type: "dimension", label: "Price", value: "price" },
+    // ],
+    tooltip,
+  },
+  data: {
+    // qDimField: "[coin]",
+    qLists: [{ dataKey: "[Country]" }],
+    cols: [
+      {
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
+      },
+      {
+        qField: "[Country",
+        qLabel: "Body Location",
+      },
+      {
+        qField: "=Sum(Price*Quantity)",
+        qLabel: "price",
+        qFillStyle: "orange",
+      },
+    ],
+
+    qTitle:
+      // "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+      "Monthly Sales by Country",
+    // qSubTitle: "test",
+  },
+};
+
 export const pieData = {
   chartConfig: {
     chartType: "pie",

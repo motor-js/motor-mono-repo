@@ -11,6 +11,7 @@ import {
   tableCols,
   BalanceHistory,
   BalanceHistoryMultiDim,
+  orderAnalysis,
   wristKPI,
   bodyLocationKPI,
   ordersByCategory,
@@ -79,7 +80,8 @@ const Crypto = () => {
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
           {/* <MotorTable tableConfig={tableCols} /> */}
-          <Chart dataProps={ordersByCategory} />
+          {/* <Chart dataProps={ordersByCategory} /> */}
+          <Chart dataProps={orderAnalysis} />
         </Col>
       </Row>
     </Auxiliary>

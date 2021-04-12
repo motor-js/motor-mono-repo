@@ -34,7 +34,6 @@ const TableComponent = ({ tableConfig }) => {
   useEffect(() => {
     const data = dataSet && flattenData(dataSet);
     dataSet && setLoading(false);
-    console.log(dataSet);
     setTableData(data);
   }, [dataSet]);
 

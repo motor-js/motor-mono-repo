@@ -14,7 +14,7 @@ import {
 } from "recharts";
 
 import { formatYAxis, formatXAxis } from "../../../util/formatChart";
-import { CustomTooltip } from "../../../util/CustomTooltip";
+import { CustomTooltip } from "../../../util";
 
 const MotorBarChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -36,38 +36,6 @@ const MotorBarChart = ({ dataSet, config }) => {
     stacked,
   } = config;
 
-  // const customTooltip = ({ active, payload, label }) => {
-  //   if (active && payload && payload.length) {
-  //     return (
-  //       <div className="custom-tooltip">
-  //         <p className="label">{`${label} : ${payload[0].value}`}</p>
-  //         {/* <p className="intro">{getIntroOfPage(label)}</p>
-  //         <p className="desc">Anything you want can be displayed here.</p> */}
-  //       </div>
-  //     );
-  //   }
-
-  //   return null;
-  // };
-
-  // const CustomTooltip = ({ active, payload, label, fill }) => {
-  //   if (active && payload && payload.length) {
-  //     return (
-  //       <div className="custom-tooltip">
-  //         {/*  <div className="recharts-tooltip-wrapper">*/}
-  //         <span
-  //           style={{ color: fill[payload[0].payload.key] }}
-  //           className="label"
-  //         >{`${payload[0].payload.label} : ${payload[0].value}`}</span>
-  //         {/* <p className="intro">{getIntroOfPage(label)}</p> */}
-  //         {/* <p className="desc">Anything you want can be displayed here.</p> */}
-  //       </div>
-  //     );
-  //   }
-
-  //   return null;
-  // };
-
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={margin}>
@@ -75,6 +43,7 @@ const MotorBarChart = ({ dataSet, config }) => {
           <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
             {xAxisLabel && (
               <Label
+                className="gx-recharts-label"
                 value={xAxisLabel.value}
                 offset={xAxisLabel.offset}
                 position={xAxisLabel.position}
@@ -86,6 +55,7 @@ const MotorBarChart = ({ dataSet, config }) => {
           <YAxis tickFormatter={formatYAxis}>
             {yAxisLabel && (
               <Label
+                className="gx-recharts-label"
                 value={yAxisLabel.value}
                 angle={yAxisLabel.angle}
                 offset={yAxisLabel.offset}
@@ -95,41 +65,9 @@ const MotorBarChart = ({ dataSet, config }) => {
           </YAxis>
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
-        {/* <Tooltip
-          wrapperStyle={{
-            backgroundColor: "white",
-            borderColor: "white",
-            boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
-            padding: "10px",
-          }}
-          // labelStyle={{ color: "black" }}
-          // itemStyle={{ color: "cyan" }}
-          // contentStyle={{ color: "yellow" }}
-          // formatter={function (value, name) {
-          //   return `${value}`;
-          // }}
-          // labelFormatter={function (value) {
-          //   return `label: ${value}`;
-          // }}
-          content={<customTooltip />}
-        /> */}
+
         <Tooltip
           wrapperStyle={tooltip && tooltip.wrapperStyle}
-          // wrapperStyle={{
-          //   backgroundColor: "white",
-          //   borderColor: "white",
-          //   boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
-          //   padding: "10px",
-          // }}
-          // labelStyle={{ color: "black" }}
-          // itemStyle={{ color: "cyan" }}
-          // contentStyle={{ color: "yellow" }}
-          // formatter={function (value, name) {
-          //   return `${value}`;
-          // }}
-          // labelFormatter={function (value) {
-          //   return `label: ${value}`;
-          // }}
           content={tooltip && <CustomTooltip fill={fill} />}
         />
         {showLegend && (

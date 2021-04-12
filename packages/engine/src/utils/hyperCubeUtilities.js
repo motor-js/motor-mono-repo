@@ -119,6 +119,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
       series["qElemNumber"] = d[0].qElemNumber;
       series[key] = value;
       series[`${key}-qElemNumber`] = qElemNumber;
+      series["label"] = d[0].qText;
     }
     parentText = d[0].qText;
   });

@@ -10,6 +10,7 @@ import {
   XAxis,
   YAxis,
   Label,
+  Tick,
 } from "recharts";
 
 import {
@@ -18,7 +19,7 @@ import {
   tooltipNumFormat,
 } from "../../../util/formatChart";
 
-import { CustomTooltip } from "../../../util/CustomTooltip";
+import { CustomTooltip } from "../../../util";
 
 const MotorLineChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -33,9 +34,9 @@ const MotorLineChart = ({ dataSet, config }) => {
     ShowYAxis = true,
     xAxisLabel,
     yAxisLabel,
-    tooltip = null,
     showGrid = true,
     showLegend = true,
+    tooltip = null,
     legendProps,
     isAnimationActive = true,
   } = config;
@@ -47,6 +48,7 @@ const MotorLineChart = ({ dataSet, config }) => {
           <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
             {xAxisLabel && (
               <Label
+                className="gx-recharts-label"
                 value={xAxisLabel.value}
                 offset={xAxisLabel.offset}
                 position={xAxisLabel.position}
@@ -58,6 +60,7 @@ const MotorLineChart = ({ dataSet, config }) => {
           <YAxis tickFormatter={formatYAxis}>
             {yAxisLabel && (
               <Label
+                className="gx-recharts-label"
                 value={yAxisLabel.value}
                 angle={yAxisLabel.angle}
                 offset={yAxisLabel.offset}
@@ -88,13 +91,17 @@ const MotorLineChart = ({ dataSet, config }) => {
               formatter={tooltipNumFormat}
               key={index}
               dataKey={key}
-              stroke={stroke}
+              stroke={typeof stroke === "string" ? stroke : stroke[index]}
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
               dot={{
                 // os use mesaureInfo
-                stroke: dot ? dot.stroke : null,
+                stroke: dot
+                  ? typeof dot.stroke === "string"
+                    ? dot.stroke
+                    : dot.stroke[index]
+                  : null,
                 strokeWidth: dot ? dot.strokeWidth : null,
               }}
             />
