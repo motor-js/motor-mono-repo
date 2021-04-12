@@ -273,7 +273,7 @@ export const getHeader = (qLayout, cols, data) =>
     [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
           title: col.qFallbackTitle,
-          dataIndex: col.qFallbackTitle,
+          dataIndex: cols[index].dataKey,
           dataKey: cols[index].dataKey,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,
@@ -285,7 +285,8 @@ export const getHeader = (qLayout, cols, data) =>
         })),
         ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
           title: col.qFallbackTitle,
-          dataIndex: col.qFallbackTitle,
+          dataIndex: cols[index].dataKey,
+          dataKey: cols[index].dataKey,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
           qPath: `/qHyperCubeDef/qMeasures/${index}`,

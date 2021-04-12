@@ -34,12 +34,10 @@ const TableComponent = ({ tableConfig }) => {
 
   useEffect(() => {
     const data = dataSet && flattenData(dataSet)
+    console.log(data)
     dataSet && setLoading(false);
     setTableData(data)
   }, [dataSet]);
-
-  console.log(tableData)
-  console.log(headerGroup)
 
   const exportData = () => {
     //File name of the export
@@ -50,6 +48,8 @@ const TableComponent = ({ tableConfig }) => {
     const fields = exportFields;
     saveAsCsv({ data, fields, filename });
   };
+
+  console.log(headerGroup)
 
   return (
     <>

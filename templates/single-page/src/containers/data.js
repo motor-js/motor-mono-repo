@@ -1,23 +1,4 @@
-// const colourPalette = [
-//   "#F6C860",
-//   "#6F4E7B",
-//   "#9DD967",
-//   "#CB472F",
-//   "#FFA056",
-//   "#0984A5",
-// ];
-// const colourPalette = [
-//   "#1abc9c",
-//   "#2ecc71",
-//   "#3498db",
-//   "#9b59b6",
-//   "#34495e",
-//   "#16a085",
-//   "#27ae60",
-//   "#2980b9",
-//   "#8e44ad",
-//   "#2c3e50",
-// ];
+
 const colourPalette = [
   "#00a8ff",
   "#9c88ff",
@@ -601,6 +582,7 @@ export const tableCols = {
   scroll: { y: 284 },
   cols: [
     {
+      dataKey: "img",
       qField: "_Image",
       qLabel: "image",
       render: (text, data) => {
@@ -633,7 +615,7 @@ export const tableCols = {
     Country: "Country",
     Category: "Category",
   },
-  exportFilename: 'Order History'
+  exportFilename: 'Products'
 };
 
 export const orderHistory = {
@@ -649,8 +631,10 @@ export const orderHistory = {
     {
       qField: "Company Name",
       qLabel: "Company Name",
+      dataKey: 'company_name'
     },
     {
+      dataKey: 'qty_sold',
       qField: "=Sum(Quantity)",
       qLabel: "Quantity Sold",
       qNumType: "I",
@@ -661,7 +645,8 @@ export const orderHistory = {
       // },
     },
     {
-      qField: "=Sum(Price  * Quantity)",
+      dataKey: 'tot_sales',
+      qField: "=Sum(Price * Quantity)",
       qLabel: "Total Sales",
       qNumType: "I",
       qNumFmt: "$#,##0.00",
@@ -673,14 +658,6 @@ export const orderHistory = {
           </div>
         );
       },
-    },
-    // {
-    //   qField: "Country",
-    //   qLabel: "Country",
-    // },
-    // {
-    //   qField: "Category",
-    //   qLabel: "Category",
-    // },
+    }
   ],
 };

@@ -12,7 +12,6 @@ import Callout from "components/Callout";
 
 import {
   FitnessKpi,
-  garminKPI,
   bodyLocationKPI,
   wristKPI,
   tableCols,
@@ -95,7 +94,7 @@ const App = () => {
               </Col>
               <Col xl={9} lg={24} md={24} sm={24} xs={24}>
                 <Callout />
-               {/*} <TableComponent tableConfig={orderHistory} /> */}
+               {<TableComponent tableConfig={orderHistory} /> }
               </Col>
             </Row>
           </div>
