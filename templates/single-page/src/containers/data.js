@@ -1,4 +1,12 @@
 
+const tooltip = {
+  wrapperStyle: {
+    backgroundColor: "white",
+    borderColor: "white",
+    boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
+    padding: "10px",
+  },
+};
 const colourPalette = [
   "#00a8ff",
   "#9c88ff",
@@ -45,6 +53,7 @@ export const FitnessKpi = {
     stroke: colourPalette[1],
     fill: "url(#color3)",
     fillOpacity: 1,
+    tooltip,
   },
   data: {
     cols: [
@@ -113,6 +122,7 @@ export const garminKPI = {
     stroke: "#4D95F3",
     fill: "url(#color4)",
     fillOpacity: 1,
+    tooltip,
   },
   data: {
     cols: [
@@ -176,7 +186,7 @@ export const bodyLocationKPI = {
     // fill: "url(#color5)",
     fill: colourPalette,
     fillOpacity: 1,
-    // stacked: true,
+    tooltip,
   },
   data: {
     cols: [
@@ -220,6 +230,7 @@ export const wristKPI = {
     height: 75,
     stroke: "#038FDE",
     dot: { stroke: "#FEA931", strokeWidth: 2 },
+    tooltip,
   },
   data: {
     cols: [
@@ -258,46 +269,46 @@ export const wristKPI = {
   icon: "litecoin",
 };
 
-export const BalanceHistory = {
-  chartConfig: {
-    chartType: "bar",
-    margin: { top: 10, right: 0, left: 0, bottom: 0 },
-    showXAxis: true,
-    showXAxis: true,
-    showGrid: true,
-    showLegend: false,
-    height: 180,
-    isAnimationActive: true,
-    xAxisDataKey: "name",
-    // dataKey: "price",
-    type: "monotone",
-    strokeWidth: 0,
-    stroke: "#003366",
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
-    stacked: true,
-    fillOpacity: 1,
-  },
-  data: {
-    cols: [
-      {
-        qField: "[name]",
-        qLabel: "name",
-      },
-      {
-        qField: "=Sum({$<coin={'ripple'}>} price)",
-        qLabel: "price",
-        qFillStyle: "orange",
-      },
-      {
-        qField: "=Sum({$<coin={'ripple'}>} price)*2.1",
-        qLabel: "count",
-      },
-    ],
+// export const BalanceHistory = {
+//   chartConfig: {
+//     chartType: "bar",
+//     margin: { top: 10, right: 0, left: 0, bottom: 0 },
+//     showXAxis: true,
+//     showXAxis: true,
+//     showGrid: true,
+//     showLegend: false,
+//     height: 180,
+//     isAnimationActive: true,
+//     xAxisDataKey: "name",
+//     // dataKey: "price",
+//     type: "monotone",
+//     strokeWidth: 0,
+//     stroke: "#003366",
+//     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+//     stacked: true,
+//     fillOpacity: 1,
+//   },
+//   data: {
+//     cols: [
+//       {
+//         qField: "[name]",
+//         qLabel: "name",
+//       },
+//       {
+//         qField: "=Sum({$<coin={'ripple'}>} price)",
+//         qLabel: "price",
+//         qFillStyle: "orange",
+//       },
+//       {
+//         qField: "=Sum({$<coin={'ripple'}>} price)*2.1",
+//         qLabel: "count",
+//       },
+//     ],
 
-    qTitle:
-      "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
-  },
-};
+//     qTitle:
+//       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
+//   },
+// };
 
 export const ordersByCategory = {
   chartConfig: {
@@ -310,14 +321,7 @@ export const ordersByCategory = {
     height: 220,
     isAnimationActive: true,
     xAxisDataKey: "Category",
-    tooltip: {
-      wrapperStyle: {
-        backgroundColor: "white",
-        borderColor: "white",
-        boxShadow: "2px 2px 3px 0px rgb(204, 204, 204)",
-        padding: "10px",
-      },
-    },
+    tooltip,
     xAxisLabel: {
       value: "Categpry",
       offset: -10,
@@ -365,7 +369,8 @@ export const orderAnalysis = {
   chartConfig: {
     chartType: "line",
     margin: { top: 10, right: 40, left: 35, bottom: 20 },
-    dot: { stroke: "#FEA931", strokeWidth: 2 },
+    // dot: { stroke: "#FEA931", strokeWidth: 2 },
+    dot: { stroke: colourPalette, strokeWidth: 10 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -386,8 +391,8 @@ export const orderAnalysis = {
     xAxisDataKey: "Order Date",
     type: "monotone",
     strokeWidth: 0,
-    stroke: "#003366",
-    fill: colourPalette,
+    // stroke: "#003366",
+    stroke: colourPalette,
     // stacked: true,
     fillOpacity: 1,
     // buttons: [
@@ -440,6 +445,7 @@ export const pieData = {
     renderLabel: (entry) => {
       return entry.payload.price.toLocaleString().split(".")[0];
     },
+    tooltip,
   },
   data: {
     cols: [
@@ -507,6 +513,7 @@ export const pieDataDonut = {
       iconType: "circle",
       layout: "horizontal",
     },
+    tooltip,
   },
   data: {
     qPage: {

@@ -14,7 +14,7 @@ import {
 } from "recharts";
 
 import { formatYAxis, formatXAxis } from "../../../util/formatChart";
-import { CustomTooltip } from "../../../util/CustomTooltip";
+import { CustomTooltip } from "../../../util";
 
 const MotorBarChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -55,7 +55,7 @@ const MotorBarChart = ({ dataSet, config }) => {
           <YAxis tickFormatter={formatYAxis}>
             {yAxisLabel && (
               <Label
-                className="gx-recharts-label"  
+                className="gx-recharts-label"
                 value={yAxisLabel.value}
                 angle={yAxisLabel.angle}
                 offset={yAxisLabel.offset}

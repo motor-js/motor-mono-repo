@@ -3,12 +3,11 @@ import { Table, Skeleton, Card, PageHeader, Select, Radio } from "antd";
 import { useTable } from "@motor-js/engine";
 import Widget from "components/Widget";
 import { useJsonToCsv } from "react-json-csv";
-import { flattenData } from "util/dataHelpers"
+import { flattenData } from "util/dataHelpers";
 
 const TableComponent = ({ tableConfig }) => {
-  
   const [loading, setLoading] = useState(true);
-  const [tableData, setTableData] = useState(null)
+  const [tableData, setTableData] = useState(null);
 
   const {
     qTitle,
@@ -20,7 +19,7 @@ const TableComponent = ({ tableConfig }) => {
     scroll = null,
     qInterColumnSortOrder,
     exportFilename,
-    exportFields
+    exportFields,
   } = tableConfig;
   const { saveAsCsv } = useJsonToCsv();
   const { title, dataSet, headerGroup } = useTable({
@@ -33,9 +32,9 @@ const TableComponent = ({ tableConfig }) => {
   });
 
   useEffect(() => {
-    const data = dataSet && flattenData(dataSet)
+    const data = dataSet && flattenData(dataSet);
     dataSet && setLoading(false);
-    setTableData(data)
+    setTableData(data);
   }, [dataSet]);
 
   const exportData = () => {
@@ -67,7 +66,7 @@ const TableComponent = ({ tableConfig }) => {
           }
         >
           <div className="gx-table-responsive">
-          {loading ? (
+            {loading ? (
               <div>loading</div>
             ) : (
               <Table

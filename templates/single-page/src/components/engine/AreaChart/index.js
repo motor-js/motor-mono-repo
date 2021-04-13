@@ -13,6 +13,7 @@ import {
 } from "recharts";
 
 import { formatYAxis, formatXAxis } from "../../../util/formatChart";
+import { CustomTooltip } from "../../../util";
 
 const MotorAreaChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -24,6 +25,7 @@ const MotorAreaChart = ({ dataSet, config }) => {
     ShowYAxis = true,
     xAxisLabel,
     yAxisLabel,
+    tooltip = null,
     showGrid = true,
     showLegend = true,
     legendProps,
@@ -70,7 +72,10 @@ const MotorAreaChart = ({ dataSet, config }) => {
           </YAxis>
         )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
-        <Tooltip />
+        <Tooltip
+          wrapperStyle={tooltip && tooltip.wrapperStyle}
+          content={tooltip && <CustomTooltip fill={fill} />}
+        />
         {showLegend && (
           <Legend
             iconSize={legendProps.iconSize}

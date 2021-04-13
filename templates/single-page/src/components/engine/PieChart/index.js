@@ -9,6 +9,8 @@ import {
   Cell,
 } from "recharts";
 
+import { CustomTooltip } from "../../../util";
+
 const MotorPieChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
 
@@ -22,6 +24,7 @@ const MotorPieChart = ({ dataSet, config }) => {
     isAnimationActive = true,
     cx = "35%",
     cy = "50%",
+    tooltip = null,
     outerRadius = 80,
     innerRadius = 0,
     renderLabel,
@@ -74,7 +77,10 @@ const MotorPieChart = ({ dataSet, config }) => {
               ))}
             </Pie>
           ))}
-        <Tooltip />
+        <Tooltip
+          wrapperStyle={tooltip && tooltip.wrapperStyle}
+          content={tooltip && <CustomTooltip fill={fill} />}
+        />
       </PieChart>
     </ResponsiveContainer>
   );
