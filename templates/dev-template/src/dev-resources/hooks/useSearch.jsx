@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef, useContext } from "react";
-import { EngineContext } from "@motor-js/engine";
+import { EngineContext } from "../contexts/EngineProvider";
 
 const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
-
+  
   const [groupResults, setGroupResults] = useState([]);
   const [flatResults, setFlatResults] = useState([]);
   const _isMounted = useRef(true);
@@ -84,7 +84,7 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
       qDoc.selectAssociations(
         {
           qSearchFields: dimensions,
-        //qContext: 'CurrentSelections'
+          qContext: 'CurrentSelections'
         },
         [searchValue],
         id

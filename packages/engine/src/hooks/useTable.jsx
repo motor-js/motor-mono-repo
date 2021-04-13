@@ -61,7 +61,7 @@ const initialProps = {
     qSortByAscii: 1,
     qSortByLoadOrder: 1,
     qExpression: null,
-    qSortByNumeric: 0,
+    qSortByNumeric: -1,
     qSortByExpression: 0,
   },
   qSuppressZero: false,

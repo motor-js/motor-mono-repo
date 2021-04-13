@@ -595,7 +595,7 @@ export const tableCols = {
       render: (text, data) => {
         return (
           <div>
-            <img src={data.image} />
+            <img src={data.img} />
           </div>
         );
       },
@@ -633,31 +633,27 @@ export const orderHistory = {
     qWidth: 10,
     qHeight: 5,
   },
-  qInterColumnSortOrder: [2, 1, 0],
+  //qInterColumnSortOrder: [1,0,2],
   cols: [
     {
+      dataKey: "company_name",
       qField: "Company Name",
       qLabel: "Company Name",
-      dataKey: 'company_name'
+     // qLibraryId: "cKLXjDf",
     },
     {
-      dataKey: 'qty_sold',
+      dataKey: "qty_sold",
       qField: "=Sum(Quantity)",
       qLabel: "Quantity Sold",
       qNumType: "I",
       qNumFmt: "#,##0",
-      useFormatting: true,
-      // render: (text, data, i) => {
-      //   return <div style={{ textAlign: "right" }}>{text}</div>;
-      // },
     },
     {
-      dataKey: 'tot_sales',
+      dataKey: "tot_sales",
       qField: "=Sum(Price * Quantity)",
       qLabel: "Total Sales",
       qNumType: "I",
       qNumFmt: "$#,##0.00",
-      useFormatting: true,
       render: (text, data, i) => {
         return (
           <div className={i === 0 ? "gx-text-red" : "gx-text-green"}>

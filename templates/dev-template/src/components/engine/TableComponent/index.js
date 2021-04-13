@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Skeleton, Card, PageHeader, Select, Radio } from "antd";
-import { useTable } from "@motor-js/engine";
+import useTable from "../../../dev-resources/hooks/useTable";
 import Widget from "components/Widget";
 import { useJsonToCsv } from "react-json-csv";
 import { flattenData } from "util/dataHelpers";
@@ -12,8 +12,8 @@ const TableComponent = ({ tableConfig }) => {
   const {
     qTitle,
     cols,
-    sortCriteria,
     useFormatting,
+    sortCriteria,
     qPage = {},
     pagination = false,
     scroll = null,
@@ -21,7 +21,6 @@ const TableComponent = ({ tableConfig }) => {
     exportFilename,
     exportFields,
   } = tableConfig;
-  
   const { saveAsCsv } = useJsonToCsv();
 
   console.log('cols: ',cols)

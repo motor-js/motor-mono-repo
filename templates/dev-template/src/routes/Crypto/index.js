@@ -17,6 +17,7 @@ import {
   FitnessKpi,
   pieData,
   orderHistory,
+  tableColsNew
 } from "./data";
 // import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
@@ -30,37 +31,26 @@ import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/Filter";
 import ChartKPI from "components/engine/ChartKPI";
 import Chart from "components/engine/Chart";
+import TableComponent from "components/engine/TableComponent"
 
 const { TabPane } = Tabs;
 const Crypto = () => {
   return (
     <Auxiliary>
       <Row>
-        {/* <ComplexTable tableConfig={tableCols} /> */}
-        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorFilter
-            dimension={["Company Name"]}
-            // style={{ width: "50%" }}
-          />
-        </Col>
-        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorFilter
-            dimension={["Country"]}
-            // style={{ width: "50%" }}
-          />
-        </Col>
+      <TableComponent tableConfig={orderHistory} />
       </Row>
+      <Row>
+      {/*<TableComponent tableConfig={tableColsNew} />*/}
+      </Row>
+      {/*}
       <Row>
         <ComplexTable tableConfig={orderHistory} />
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          {/* <ChartKPI dataProps={FitnessKpi} /> */}
           <ChartKPI dataProps={bodyLocationKPI} />
         </Col>
-        {/* <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <ChartKPI dataProps={etheriumKPI} />
-        </Col>*/}
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartKPI dataProps={wristKPI} />
         </Col>
@@ -78,10 +68,9 @@ const Crypto = () => {
           </Tabs>
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          {/* <MotorTable tableConfig={tableCols} /> */}
           <Chart dataProps={ordersByCategory} />
         </Col>
-      </Row>
+      </Row>*/}
     </Auxiliary>
   );
 };

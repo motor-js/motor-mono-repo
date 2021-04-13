@@ -400,3 +400,44 @@ export const pieData = {
       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
   },
 };
+
+
+export const orderHistory = {
+  qTitle: "Top 5 Orders",
+  qPage: {
+    qTop: 0,
+    qLeft: 0,
+    qWidth: 10,
+    qHeight: 5,
+  },
+  //qInterColumnSortOrder: [1,0,2],
+  cols: [
+    {
+      dataKey: "company_name",
+      qField: "Company Name",
+      qLabel: "Company Name",
+     // qLibraryId: "cKLXjDf",
+    },
+    {
+      dataKey: "qty_sold",
+      qField: "=Sum(Quantity)",
+      qLabel: "Quantity Sold",
+      qNumType: "I",
+      qNumFmt: "#,##0",
+    },
+    {
+      dataKey: "tot_sales",
+      qField: "=Sum(Price * Quantity)",
+      qLabel: "Total Sales",
+      qNumType: "I",
+      qNumFmt: "$#,##0.00",
+      render: (text, data, i) => {
+        return (
+          <div className={i === 0 ? "gx-text-red" : "gx-text-green"}>
+            {text}
+          </div>
+        );
+      },
+    }
+  ],
+};
