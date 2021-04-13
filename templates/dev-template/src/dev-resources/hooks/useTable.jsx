@@ -102,7 +102,7 @@ const useTable = (props) => {
   } = sortCriteria
 
   console.log('sc: ',sortCriteria)
-  console.log('icoso1: ',qInterColumnSortOrder)
+ // console.log('icoso1: ',qInterColumnSortOrder)
 
   const {
     title,

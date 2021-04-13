@@ -17,29 +17,26 @@ const TableComponent = ({ tableConfig }) => {
     qPage = {},
     pagination = false,
     scroll = null,
-    qInterColumnSortOrder,
     exportFilename,
     exportFields,
   } = tableConfig;
-  
+
   const { saveAsCsv } = useJsonToCsv();
 
-  console.log('cols: ',cols)
+ //const sortCriteriaProp = sortCriteria && sortCriteria
+
   const { title, dataSet, headerGroup } = useTable({
     cols,
     sortCriteria,
     useFormatting,
     qPage,
-    qInterColumnSortOrder,
     qTitle,
     qSuppressMissing: true
   });
 
   useEffect(() => {
-    console.log('ds',dataSet)
     const data = dataSet && flattenData(dataSet);
     dataSet && setLoading(false);
-    console.log('d',data)
     setTableData(data);
   }, [dataSet]);
 
@@ -53,7 +50,6 @@ const TableComponent = ({ tableConfig }) => {
     saveAsCsv({ data, fields, filename });
   };
   
-  console.log('hg: ',headerGroup)
   return (
     <>
       {tableData ? (

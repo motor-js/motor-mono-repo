@@ -616,7 +616,7 @@ export const orderHistory = {
     qWidth: 10,
     qHeight: 5,
   },
-  sortCriteria: { qInterColumnSortOrder: [2,1,0] },
+  //sortCriteria: {  },
   cols: [
     {
       dataKey: "qty_sold",

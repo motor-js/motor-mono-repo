@@ -17,19 +17,18 @@ const TableComponent = ({ tableConfig }) => {
     qPage = {},
     pagination = false,
     scroll = null,
-    qInterColumnSortOrder,
     exportFilename,
     exportFields,
   } = tableConfig;
+
   const { saveAsCsv } = useJsonToCsv();
 
   console.log('cols: ',cols)
   const { title, dataSet, headerGroup } = useTable({
     cols,
-    sortCriteria,
+    sortCriteria: {},
     useFormatting,
     qPage,
-    qInterColumnSortOrder,
     qTitle,
     qSuppressMissing: true
   });

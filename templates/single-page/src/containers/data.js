@@ -587,6 +587,7 @@ export const tableCols = {
     pageSizeOptions: ["10", "20", "30"],
   },
   scroll: { y: 284 },
+  sortCriteria: {},
   cols: [
     {
       dataKey: "img",
@@ -633,7 +634,7 @@ export const orderHistory = {
     qWidth: 10,
     qHeight: 5,
   },
-  //qInterColumnSortOrder: [1,0,2],
+  sortCriteria: { qInterColumnSortOrder: [2,0,1] },
   cols: [
     {
       dataKey: "company_name",
