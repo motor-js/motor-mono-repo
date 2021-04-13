@@ -120,6 +120,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
       series["qElemNumber"] = d[0].qElemNumber;
       series[key] = value;
       series[`${key}-qElemNumber`] = qElemNumber;
+      series["label"] = d[0].qText;
     }
     parentText = d[0].qText;
   });
@@ -275,6 +276,7 @@ export const getHeader = (qLayout, cols, data) =>
           title: col.qFallbackTitle,
           dataIndex: cols[index].dataKey,
           dataKey: cols[index].dataKey,
+          render: cols[index].render,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,
           qPath: `/qHyperCubeDef/qDimensions/${index}`,
@@ -287,6 +289,7 @@ export const getHeader = (qLayout, cols, data) =>
           title: col.qFallbackTitle,
           dataIndex: cols[index].dataKey,
           dataKey: cols[index].dataKey,
+          render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
           qPath: `/qHyperCubeDef/qMeasures/${index}`,
