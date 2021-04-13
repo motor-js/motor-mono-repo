@@ -56,7 +56,7 @@ const Filter = ({ dimension, maxTagCount = 10 }) => {
       allowClear
       onChange={handleChange}
       value={selected}
-      style={{ width: "100%" }}
+      style={{ width: "100%", padding: '2px' }}
       placeholder={dimension[0]}
       onClear={handleClear}
       maxTagCount={maxTagCount}
