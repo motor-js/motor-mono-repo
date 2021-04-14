@@ -623,7 +623,7 @@ export const orderHistory = {
 export const multipleMeasures = {
   chartConfig: {
     chartType: "bar",
-    margin: { top: 10, right: 0, left: 0, bottom: 0 },
+    margin: { top: 10, right: 15, left: -10, bottom: 0 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -643,7 +643,7 @@ export const multipleMeasures = {
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
-    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    fill: colourPalette,
     // stacked: true,
     fillOpacity: 1,
   },
@@ -671,7 +671,7 @@ export const multipleMeasures = {
   },
 };
 
-export const BalanceHistoryMultiDim = {
+export const stackedBar = {
   chartConfig: {
     chartType: "bar",
     // margin: { top: 10, right: 0, left: -15, bottom: 0 },

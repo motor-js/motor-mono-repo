@@ -21,7 +21,7 @@ import {
   pieDataDonut,
   reverseCardData,
   orderHistory,
-  BalanceHistoryMultiDim,
+  stackedBar,
   multipleMeasures,
 } from "./data";
 
@@ -81,7 +81,7 @@ const App = () => {
             </Row>
             <Row>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-                <Chart dataProps={BalanceHistoryMultiDim} />
+                <Chart dataProps={stackedBar} />
               </Col>
               <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                 <Chart dataProps={multipleMeasures} />
