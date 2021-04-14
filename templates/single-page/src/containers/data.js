@@ -268,47 +268,6 @@ export const wristKPI = {
   icon: "litecoin",
 };
 
-// export const BalanceHistory = {
-//   chartConfig: {
-//     chartType: "bar",
-//     margin: { top: 10, right: 0, left: 0, bottom: 0 },
-//     showXAxis: true,
-//     showXAxis: true,
-//     showGrid: true,
-//     showLegend: false,
-//     height: 180,
-//     isAnimationActive: true,
-//     xAxisDataKey: "name",
-//     // dataKey: "price",
-//     type: "monotone",
-//     strokeWidth: 0,
-//     stroke: "#003366",
-//     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
-//     stacked: true,
-//     fillOpacity: 1,
-//   },
-//   data: {
-//     cols: [
-//       {
-//         qField: "[name]",
-//         qLabel: "name",
-//       },
-//       {
-//         qField: "=Sum({$<coin={'ripple'}>} price)",
-//         qLabel: "price",
-//         qFillStyle: "orange",
-//       },
-//       {
-//         qField: "=Sum({$<coin={'ripple'}>} price)*2.1",
-//         qLabel: "count",
-//       },
-//     ],
-
-//     qTitle:
-//       "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
-//   },
-// };
-
 export const ordersByCategory = {
   chartConfig: {
     chartType: "bar",
@@ -421,10 +380,7 @@ export const orderAnalysis = {
       },
     ],
 
-    qTitle:
-      // "='Ripple Multi Dim Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
-      "Monthly Sales by Country",
-    // qSubTitle: "test",
+    qTitle: "Monthly Sales by Country",
   },
 };
 
@@ -572,9 +528,7 @@ export const reverseCardData = {
         qType: "qStringExpression",
       },
     ],
-    qTitle:
-      // "='Ripple Max Price : ' & Num(Max({$<coin={'ripple'}>}price),'$#,##0')",
-      "Sales by Body Location",
+    qTitle: "Sales by Body Location",
   },
 };
 
@@ -664,4 +618,112 @@ export const orderHistory = {
       },
     },
   ],
+};
+
+export const multipleMeasures = {
+  chartConfig: {
+    chartType: "bar",
+    margin: { top: 10, right: 0, left: 0, bottom: 0 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    showLegend: true,
+    legendProps: {
+      wrapperStyle: {
+        padding: "10px",
+      },
+      iconType: "circle",
+      layout: "horizontal",
+    },
+    height: 220,
+    isAnimationActive: true,
+    xAxisDataKey: "Order Date",
+    // dataKey: "price",
+    tooltip,
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    // stacked: true,
+    fillOpacity: 1,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
+      },
+      {
+        qField: "=count({$<[Body Location]={'Chest'}>} Quantity*Price)",
+        qLabel: "chest",
+      },
+      {
+        qField: "=count({$<[Body Location]={'Torso'}>} Quantity*Price)",
+        qLabel: "torso",
+      },
+      {
+        qField: "=count({$<[Body Location]={'Waist'}>} Quantity*Price)",
+        qLabel: "waist",
+      },
+    ],
+
+    qTitle: "Bar chart with multiple Measures",
+  },
+};
+
+export const BalanceHistoryMultiDim = {
+  chartConfig: {
+    chartType: "bar",
+    // margin: { top: 10, right: 0, left: -15, bottom: 0 },
+    margin: { top: 10, right: 10, left: 0, bottom: 0 },
+    showXAxis: true,
+    showXAxis: true,
+    showGrid: true,
+    showLegend: true,
+    legendProps: {
+      wrapperStyle: {
+        padding: "10px",
+      },
+      // iconType: "circle",
+      layout: "horizontal",
+    },
+    height: 180,
+    isAnimationActive: true,
+    xAxisDataKey: "Order Date",
+    // dataKey: "price",
+    tooltip,
+    type: "monotone",
+    strokeWidth: 0,
+    stroke: "#003366",
+    fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
+    stacked: true,
+    fillOpacity: 1,
+    buttons: [
+      { type: "measure", label: "Sum", value: "=Sum(Price*Quantity)" },
+      { type: "measure", label: "Count", value: "=Count(Price*Quantity)" },
+      { type: "dimension", label: "Order Date", value: "[OrderDateMonth]" },
+      { type: "dimension", label: "Country", value: "Country" },
+    ],
+  },
+  data: {
+    // qDimField: "[coin]",
+    qLists: [{ dataKey: "[Body Location]" }, { name: "[Body Location]" }],
+    cols: [
+      {
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
+      },
+      {
+        qField: "[Body Location]",
+        qLabel: "Body Location",
+      },
+      {
+        qField: "=Sum(Price*Quantity)",
+        qLabel: "price",
+        qFillStyle: "orange",
+      },
+    ],
+
+    qTitle: "Stacked Bar chart with buttons to change View",
+  },
 };
