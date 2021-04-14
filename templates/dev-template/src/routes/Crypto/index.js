@@ -74,13 +74,11 @@ const Crypto = () => {
               <Chart dataProps={BalanceHistory} />
             </TabPane>
             <TabPane tab="Pie Chart" key="3">
-              <Chart dataProps={pieData} />
+              <Chart dataProps={rippleKPI} />
             </TabPane>
           </Tabs>
         </Col>
         <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          {/* <MotorTable tableConfig={tableCols} /> */}
-          {/* <Chart dataProps={ordersByCategory} /> */}
           <Chart dataProps={orderAnalysis} />
         </Col>
       </Row>

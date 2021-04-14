@@ -241,7 +241,7 @@ export const etheriumKPI = {
 
 export const rippleKPI = {
   chartConfig: {
-    chartType: "area",
+    chartType: "bar",
     margin: { top: 0, right: 0, left: 0, bottom: 0 },
     height: 75,
 
@@ -262,8 +262,9 @@ export const rippleKPI = {
     stackId: 2,
     stroke: "#FEEADA",
     fill: "url(#color5)",
+    fill: colourPalette,
     fillOpacity: 1,
-    // stacked: true,
+    stacked: true,
   },
   data: {
     cols: [
@@ -275,10 +276,10 @@ export const rippleKPI = {
         qField: "=Sum({$<coin={'ripple'}>} price)",
         qLabel: "price",
       },
-      // {
-      //   qField: "=Sum({$<coin={'bitcoin'}>} price)",
-      //   qLabel: "price",
-      // },
+      {
+        qField: "=Sum({$<coin={'bitcoin'}>} price)",
+        qLabel: "price",
+      },
     ],
     qMetrics: [
       {
@@ -359,7 +360,7 @@ export const BalanceHistory = {
     showLegend: false,
     height: 180,
     isAnimationActive: true,
-    xAxisDataKey: "name",
+    xAxisDataKey: "Order Date",
     // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
@@ -371,17 +372,16 @@ export const BalanceHistory = {
   data: {
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
       },
       {
-        qField: "=Sum({$<coin={'ripple'}>} price)",
+        qField: "=Count(Quantity)",
         qLabel: "price",
-        qFillStyle: "orange",
       },
       {
-        qField: "=Sum({$<coin={'ripple'}>} price)*2.1",
-        qLabel: "count",
+        qField: "=Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)",
+        qLabel: "wrist",
       },
     ],
 
@@ -398,38 +398,45 @@ export const BalanceHistoryMultiDim = {
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
-    showLegend: false,
+    showLegend: true,
+    // legendProps: {
+    //   wrapperStyle: {
+    //     padding: "10px",
+    //   },
+    //   iconType: "circle",
+    //   layout: "horizontal",
+    // },
     height: 180,
     isAnimationActive: true,
-    xAxisDataKey: "name",
+    xAxisDataKey: "Order Date",
     // dataKey: "price",
     type: "monotone",
     strokeWidth: 0,
     stroke: "#003366",
     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
-
+    stacked: true,
     fillOpacity: 1,
     buttons: [
-      { type: "measure", label: "Sum", value: "=Sum(price)" },
-      { type: "measure", label: "Count", value: "=count(price)" },
-      { type: "dimension", label: "Name", value: "[name]" },
-      { type: "dimension", label: "Price", value: "price" },
+      { type: "measure", label: "Sum", value: "=Sum(Price*Quantity)" },
+      { type: "measure", label: "Count", value: "=Count(Price*Quantity)" },
+      { type: "dimension", label: "Order Date", value: "[OrderDateMonth]" },
+      { type: "dimension", label: "Country", value: "Country" },
     ],
   },
   data: {
     // qDimField: "[coin]",
-    qLists: [{ dataKey: "[coin]" }, { name: "[name]" }],
+    qLists: [{ dataKey: "[Body Location]" }, { name: "[Body Location]" }],
     cols: [
       {
-        qField: "[name]",
-        qLabel: "name",
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
       },
       {
-        qField: "[coin]",
-        qLabel: "coin",
+        qField: "[Body Location]",
+        qLabel: "Body Location",
       },
       {
-        qField: "=Sum(price)",
+        qField: "=Sum(Price*Quantity)",
         qLabel: "price",
         qFillStyle: "orange",
       },
@@ -678,7 +685,7 @@ export const tableColsNew = {
     Country: "Country",
     Category: "Category",
   },
-  exportFilename: 'Products'
+  exportFilename: "Products",
 };
 
 export const orderHistory = {
@@ -702,7 +709,7 @@ export const orderHistory = {
       dataKey: "company_name",
       qField: "Company Name",
       qLabel: "Company Name",
-     // qLibraryId: "cKLXjDf",
+      // qLibraryId: "cKLXjDf",
     },
     {
       dataKey: "tot_sales",
@@ -717,7 +724,7 @@ export const orderHistory = {
           </div>
         );
       },
-    }
+    },
   ],
 };
 
