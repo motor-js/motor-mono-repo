@@ -13,7 +13,7 @@
     "UI",
     "Qlik-Sense"
   ],
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "The Headless Framework for Qlik Sense Mashups",
   "author": "Motor",
   "main": "lib/index.ts",
