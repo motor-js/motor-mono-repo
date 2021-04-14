@@ -13,6 +13,8 @@ export const tooltipNumFormat = (tickItem) => {
 };
 
 export const tooltipValueFormat = (tickItem) => {
+  if (typeof tickItem === "undefined") return null;
+
   return new Date(tickItem).toLocaleDateString() !== "Invalid Date"
     ? new Date(tickItem).toLocaleDateString()
     : tickItem.toLocaleString();
