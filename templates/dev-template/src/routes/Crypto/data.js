@@ -634,6 +634,53 @@ export const FitnessKpi = {
   // styleName: "up",
 };
 
+export const tableColsNew = {
+  // qTitle: "=Count(Name)",
+  qTitle: "Products",
+  pagination: {
+    defaultPageSize: 10,
+    showSizeChanger: true,
+    pageSizeOptions: ["10", "20", "30"],
+  },
+  scroll: { y: 284 },
+  cols: [
+    {
+      dataKey: "img",
+      qField: "_Image",
+      qLabel: "image",
+      render: (text, data) => {
+        return (
+          <div>
+            <img src={data.img} />
+          </div>
+        );
+      },
+    },
+    {
+      dataKey: "Name",
+      qField: "Name",
+      qLabel: "Name",
+    },
+    {
+      dataKey: "Country",
+      qField: "Country",
+      qLabel: "Country",
+    },
+    {
+      dataKey: "Category",
+      qField: "Category",
+      qLabel: "Category",
+    },
+  ],
+  exportFields: {
+    Image: "img",
+    Name: "Name",
+    Country: "Country",
+    Category: "Category",
+  },
+  exportFilename: 'Products'
+};
+
 export const orderHistory = {
   qTitle: "Top 5 Orders",
   qPage: {
@@ -642,22 +689,27 @@ export const orderHistory = {
     qWidth: 10,
     qHeight: 5,
   },
-  qInterColumnSortOrder: [2, 1, 0],
+  //sortCriteria: {  },
   cols: [
     {
-      qField: "Company Name",
-      qLabel: "Company Name",
-    },
-    {
+      dataKey: "qty_sold",
       qField: "=Sum(Quantity)",
       qLabel: "Quantity Sold",
+      qNumType: "I",
+      qNumFmt: "#,##0",
     },
     {
-      qField: "=Sum(Price  * Quantity)",
+      dataKey: "company_name",
+      qField: "Company Name",
+      qLabel: "Company Name",
+     // qLibraryId: "cKLXjDf",
+    },
+    {
+      dataKey: "tot_sales",
+      qField: "=Sum(Price * Quantity)",
       qLabel: "Total Sales",
       qNumType: "I",
       qNumFmt: "$#,##0.00",
-      useFormatting: true,
       render: (text, data, i) => {
         return (
           <div className={i === 0 ? "gx-text-red" : "gx-text-green"}>
@@ -665,15 +717,7 @@ export const orderHistory = {
           </div>
         );
       },
-    },
-    // {
-    //   qField: "Country",
-    //   qLabel: "Country",
-    // },
-    // {
-    //   qField: "Category",
-    //   qLabel: "Category",
-    // },
+    }
   ],
 };
 

@@ -11,6 +11,7 @@ import {
   BalanceHistory,
   BalanceHistoryMultiDim,
   pieData,
+  orderHistory
 } from "./data-Wearables";
 // import ChartCard from "dev-resources/components/dashboard/Crypto/ChartCard";
 import Portfolio from "dev-resources/components/dashboard/Crypto/Portfolio";
@@ -24,18 +25,14 @@ import MotorTable from "components/engine/MotorTable";
 import MotorFilter from "components/engine/Filter";
 import ChartKPI from "components/engine/ChartKPI";
 import Chart from "components/engine/Chart";
+import TableComponent from "components/engine/TableComponent"
 
 const { TabPane } = Tabs;
 const Crypto = () => {
   return (
     <Auxiliary>
       <Row>
-        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorFilter dimension={["Country"]} />
-        </Col>
-        <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-          <MotorFilter dimension={["City"]} />
-        </Col>
+      <TableComponent tableConfig={orderHistory} />
       </Row>
       <Row>
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>

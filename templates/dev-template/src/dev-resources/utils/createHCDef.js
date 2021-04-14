@@ -1,3 +1,4 @@
+
 function createDef(
   cols,
   qTitle,
@@ -126,7 +127,7 @@ function createDef(
       if (typeof col === "object" && col.qLibraryId) {
         return {
           qLibraryId: col.qLibraryId,
-          qType: col.qType,
+          //qType: col.qType,
           qOtherTotalSpec: totalSpec,
           qOtherLabel:
             qOtherTotalSpec !== undefined

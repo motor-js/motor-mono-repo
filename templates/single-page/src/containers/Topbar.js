@@ -38,7 +38,6 @@ const Topbar = () => {
   return (
     <>
       <Header style={{ position: "sticky", top: "0" }}>
-        {/* <div className="gx-header-horizontal-main-flex">*/}
         {themeState.theme === "light" ? (
           <div>
             <img
@@ -67,19 +66,36 @@ const Topbar = () => {
           </div>
         )}
         <ul className="gx-header-notifications">
-          <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
+          <li className="gx-d-none gx-d-lg-block gx-nav-icon gx-ml-auto" style={{ width: "155px" }}>
             <Filter dimension={["Country"]} maxTagCount={1} />
           </li>
-          <li className="gx-nav-icon gx-ml-auto" style={{ width: "200px" }}>
+          <li className="gx-d-none gx-d-lg-block gx-nav-icon gx-ml-auto" style={{ width: "155px" }}>
             <Filter dimension={["City"]} maxTagCount={1} />
           </li>
           <li className="gx-nav-icon gx-ml-auto">
             <MotorSearch
-              styleName="gx-d-none gx-d-lg-block "
+              styleName="gx-d-none gx-d-lg-block"
               placeholder="Search in app..."
               onChange={handleSearch}
               value={searchText}
             />
+          </li>
+          <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
+            <Popover
+              overlayClassName="gx-popover-horizantal"
+              placement="bottomRight"
+              trigger="click"
+              content={
+                <div style={{ width: "200px"}}>
+                  <Filter dimension={["Country"]} maxTagCount={1} />
+                  <Filter dimension={["City"]} maxTagCount={1} />
+                </div>
+              }
+            >
+              <span className="gx-pointer gx-d-block">
+                <i className="icon icon-filter" />
+              </span>
+            </Popover>
           </li>
           <li className="gx-notify gx-notify-search gx-d-inline-block gx-d-lg-none">
             <Popover
@@ -127,18 +143,7 @@ const Topbar = () => {
             </li>
           )}
         </ul>
-        {/*</div>*/}
       </Header>
-      {/* <Row>
-        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          <Filter dimension={["Country"]} style={{ width: "50%" }} />
-        </Col>
-        <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-          <Filter dimension={["City"]} />
-        </Col>
-      </Row> */}
-      {/* <Header> */}
-      {/* </Header> */}
     </>
   );
 };

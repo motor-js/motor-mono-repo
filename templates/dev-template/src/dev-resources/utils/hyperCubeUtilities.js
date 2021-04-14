@@ -57,94 +57,22 @@ export function hyperCubeTransform(
   useNumonFirstDim = false,
   cols
 ) {
-  let dim = [];
-  let meas = [];
-
-  const getDims = (cols) => {
-    cols
-      .filter((col, i) => {
-        const isDimension =
-          (typeof col === "object" &&
-            col.qLibraryId &&
-            col.qType &&
-            col.qType === "dimension") ||
-          Array.isArray(col.qField) ||
-          (typeof col === "object" && !col.qField.startsWith("="));
-
-        return isDimension;
-      })
-      .map((col) => {
-        dim.push(col);
-        return col;
-      });
-  };
-
-  const getMeas = (cols) => {
-    cols
-      .filter((col, i) => {
-        const isMeasure =
-          (typeof col === "object" &&
-            col.qLibraryId &&
-            col.qType &&
-            col.qType === "measure") ||
-          (typeof col === "object" &&
-            !Array.isArray(col.qField) &&
-            col.qField.startsWith("="));
-
-        return isMeasure;
-      })
-      .map((col) => {
-        meas.push(col);
-        return col;
-      });
-  };
-
-  //get dimensions
-  getDims(cols);
-  // get measures
-  getMeas(cols);
-  //concatenate dimensions and measures
-  const orderedCols = dim.concat(meas);
-
-  const qNoOfDimensions =
-    qHyperCube !== undefined ? qHyperCube.qDimensionInfo.length : 1;
-
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
-    let dimName;
-    let measName;
     d.forEach((item, index) => {
-      const name = orderedCols[index].dataKey;
-
-      const pair =
-        index < qNoOfDimensions
-          ? {
-              [name]: {
-                value:
-                  d[index].qText === undefined
-                    ? "undefined"
-                    : index === 0 && useNumonFirstDim
-                    ? d[index].qNum
-                    : d[index].qText,
-                elemNumber: d[index].qElemNumber,
-                state: d[index].qState,
-                attrExp: d[index].qAttrExps,
-                columnId: index,
-              },
-            }
-          : {
-              [name]: {
-                value: cols[index].useFormatting
-                  ? d[index].qText
-                  : d[index].qNum !== "NaN"
-                  ? d[index].qNum
-                  : 0,
-                state: d[index].qState,
-                attrExp: d[index].qAttrExps,
-                columnId: index,
-              },
-              key: i,
-            };
+      const name = cols[index].dataKey;
+      const pair = {
+        [name]:
+          {
+            text: d[index].qText,
+            number: d[index].qNum,
+            elemNumber: d[index].qElemNumber,
+            state: d[index].qState,
+            attrExp: d[index].qAttrExps,
+            columnId: index,
+          },
+        key: i,
+      }
       data = { ...data, ...pair };
     });
     return data;
@@ -285,12 +213,69 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
   return direction;
 };
 
-export const getHeader = (qLayout, cols, data) =>
-  qLayout
-    ? [
+export const orderCols = (cols) => {
+
+  let dim = []
+  let meas = []
+
+  const getDims = (cols) => {
+    cols
+      .filter((col, i) => {
+        const isDimension =
+          (typeof col === "object" &&
+            col.qLibraryId &&
+            col.qType &&
+            col.qType === "dimension") ||
+          Array.isArray(col.qField) ||
+          (typeof col === "object" && !col.qField.startsWith("="));
+
+        return isDimension;
+      })
+      .map((col) => {
+        dim.push(col);
+        return col;
+      });
+  };
+
+  const getMeas = (cols) => {
+    cols
+      .filter((col, i) => {
+        const isMeasure =
+          (typeof col === "object" &&
+            col.qLibraryId &&
+            col.qType &&
+            col.qType === "measure") ||
+          (typeof col === "object" &&
+            !Array.isArray(col.qField) &&
+            col.qField.startsWith("="));
+
+        return isMeasure;
+      })
+      .map((col) => {
+        meas.push(col);
+        return col;
+      });
+  };
+
+  //get dimensions
+  getDims(cols);
+  // get measures
+  getMeas(cols);
+  //concatenate dimensions and measures
+  const orderedCols = dim.concat(meas);
+
+  return orderedCols
+}
+
+export const getHeader = (qLayout, cols, data) => {
+
+  if(qLayout) {
+    return [
         ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
           title: col.qFallbackTitle,
-          dataIndex: col.qFallbackTitle,
+          dataIndex: cols[index].dataKey,
+          dataKey: cols[index].dataKey,
+          render: cols[index].render,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index,
           qPath: `/qHyperCubeDef/qDimensions/${index}`,
@@ -301,7 +286,9 @@ export const getHeader = (qLayout, cols, data) =>
         })),
         ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
           title: col.qFallbackTitle,
-          dataIndex: col.qFallbackTitle,
+          dataIndex: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+          dataKey: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+          render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
           qPath: `/qHyperCubeDef/qMeasures/${index}`,
@@ -310,7 +297,8 @@ export const getHeader = (qLayout, cols, data) =>
           qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
           qColumnType: "meas",
         })),
-      ]
-    : [];
+      ]}
+    else  { return []}
+  };
 
 export default hyperCubeTransform;

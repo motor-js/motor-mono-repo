@@ -1,5 +1,5 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
-import { EngineContext } from "@motor-js/engine";
+import { EngineContext } from "../contexts/EngineProvider";
 import { deepMerge } from "../utils/object";
 import createDef from "../utils/createHCDef";
 
@@ -59,32 +59,49 @@ const useButton = (props) => {
     engine && engine.forward();
   };
 
-  /*
-  const exportData = (
-    filename,
-    ) => {  
-    const { host, secure, port, prefix } = config
-
-    const id = qLayout.qInfo.qId
-    const filenameExport = filename || 'Data Export'
-    const _secure = secure ? 'https://' : 'http://'
-    const _port = port ? `:${port}` : ''
-    const server = _secure + host + _port + prefix
-    engine.getObject(id).then(model => {
-      model.exportData('CSV_C', '/qHyperCubeDef','Test', 'P').then(url => {
-        console.log(url.qUrl, url.qWarnings)
-       // window.open(server + url.qUrl, '_blank')
-      })
-    })
+  const select = async (value, field) => {
+    const qDoc = await engine;
+    const qField = await qDoc.getField(field)
+    qField.select(value)
   }
-  */
+
+  const selectValues = async (values, field, toggle=false) => {
+    const sel = await values.map(d => ({'qText': d}))
+    const qDoc = await engine;
+    const qField = await qDoc.getField(field)
+    qField.selectValues(sel,toggle)
+  }
+
+  const doReload = async (qMode, qPartial ) => {
+    const qDoc = await engine;
+    qDoc.doReload(qMode, qPartial, false)
+  }
+
+  const exportData = (filename) => {
+    const { host, secure, port, prefix } = config;
+
+    const id = qLayout.qInfo.qId;
+    const filenameExport = filename || "Data Export";
+    const _secure = secure ? "https://" : "http://";
+    const _port = port ? `:${port}` : "";
+    const server = _secure + host + _port + prefix;
+    engine.getObject(id).then((model) => {
+      model.exportData("CSV_C", "/qHyperCubeDef", "Test", "P").then((url) => {
+        console.log(url.qUrl, url.qWarnings);
+        // window.open(server + url.qUrl, '_blank')
+      });
+    });
+  };
 
   return {
     clearSelections,
     previousSelection,
     nextSelection,
     qLayout,
-    //exportData
+    exportData,
+    select,
+    selectValues,
+    doReload,
   };
 };
 

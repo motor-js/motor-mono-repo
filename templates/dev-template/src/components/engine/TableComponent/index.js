@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Skeleton, Card, PageHeader, Select, Radio } from "antd";
-import { useTable } from "@motor-js/engine";
+import useTable from "../../../dev-resources/hooks/useTable";
 import Widget from "components/Widget";
 import { useJsonToCsv } from "react-json-csv";
 import { flattenData } from "util/dataHelpers";
@@ -12,8 +12,8 @@ const TableComponent = ({ tableConfig }) => {
   const {
     qTitle,
     cols,
-    sortCriteria,
     useFormatting,
+    sortCriteria,
     qPage = {},
     pagination = false,
     scroll = null,
@@ -23,11 +23,10 @@ const TableComponent = ({ tableConfig }) => {
 
   const { saveAsCsv } = useJsonToCsv();
 
- //const sortCriteriaProp = sortCriteria && sortCriteria
-
+  console.log('cols: ',cols)
   const { title, dataSet, headerGroup } = useTable({
     cols,
-    sortCriteria,
+    sortCriteria: {},
     useFormatting,
     qPage,
     qTitle,
@@ -35,8 +34,10 @@ const TableComponent = ({ tableConfig }) => {
   });
 
   useEffect(() => {
+    console.log('ds',dataSet)
     const data = dataSet && flattenData(dataSet);
     dataSet && setLoading(false);
+    console.log('d',data)
     setTableData(data);
   }, [dataSet]);
 
@@ -50,6 +51,7 @@ const TableComponent = ({ tableConfig }) => {
     saveAsCsv({ data, fields, filename });
   };
   
+  console.log('hg: ',headerGroup)
   return (
     <>
       {tableData ? (

@@ -1,6 +1,7 @@
+import * as React from "react";
 import { calcCondType, otherTotalSpecType } from "../utils";
 
-export interface useDataProps {
+export interface useTableProps {
   cols: Array<string>;
   qColumnOrder: Array<number>;
   qCalcCondition: calcCondType;
@@ -14,8 +15,8 @@ export interface useDataProps {
   qOtherTotalSpec: otherTotalSpecType;
 }
 
-declare const useData: React.FC<useDataProps>;
+declare const useTable: React.FC<useTableProps>;
 
-export type useDataType = useDataProps;
+export type useTableType = useTableProps;
 
-export default useData;
+export default useTable;

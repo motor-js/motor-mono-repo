@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/engine",
   "license": "Apache 2.0",
-  "version": "0.0.18",
+  "version": "0.0.24",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
