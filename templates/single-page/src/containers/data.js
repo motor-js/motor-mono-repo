@@ -1,4 +1,3 @@
-
 const tooltip = {
   wrapperStyle: {
     backgroundColor: "white",
@@ -624,7 +623,7 @@ export const tableCols = {
     Country: "Country",
     Category: "Category",
   },
-  exportFilename: 'Products'
+  exportFilename: "Products",
 };
 
 export const orderHistory = {
@@ -635,13 +634,13 @@ export const orderHistory = {
     qWidth: 10,
     qHeight: 5,
   },
-  sortCriteria: { qInterColumnSortOrder: [2,0,1] },
+  sortCriteria: { qInterColumnSortOrder: [2, 0, 1] },
   cols: [
     {
       dataKey: "company_name",
       qField: "Company Name",
       qLabel: "Company Name",
-     // qLibraryId: "cKLXjDf",
+      // qLibraryId: "cKLXjDf",
     },
     {
       dataKey: "qty_sold",
@@ -663,6 +662,6 @@ export const orderHistory = {
           </div>
         );
       },
-    }
+    },
   ],
 };
