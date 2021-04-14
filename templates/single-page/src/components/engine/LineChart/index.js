@@ -76,13 +76,13 @@ const MotorLineChart = ({ dataSet, config }) => {
         />
         {showLegend && (
           <Legend
-            iconSize={legendProps.iconSize}
-            iconType={legendProps.iconType}
-            width={legendProps.width}
-            height={legendProps.height}
-            layout={legendProps.layout}
-            verticalAlign={legendProps.verticalAlign}
-            wrapperStyle={legendProps.wrapperStyle}
+            iconSize={legendProps && legendProps.iconSize}
+            iconType={legendProps && legendProps.iconType}
+            width={legendProps && legendProps.width}
+            height={legendProps && legendProps.height}
+            layout={legendProps && legendProps.layout}
+            verticalAlign={legendProps && legendProps.verticalAlign}
+            wrapperStyle={legendProps && legendProps.wrapperStyle}
           />
         )}
         {dataKeys &&

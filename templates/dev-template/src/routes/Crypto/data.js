@@ -366,7 +366,7 @@ export const BalanceHistory = {
     strokeWidth: 0,
     stroke: "#003366",
     fill: ["#6b5b95", "#feb236", "#d64161", "#ff7b25"],
-    stacked: true,
+    // stacked: true,
     fillOpacity: 1,
   },
   data: {
@@ -376,12 +376,16 @@ export const BalanceHistory = {
         qLabel: "Order Date",
       },
       {
-        qField: "=Count(Quantity)",
-        qLabel: "price",
+        qField: "=count({$<[Body Location]={'Chest'}>} Quantity*Price)",
+        qLabel: "chest",
       },
       {
-        qField: "=Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)",
-        qLabel: "wrist",
+        qField: "=count({$<[Body Location]={'Torso'}>} Quantity*Price)",
+        qLabel: "torso",
+      },
+      {
+        qField: "=count({$<[Body Location]={'Waist'}>} Quantity*Price)",
+        qLabel: "waist",
       },
     ],
 

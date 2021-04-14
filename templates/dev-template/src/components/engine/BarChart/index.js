@@ -33,7 +33,7 @@ const MotorBarChart = ({ dataSet, config }) => {
     margin,
     height,
     fill,
-    stacked,
+    stacked = false,
   } = config;
 
   return (
@@ -92,7 +92,7 @@ const MotorBarChart = ({ dataSet, config }) => {
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
             >
-              {!stacked &&
+              {dataKeys.length === 1 &&
                 data.map((entry, index) => (
                   <Cell key={index} fill={fill[index]} />
                 ))}
