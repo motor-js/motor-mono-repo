@@ -1,7 +1,21 @@
 {
   "name": "@motor-js/engine",
   "license": "https://docs.motor.so/motor-js-engine/license",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/motor-js/engine"
+  },
+  "keywords": [
+    "Qlik",
+    "Sense",
+    "Mashups",
+    "React",
+    "UI",
+    "Qlik-Sense"
+  ],
   "version": "0.1.1",
+  "description": "The Headless Framework for Qlik Sense Mashups",
+  "author": "Motor",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
