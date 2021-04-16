@@ -16,7 +16,14 @@
 
   /*  Charts Styling */
   .@{class-prefix}-recharts-label {
-    fill: @dark-theme-text-color
+    fill: @dark-theme-text-color;
+  }
+
+  .recharts-cartesian-axis-tick-value {
+    fill: @dark-theme-text-color;
+  }
+  .recharts-cartesian-axis-tick-line {
+    stroke: @dark-theme-text-color;
   }
 
   .ant-input-search {
@@ -116,10 +123,9 @@
     background: none;
   }
 
-  .@{class-prefix}-header-notifications
-  li {
-  & > span {
-    color: @dark-theme-text-color;
+  .@{class-prefix}-header-notifications li {
+    & > span {
+      color: @dark-theme-text-color;
     }
   }
 
@@ -744,7 +750,6 @@
   & .@{class-prefix}-card {
     background-color: @dark-theme-component-background;
   }
-
 
   & .@{class-prefix}-card-metrics,
   & .@{class-prefix}-card-widget {
@@ -2182,7 +2187,7 @@
     border-color: darken(@dark-theme-component-background, 5%);
     color: @dark-theme-text-color;
 
-    &.ant-input-search-button  {
+    &.ant-input-search-button {
       color: @dark-theme-text-color !important;
     }
 
@@ -3149,7 +3154,6 @@
       color: @dark-theme-text-color;
     }
   }
-
 
   & .ant-dropdown-menu-item > a,
   & .ant-dropdown-menu-submenu-title > a {
