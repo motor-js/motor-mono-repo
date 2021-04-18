@@ -345,6 +345,35 @@ const useData = (props) => {
           return col;
         });
 
+    if (qDimensions.length > 1) {
+      const listDef = {
+        qListObjectDef: {
+          qStateName: "$",
+          qLibraryId: "",
+          qDef: {
+            qFieldDefs: qDimensions[1].qDef.qFieldDefs,
+            qFieldLabels: ["multiDimDataKeys"],
+            qSortCriterias: [
+              {
+                qSortByLoadOrder: 1,
+              },
+            ],
+          },
+          qInitialDataFetch: [
+            {
+              qTop: 0,
+              qHeight: 1,
+              qLeft: 0,
+              qWidth: 1,
+            },
+          ],
+        },
+      };
+      if (typeof qProp.qListObjects === "undefined") qProp.qListObjects = [];
+
+      qProp.qListObjects.push(listDef);
+    }
+
     const qMeasures =
       cols &&
       cols
@@ -522,9 +551,12 @@ const useData = (props) => {
       return measureInfo.map((measure) => measure.qFallbackTitle);
     }
 
-    const keys = listData.filter((item) => Object.keys(item)[0] === "dataKey");
+    // Get values for the second dimension.
+    const keys = listData.filter(
+      (item) => Object.keys(item)[0] === "multiDimDataKeys"
+    );
 
-    return keys[0].dataKey;
+    return keys[0].multiDimDataKeys;
   }, []);
 
   const getDataKeyList = useCallback(async (listData, layout) => {

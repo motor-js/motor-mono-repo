@@ -21,7 +21,11 @@ const CustomTooltip = ({ active, payload, label, fill }) => {
         {payload.length !== 1 &&
           payload.map((value, index) => {
             return (
-              <span style={{ color: value.color }} className="label">
+              <span
+                style={{ color: value.color }}
+                className="label"
+                key={index}
+              >
                 {`${tooltipValueFormat(value.dataKey)} : ${tooltipNumFormat(
                   value.value
                 )}`}

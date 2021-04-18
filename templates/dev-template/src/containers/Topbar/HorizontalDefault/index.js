@@ -20,8 +20,8 @@ const Topbar = () => {
   const { selections, clearSelections } = useSelections();
   const { showThemeSwitch } = appSettings;
 
-  console.log(selections)
-  
+  // console.log(selections)
+
   const handleClear = (field) => clearSelections(field);
 
   const handleSearch = (evt) => {

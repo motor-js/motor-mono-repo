@@ -429,7 +429,7 @@ export const BalanceHistoryMultiDim = {
   },
   data: {
     // qDimField: "[coin]",
-    qLists: [{ dataKey: "[Body Location]" }, { name: "[Body Location]" }],
+    // qLists: [{ dataKey: "[Body Location]" }, { name: "[Body Location]" }],
     cols: [
       {
         qField: "[OrderDateMonth]",
@@ -501,7 +501,7 @@ export const orderAnalysis = {
   },
   data: {
     // qDimField: "[coin]",
-    qLists: [{ dataKey: "[Country]" }],
+    // qLists: [{ dataKey: "[Country]" }],
     cols: [
       {
         qField: "[OrderDateMonth]",
