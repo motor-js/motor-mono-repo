@@ -1,6 +1,7 @@
 {
   "name": "single-page-mashup",
   "version": "0.1.19",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
