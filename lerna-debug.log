@@ -1,16 +1,7 @@
-0 silly argv {
-0 silly argv   _: [ 'add' ],
-0 silly argv   globs: [ 'apps/demo' ],
-0 silly argv   lernaVersion: '3.22.1',
-0 silly argv   '$0': 'lerna',
-0 silly argv   pkg: 'semantic-ui/react'
-0 silly argv }
-1 notice cli v3.22.1
-2 verbose rootPath /Users/Luke/motor-mono-repo
-3 info versioning independent
-4 error Error: exited with error code: 128
-4 error     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/lerna/node_modules/@evocateur/pacote/lib/util/finished.js:12:19)
-4 error     at ChildProcess.emit (events.js:310:20)
-4 error     at maybeClose (internal/child_process.js:1021:16)
-4 error     at Socket.<anonymous> (internal/child_process.js:443:11)
-4 error     at Socket.emit (events.js:310:20)
+68 error Error: Command failed: git tag demo@0.1.24 -m demo@0.1.24
+68 error fatal: tag 'demo@0.1.24' already exists
+68 error
+68 error     at makeError (/Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:174:9)
+68 error     at /Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:278:16
+68 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+68 error     at async Promise.all (index 0)
