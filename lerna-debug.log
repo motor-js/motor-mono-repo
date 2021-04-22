@@ -1,6 +1,6 @@
 64 warn complete Waiting for 1 child process to exit. CTRL-C to exit immediately.
-65 error Error: Command failed: git tag @motor-js/engine@0.1.1 -m @motor-js/engine@0.1.1
-65 error fatal: tag '@motor-js/engine@0.1.1' already exists
+65 error Error: Command failed: git tag @motor-js/engine@0.1.2 -m @motor-js/engine@0.1.2
+65 error fatal: tag '@motor-js/engine@0.1.2' already exists
 65 error
 65 error     at makeError (/Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:174:9)
 65 error     at /Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:278:16
