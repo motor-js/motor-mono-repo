@@ -5,6 +5,16 @@ export const footer = {
 
 export const qlikConfig = {
   //Enter your app config here..
+  host: "104.248.85.82", // Qlik Sense Host
+  secure: false, // Whether your host is secure of not (HTTPS / HTTP)
+  port: 19076, // Qlik Sense site port
+  prefix: "", // Prefix
+  appId: "Wearables2", // Application Id
+};
+
+/*
+export const qlikConfig = {
+  //Enter your app config here..
   host: "juno-ui.eu.qlikcloud.com", // Qlik Sense Host
   secure: true, // Whether your host is secure of not (HTTPS / HTTP)
   port: null, // Qlik Sense site port
@@ -13,6 +23,7 @@ export const qlikConfig = {
   webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
   qcs: true, // whether you are connecting to a Qlik Cloud site or not
 };
+*/
 
 export const appSettings = {
   theme: "light", // light or dark
