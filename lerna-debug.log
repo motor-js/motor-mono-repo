@@ -1,7 +1,7 @@
-68 error Error: Command failed: git tag demo@0.1.24 -m demo@0.1.24
-68 error fatal: tag 'demo@0.1.24' already exists
-68 error
-68 error     at makeError (/Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:174:9)
-68 error     at /Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:278:16
-68 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)
-68 error     at async Promise.all (index 0)
+64 error Error: Command failed: git tag e-commerce@0.1.23 -m e-commerce@0.1.23
+64 error fatal: tag 'e-commerce@0.1.23' already exists
+64 error
+64 error     at makeError (/Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:174:9)
+64 error     at /Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:278:16
+64 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+64 error     at async Promise.all (index 2)
