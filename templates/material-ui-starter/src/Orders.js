@@ -6,6 +6,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { useTable } from "@motor-js/engine";
 import Title from "./Title";
 
 // Generate Order Data
@@ -66,8 +67,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const cols = [
+  {
+    qField: "Date",
+    qLabel: "Date",
+  },
+  {
+    qField: "Name",
+    qLabel: "Name",
+  },
+  {
+    qField: "[Ship To]",
+    qLabel: "Ship To",
+  },
+  {
+    qField: "[Payment Method]",
+    qLabel: "Payment Method",
+  },
+  {
+    qField: "[Sale Amount]",
+    qLabel: "Sale Amount",
+  },
+];
+
 export default function Orders() {
   const classes = useStyles();
+  const { title, dataSet, headerGroup } = useTable({
+    cols,
+    sortCriteria: {},
+    // useFormatting,
+    // qPage,
+    // qTitle,
+    qSuppressMissing: true,
+  });
+
+  console.log(dataSet);
+
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
