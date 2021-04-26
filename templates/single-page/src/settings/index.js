@@ -5,9 +5,9 @@ export const footer = {
 
 export const qlikConfig = {
   //Enter your app config here..
-  host: "104.248.85.82", // Qlik Sense Host
-  secure: false, // Whether your host is secure of not (HTTPS / HTTP)
-  port: 19076, // Qlik Sense site port
+  host: "motor-demo.com", // Qlik Sense Host
+  secure: true, // Whether your host is secure of not (HTTPS / HTTP)
+  port: 443, // Qlik Sense site port
   prefix: "", // Prefix
   appId: "Wearables2", // Application Id
 };
