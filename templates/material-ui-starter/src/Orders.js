@@ -69,24 +69,36 @@ const useStyles = makeStyles((theme) => ({
 
 const cols = [
   {
+    dataKey: "date",
     qField: "Date",
     qLabel: "Date",
   },
   {
+    dataKey: "name",
     qField: "Name",
     qLabel: "Name",
   },
   {
+    dataKey: "ship_to",
     qField: "[Ship To]",
     qLabel: "Ship To",
   },
   {
+    dataKey: "payment_method]",
     qField: "[Payment Method]",
     qLabel: "Payment Method",
   },
   {
-    qField: "[Sale Amount]",
+    dataKey: "sale_amount",
+    qField: "=Sum(Sale Amount)",
     qLabel: "Sale Amount",
+    qNumType: "I",
+    qNumFmt: "$#,##0.00",
+    // render: (text, data, i) => {
+    //   return (
+    //     <div className={i === 0 ? "gx-text-red" : "gx-text-green"}>{text}</div>
+    //   );
+    // },
   },
 ];
 
@@ -100,8 +112,6 @@ export default function Orders() {
     // qTitle,
     qSuppressMissing: true,
   });
-
-  console.log(dataSet);
 
   return (
     <React.Fragment>
