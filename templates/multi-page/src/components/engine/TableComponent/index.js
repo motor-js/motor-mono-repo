@@ -1,59 +1,93 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Table, Skeleton, Card, PageHeader, Select, Radio } from "antd";
 import { useTable } from "@motor-js/engine";
 import Widget from "components/Widget";
+import { useJsonToCsv } from "react-json-csv";
+import { flattenData } from "util/dataHelpers";
 
-const TableComponent = () => {
+const TableComponent = ({ tableConfig }) => {
   const [loading, setLoading] = useState(true);
+  const [tableData, setTableData] = useState(null);
 
-  const cols = [
-    {
-      qField: "currency",
-      qLabel: "currency",
-    },
-    {
-      qField: "rate",
-      qLabel: "rate",
-    },
-    {
-      qField: "date",
-      qLabel: "date",
-    },
-    {
-      qField: "fee",
-      qLabel: "fee",
-    },
-  ];
-
-  const { mData, headerGroup } = useTable({
+  const {
+    qTitle,
     cols,
+    sortCriteria,
+    useFormatting,
+    qPage = {},
+    pagination = false,
+    scroll = null,
+    exportFilename,
+    exportFields,
+  } = tableConfig;
+
+  const { saveAsCsv } = useJsonToCsv();
+
+  //const sortCriteriaProp = sortCriteria && sortCriteria
+
+  const { title, dataSet, headerGroup } = useTable({
+    cols,
+    sortCriteria,
+    useFormatting,
+    qPage,
+    qTitle,
+    qSuppressMissing: true,
   });
 
   useEffect(() => {
-    mData && setLoading(false);
-  }, [mData]);
+    const data = dataSet && flattenData(dataSet);
+    dataSet && setLoading(false);
+    setTableData(data);
+  }, [dataSet]);
+
+  const exportData = () => {
+    //File name of the export
+    const filename = exportFilename;
+    //Data to be exported
+    const data = tableData;
+    // List fields here for extract
+    const fields = exportFields;
+    saveAsCsv({ data, fields, filename });
+  };
 
   return (
-    <Widget
-      styleName="gx-order-history"
-      title={<h2 className="h4 gx-text-capitalize gx-mb-0">Table Component</h2>}
-      extra={<p className="gx-text-primary gx-mb-0 gx-pointer">Export Data</p>}
-    >
-      <div className="gx-table-responsive">
-        {loading ? (
-          <div>loading</div>
-        ) : (
-          <Table
-            className="gx-table-no-bordered"
-            columns={headerGroup}
-            dataSource={mData}
-            pagination={false}
-            bordered={false}
-            size="small"
-          />
-        )}
-      </div>
-    </Widget>
+    <>
+      {tableData ? (
+        <Widget
+          styleName="gx-order-history"
+          style={{ width: "100%", height: "100px" }}
+          title={
+            <h2 className="h4 gx-text-capitalize gx-mb-0">{title || qTitle}</h2>
+          }
+          extra={
+            <p
+              className="gx-text-primary gx-mb-0 gx-pointer"
+              onClick={exportData}
+            >
+              Export Data
+            </p>
+          }
+        >
+          <div className="gx-table-responsive">
+            {loading ? (
+              <div>loading</div>
+            ) : (
+              <Table
+                scroll={scroll}
+                className="gx-table-no-bordered"
+                columns={headerGroup}
+                dataSource={tableData}
+                pagination={pagination}
+                bordered={false}
+                size="small"
+              />
+            )}
+          </div>
+        </Widget>
+      ) : (
+        <Skeleton active />
+      )}
+    </>
   );
 };
 
