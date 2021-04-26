@@ -3,8 +3,10 @@ import { Route, Switch } from "react-router-dom";
 
 import asyncComponent from "util/asyncComponent";
 
-const App = ({ match }) => (
+// import "assets/vendors/style";
+// import "styles/wieldy.less";
 
+const App = ({ match }) => (
   <div className="gx-main-content-wrapper">
     <Switch>
       <Route
