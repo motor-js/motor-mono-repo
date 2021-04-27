@@ -1,6 +1,6 @@
 /*Base Styles*/
 body {
-  overflow: hidden;
+  // overflow: hidden;
   .transition(all 0.3s ease-out);
   width: 100% !important;
   position: relative;
@@ -328,6 +328,55 @@ img {
   .@{class-prefix}-card-social & {
     margin-bottom: 0;
     .justify-content(space-around);
+  }
+}
+
+.@{class-prefix}-reward-card-bestSelling{
+  color: #FF7272;
+}
+
+.@{class-prefix}-red-gradient {
+  .horizontal-gradient(#FF7171, #ffb8b8);
+}
+
+.@{class-prefix}-pink-purple-gradient {
+  .horizontal-gradient(#FF7171, #ffb8b8);
+}
+
+.@{class-prefix}-chart-up {
+  color: @green-color;
+
+  .@{class-prefix}-bg-geekblue & {
+    color: @white-color;
+  }
+}
+
+.@{class-prefix}-chart-down {
+  color: @red-6;
+
+  & .icon {
+    .rotate(180deg);
+    display: inline-block;
+  }
+}
+
+.@{class-prefix}-bg-dark-primary {
+  background-color: @primary-color;
+  position: relative;
+  overflow: hidden;
+
+  & > * {
+    position: relative;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: fade(@black-color, 72%);
   }
 }
 

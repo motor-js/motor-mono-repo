@@ -9,10 +9,9 @@ import PieChart from "components/engine/PieChart";
 import Widget from "components/Widget";
 
 const ChartComponent = ({ dataProps }) => {
-
   const { data, chartConfig } = dataProps;
 
-  const { cols, qTitle, qSubTitle, qMetrics, qLists } = data;
+  const { cols, qPage = {}, qTitle, qSubTitle, qMetrics, qLists } = data;
   const { chartType, buttons } = chartConfig;
 
   const [chartValue, setChartValue] = useState(buttons ? buttons[0].value : []);
@@ -36,13 +35,9 @@ const ChartComponent = ({ dataProps }) => {
       Chart = AreaChart;
   }
 
-  const {
-    dataSet,
-    title,
-    subTitle,
-    handlerChange,
-  } = useData({
+  const { dataSet, title, subTitle, handlerChange } = useData({
     cols,
+    qPage,
     qTitle,
     qSubTitle,
     qMetrics,
@@ -64,15 +59,13 @@ const ChartComponent = ({ dataProps }) => {
 
   return (
     <>
-      {dataSet ? (
-        <Widget styleName="gx-card-full">
-          {(title || subTitle) && (
-            <PageHeader
-              className="site-page-header"
-              title={title}
-              subTitle={subTitle}
-            />
-          )}
+      {dataSet.data ? (
+        <Widget
+          styleName="gx-card-full"
+          title={
+            <h2 className="h4 gx-text-capitalize gx-mb-0">{title || qTitle}</h2>
+          }
+        >
           <div className="ant-row-flex gx-px-4 gx-pt-4">
             <div className="gx-ml-auto">
               {buttons && (

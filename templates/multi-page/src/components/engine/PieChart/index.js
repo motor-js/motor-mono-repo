@@ -9,6 +9,8 @@ import {
   Cell,
 } from "recharts";
 
+import { CustomTooltip } from "../../../util";
+
 const MotorPieChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
 
@@ -18,17 +20,44 @@ const MotorPieChart = ({ dataSet, config }) => {
     height,
     fill,
     label = true,
+    labelLine = true,
     isAnimationActive = true,
     cx = "35%",
     cy = "50%",
+    tooltip = null,
     outerRadius = 80,
     innerRadius = 0,
+    renderLabel,
+    legendProps,
   } = config;
+
+  const renderLegend = (props) => {
+    const { payload } = props;
+    console.log(payload);
+
+    return (
+      <ul>
+        {payload.map((entry, index) => (
+          <li key={`item-${index}`}>{entry.payload.name}</li>
+        ))}
+      </ul>
+    );
+  };
 
   return (
     <ResponsiveContainer width="100%" height={height}>
       <PieChart margin={margin}>
-        {showLegend && <Legend />}
+        {showLegend && (
+          <Legend
+            iconSize={legendProps && legendProps.iconSize}
+            iconType={legendProps && legendProps.iconType}
+            width={legendProps && legendProps.width}
+            height={legendProps && legendProps.height}
+            layout={legendProps && legendProps.layout}
+            verticalAlign={legendProps && legendProps.verticalAlign}
+            wrapperStyle={legendProps && legendProps.wrapperStyle}
+          />
+        )}
         {dataKeys &&
           dataKeys.map((key, index) => (
             <Pie
@@ -40,22 +69,18 @@ const MotorPieChart = ({ dataSet, config }) => {
               cy={cy}
               outerRadius={outerRadius}
               innerRadius={innerRadius}
-              label={label}
+              label={renderLabel}
+              labelLine={labelLine}
             >
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={fill[index]} />
               ))}
             </Pie>
           ))}
-        {/* <Pie
-          dataKey="value"
-          data={data02}
-          cx="70%"
-          cy="50%"
-          outerRadius={80}
-          fill="#FE9E15"
-        /> */}
-        <Tooltip />
+        <Tooltip
+          wrapperStyle={tooltip && tooltip.wrapperStyle}
+          content={tooltip && <CustomTooltip fill={fill} />}
+        />
       </PieChart>
     </ResponsiveContainer>
   );

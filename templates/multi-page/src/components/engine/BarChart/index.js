@@ -9,7 +9,12 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
+  Label,
+  Cell,
 } from "recharts";
+
+import { formatYAxis, formatXAxis } from "../../../util/formatChart";
+import { CustomTooltip } from "../../../util";
 
 const MotorBarChart = ({ dataSet, config }) => {
   const { data, dataKeys } = dataSet;
@@ -18,8 +23,12 @@ const MotorBarChart = ({ dataSet, config }) => {
     showXAxis = true,
     xAxisDataKey,
     ShowYAxis = true,
+    xAxisLabel,
+    tooltip = null,
+    yAxisLabel,
     showGrid = true,
     showLegend = true,
+    legendProps,
     isAnimationActive = true,
     margin,
     height,
@@ -30,11 +39,48 @@ const MotorBarChart = ({ dataSet, config }) => {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={margin}>
-        {showXAxis && <XAxis dataKey={xAxisDataKey} />}
-        {ShowYAxis && <YAxis />}
+        {showXAxis && (
+          <XAxis dataKey={xAxisDataKey} tickFormatter={formatXAxis}>
+            {xAxisLabel && (
+              <Label
+                className="gx-recharts-label"
+                value={xAxisLabel.value}
+                offset={xAxisLabel.offset}
+                position={xAxisLabel.position}
+              />
+            )}
+          </XAxis>
+        )}
+        {ShowYAxis && (
+          <YAxis tickFormatter={formatYAxis}>
+            {yAxisLabel && (
+              <Label
+                className="gx-recharts-label"
+                value={yAxisLabel.value}
+                angle={yAxisLabel.angle}
+                offset={yAxisLabel.offset}
+                position={yAxisLabel.position}
+              />
+            )}
+          </YAxis>
+        )}
         {showGrid && <CartesianGrid strokeDasharray="3 3" />}
-        <Tooltip />
-        {showLegend && <Legend />}
+
+        <Tooltip
+          wrapperStyle={tooltip && tooltip.wrapperStyle}
+          content={tooltip && <CustomTooltip fill={fill} />}
+        />
+        {showLegend && (
+          <Legend
+            iconSize={legendProps && legendProps.iconSize}
+            iconType={legendProps && legendProps.iconType}
+            width={legendProps && legendProps.width}
+            height={legendProps && legendProps.height}
+            layout={legendProps && legendProps.layout}
+            verticalAlign={legendProps && legendProps.verticalAlign}
+            wrapperStyle={legendProps && legendProps.wrapperStyle}
+          />
+        )}
         {dataKeys &&
           dataKeys.map((key, index) => (
             <Bar
@@ -45,7 +91,12 @@ const MotorBarChart = ({ dataSet, config }) => {
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
-            />
+            >
+              {dataKeys.length === 1 &&
+                data.map((entry, index) => (
+                  <Cell key={index} fill={fill[index]} />
+                ))}
+            </Bar>
           ))}
       </BarChart>
     </ResponsiveContainer>
