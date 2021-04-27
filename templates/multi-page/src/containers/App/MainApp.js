@@ -13,7 +13,7 @@ const { Content, Footer } = Layout;
 const MainApp = (props) => {
   const { match } = props;
 
-  console.log(props);
+  // console.log(props);
 
   const [layoutState, layoutDispatch] = useContext(LayoutContext);
 

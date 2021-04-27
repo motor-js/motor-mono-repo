@@ -22,6 +22,22 @@ body.dark-theme {
   color: @dark-theme-text-color;
   background-color: @dark-theme-primary-color;
 
+  /*  Charts Styling */
+  .@{class-prefix}-recharts-label {
+    fill: @dark-theme-text-color;
+  }
+
+  .recharts-cartesian-axis-tick-value {
+    fill: @dark-theme-text-color;
+  }
+  .recharts-cartesian-axis-tick-line {
+    stroke: @dark-theme-text-color;
+  }
+
+  .ant-input-search {
+    color: @dark-theme-text-color;
+  }
+
   & .@{class-prefix}-link {
     color: darken(@dark-theme-text-color, 10%);
   }
@@ -2176,6 +2192,10 @@ body.dark-theme {
     background-color: darken(@dark-theme-component-background, 5%);
     border-color: darken(@dark-theme-component-background, 5%);
     color: @dark-theme-text-color;
+
+    &.ant-input-search-button {
+      color: @dark-theme-text-color !important;
+    }
 
     &:hover,
     &:focus {
