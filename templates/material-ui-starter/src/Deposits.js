@@ -39,6 +39,14 @@ export default function Deposits() {
     qMetrics,
   });
 
+  const Loader = ({ height }) => {
+    const skeletons = [];
+    for (let i = 0; i < height; i += 18) {
+      skeletons.push(<Skeleton key={i} />);
+    }
+    return <div style={{ height: height }}>{skeletons}</div>;
+  };
+
   return (
     <React.Fragment>
       {metrics ? (
@@ -57,19 +65,7 @@ export default function Deposits() {
           </div>{" "}
         </>
       ) : (
-        <>
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-        </>
+        <Loader height={250} />
       )}
     </React.Fragment>
   );
