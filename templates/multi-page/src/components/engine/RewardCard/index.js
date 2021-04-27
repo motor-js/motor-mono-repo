@@ -33,12 +33,6 @@ const RewardCard = ({ dataProps }) => {
               and is supplied by {metrics.companyName} at a a price of{" "}
               {metrics.price}
             </p>
-            {/* <Button
-              size="large"
-              className="gx-btn-secondary gx-mt-md-5 gx-mb-1"
-            >
-              Invite Friends
-            </Button> */}
             <img
               style={{ marginTop: "10px", borderRadius: "20px" }}
               src={metrics.image}
