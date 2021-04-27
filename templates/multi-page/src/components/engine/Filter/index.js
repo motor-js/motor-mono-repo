@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Select } from "antd";
-import { useList } from "@motor-js/engine"
-import Widget from "components/Widget";
+import { useList } from "@motor-js/engine";
 
-const Filter = ({ dimension }) => {
+const Filter = ({ dimension, maxTagCount = 10 }) => {
   const [children, setChildren] = useState([]);
   const [selected, setSelected] = useState();
 
   const {
-    mData,
+    listData,
     select,
     selections,
     beginSelections,
@@ -22,8 +21,8 @@ const Filter = ({ dimension }) => {
 
   useEffect(() => {
     let child = [];
-    mData &&
-      mData.map((d, i) =>
+    listData &&
+      listData.map((d, i) =>
         child.push(
           <Option key={d.key} value={d.key}>
             {d.text}
@@ -33,7 +32,7 @@ const Filter = ({ dimension }) => {
     setChildren(child);
     if (!selections) return;
     setSelected(selections);
-  }, [mData, selections]);
+  }, [listData, selections]);
 
   async function handleChange(v) {
     await beginSelections();
@@ -52,26 +51,23 @@ const Filter = ({ dimension }) => {
   }
 
   return (
-    <Widget
-    //styleName="gx-order-history"
-    //title={ <h2 className="h4 gx-text-capitalize gx-mb-0">Name</h2> }
+    <Select
+      mode="multiple"
+      allowClear
+      onChange={handleChange}
+      value={selected}
+      style={{ width: "100%", padding: "2px" }}
+      placeholder={dimension[0]}
+      onClear={handleClear}
+      maxTagCount={maxTagCount}
+      onDeselect={(v) => handleDeselect(v)}
+      filterOption={(input, option) =>
+        option.children &&
+        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      }
     >
-      <Select
-        mode="multiple"
-        allowClear
-        onChange={handleChange}
-        value={selected}
-        style={{ width: "100%" }}
-        placeholder={dimension[0]}
-        onClear={handleClear}
-        onDeselect={(v) => handleDeselect(v)}
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-      >
-        {children}
-      </Select>
-    </Widget>
+      {children}
+    </Select>
   );
 };
 
