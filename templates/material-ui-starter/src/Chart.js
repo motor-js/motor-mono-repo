@@ -1,6 +1,5 @@
 import React from "react";
 import { useTheme } from "@material-ui/core/styles";
-import Skeleton from "@material-ui/lab/Skeleton";
 import {
   LineChart,
   Line,
@@ -11,6 +10,7 @@ import {
 } from "recharts";
 import { useData } from "@motor-js/engine";
 import Title from "./Title";
+import Loader from "./Loader";
 
 const cols = [
   {
@@ -22,14 +22,6 @@ const cols = [
     qLabel: "amount",
   },
 ];
-
-const Loader = ({ height }) => {
-  const skeletons = [];
-  for (let i = 0; i < height; i += 18) {
-    skeletons.push(<Skeleton key={i} />);
-  }
-  return <div style={{ height: height }}>{skeletons}</div>;
-};
 
 export default function Chart() {
   const theme = useTheme();

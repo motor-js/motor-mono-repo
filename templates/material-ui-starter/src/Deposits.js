@@ -2,9 +2,9 @@ import React from "react";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Skeleton from "@material-ui/lab/Skeleton";
 import { useData } from "@motor-js/engine";
 import Title from "./Title";
+import Loader from "./Loader";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -38,14 +38,6 @@ export default function Deposits() {
     cols,
     qMetrics,
   });
-
-  const Loader = ({ height }) => {
-    const skeletons = [];
-    for (let i = 0; i < height; i += 18) {
-      skeletons.push(<Skeleton key={i} />);
-    }
-    return <div style={{ height: height }}>{skeletons}</div>;
-  };
 
   return (
     <React.Fragment>
