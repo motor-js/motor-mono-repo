@@ -28,5 +28,6 @@
     "@nebula.js/sn-sankey-chart": "^0.5.11",
     "@nebula.js/sn-table": "^0.2.2",
     "@nebula.js/stardust": "^1.1.1"
-  }
+  },
+  "gitHead": "90eb031624470d41e2f25838851e737a91a9f19a"
 }
