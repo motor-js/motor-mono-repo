@@ -345,7 +345,7 @@ const useData = (props) => {
           return col;
         });
 
-    if (qDimensions.length > 1) {
+    if (qDimensions && qDimensions.length > 1) {
       const listDef = {
         qListObjectDef: {
           qStateName: "$",
