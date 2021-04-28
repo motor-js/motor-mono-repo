@@ -478,45 +478,6 @@ export const pieDataDonut = {
     qTitle: "Top 5 Sales by Company",
   },
 };
-export const reverseCardData = {
-  data: {
-    cols: [
-      {
-        qField: "[Body Location]",
-        qLabel: "Location",
-      },
-      {
-        qField: "=Sum(Quantity*Price)",
-        qLabel: "price",
-      },
-    ],
-    qMetrics: [
-      {
-        qName: "bestSelling",
-        qExpr: "FirstSortedValue(Name,-Aggr(Sum(Price*Quantity),  Name))",
-        qType: "qStringExpression",
-      },
-      {
-        qName: "companyName",
-        qExpr:
-          "FirstSortedValue([Company Name], -Aggr(Sum(Price*Quantity), [Company Name]))",
-        qType: "qStringExpression",
-      },
-      {
-        qName: "price",
-        qExpr:
-          "Num(FirstSortedValue([Price], -Aggr(Sum(Price*Quantity), [Price])),'$#,##0.00')",
-        qType: "qStringExpression",
-      },
-      {
-        qName: "image",
-        qExpr: "FirstSortedValue(_Image, -Aggr(Sum(Price*Quantity), _Image))",
-        qType: "qStringExpression",
-      },
-    ],
-    qTitle: "Sales by Body Location",
-  },
-};
 
 export const tableCols = {
   // qTitle: "=Count(Name)",
@@ -567,12 +528,12 @@ export const tableCols = {
 };
 
 export const orderHistory = {
-  qTitle: "Top 5 Orders",
+  qTitle: "Top 10 Orders",
   qPage: {
     qTop: 0,
     qLeft: 0,
     qWidth: 10,
-    qHeight: 5,
+    qHeight: 10,
   },
   sortCriteria: { qInterColumnSortOrder: [2, 0, 1] },
   cols: [
@@ -691,8 +652,6 @@ export const stackedBar = {
     ],
   },
   data: {
-    // qDimField: "[coin]",
-    // qLists: [{ dataKey: "[Body Location]" }, { name: "[Body Location]" }],
     cols: [
       {
         qField: "[OrderDateMonth]",
