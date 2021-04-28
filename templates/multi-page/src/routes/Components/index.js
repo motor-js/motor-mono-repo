@@ -29,12 +29,14 @@ const Components = () => {
   return (
     <Auxiliary>
       <Layout className="gx-app-layout">
+        <div className="gx-page-heading">
+          <h2 className="gx-page-title">Filters</h2>
+        </div>
         <Layout>
           {/* <Topbar /> */}
           <Content className={`gx-layout-content gx-container-wrap`}>
             {/* <div className="gx-main-content-wrapper"> */}
             <div>
-              {" "}
               <Row>
                 <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                   <Widget>
@@ -47,6 +49,9 @@ const Components = () => {
                   </Widget>
                 </Col>
               </Row>
+              <div className="gx-page-heading">
+                <h2 className="gx-page-title">KPI Charts</h2>
+              </div>
               <Row>
                 <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                   <ChartKPI dataProps={FitnessKpi} />
@@ -64,6 +69,9 @@ const Components = () => {
                   <ChartKPI dataProps={bodyLocationKPI} />
                 </Col>
               </Row>
+              <div className="gx-page-heading">
+                <h2 className="gx-page-title">Charts</h2>
+              </div>
               <Row>
                 <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                   <Chart dataProps={ordersByCategory} />
@@ -88,6 +96,9 @@ const Components = () => {
                   <Chart dataProps={pieDataDonut} />
                 </Col>
               </Row>
+              <div className="gx-page-heading">
+                <h2 className="gx-page-title">Tables</h2>
+              </div>
               <Row>
                 <Col xl={12} lg={24} md={12} sm={24} xs={24}>
                   <TableComponent tableConfig={tableCols} />
