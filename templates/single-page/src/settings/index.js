@@ -3,6 +3,17 @@ export const footer = {
   footerText: "Copyright Motor © 2021",
 };
 
+/*
+export const qlikConfig = {
+  //Enter your app config here..
+  host: "localhost", // Qlik Sense Host
+  secure: false, // Whether your host is secure of not (HTTPS / HTTP)
+  port: 19076, // Qlik Sense site port
+  prefix: "", // Prefix
+  appId: "Wearables2", // Application Id
+};
+*/
+
 export const qlikConfig = {
   //Enter your app config here..
   host: "motor-demo.com", // Qlik Sense Host
@@ -11,6 +22,7 @@ export const qlikConfig = {
   prefix: "", // Prefix
   appId: "Wearables2", // Application Id
 };
+
 
 /*
 export const qlikConfig = {
