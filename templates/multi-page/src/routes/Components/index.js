@@ -10,6 +10,7 @@ import Chart from "components/engine/Chart";
 import {
   FitnessKpi,
   bodyLocationKPI,
+  bodyLocationStackedKPI,
   wristKPI,
   tableCols,
   ordersByCategory,
@@ -66,7 +67,7 @@ const Components = () => {
                 </Col>
 
                 <Col xl={12} lg={24} md={12} sm={24} xs={24}>
-                  <ChartKPI dataProps={bodyLocationKPI} />
+                  <ChartKPI dataProps={bodyLocationStackedKPI} />
                 </Col>
               </Row>
               <div className="gx-page-heading">

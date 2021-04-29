@@ -207,6 +207,62 @@ export const bodyLocationKPI = {
   },
   icon: "ripple",
 };
+export const bodyLocationStackedKPI = {
+  chartConfig: {
+    chartType: "bar",
+    margin: { top: 0, right: 0, left: 0, bottom: 0 },
+    height: 75,
+    strokeWidth: 0,
+    stackId: 2,
+    stroke: "#FEEADA",
+    // fill: "url(#color5)",
+    fill: colourPalette,
+    fillOpacity: 1,
+    tooltip,
+    stacked: true,
+  },
+  data: {
+    cols: [
+      {
+        qField: "[OrderDateMonth]",
+        qLabel: "Order Date",
+      },
+      {
+        qField: "=count({$<[Body Location]={'Chest'}>} Quantity*Price)",
+        qLabel: "Chest",
+      },
+      {
+        qField: "=count({$<[Body Location]={'Torso'}>} Quantity*Price)",
+        qLabel: "Torso",
+      },
+      {
+        qField: "=count({$<[Body Location]={'Waist'}>} Quantity*Price)",
+        qLabel: "Waist",
+      },
+    ],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr:
+          "num(Sum({$<[Body Location]={'Torso','Waist','Chest'}>}Quantity*Price),'$#,##0')",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "desc",
+        qExpr: "=count({$<[Body Location]={'Torso'}>} Quantity*Price)",
+        qType: "qStringExpression",
+      },
+      {
+        qName: "styleName",
+        qExpr:
+          "if(Sum({$<[Body Location]={'Wrist'}>} Quantity*Price)/Sum( Quantity*Price)>=0,'up','down')",
+        qType: "qStringExpression",
+      },
+    ],
+    qTitle: "Stacked Bar chart KPI",
+  },
+  icon: "ripple",
+};
 
 export const wristKPI = {
   chartConfig: {
