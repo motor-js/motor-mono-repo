@@ -34,7 +34,8 @@ const Home = () => {
         <Layout>
           {/* <Topbar /> */}
           <Content className={`gx-layout-content gx-container-wrap`}>
-            <div className="gx-main-content-wrapper">
+            {/* <div className="gx-main-content-wrapper"> */}
+            <div>
               <Row>
                 <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                   <ChartKPI dataProps={FitnessKpi} />

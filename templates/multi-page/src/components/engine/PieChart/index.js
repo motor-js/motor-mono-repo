@@ -33,7 +33,7 @@ const MotorPieChart = ({ dataSet, config }) => {
 
   const renderLegend = (props) => {
     const { payload } = props;
-    console.log(payload);
+    // console.log(payload);
 
     return (
       <ul>
