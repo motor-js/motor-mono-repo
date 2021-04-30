@@ -119,6 +119,7 @@ const StyledLogin = ({
           }}
         >
           <div style={{ padding: "0.6rem", fontSize: "14px" }}>{body}</div>
+          <div style={{ padding: "0.6rem", fontSize: "14px" }}>{bodySub}</div>
           <button
             style={{
               fontFamily: loginfontFamily,

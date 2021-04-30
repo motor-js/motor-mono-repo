@@ -370,7 +370,7 @@ export const orderAnalysis = {
     chartType: "line",
     margin: { top: 10, right: 40, left: 35, bottom: 20 },
     // dot: { stroke: "#FEA931", strokeWidth: 2 },
-    dot: { stroke: colourPalette, strokeWidth: 10 },
+    dot: { stroke: colourPalette, strokeWidth: 2 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,

@@ -12,12 +12,12 @@ function Motor({
   logoHeight,
   header,
   body,
+  bodySub,
   size,
   buttonText,
   buttonFontColor,
   buttonColor,
   backgroundColor,
-  capabilityAPI,
   loginfontFamily,
   NotConnectedheader,
   NotConnectedBody,
@@ -37,6 +37,7 @@ function Motor({
             logoWidth={logoWidth}
             header={header}
             body={body}
+            bodySub={bodySub}
             size={size}
             backgroundColor={backgroundColor}
             buttonText={buttonText}
