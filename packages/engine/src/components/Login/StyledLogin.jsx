@@ -4,6 +4,7 @@ const StyledLogin = ({
   config,
   header,
   body,
+  bodySub,
   size,
   buttonText,
   backgroundColor,

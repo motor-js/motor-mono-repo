@@ -27,7 +27,8 @@ export const appSettings = {
   logoWidth: "120px", // Login logo width
   buttonColor: "#FF7171", // Button color
   buttonFontColor: "white", // Button font color
-  body: "Please login to get started 🎉 (try username: demo@motor-js.io & pword: MotorDemo!)", // Login text
+  body: "Please login to get started 🎉 ", // Login text
+  bodySub: "(try username: demo@motor-js.io & pword: MotorDemo!)",
   loginfontFamily: '"NoirPro", sans-serif', //Login & Not Connected modal font
   NotConnectedheader: "Connection lost", // Not Connected header text
   NotConnectedBody: "Please refresh to continue", // Not Connected body text

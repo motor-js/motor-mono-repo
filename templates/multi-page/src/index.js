@@ -17,6 +17,7 @@ ReactDOM.render(
     buttonColor={appSettings.buttonColor}
     buttonFontColor={appSettings.buttonFontColor}
     body={appSettings.body}
+    bodySub={appSettings.bodySub}
     loginfontFamily={appSettings.loginfontFamily}
     NotConnectedheader={appSettings.NotConnectedheader}
     NotConnectedBody={appSettings.NotConnectedBody}
