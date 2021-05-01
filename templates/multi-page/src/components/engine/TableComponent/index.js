@@ -47,7 +47,8 @@ const TableComponent = ({ tableConfig }) => {
     const data = tableData;
     // List fields here for extract
     const fields = exportFields;
-    saveAsCsv({ data, fields, filename });
+    console.log({ data, fields, filename })
+   saveAsCsv({ data, fields, filename });
   };
 
   return (

@@ -2,7 +2,6 @@ export const footer = {
   footerText: "Copyright Motor © 2021",
 };
 
-
 export const qlikConfig = {
   //Enter your app config here..
   host: "motor.eu.qlikcloud.com", // Qlik Sense Host
@@ -28,7 +27,7 @@ export const appSettings = {
   buttonColor: "#FF7171", // Button color
   buttonFontColor: "white", // Button font color
   body: "Please login to get started 🎉 ", // Login text
-  bodySub: "(try username: demo@motor-js.io & pword: MotorDemo!)",
+  bodySub: "Try user: demo@motor-js.io & password: MotorDemo!",
   loginfontFamily: '"NoirPro", sans-serif', //Login & Not Connected modal font
   NotConnectedheader: "Connection lost", // Not Connected header text
   NotConnectedBody: "Please refresh to continue", // Not Connected body text

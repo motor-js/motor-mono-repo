@@ -8,12 +8,13 @@ const NebulaContainer = ({ render, styles }) => {
  
   const nebula = useContext(NebulaContext)
   
-  const { type, fields, properties, showTitles, title, subTitle, footnote } = render
+  const { id, type, fields, properties, showTitles, title, subTitle, footnote } = render
 
   const update = async () => {
 
     nebula.render({
-      element: chartRef.current,           
+      element: chartRef.current,    
+      id,       
       type,
       fields,
       properties,

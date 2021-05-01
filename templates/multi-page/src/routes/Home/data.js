@@ -267,7 +267,7 @@ export const ordersByCategory = {
     xAxisDataKey: "Category",
     tooltip,
     xAxisLabel: {
-      value: "Categpry",
+      value: "Category",
       offset: -10,
       position: "insideBottom",
     },
@@ -314,7 +314,7 @@ export const orderAnalysis = {
     chartType: "line",
     margin: { top: 10, right: 40, left: 35, bottom: 20 },
     // dot: { stroke: "#FEA931", strokeWidth: 2 },
-    dot: { stroke: colourPalette, strokeWidth: 10 },
+    dot: { stroke: colourPalette, strokeWidth: 2 },
     showXAxis: true,
     showXAxis: true,
     showGrid: true,
@@ -325,7 +325,7 @@ export const orderAnalysis = {
       position: "insideBottom",
     },
     yAxisLabel: {
-      value: "Pages",
+      value: "Sales",
       angle: -90,
       offset: -20,
       position: "insideLeft",
@@ -604,6 +604,12 @@ export const orderHistory = {
       },
     },
   ],
+  exportFields: {
+    company_name: "Company",
+    qty_sold: "Quantity Sold",
+    tot_sales: "Total Sales",
+  },
+  exportFilename: "Top 5 Orders",
 };
 
 export const multipleMeasures = {
