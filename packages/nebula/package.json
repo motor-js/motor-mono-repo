@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/nebula",
   "license": "MIT",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
