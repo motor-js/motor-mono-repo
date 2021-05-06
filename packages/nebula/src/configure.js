@@ -20,27 +20,27 @@ const configure = embed.createConfiguration({
   },
   types: [
     {
-      name: 'barChart',
+      name: 'barchart',
       load: () => barChart,
     },
     {
-      name: 'lineChart',
+      name: 'linechart',
       load: () => lineChart,
     },
     {
-      name: 'pieChart',
+      name: 'piechart',
       load: () => pieChart,
     },
     {
-      name: 'sankeyChart',
+      name: 'sankeychart',
       load: () => sankeyChart,
     },
     {
-      name: 'funneChart',
+      name: 'funnechart',
       load: () => funneChart,
     },
     {
-      name: 'mekkoChart',
+      name: 'mekkochart',
       load: () => mekkoChart,
     },
     {
@@ -48,7 +48,7 @@ const configure = embed.createConfiguration({
       load: () => table,
     },
     {
-      name: 'comboChart',
+      name: 'combochart',
       load: () => comboChart,
     },
   ],
