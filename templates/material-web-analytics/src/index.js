@@ -9,8 +9,8 @@ import { HashRouter as Router, Route } from "react-router-dom";
 import ReportPage from "./pages/ReportPage";
 
 import AudiencePage from "./pages/AudiencePage";
-// import BehaviorPage from "./pages/BehaviorPage";
-// import AcquisitionPage from "./pages/AcquisitionPage";
+import BehaviorPage from "./pages/BehaviorPage";
+import AcquisitionPage from "./pages/AcquisitionPage";
 // import CustomReportPage from "./pages/CustomReportPage";
 
 // import CustomReportsOverviewPage from "./pages/CustomReportsOverviewPage";
@@ -27,14 +27,12 @@ ReactDOM.render(
       <Route
         exact
         path="/behavior"
-        // render={() => <ReportPage report={BehaviorPage} />}
-        render={() => <h1>BehaviorPage</h1>}
+        render={() => <ReportPage report={BehaviorPage} />}
       />
       <Route
         exact
         path="/acquisition"
-        // render={() => <ReportPage report={AcquisitionPage} />}
-        render={() => <h1>AcquisitionPage</h1>}
+        render={() => <ReportPage report={AcquisitionPage} />}
       />
       {/* <Route
         exact
