@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useCubeQuery } from "@cubejs-client/react";
+// import { useCubeQuery } from "@cubejs-client/react";
+import { useData } from "@motor-js/engine";
 
 import {
   CartesianGrid,
@@ -195,12 +196,17 @@ const TypeToChartComponent = {
     </ResponsiveContainer>
   ),
   number: ({ resultSet, height }) => {
-    const measureKey = resultSet.seriesNames()[0].key; // Ensure number can only render single measure
-    const format = resultSet.annotation().measures[measureKey].format;
-    const value = resultSet.totalRow()[measureKey];
+    // const format = resultSet.annotation().measures[measureKey].format;
+    const format = null; // AG
+
+    const measureKey = Object.keys(resultSet.metrics)[0]; // Ensure number can only render single measure
+    const value = resultSet.metrics[Object.keys(resultSet.metrics)[0]];
     let formattedValue;
     if (format === "percent") {
       formattedValue = percentFormatter(value);
+    } else if (typeof value === "string") {
+      formattedValue = value;
+    } else if (Math.ceil(value) === value && Math.floor(value) === value) {
     } else if (durationMeasures.includes(measureKey)) {
       // special case, since format time is missing
       formattedValue = timeNumberFormatter(value);
@@ -276,9 +282,20 @@ const renderChart = (Component) => ({ resultSet, error, height, ...props }) =>
   (error && error.toString()) || <Loader height={height} />;
 
 const ChartRenderer = ({ vizState, height }) => {
-  const { query, chartType, ...options } = vizState;
+  const { cols, qMetrics, chartType, ...options } = vizState;
   const component = TypeToMemoChartComponent[chartType];
-  const renderProps = useCubeQuery(query);
+  // const renderProps = useCubeQuery(query);
+  const { metrics } = useData({
+    cols,
+    qMetrics,
+  });
+
+  const renderProps = {
+    error: null,
+    resultSet: { metrics },
+  };
+
+  if (!metrics) return null;
   return (
     component && renderChart(component)({ ...options, height, ...renderProps })
   );
