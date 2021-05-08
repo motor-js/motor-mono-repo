@@ -74,23 +74,22 @@ const queries = {
       },
     ],
   },
+  usersByType: {
+    chartType: "pie",
+    cols: [
+      {
+        qField: "[Type]",
+        qLabel: "Type",
+      },
+      {
+        qField: "=Count(Dim1)",
+        qLabel: "Users",
+      },
+    ],
+  },
 };
 
 // const queries = {
-
-//   usersByType: {
-//     chartType: "pie",
-//     query: {
-//       measures: ["Sessions.usersCount"],
-//       dimensions: ["Sessions.type"],
-//       timeDimensions: [
-//         {
-//           dimension: "Sessions.sessionStart",
-//         },
-//       ],
-//     },
-//   },
-// };
 
 // const overTimeQueries = {
 //   Users: {
@@ -182,10 +181,7 @@ const AudiencePage = ({ withTime }) => {
         </Grid>
       </Grid>
       <Grid item xs={6}>
-        {/* <Chart
-          title="Users by Type"
-          vizState={withTime(queries.usersByType)}
-        /> */}
+        <Chart title="Users by Type" vizState={withTime(queries.usersByType)} />
       </Grid>
       {/* <SwitchTable
         options={[{

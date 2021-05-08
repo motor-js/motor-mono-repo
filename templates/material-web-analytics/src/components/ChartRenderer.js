@@ -175,26 +175,29 @@ const TypeToChartComponent = {
       ))}
     </CartesianChart>
   ),
-  pie: ({ resultSet, legend, height }) => (
-    <ResponsiveContainer width="100%" height={height || 250}>
-      <PieChart>
-        <Pie
-          label={(value) => numeral(value.percent).format("0.00%")}
-          isAnimationActive={false}
-          data={resultSet.chartPivot()}
-          nameKey="x"
-          dataKey={resultSet.seriesNames()[0].key}
-          fill="#8884d8"
-        >
-          {resultSet.chartPivot().map((e, index) => (
-            <Cell key={index} fill={colors[index % colors.length]} />
-          ))}
-        </Pie>
-        {legend && <Legend layout={legend} align="right" />}
-        <Tooltip />
-      </PieChart>
-    </ResponsiveContainer>
-  ),
+  pie: ({ resultSet, legend, height }) => {
+    console.log(resultSet);
+    return (
+      <ResponsiveContainer width="100%" height={height || 250}>
+        <PieChart>
+          <Pie
+            label={(value) => numeral(value.percent).format("0.00%")}
+            isAnimationActive={false}
+            data={resultSet.chartPivot()}
+            nameKey="x"
+            dataKey={resultSet.seriesNames()[0].key}
+            fill="#8884d8"
+          >
+            {resultSet.chartPivot().map((e, index) => (
+              <Cell key={index} fill={colors[index % colors.length]} />
+            ))}
+          </Pie>
+          {legend && <Legend layout={legend} align="right" />}
+          <Tooltip />
+        </PieChart>
+      </ResponsiveContainer>
+    );
+  },
   number: ({ resultSet, height }) => {
     // const format = resultSet.annotation().measures[measureKey].format;
     const format = null; // AG
@@ -285,14 +288,14 @@ const ChartRenderer = ({ vizState, height }) => {
   const { cols, qMetrics, chartType, ...options } = vizState;
   const component = TypeToMemoChartComponent[chartType];
   // const renderProps = useCubeQuery(query);
-  const { metrics } = useData({
+  const { dataSet, metrics } = useData({
     cols,
     qMetrics,
   });
 
   const renderProps = {
-    error: null,
-    resultSet: { metrics },
+    // error: null,
+    resultSet: { dataSet, metrics },
   };
 
   if (!metrics) return null;
