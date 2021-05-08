@@ -6,9 +6,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { HashRouter as Router, Route } from "react-router-dom";
 
-// import ReportPage from "./pages/ReportPage";
+import ReportPage from "./pages/ReportPage";
 
-// import AudiencePage from "./pages/AudiencePage";
+import AudiencePage from "./pages/AudiencePage";
 // import BehaviorPage from "./pages/BehaviorPage";
 // import AcquisitionPage from "./pages/AcquisitionPage";
 // import CustomReportPage from "./pages/CustomReportPage";
@@ -22,8 +22,7 @@ ReactDOM.render(
       <Route
         exact
         path="/"
-        // render={() => <ReportPage report={AudiencePage} />}
-        render={() => <h1>AudiencePage</h1>}
+        render={() => <ReportPage report={AudiencePage} />}
       />
       <Route
         exact
