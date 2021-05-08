@@ -89,8 +89,6 @@ const queries = {
   },
 };
 
-// const queries = {
-
 // const overTimeQueries = {
 //   Users: {
 //     measures: ["Sessions.usersCount"],

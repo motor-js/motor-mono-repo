@@ -1,93 +1,55 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 // import OverTimeChart from "../components/OverTimeChart";
-// import Chart from "../components/Chart";
+import Chart from "../components/Chart";
 // import SwitchTable from "../components/SwitchTable";
 
-// const queries = {
-//   pageviewsOverTime: {
-//     chartType: "line",
-//     legend: false,
-//     query: {
-//       measures: ["PageViews.count"],
-//       timeDimensions: [
-//         {
-//           dimension: "PageViews.time",
-//           granularity: "day",
-//         },
-//       ],
-//     },
-//   },
-
-//   pageviews: {
-//     chartType: "number",
-//     query: {
-//       measures: ["PageViews.pageviews"],
-//       timeDimensions: [
-//         {
-//           dimension: "PageViews.time",
-//         },
-//       ],
-//     },
-//   },
-
-//   uniqPageviews: {
-//     chartType: "number",
-//     query: {
-//       measures: ["PageViews.uniqPageviews"],
-//       timeDimensions: [
-//         {
-//           dimension: "PageViews.time",
-//         },
-//       ],
-//     },
-//   },
-
-//   averageTimeOnPageSeconds: {
-//     chartType: "number",
-//     query: {
-//       measures: ["PageViews.averageTimeOnPageSeconds"],
-//       timeDimensions: [
-//         {
-//           dimension: "PageViews.time",
-//         },
-//       ],
-//     },
-//   },
-
-//   bounceRate: {
-//     chartType: "number",
-//     query: {
-//       measures: ["Sessions.bounceRate"],
-//     },
-//   },
-
-//   exitPercent: {
-//     chartType: "number",
-//     query: {
-//       measures: ["PageViews.exitPercent"],
-//       timeDimensions: [
-//         {
-//           dimension: "PageViews.time",
-//         },
-//       ],
-//     },
-//   },
-
-//   pageviewsTable: {
-//     chartType: "table",
-//     query: {
-//       measures: ["PageViews.pageviews"],
-//       dimensions: ["PageViews.pageUrlPath"],
-//       timeDimensions: [
-//         {
-//           dimension: "PageViews.time",
-//         },
-//       ],
-//     },
-//     order: { "PageViews.pageviews": "desc" },
-//   },
-// };
+const queries = {
+  pageviews: {
+    chartType: "number",
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(Value),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
+  },
+  uniqPageviews: {
+    chartType: "number",
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Count(Value),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
+  },
+  averageTimeOnPageSeconds: {
+    chartType: "number",
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Count(Value),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
+  },
+  bounceRate: {
+    chartType: "number",
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Count(Value),'#,##0.00%')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
+  },
+};
 
 const BehaviorPage = ({ withTime }) => (
   <Grid item xs={12}>
@@ -99,16 +61,22 @@ const BehaviorPage = ({ withTime }) => (
         /> */}
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Pageviews" vizState={withTime(queries.pageviews)} /> */}
+        <Chart title="Pageviews" vizState={withTime(queries.pageviews)} />
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Unique Pageviews" vizState={withTime(queries.uniqPageviews)} /> */}
+        <Chart
+          title="Unique Pageviews"
+          vizState={withTime(queries.uniqPageviews)}
+        />
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Avg. Time on Page" vizState={withTime(queries.averageTimeOnPageSeconds)} /> */}
+        <Chart
+          title="Avg. Time on Page"
+          vizState={withTime(queries.averageTimeOnPageSeconds)}
+        />
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Bounce Rate" vizState={withTime(queries.bounceRate)} /> */}
+        <Chart title="Bounce Rate" vizState={withTime(queries.bounceRate)} />
       </Grid>
       <Grid item xs={2}>
         {/* <Chart title="% Exit" vizState={withTime(queries.exitPercent)} /> */}

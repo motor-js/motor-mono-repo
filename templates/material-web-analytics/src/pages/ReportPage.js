@@ -42,33 +42,6 @@ const getDateRange = () => {
   }
 };
 
-// const withTimeFunc = ({ query, ...vizState }, begin, end, segment) => {
-//   const timeDimensionObj = (query.timeDimensions || [])[0] || {};
-//   const cube = (query.measures && query.measures[0].split(".")[0]) || "Sessions";
-//   const timeDimension = timeDimensionObj.dimension || `${cube}.sessionStart`;
-//   const granularity = timeDimensionObj.granularity || null;
-//   const segmentCube = (query) => {
-//     const measureCube = query.measures[0].split(".")[0];
-//     if (['PageViews'].indexOf(measureCube) !== -1) {
-//       return 'Sessions';
-//     }
-//     return measureCube;
-//   }
-//   const segments = segment === 'all' ? [] : [`${segmentCube(query)}.${segment}`];
-//   return {
-//     ...vizState,
-//     query: {
-//       ...query,
-//       segments,
-//       timeDimensions: [{
-//         dimension: timeDimension,
-//         dateRange: [begin.format(moment.HTML5_FMT.DATE), end.format(moment.HTML5_FMT.DATE)],
-//         granularity: granularity
-//       }]
-//     }
-//   }
-// };
-
 const withTimeFunc = ({ ...vizState }, begin, end, segment) => {
   // const timeDimensionObj = (query.timeDimensions || [])[0] || {};
   // const cube =
