@@ -9,49 +9,49 @@ import Input from "@material-ui/core/Input";
 // import Chart from "../components/Chart";
 // import ChartRenderer from "../components/ChartRenderer";
 
-const queries = {
-  topSources: {
-    chartType: "pie",
-    legend: "vertical",
-    query: {
-      measures: ["Sessions.usersCount"],
-      dimensions: ["Sessions.sourceMedium"],
-      timeDimensions: [
-        {
-          dimension: "Sessions.sessionStart",
-        },
-      ],
-    },
-  },
-  usersOvertime: {
-    chartType: "line",
-    query: {
-      measures: ["Sessions.usersCount"],
-      timeDimensions: [
-        {
-          dimension: "Sessions.sessionStart",
-          granularity: "day",
-        },
-      ],
-    },
-  },
+// const queries = {
+//   topSources: {
+//     chartType: "pie",
+//     legend: "vertical",
+//     query: {
+//       measures: ["Sessions.usersCount"],
+//       dimensions: ["Sessions.sourceMedium"],
+//       timeDimensions: [
+//         {
+//           dimension: "Sessions.sessionStart",
+//         },
+//       ],
+//     },
+//   },
+//   usersOvertime: {
+//     chartType: "line",
+//     query: {
+//       measures: ["Sessions.usersCount"],
+//       timeDimensions: [
+//         {
+//           dimension: "Sessions.sessionStart",
+//           granularity: "day",
+//         },
+//       ],
+//     },
+//   },
 
-  tableQuery: {
-    query: {
-      measures: [
-        "Sessions.count",
-        "Sessions.usersCount",
-        "Sessions.newUsersCount",
-      ],
-      timeDimensions: [
-        {
-          dimension: "Sessions.sessionStart",
-        },
-      ],
-    },
-    chartType: "table",
-  },
-};
+//   tableQuery: {
+//     query: {
+//       measures: [
+//         "Sessions.count",
+//         "Sessions.usersCount",
+//         "Sessions.newUsersCount",
+//       ],
+//       timeDimensions: [
+//         {
+//           dimension: "Sessions.sessionStart",
+//         },
+//       ],
+//     },
+//     chartType: "table",
+//   },
+// };
 
 const dimensionOptions = {
   "Top Sources/Mediums": "Sessions.sourceMedium",
@@ -59,13 +59,13 @@ const dimensionOptions = {
   "Top Mediums": "Sessions.referrerMedium",
 };
 
-const withPrimaryDimension = ({ query, ...vizState }, dimension) => ({
-  ...vizState,
-  query: {
-    ...query,
-    dimensions: [dimension],
-  },
-});
+// const withPrimaryDimension = ({ query, ...vizState }, dimension) => ({
+//   ...vizState,
+//   query: {
+//     ...query,
+//     dimensions: [dimension],
+//   },
+// });
 
 const AcquisitionPage = ({ withTime }) => {
   const [primaryDimension, setPrimaryDimension] = useState(

@@ -4,90 +4,90 @@ import Grid from "@material-ui/core/Grid";
 // import Chart from "../components/Chart";
 // import SwitchTable from "../components/SwitchTable";
 
-const queries = {
-  pageviewsOverTime: {
-    chartType: "line",
-    legend: false,
-    query: {
-      measures: ["PageViews.count"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-          granularity: "day",
-        },
-      ],
-    },
-  },
+// const queries = {
+//   pageviewsOverTime: {
+//     chartType: "line",
+//     legend: false,
+//     query: {
+//       measures: ["PageViews.count"],
+//       timeDimensions: [
+//         {
+//           dimension: "PageViews.time",
+//           granularity: "day",
+//         },
+//       ],
+//     },
+//   },
 
-  pageviews: {
-    chartType: "number",
-    query: {
-      measures: ["PageViews.pageviews"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
-  },
+//   pageviews: {
+//     chartType: "number",
+//     query: {
+//       measures: ["PageViews.pageviews"],
+//       timeDimensions: [
+//         {
+//           dimension: "PageViews.time",
+//         },
+//       ],
+//     },
+//   },
 
-  uniqPageviews: {
-    chartType: "number",
-    query: {
-      measures: ["PageViews.uniqPageviews"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
-  },
+//   uniqPageviews: {
+//     chartType: "number",
+//     query: {
+//       measures: ["PageViews.uniqPageviews"],
+//       timeDimensions: [
+//         {
+//           dimension: "PageViews.time",
+//         },
+//       ],
+//     },
+//   },
 
-  averageTimeOnPageSeconds: {
-    chartType: "number",
-    query: {
-      measures: ["PageViews.averageTimeOnPageSeconds"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
-  },
+//   averageTimeOnPageSeconds: {
+//     chartType: "number",
+//     query: {
+//       measures: ["PageViews.averageTimeOnPageSeconds"],
+//       timeDimensions: [
+//         {
+//           dimension: "PageViews.time",
+//         },
+//       ],
+//     },
+//   },
 
-  bounceRate: {
-    chartType: "number",
-    query: {
-      measures: ["Sessions.bounceRate"],
-    },
-  },
+//   bounceRate: {
+//     chartType: "number",
+//     query: {
+//       measures: ["Sessions.bounceRate"],
+//     },
+//   },
 
-  exitPercent: {
-    chartType: "number",
-    query: {
-      measures: ["PageViews.exitPercent"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
-  },
+//   exitPercent: {
+//     chartType: "number",
+//     query: {
+//       measures: ["PageViews.exitPercent"],
+//       timeDimensions: [
+//         {
+//           dimension: "PageViews.time",
+//         },
+//       ],
+//     },
+//   },
 
-  pageviewsTable: {
-    chartType: "table",
-    query: {
-      measures: ["PageViews.pageviews"],
-      dimensions: ["PageViews.pageUrlPath"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
-    order: { "PageViews.pageviews": "desc" },
-  },
-};
+//   pageviewsTable: {
+//     chartType: "table",
+//     query: {
+//       measures: ["PageViews.pageviews"],
+//       dimensions: ["PageViews.pageUrlPath"],
+//       timeDimensions: [
+//         {
+//           dimension: "PageViews.time",
+//         },
+//       ],
+//     },
+//     order: { "PageViews.pageviews": "desc" },
+//   },
+// };
 
 const BehaviorPage = ({ withTime }) => (
   <Grid item xs={12}>

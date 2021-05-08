@@ -1,115 +1,116 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 
 // import OverTimeChart from "../components/OverTimeChart";
 // import Chart from "../components/Chart";
-import Dropdown from "../components/Dropdown";
+// import Dropdown from "../components/Dropdown";
 // import SwitchTable from "../components/SwitchTable";
 
-const queries = {
-  usersCount: {
-    chartType: "number",
-    query: {
-      measures: ["Sessions.usersCount"],
-      timeDimensions: [
-        {
-          dimension: "Sessions.sessionStart",
-        },
-      ],
-    },
-  },
+// const queries = {
+//   usersCount: {
+//     chartType: "number",
+//     query: {
+//       measures: ["Sessions.usersCount"],
+//       timeDimensions: [
+//         {
+//           dimension: "Sessions.sessionStart",
+//         },
+//       ],
+//     },
+//   },
 
-  sessionsCount: {
-    chartType: "number",
-    query: {
-      measures: ["Sessions.count"],
-    },
-  },
+//   sessionsCount: {
+//     chartType: "number",
+//     query: {
+//       measures: ["Sessions.count"],
+//     },
+//   },
 
-  newUsersCount: {
-    chartType: "number",
-    query: {
-      measures: ["Sessions.newUsersCount"],
-      timeDimensions: [
-        {
-          dimension: "Sessions.sessionStart",
-        },
-      ],
-    },
-  },
+//   newUsersCount: {
+//     chartType: "number",
+//     query: {
+//       measures: ["Sessions.newUsersCount"],
+//       timeDimensions: [
+//         {
+//           dimension: "Sessions.sessionStart",
+//         },
+//       ],
+//     },
+//   },
 
-  bounceRate: {
-    chartType: "number",
-    query: {
-      measures: ["Sessions.bounceRate"],
-    },
-  },
+//   bounceRate: {
+//     chartType: "number",
+//     query: {
+//       measures: ["Sessions.bounceRate"],
+//     },
+//   },
 
-  averageDuration: {
-    chartType: "number",
-    query: {
-      measures: ["Sessions.averageDurationSeconds"],
-    },
-  },
+//   averageDuration: {
+//     chartType: "number",
+//     query: {
+//       measures: ["Sessions.averageDurationSeconds"],
+//     },
+//   },
 
-  averageNumberSessions: {
-    chartType: "number",
-    query: {
-      measures: ["Sessions.sessionsPerUser"],
-      timeDimensions: [
-        {
-          dimension: "Sessions.sessionStart",
-        },
-      ],
-    },
-  },
+//   averageNumberSessions: {
+//     chartType: "number",
+//     query: {
+//       measures: ["Sessions.sessionsPerUser"],
+//       timeDimensions: [
+//         {
+//           dimension: "Sessions.sessionStart",
+//         },
+//       ],
+//     },
+//   },
 
-  usersByType: {
-    chartType: "pie",
-    query: {
-      measures: ["Sessions.usersCount"],
-      dimensions: ["Sessions.type"],
-      timeDimensions: [
-        {
-          dimension: "Sessions.sessionStart",
-        },
-      ],
-    },
-  },
-};
+//   usersByType: {
+//     chartType: "pie",
+//     query: {
+//       measures: ["Sessions.usersCount"],
+//       dimensions: ["Sessions.type"],
+//       timeDimensions: [
+//         {
+//           dimension: "Sessions.sessionStart",
+//         },
+//       ],
+//     },
+//   },
+// };
 
-const overTimeQueries = {
-  Users: {
-    measures: ["Sessions.usersCount"],
-    timeDimensions: [
-      {
-        granularity: "day",
-        dimension: "Sessions.sessionStart",
-      },
-    ],
-  },
-  Sessions: {
-    measures: ["Sessions.count"],
-    timeDimensions: [
-      {
-        granularity: "day",
-        dimension: "Sessions.sessionStart",
-      },
-    ],
-  },
-  "Page Views": {
-    measures: ["PageViews.count"],
-    timeDimensions: [
-      {
-        granularity: "day",
-        dimension: "PageViews.time",
-      },
-    ],
-  },
-};
+// const overTimeQueries = {
+//   Users: {
+//     measures: ["Sessions.usersCount"],
+//     timeDimensions: [
+//       {
+//         granularity: "day",
+//         dimension: "Sessions.sessionStart",
+//       },
+//     ],
+//   },
+//   Sessions: {
+//     measures: ["Sessions.count"],
+//     timeDimensions: [
+//       {
+//         granularity: "day",
+//         dimension: "Sessions.sessionStart",
+//       },
+//     ],
+//   },
+//   "Page Views": {
+//     measures: ["PageViews.count"],
+//     timeDimensions: [
+//       {
+//         granularity: "day",
+//         dimension: "PageViews.time",
+//       },
+//     ],
+//   },
+// };
 
 const AudiencePage = ({ withTime }) => {
-  const [overTimeQuery, setOverTimeQuery] = useState("Users");
+  // const [overTimeQuery, setOverTimeQuery] = useState("Users");
   return (
     <>
       <Grid item xs={12}>
