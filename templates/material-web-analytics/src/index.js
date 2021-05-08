@@ -1,17 +1,62 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "typeface-roboto";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { HashRouter as Router, Route } from "react-router-dom";
+
+// import ReportPage from "./pages/ReportPage";
+
+// import AudiencePage from "./pages/AudiencePage";
+// import BehaviorPage from "./pages/BehaviorPage";
+// import AcquisitionPage from "./pages/AcquisitionPage";
+// import CustomReportPage from "./pages/CustomReportPage";
+
+// import CustomReportsOverviewPage from "./pages/CustomReportsOverviewPage";
+// import CustomReportsBuilderPage from "./pages/CustomReportsBuilderPage";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  <Router>
+    <App>
+      <Route
+        exact
+        path="/"
+        // render={() => <ReportPage report={AudiencePage} />}
+        render={() => <h1>AudiencePage</h1>}
+      />
+      <Route
+        exact
+        path="/behavior"
+        // render={() => <ReportPage report={BehaviorPage} />}
+        render={() => <h1>BehaviorPage</h1>}
+      />
+      <Route
+        exact
+        path="/acquisition"
+        // render={() => <ReportPage report={AcquisitionPage} />}
+        render={() => <h1>AcquisitionPage</h1>}
+      />
+      {/* <Route
+        exact
+        path="/custom-reports-overview"
+        component={CustomReportsOverviewPage}
+      />
+      <Route
+        exact
+        path="/custom-reports-builder/:id?"
+        component={CustomReportsBuilderPage}
+      />
+      <Route
+        exact
+        path="/custom-reports/:id"
+        render={() => <ReportPage report={CustomReportPage} />}
+      /> */}
+    </App>
+  </Router>,
+  document.getElementById("root")
+); // If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+serviceWorker.unregister();
