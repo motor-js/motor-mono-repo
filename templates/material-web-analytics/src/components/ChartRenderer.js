@@ -34,9 +34,6 @@ import moment from "moment";
 import numeral from "numeral";
 
 const numberFormatter = (item) => numeral(item).format("0,0");
-const decimalFormatter = (item) => numeral(item).format("0,0.00");
-const percentFormatter = (item) => numeral(item / 100.0).format("0.00%");
-const timeNumberFormatter = (item) => numeral(item).format("00:00:00");
 const dateFormatter = (item) => moment(item).format("MMM DD");
 
 const resolveFormatter = (type) => {
@@ -113,11 +110,6 @@ CartesianChart.defaultProps = {
 };
 
 const colors = ["#4791db", "#e33371", "#e57373"];
-
-const durationMeasures = [
-  "PageViews.averageTimeOnPageSeconds",
-  "Sessions.averageDurationSeconds",
-];
 
 // eslint-disable-next-line no-unused-vars
 const stackedChartData = (resultSet) => {
@@ -199,28 +191,11 @@ const TypeToChartComponent = {
     );
   },
   number: ({ resultSet, height }) => {
-    // const format = resultSet.annotation().measures[measureKey].format;
-    const format = null; // AG
-
-    const measureKey = Object.keys(resultSet.metrics)[0]; // Ensure number can only render single measure
     const value = resultSet.metrics[Object.keys(resultSet.metrics)[0]];
-    let formattedValue;
-    if (format === "percent") {
-      formattedValue = percentFormatter(value);
-    } else if (typeof value === "string") {
-      formattedValue = value;
-    } else if (Math.ceil(value) === value && Math.floor(value) === value) {
-    } else if (durationMeasures.includes(measureKey)) {
-      // special case, since format time is missing
-      formattedValue = timeNumberFormatter(value);
-    } else if (Math.ceil(value) === value && Math.floor(value) === value) {
-      formattedValue = numberFormatter(value);
-    } else {
-      formattedValue = decimalFormatter(value);
-    }
+
     return (
       <Typography component="p" variant="h4" style={{ height: height }}>
-        {formattedValue}
+        {value}
       </Typography>
     );
   },
