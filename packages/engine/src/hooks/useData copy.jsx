@@ -31,7 +31,6 @@ function reducer(state, action) {
       metrics,
       qData,
       mData,
-      nameKey,
       qListData,
       // measureInfo,
       // dimensionInfo,
@@ -53,7 +52,6 @@ function reducer(state, action) {
         metrics,
         qData,
         mData,
-        nameKey,
         qListData,
         // dimensionInfo,
         // measureInfo,
@@ -73,7 +71,7 @@ function reducer(state, action) {
 }
 
 const initialProps = {
-  cols: [],
+  cols: null,
   qLists: null,
   qHyperCubeDef: null,
   qPage: {
@@ -131,7 +129,6 @@ const useData = (props) => {
     metrics,
     qData,
     mData,
-    nameKey,
     qListData,
     // dimensionInfo,
     // measureInfo,
@@ -507,11 +504,6 @@ const useData = (props) => {
     );
   }, []);
 
-  const getNameKey = useCallback(async (layout) => {
-    if (layout.qHyperCube.qDimensionInfo.length === 0) return null;
-    return layout.qHyperCube.qDimensionInfo[0].qFallbackTitle;
-  }, []);
-
   const getReducedData = useCallback(
     () => async () => {
       const { qWidth } = qPage.current;
@@ -610,7 +602,6 @@ const useData = (props) => {
 
       // const _measureDetails = await getMeasureInfo(_qLayout);
       // const _dimensionDetails = await getDimensionInfo(_qLayout);
-      const _nameKey = await getNameKey(_qLayout);
       const _dataList = await getDataKeyList(_qListData, _qLayout);
 
       const _dataKeys = await getDataKeys(
@@ -650,7 +641,6 @@ const useData = (props) => {
             subTitle: _qSubTitle,
             qData: _qData,
             mData: _mData,
-            nameKey: _nameKey,
             qListData: _qListData,
             // dimensionInfo: _dimensionDetails,
             // measureInfo: _measureDetails,
@@ -670,7 +660,6 @@ const useData = (props) => {
             metrics: _qMetrics,
             qData: _qData,
             mData: _mData,
-            nameKey: _nameKey,
             qListData: _qListData,
             dataList: _dataList,
             dataKeys: _dataKeys,
@@ -790,13 +779,6 @@ const useData = (props) => {
   }, [generateQProp, engine, update]);
 
   useEffect(() => () => (_isMounted.current = false), []);
-  // const dataSet = { data: mData, dataKeys, dataList, nameKey };
-  const dataSet = {};
-
-  if (mData) dataSet.data = mData;
-  if (dataKeys && dataKeys.length !== 0) dataSet.dataKeys = dataKeys;
-  if (dataList) dataSet.dataList = dataList;
-  if (nameKey) dataSet.nameKey = nameKey;
 
   return {
     beginSelections,
@@ -810,9 +792,7 @@ const useData = (props) => {
     dataList,
     handlerChange,
     dataKeys,
-    nameKey,
-    // dataSet: { data: mData, dataKeys, dataList, nameKey },
-    dataSet,
+    dataSet: { data: mData, dataKeys, dataList },
     title,
     subTitle,
     metrics,
