@@ -32,6 +32,7 @@ function reducer(state, action) {
       qData,
       mData,
       nameKey,
+      valueKey,
       qListData,
       // measureInfo,
       // dimensionInfo,
@@ -54,6 +55,7 @@ function reducer(state, action) {
         qData,
         mData,
         nameKey,
+        valueKey,
         qListData,
         // dimensionInfo,
         // measureInfo,
@@ -132,6 +134,7 @@ const useData = (props) => {
     qData,
     mData,
     nameKey,
+    valueKey,
     qListData,
     // dimensionInfo,
     // measureInfo,
@@ -512,6 +515,11 @@ const useData = (props) => {
     return layout.qHyperCube.qDimensionInfo[0].qFallbackTitle;
   }, []);
 
+  const getValueKey = useCallback(async (layout) => {
+    if (layout.qHyperCube.qMeasureInfo.length === 0) return null;
+    return layout.qHyperCube.qMeasureInfo[0].qFallbackTitle;
+  }, []);
+
   const getReducedData = useCallback(
     () => async () => {
       const { qWidth } = qPage.current;
@@ -611,6 +619,7 @@ const useData = (props) => {
       // const _measureDetails = await getMeasureInfo(_qLayout);
       // const _dimensionDetails = await getDimensionInfo(_qLayout);
       const _nameKey = await getNameKey(_qLayout);
+      const _valueKey = await getValueKey(_qLayout);
       const _dataList = await getDataKeyList(_qListData, _qLayout);
 
       const _dataKeys = await getDataKeys(
@@ -651,6 +660,7 @@ const useData = (props) => {
             qData: _qData,
             mData: _mData,
             nameKey: _nameKey,
+            valueKey: _valueKey,
             qListData: _qListData,
             // dimensionInfo: _dimensionDetails,
             // measureInfo: _measureDetails,
@@ -671,6 +681,7 @@ const useData = (props) => {
             qData: _qData,
             mData: _mData,
             nameKey: _nameKey,
+            valueKey: _valueKey,
             qListData: _qListData,
             dataList: _dataList,
             dataKeys: _dataKeys,
@@ -797,6 +808,7 @@ const useData = (props) => {
   if (dataKeys && dataKeys.length !== 0) dataSet.dataKeys = dataKeys;
   if (dataList) dataSet.dataList = dataList;
   if (nameKey) dataSet.nameKey = nameKey;
+  if (valueKey) dataSet.valueKey = valueKey;
 
   return {
     beginSelections,
