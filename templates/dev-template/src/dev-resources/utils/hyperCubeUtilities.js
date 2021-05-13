@@ -48,7 +48,6 @@ export function hyperCubeChartTransform(
 
       data = { ...data, ...pair };
     });
-    console.log(data);
     return data;
   });
 
