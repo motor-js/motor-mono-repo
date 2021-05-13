@@ -804,6 +804,7 @@ const useData = (props) => {
   // const dataSet = { data: mData, dataKeys, dataList, nameKey };
   const dataSet = {};
 
+  dataSet.select = select;
   if (mData) dataSet.data = mData;
   if (dataKeys && dataKeys.length !== 0) dataSet.dataKeys = dataKeys;
   if (dataList) dataSet.dataList = dataList;
