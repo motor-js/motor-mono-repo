@@ -34,17 +34,21 @@ export function hyperCubeChartTransform(
                   : d[index].qText,
             }
           : {
-              [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
-                ? d[index].qText
-                : d[index].qNum !== "NaN"
-                ? d[index].qNum
-                : 0,
+              // [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
+              [measureNames[index - qNoOfDiemnsions]]:
+                cols[index].qNumFormat ||
+                cols[index].qNumType ||
+                cols[index].qNumFmt
+                  ? d[index].qText
+                  : d[index].qNum !== "NaN"
+                  ? d[index].qNum
+                  : 0,
               key: i,
             };
 
       data = { ...data, ...pair };
     });
-
+    console.log(data);
     return data;
   });
 
@@ -62,17 +66,16 @@ export function hyperCubeTransform(
     d.forEach((item, index) => {
       const name = cols[index].dataKey;
       const pair = {
-        [name]:
-          {
-            text: d[index].qText,
-            number: d[index].qNum,
-            elemNumber: d[index].qElemNumber,
-            state: d[index].qState,
-            attrExp: d[index].qAttrExps,
-            columnId: index,
-          },
+        [name]: {
+          text: d[index].qText,
+          number: d[index].qNum,
+          elemNumber: d[index].qElemNumber,
+          state: d[index].qState,
+          attrExp: d[index].qAttrExps,
+          columnId: index,
+        },
         key: i,
-      }
+      };
       data = { ...data, ...pair };
     });
     return data;
@@ -214,9 +217,8 @@ export const numericSortDirection = (sortDirection, defaultSetting = 0) => {
 };
 
 export const orderCols = (cols) => {
-
-  let dim = []
-  let meas = []
+  let dim = [];
+  let meas = [];
 
   const getDims = (cols) => {
     cols
@@ -264,41 +266,43 @@ export const orderCols = (cols) => {
   //concatenate dimensions and measures
   const orderedCols = dim.concat(meas);
 
-  return orderedCols
-}
+  return orderedCols;
+};
 
 export const getHeader = (qLayout, cols, data) => {
-
-  if(qLayout) {
+  if (qLayout) {
     return [
-        ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
-          title: col.qFallbackTitle,
-          dataIndex: cols[index].dataKey,
-          dataKey: cols[index].dataKey,
-          render: cols[index].render,
-          defaultSortDesc: col.qSortIndicator === "D",
-          qInterColumnIndex: index,
-          qPath: `/qHyperCubeDef/qDimensions/${index}`,
-          qSortIndicator: col.qSortIndicator,
-          qReverseSort: col.qReverseSort,
-          qGrandTotals: { qText: null, qNum: null },
-          qColumnType: "dim",
-        })),
-        ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
-          title: col.qFallbackTitle,
-          dataIndex: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
-          dataKey: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
-          render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
-          defaultSortDesc: col.qSortIndicator === "D",
-          qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
-          qPath: `/qHyperCubeDef/qMeasures/${index}`,
-          qSortIndicator: col.qSortIndicator,
-          qReverseSort: col.qReverseSort,
-          qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
-          qColumnType: "meas",
-        })),
-      ]}
-    else  { return []}
-  };
+      ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
+        title: col.qFallbackTitle,
+        dataIndex: cols[index].dataKey,
+        dataKey: cols[index].dataKey,
+        render: cols[index].render,
+        defaultSortDesc: col.qSortIndicator === "D",
+        qInterColumnIndex: index,
+        qPath: `/qHyperCubeDef/qDimensions/${index}`,
+        qSortIndicator: col.qSortIndicator,
+        qReverseSort: col.qReverseSort,
+        qGrandTotals: { qText: null, qNum: null },
+        qColumnType: "dim",
+      })),
+      ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
+        title: col.qFallbackTitle,
+        dataIndex:
+          cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+        dataKey: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+        render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
+        defaultSortDesc: col.qSortIndicator === "D",
+        qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
+        qPath: `/qHyperCubeDef/qMeasures/${index}`,
+        qSortIndicator: col.qSortIndicator,
+        qReverseSort: col.qReverseSort,
+        qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
+        qColumnType: "meas",
+      })),
+    ];
+  } else {
+    return [];
+  }
+};
 
 export default hyperCubeTransform;

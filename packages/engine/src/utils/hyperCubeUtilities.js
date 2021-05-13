@@ -34,11 +34,15 @@ export function hyperCubeChartTransform(
                   : d[index].qText,
             }
           : {
-              [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
-                ? d[index].qText
-                : d[index].qNum !== "NaN"
-                ? d[index].qNum
-                : 0,
+              // [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
+              [measureNames[index - qNoOfDiemnsions]]:
+                cols[index].qNumFormat ||
+                cols[index].qNumType ||
+                cols[index].qNumFmt
+                  ? d[index].qText
+                  : d[index].qNum !== "NaN"
+                  ? d[index].qNum
+                  : 0,
               key: i,
             };
 
@@ -283,8 +287,10 @@ export const getHeader = (qLayout, cols, data) =>
         })),
         ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
           title: col.qFallbackTitle,
-          dataIndex: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
-          dataKey: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+          dataIndex:
+            cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+          dataKey:
+            cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
           render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
           defaultSortDesc: col.qSortIndicator === "D",
           qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
