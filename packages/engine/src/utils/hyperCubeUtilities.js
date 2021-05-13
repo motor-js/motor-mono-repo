@@ -32,6 +32,7 @@ export function hyperCubeChartTransform(
                   : index === 0 && useNumonFirstDim
                   ? d[index].qNum
                   : d[index].qText,
+              // attrExp: d[index].qAttrExps,
             }
           : {
               // [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
@@ -44,6 +45,7 @@ export function hyperCubeChartTransform(
                   ? d[index].qNum
                   : 0,
               key: i,
+              // attrExp: d[index].qAttrExps,
             };
 
       data = { ...data, ...pair };

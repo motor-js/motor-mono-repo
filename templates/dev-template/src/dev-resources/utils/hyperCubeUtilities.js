@@ -12,6 +12,8 @@ export function hyperCubeChartTransform(
   const measureNames = getMeasureNames(qHyperCube);
   const dimensionNames = getDimensionNames(qHyperCube);
 
+  console.log(cols, qData, qHyperCube);
+
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
     d.forEach((item, index) => {
@@ -32,6 +34,7 @@ export function hyperCubeChartTransform(
                   : index === 0 && useNumonFirstDim
                   ? d[index].qNum
                   : d[index].qText,
+              // attrExp: d[index].qAttrExps,
             }
           : {
               // [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
@@ -44,6 +47,7 @@ export function hyperCubeChartTransform(
                   ? d[index].qNum
                   : 0,
               key: i,
+              // attrExp: d[index].qAttrExps,
             };
 
       data = { ...data, ...pair };
