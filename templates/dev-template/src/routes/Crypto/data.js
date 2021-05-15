@@ -57,6 +57,7 @@ export const bodyLocationKPI = {
         qAttributeExpressions: {
           fill: "=if([Body Location]='Arms','red','blue')",
           stroke: "=if([Body Location]='Arms',1,2)",
+          // colourPalette,
         },
       },
       {

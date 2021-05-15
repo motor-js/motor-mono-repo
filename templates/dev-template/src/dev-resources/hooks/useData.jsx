@@ -444,6 +444,19 @@ const useData = (props) => {
             };
           }
           if (typeof col === "object") {
+            const qAttributeExpressions = [];
+            if (col.qAttributeExpressions) {
+              for (const [id, qExpression] of Object.entries(
+                col.qAttributeExpressions
+              )) {
+                qAttributeExpressions.push({
+                  id,
+                  qExpression,
+                  qLibraryId: "",
+                  qAttribute: false,
+                });
+              }
+            }
             return {
               qDef: {
                 qDef: col.qField,
@@ -462,22 +475,23 @@ const useData = (props) => {
                 qExpression,
                 qSuppressMissing,
               },
-              qAttributeExpressions: [
-                {
-                  // chart fill color
-                  qExpression: col.qFillStyle,
-                  qLibraryId: "",
-                  qAttribute: false,
-                  id: "fill",
-                },
-                {
-                  // chart stroke width
-                  qExpression: col.qStroke,
-                  qLibraryId: "",
-                  qAttribute: false,
-                  id: "stroke",
-                },
-              ],
+              qAttributeExpressions,
+              // qAttributeExpressions: [
+              //   {
+              //     // chart fill color
+              //     qExpression: col.qFillStyle,
+              //     qLibraryId: "",
+              //     qAttribute: false,
+              //     id: "fill",
+              //   },
+              //   {
+              //     // chart stroke width
+              //     qExpression: col.qStroke,
+              //     qLibraryId: "",
+              //     qAttribute: false,
+              //     id: "stroke",
+              //   },
+              // ],
               // qChartType: col.qChartType,
               // qShowPoints: col.qShowPoints,
               // qCurve: col.qCurve,
