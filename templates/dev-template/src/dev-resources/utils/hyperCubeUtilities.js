@@ -1,7 +1,7 @@
 export function hyperCubeChartTransform(
   qData,
   qHyperCube,
-  useNumonFirstDim = false,
+  // useNumonFirstDim = false,
   cols
 ) {
   const qNoOfDiemnsions =
@@ -12,32 +12,54 @@ export function hyperCubeChartTransform(
   const measureNames = getMeasureNames(qHyperCube);
   const dimensionNames = getDimensionNames(qHyperCube);
 
-  console.log(cols, qData, qHyperCube);
-
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
+    let attrExpItems = {};
     d.forEach((item, index) => {
+      if (index < qNoOfDiemnsions) {
+        const attrExp = d[index].qAttrExps;
+        if (typeof attrExp !== "undefined") {
+          const items = attrExp.qValues;
+
+          items.forEach((qAttrExprInfoItem, itemIndex) => {
+            if (qAttrExprInfoItem.qText !== undefined)
+              attrExpItems[
+                qHyperCube.qDimensionInfo[index].qAttrExprInfo[itemIndex].id
+              ] =
+                qAttrExprInfoItem.qNum !== "NaN"
+                  ? qAttrExprInfoItem.qNum
+                  : qAttrExprInfoItem.qText;
+          });
+        }
+      } else {
+        const attrExp = d[index].qAttrExps;
+        if (typeof attrExp !== "undefined") {
+          const items = attrExp.qValues;
+
+          items.forEach((qAttrExprInfoItem, itemIndex) => {
+            if (qAttrExprInfoItem.qText !== undefined)
+              attrExpItems[
+                qHyperCube.qMeasureInfo[index - -qNoOfDiemnsions].qAttrExprInfo[
+                  itemIndex
+                ].id
+              ] =
+                qAttrExprInfoItem.qNum !== "NaN"
+                  ? qAttrExprInfoItem.qNum
+                  : qAttrExprInfoItem.qText;
+          });
+        }
+      }
+
       const pair =
         index < qNoOfDiemnsions
           ? {
-              [dimensionNames[index]]:
-                d[index].qText === undefined
-                  ? "undefined"
-                  : index === 0 && useNumonFirstDim
-                  ? d[index].qNum
-                  : d[index].qText,
+              [dimensionNames[index]]: d[index].qText,
               [`elemNumber${index !== 0 ? index : ""}`]: d[index].qElemNumber,
               key: i,
-              label:
-                d[index].qText === undefined
-                  ? "undefined"
-                  : index === 0 && useNumonFirstDim
-                  ? d[index].qNum
-                  : d[index].qText,
-              // attrExp: d[index].qAttrExps,
+
+              label: d[index].qText,
             }
           : {
-              // [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
               [measureNames[index - qNoOfDiemnsions]]:
                 cols[index].qNumFormat ||
                 cols[index].qNumType ||
@@ -47,10 +69,9 @@ export function hyperCubeChartTransform(
                   ? d[index].qNum
                   : 0,
               key: i,
-              // attrExp: d[index].qAttrExps,
             };
 
-      data = { ...data, ...pair };
+      data = { ...data, ...pair, ...attrExpItems };
     });
     return data;
   });
@@ -61,7 +82,7 @@ export function hyperCubeChartTransform(
 export function hyperCubeTransform(
   qData,
   qHyperCube,
-  useNumonFirstDim = false,
+  // useNumonFirstDim = false,
   cols
 ) {
   const transformedData = qData.qMatrix.map((d, i) => {
