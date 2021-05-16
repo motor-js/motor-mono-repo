@@ -122,12 +122,12 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
   qData.qMatrix.map((d, i) => {
     let key = null;
     let value = null;
-    let qElemNumber = null;
+    let elemNumber = null;
 
     d.forEach((item, index) => {
       if (index < qNoOfDimensions && index !== 0) {
         key = d[index].qText;
-        qElemNumber = d[index].qElemNumber;
+        elemNumber = d[index].qElemNumber;
       } else if (index !== 0) {
         value = d[index].qNum;
       }

@@ -91,7 +91,7 @@ const MotorBarChart = ({ dataSet, config, select }) => {
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
-              onClick={(c) => select(0, [c.qElemNumber || c.elemNumber], false)}
+              onClick={(c) => select(0, [c.elemNumber], false)}
             >
               {dataKeys.length === 1 &&
                 data.map((entry, index) => (
