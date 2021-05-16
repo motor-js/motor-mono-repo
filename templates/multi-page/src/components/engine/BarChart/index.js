@@ -16,7 +16,7 @@ import {
 import { formatYAxis, formatXAxis } from "../../../util/formatChart";
 import { CustomTooltip } from "../../../util";
 
-const MotorBarChart = ({ dataSet, config }) => {
+const MotorBarChart = ({ dataSet, config, select }) => {
   const { data, dataKeys } = dataSet;
 
   const {
@@ -91,6 +91,7 @@ const MotorBarChart = ({ dataSet, config }) => {
               isAnimationActive={
                 isAnimationActive.isAnimationActive || isAnimationActive
               }
+              onClick={(c) => select(0, [c.qElemNumber || c.elemNumber], false)}
             >
               {dataKeys.length === 1 &&
                 data.map((entry, index) => (

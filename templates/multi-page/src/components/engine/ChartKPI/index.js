@@ -34,7 +34,7 @@ const ChartKPI = ({ dataProps }) => {
       Chart = AreaChart;
   }
 
-  const { dataSet, title, metrics } = useData({
+  const { dataSet, title, metrics, select } = useData({
     cols,
     qTitle,
     qMetrics,
@@ -63,7 +63,7 @@ const ChartKPI = ({ dataProps }) => {
             <p className="gx-mb-0 gx-fs-sm gx-text-grey">{title}</p>
           </div>
           {/* {React.cloneElement(children, { data: mData })} */}
-          <Chart dataSet={dataSet} config={chartConfig} />
+          <Chart dataSet={dataSet} config={chartConfig} select={select} />
         </Widget>
       ) : (
         <Skeleton active />
