@@ -175,9 +175,10 @@ const TypeToChartComponent = {
       ))}
     </CartesianChart>
   ),
-  pie: ({ resultSet, legend, height }) => {
+  pie: ({ resultSet, height }) => {
     const { data, dataKeys } = resultSet.dataSet;
-    const { select } = resultSet;
+    const { select, legend } = resultSet;
+
     return (
       <ResponsiveContainer width="100%" height={height || 250}>
         <PieChart>
@@ -198,7 +199,8 @@ const TypeToChartComponent = {
                 ))}
               </Pie>
             ))}
-          <Legend />
+          {/* <Legend /> */}
+          {legend && <Legend layout={legend} align="right" />}
           <Tooltip />
           {/* <Pie
             label={(value) => numeral(value.percent).format("0.00%")}
@@ -290,7 +292,7 @@ const renderChart = (Component) => ({ resultSet, error, height, ...props }) =>
   (error && error.toString()) || <Loader height={height} />;
 
 const ChartRenderer = ({ vizState, height }) => {
-  const { cols, qMetrics, chartType, ...options } = vizState;
+  const { cols, qMetrics, chartType, legend, ...options } = vizState;
   const component = TypeToMemoChartComponent[chartType];
   // const renderProps = useCubeQuery(query);
   const { dataSet, metrics, select } = useData({
@@ -298,9 +300,11 @@ const ChartRenderer = ({ vizState, height }) => {
     qMetrics,
   });
 
+  // console.log("vizState", vizState);
+
   const renderProps = {
     // error: null,
-    resultSet: { dataSet, metrics, select },
+    resultSet: { dataSet, metrics, select, legend },
   };
 
   // console.log(chartType, dataSet.data, metrics);

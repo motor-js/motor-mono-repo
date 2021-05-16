@@ -76,6 +76,7 @@ const queries = {
   },
   usersByType: {
     chartType: "pie",
+    legend: true,
     cols: [
       {
         qField: "[Type]",
