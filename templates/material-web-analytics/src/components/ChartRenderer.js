@@ -127,19 +127,27 @@ const stackedChartData = (resultSet) => {
 };
 
 const TypeToChartComponent = {
-  line: ({ resultSet, ...props }) => (
-    <CartesianChart resultSet={resultSet} ChartComponent={LineChart} {...props}>
-      {resultSet.seriesNames().map((series, i) => (
-        <Line
-          key={series.key}
-          stackId="a"
-          dataKey={series.key}
-          name={series.title}
-          stroke={colors[i]}
-        />
-      ))}
-    </CartesianChart>
-  ),
+  line: ({ resultSet, ...props }) => {
+    console.log(resultSet);
+    return <h1>Development in Progress</h1>;
+    return (
+      <CartesianChart
+        resultSet={resultSet}
+        ChartComponent={LineChart}
+        {...props}
+      >
+        {resultSet.seriesNames().map((series, i) => (
+          <Line
+            key={series.key}
+            stackId="a"
+            dataKey={series.key}
+            name={series.title}
+            stroke={colors[i]}
+          />
+        ))}
+      </CartesianChart>
+    );
+  },
   bar: ({ resultSet }) => (
     <CartesianChart resultSet={resultSet} ChartComponent={BarChart}>
       {resultSet.seriesNames().map((series, i) => (
@@ -168,24 +176,46 @@ const TypeToChartComponent = {
     </CartesianChart>
   ),
   pie: ({ resultSet, legend, height }) => {
-    console.log(resultSet);
+    const { data, dataKeys } = resultSet.dataSet;
+    const { select } = resultSet;
     return (
       <ResponsiveContainer width="100%" height={height || 250}>
         <PieChart>
-          <Pie
+          {dataKeys &&
+            dataKeys.map((key, index) => (
+              <Pie
+                // TODO replace nameKey={nameKey} from useData
+                nameKey="Type"
+                key={index}
+                dataKey={key}
+                isAnimationActive={false}
+                data={data}
+                label={(value) => numeral(value.percent).format("0.00%")}
+                onClick={(c) => select(0, [c.elemNumber], false)}
+              >
+                {data.map((entry, index) => (
+                  <Cell key={index} fill={colors[index % colors.length]} />
+                ))}
+              </Pie>
+            ))}
+          <Legend />
+          <Tooltip />
+          {/* <Pie
             label={(value) => numeral(value.percent).format("0.00%")}
             isAnimationActive={false}
-            data={resultSet.chartPivot()}
+            // data={resultSet.chartPivot()}
+            data={resultSet.data}
             nameKey="x"
-            dataKey={resultSet.seriesNames()[0].key}
+            // dataKey={resultSet.seriesNames()[0].key}
+            dataKey={resultSet.dataKeys}
             fill="#8884d8"
           >
-            {resultSet.chartPivot().map((e, index) => (
+            {resultSet.data.map((e, index) => (
               <Cell key={index} fill={colors[index % colors.length]} />
             ))}
           </Pie>
           {legend && <Legend layout={legend} align="right" />}
-          <Tooltip />
+          <Tooltip /> */}
         </PieChart>
       </ResponsiveContainer>
     );
@@ -263,17 +293,19 @@ const ChartRenderer = ({ vizState, height }) => {
   const { cols, qMetrics, chartType, ...options } = vizState;
   const component = TypeToMemoChartComponent[chartType];
   // const renderProps = useCubeQuery(query);
-  const { dataSet, metrics } = useData({
+  const { dataSet, metrics, select } = useData({
     cols,
     qMetrics,
   });
 
   const renderProps = {
     // error: null,
-    resultSet: { dataSet, metrics },
+    resultSet: { dataSet, metrics, select },
   };
 
-  if (!metrics) return null;
+  // console.log(chartType, dataSet.data, metrics);
+
+  if (!metrics && !dataSet.data) return null;
   return (
     component && renderChart(component)({ ...options, height, ...renderProps })
   );

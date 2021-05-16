@@ -2,7 +2,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 
-// import OverTimeChart from "../components/OverTimeChart";
+import OverTimeChart from "../components/OverTimeChart";
 import Chart from "../components/Chart";
 // import Dropdown from "../components/Dropdown";
 // import SwitchTable from "../components/SwitchTable";
@@ -89,6 +89,49 @@ const queries = {
   },
 };
 
+const overTimeQueries = {
+  Users: {
+    cols: [
+      {
+        qField: "[OrderDate]",
+        qLabel: "date",
+      },
+      {
+        qField: "=sum(Quantity * Price)",
+        qLabel: "value",
+        // useFormatting: true,
+        // qNumType: "M",
+        // qNumFmt: "£#,##0",
+      },
+    ],
+    granularity: "day",
+    // measures: ["Sessions.usersCount"],
+    // timeDimensions: [
+    //   {
+    //     granularity: "day",
+    //     dimension: "Sessions.sessionStart",
+    //   },
+    // ],
+  },
+  // Sessions: {
+  //   measures: ["Sessions.count"],
+  //   timeDimensions: [
+  //     {
+  //       granularity: "day",
+  //       dimension: "Sessions.sessionStart",
+  //     },
+  //   ],
+  // },
+  // "Page Views": {
+  //   measures: ["PageViews.count"],
+  //   timeDimensions: [
+  //     {
+  //       granularity: "day",
+  //       dimension: "PageViews.time",
+  //     },
+  //   ],
+  // },
+};
 // const overTimeQueries = {
 //   Users: {
 //     measures: ["Sessions.usersCount"],
@@ -124,22 +167,23 @@ const AudiencePage = ({ withTime }) => {
   return (
     <>
       <Grid item xs={12}>
-        {/* <OverTimeChart
-          title={
-            <Dropdown
-              value={overTimeQuery}
-              options={Object.keys(overTimeQueries).reduce((out, measure) => {
-                out[measure] = () => setOverTimeQuery(measure);
-                return out;
-              }, {})}
-            />
-          }
+        <OverTimeChart
+          // title={
+          //   <Dropdown
+          //     value={overTimeQuery}
+          //     options={Object.keys(overTimeQueries).reduce((out, measure) => {
+          //       out[measure] = () => setOverTimeQuery(measure);
+          //       return out;
+          //     }, {})}
+          //   />
+          // }
           vizState={withTime({
             chartType: "line",
             legend: false,
-            query: overTimeQueries[overTimeQuery],
+            // query: overTimeQueries[overTimeQuery],
+            query: overTimeQueries["Users"],
           })}
-        /> */}
+        />
       </Grid>
       <Grid item xs={6}>
         <Grid container spacing={3}>
