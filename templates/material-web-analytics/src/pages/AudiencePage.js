@@ -94,12 +94,12 @@ const overTimeQueries = {
   Users: {
     cols: [
       {
-        qField: "[OrderDate]",
-        qLabel: "date",
+        qField: "[Period]",
+        qLabel: "Period",
       },
       {
-        qField: "=sum(Quantity * Price)",
-        qLabel: "value",
+        qField: "=count(Dim1)",
+        qLabel: "Users",
         // useFormatting: true,
         // qNumType: "M",
         // qNumFmt: "£#,##0",

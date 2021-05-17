@@ -47,6 +47,8 @@ const resolveFormatter = (type) => {
 };
 
 const xAxisFormatter = (item) => {
+  // console.log(item, moment(item).isValid());
+  console.log(moment(item).isValid());
   if (moment(item).isValid()) {
     return dateFormatter(item);
   } else {
@@ -68,13 +70,7 @@ const getType = (resultSet, key) => {
   throw new Error(`Unable to resolve type from resultSet with key: "${key}"`);
 };
 
-const CartesianChart = ({
-  resultSet,
-  legend,
-  children,
-  ChartComponent,
-  height,
-}) => (
+const CartesianChart = ({ data, legend, children, ChartComponent, height }) => (
   <ResponsiveContainer width="100%" height={height || 250}>
     <ChartComponent
       margin={{
@@ -83,13 +79,14 @@ const CartesianChart = ({
         bottom: 0,
         left: 0,
       }}
-      data={resultSet.chartPivot()}
+      // data={resultSet.chartPivot()}
+      data={data}
     >
       <XAxis
         axisLine={false}
         tickLine={false}
         tickFormatter={xAxisFormatter}
-        dataKey="x"
+        dataKey="Period"
         minTickGap={20}
       />
       <YAxis
@@ -128,25 +125,43 @@ const stackedChartData = (resultSet) => {
 
 const TypeToChartComponent = {
   line: ({ resultSet, ...props }) => {
+    const { data, dataKeys } = resultSet.dataSet;
+    const { select, legend } = resultSet;
     console.log(resultSet);
-    return <h1>Development in Progress</h1>;
+    // return <h1>Development in Progress</h1>;
     return (
-      <CartesianChart
-        resultSet={resultSet}
-        ChartComponent={LineChart}
-        {...props}
-      >
-        {resultSet.seriesNames().map((series, i) => (
+      <CartesianChart data={data} ChartComponent={LineChart} {...props}>
+        {dataKeys.map((series, i) => (
           <Line
-            key={series.key}
+            // key={series.key}
+            key={i}
             stackId="a"
-            dataKey={series.key}
-            name={series.title}
+            // dataKey={series.key}
+            dataKey={series}
+            // name={series.title}
+            name={series}
             stroke={colors[i]}
           />
         ))}
       </CartesianChart>
     );
+    // return (
+    //   <CartesianChart
+    //     resultSet={resultSet}
+    //     ChartComponent={LineChart}
+    //     {...props}
+    //   >
+    //     {resultSet.seriesNames().map((series, i) => (
+    //       <Line
+    //         key={series.key}
+    //         stackId="a"
+    //         dataKey={series.key}
+    //         name={series.title}
+    //         stroke={colors[i]}
+    //       />
+    //     ))}
+    //   </CartesianChart>
+    // );
   },
   bar: ({ resultSet }) => (
     <CartesianChart resultSet={resultSet} ChartComponent={BarChart}>
