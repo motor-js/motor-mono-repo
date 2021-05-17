@@ -47,8 +47,6 @@ const resolveFormatter = (type) => {
 };
 
 const xAxisFormatter = (item) => {
-  // console.log(item, moment(item).isValid());
-  console.log(moment(item).isValid());
   if (moment(item).isValid()) {
     return dateFormatter(item);
   } else {
@@ -86,6 +84,7 @@ const CartesianChart = ({ data, legend, children, ChartComponent, height }) => (
         axisLine={false}
         tickLine={false}
         tickFormatter={xAxisFormatter}
+        // TODO replace nameKey={nameKey} from useData
         dataKey="Period"
         minTickGap={20}
       />
@@ -126,42 +125,26 @@ const stackedChartData = (resultSet) => {
 const TypeToChartComponent = {
   line: ({ resultSet, ...props }) => {
     const { data, dataKeys } = resultSet.dataSet;
-    const { select, legend } = resultSet;
-    console.log(resultSet);
+    const { legend } = resultSet;
     // return <h1>Development in Progress</h1>;
     return (
-      <CartesianChart data={data} ChartComponent={LineChart} {...props}>
+      <CartesianChart
+        data={data}
+        legend={legend}
+        ChartComponent={LineChart}
+        {...props}
+      >
         {dataKeys.map((series, i) => (
           <Line
-            // key={series.key}
             key={i}
             stackId="a"
-            // dataKey={series.key}
             dataKey={series}
-            // name={series.title}
             name={series}
             stroke={colors[i]}
           />
         ))}
       </CartesianChart>
     );
-    // return (
-    //   <CartesianChart
-    //     resultSet={resultSet}
-    //     ChartComponent={LineChart}
-    //     {...props}
-    //   >
-    //     {resultSet.seriesNames().map((series, i) => (
-    //       <Line
-    //         key={series.key}
-    //         stackId="a"
-    //         dataKey={series.key}
-    //         name={series.title}
-    //         stroke={colors[i]}
-    //       />
-    //     ))}
-    //   </CartesianChart>
-    // );
   },
   bar: ({ resultSet }) => (
     <CartesianChart resultSet={resultSet} ChartComponent={BarChart}>
@@ -315,14 +298,10 @@ const ChartRenderer = ({ vizState, height }) => {
     qMetrics,
   });
 
-  // console.log("vizState", vizState);
-
   const renderProps = {
     // error: null,
     resultSet: { dataSet, metrics, select, legend },
   };
-
-  // console.log(chartType, dataSet.data, metrics);
 
   if (!metrics && !dataSet.data) return null;
   return (
