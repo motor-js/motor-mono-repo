@@ -126,7 +126,7 @@ const TypeToChartComponent = {
   line: ({ resultSet, ...props }) => {
     const { data, dataKeys } = resultSet.dataSet;
     const { legend } = resultSet;
-    // return <h1>Development in Progress</h1>;
+
     return (
       <CartesianChart
         data={data}

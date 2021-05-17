@@ -1,5 +1,4 @@
-// import React, { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 
 import OverTimeChart from "../components/OverTimeChart";
@@ -164,7 +163,7 @@ const overTimeQueries = {
 // };
 
 const AudiencePage = ({ withTime }) => {
-  // const [overTimeQuery, setOverTimeQuery] = useState("Users");
+  const [overTimeQuery, setOverTimeQuery] = useState("Users");
   return (
     <>
       <Grid item xs={12}>
@@ -181,8 +180,8 @@ const AudiencePage = ({ withTime }) => {
           vizState={withTime({
             chartType: "line",
             legend: false,
-            // query: overTimeQueries[overTimeQuery],
-            query: overTimeQueries["Users"],
+            query: overTimeQueries[overTimeQuery],
+            // query: overTimeQueries["Users"],
           })}
         />
       </Grid>
