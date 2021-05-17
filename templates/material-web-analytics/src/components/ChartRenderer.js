@@ -146,19 +146,28 @@ const TypeToChartComponent = {
       </CartesianChart>
     );
   },
-  bar: ({ resultSet }) => (
-    <CartesianChart resultSet={resultSet} ChartComponent={BarChart}>
-      {resultSet.seriesNames().map((series, i) => (
-        <Bar
-          key={series.key}
-          stackId="a"
-          dataKey={series.key}
-          name={series.title}
-          fill={colors[i]}
-        />
-      ))}
-    </CartesianChart>
-  ),
+  bar: ({ resultSet }) => {
+    const { data, dataKeys } = resultSet.dataSet;
+    const { legend } = resultSet;
+
+    return (
+      <CartesianChart data={data} legend={legend} ChartComponent={BarChart}>
+        {dataKeys.map((series, i) => (
+          <Bar
+            key={i}
+            stackId="a"
+            dataKey={series}
+            name={series}
+            fill={colors[i]}
+          >
+            {data.map((entry, index) => (
+              <Cell key={index} fill={colors[index % colors.length]} />
+            ))}
+          </Bar>
+        ))}
+      </CartesianChart>
+    );
+  },
   area: ({ resultSet }) => (
     <CartesianChart resultSet={resultSet} ChartComponent={AreaChart}>
       {resultSet.seriesNames().map((series, i) => (

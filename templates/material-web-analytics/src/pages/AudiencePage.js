@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 
 import OverTimeChart from "../components/OverTimeChart";
 import Chart from "../components/Chart";
-// import Dropdown from "../components/Dropdown";
+import Dropdown from "../components/Dropdown";
 // import SwitchTable from "../components/SwitchTable";
 
 const queries = {
@@ -98,7 +98,7 @@ const overTimeQueries = {
       },
       {
         qField: "=count(Dim1)",
-        qLabel: "Users",
+        qLabel: "Session Users",
         // useFormatting: true,
         // qNumType: "M",
         // qNumFmt: "£#,##0",
@@ -113,24 +113,52 @@ const overTimeQueries = {
     //   },
     // ],
   },
-  // Sessions: {
-  //   measures: ["Sessions.count"],
-  //   timeDimensions: [
-  //     {
-  //       granularity: "day",
-  //       dimension: "Sessions.sessionStart",
-  //     },
-  //   ],
-  // },
-  // "Page Views": {
-  //   measures: ["PageViews.count"],
-  //   timeDimensions: [
-  //     {
-  //       granularity: "day",
-  //       dimension: "PageViews.time",
-  //     },
-  //   ],
-  // },
+  Sessions: {
+    cols: [
+      {
+        qField: "[Period]",
+        qLabel: "Period",
+      },
+      {
+        qField: "=count(Dim2)",
+        qLabel: "Sessions Sessions",
+        // useFormatting: true,
+        // qNumType: "M",
+        // qNumFmt: "£#,##0",
+      },
+    ],
+    granularity: "day",
+    //   measures: ["Sessions.count"],
+    //   timeDimensions: [
+    //     {
+    //       granularity: "day",
+    //       dimension: "Sessions.sessionStart",
+    //     },
+    //   ],
+  },
+  "Page Views": {
+    cols: [
+      {
+        qField: "[Period]",
+        qLabel: "Period",
+      },
+      {
+        qField: "=count(Type)",
+        qLabel: "Page Views Count",
+        // useFormatting: true,
+        // qNumType: "M",
+        // qNumFmt: "£#,##0",
+      },
+    ],
+    granularity: "day",
+    //   measures: ["PageViews.count"],
+    //   timeDimensions: [
+    //     {
+    //       granularity: "day",
+    //       dimension: "PageViews.time",
+    //     },
+    //   ],
+  },
 };
 // const overTimeQueries = {
 //   Users: {
@@ -168,15 +196,15 @@ const AudiencePage = ({ withTime }) => {
     <>
       <Grid item xs={12}>
         <OverTimeChart
-          // title={
-          //   <Dropdown
-          //     value={overTimeQuery}
-          //     options={Object.keys(overTimeQueries).reduce((out, measure) => {
-          //       out[measure] = () => setOverTimeQuery(measure);
-          //       return out;
-          //     }, {})}
-          //   />
-          // }
+          title={
+            <Dropdown
+              value={overTimeQuery}
+              options={Object.keys(overTimeQueries).reduce((out, measure) => {
+                out[measure] = () => setOverTimeQuery(measure);
+                return out;
+              }, {})}
+            />
+          }
           vizState={withTime({
             chartType: "line",
             legend: false,
