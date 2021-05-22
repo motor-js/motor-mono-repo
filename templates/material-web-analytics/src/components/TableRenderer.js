@@ -96,12 +96,8 @@ const renderChart = (Component) => ({ resultSet, error, height, ...props }) =>
 
 const TableRenderer = ({ vizState, height }) => {
   const { cols, chartType, dimensions, ...options } = vizState.query;
-  const component = TypeToMemoChartComponent[chartType];
 
-  // cols[0].qField = dimensions[0];
-  // cols[0].dataKey = dimensions[0];
-  // cols[0].qLabel = dimensions[0];
-  // console.log(cols);
+  const component = TypeToMemoChartComponent[chartType];
 
   const { dataSet, headerGroup, select } = useTable({
     cols,

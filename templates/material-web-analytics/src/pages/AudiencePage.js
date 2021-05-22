@@ -299,6 +299,7 @@ const AudiencePage = ({ withTime }) => {
                   ...vizState,
                   query: {
                     ...query,
+
                     dimensions: ["Type"],
                   },
                 }),
@@ -307,9 +308,7 @@ const AudiencePage = ({ withTime }) => {
           },
         ]}
         query={withTime({
-          // query: queries.usersCount.query,
           query: queries.usersTableCount,
-          // chartType: "table",
         })}
       />
     </>
