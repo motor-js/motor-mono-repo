@@ -98,15 +98,17 @@ const TableRenderer = ({ vizState, height }) => {
   const { cols, chartType, dimensions, ...options } = vizState.query;
   const component = TypeToMemoChartComponent[chartType];
 
-  console.log(cols[0], dimensions[0]);
-  cols[0].qField = dimensions[0];
-  cols[0].qLabel = dimensions[0];
+  // cols[0].qField = dimensions[0];
+  // cols[0].dataKey = dimensions[0];
+  // cols[0].qLabel = dimensions[0];
+  // console.log(cols);
 
   const { dataSet, headerGroup, select } = useTable({
     cols,
   });
 
   if (!dataSet) return null;
+
   const renderProps = {
     // error: null,
     resultSet: { dataSet, headerGroup, select },
