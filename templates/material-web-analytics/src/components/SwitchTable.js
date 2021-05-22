@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ChartRenderer from "../components/ChartRenderer";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import TableRenderer from "../components/TableRenderer";
 
 const SwitchTable = ({ options, query }) => {
   const [option, setOption] = useState(options[0].values[0]);
   return (
     <>
-      <Grid item xs={3} style={{minHeight: 300}} >
+      <Grid item xs={3} style={{ minHeight: 300 }}>
         {options.map(({ title, values }) => (
           <List
             key={title}
@@ -18,20 +18,26 @@ const SwitchTable = ({ options, query }) => {
             aria-labelledby="nested-list-subheader"
             subheader={
               <ListSubheader component="div" id="nested-list-subheader">
-                { title }
+                {title}
               </ListSubheader>
             }
           >
-            {values.map(opt => (
-              <ListItem key={`${title}-${opt.name}`} onClick={() => setOption(opt)} selected={option.name === opt.name} button>
+            {values.map((opt) => (
+              <ListItem
+                key={`${title}-${opt.name}`}
+                onClick={() => setOption(opt)}
+                selected={option.name === opt.name}
+                button
+              >
                 <ListItemText primary={opt.name} />
               </ListItem>
             ))}
           </List>
         ))}
-      </Grid>,
+      </Grid>
+      ,
       <Grid item xs={9}>
-        <ChartRenderer vizState={option.fn(query)} />
+        <TableRenderer vizState={option.fn(query)} />
       </Grid>
     </>
   );

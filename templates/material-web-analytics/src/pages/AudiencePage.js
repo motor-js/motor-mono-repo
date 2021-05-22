@@ -4,9 +4,24 @@ import Grid from "@material-ui/core/Grid";
 import OverTimeChart from "../components/OverTimeChart";
 import Chart from "../components/Chart";
 import Dropdown from "../components/Dropdown";
-// import SwitchTable from "../components/SwitchTable";
+import SwitchTable from "../components/SwitchTable";
 
 const queries = {
+  usersTableCount: {
+    chartType: "table",
+    cols: [
+      {
+        qField: "Dim2",
+        dataKey: "Dim2",
+        qLabel: "Dim2",
+      },
+      {
+        qField: "=sum(Value)",
+        dataKey: "quantity",
+        qLabel: "Quantity Sold",
+      },
+    ],
+  },
   usersCount: {
     chartType: "number",
     cols: [],
@@ -253,42 +268,50 @@ const AudiencePage = ({ withTime }) => {
       <Grid item xs={6}>
         <Chart title="Users by Type" vizState={withTime(queries.usersByType)} />
       </Grid>
-      {/* <SwitchTable
-        options={[{
-          title: "Demographics",
-          values: [{
-            name: "Language",
-            fn: ({ query, ...vizState }) => ({
-              ...vizState,
-              query: {
-                ...query,
-                dimensions: ["Sessions.language"]
-              }
-            })
-          },
+      <SwitchTable
+        options={[
           {
-            name: "Country",
-            fn: ({ query, ...vizState }) => ({
-              ...vizState,
-              query: {
-                ...query,
-                dimensions: ["Sessions.country"]
-              }
-            })
+            title: "Demographics",
+            values: [
+              {
+                name: "Language",
+                fn: ({ query, ...vizState }) => ({
+                  ...vizState,
+                  query: {
+                    ...query,
+                    dimensions: ["Dim1"],
+                  },
+                }),
+              },
+              {
+                name: "Country",
+                fn: ({ query, ...vizState }) => ({
+                  ...vizState,
+                  query: {
+                    ...query,
+                    dimensions: ["Dim2"],
+                  },
+                }),
+              },
+              {
+                name: "City",
+                fn: ({ query, ...vizState }) => ({
+                  ...vizState,
+                  query: {
+                    ...query,
+                    dimensions: ["Type"],
+                  },
+                }),
+              },
+            ],
           },
-          {
-            name: "City",
-            fn: ({ query, ...vizState }) => ({
-              ...vizState,
-              query: {
-                ...query,
-                dimensions: ["Sessions.city"]
-              }
-            })
-          }]
-        }]}
-        query={withTime({ query: queries.usersCount.query, chartType: 'table' })}
-      /> */}
+        ]}
+        query={withTime({
+          // query: queries.usersCount.query,
+          query: queries.usersTableCount,
+          // chartType: "table",
+        })}
+      />
     </>
   );
 };

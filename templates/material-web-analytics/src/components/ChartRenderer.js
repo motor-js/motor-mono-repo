@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import { useCubeQuery } from "@cubejs-client/react";
 import { useData } from "@motor-js/engine";
 
 import {
@@ -21,13 +20,6 @@ import {
   Line,
 } from "recharts";
 import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import moment from "moment";
@@ -36,36 +28,12 @@ import numeral from "numeral";
 const numberFormatter = (item) => numeral(item).format("0,0");
 const dateFormatter = (item) => moment(item).format("MMM DD");
 
-const resolveFormatter = (type) => {
-  if (type === "string") {
-    return (item) => item;
-  } else if (type === "number") {
-    return numberFormatter;
-  }
-
-  throw new Error(`Unsupported type for resolveFormatter: "${type}"`);
-};
-
 const xAxisFormatter = (item) => {
   if (moment(item).isValid()) {
     return dateFormatter(item);
   } else {
     return item;
   }
-};
-
-const getType = (resultSet, key) => {
-  let annotation = resultSet.annotation();
-
-  if (annotation.measures[key]) {
-    return annotation.measures[key].type;
-  }
-
-  if (annotation.dimensions[key]) {
-    return annotation.dimensions[key].type;
-  }
-
-  throw new Error(`Unable to resolve type from resultSet with key: "${key}"`);
 };
 
 const CartesianChart = ({ data, legend, children, ChartComponent, height }) => (
@@ -77,7 +45,6 @@ const CartesianChart = ({ data, legend, children, ChartComponent, height }) => (
         bottom: 0,
         left: 0,
       }}
-      // data={resultSet.chartPivot()}
       data={data}
     >
       <XAxis
@@ -206,25 +173,8 @@ const TypeToChartComponent = {
                 ))}
               </Pie>
             ))}
-          {/* <Legend /> */}
           {legend && <Legend layout={legend} align="right" />}
           <Tooltip />
-          {/* <Pie
-            label={(value) => numeral(value.percent).format("0.00%")}
-            isAnimationActive={false}
-            // data={resultSet.chartPivot()}
-            data={resultSet.data}
-            nameKey="x"
-            // dataKey={resultSet.seriesNames()[0].key}
-            dataKey={resultSet.dataKeys}
-            fill="#8884d8"
-          >
-            {resultSet.data.map((e, index) => (
-              <Cell key={index} fill={colors[index % colors.length]} />
-            ))}
-          </Pie>
-          {legend && <Legend layout={legend} align="right" />}
-          <Tooltip /> */}
         </PieChart>
       </ResponsiveContainer>
     );
@@ -238,45 +188,6 @@ const TypeToChartComponent = {
       </Typography>
     );
   },
-  table: ({ resultSet }) => (
-    <TableContainer component={Paper}>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            {resultSet.tableColumns().map((c) => (
-              <TableCell
-                align={
-                  getType(resultSet, c.key) === "number" ? "right" : "left"
-                }
-                key={c.key}
-              >
-                {c.shortTitle}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {resultSet.tablePivot().map((row, index) => (
-            <TableRow key={index}>
-              {resultSet.tableColumns().map((c) => {
-                const type = getType(resultSet, c.key);
-                return (
-                  <TableCell
-                    align={
-                      getType(resultSet, c.key) === "number" ? "right" : "left"
-                    }
-                    key={c.key}
-                  >
-                    {resolveFormatter(type)(row[c.key])}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  ),
 };
 const TypeToMemoChartComponent = Object.keys(TypeToChartComponent)
   .map((key) => ({
