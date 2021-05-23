@@ -6,52 +6,79 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 
-// import Chart from "../components/Chart";
-// import ChartRenderer from "../components/ChartRenderer";
+import Chart from "../components/Chart";
+import TableRenderer from "../components/TableRenderer";
 
-// const queries = {
-//   topSources: {
-//     chartType: "pie",
-//     legend: "vertical",
-//     query: {
-//       measures: ["Sessions.usersCount"],
-//       dimensions: ["Sessions.sourceMedium"],
-//       timeDimensions: [
-//         {
-//           dimension: "Sessions.sessionStart",
-//         },
-//       ],
-//     },
-//   },
-//   usersOvertime: {
-//     chartType: "line",
-//     query: {
-//       measures: ["Sessions.usersCount"],
-//       timeDimensions: [
-//         {
-//           dimension: "Sessions.sessionStart",
-//           granularity: "day",
-//         },
-//       ],
-//     },
-//   },
+const queries = {
+  topSources: {
+    chartType: "pie",
+    legend: true,
+    cols: [
+      {
+        qField: "[Type]",
+        qLabel: "Type",
+      },
+      {
+        qField: "=Count(Dim1)",
+        qLabel: "Users",
+      },
+    ],
+    //     chartType: "pie",
+    //     legend: "vertical",
+    //     query: {
+    //       measures: ["Sessions.usersCount"],
+    //       dimensions: ["Sessions.sourceMedium"],
+    //       timeDimensions: [
+    //         {
+    //           dimension: "Sessions.sessionStart",
+    //         },
+    //       ],
+    //     },
+  },
+  usersOvertime: {
+    chartType: "line",
+    cols: [
+      {
+        qField: "[Period]",
+        qLabel: "Period",
+      },
+      {
+        qField: "=count(Dim1)",
+        qLabel: "Session Users",
+        // useFormatting: true,
+        // qNumType: "M",
+        // qNumFmt: "£#,##0",
+      },
+    ],
+    // granularity: "day",
+    //     chartType: "line",
+    //     query: {
+    //       measures: ["Sessions.usersCount"],
+    //       timeDimensions: [
+    //         {
+    //           dimension: "Sessions.sessionStart",
+    //           granularity: "day",
+    //         },
+    //       ],
+    //     },
+  },
 
-//   tableQuery: {
-//     query: {
-//       measures: [
-//         "Sessions.count",
-//         "Sessions.usersCount",
-//         "Sessions.newUsersCount",
-//       ],
-//       timeDimensions: [
-//         {
-//           dimension: "Sessions.sessionStart",
-//         },
-//       ],
-//     },
-//     chartType: "table",
-//   },
-// };
+  //   tableQuery: {
+  //     query: {
+  //       measures: [
+  //         "Sessions.count",
+  //         "Sessions.usersCount",
+  //         "Sessions.newUsersCount",
+  //       ],
+  //       timeDimensions: [
+  //         {
+  //           dimension: "Sessions.sessionStart",
+  //         },
+  //       ],
+  //     },
+  //     chartType: "table",
+  // },
+};
 
 const dimensionOptions = {
   "Top Sources/Mediums": "Sessions.sourceMedium",
@@ -59,13 +86,13 @@ const dimensionOptions = {
   "Top Mediums": "Sessions.referrerMedium",
 };
 
-// const withPrimaryDimension = ({ query, ...vizState }, dimension) => ({
-//   ...vizState,
-//   query: {
-//     ...query,
-//     dimensions: [dimension],
-//   },
-// });
+const withPrimaryDimension = ({ query, ...vizState }, dimension) => ({
+  ...vizState,
+  query: {
+    ...query,
+    dimensions: [dimension],
+  },
+});
 
 const AcquisitionPage = ({ withTime }) => {
   const [primaryDimension, setPrimaryDimension] = useState(
@@ -95,17 +122,36 @@ const AcquisitionPage = ({ withTime }) => {
           </FormControl>
         </Grid>
         <Grid item xs={6}>
-          {/* <Chart
+          <Chart
             title={primaryDimension}
-            vizState={withPrimaryDimension(withTime(queries.topSources), dimensionOptions[primaryDimension])}
-          /> */}
+            vizState={withPrimaryDimension(
+              withTime(queries.topSources),
+              dimensionOptions[primaryDimension]
+            )}
+          />
         </Grid>
         <Grid item xs={6}>
-          {/* <Chart title="Users" vizState={withTime(queries.usersOvertime)} /> */}
+          <Chart
+            title="Users"
+            vizState={withTime(queries.usersOvertime)}
+            // vizState={withPrimaryDimension(
+            //   withTime(queries.topSources),
+            //   dimensionOptions[primaryDimension]
+            // )}
+            // vizState={withTime({
+            //   chartType: "line",
+            //   legend: false,
+            //   query: withTime(queries.usersOvertime),
+            // })}
+          />
         </Grid>
         <Grid item xs={12}>
-          {/* <ChartRenderer
-            vizState={withPrimaryDimension(withTime(queries.tableQuery), dimensionOptions[primaryDimension])} /> */}
+          {/* <TableRenderer
+            vizState={withPrimaryDimension(
+              withTime(queries.tableQuery),
+              dimensionOptions[primaryDimension]
+            )}
+          /> */}
         </Grid>
       </Grid>
     </Grid>
