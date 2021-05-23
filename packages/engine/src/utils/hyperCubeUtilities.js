@@ -138,7 +138,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
         series[dimensionNames[0]] = d[0].qText;
         series["qElemNumber"] = d[0].qElemNumber;
         series[key] = value;
-        series[`${key}-qElemNumber`] = qElemNumber;
+        series[`${key}-qElemNumber`] = elemNumber;
       }
       transformedData.push(series);
       series = {};
@@ -146,7 +146,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
       series[dimensionNames[0]] = d[0].qText;
       series["qElemNumber"] = d[0].qElemNumber;
       series[key] = value;
-      series[`${key}-qElemNumber`] = qElemNumber;
+      series[`${key}-qElemNumber`] = elemNumber;
       series["label"] = d[0].qText;
     }
     parentText = d[0].qText;
