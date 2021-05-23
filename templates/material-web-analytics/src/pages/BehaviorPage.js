@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import OverTimeChart from "../components/OverTimeChart";
 import Chart from "../components/Chart";
-// import SwitchTable from "../components/SwitchTable";
+import SwitchTable from "../components/SwitchTable";
 
 const queries = {
   pageviewsOverTime: {
@@ -66,6 +66,26 @@ const queries = {
       },
     ],
   },
+  pageviewsTable: {
+    chartType: "table",
+    cols: [
+      {
+        qField: "Dim1",
+        dataKey: "Dim1",
+        qLabel: "Dim1",
+      },
+      {
+        qField: "Type",
+        dataKey: "Type",
+        qLabel: "Type",
+      },
+      {
+        qField: "=sum(Value)",
+        dataKey: "quantity",
+        qLabel: "Quantity Sold",
+      },
+    ],
+  },
 };
 
 const BehaviorPage = ({ withTime }) => (
@@ -102,32 +122,38 @@ const BehaviorPage = ({ withTime }) => (
       <Grid item xs={2}>
         {/* <Chart title="% Exit" vizState={withTime(queries.exitPercent)} /> */}
       </Grid>
-      {/* <SwitchTable
-        options={[{
-          title: "Site Content",
-          values: [{
-            name: "Page",
-            fn: ({ query, ...vizState }) => ({
-              ...vizState,
-              query: {
-                ...query,
-                dimensions: ["PageViews.pageUrlPath"]
-              }
-            })
-          },
+      <SwitchTable
+        options={[
           {
-            name: "Page Title",
-            fn: ({ query, ...vizState }) => ({
-              ...vizState,
-              query: {
-                ...query,
-                dimensions: ["PageViews.pageTitle"]
-              }
-            })
-          }]
-        }]}
-        query={withTime(queries.pageviewsTable)}
-      /> */}
+            title: "Site Content",
+            values: [
+              {
+                name: "Page",
+                fn: ({ query, ...vizState }) => ({
+                  ...vizState,
+                  query: {
+                    ...query,
+                    dimensions: ["PageViews.pageUrlPath"],
+                  },
+                }),
+              },
+              {
+                name: "Page Title",
+                fn: ({ query, ...vizState }) => ({
+                  ...vizState,
+                  query: {
+                    ...query,
+                    dimensions: ["PageViews.pageTitle"],
+                  },
+                }),
+              },
+            ],
+          },
+        ]}
+        query={withTime({
+          query: queries.pageviewsTable,
+        })}
+      />
     </Grid>
   </Grid>
 );
