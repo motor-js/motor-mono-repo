@@ -129,22 +129,16 @@ const BehaviorPage = ({ withTime }) => (
             values: [
               {
                 name: "Page",
-                fn: ({ query, ...vizState }) => ({
-                  ...vizState,
-                  query: {
-                    ...query,
-                    dimensions: ["PageViews.pageUrlPath"],
-                  },
+                fn: ({ query }) => ({
+                  ...query,
+                  dimensions: ["PageViews.pageUrlPath"],
                 }),
               },
               {
                 name: "Page Title",
-                fn: ({ query, ...vizState }) => ({
-                  ...vizState,
-                  query: {
-                    ...query,
-                    dimensions: ["PageViews.pageTitle"],
-                  },
+                fn: ({ query }) => ({
+                  ...query,
+                  dimensions: ["PageViews.pageTitle"],
                 }),
               },
             ],

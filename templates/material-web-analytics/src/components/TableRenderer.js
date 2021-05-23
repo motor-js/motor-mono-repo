@@ -95,7 +95,7 @@ const renderChart = (Component) => ({ resultSet, error, height, ...props }) =>
   (error && error.toString()) || <Loader height={height} />;
 
 const TableRenderer = ({ vizState, height }) => {
-  const { cols, chartType, dimensions, ...options } = vizState.query;
+  const { cols, chartType, dimensions, ...options } = vizState;
 
   const component = TypeToMemoChartComponent[chartType];
 

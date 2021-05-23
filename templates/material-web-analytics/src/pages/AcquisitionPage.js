@@ -63,21 +63,44 @@ const queries = {
     //     },
   },
 
-  //   tableQuery: {
-  //     query: {
-  //       measures: [
-  //         "Sessions.count",
-  //         "Sessions.usersCount",
-  //         "Sessions.newUsersCount",
-  //       ],
-  //       timeDimensions: [
-  //         {
-  //           dimension: "Sessions.sessionStart",
-  //         },
-  //       ],
-  //     },
-  //     chartType: "table",
-  // },
+  tableQuery: {
+    chartType: "table",
+    cols: [
+      {
+        qField: "Dim1",
+        dataKey: "Dim1",
+        qLabel: "Dim1",
+      },
+      {
+        qField: "Dim2",
+        dataKey: "Dim2",
+        qLabel: "Dim2",
+      },
+      {
+        qField: "Type",
+        dataKey: "Type",
+        qLabel: "Type",
+      },
+      {
+        qField: "=sum(Value)",
+        dataKey: "quantity",
+        qLabel: "Quantity Sold",
+      },
+    ],
+    //     query: {
+    //       measures: [
+    //         "Sessions.count",
+    //         "Sessions.usersCount",
+    //         "Sessions.newUsersCount",
+    //       ],
+    //       timeDimensions: [
+    //         {
+    //           dimension: "Sessions.sessionStart",
+    //         },
+    //       ],
+    //     },
+    //     chartType: "table",
+  },
 };
 
 const dimensionOptions = {
@@ -131,27 +154,15 @@ const AcquisitionPage = ({ withTime }) => {
           />
         </Grid>
         <Grid item xs={6}>
-          <Chart
-            title="Users"
-            vizState={withTime(queries.usersOvertime)}
-            // vizState={withPrimaryDimension(
-            //   withTime(queries.topSources),
-            //   dimensionOptions[primaryDimension]
-            // )}
-            // vizState={withTime({
-            //   chartType: "line",
-            //   legend: false,
-            //   query: withTime(queries.usersOvertime),
-            // })}
-          />
+          <Chart title="Users" vizState={withTime(queries.usersOvertime)} />
         </Grid>
         <Grid item xs={12}>
-          {/* <TableRenderer
+          <TableRenderer
             vizState={withPrimaryDimension(
               withTime(queries.tableQuery),
               dimensionOptions[primaryDimension]
             )}
-          /> */}
+          />
         </Grid>
       </Grid>
     </Grid>

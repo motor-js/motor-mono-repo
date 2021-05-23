@@ -276,33 +276,23 @@ const AudiencePage = ({ withTime }) => {
             values: [
               {
                 name: "Language",
-                fn: ({ query, ...vizState }) => ({
-                  ...vizState,
-                  query: {
-                    ...query,
-                    dimensions: ["Dim1"],
-                  },
+                fn: ({ query }) => ({
+                  ...query,
+                  dimensions: ["Dim1"],
                 }),
               },
               {
                 name: "Country",
-                fn: ({ query, ...vizState }) => ({
-                  ...vizState,
-                  query: {
-                    ...query,
-                    dimensions: ["Dim2"],
-                  },
+                fn: ({ query }) => ({
+                  ...query,
+                  dimensions: ["Dim2"],
                 }),
               },
               {
                 name: "City",
-                fn: ({ query, ...vizState }) => ({
-                  ...vizState,
-                  query: {
-                    ...query,
-
-                    dimensions: ["Type"],
-                  },
+                fn: ({ query }) => ({
+                  ...query,
+                  dimensions: ["Type"],
                 }),
               },
             ],
