@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useData } from "@motor-js/engine";
 
@@ -210,21 +210,36 @@ const renderChart = (Component) => ({ resultSet, error, height, ...props }) =>
   (error && error.toString()) || <Loader height={height} />;
 
 const ChartRenderer = ({ vizState, height }) => {
-  const { cols, qMetrics, chartType, legend, ...options } = vizState;
+  const {
+    cols,
+    qMetrics,
+    chartType,
+    legend,
+    dimensions,
+    ...options
+  } = vizState;
+  const [dimension, setDimension] = useState(dimensions && dimensions[0]);
   const component = TypeToMemoChartComponent[chartType];
-  // const renderProps = useCubeQuery(query);
-  // console.log("ff", cols[1]);
-  const { dataSet, metrics, select } = useData({
+
+  // console.log(vizState.query && vizState.query.dimensions, dimension);
+  // console.log(vizState);
+  const { dataSet, metrics, select, handlerChange } = useData({
     cols,
     qMetrics,
   });
+
+  if (!metrics && !dataSet.data) return null;
+
+  if (dimensions && dimensions[0] !== dimension) {
+    handlerChange(false, dimensions[0]);
+    setDimension(dimensions[0]);
+  }
 
   const renderProps = {
     // error: null,
     resultSet: { dataSet, metrics, select, legend },
   };
 
-  if (!metrics && !dataSet.data) return null;
   return (
     component && renderChart(component)({ ...options, height, ...renderProps })
   );

@@ -104,17 +104,21 @@ const queries = {
 };
 
 const dimensionOptions = {
-  "Top Sources/Mediums": "Sessions.sourceMedium",
-  "Top Sources": "Sessions.referrerSource",
-  "Top Mediums": "Sessions.referrerMedium",
+  // "Top Sources/Mediums": "Sessions.sourceMedium",
+  // "Top Sources": "Sessions.referrerSource",
+  // "Top Mediums": "Sessions.referrerMedium",
+  "Top Sources/Mediums": "Type",
+  "Top Sources": "Dim1",
+  "Top Mediums": "Dim2",
 };
 
 const withPrimaryDimension = ({ query, ...vizState }, dimension) => ({
   ...vizState,
-  query: {
-    ...query,
-    dimensions: [dimension],
-  },
+  dimensions: [dimension],
+  // query: {
+  //   ...query,
+  //   dimensions: [dimension],
+  // },
 });
 
 const AcquisitionPage = ({ withTime }) => {
