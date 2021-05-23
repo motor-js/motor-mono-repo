@@ -67,6 +67,11 @@ const queries = {
     chartType: "table",
     cols: [
       {
+        qField: "Type",
+        dataKey: "Type",
+        qLabel: "Type",
+      },
+      {
         qField: "Dim1",
         dataKey: "Dim1",
         qLabel: "Dim1",
@@ -77,9 +82,9 @@ const queries = {
         qLabel: "Dim2",
       },
       {
-        qField: "Type",
-        dataKey: "Type",
-        qLabel: "Type",
+        qField: "Period",
+        dataKey: "Period",
+        qLabel: "Period",
       },
       {
         qField: "=sum(Value)",

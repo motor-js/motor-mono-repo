@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTable } from "@motor-js/engine";
 
@@ -96,79 +96,32 @@ const renderChart = (Component) => ({ resultSet, error, height, ...props }) =>
 
 const TableRenderer = ({ vizState, height }) => {
   const { cols, chartType, dimensions, ...options } = vizState;
+  const [dimension, setDimension] = useState(dimensions && dimensions[0]);
 
   const component = TypeToMemoChartComponent[chartType];
-  console.log(vizState);
+  // console.log(vizState);
 
-  const { dataSet, headerGroup, select } = useTable({
+  const { dataSet, headerGroup, select, applyPatches } = useTable({
     cols,
   });
 
   if (!dataSet) return null;
 
-  // console.log(dimensions[0]);
-
-  // handlerChange(false, "Dim1");
-  // const isMeasure = false;
-  // // const value = dimensions[0];
-  // const patches = [
-  //   {
-  //     qOp: "replace",
-  //     qPath: `/qHyperCubeDef/${
-  //       isMeasure ? "qMeasures" : "qDimensions"
-  //     }/0/qDef/${isMeasure ? "qDef" : "qFieldDefs"}`,
-  //     qValue: JSON.stringify(isMeasure ? dimensions[0] : [dimensions[0]]),
-  //   },
-  // ];
-
-  // applyPatches(patches);
-
-  // const patches = [
-  //   {
-  //     qPath: "/qHyperCube/qDimensionInfo/0",
-  //     qOp: "replace",
-  //     // qValue: "-1",
-  //     // qValue: JSON.stringify(dimensions),
-  //     // qValue: dimensions[0],
-  //     // qValue: JSON.stringify("Dim1"),
-  //     qValue: "[" + dimensions[0] + "]",
-  //   },
-  // ];
-  // const reversesort = 1;
-
-  // const patches = [
-  //   {
-  //     qPath: "/qHyperCubeDef/qDimensions/0/qDef/qReverseSort",
-  //     qOp: "replace",
-  //     qValue: JSON.stringify(!reversesort),
-  //   },
-  // ];
-
-  // const patches = [
-  //   {
-  //     //path to the sortOrder property
-  //     qPath: "/qHyperCubeDef/qInterColumnSortOrder",
-  //     //we want to replace the sort order
-  //     qOp: "replace",
-  //     //make a string with an array in it
-  //     qValue: "[" + 0 + "]",
-  //   },
-  // ];
-
-  // const patches = [
-  //   {
-  //     //path to the sortOrder property
-  //     qPath: "/qHyperCubeDef/qInterColumnSortOrder",
-  //     //we want to replace the sort order
-  //     qOp: "replace",
-  //     //make a string with an array in it
-  //     qValue: "[" + 1 + "]",
-  //   },
-  // ];
-
-  // applyPatches(patches);
-
-  // console.log(applyPatches);
+  if (dimensions && dimensions[0] !== dimension) {
+    applyPatches([
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldDefs`,
+        qValue: JSON.stringify([dimensions[0]]),
+      },
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldLabels`,
+        qValue: JSON.stringify([dimensions[0]]),
+      },
+    ]);
+    setDimension(dimensions[0]);
+  }
 
   const renderProps = {
     // error: null,
