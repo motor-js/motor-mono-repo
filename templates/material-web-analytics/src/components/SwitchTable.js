@@ -8,6 +8,10 @@ import TableRenderer from "../components/TableRenderer";
 
 const SwitchTable = ({ options, query }) => {
   const [option, setOption] = useState(options[0].values[0]);
+  // console.log("vv", query, option);
+  const segment = query.segment;
+  const timeDimension = query.timeDimension;
+  // console.log("segment", segment);
   return (
     <>
       <Grid item xs={3} style={{ minHeight: 300 }}>
@@ -37,7 +41,7 @@ const SwitchTable = ({ options, query }) => {
       </Grid>
       ,
       <Grid item xs={9}>
-        <TableRenderer vizState={option.fn(query)} />
+        <TableRenderer vizState={option.fn(query, segment, timeDimension)} />
       </Grid>
     </>
   );

@@ -44,9 +44,11 @@ const getDateRange = () => {
 
 const withTimeFunc = ({ ...vizState }, begin, end, segment) => {
   // const timeDimensionObj = (query.timeDimensions || [])[0] || {};
+  // const timeDimensionObj = {};
   // const cube =
   //   (query.measures && query.measures[0].split(".")[0]) || "Sessions";
   // const timeDimension = timeDimensionObj.dimension || `${cube}.sessionStart`;
+  // const timeDimension = timeDimensionObj.dimension;
   // const granularity = timeDimensionObj.granularity || null;
   // const segmentCube = (query) => {
   //   const measureCube = query.measures[0].split(".")[0];
@@ -64,17 +66,22 @@ const withTimeFunc = ({ ...vizState }, begin, end, segment) => {
     ...vizState,
     // query: {
     //   ...query,
-    //   segments,
-    //   timeDimensions: [
-    //     {
-    //       dimension: timeDimension,
-    //       dateRange: [
-    //         begin.format(moment.HTML5_FMT.DATE),
-    //         end.format(moment.HTML5_FMT.DATE),
-    //       ],
-    //       granularity: granularity,
-    //     },
-    //   ],
+    // segments,
+    segment,
+    timeDimension: [
+      begin.format(moment.HTML5_FMT.DATE),
+      end.format(moment.HTML5_FMT.DATE),
+    ],
+    // timeDimensions: [
+    //   {
+    //     dimension: timeDimension,
+    //     dateRange: [
+    //       begin.format(moment.HTML5_FMT.DATE),
+    //       end.format(moment.HTML5_FMT.DATE),
+    //     ],
+    //     granularity: granularity,
+    //   },
+    // ],
     // },
   };
 };

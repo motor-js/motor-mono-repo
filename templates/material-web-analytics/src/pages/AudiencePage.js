@@ -276,22 +276,28 @@ const AudiencePage = ({ withTime }) => {
             values: [
               {
                 name: "Language",
-                fn: ({ query }) => ({
+                fn: ({ query }, segment, timeDimension) => ({
                   ...query,
+                  segment,
+                  timeDimension,
                   dimensions: ["Dim1"],
                 }),
               },
               {
                 name: "Country",
-                fn: ({ query }) => ({
+                fn: ({ query }, segment, timeDimension) => ({
                   ...query,
+                  segment,
+                  timeDimension,
                   dimensions: ["Dim2"],
                 }),
               },
               {
                 name: "City",
-                fn: ({ query }) => ({
+                fn: ({ query }, segment, timeDimension) => ({
                   ...query,
+                  segment,
+                  timeDimension,
                   dimensions: ["Type"],
                 }),
               },
