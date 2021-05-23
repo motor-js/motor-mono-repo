@@ -213,6 +213,7 @@ const ChartRenderer = ({ vizState, height }) => {
   const { cols, qMetrics, chartType, legend, ...options } = vizState;
   const component = TypeToMemoChartComponent[chartType];
   // const renderProps = useCubeQuery(query);
+  // console.log("ff", cols[1]);
   const { dataSet, metrics, select } = useData({
     cols,
     qMetrics,

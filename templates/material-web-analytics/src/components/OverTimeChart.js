@@ -11,6 +11,7 @@ import ChartRenderer from "./ChartRenderer";
 const granularityFromQuery = ({ query }) => query.granularity;
 
 const withGranularity = ({ query, ...vizState }, granularity) => {
+  // console.log(query.cols[1].qField);
   return {
     ...vizState,
     granularity: granularity, // Hour, Day, Week,Month
@@ -31,6 +32,7 @@ const OverTimeChart = ({ title, vizState, granularityControls }) => {
     granularityFromQuery(vizState)
   );
   // console.log(withGranularity(vizState, granularity));
+
   return (
     <Card>
       <CardContent>

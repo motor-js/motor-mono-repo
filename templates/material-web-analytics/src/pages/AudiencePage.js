@@ -112,7 +112,7 @@ const overTimeQueries = {
         qLabel: "Period",
       },
       {
-        qField: "=count(Dim1)",
+        qField: "=count(Dim1)*1000",
         qLabel: "Session Users",
         // useFormatting: true,
         // qNumType: "M",
@@ -207,6 +207,7 @@ const overTimeQueries = {
 
 const AudiencePage = ({ withTime }) => {
   const [overTimeQuery, setOverTimeQuery] = useState("Users");
+
   return (
     <>
       <Grid item xs={12}>
