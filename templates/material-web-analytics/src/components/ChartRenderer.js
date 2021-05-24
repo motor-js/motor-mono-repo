@@ -218,12 +218,16 @@ const ChartRenderer = ({ vizState, height }) => {
     dimensions,
     ...options
   } = vizState;
-  const [dimension, setDimension] = useState(dimensions && dimensions[0]);
+  const [dimension, setDimension] = useState(
+    (dimensions && dimensions[0]) || (cols[0] && cols[0].qField)
+  );
+  const [measure, setMeasure] = useState(cols[1] && cols[1].qField);
+  // const [columns, setColumns] = useState(dimensions && dimensions[0]);
   const component = TypeToMemoChartComponent[chartType];
 
   // console.log(vizState.query && vizState.query.dimensions, dimension);
   // console.log(vizState);
-  const { dataSet, metrics, select, handlerChange } = useData({
+  const { dataSet, metrics, select, applyPatches } = useData({
     cols,
     qMetrics,
   });
@@ -231,8 +235,42 @@ const ChartRenderer = ({ vizState, height }) => {
   if (!metrics && !dataSet.data) return null;
 
   if (dimensions && dimensions[0] !== dimension) {
-    handlerChange(false, dimensions[0]);
+    // handlerChange(false, dimensions[0]);
+    applyPatches([
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldDefs`,
+        qValue: JSON.stringify([dimensions[0]]),
+      },
+      // {
+      //   qOp: "replace",
+      //   qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldLabels`,
+      //   qValue: JSON.stringify([dimensions[0]]),
+      // },
+    ]);
     setDimension(dimensions[0]);
+  }
+  if (cols[1] && cols[1].qField !== measure) {
+    // handlerChange(false, dimensions[0]);
+    // console.log(cols[1].qField);
+    applyPatches([
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qMeasures/0/qDef/qDef`,
+        qValue: JSON.stringify(cols[1].qField),
+      },
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qMeasures/0/qDef/qLabel`,
+        qValue: JSON.stringify(cols[1].qLabel),
+      },
+      // {
+      //   qOp: "replace",
+      //   qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldLabels`,
+      //   qValue: JSON.stringify([dimensions[0]]),
+      // },
+    ]);
+    setMeasure(cols[1].qField);
   }
 
   const renderProps = {

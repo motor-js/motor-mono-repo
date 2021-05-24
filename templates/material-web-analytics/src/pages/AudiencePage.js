@@ -135,7 +135,7 @@ const overTimeQueries = {
         qLabel: "Period",
       },
       {
-        qField: "=count(Dim2)",
+        qField: "=count(distinct Dim2)",
         qLabel: "Sessions Sessions",
         // useFormatting: true,
         // qNumType: "M",
