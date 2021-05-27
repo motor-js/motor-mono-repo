@@ -3,10 +3,9 @@ import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
-import ReactWaterMark from 'react-watermark-component';
-import License from "../License"
 
 function Motor({
+  engine,
   children,
   config,
   logo,
@@ -28,8 +27,9 @@ function Motor({
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
 
-  const engine = useEngine(myConfig);
+  const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
 
+  /*
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.warn('start alarm'); };
   
@@ -43,16 +43,18 @@ function Motor({
     rotateAngle: -0.19,
     fillStyle: '#666'
   }
+*/
 
   return (
-    <EngineContext.Provider value={engine}>
+    <EngineContext.Provider value={newEngine}>
+      {/*
       <License />
       <ReactWaterMark
         waterMarkText={text}
         openSecurityDefense
         securityAlarm={beginAlarm}
         options={options}
-      >
+      >*/}
           <Login
             config={myConfig}
             logo={logo}
@@ -80,7 +82,7 @@ function Motor({
             loginfontFamily={loginfontFamily}
           />
           {children}
-      </ReactWaterMark>
+     {/* </ReactWaterMark> */} 
     </EngineContext.Provider>
   );
 }
