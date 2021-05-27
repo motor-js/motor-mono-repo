@@ -11,7 +11,7 @@ import {
 
 import { CustomTooltip } from "../../../util";
 
-const MotorPieChart = ({ dataSet, config }) => {
+const MotorPieChart = ({ dataSet, config, select }) => {
   const { data, dataKeys } = dataSet;
 
   const {
@@ -71,6 +71,7 @@ const MotorPieChart = ({ dataSet, config }) => {
               innerRadius={innerRadius}
               label={renderLabel}
               labelLine={labelLine}
+              onClick={(c) => select(0, [c.elemNumber], false)}
             >
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={fill[index]} />

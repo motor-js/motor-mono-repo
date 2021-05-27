@@ -1,4 +1,11 @@
-import { useState, useCallback, useRef, useReducer, useEffect, useContext } from "react";
+import {
+  useState,
+  useCallback,
+  useRef,
+  useReducer,
+  useEffect,
+  useContext,
+} from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
 import createDef from "../utils/createHCDef";
@@ -6,7 +13,7 @@ import {
   getHeader,
   hyperCubeTransform,
   hyperCubeChartTransform,
-  orderCols
+  orderCols,
 } from "../utils/hyperCubeUtilities";
 
 const initialState = {
@@ -21,7 +28,15 @@ const initialState = {
 
 function reducer(state, action) {
   const {
-    payload: { title, qData, dataSet, qRData, headerGroup, qLayout, selections },
+    payload: {
+      title,
+      qData,
+      dataSet,
+      qRData,
+      headerGroup,
+      qLayout,
+      selections,
+    },
     type,
   } = action;
 
@@ -69,7 +84,7 @@ const initialProps = {
   getQRData: false,
   qColumnOrder: [],
   qCalcCondition: undefined,
-  qOtherTotalSpec: ''
+  qOtherTotalSpec: "",
 };
 
 const useTable = (props) => {
@@ -84,10 +99,8 @@ const useTable = (props) => {
     qColumnOrder,
     qCalcCondition,
     getQRData,
-    qOtherTotalSpec
+    qOtherTotalSpec,
   } = deepMerge(initialProps, props);
-
-  console.log('props', props)
 
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -98,11 +111,8 @@ const useTable = (props) => {
     qSortByLoadOrder,
     qExpression,
     qSortByNumeric,
-    qSortByExpression
-  } = sortCriteria
-
-  console.log('sc: ',sortCriteria)
- // console.log('icoso1: ',qInterColumnSortOrder)
+    qSortByExpression,
+  } = sortCriteria;
 
   const {
     title,
@@ -135,7 +145,7 @@ const useTable = (props) => {
       _setPage(_page);
       changePage({ qTop: _page * pageSize });
     },
-    [pageSize]
+    [changePage, pageSize]
   );
   window.setPage = setPage;
 
@@ -150,7 +160,7 @@ const useTable = (props) => {
     },
     [page, setPage]
   );
-  
+
   //handle page change
   const handlePageChange = useCallback(
     (pageIndex) => {
@@ -167,15 +177,14 @@ const useTable = (props) => {
 
   // page decrement
   const decrementPage = () => {
-      if(page == 0) {
-        console.log(pages)
-        handlePageChange(pages - 1);
-      } else {
-        const prevPage = page - 1;
-        handlePageChange(prevPage);
-      }
+    if (page == 0) {
+      console.log(pages);
+      handlePageChange(pages - 1);
+    } else {
+      const prevPage = page - 1;
+      handlePageChange(prevPage);
+    }
   };
-
 
   // Find the total size of the Hypercube
   useEffect(() => {
@@ -183,9 +192,7 @@ const useTable = (props) => {
     setPages(Math.ceil(qLayout.qHyperCube.qSize.qcy / pageSize));
   }, [qLayout, qData, pageSize, setPage, setPages]);
 
-
   //======================
-
 
   // Build qOtherTotalSpec object
   let totalSpec;
@@ -208,8 +215,6 @@ const useTable = (props) => {
   }
 
   const generateQProp = useCallback(() => {
-
-    console.log('icso', qInterColumnSortOrder)
     const qProp = createDef(
       cols,
       qTitle,
@@ -279,65 +284,61 @@ const useTable = (props) => {
   );
 
   const structureData = useCallback(async (layout, data, cols) => {
-    let useNumonFirstDim;
+    // let useNumonFirstDim;
     const dataSet = hyperCubeTransform(
-        data,
-        layout.qHyperCube,
-        useNumonFirstDim,
-        cols
-      )
+      data,
+      layout.qHyperCube,
+      // useNumonFirstDim,
+      cols
+    );
 
     return dataSet;
   }, []);
 
-  const update = useCallback(
-    async () => {
-      const _qLayout = await getLayout();
-      const _qTitle = await getTitle(_qLayout);
-      const _qData = await getData();
-      // Order colunns for dataKey
-      const _orderedCols = await orderCols(cols)
-      const _dataSet =  _qData && await structureData(_qLayout, _qData, _orderedCols);
-      const _headerGroup = _qData && await getHeader(_qLayout, _orderedCols);
-      if (_qData && _isMounted.current) {
-        const _selections = _qData.qMatrix.filter(
-          (row) => row[0].qState === "S"
-        );
+  const update = useCallback(async () => {
+    const _qLayout = await getLayout();
+    const _qTitle = await getTitle(_qLayout);
+    const _qData = await getData();
+    // Order colunns for dataKey
+    const _orderedCols = await orderCols(cols);
+    const _dataSet =
+      _qData && (await structureData(_qLayout, _qData, _orderedCols));
+    const _headerGroup = _qData && (await getHeader(_qLayout, _orderedCols));
+    if (_qData && _isMounted.current) {
+      const _selections = _qData.qMatrix.filter((row) => row[0].qState === "S");
+      dispatch({
+        type: "update",
+        payload: {
+          title: _qTitle,
+          qData: _qData,
+          dataSet: _dataSet,
+          headerGroup: _headerGroup,
+          qLayout: _qLayout,
+          selections: _selections,
+        },
+      });
+    } else if (_isMounted.current) {
+      dispatch({
+        type: "update",
+        payload: {
+          title: _qTitle,
+          qData: _qData,
+          dataSet: _dataSet,
+          headerGroup: _headerGroup,
+          qLayout: _qLayout,
+        },
+      });
+    }
+    if (getQRData) {
+      const _qRData = await getReducedData();
+      if (_isMounted.current) {
         dispatch({
-          type: "update",
-          payload: {
-            title: _qTitle,
-            qData: _qData,
-            dataSet: _dataSet,
-            headerGroup: _headerGroup,
-            qLayout: _qLayout,
-            selections: _selections,
-          },
-        });
-      } else if (_isMounted.current) {
-        dispatch({
-          type: "update",
-          payload: {
-            title: _qTitle,
-            qData: _qData,
-            dataSet: _dataSet,
-            headerGroup: _headerGroup,
-            qLayout: _qLayout,
-          },
+          type: "updateReducedData",
+          payload: { qRData: _qRData },
         });
       }
-      if (getQRData) {
-        const _qRData = await getReducedData();
-        if (_isMounted.current) {
-          dispatch({
-            type: "updateReducedData",
-            payload: { qRData: _qRData },
-          });
-        }
-      }
-    },
-    [getData, getLayout, getQRData, getReducedData]
-  );
+    }
+  }, [getData, getLayout, getQRData, getReducedData]);
 
   const changePage = useCallback(
     (newPage) => {
@@ -379,7 +380,7 @@ const useTable = (props) => {
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
     async (column) => {
-      console.log(column)
+      console.log(column);
       // If no sort is set, we need to set a default sort order
       if (column.qSortIndicator === "N") {
         if (column.qPath.includes("qDimensions")) {
@@ -465,7 +466,7 @@ const useTable = (props) => {
     handlePageChange,
     page, //current page
     pageSize, //page size
-    pages //number of pages
+    pages, //number of pages
   };
 };
 

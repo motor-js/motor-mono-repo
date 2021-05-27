@@ -1,91 +1,90 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-// import OverTimeChart from "../components/OverTimeChart";
-// import Chart from "../components/Chart";
-// import SwitchTable from "../components/SwitchTable";
+import OverTimeChart from "../components/OverTimeChart";
+import Chart from "../components/Chart";
+import SwitchTable from "../components/SwitchTable";
 
 const queries = {
   pageviewsOverTime: {
     chartType: "line",
-    legend: false,
-    query: {
-      measures: ["PageViews.count"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-          granularity: "day",
-        },
-      ],
-    },
+    cols: [
+      {
+        qField: "[Period]",
+        qLabel: "Period",
+      },
+      {
+        qField: "=count(Dim1)",
+        qLabel: "Session Users",
+        // useFormatting: true,
+        // qNumType: "M",
+        // qNumFmt: "£#,##0",
+      },
+    ],
+    granularity: "day",
   },
-
   pageviews: {
     chartType: "number",
-    query: {
-      measures: ["PageViews.pageviews"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Sum(Value),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
   },
-
   uniqPageviews: {
     chartType: "number",
-    query: {
-      measures: ["PageViews.uniqPageviews"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Count(Value),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
   },
-
   averageTimeOnPageSeconds: {
     chartType: "number",
-    query: {
-      measures: ["PageViews.averageTimeOnPageSeconds"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Count(Value),'$#,##0')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
   },
-
   bounceRate: {
     chartType: "number",
-    query: {
-      measures: ["Sessions.bounceRate"],
-    },
+    cols: [],
+    qMetrics: [
+      {
+        qName: "prize",
+        qExpr: "num(Count(Value),'#,##0.00%')",
+        qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+      },
+    ],
   },
-
-  exitPercent: {
-    chartType: "number",
-    query: {
-      measures: ["PageViews.exitPercent"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
-  },
-
   pageviewsTable: {
     chartType: "table",
-    query: {
-      measures: ["PageViews.pageviews"],
-      dimensions: ["PageViews.pageUrlPath"],
-      timeDimensions: [
-        {
-          dimension: "PageViews.time",
-        },
-      ],
-    },
-    order: { "PageViews.pageviews": "desc" },
+    cols: [
+      {
+        qField: "Type",
+        dataKey: "Type",
+        qLabel: "Type",
+      },
+      {
+        qField: "Dim1",
+        dataKey: "Dim1",
+        qLabel: "Dim1",
+      },
+      {
+        qField: "=sum(Value)",
+        dataKey: "quantity",
+        qLabel: "Quantity Sold",
+      },
+    ],
   },
 };
 
@@ -93,52 +92,68 @@ const BehaviorPage = ({ withTime }) => (
   <Grid item xs={12}>
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        {/* <OverTimeChart
+        <OverTimeChart
           title="Pageviews"
-          vizState={withTime(queries.pageviewsOverTime)}
-        /> */}
+          vizState={withTime({
+            chartType: "line",
+            legend: false,
+            query: withTime(queries.pageviewsOverTime),
+          })}
+        />
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Pageviews" vizState={withTime(queries.pageviews)} /> */}
+        <Chart title="Pageviews" vizState={withTime(queries.pageviews)} />
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Unique Pageviews" vizState={withTime(queries.uniqPageviews)} /> */}
+        <Chart
+          title="Unique Pageviews"
+          vizState={withTime(queries.uniqPageviews)}
+        />
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Avg. Time on Page" vizState={withTime(queries.averageTimeOnPageSeconds)} /> */}
+        <Chart
+          title="Avg. Time on Page"
+          vizState={withTime(queries.averageTimeOnPageSeconds)}
+        />
       </Grid>
       <Grid item xs={2}>
-        {/* <Chart title="Bounce Rate" vizState={withTime(queries.bounceRate)} /> */}
+        <Chart title="Bounce Rate" vizState={withTime(queries.bounceRate)} />
       </Grid>
       <Grid item xs={2}>
         {/* <Chart title="% Exit" vizState={withTime(queries.exitPercent)} /> */}
       </Grid>
-      {/* <SwitchTable
-        options={[{
-          title: "Site Content",
-          values: [{
-            name: "Page",
-            fn: ({ query, ...vizState }) => ({
-              ...vizState,
-              query: {
-                ...query,
-                dimensions: ["PageViews.pageUrlPath"]
-              }
-            })
-          },
+      <SwitchTable
+        options={[
           {
-            name: "Page Title",
-            fn: ({ query, ...vizState }) => ({
-              ...vizState,
-              query: {
-                ...query,
-                dimensions: ["PageViews.pageTitle"]
-              }
-            })
-          }]
-        }]}
-        query={withTime(queries.pageviewsTable)}
-      /> */}
+            title: "Site Content",
+            values: [
+              {
+                name: "Page",
+                fn: ({ query }, segment, timeDimension) => ({
+                  ...query,
+                  segment,
+                  timeDimension,
+                  // dimensions: ["PageViews.pageUrlPath"],
+                  dimensions: ["Type"],
+                }),
+              },
+              {
+                name: "Page Title",
+                fn: ({ query }, segment, timeDimension) => ({
+                  ...query,
+                  segment,
+                  timeDimension,
+                  // dimensions: ["PageViews.pageTitle"],
+                  dimensions: ["Dim1"],
+                }),
+              },
+            ],
+          },
+        ]}
+        query={withTime({
+          query: queries.pageviewsTable,
+        })}
+      />
     </Grid>
   </Grid>
 );

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useCubeQuery } from "@cubejs-client/react";
+import { useData } from "@motor-js/engine";
 
 import {
   CartesianGrid,
@@ -20,33 +20,13 @@ import {
   Line,
 } from "recharts";
 import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import moment from "moment";
 import numeral from "numeral";
 
 const numberFormatter = (item) => numeral(item).format("0,0");
-const decimalFormatter = (item) => numeral(item).format("0,0.00");
-const percentFormatter = (item) => numeral(item / 100.0).format("0.00%");
-const timeNumberFormatter = (item) => numeral(item).format("00:00:00");
 const dateFormatter = (item) => moment(item).format("MMM DD");
-
-const resolveFormatter = (type) => {
-  if (type === "string") {
-    return (item) => item;
-  } else if (type === "number") {
-    return numberFormatter;
-  }
-
-  throw new Error(`Unsupported type for resolveFormatter: "${type}"`);
-};
 
 const xAxisFormatter = (item) => {
   if (moment(item).isValid()) {
@@ -56,27 +36,7 @@ const xAxisFormatter = (item) => {
   }
 };
 
-const getType = (resultSet, key) => {
-  let annotation = resultSet.annotation();
-
-  if (annotation.measures[key]) {
-    return annotation.measures[key].type;
-  }
-
-  if (annotation.dimensions[key]) {
-    return annotation.dimensions[key].type;
-  }
-
-  throw new Error(`Unable to resolve type from resultSet with key: "${key}"`);
-};
-
-const CartesianChart = ({
-  resultSet,
-  legend,
-  children,
-  ChartComponent,
-  height,
-}) => (
+const CartesianChart = ({ data, legend, children, ChartComponent, height }) => (
   <ResponsiveContainer width="100%" height={height || 250}>
     <ChartComponent
       margin={{
@@ -85,13 +45,14 @@ const CartesianChart = ({
         bottom: 0,
         left: 0,
       }}
-      data={resultSet.chartPivot()}
+      data={data}
     >
       <XAxis
         axisLine={false}
         tickLine={false}
         tickFormatter={xAxisFormatter}
-        dataKey="x"
+        // TODO replace nameKey={nameKey} from useData
+        dataKey="Period"
         minTickGap={20}
       />
       <YAxis
@@ -113,11 +74,6 @@ CartesianChart.defaultProps = {
 
 const colors = ["#4791db", "#e33371", "#e57373"];
 
-const durationMeasures = [
-  "PageViews.averageTimeOnPageSeconds",
-  "Sessions.averageDurationSeconds",
-];
-
 // eslint-disable-next-line no-unused-vars
 const stackedChartData = (resultSet) => {
   const data = resultSet
@@ -134,32 +90,51 @@ const stackedChartData = (resultSet) => {
 };
 
 const TypeToChartComponent = {
-  line: ({ resultSet, ...props }) => (
-    <CartesianChart resultSet={resultSet} ChartComponent={LineChart} {...props}>
-      {resultSet.seriesNames().map((series, i) => (
-        <Line
-          key={series.key}
-          stackId="a"
-          dataKey={series.key}
-          name={series.title}
-          stroke={colors[i]}
-        />
-      ))}
-    </CartesianChart>
-  ),
-  bar: ({ resultSet }) => (
-    <CartesianChart resultSet={resultSet} ChartComponent={BarChart}>
-      {resultSet.seriesNames().map((series, i) => (
-        <Bar
-          key={series.key}
-          stackId="a"
-          dataKey={series.key}
-          name={series.title}
-          fill={colors[i]}
-        />
-      ))}
-    </CartesianChart>
-  ),
+  line: ({ resultSet, ...props }) => {
+    const { data, dataKeys } = resultSet.dataSet;
+    const { legend } = resultSet;
+
+    return (
+      <CartesianChart
+        data={data}
+        legend={legend}
+        ChartComponent={LineChart}
+        {...props}
+      >
+        {dataKeys.map((series, i) => (
+          <Line
+            key={i}
+            stackId="a"
+            dataKey={series}
+            name={series}
+            stroke={colors[i]}
+          />
+        ))}
+      </CartesianChart>
+    );
+  },
+  bar: ({ resultSet }) => {
+    const { data, dataKeys } = resultSet.dataSet;
+    const { legend } = resultSet;
+
+    return (
+      <CartesianChart data={data} legend={legend} ChartComponent={BarChart}>
+        {dataKeys.map((series, i) => (
+          <Bar
+            key={i}
+            stackId="a"
+            dataKey={series}
+            name={series}
+            fill={colors[i]}
+          >
+            {data.map((entry, index) => (
+              <Cell key={index} fill={colors[index % colors.length]} />
+            ))}
+          </Bar>
+        ))}
+      </CartesianChart>
+    );
+  },
   area: ({ resultSet }) => (
     <CartesianChart resultSet={resultSet} ChartComponent={AreaChart}>
       {resultSet.seriesNames().map((series, i) => (
@@ -174,86 +149,45 @@ const TypeToChartComponent = {
       ))}
     </CartesianChart>
   ),
-  pie: ({ resultSet, legend, height }) => (
-    <ResponsiveContainer width="100%" height={height || 250}>
-      <PieChart>
-        <Pie
-          label={(value) => numeral(value.percent).format("0.00%")}
-          isAnimationActive={false}
-          data={resultSet.chartPivot()}
-          nameKey="x"
-          dataKey={resultSet.seriesNames()[0].key}
-          fill="#8884d8"
-        >
-          {resultSet.chartPivot().map((e, index) => (
-            <Cell key={index} fill={colors[index % colors.length]} />
-          ))}
-        </Pie>
-        {legend && <Legend layout={legend} align="right" />}
-        <Tooltip />
-      </PieChart>
-    </ResponsiveContainer>
-  ),
+  pie: ({ resultSet, height }) => {
+    const { data, dataKeys } = resultSet.dataSet;
+    const { select, legend } = resultSet;
+
+    return (
+      <ResponsiveContainer width="100%" height={height || 250}>
+        <PieChart>
+          {dataKeys &&
+            dataKeys.map((key, index) => (
+              <Pie
+                // TODO replace nameKey={nameKey} from useData
+                nameKey="Type"
+                key={index}
+                dataKey={key}
+                isAnimationActive={false}
+                data={data}
+                label={(value) => numeral(value.percent).format("0.00%")}
+                onClick={(c) => select(0, [c.elemNumber], false)}
+              >
+                {data.map((entry, index) => (
+                  <Cell key={index} fill={colors[index % colors.length]} />
+                ))}
+              </Pie>
+            ))}
+          {legend && <Legend layout={legend} align="right" />}
+          <Tooltip />
+        </PieChart>
+      </ResponsiveContainer>
+    );
+  },
   number: ({ resultSet, height }) => {
-    const measureKey = resultSet.seriesNames()[0].key; // Ensure number can only render single measure
-    const format = resultSet.annotation().measures[measureKey].format;
-    const value = resultSet.totalRow()[measureKey];
-    let formattedValue;
-    if (format === "percent") {
-      formattedValue = percentFormatter(value);
-    } else if (durationMeasures.includes(measureKey)) {
-      // special case, since format time is missing
-      formattedValue = timeNumberFormatter(value);
-    } else if (Math.ceil(value) === value && Math.floor(value) === value) {
-      formattedValue = numberFormatter(value);
-    } else {
-      formattedValue = decimalFormatter(value);
-    }
+    const value = resultSet.metrics[Object.keys(resultSet.metrics)[0]];
+
     return (
       <Typography component="p" variant="h4" style={{ height: height }}>
-        {formattedValue}
+        {value}
       </Typography>
     );
   },
-  table: ({ resultSet }) => (
-    <TableContainer component={Paper}>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            {resultSet.tableColumns().map((c) => (
-              <TableCell
-                align={
-                  getType(resultSet, c.key) === "number" ? "right" : "left"
-                }
-                key={c.key}
-              >
-                {c.shortTitle}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {resultSet.tablePivot().map((row, index) => (
-            <TableRow key={index}>
-              {resultSet.tableColumns().map((c) => {
-                const type = getType(resultSet, c.key);
-                return (
-                  <TableCell
-                    align={
-                      getType(resultSet, c.key) === "number" ? "right" : "left"
-                    }
-                    key={c.key}
-                  >
-                    {resolveFormatter(type)(row[c.key])}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  ),
 };
 const TypeToMemoChartComponent = Object.keys(TypeToChartComponent)
   .map((key) => ({
@@ -276,9 +210,74 @@ const renderChart = (Component) => ({ resultSet, error, height, ...props }) =>
   (error && error.toString()) || <Loader height={height} />;
 
 const ChartRenderer = ({ vizState, height }) => {
-  const { query, chartType, ...options } = vizState;
+  const {
+    cols,
+    qMetrics,
+    chartType,
+    legend,
+    dimensions,
+    ...options
+  } = vizState;
+  const [dimension, setDimension] = useState(
+    (dimensions && dimensions[0]) || (cols[0] && cols[0].qField)
+  );
+  const [measure, setMeasure] = useState(cols[1] && cols[1].qField);
+  // const [columns, setColumns] = useState(dimensions && dimensions[0]);
   const component = TypeToMemoChartComponent[chartType];
-  const renderProps = useCubeQuery(query);
+
+  // console.log(vizState.query && vizState.query.dimensions, dimension);
+  // console.log(vizState);
+  const { dataSet, metrics, select, applyPatches } = useData({
+    cols,
+    qMetrics,
+  });
+
+  if (!metrics && !dataSet.data) return null;
+
+  if (dimensions && dimensions[0] !== dimension) {
+    // handlerChange(false, dimensions[0]);
+    applyPatches([
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldDefs`,
+        qValue: JSON.stringify([dimensions[0]]),
+      },
+      // {
+      //   qOp: "replace",
+      //   qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldLabels`,
+      //   qValue: JSON.stringify([dimensions[0]]),
+      // },
+    ]);
+    setDimension(dimensions[0]);
+  }
+  if (cols[1] && cols[1].qField !== measure) {
+    // handlerChange(false, dimensions[0]);
+    // console.log(cols[1].qField);
+    applyPatches([
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qMeasures/0/qDef/qDef`,
+        qValue: JSON.stringify(cols[1].qField),
+      },
+      {
+        qOp: "replace",
+        qPath: `/qHyperCubeDef/qMeasures/0/qDef/qLabel`,
+        qValue: JSON.stringify(cols[1].qLabel),
+      },
+      // {
+      //   qOp: "replace",
+      //   qPath: `/qHyperCubeDef/qDimensions/0/qDef/qFieldLabels`,
+      //   qValue: JSON.stringify([dimensions[0]]),
+      // },
+    ]);
+    setMeasure(cols[1].qField);
+  }
+
+  const renderProps = {
+    // error: null,
+    resultSet: { dataSet, metrics, select, legend },
+  };
+
   return (
     component && renderChart(component)({ ...options, height, ...renderProps })
   );

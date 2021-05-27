@@ -35,7 +35,7 @@ const ChartComponent = ({ dataProps }) => {
       Chart = AreaChart;
   }
 
-  const { dataSet, title, subTitle, handlerChange } = useData({
+  const { dataSet, title, subTitle, handlerChange, select } = useData({
     cols,
     qPage,
     qTitle,
@@ -78,7 +78,7 @@ const ChartComponent = ({ dataProps }) => {
               )}
             </div>
           </div>
-          <Chart dataSet={dataSet} config={chartConfig} />
+          <Chart dataSet={dataSet} config={chartConfig} select={select} />
         </Widget>
       ) : (
         <Skeleton active />

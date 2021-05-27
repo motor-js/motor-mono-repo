@@ -8,27 +8,31 @@ import Grid from "@material-ui/core/Grid";
 
 import ChartRenderer from "./ChartRenderer";
 
-const granularityFromQuery = ({ query }) =>
-  query.timeDimensions &&
-  query.timeDimensions.length > 0 &&
-  query.timeDimensions[0].granularity
+const granularityFromQuery = ({ query }) => query.granularity;
 
 const withGranularity = ({ query, ...vizState }, granularity) => {
+  // console.log(query.cols[1].qField);
   return {
     ...vizState,
-    query: {
-      ...query,
-      timeDimensions: [{
-        ...query.timeDimensions[0],
-        granularity: granularity
-      }]
+    granularity: granularity, // Hour, Day, Week,Month
+    cols: query.cols,
+    // query: {
+    //   ...query,
+    //   timeDimensions: [{
+    //     ...query.timeDimensions[0],
+    //     granularity: granularity
+    //   }]
 
-    }
-  }
-}
+    // }
+  };
+};
 
 const OverTimeChart = ({ title, vizState, granularityControls }) => {
-  const [granularity, setGranularity] = useState(granularityFromQuery(vizState));
+  const [granularity, setGranularity] = useState(
+    granularityFromQuery(vizState)
+  );
+  // console.log(withGranularity(vizState, granularity));
+
   return (
     <Card>
       <CardContent>
@@ -39,10 +43,14 @@ const OverTimeChart = ({ title, vizState, granularityControls }) => {
             </Typography>
           </Grid>
           <Grid item>
-            <ButtonGroup size="small" color="primary" aria-label="outlined primary button group">
-              {['hour', 'day', 'week', 'month'].map(granOption => (
+            <ButtonGroup
+              size="small"
+              color="primary"
+              aria-label="outlined primary button group"
+            >
+              {["hour", "day", "week", "month"].map((granOption) => (
                 <Button
-                  variant={granularity === granOption ? 'contained' : ''}
+                  variant={granularity === granOption ? "contained" : ""}
                   key={granOption}
                   onClick={() => setGranularity(granOption)}
                 >
@@ -52,10 +60,13 @@ const OverTimeChart = ({ title, vizState, granularityControls }) => {
             </ButtonGroup>
           </Grid>
         </Grid>
-        <ChartRenderer height={250} vizState={withGranularity(vizState, granularity)} />
+        <ChartRenderer
+          height={250}
+          vizState={withGranularity(vizState, granularity)}
+        />
       </CardContent>
     </Card>
-  )
+  );
 };
 
 export default OverTimeChart;

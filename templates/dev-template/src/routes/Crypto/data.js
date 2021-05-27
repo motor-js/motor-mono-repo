@@ -52,6 +52,13 @@ export const bodyLocationKPI = {
       {
         qField: "[Body Location]",
         qLabel: "Location",
+        // qFillStyle: "=if([Body Location]='Arms','red','blue')",
+        // qStroke: "=if([Body Location]='Arms',1,2)",
+        qAttributeExpressions: {
+          fill: "=if([Body Location]='Arms','red','blue')",
+          stroke: "=if([Body Location]='Arms',1,2)",
+          // colourPalette,
+        },
       },
       {
         qField: "=Count(Quantity)",

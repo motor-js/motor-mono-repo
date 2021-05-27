@@ -1,7 +1,7 @@
 export function hyperCubeChartTransform(
   qData,
   qHyperCube,
-  useNumonFirstDim = false,
+  // useNumonFirstDim = false,
   cols
 ) {
   const qNoOfDiemnsions =
@@ -14,37 +14,65 @@ export function hyperCubeChartTransform(
 
   const transformedData = qData.qMatrix.map((d, i) => {
     let data = {};
+    let attrExpItems = {};
     d.forEach((item, index) => {
+      if (index < qNoOfDiemnsions) {
+        const attrExp = d[index].qAttrExps;
+        if (typeof attrExp !== "undefined") {
+          const items = attrExp.qValues;
+
+          items.forEach((qAttrExprInfoItem, itemIndex) => {
+            if (qAttrExprInfoItem.qText !== undefined)
+              attrExpItems[
+                qHyperCube.qDimensionInfo[index].qAttrExprInfo[itemIndex].id
+              ] =
+                qAttrExprInfoItem.qNum !== "NaN"
+                  ? qAttrExprInfoItem.qNum
+                  : qAttrExprInfoItem.qText;
+          });
+        }
+      } else {
+        const attrExp = d[index].qAttrExps;
+        if (typeof attrExp !== "undefined") {
+          const items = attrExp.qValues;
+
+          items.forEach((qAttrExprInfoItem, itemIndex) => {
+            if (qAttrExprInfoItem.qText !== undefined)
+              attrExpItems[
+                qHyperCube.qMeasureInfo[index - -qNoOfDiemnsions].qAttrExprInfo[
+                  itemIndex
+                ].id
+              ] =
+                qAttrExprInfoItem.qNum !== "NaN"
+                  ? qAttrExprInfoItem.qNum
+                  : qAttrExprInfoItem.qText;
+          });
+        }
+      }
+
       const pair =
         index < qNoOfDiemnsions
           ? {
-              [dimensionNames[index]]:
-                d[index].qText === undefined
-                  ? "undefined"
-                  : index === 0 && useNumonFirstDim
-                  ? d[index].qNum
-                  : d[index].qText,
+              [dimensionNames[index]]: d[index].qText,
               [`elemNumber${index !== 0 ? index : ""}`]: d[index].qElemNumber,
               key: i,
-              label:
-                d[index].qText === undefined
-                  ? "undefined"
-                  : index === 0 && useNumonFirstDim
-                  ? d[index].qNum
-                  : d[index].qText,
+
+              label: d[index].qText,
             }
           : {
-              [measureNames[index - qNoOfDiemnsions]]: cols[index].useFormatting
-                ? d[index].qText
-                : d[index].qNum !== "NaN"
-                ? d[index].qNum
-                : 0,
+              [measureNames[index - qNoOfDiemnsions]]:
+                cols[index].qNumFormat ||
+                cols[index].qNumType ||
+                cols[index].qNumFmt
+                  ? d[index].qText
+                  : d[index].qNum !== "NaN"
+                  ? d[index].qNum
+                  : 0,
               key: i,
             };
 
-      data = { ...data, ...pair };
+      data = { ...data, ...pair, ...attrExpItems };
     });
-
     return data;
   });
 
@@ -54,7 +82,7 @@ export function hyperCubeChartTransform(
 export function hyperCubeTransform(
   qData,
   qHyperCube,
-  useNumonFirstDim = false,
+  // useNumonFirstDim = false,
   cols
 ) {
   const transformedData = qData.qMatrix.map((d, i) => {
@@ -94,12 +122,12 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
   qData.qMatrix.map((d, i) => {
     let key = null;
     let value = null;
-    let qElemNumber = null;
+    let elemNumber = null;
 
     d.forEach((item, index) => {
       if (index < qNoOfDimensions && index !== 0) {
         key = d[index].qText;
-        qElemNumber = d[index].qElemNumber;
+        elemNumber = d[index].qElemNumber;
       } else if (index !== 0) {
         value = d[index].qNum;
       }
@@ -110,7 +138,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
         series[dimensionNames[0]] = d[0].qText;
         series["qElemNumber"] = d[0].qElemNumber;
         series[key] = value;
-        series[`${key}-qElemNumber`] = qElemNumber;
+        series[`${key}-qElemNumber`] = elemNumber;
       }
       transformedData.push(series);
       series = {};
@@ -118,7 +146,7 @@ export function multiDimHyperCubeTransform(qData, qHyperCube) {
       series[dimensionNames[0]] = d[0].qText;
       series["qElemNumber"] = d[0].qElemNumber;
       series[key] = value;
-      series[`${key}-qElemNumber`] = qElemNumber;
+      series[`${key}-qElemNumber`] = elemNumber;
       series["label"] = d[0].qText;
     }
     parentText = d[0].qText;
@@ -265,37 +293,40 @@ export const orderCols = (cols) => {
   return orderedCols;
 };
 
-export const getHeader = (qLayout, cols, data) =>
-  qLayout
-    ? [
-        ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
-          title: col.qFallbackTitle,
-          dataIndex: cols[index].dataKey,
-          dataKey: cols[index].dataKey,
-          render: cols[index].render,
-          defaultSortDesc: col.qSortIndicator === "D",
-          qInterColumnIndex: index,
-          qPath: `/qHyperCubeDef/qDimensions/${index}`,
-          qSortIndicator: col.qSortIndicator,
-          qReverseSort: col.qReverseSort,
-          qGrandTotals: { qText: null, qNum: null },
-          qColumnType: "dim",
-        })),
-        ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
-          title: col.qFallbackTitle,
-          dataIndex: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
-          dataKey: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
-          render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
-          defaultSortDesc: col.qSortIndicator === "D",
-          qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
-          qPath: `/qHyperCubeDef/qMeasures/${index}`,
-          qSortIndicator: col.qSortIndicator,
-          qReverseSort: col.qReverseSort,
-          qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
-          render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
-          qColumnType: "meas",
-        })),
-      ]
-    : [];
+export const getHeader = (qLayout, cols, data) => {
+  if (qLayout) {
+    return [
+      ...qLayout.qHyperCube.qDimensionInfo.map((col, index) => ({
+        title: col.qFallbackTitle,
+        dataIndex: cols[index].dataKey,
+        dataKey: cols[index].dataKey,
+        render: cols[index].render,
+        defaultSortDesc: col.qSortIndicator === "D",
+        qInterColumnIndex: index,
+        qPath: `/qHyperCubeDef/qDimensions/${index}`,
+        qSortIndicator: col.qSortIndicator,
+        qReverseSort: col.qReverseSort,
+        qGrandTotals: { qText: null, qNum: null },
+        qColumnType: "dim",
+      })),
+      ...qLayout.qHyperCube.qMeasureInfo.map((col, index) => ({
+        title: col.qFallbackTitle,
+        dataIndex:
+          cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+        dataKey: cols[qLayout.qHyperCube.qDimensionInfo.length + index].dataKey,
+        render: cols[qLayout.qHyperCube.qDimensionInfo.length + index].render,
+        defaultSortDesc: col.qSortIndicator === "D",
+        qInterColumnIndex: index + qLayout.qHyperCube.qDimensionInfo.length,
+        qPath: `/qHyperCubeDef/qMeasures/${index}`,
+        qSortIndicator: col.qSortIndicator,
+        qReverseSort: col.qReverseSort,
+        qGrandTotals: qLayout.qHyperCube.qGrandTotalRow[index],
+        qColumnType: "meas",
+      })),
+    ];
+  } else {
+    return [];
+  }
+};
 
 export default hyperCubeTransform;
