@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Motor } from "@motor-js/engine";
+import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +15,7 @@ ReactDOM.render(
         secure: true,
         port: null,
         prefix: '',
-        appId: '79b4f41e-f680-423d-a088-1ae81d1bc8fc',
+        appId: '0294cf88-eb02-484a-b315-cf06b45ac347',
         webIntId: '4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i',
         qcs: true,
       }}>

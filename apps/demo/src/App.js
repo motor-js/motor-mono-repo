@@ -1,21 +1,11 @@
-import { useContext } from 'react'
-import { useList, EngineContext } from "@motor-js/engine"
-import HC from './HC'
-import List from './List'
-import 'semantic-ui-css/semantic.min.css'
+import Table from './components/TableExampleCompact'
+import ButtonComponent from './components/ButtonComponent'
 
-function App() {
-  
-  const { engine, engineError } = useContext(EngineContext);
-
+export default function App() {
   return (
     <div className="App">
-      {engine && 
-        <HC />
-      }
-      hi
+      <ButtonComponent />
+      <Table />
     </div>
   );
 }
-
-export default App;
