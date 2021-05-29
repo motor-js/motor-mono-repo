@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 
-const useLayout = () => {
+const useVariable = () => {
   const { engine } = useContext(EngineContext) || {};
   const [layout, setLayout] = useState();
 
@@ -27,4 +27,4 @@ const useLayout = () => {
   };
 };
 
-export default useLayout;
+export default useVariable;
