@@ -35,10 +35,11 @@ const TableExampleCompact = () => {
   });
 
   // const { engineVersion, global } = useGlobal();
-  // const { app, appProperties, qTitle, qLastReloadTime } = useApp();
+  // const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
   // const { createdDate } = useLayout();
   // // console.log(engineVersion, global);
   // console.log(createdDate);
+  // console.log(app && evaluate("Count(Country)"));
 
   const handleSelect = (c, i) => {
     console.log(c);
