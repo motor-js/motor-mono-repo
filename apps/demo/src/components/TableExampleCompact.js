@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, Icon, Menu } from "semantic-ui-react";
-import { useTable, useGlobal } from "@motor-js/engine";
+import { useTable, useApp, useLayout } from "@motor-js/engine";
 
 const TableExampleCompact = () => {
   const cols = [
@@ -33,6 +33,12 @@ const TableExampleCompact = () => {
     cols,
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
+
+  // const { engineVersion, global } = useGlobal();
+  // const { app, appProperties, qTitle, qLastReloadTime } = useApp();
+  // const { createdDate } = useLayout();
+  // // console.log(engineVersion, global);
+  // console.log(createdDate);
 
   const handleSelect = (c, i) => {
     console.log(c);

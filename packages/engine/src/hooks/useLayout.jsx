@@ -3,7 +3,7 @@ import { EngineContext } from "../contexts/EngineProvider";
 
 const useApp = () => {
   const { engine } = useContext(EngineContext) || {};
-  const [qApp, setApp] = useState();
+  const [layout, setLayout] = useState();
 
   useEffect(
     () =>
@@ -12,11 +12,10 @@ const useApp = () => {
         } else {
           const qDoc = await engine;
 
-          const appProperties = await qDoc.getAppProperties();
-          setApp({
-            app: qDoc,
-            appProperties,
-            ...appProperties,
+          const appLayout = await qDoc.getAppLayout();
+          setLayout({
+            appLayout,
+            ...appLayout,
           });
         }
       })(),
@@ -24,7 +23,7 @@ const useApp = () => {
   );
 
   return {
-    ...qApp,
+    ...layout,
   };
 };
 
