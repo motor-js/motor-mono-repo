@@ -3,32 +3,32 @@ import { useState, useEffect, useContext } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 
 const useGlobal = () => {
-  const { global } = useContext(EngineContext) || {};
+  const { global: qGlobal } = useContext(EngineContext) || {};
 
   const [globalObject, setGlobal] = useState({
-    engine: null,
+    global: null,
     engineVersion: null,
     docList: null,
     osVersion: null,
   });
 
   useEffect(() => {
-    if (!global) return;
+    if (!qGlobal) return;
     (async () => {
-      const engineVersion = await global.engineVersion();
-      const oSName = await global.oSName();
-      const oSVersion = await global.oSVersion();
-      setGlobal({ qGlobal: global, engineVersion, oSName, oSVersion });
+      const engineVersion = await qGlobal.engineVersion();
+      const oSName = await qGlobal.oSName();
+      const oSVersion = await qGlobal.oSVersion();
+      setGlobal({ global: qGlobal, engineVersion, oSName, oSVersion });
     })();
-  }, [global]);
+  }, [qGlobal]);
 
-  const { qGlobal, engineVersion, docList, osVersion } = globalObject;
+  const { global, engineVersion, oSName, oSVersion } = globalObject;
 
   return {
-    global: qGlobal,
+    global,
     engineVersion,
-    docList,
-    osVersion,
+    oSName,
+    oSVersion,
   };
 };
 
