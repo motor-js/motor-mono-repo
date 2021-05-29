@@ -14,6 +14,7 @@ const useApp = () => {
         if (engine === undefined) {
         } else {
           const qDoc = await engine;
+
           const qAppLayout = await qDoc.getAppLayout();
           // console.log('qDoc',qDoc)
           setApp(qDoc);
