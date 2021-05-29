@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getCapabilityAPIs } from '../utils/CapApiUtils/ConnectCapAPI'
+import { getCapabilityAPIs } from "../utils/CapApiUtils/ConnectCapAPI";
 const enigma = require("enigma.js");
 const schema = require("enigma.js/schemas/12.170.2.json");
 const SenseUtilities = require("enigma.js/sense-utilities");
@@ -7,7 +7,6 @@ const SenseUtilities = require("enigma.js/sense-utilities");
 const MAX_RETRIES = 3;
 
 function useEngine(config, capabilityAPI) {
-
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -52,7 +51,8 @@ function useEngine(config, capabilityAPI) {
   ];
 
   const [engineError, setEngineError] = useState(false);
-  const [app, setApp] = useState(null)
+  const [app, setApp] = useState(null);
+  const [global, setGlobal] = useState(null);
   const [errorCode, seErrorCode] = useState(null);
   const [engine, setEngine] = useState(() => {
     (async () => {
@@ -103,6 +103,7 @@ function useEngine(config, capabilityAPI) {
         const _doc = await _global.openDoc(config.appId);
         //const _app =  await getCapabilityAPIs(config)
         //setApp(_app)
+        setGlobal(_global);
         setEngine(_doc);
         seErrorCode(1);
 
@@ -133,6 +134,7 @@ function useEngine(config, capabilityAPI) {
           const _doc = await _global.openDoc(config.appId);
           //const _app = await capabilityAPI && getCapabilityAPIs(config)
           //setApp(_app)
+          setGlobal(_global);
           setEngine(_doc);
           seErrorCode(1);
 
@@ -150,8 +152,7 @@ function useEngine(config, capabilityAPI) {
     })();
   }, []);
 
-  return { engine, engineError, errorCode, app }
+  return { engine, engineError, errorCode, app, global };
 }
-
 
 export default useEngine;

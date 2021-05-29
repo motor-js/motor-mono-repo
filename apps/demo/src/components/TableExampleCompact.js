@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, Icon, Menu } from "semantic-ui-react";
-import { useTable, useApp } from "@motor-js/engine";
+import { useTable, useGlobal } from "@motor-js/engine";
 
 const TableExampleCompact = () => {
   const cols = [
@@ -33,6 +33,9 @@ const TableExampleCompact = () => {
     cols,
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
+
+  const { osVersion } = useGlobal();
+  console.log(osVersion);
 
   const handleSelect = (c, i) => {
     console.log(c);
