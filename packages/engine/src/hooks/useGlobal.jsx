@@ -5,18 +5,29 @@ import { EngineContext } from "../contexts/EngineProvider";
 const useGlobal = () => {
   const { global } = useContext(EngineContext) || {};
 
-  const [osVersion, setOSVersion] = useState(null);
+  const [globalObject, setGlobal] = useState({
+    engine: null,
+    engineVersion: null,
+    docList: null,
+    osVersion: null,
+  });
 
   useEffect(() => {
     if (!global) return;
     (async () => {
-      const osVersion = await global.engineVersion();
-      setOSVersion(osVersion);
+      const engineVersion = await global.engineVersion();
+      const oSName = await global.oSName();
+      const oSVersion = await global.oSVersion();
+      setGlobal({ qGlobal: global, engineVersion, oSName, oSVersion });
     })();
   }, [global]);
 
+  const { qGlobal, engineVersion, docList, osVersion } = globalObject;
+
   return {
-    global,
+    global: qGlobal,
+    engineVersion,
+    docList,
     osVersion,
   };
 };

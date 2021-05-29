@@ -1,22 +1,10 @@
 import * as React from "react";
-import { calcCondType, otherTotalSpecType } from "../utils";
+import { configType } from "../utils";
 
-export interface useTableProps {
-  cols: Array<string>;
-  qColumnOrder: Array<number>;
-  qCalcCondition: calcCondType;
-  qPage: object;
-  qInterColumnSortOrder: Array<number>;
-  qSupressMissing: boolean;
-  qSuppressZero: boolean;
-  qSortByNumeric: number;
-  qSortByAscii: number;
-  qInterLineSortOrder: Array<number>;
-  qOtherTotalSpec: otherTotalSpecType;
+export interface useAppProps {
+  config: configType;
 }
 
-declare const useTable: React.FC<useTableProps>;
+declare const useGlobal: React.FC<useAppProps>;
 
-export type useTableType = useTableProps;
-
-export default useTable;
+export default useGlobal;
