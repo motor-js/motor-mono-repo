@@ -36,12 +36,12 @@ const TableExampleCompact = () => {
 
   // const { engineVersion, global } = useGlobal();
   // const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
-  const { variables } = useVariable();
-  // const { createdDate } = useLayout();
+  // const { variables } = useVariable();
+  const { createdDate } = useLayout();
   // // console.log(engineVersion, global);
-  // console.log(createdDate);
+  console.log("createdDate", createdDate);
   // console.log(app && evaluate("Count(Country)"));
-  console.log(variables);
+  // console.log(variables);
 
   const handleSelect = (c, i) => {
     console.log(c);

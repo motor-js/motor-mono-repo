@@ -12,15 +12,15 @@ const useVariable = () => {
         } else {
           const qDoc = await engine;
 
-          const variables = await qDoc.createVariableEx({
-            qInfo: {
-              qId: "VB02",
-              qType: "Variable",
-            },
-            qName: "Variable02",
-            qComment: "My first variable",
-            qDefinition: "=Count(Country)",
-          });
+          // const variables = await qDoc.createVariableEx({
+          //   qInfo: {
+          //     qId: "VB02",
+          //     qType: "Variable",
+          //   },
+          //   qName: "Variable02",
+          //   qComment: "My first variable",
+          //   qDefinition: "=Count(Country)",
+          // });
 
           const variable = await qDoc.getVariableById({
             qId: "VB02",
