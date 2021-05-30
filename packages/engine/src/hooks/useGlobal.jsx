@@ -7,25 +7,40 @@ const useGlobal = () => {
 
   const [globalObject, setGlobal] = useState({
     global: null,
+    appList: null,
     engineVersion: null,
     docList: null,
     osVersion: null,
   });
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!qGlobal) return;
+
     (async () => {
-      const engineVersion = await qGlobal.engineVersion();
-      const oSName = await qGlobal.oSName();
-      const oSVersion = await qGlobal.oSVersion();
-      setGlobal({ global: qGlobal, engineVersion, oSName, oSVersion });
+      try {
+        const engineVersion = await qGlobal.engineVersion();
+        const appList = await qGlobal.getDocList({});
+        const oSName = await qGlobal.oSName();
+        const oSVersion = await qGlobal.oSVersion();
+        setGlobal({
+          global: qGlobal,
+          appList,
+          engineVersion,
+          oSName,
+          oSVersion,
+        });
+      } catch (err) {
+        setError(err);
+      }
     })();
   }, [qGlobal]);
 
-  const { global, engineVersion, oSName, oSVersion } = globalObject;
+  const { global, appList, engineVersion, oSName, oSVersion } = globalObject;
 
   return {
     global,
+    appList,
     engineVersion,
     oSName,
     oSVersion,

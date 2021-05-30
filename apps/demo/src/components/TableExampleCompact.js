@@ -1,6 +1,12 @@
 import React from "react";
 import { Table, Icon, Menu } from "semantic-ui-react";
-import { useTable, useApp, useLayout, useVariable } from "@motor-js/engine";
+import {
+  useTable,
+  useApp,
+  useLayout,
+  useVariable,
+  useGlobal,
+} from "@motor-js/engine";
 
 const TableExampleCompact = () => {
   const cols = [
@@ -34,12 +40,12 @@ const TableExampleCompact = () => {
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
 
-  // const { engineVersion, global } = useGlobal();
+  const { engineVersion, global } = useGlobal();
   // const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
   // const { variables } = useVariable();
   const { createdDate } = useLayout();
   // // console.log(engineVersion, global);
-  console.log("createdDate", createdDate);
+  console.log("createdDate", engineVersion);
   // console.log(app && evaluate("Count(Country)"));
   // console.log(variables);
 
