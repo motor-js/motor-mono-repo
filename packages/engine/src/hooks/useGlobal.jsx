@@ -44,6 +44,7 @@ const useGlobal = () => {
     engineVersion,
     oSName,
     oSVersion,
+    error,
   };
 };
 
