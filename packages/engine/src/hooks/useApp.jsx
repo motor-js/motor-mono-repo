@@ -13,6 +13,12 @@ const useApp = () => {
           const qDoc = await engine;
 
           const appProperties = await qDoc.getAppProperties();
+
+          //  const variables = await qDoc.doReload({
+          //    qMode: 1,
+          //    qPartial: true,
+          //    qDebug: true,
+          //  });
           setApp({
             app: qDoc,
             appProperties,

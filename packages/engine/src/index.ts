@@ -16,6 +16,7 @@ export { default as useSelections } from "./hooks/useSelections";
 export { default as useCapability } from "./hooks/useCapability";
 export { default as useApp } from "./hooks/useApp";
 export { default as useLayout } from "./hooks/useLayout";
+export { default as useVariable } from "./hooks/useVariable";
 
 //Contexts
 export { EngineContext } from "./contexts/EngineProvider";
