@@ -5,6 +5,11 @@ const useApp = () => {
   const { engine } = useContext(EngineContext) || {};
   const [qApp, setApp] = useState();
 
+  const doReload = async (qMode, qPartial) => {
+    const qDoc = await engine;
+    qDoc.doReload(qMode, qPartial, false);
+  };
+
   useEffect(
     () =>
       (async () => {
@@ -14,15 +19,11 @@ const useApp = () => {
 
           const appProperties = await qDoc.getAppProperties();
 
-          //  const variables = await qDoc.doReload({
-          //    qMode: 1,
-          //    qPartial: true,
-          //    qDebug: true,
-          //  });
           setApp({
             app: qDoc,
             appProperties,
             ...appProperties,
+            doReload,
           });
         }
       })(),

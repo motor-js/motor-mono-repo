@@ -54,15 +54,17 @@ const TableExampleCompact = () => {
   // const { engineVersion, global, globalError } = useGlobal(config);
   // const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
   // const { variables } = useVariable();
-  const { createdDate } = useLayout();
+  // const { createdDate } = useLayout();
+  // const { doReload } = useApp();
   // // console.log(engineVersion, global);
   // console.log("createdDate", engineVersion, globalError);
   // console.log(app && evaluate("Count(Country)"));
   // console.log(variables);
 
   const handleSelect = (c, i) => {
-    console.log(c);
+    // console.log(c);
     select(c.columnId, [c.elemNumber], false);
+    // doReload(1, true);
   };
 
   return (
