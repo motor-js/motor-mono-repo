@@ -1,51 +1,175 @@
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
+const enigma = require("enigma.js");
+const schema = require("enigma.js/schemas/12.170.2.json");
+const SenseUtilities = require("enigma.js/sense-utilities");
 
-import { EngineContext } from "../contexts/EngineProvider";
+const MAX_RETRIES = 3;
 
-const useGlobal = () => {
-  const { global: qGlobal } = useContext(EngineContext) || {};
+function useGlobal(config) {
+  const responseInterceptors = [
+    {
+      // We only want to handle failed responses from QIX Engine:
+      onRejected: function retryAbortedError(sessionReference, request, error) {
+        console.warn(
+          "Captured Request: Rejected",
+          `Error Code: ${error.code} : ${error}`
+        );
+        // We only want to handle aborted QIX errors:
+        if (
+          error.code === schema.enums.LocalizedErrorCode.LOCERR_GENERIC_ABORTED
+        ) {
+          // We keep track of how many consecutive times we have tried to do this call:
+          request.tries = (request.tries || 0) + 1;
+          console.warn(`Captured Request: Retry #${request.tries}`);
+          // We do not want to get stuck in an infinite loop here if something has gone
+          // awry, so we only retry until we have reached MAX_RETRIES:
+          if (request.tries <= MAX_RETRIES) {
+            return request.retry();
+          }
+        }
+        if (
+          error.code ===
+          schema.enums.LocalizedErrorCode.LOCERR_GENERIC_INVALID_PARAMETERS
+        ) {
+          return error.code;
+        }
+        if (
+          error.code ===
+          schema.enums.LocalizedErrorCode.LOCERR_HC_MODAL_OBJECT_ERROR
+        ) {
+          return error.code;
+        }
+        // If it was not an aborted QIX call, or if we reached MAX_RETRIES, we let the error
+        // trickle down to potential other interceptors, and finally down to resolving/rejecting
+        // the initial promise that the user got when invoking the QIX method:
+        console.warn(error);
 
-  const [globalObject, setGlobal] = useState({
-    global: null,
-    appList: null,
-    engineVersion: null,
-    docList: null,
-    osVersion: null,
-  });
-  const [error, setError] = useState(null);
+        return this.Promise.reject(error);
+      },
+    },
+  ];
 
-  useEffect(() => {
-    if (!qGlobal) return;
+  const [globalError, setGlobalError] = useState(false);
 
+  const [errorCode, seErrorCode] = useState(null);
+  const [global, setGlobal] = useState(() => {
     (async () => {
-      try {
-        const engineVersion = await qGlobal.engineVersion();
-        const appList = await qGlobal.getDocList({});
-        const oSName = await qGlobal.oSName();
-        const oSVersion = await qGlobal.oSVersion();
+      if (config && config.qcs) {
+        const tenantUri = config.host;
+        const webIntegrationId = config.webIntId;
+
+        const fetchResult = await fetch(
+          `https://${tenantUri}/api/v1/csrf-token`,
+          {
+            mode: "cors", // cors must be enabled
+            credentials: "include", // credentials must be included
+            headers: {
+              "qlik-web-integration-id": webIntegrationId,
+              "content-type": "application/json",
+            },
+          }
+        ).catch((error) => {
+          console.log("caught failed fetch", error);
+        });
+
+        const csrfToken = fetchResult.headers.get("qlik-csrf-token");
+        if (csrfToken == null) {
+          console.log("Not logged in");
+          seErrorCode(-1);
+
+          return -1;
+        }
+        const session = enigma.create({
+          schema,
+          url: `wss://${tenantUri}/app/${config.appId}?qlik-web-integration-id=${webIntegrationId}&qlik-csrf-token=${csrfToken}`,
+          createSocket: (url) => new WebSocket(url),
+          responseInterceptors,
+        });
+        session.on("suspended", () => {
+          console.warn("Captured session suspended");
+        });
+        session.on("error", () => {
+          console.warn("Captured session error");
+        });
+        session.on("closed", () => {
+          console.warn("Session was closed");
+          seErrorCode(-3);
+
+          return -3;
+        });
+        const _global = await session.open();
+        const engineVersion = await _global.engineVersion();
+        const docList = await _global.getDocList({});
+        const oSName = await _global.oSName();
+        const oSVersion = await _global.oSVersion();
         setGlobal({
-          global: qGlobal,
-          appList,
+          global: _global,
+          docList,
           engineVersion,
           oSName,
           oSVersion,
         });
-      } catch (err) {
-        setError(err);
-      }
-    })();
-  }, [qGlobal]);
 
-  const { global, appList, engineVersion, oSName, oSVersion } = globalObject;
+        seErrorCode(1);
+
+        return 1;
+      }
+      if (config) {
+        const myConfig = config;
+        const url = SenseUtilities.buildUrl(myConfig);
+        try {
+          const session = enigma.create({
+            schema,
+            url,
+            responseInterceptors,
+          });
+          session.on("suspended", () => {
+            console.warn("Captured session suspended");
+          });
+          session.on("error", () => {
+            console.warn("Captured session error");
+          });
+          session.on("closed", () => {
+            console.warn("Session was closed");
+            seErrorCode(-3);
+
+            return -3;
+          });
+          const _global = await session.open();
+
+          const engineVersion = await _global.engineVersion();
+          const docList = await _global.getDocList({});
+          const oSName = await _global.oSName();
+          const oSVersion = await _global.oSVersion();
+          setGlobal({
+            global: _global,
+            docList,
+            engineVersion,
+            oSName,
+            oSVersion,
+          });
+
+          seErrorCode(1);
+
+          return 1;
+        } catch (err) {
+          console.warn("Captured Error", err);
+          if (err.code === 1003) {
+            setGlobalError("No engine. App Not found.");
+          }
+          seErrorCode(-2);
+
+          return -2;
+        }
+      }
+    })(null);
+  }, []);
 
   return {
-    global,
-    appList,
-    engineVersion,
-    oSName,
-    oSVersion,
-    error,
+    ...global,
+    globalError,
+    errorCode,
   };
-};
+}
 
 export default useGlobal;

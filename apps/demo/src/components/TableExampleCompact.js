@@ -40,12 +40,23 @@ const TableExampleCompact = () => {
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
 
-  const { engineVersion, global, error } = useGlobal();
+  // const config = {
+  //   //Enter your app config here..
+  //   host: "juno-ui.eu.qlikcloud.com",
+  //   secure: true,
+  //   port: null,
+  //   prefix: "",
+  //   appId: "0294cf88-eb02-484a-b315-cf06b45ac347",
+  //   webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
+  //   qcs: true,
+  // };
+
+  // const { engineVersion, global, globalError } = useGlobal(config);
   // const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
   // const { variables } = useVariable();
   const { createdDate } = useLayout();
   // // console.log(engineVersion, global);
-  console.log("createdDate", engineVersion, error);
+  // console.log("createdDate", engineVersion, globalError);
   // console.log(app && evaluate("Count(Country)"));
   // console.log(variables);
 

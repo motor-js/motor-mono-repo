@@ -52,7 +52,6 @@ function useEngine(config, capabilityAPI) {
 
   const [engineError, setEngineError] = useState(false);
   const [app, setApp] = useState(null);
-  const [global, setGlobal] = useState(null);
   const [errorCode, seErrorCode] = useState(null);
   const [engine, setEngine] = useState(() => {
     (async () => {
@@ -101,9 +100,6 @@ function useEngine(config, capabilityAPI) {
         });
         const _global = await session.open();
         const _doc = await _global.openDoc(config.appId);
-        //const _app =  await getCapabilityAPIs(config)
-        //setApp(_app)
-        setGlobal(_global);
         setEngine(_doc);
         seErrorCode(1);
 
@@ -132,9 +128,6 @@ function useEngine(config, capabilityAPI) {
           });
           const _global = await session.open();
           const _doc = await _global.openDoc(config.appId);
-          //const _app = await capabilityAPI && getCapabilityAPIs(config)
-          //setApp(_app)
-          setGlobal(_global);
           setEngine(_doc);
           seErrorCode(1);
 
@@ -152,7 +145,7 @@ function useEngine(config, capabilityAPI) {
     })();
   }, []);
 
-  return { engine, engineError, errorCode, app, global };
+  return { engine, engineError, errorCode, app };
 }
 
 export default useEngine;
