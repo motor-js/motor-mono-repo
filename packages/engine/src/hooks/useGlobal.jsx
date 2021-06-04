@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { getCapabilityAPIs } from "../utils/CapApiUtils/ConnectCapAPI";
 const enigma = require("enigma.js");
 const schema = require("enigma.js/schemas/12.170.2.json");
 const SenseUtilities = require("enigma.js/sense-utilities");
 
 const MAX_RETRIES = 3;
 
-function useEngine(config, capabilityAPI) {
+function useGlobal(config) {
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -50,10 +49,10 @@ function useEngine(config, capabilityAPI) {
     },
   ];
 
-  const [engineError, setEngineError] = useState(false);
-  const [app, setApp] = useState(null);
+  const [globalError, setGlobalError] = useState(false);
+
   const [errorCode, seErrorCode] = useState(null);
-  const [engine, setEngine] = useState(() => {
+  const [global, setGlobal] = useState(() => {
     (async () => {
       if (config && config.qcs) {
         const tenantUri = config.host;
@@ -99,8 +98,18 @@ function useEngine(config, capabilityAPI) {
           return -3;
         });
         const _global = await session.open();
-        const _doc = await _global.openDoc(config.appId);
-        setEngine(_doc);
+        const engineVersion = await _global.engineVersion();
+        const docList = await _global.getDocList({});
+        const oSName = await _global.oSName();
+        const oSVersion = await _global.oSVersion();
+        setGlobal({
+          global: _global,
+          docList,
+          engineVersion,
+          oSName,
+          oSVersion,
+        });
+
         seErrorCode(1);
 
         return 1;
@@ -127,25 +136,40 @@ function useEngine(config, capabilityAPI) {
             return -3;
           });
           const _global = await session.open();
-          const _doc = await _global.openDoc(config.appId);
-          setEngine(_doc);
+
+          const engineVersion = await _global.engineVersion();
+          const docList = await _global.getDocList({});
+          const oSName = await _global.oSName();
+          const oSVersion = await _global.oSVersion();
+          setGlobal({
+            global: _global,
+            docList,
+            engineVersion,
+            oSName,
+            oSVersion,
+          });
+
           seErrorCode(1);
 
           return 1;
         } catch (err) {
           console.warn("Captured Error", err);
           if (err.code === 1003) {
-            setEngineError("No engine. App Not found.");
+            setGlobalError("No engine. App Not found.");
           }
           seErrorCode(-2);
 
           return -2;
         }
       }
-    })();
+    })(null);
   }, []);
 
-  return { engine, engineError, errorCode, app };
+  return {
+    ...global,
+    globalError,
+    errorCode,
+  };
 }
 
-export default useEngine;
+export default useGlobal;

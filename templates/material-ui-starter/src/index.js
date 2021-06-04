@@ -7,22 +7,20 @@ import { Motor } from "@motor-js/engine";
 import { qlikConfig, appSettings } from "./settings";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Motor
-      config={qlikConfig}
-      logo={appSettings.logo}
-      logoHeight={appSettings.logoHeight}
-      logoWidth={appSettings.logoWidth}
-      buttonColor={appSettings.buttonColor}
-      buttonFontColor={appSettings.buttonFontColor}
-      body={appSettings.body}
-      loginfontFamily={appSettings.loginfontFamily}
-      NotConnectedheader={appSettings.NotConnectedheader}
-      NotConnectedBody={appSettings.NotConnectedBody}
-    >
-      <App />
-    </Motor>
-  </React.StrictMode>,
+  <Motor
+    config={qlikConfig}
+    logo={appSettings.logo}
+    logoHeight={appSettings.logoHeight}
+    logoWidth={appSettings.logoWidth}
+    buttonColor={appSettings.buttonColor}
+    buttonFontColor={appSettings.buttonFontColor}
+    body={appSettings.body}
+    loginfontFamily={appSettings.loginfontFamily}
+    NotConnectedheader={appSettings.NotConnectedheader}
+    NotConnectedBody={appSettings.NotConnectedBody}
+  >
+    <App />
+  </Motor>,
   document.getElementById("root")
 );
 
