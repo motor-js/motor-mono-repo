@@ -40,6 +40,7 @@ function createDef(
 
   const qDimensions = cols
     .filter((col, i) => {
+      console.log(col)
       const isDimension =
         (typeof col === "string" && !col.startsWith("=")) ||
         (typeof col === "object" && col.qDef && col.qDef.qFieldDefs) ||
@@ -161,7 +162,7 @@ function createDef(
           qShowTotalsAbove: true,
         };
       }
-
+      console.log('col: ',col)
       return col;
     });
 

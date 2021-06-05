@@ -14,6 +14,7 @@ import {
   hyperCubeTransform,
   hyperCubeChartTransform,
   orderCols,
+  validData,
 } from "../utils/hyperCubeUtilities";
 
 const initialState = {
@@ -298,7 +299,10 @@ const useTable = (props) => {
   const update = useCallback(async () => {
     const _qLayout = await getLayout();
     const _qTitle = await getTitle(_qLayout);
+    const test = await validData(_qLayout)
+    console.log(test)
     const _qData = await getData();
+    //console.log(_qData)
     // Order colunns for dataKey
     const _orderedCols = await orderCols(cols);
     const _dataSet =

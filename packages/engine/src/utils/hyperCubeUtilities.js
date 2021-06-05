@@ -181,9 +181,8 @@ export const validData = (qLayout, theme) => {
   let dataError = "";
   const { qDimensionInfo, qMeasureInfo } =
     qLayout.qHyperCube || qLayout.qListObject;
-  const { dimensionErrMsg, measureErrMsg } = theme.error
-    ? theme.error
-    : theme.global.chart.error;
+  console.log('dim: ',qDimensionInfo)
+  console.log('meas: ',qMeasureInfo)
 
   const DimCheck = () => {
     //check if an array, to work with HyperCube & ListObject
@@ -191,26 +190,26 @@ export const validData = (qLayout, theme) => {
       ? qDimensionInfo
       : [qDimensionInfo];
     _qDimensionInfo.forEach((qData) => {
-      if (qData.qError) {
-        isValid = false;
-        dataError = dimensionErrMsg;
-      }
+        if (qData.qError) {
+          console.error('There is an issue with you dimension. Please fix in order to receive the correct data. ', qData.qError)
+        }
     });
   };
 
   const MeasCheck = () => {
     qMeasureInfo.forEach((qData) => {
+      console.log('meas',qData)
       // console.log('meas check: ',qData)
-      /*if (
+      if (
         (isNaN(qData.qMax) && isNaN(qData.qMin)) ||
         (qData.qMax === 0 && qData.qMin === 0)
       ) {
-        isValid = false;
-        dataError = measureErrMsg;
-      }*/
+      //  isValid = false;
+      //  dataError = measureErrMsg;
+      }
     });
   };
-
+  
   if (qDimensionInfo && qMeasureInfo) {
     DimCheck();
     MeasCheck();
@@ -218,10 +217,8 @@ export const validData = (qLayout, theme) => {
     DimCheck();
   } else if (!qDimensionInfo && qMeasureInfo) {
     MeasCheck();
-  } else {
-  }
+  } else { }
 
-  return { isValid, dataError };
 };
 
 export const numericSortDirection = (sortDirection, defaultSetting = 0) => {

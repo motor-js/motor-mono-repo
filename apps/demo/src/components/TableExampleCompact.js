@@ -16,17 +16,18 @@ const TableExampleCompact = () => {
       qLabel: "Company Name",
     },
     {
-      qField: "=sum(Quantity)",
+      qField: "rubbish",
+      qLibraryId: "CjJKec",
       dataKey: "quantity",
       qLabel: "Quantity Sold",
-    },
-    {
+    }
+    /*{
       qField: "=sum(Quantity * Price)",
       dataKey: "revenue",
       qLabel: "Revenue",
       qNumType: "M",
       qNumFmt: "£#,##0",
-    },
+    },*/
   ];
 
   const {
@@ -40,6 +41,8 @@ const TableExampleCompact = () => {
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
 
+  console.log(dataSet)
+
   // const config = {
   //   //Enter your app config here..
   //   host: "juno-ui.eu.qlikcloud.com",
@@ -52,8 +55,8 @@ const TableExampleCompact = () => {
   // };
 
   // const { engineVersion, global, globalError } = useGlobal(config);
-  const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
-  console.log(qTitle);
+  //const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
+  //console.log(qTitle);
   // const { getVariablebyID } = useVariable();
   // const { createdDate } = useLayout();
   // const { doReload } = useApp();
@@ -76,7 +79,7 @@ const TableExampleCompact = () => {
 
   return (
     <div style={{ padding: "10px" }}>
-      {dataSet && (
+      {/*dataSet && (
         <Table compact celled striped>
           <Table.Header>
             <Table.Row>
@@ -117,7 +120,7 @@ const TableExampleCompact = () => {
             </Table.Row>
           </Table.Footer>
         </Table>
-      )}
+            )*/}
     </div>
   );
 };
