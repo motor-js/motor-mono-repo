@@ -1,78 +1,95 @@
-import { useContext, useCallback, useEffect, useState } from "react";
+import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
+import { deepMerge } from "../utils/object";
+import createDef from "../utils/createVarDef";
 
-let qDoc = null;
+// const initialProps = {
+//   qPage: {
+//     qTop: 0,
+//     qLeft: 0,
+//     qWidth: 1,
+//     qHeight: 1000,
+//   },
+//   cols: null,
+//   qHyperCubeDef: null,
+//   config: null,
+// };
 
-const useVariable = () => {
+const useVariable = (props) => {
+  // const { qPage: qPageProp, cols, qHyperCubeDef, config } = deepMerge(
+  //   initialProps,
+  //   props
+  // );
+  const { qId, qName } = props;
+  // console.log(qId);
+
   const { engine, engineError } = useContext(EngineContext) || {};
-  const [variables, setVariables] = useState();
+  const [qLayout, setQLayout] = useState(null);
+  const [error, setError] = useState(null);
 
-  //   const getVariablebyID = useCallback(
-  //     (engine) => {
-  //  const qVariable = await qDoc.getVariableById({
-  //       qId: "VB02",
-  //     });
+  const qObject = useRef(null);
 
-  //       return qVariable;
-  //     },
-  //     []
-  //   );
+  const generateQProp = useCallback(() => {
+    // const qProp = createDef(cols, qHyperCubeDef);
+    const qProp = {
+      qInfo: {
+        qId: "VB05",
+        qType: "Variable",
+      },
+      qMetaDef: {},
+      // qName: "value",
+      qName: "Variable98",
+      // qComment: "value",
+      qComment: "My first variable",
+      // qNumberPresentation: {
+      //   qType: "value",
+      //   qnDec: 1,
+      //   qUseThou: 1,
+      //   qFmt: "value",
+      //   qDec: "value",
+      //   qThou: "value",
+      // },
+      qIncludeInBookmark: true,
+      // qDefinition: "value",
+      qDefinition: "=Count(Country)",
+    };
 
-  // const getVariablebyID = async (id) => {
-  //   const qDoc = await engine;
-  //   if (!qDoc) return;
-  //   const qVariable = await qDoc.getVariableById({
-  //     qId: "VB02",
-  //   });
-  //   // console.log("qVariable", qVariable);
+    return qProp;
+    // }, [qHyperCubeDef]);
+  }, []);
 
-  //   return await qVariable;
-  // };
+  const getVaribale = async (qId, qName) => {
+    const qDoc = await engine;
 
-  const asynchronousFunction = async (qId) => {
-    if (qDoc) {
-      const qVariable = await qDoc.getVariableById({
+    // const test = await qDoc.createSessionObject({
+    //   qInfo: {
+    //     qId: "VL01",
+    //     qType: "VariableList",
+    //   },
+    //   qVariableListDef: {
+    //     qType: "variable",
+    //   },
+    // });
+    // console.log(await test.getLayout());
+
+    let qObject;
+    if (qId)
+      qObject = await qDoc.getVariableById({
         qId,
       });
-      const variableLayout = await qVariable.getLayout();
-      setVariables(variableLayout);
+    if (qName) {
+      qObject = await qDoc.getVariableByName({
+        qName,
+      });
     }
+
+    return qObject;
   };
 
-  const getVariablebyID = useCallback(
-    (qId) => {
-      if (variables) return variables;
-      asynchronousFunction(qId);
-    },
-    [variables]
-  );
-
-  // const getVariablebyID = () =>
-  //   (async () => {
-  //     if (variables)return variables;
-  //     asynchronousFunction();
-  //      const result = await asynchronousFunction();
-  //     return result;
-  //   })();
-  // const getVariablebyID = (qId) => {
-  //   // return getByID(qId);
-  //   (async () => {
-  //     console.log(await getByID(qId));
-  //   })();
-  //   // async () => {
-  //   //   const qDoc = await engine;
-  //   //   if (!qDoc) return;
-  //   //   const qVariable = await qDoc.getVariableById({
-  //   //     qId: "VB02",
-  //   //   });
-  //   //   console.log("qVariable", qVariable);
-
-  //   //   return await qVariable.getLayout();
-  //   // };
-  //   // return qVariableInfo;
-
-  //   // console.log(test);
-  // };
+  // const getValueKey = useCallback(async (layout) => {
+  //   if (layout.qHyperCube.qMeasureInfo.length === 0) return null;
+  //   return layout.qHyperCube.qMeasureInfo[0].qFallbackTitle;
+  // }, []);
 
   // const select = async (value, field) => {
   //   const qDoc = await engine;
@@ -80,107 +97,66 @@ const useVariable = () => {
   //   qField.select(value);
   // };
 
+  const getLayout = useCallback(() => qObject.current.getLayout(), []);
+  const setProperties = useCallback(() => qObject.current.setProperties(), []);
+
+  const update = useCallback(async (qObj) => {
+    const _qLayout = await getLayout();
+    // console.log(_qLayout);
+    _qLayout.value =
+      _qLayout.qNum === "number" ? _qLayout.qNum : _qLayout.qText;
+    setQLayout(_qLayout);
+  }, []);
+
   useEffect(() => {
-    // eslint-disable-next-line no-empty
-    if (engine === undefined) {
-    } else {
-      (async () => {
-        // const qProp = {
-        //   qInfo: { qType: "SelectionObject" },
-        //   qSelectionObjectDef: {},
-        // };
-        qDoc = await engine;
-        // qObject = await qDoc.createSessionObject(qProp);
-        // qObject.on("changed", () => {
-        //   update();
-        // });
-        // update();
-      })();
-    }
-  }, [engine]);
+    if (!engine) return;
 
-  // useEffect(
-  //   () =>
-  //     (async () => {
-  //       if (engine === undefined) {
-  //       } else {
-  //         const qDoc = await engine;
+    (async () => {
+      // const qProp = generateQProp();
+      // const qDoc = await engine;
+      // qObject.current = await qDoc.createSessionVariable(qProp);
+      // qObject.current = await qDoc.createSessionVariable(qProp);
+      // console.log(qProp);
+      // const test = await qDoc.createSessionVariable(qProp);
+      // const test = await qDoc.createSessionVariable({
+      //   qInfo: {
+      //     qId: "VB99",
+      //     qType: "Variable",
+      //   },
+      //   qName: "Variable099",
+      //   qComment: "My first variable",
+      //   qDefinition: "=Count(Country)",
+      // });
+      try {
+        qObject.current = await getVaribale(qId, qName);
 
-  //         // const variables = await qDoc.createVariableEx({
-  //         //   qInfo: {
-  //         //     qId: "VB02",
-  //         //     qType: "Variable",
-  //         //   },
-  //         //   qName: "Variable02",
-  //         //   qComment: "My first variable",
-  //         //   qDefinition: "=Count(Country)",
-  //         // });
+        // console.log(qObject.current);
 
-  //         const variable = await qDoc.getVariableById({
-  //           qId: "VB02",
-  //         });
-
-  //         const test = await variable.getLayout();
-  //         console.log(test);
-
-  //         // const variables = await qDoc.createVariableEx({
-  //         //   qProp: {
-  //         //     qInfo: {
-  //         //       qId: "value",
-  //         //       qType: "value",
-  //         //     },
-  //         //     qMetaDef: {},
-  //         //     qName: "value",
-  //         //     qComment: "value",
-  //         //     qNumberPresentation: {
-  //         //       qType: "value",
-  //         //       qnDec: 1,
-  //         //       qUseThou: 1,
-  //         //       qFmt: "value",
-  //         //       qDec: "value",
-  //         //       qThou: "value",
-  //         //     },
-  //         //     qIncludeInBookmark: true,
-  //         //     qDefinition: "value",
-  //         //   },
-  //         // });
-
-  //         // const variables = await qDoc.createSessionVariable({
-  //         //   qProp: {
-  //         //     qInfo: {
-  //         //       qId: "value",
-  //         //       qType: "value",
-  //         //     },
-  //         //     qMetaDef: {},
-  //         //     qName: "value",
-  //         //     qComment: "value",
-  //         //     qNumberPresentation: {
-  //         //       qType: "value",
-  //         //       qnDec: 1,
-  //         //       qUseThou: 1,
-  //         //       qFmt: "value",
-  //         //       qDec: "value",
-  //         //       qThou: "value",
-  //         //     },
-  //         //     qIncludeInBookmark: true,
-  //         //     qDefinition: "value",
-  //         //   },
-  //         // });
-
-  //         // const variables = qDoc.createSessionVariable({
-  //         //   qName: "myvar",
-  //         //   qDefinition: "Month",
-  //         // });
-
-  //         console.log(variables);
-  //       }
-  //     })(),
-  //   [engine]
-  // );
+        qObject.current.on("changed", () => {
+          update(qObject.current);
+        });
+        update(qObject.current);
+      } catch (err) {
+        if (err.code === -2) {
+          setError("Object Not Found");
+        } else {
+          setError(err);
+        }
+      }
+      // setQLayout(await qObject.current.getLayout());
+      // console.log(qObject);
+      // qObject.current = await qDoc.createSessionObject(qProp);
+    })();
+  }, [qId, qName, generateQProp, engine]);
 
   return {
-    // ...variables,
-    getVariablebyID,
+    qLayout,
+    // value: qLayout.qText,
+    // select,
+    // ...result,
+    ...qLayout,
+    // qLayout,
+    error,
   };
 };
 
