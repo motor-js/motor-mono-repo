@@ -23,6 +23,7 @@ const useVariable = (props) => {
 
   const { engine, engineError } = useContext(EngineContext) || {};
   const [qLayout, setQLayout] = useState(null);
+  const [qProperties, setQProperties] = useState(null);
   const [error, setError] = useState(null);
 
   const qObject = useRef(null);
@@ -76,10 +77,11 @@ const useVariable = (props) => {
       qObject = await qSessionObject.getLayout();
       setQLayout(qObject);
     }
-    if (qId && !qDefinition)
+    if (qId && !qDefinition) {
       qObject = await qDoc.getVariableById({
         qId,
       });
+    }
     if (qName && !qDefinition) {
       qObject = await qDoc.getVariableByName({
         qName,
@@ -114,6 +116,7 @@ const useVariable = (props) => {
   };
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
+  const getProperties = useCallback(() => qObject.current.getProperties(), []);
   const setProperties = useCallback(() => qObject.current.setProperties(), []);
 
   const update = useCallback(async (qObj) => {
@@ -121,6 +124,7 @@ const useVariable = (props) => {
     _qLayout.value =
       _qLayout.qNum === "number" ? _qLayout.qNum : _qLayout.qText;
     setQLayout(_qLayout);
+    setQProperties(await getProperties());
   }, []);
 
   useEffect(() => {
@@ -160,6 +164,7 @@ const useVariable = (props) => {
   return {
     qLayout,
     ...qLayout,
+    qProperties,
     error,
   };
 };
