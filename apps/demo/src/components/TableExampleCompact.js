@@ -6,6 +6,7 @@ import {
   useLayout,
   useVariable,
   useGlobal,
+  useBookmark,
 } from "@motor-js/engine";
 
 const TableExampleCompact = () => {
@@ -40,70 +41,8 @@ const TableExampleCompact = () => {
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
 
-  // const config = {
-  //   //Enter your app config here..
-  //   host: "juno-ui.eu.qlikcloud.com",
-  //   secure: true,
-  //   port: null,
-  //   prefix: "",
-  //   appId: "0294cf88-eb02-484a-b315-cf06b45ac347",
-  //   webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-  //   qcs: true,
-  // };
-
-  // const { engineVersion, global, globalError } = useGlobal(config);
-  // const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
-  // console.log(qTitle);
-  // const { getVariablebyID } = useVariable();
-  // const { qLayout, value } = useVariable({ qId: "VB99" });
-  // const { qLayout, value, error } = useVariable({ qName: "name" });
-  const {
-    qLayout,
-    value,
-    variableList,
-    error,
-    qProperties,
-    setProperties,
-  } = useVariable({
-    qId: "v460",
-    // qName: "testmenoyyyyy",
-    // qDefinition: "=Len(Country)",
-  });
-
-  // setProperties({ qDefinition: "=MaxString(Country)" });
-  // const { createdDate } = useLayout();
-  // const { doReload } = useApp();
-  // // console.log(engineVersion, global);
-  // console.log("createdDate", engineVersion, globalError);
-  // console.log(app && evaluate("Count(Country)"));
-  // console.log(getVariablebyID && getVariablebyID("VB02"));
-
-  // const abc = getVariablebyID("VB02");
-  // console.log(abc);
-
-  // const def = getVariablebyID("VB2");
-  // console.log(def);
-
-  // const generateQProp = useCallback(() => {
-  //   if (!qLayout) return;
-  //   const qProp = getValue();
-
-  //   return qProp;
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!qLayout) return;
-  //   // if (qObject.current) return;
-  //   // getValue();
-  //   const qProp = generateQProp();
-  //   console.log("qLayout", qProp);
-  //   // (async () => {
-  //   //   const qProp = generateQProp();
-  //   //   const qDoc = await engine;
-  //   //   qObject.current = await qDoc.createSessionObject(qProp);
-  //   //   setQLayout(await qObject.current.getLayout());
-  //   // })();
-  // }, [dataSet]);
+  const { bookmarks } = useBookmark();
+  console.log(bookmarks);
 
   const handleSelect = (c, i) => {
     // console.log(c);
@@ -115,7 +54,6 @@ const TableExampleCompact = () => {
 
   return (
     <div style={{ padding: "10px" }}>
-      {value}
       {dataSet && (
         <Table compact celled striped>
           <Table.Header>
