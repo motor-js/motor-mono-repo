@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { Table, Icon, Menu } from "semantic-ui-react";
 import {
   useTable,
@@ -52,9 +52,25 @@ const TableExampleCompact = () => {
   // };
 
   // const { engineVersion, global, globalError } = useGlobal(config);
-  const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
-  console.log(qTitle);
+  // const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
+  // console.log(qTitle);
   // const { getVariablebyID } = useVariable();
+  // const { qLayout, value } = useVariable({ qId: "VB99" });
+  // const { qLayout, value, error } = useVariable({ qName: "name" });
+  // const {
+  //   qLayout,
+  //   value,
+  //   variableList,
+  //   error,
+  //   qProperties,
+  //   setProperties,
+  // } = useVariable({
+  //   qId: "v460",
+  //   // qName: "testmenoyyyyy",
+  //   // qDefinition: "=Len(Country)",
+  // });
+
+  // setProperties({ qDefinition: "=MaxString(Country)" });
   // const { createdDate } = useLayout();
   // const { doReload } = useApp();
   // // console.log(engineVersion, global);
@@ -68,14 +84,38 @@ const TableExampleCompact = () => {
   // const def = getVariablebyID("VB2");
   // console.log(def);
 
+  // const generateQProp = useCallback(() => {
+  //   if (!qLayout) return;
+  //   const qProp = getValue();
+
+  //   return qProp;
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!qLayout) return;
+  //   // if (qObject.current) return;
+  //   // getValue();
+  //   const qProp = generateQProp();
+  //   console.log("qLayout", qProp);
+  //   // (async () => {
+  //   //   const qProp = generateQProp();
+  //   //   const qDoc = await engine;
+  //   //   qObject.current = await qDoc.createSessionObject(qProp);
+  //   //   setQLayout(await qObject.current.getLayout());
+  //   // })();
+  // }, [dataSet]);
+
   const handleSelect = (c, i) => {
     // console.log(c);
     select(c.columnId, [c.elemNumber], false);
+    // console.log("qLayout", getValue());
+
     // doReload(1, true);
   };
 
   return (
     <div style={{ padding: "10px" }}>
+      {/* {value} */}
       {dataSet && (
         <Table compact celled striped>
           <Table.Header>

@@ -117,7 +117,32 @@ const useVariable = (props) => {
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
   const getProperties = useCallback(() => qObject.current.getProperties(), []);
-  const setProperties = useCallback(() => qObject.current.setProperties(), []);
+  // const setProperties = useCallback(() => qObject.current.setProperties(), []);
+  const setProperties = useCallback(async (props) => {
+    // console.log(qObject.current && (await qObject.current.getProperties()));
+    const {
+      qId,
+      qName,
+      qComment,
+      qNumberPresentation,
+      qIncludeInBookmark,
+      qDefinition,
+    } = props;
+    if (qObject.current) {
+      const qProperties = await getProperties();
+
+      const qObject = await qObject.current.setProperties(
+        generateQProp(
+          qId || qProperties.qInfo.qId,
+          qName || qProperties.qName,
+          qComment || qProperties.qComment,
+          qNumberPresentation || qProperties.qNumberPresentation,
+          qIncludeInBookmark || qProperties.qIncludeInBookmark,
+          qDefinition || qProperties.qDefinition
+        )
+      );
+    }
+  }, []);
 
   const update = useCallback(async (qObj) => {
     const _qLayout = await getLayout();
@@ -165,6 +190,7 @@ const useVariable = (props) => {
     qLayout,
     ...qLayout,
     qProperties,
+    setProperties,
     error,
   };
 };
