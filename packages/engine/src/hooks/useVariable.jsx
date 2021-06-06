@@ -5,11 +5,21 @@ import { deepMerge } from "../utils/object";
 const initialProps = {
   qId: null,
   qName: null,
-  qProp: null,
+  qComment: undefined,
+  qNumberPresentation: undefined,
+  qIncludeInBookmark: false,
+  qDefinition: null,
 };
 
 const useVariable = (props) => {
-  const { qId, qName, qProp } = deepMerge(initialProps, props);
+  const {
+    qId,
+    qName,
+    qComment,
+    qNumberPresentation,
+    qIncludeInBookmark,
+    qDefinition,
+  } = deepMerge(initialProps, props);
 
   const { engine, engineError } = useContext(EngineContext) || {};
   const [qLayout, setQLayout] = useState(null);
@@ -17,16 +27,14 @@ const useVariable = (props) => {
 
   const qObject = useRef(null);
 
-  const generateQProp = (qPropProps) => {
-    const {
-      qId,
-      qName,
-      qComment,
-      qNumberPresentation,
-      qIncludeInBookmark = false,
-      qDefinition,
-    } = qPropProps;
-
+  const generateQProp = (
+    qId,
+    qName,
+    qComment,
+    qNumberPresentation,
+    qIncludeInBookmark,
+    qDefinition
+  ) => {
     const qProp = {
       qInfo: {
         qId,
@@ -43,12 +51,19 @@ const useVariable = (props) => {
     return qProp;
   };
 
-  const getVaribale = async (qId, qName, qProp) => {
+  const getVaribale = async (
+    qId,
+    qName,
+    qComment,
+    qNumberPresentation,
+    qIncludeInBookmark,
+    qDefinition
+  ) => {
     const qDoc = await engine;
 
     let qObject;
 
-    if (!qId && !qName && !qProp) {
+    if (!qId && !qName && !qDefinition) {
       const qSessionObject = await qDoc.createSessionObject({
         qInfo: {
           qId: "VL01",
@@ -61,22 +76,30 @@ const useVariable = (props) => {
       qObject = await qSessionObject.getLayout();
       setQLayout(qObject);
     }
-    if (qId)
+    if (qId && !qDefinition)
       qObject = await qDoc.getVariableById({
         qId,
       });
-    if (qName) {
+    if (qName && !qDefinition) {
       qObject = await qDoc.getVariableByName({
         qName,
       });
     }
-    if (qProp) {
+    if (qName && qDefinition) {
       try {
-        qObject = await getVaribale(null, qProp.qName);
+        qObject = await getVaribale(null, qName);
       } catch (err) {
-        const id = qObject.id;
-        if (!id) {
-          qObject = await qDoc.createSessionVariable(generateQProp(qProp));
+        if (!qObject) {
+          qObject = await qDoc.createSessionVariable(
+            generateQProp(
+              qId,
+              qName,
+              qComment,
+              qNumberPresentation,
+              qIncludeInBookmark,
+              qDefinition
+            )
+          );
           setQLayout(qObject);
         }
         if ((error.code = 18001)) {
@@ -107,7 +130,14 @@ const useVariable = (props) => {
       const qDoc = await engine;
 
       try {
-        qObject.current = await getVaribale(qId, qName, qProp);
+        qObject.current = await getVaribale(
+          qId,
+          qName,
+          qComment,
+          qNumberPresentation,
+          qIncludeInBookmark,
+          qDefinition
+        );
 
         qObject.current.on("changed", () => {
           update(qObject.current);
