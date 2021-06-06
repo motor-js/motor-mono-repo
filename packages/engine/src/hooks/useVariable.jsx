@@ -1,27 +1,15 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 import { deepMerge } from "../utils/object";
-import createDef from "../utils/createVarDef";
 
-// const initialProps = {
-//   qPage: {
-//     qTop: 0,
-//     qLeft: 0,
-//     qWidth: 1,
-//     qHeight: 1000,
-//   },
-//   cols: null,
-//   qHyperCubeDef: null,
-//   config: null,
-// };
+const initialProps = {
+  qId: null,
+  qName: null,
+  qProp: null,
+};
 
 const useVariable = (props) => {
-  // const { qPage: qPageProp, cols, qHyperCubeDef, config } = deepMerge(
-  //   initialProps,
-  //   props
-  // );
-  const { qId, qName } = props;
-  // console.log(qId);
+  const { qId, qName, qProp } = deepMerge(initialProps, props);
 
   const { engine, engineError } = useContext(EngineContext) || {};
   const [qLayout, setQLayout] = useState(null);
@@ -29,50 +17,50 @@ const useVariable = (props) => {
 
   const qObject = useRef(null);
 
-  const generateQProp = useCallback(() => {
-    // const qProp = createDef(cols, qHyperCubeDef);
+  const generateQProp = (qPropProps) => {
+    const {
+      qId,
+      qName,
+      qComment,
+      qNumberPresentation,
+      qIncludeInBookmark = false,
+      qDefinition,
+    } = qPropProps;
+
     const qProp = {
       qInfo: {
-        qId: "VB05",
+        qId,
         qType: "Variable",
       },
       qMetaDef: {},
-      // qName: "value",
-      qName: "Variable98",
-      // qComment: "value",
-      qComment: "My first variable",
-      // qNumberPresentation: {
-      //   qType: "value",
-      //   qnDec: 1,
-      //   qUseThou: 1,
-      //   qFmt: "value",
-      //   qDec: "value",
-      //   qThou: "value",
-      // },
-      qIncludeInBookmark: true,
-      // qDefinition: "value",
-      qDefinition: "=Count(Country)",
+      qName,
+      qComment,
+      qNumberPresentation,
+      qIncludeInBookmark,
+      qDefinition,
     };
 
     return qProp;
-    // }, [qHyperCubeDef]);
-  }, []);
+  };
 
-  const getVaribale = async (qId, qName) => {
+  const getVaribale = async (qId, qName, qProp) => {
     const qDoc = await engine;
 
-    // const test = await qDoc.createSessionObject({
-    //   qInfo: {
-    //     qId: "VL01",
-    //     qType: "VariableList",
-    //   },
-    //   qVariableListDef: {
-    //     qType: "variable",
-    //   },
-    // });
-    // console.log(await test.getLayout());
-
     let qObject;
+
+    if (!qId && !qName && !qProp) {
+      const qSessionObject = await qDoc.createSessionObject({
+        qInfo: {
+          qId: "VL01",
+          qType: "VariableList",
+        },
+        qVariableListDef: {
+          qType: "variable",
+        },
+      });
+      qObject = await qSessionObject.getLayout();
+      setQLayout(qObject);
+    }
     if (qId)
       qObject = await qDoc.getVariableById({
         qId,
@@ -82,27 +70,31 @@ const useVariable = (props) => {
         qName,
       });
     }
+    if (qProp) {
+      try {
+        qObject = await getVaribale(null, qProp.qName);
+      } catch (err) {
+        const id = qObject.id;
+        if (!id) {
+          qObject = await qDoc.createSessionVariable(generateQProp(qProp));
+          setQLayout(qObject);
+        }
+        if ((error.code = 18001)) {
+          setError("Variable already exists");
+        } else {
+          setError(err);
+        }
+      }
+    }
 
     return qObject;
   };
-
-  // const getValueKey = useCallback(async (layout) => {
-  //   if (layout.qHyperCube.qMeasureInfo.length === 0) return null;
-  //   return layout.qHyperCube.qMeasureInfo[0].qFallbackTitle;
-  // }, []);
-
-  // const select = async (value, field) => {
-  //   const qDoc = await engine;
-  //   const qField = await qDoc.getField(field);
-  //   qField.select(value);
-  // };
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
   const setProperties = useCallback(() => qObject.current.setProperties(), []);
 
   const update = useCallback(async (qObj) => {
     const _qLayout = await getLayout();
-    // console.log(_qLayout);
     _qLayout.value =
       _qLayout.qNum === "number" ? _qLayout.qNum : _qLayout.qText;
     setQLayout(_qLayout);
@@ -112,25 +104,10 @@ const useVariable = (props) => {
     if (!engine) return;
 
     (async () => {
-      // const qProp = generateQProp();
-      // const qDoc = await engine;
-      // qObject.current = await qDoc.createSessionVariable(qProp);
-      // qObject.current = await qDoc.createSessionVariable(qProp);
-      // console.log(qProp);
-      // const test = await qDoc.createSessionVariable(qProp);
-      // const test = await qDoc.createSessionVariable({
-      //   qInfo: {
-      //     qId: "VB99",
-      //     qType: "Variable",
-      //   },
-      //   qName: "Variable099",
-      //   qComment: "My first variable",
-      //   qDefinition: "=Count(Country)",
-      // });
-      try {
-        qObject.current = await getVaribale(qId, qName);
+      const qDoc = await engine;
 
-        // console.log(qObject.current);
+      try {
+        qObject.current = await getVaribale(qId, qName, qProp);
 
         qObject.current.on("changed", () => {
           update(qObject.current);
@@ -138,24 +115,21 @@ const useVariable = (props) => {
         update(qObject.current);
       } catch (err) {
         if (err.code === -2) {
-          setError("Object Not Found");
+          setError("Variable Not Found");
         } else {
           setError(err);
         }
       }
-      // setQLayout(await qObject.current.getLayout());
-      // console.log(qObject);
-      // qObject.current = await qDoc.createSessionObject(qProp);
     })();
-  }, [qId, qName, generateQProp, engine]);
+  }, [qId, qName, engine]);
+
+  if (qLayout && qLayout.qVariableList) {
+    qLayout.variableList = qLayout.qVariableList.qItems;
+  }
 
   return {
     qLayout,
-    // value: qLayout.qText,
-    // select,
-    // ...result,
     ...qLayout,
-    // qLayout,
     error,
   };
 };
