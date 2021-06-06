@@ -57,18 +57,18 @@ const TableExampleCompact = () => {
   // const { getVariablebyID } = useVariable();
   // const { qLayout, value } = useVariable({ qId: "VB99" });
   // const { qLayout, value, error } = useVariable({ qName: "name" });
-  // const {
-  //   qLayout,
-  //   value,
-  //   variableList,
-  //   error,
-  //   qProperties,
-  //   setProperties,
-  // } = useVariable({
-  //   qId: "v460",
-  //   // qName: "testmenoyyyyy",
-  //   // qDefinition: "=Len(Country)",
-  // });
+  const {
+    qLayout,
+    value,
+    variableList,
+    error,
+    qProperties,
+    setProperties,
+  } = useVariable({
+    qId: "v460",
+    // qName: "testmenoyyyyy",
+    // qDefinition: "=Len(Country)",
+  });
 
   // setProperties({ qDefinition: "=MaxString(Country)" });
   // const { createdDate } = useLayout();
@@ -115,7 +115,7 @@ const TableExampleCompact = () => {
 
   return (
     <div style={{ padding: "10px" }}>
-      {/* {value} */}
+      {value}
       {dataSet && (
         <Table compact celled striped>
           <Table.Header>

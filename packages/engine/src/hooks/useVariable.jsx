@@ -117,9 +117,8 @@ const useVariable = (props) => {
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
   const getProperties = useCallback(() => qObject.current.getProperties(), []);
-  // const setProperties = useCallback(() => qObject.current.setProperties(), []);
+
   const setProperties = useCallback(async (props) => {
-    // console.log(qObject.current && (await qObject.current.getProperties()));
     const {
       qId,
       qName,
