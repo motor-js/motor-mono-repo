@@ -19,9 +19,18 @@ const useBookmark = (props) => {
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
   const getProperties = useCallback(() => qObject.current.getProperties(), []);
+  const getBookmarks = useCallback(() =>
+    qObject.current.getBookmarks({
+      qOptions: {
+        qTypes: ["bookmark"],
+        qData: {},
+      },
+    })
+  );
 
   const update = useCallback(async (qObj) => {
-    setBookmarks(qObject.current);
+    // setBookmarks(qObject.current);
+    setBookmarks(await getBookmarks());
     // const _qLayout = await getLayout();
     // _qLayout.value = §§
     //   _qLayout.qNum === "number" ? _qLayout.qNum : _qLayout.qText;
@@ -35,21 +44,22 @@ const useBookmark = (props) => {
       const qDoc = await engine;
 
       try {
-        const qBookmarks = await qDoc.getBookmarks({
-          qOptions: {
-            qTypes: ["bookmark"],
-            qData: {},
-          },
-        });
+        qObject.current = qDoc;
+        // const qBookmarks = await qDoc.getBookmarks({
+        //   qOptions: {
+        //     qTypes: ["bookmark"],
+        //     qData: {},
+        //   },
+        // });
 
-        setBookmarks(qBookmarks);
+        // setBookmarks(qBookmarks);
 
         // qObject.current = qBookmarks;
 
         // qObject.current.on("changed", () => {
         //   update(qObject.current);
         // });
-        // update(qObject.current);
+        update(qObject.current);
       } catch (err) {
         console.log("error", err);
         if (err.code === -2) {
