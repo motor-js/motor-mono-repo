@@ -10,15 +10,55 @@ const useBookmark = (props) => {
   // const { qId } = deepMerge(initialProps, props);
 
   const { engine, engineError } = useContext(EngineContext) || {};
-  const [qLayout, setQLayout] = useState(null);
   const [bookmarks, setBookmarks] = useState(null);
-  const [qProperties, setQProperties] = useState(null);
   const [error, setError] = useState(null);
 
   const qObject = useRef(null);
 
-  const getLayout = useCallback(() => qObject.current.getLayout(), []);
-  const getProperties = useCallback(() => qObject.current.getProperties(), []);
+  const getBookmark = useCallback(
+    (qId) =>
+      qObject.current.getBookmark({
+        qId: qId,
+      }),
+    []
+  );
+
+  const applyBookmark = async (qId) => {
+    const bookmarkApplied =
+      qObject.current &&
+      qObject.current.applyBookmark({
+        qId,
+      });
+    if (bookmarkApplied) {
+      const appliedBookmark = await getBookmark(qId);
+      const bookmarkInfo = await appliedBookmark.getLayout();
+
+      setBookmarks({ ...bookmarks, appliedBookmark, bookmarkInfo });
+    }
+  };
+
+  const destroyBookmark = useCallback(
+    (qId) =>
+      qObject.current.destroyBookmark({
+        qId: qId,
+      }),
+    []
+  );
+
+  const createBookmark = useCallback(
+    (qId, qTitle) =>
+      qObject.current.createBookmark({
+        qProp: {
+          qInfo: {
+            qId: qId,
+            qType: "bookmark",
+          },
+          qMetaDef: { title: qTitle || "Unnamed bookmark" },
+        },
+      }),
+    []
+  );
+
   const getBookmarks = useCallback(() =>
     qObject.current.getBookmarks({
       qOptions: {
@@ -30,7 +70,12 @@ const useBookmark = (props) => {
 
   const update = useCallback(async (qObj) => {
     // setBookmarks(qObject.current);
-    setBookmarks(await getBookmarks());
+
+    const bookmarks = await getBookmarks();
+    const bookmarkList = bookmarks.map((d, i) => {
+      return { key: d.qInfo.qId, value: d.qInfo.qId, text: d.qMeta.title };
+    });
+    setBookmarks({ bookmarks, bookmarkList });
     // const _qLayout = await getLayout();
     // _qLayout.value = §§
     //   _qLayout.qNum === "number" ? _qLayout.qNum : _qLayout.qText;
@@ -39,6 +84,7 @@ const useBookmark = (props) => {
 
   useEffect(() => {
     if (!engine) return;
+    if (qObject.current) return;
 
     (async () => {
       const qDoc = await engine;
@@ -56,14 +102,13 @@ const useBookmark = (props) => {
 
         // qObject.current = qBookmarks;
 
-        // qObject.current.on("changed", () => {
-        //   update(qObject.current);
-        // });
+        qObject.current.on("changed", () => {
+          update(qObject.current);
+        });
         update(qObject.current);
       } catch (err) {
-        console.log("error", err);
         if (err.code === -2) {
-          setError("Variable Not Found");
+          setError("Bookmark Not Found");
         } else {
           setError(err);
         }
@@ -72,12 +117,15 @@ const useBookmark = (props) => {
   }, [engine]);
 
   return {
-    bookmarks,
+    ...bookmarks,
+    applyBookmark,
+    createBookmark,
+    destroyBookmark,
     // qLayout,
     // ...qLayout,
     // qProperties,
     // setProperties,
-    // error,
+    error,
   };
 };
 
