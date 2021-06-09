@@ -6,6 +6,7 @@ const ButtonComponent = () => {
   const {
     bookmarks,
     applyBookmark,
+    destroyBookmark,
     bookmarkList,
     appliedBookmark,
     bookmarkInfo,
@@ -15,7 +16,8 @@ const ButtonComponent = () => {
   // console.log(appliedBookmark, bookmarkInfo);
 
   const apply = (e, data) => applyBookmark(data.value);
-  console.log("fff", bookmarkInfo);
+  // const apply = (e, data) => destroyBookmark(data.value);
+  console.log("fff", bookmarkList && bookmarkList.length);
 
   // useEffect(() => {
   //   if (!bookmarks) return;
