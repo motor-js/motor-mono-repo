@@ -1,13 +1,6 @@
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 import { Table, Icon, Menu } from "semantic-ui-react";
-import {
-  useTable,
-  useApp,
-  useLayout,
-  useVariable,
-  useGlobal,
-  useBookmark,
-} from "@motor-js/engine";
+import { useTable, useApp, useLayout, useGlobal } from "@motor-js/engine";
 
 const TableExampleCompact = () => {
   const cols = [
@@ -40,10 +33,6 @@ const TableExampleCompact = () => {
     cols,
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
-
-  // const { bookmarks, applyBookmark } = useBookmark();
-  // console.log(bookmarks);
-  // applyBookmark({ qId: "df33f003-a979-4bda-911d-47d1051b0e78" });
 
   const handleSelect = (c, i) => {
     // console.log(c);

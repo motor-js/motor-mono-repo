@@ -1,12 +1,12 @@
 import Table from "./components/TableExampleCompact";
 import ButtonComponent from "./components/ButtonComponent";
-import BookmarkComponent from "./components/BookmarkComponent";
+import AppBar from "./components/AppBar";
 
 export default function App() {
   return (
     <div className="App">
-      <ButtonComponent />
-      <BookmarkComponent />
+      <AppBar />
+      {/* <ButtonComponent /> */}
       <Table />
     </div>
   );
