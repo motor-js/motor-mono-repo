@@ -14,7 +14,6 @@ const useBookmark = (props) => {
   const [error, setError] = useState(null);
 
   const qObject = useRef(null);
-  let bookmarkCreated = null;
 
   const getBookmark = useCallback(
     (qId) =>
@@ -30,12 +29,13 @@ const useBookmark = (props) => {
       qObject.current.applyBookmark({
         qId,
       });
-    // if (bookmarkApplied) {
-    // const appliedBookmark = await getBookmark(qId);
-    // const bookmarkInfo = await appliedBookmark.getLayout();
-    // console.log(bookmarkInfo);
-    // setBookmarks({ ...bookmarks, appliedBookmark, bookmarkInfo });
-    // }
+    if (bookmarkApplied) {
+      const appliedBookmark = await getBookmark(qId);
+      const bookmarkInfo = await appliedBookmark.getLayout();
+      console.log(bookmarkInfo);
+
+      // setBookmarks({ ...bookmarks, appliedBookmark, bookmarkInfo });
+    }
   };
 
   const destroyBookmark = useCallback(
@@ -46,27 +46,9 @@ const useBookmark = (props) => {
     []
   );
 
-  // const createBookmark = useCallback(
-  //   (qId, qTitle, qDescription) =>
-  //     qObject.current.createBookmark({
-  //       qProp: {
-  //         qInfo: {
-  //           qId: qId,
-  //           qType: "bookmark",
-  //         },
-  //         qMetaDef: {
-  //           title: qTitle || "Unnamed bookmark",
-  //           description: qDescription,
-  //         },
-  //       },
-  //     }),
-  //   []
-  // );
-
-  const createBookmark = async (qId, qTitle, qDescription) => {
-    bookmarkCreated =
-      qObject.current &&
-      (await qObject.current.createBookmark({
+  const createBookmark = useCallback(
+    (qId, qTitle, qDescription) =>
+      qObject.current.createBookmark({
         qProp: {
           qInfo: {
             qId: qId,
@@ -77,15 +59,9 @@ const useBookmark = (props) => {
             description: qDescription,
           },
         },
-      }));
-    update(qObject.current);
-    // if (bookmarkApplied) {
-    // const appliedBookmark = await getBookmark(qId);
-    // const bookmarkInfo = await appliedBookmark.getLayout();
-    // console.log(bookmarkInfo);
-    // setBookmarks({ ...bookmarks, appliedBookmark, bookmarkInfo });
-    // }
-  };
+      }),
+    []
+  );
 
   const getBookmarks = useCallback(() =>
     qObject.current.getBookmarks({
@@ -101,11 +77,9 @@ const useBookmark = (props) => {
     console.log("update");
 
     const bookmarks = await getBookmarks();
-
     const bookmarkList = bookmarks.map((d, i) => {
       return { key: d.qInfo.qId, value: d.qInfo.qId, text: d.qMeta.title };
     });
-    console.log(bookmarkList);
     setBookmarks({ bookmarks, bookmarkList });
     // const _qLayout = await getLayout();
     // _qLayout.value = §§
