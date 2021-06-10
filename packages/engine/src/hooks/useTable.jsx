@@ -128,9 +128,6 @@ const useTable = (props) => {
   // load engine from props
   //const myEngine = props.engine;
   const { engine, engineError } = useContext(EngineContext) || {};
-
-  console.log('table hook: ',engine)
-
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
 

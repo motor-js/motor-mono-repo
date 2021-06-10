@@ -74,10 +74,10 @@ async function useEngine (config, capabilityAPI) {
 
         const csrfToken = fetchResult.headers.get("qlik-csrf-token");
         if (csrfToken == null) {
-          console.log("Not logged in");
-          return { errorCode: 1 }
+          
+          console.warn("Not logged in");
+          return { errorCode: -1 }
 
-          return -1;
         }
         const session = enigma.create({
           schema,
@@ -93,17 +93,12 @@ async function useEngine (config, capabilityAPI) {
         });
         session.on("closed", () => {
           console.warn("Session was closed");
-          //seErrorCode(-3);
-
-          return -3;
+          return { errorCode: -3 }
         });
         const _global = await session.open();
         const _doc = await _global.openDoc(config.appId)
-        const test = await _doc
         
-        return { engine: test, errorCode: 1 }
-        //resolve({ engine: _doc })
-
+        return { engine: _doc, errorCode: 1 }
       }
       if (config) {
         const myConfig = config;
@@ -122,23 +117,20 @@ async function useEngine (config, capabilityAPI) {
           });
           session.on("closed", () => {
             console.warn("Session was closed");
-           // seErrorCode(-3);
 
-            return -3;
+           return { errorCode: -3 }
           });
           const _global = await session.open();
           const _doc = await _global.openDoc(config.appId);
  
           return { engine: _doc, errorCode: 1 };
 
-          //setEngine(_doc);
-          //seErrorCode(1);
         } catch (err) {
           console.warn("Captured Error", err);
           if (err.code === 1003) {
-            setEngineError("No engine. App Not found.");
+            console.warn("No engine. App Not found.");
           }
-         // return { errorCode: 1 };
+          return { errorCode: -3 }
         }
       }
  // }, []);

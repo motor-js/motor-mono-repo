@@ -30,13 +30,11 @@ function Motor({
   const [myConfig, setMyConfig] = useState(config);
   const [newEngine, setNewEngine] = useState(() => useEngine(myConfig).then((val) => setNewEngine(val)))
 
-  console.log('motor render')
-
   //const engineFinal = newEngine ? newEngine : { engine: engine, engineError: null, errorCode: null }
   //const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
   
   const text = `Powered by Motor`;
-  const beginAlarm = function() { console.warn('start alarm'); };
+  const beginAlarm = function() { console.error('start alarm'); };
   
   const options = {
     chunkWidth: 200,
@@ -49,9 +47,14 @@ function Motor({
     fillStyle: '#666'
   }
 
-
   return (
     <EngineContext.Provider value={newEngine}>
+      <ReactWaterMark
+        waterMarkText={text}
+        openSecurityDefense
+        securityAlarm={beginAlarm}
+        options={options}
+      >
       <License />
         <Login
           config={myConfig}
@@ -79,12 +82,6 @@ function Motor({
           buttonColor={buttonColor}
           loginfontFamily={loginfontFamily}
         />
-        <ReactWaterMark
-          waterMarkText={text}
-          openSecurityDefense
-          securityAlarm={beginAlarm}
-          options={options}
-        >
           {children}
         </ReactWaterMark>
     </EngineContext.Provider>

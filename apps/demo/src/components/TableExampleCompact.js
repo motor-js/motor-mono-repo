@@ -14,8 +14,6 @@ const TableExampleCompact = () => {
 
   const engine = useContext(EngineContext)
 
-  console.log('table engine', engine)
-
   const cols = [
     {
       qField: "[Company Name]",
@@ -59,7 +57,7 @@ const TableExampleCompact = () => {
   };
 
   return (
-    <div style={{ padding: "10px", hieght: "500px", position: 'absolute' }}>
+    <div style={{ padding: "10px", hieght: "500px" }}>
       Test
       {/*dataSet && (
         <Table compact celled striped>
