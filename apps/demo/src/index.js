@@ -10,7 +10,7 @@ ReactDOM.render(
   <Motor
     config={{
       //Enter your app config here..
-      host: "juno-ui.eu.qlikcloud.com",
+      host: "motor.eu.qlikcloud.com",
       secure: true,
       port: null,
       prefix: "",

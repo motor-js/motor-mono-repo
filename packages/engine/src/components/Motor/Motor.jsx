@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ReactWaterMark from "react-watermark-component"
 import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
+import License from "../License/License"
 
 function Motor({
   engine,
@@ -26,10 +28,13 @@ function Motor({
 }) {
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
+  const [newEngine, setNewEngine] = useState(() => useEngine(myConfig).then((val) => setNewEngine(val)))
 
-  const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
+  console.log('motor render')
 
-  /*
+  //const engineFinal = newEngine ? newEngine : { engine: engine, engineError: null, errorCode: null }
+  //const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
+  
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.warn('start alarm'); };
   
@@ -43,46 +48,45 @@ function Motor({
     rotateAngle: -0.19,
     fillStyle: '#666'
   }
-*/
+
 
   return (
     <EngineContext.Provider value={newEngine}>
-      {/*
       <License />
-      <ReactWaterMark
-        waterMarkText={text}
-        openSecurityDefense
-        securityAlarm={beginAlarm}
-        options={options}
-      >*/}
-          <Login
-            config={myConfig}
-            logo={logo}
-            logoHeight={logoHeight}
-            logoWidth={logoWidth}
-            header={header}
-            body={body}
-            bodySub={bodySub}
-            size={size}
-            backgroundColor={backgroundColor}
-            buttonText={buttonText}
-            buttonFontColor={buttonFontColor}
-            buttonColor={buttonColor}
-            loginfontFamily={loginfontFamily}
-          />
-          <NotConnected
-            config={myConfig}
-            header={NotConnectedheader}
-            body={NotConnectedBody}
-            size={size}
-            buttonText={NotConnectedButtonText}
-            backgroundColor={backgroundColor}
-            buttonFontColor={buttonFontColor}
-            buttonColor={buttonColor}
-            loginfontFamily={loginfontFamily}
-          />
+        <Login
+          config={myConfig}
+          logo={logo}
+          logoHeight={logoHeight}
+          logoWidth={logoWidth}
+          header={header}
+          body={body}
+          bodySub={bodySub}
+          size={size}
+          backgroundColor={backgroundColor}
+          buttonText={buttonText}
+          buttonFontColor={buttonFontColor}
+          buttonColor={buttonColor}
+          loginfontFamily={loginfontFamily}
+        />
+        <NotConnected
+          config={myConfig}
+          header={NotConnectedheader}
+          body={NotConnectedBody}
+          size={size}
+          buttonText={NotConnectedButtonText}
+          backgroundColor={backgroundColor}
+          buttonFontColor={buttonFontColor}
+          buttonColor={buttonColor}
+          loginfontFamily={loginfontFamily}
+        />
+        <ReactWaterMark
+          waterMarkText={text}
+          openSecurityDefense
+          securityAlarm={beginAlarm}
+          options={options}
+        >
           {children}
-     {/* </ReactWaterMark> */} 
+        </ReactWaterMark>
     </EngineContext.Provider>
   );
 }

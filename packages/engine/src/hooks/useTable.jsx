@@ -129,6 +129,8 @@ const useTable = (props) => {
   //const myEngine = props.engine;
   const { engine, engineError } = useContext(EngineContext) || {};
 
+  console.log('table hook: ',engine)
+
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
 
@@ -299,10 +301,9 @@ const useTable = (props) => {
   const update = useCallback(async () => {
     const _qLayout = await getLayout();
     const _qTitle = await getTitle(_qLayout);
-    const test = await validData(_qLayout)
-    console.log(test)
+    const _qValid = await validData(_qLayout, engine)
     const _qData = await getData();
-    //console.log(_qData)
+
     // Order colunns for dataKey
     const _orderedCols = await orderCols(cols);
     const _dataSet =
@@ -384,8 +385,7 @@ const useTable = (props) => {
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
     async (column) => {
-      console.log(column);
-      // If no sort is set, we need to set a default sort order
+    // If no sort is set, we need to set a default sort order
       if (column.qSortIndicator === "N") {
         if (column.qPath.includes("qDimensions")) {
           await applyPatches([

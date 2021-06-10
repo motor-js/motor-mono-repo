@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Table, Icon, Menu } from "semantic-ui-react";
 import {
   useTable,
@@ -6,9 +6,16 @@ import {
   useLayout,
   useVariable,
   useGlobal,
+  EngineContext
 } from "@motor-js/engine";
 
+
 const TableExampleCompact = () => {
+
+  const engine = useContext(EngineContext)
+
+  console.log('table engine', engine)
+
   const cols = [
     {
       qField: "[Company Name]",
@@ -16,20 +23,21 @@ const TableExampleCompact = () => {
       qLabel: "Company Name",
     },
     {
-      qField: "rubbish",
-      qLibraryId: "CjJKec",
+      qField: "",
+      qLibraryId: "cKLXjDf",
       dataKey: "quantity",
       qLabel: "Quantity Sold",
-    }
-    /*{
+    },
+    {
       qField: "=sum(Quantity * Price)",
       dataKey: "revenue",
       qLabel: "Revenue",
       qNumType: "M",
       qNumFmt: "£#,##0",
-    },*/
+    },
   ];
 
+  
   const {
     dataSet,
     headerGroup,
@@ -41,44 +49,18 @@ const TableExampleCompact = () => {
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
 
-  console.log(dataSet)
 
-  // const config = {
-  //   //Enter your app config here..
-  //   host: "juno-ui.eu.qlikcloud.com",
-  //   secure: true,
-  //   port: null,
-  //   prefix: "",
-  //   appId: "0294cf88-eb02-484a-b315-cf06b45ac347",
-  //   webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-  //   qcs: true,
-  // };
-
-  // const { engineVersion, global, globalError } = useGlobal(config);
-  //const { app, appProperties, qTitle, qLastReloadTime, evaluate } = useApp();
-  //console.log(qTitle);
-  // const { getVariablebyID } = useVariable();
-  // const { createdDate } = useLayout();
-  // const { doReload } = useApp();
-  // // console.log(engineVersion, global);
-  // console.log("createdDate", engineVersion, globalError);
-  // console.log(app && evaluate("Count(Country)"));
-  // console.log(getVariablebyID && getVariablebyID("VB02"));
-
-  // const abc = getVariablebyID("VB02");
-  // console.log(abc);
-
-  // const def = getVariablebyID("VB2");
-  // console.log(def);
+  //console.log('dataSet: ',dataSet)
 
   const handleSelect = (c, i) => {
     // console.log(c);
-    select(c.columnId, [c.elemNumber], false);
+    //select(c.columnId, [c.elemNumber], false);
     // doReload(1, true);
   };
 
   return (
-    <div style={{ padding: "10px" }}>
+    <div style={{ padding: "10px", hieght: "500px", position: 'absolute' }}>
+      Test
       {/*dataSet && (
         <Table compact celled striped>
           <Table.Header>

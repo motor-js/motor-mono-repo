@@ -176,13 +176,11 @@ export const getDimensionCategories = (data) => [
   ),
 ];
 
-export const validData = (qLayout, theme) => {
+export const validData = (qLayout) => {
   let isValid = true;
   let dataError = "";
   const { qDimensionInfo, qMeasureInfo } =
     qLayout.qHyperCube || qLayout.qListObject;
-  console.log('dim: ',qDimensionInfo)
-  console.log('meas: ',qMeasureInfo)
 
   const DimCheck = () => {
     //check if an array, to work with HyperCube & ListObject
@@ -191,21 +189,17 @@ export const validData = (qLayout, theme) => {
       : [qDimensionInfo];
     _qDimensionInfo.forEach((qData) => {
         if (qData.qError) {
-          console.error('There is an issue with you dimension. Please fix in order to receive the correct data. ', qData.qError)
+          console.error('There is an issue with your dimension. Please fix this in order to receive the correct data. ', qData.qError)
         }
     });
   };
 
   const MeasCheck = () => {
     qMeasureInfo.forEach((qData) => {
-      console.log('meas',qData)
-      // console.log('meas check: ',qData)
       if (
-        (isNaN(qData.qMax) && isNaN(qData.qMin)) ||
-        (qData.qMax === 0 && qData.qMin === 0)
+        (isNaN(qData.qMax) && isNaN(qData.qMin)) 
       ) {
-      //  isValid = false;
-      //  dataError = measureErrMsg;
+        console.error('There is an issue with your measure. It is not returning any data.')
       }
     });
   };

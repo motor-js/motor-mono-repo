@@ -28,7 +28,7 @@ console.log(decrypt.toString(CryptoJS.enc.Hex))
 
   return (
     <div className="App">
-      <ButtonComponent />
+      {/*<ButtonComponent />*/}
       <Table />
     </div>
   );
