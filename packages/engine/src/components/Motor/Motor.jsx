@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactWaterMark from "react-watermark-component"
 import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
-import License from "../License/License"
+//import { EncryptLicense } from "../License/EncryptLicense"
 
 function Motor({
   engine,
@@ -26,6 +26,9 @@ function Motor({
   NotConnectedBody,
   NotConnectedButtonText,
 }) {
+
+  //EncryptLicense()
+
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
   const [newEngine, setNewEngine] = useState(() => useEngine(myConfig).then((val) => setNewEngine(val)))
@@ -34,7 +37,7 @@ function Motor({
   //const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
   
   const text = `Powered by Motor`;
-  const beginAlarm = function() { console.error('start alarm'); };
+  const beginAlarm = function() { console.error('start alarm!'); };
   
   const options = {
     chunkWidth: 200,

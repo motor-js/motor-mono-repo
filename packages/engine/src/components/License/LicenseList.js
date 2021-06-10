@@ -1,6 +1,4 @@
-
-const LicenseList = () => {
-
+export const LicenseList = () => {
   var i;
   const licenses = []
 
@@ -10,5 +8,3 @@ const LicenseList = () => {
 
   return licenses
 }
-
-export default LicenseList
