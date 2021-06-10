@@ -1,7 +1,6 @@
-import Table from './components/TableExampleCompact'
-import CryptoAES from 'crypto-js/aes'
-import CryptoENC from 'crypto-js/enc-utf8'
-import CryptoJS from 'crypto-js'
+import React from "react";
+import Table from "./components/TableExampleCompact";
+import ButtonComponent from "./components/ButtonComponent";
 
 export default function App() {
 

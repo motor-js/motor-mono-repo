@@ -1,19 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Table, Icon, Menu } from "semantic-ui-react";
-import {
-  useTable,
-  useApp,
-  useLayout,
-  useVariable,
-  useGlobal,
-  EngineContext
-} from "@motor-js/engine";
-
+import { useTable, useApp, useLayout, useGlobal } from "@motor-js/engine";
 
 const TableExampleCompact = () => {
-
-  const engine = useContext(EngineContext)
-
   const cols = [
     {
       qField: "[Company Name]",
@@ -21,8 +10,7 @@ const TableExampleCompact = () => {
       qLabel: "Company Name",
     },
     {
-      qField: "",
-      qLibraryId: "cKLXjDf",
+      qField: "=sum(Quantity)",
       dataKey: "quantity",
       qLabel: "Quantity Sold",
     },
@@ -35,7 +23,6 @@ const TableExampleCompact = () => {
     },
   ];
 
-  
   const {
     dataSet,
     headerGroup,
@@ -49,14 +36,15 @@ const TableExampleCompact = () => {
 
   const handleSelect = (c, i) => {
     // console.log(c);
-    //select(c.columnId, [c.elemNumber], false);
+    select(c.columnId, [c.elemNumber], false);
+    // console.log("qLayout", getValue());
+
     // doReload(1, true);
   };
 
   return (
-    <div style={{ padding: "10px", hieght: "500px" }}>
-      Test
-      {/*dataSet && (
+    <div style={{ padding: "10px" }}>
+      {dataSet && (
         <Table compact celled striped>
           <Table.Header>
             <Table.Row>
@@ -97,7 +85,7 @@ const TableExampleCompact = () => {
             </Table.Row>
           </Table.Footer>
         </Table>
-            )*/}
+      )}
     </div>
   );
 };

@@ -17,6 +17,7 @@ export { default as useCapability } from "./hooks/useCapability";
 export { default as useApp } from "./hooks/useApp";
 export { default as useLayout } from "./hooks/useLayout";
 export { default as useVariable } from "./hooks/useVariable";
+export { default as useBookmark } from "./hooks/useBookmark";
 
 //Contexts
 export { EngineContext } from "./contexts/EngineProvider";

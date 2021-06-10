@@ -42,13 +42,13 @@ function Motor({
   const options = {
     chunkWidth: 200,
     chunkHeight: 90,
-    textAlign: 'left',
-    textBaseline: 'bottom',
+    textAlign: "left",
+    textBaseline: "bottom",
     globalAlpha: 0.17,
-    font: '16px Roboto sans-serif',
+    font: "16px Roboto sans-serif",
     rotateAngle: -0.19,
-    fillStyle: '#666'
-  }
+    fillStyle: "#666",
+  };
 
   return (
     <EngineContext.Provider value={newEngine}>
