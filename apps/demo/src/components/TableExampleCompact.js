@@ -8,11 +8,14 @@ import {
   useGlobal,
   EngineContext
 } from "@motor-js/engine";
+import { Suspense } from "react";
 
 
 const TableExampleCompact = () => {
 
   const engine = useContext(EngineContext)
+
+  //console.log('table engine: ',engine)
 
   const cols = [
     {
@@ -46,6 +49,8 @@ const TableExampleCompact = () => {
     cols,
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
+
+  console.log(dataSet)
 
   const handleSelect = (c, i) => {
     // console.log(c);

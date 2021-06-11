@@ -4,11 +4,12 @@ import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
-//import { EncryptLicense } from "../License/EncryptLicense"
+import { LicenseCheck } from "../License/LicenseCheck"
 
 function Motor({
   engine,
   children,
+  licenseKey,
   config,
   logo,
   logoWidth,
@@ -27,11 +28,14 @@ function Motor({
   NotConnectedButtonText,
 }) {
 
-  //EncryptLicense()
+  //license key
+  LicenseCheck(licenseKey)
 
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
   const [newEngine, setNewEngine] = useState(() => useEngine(myConfig).then((val) => setNewEngine(val)))
+
+  //console.log(newEngine)
 
   //const engineFinal = newEngine ? newEngine : { engine: engine, engineError: null, errorCode: null }
   //const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
@@ -58,7 +62,7 @@ function Motor({
         securityAlarm={beginAlarm}
         options={options}
       >
-      <License />
+     {/*} <License /> */}
         <Login
           config={myConfig}
           logo={logo}
