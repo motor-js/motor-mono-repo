@@ -32,9 +32,8 @@ const useBookmark = (props) => {
     if (bookmarkApplied) {
       const appliedBookmark = await getBookmark(qId);
       const bookmarkInfo = await appliedBookmark.getLayout();
-      console.log(bookmarkInfo);
 
-      // setBookmarks({ ...bookmarks, appliedBookmark, bookmarkInfo });
+      setBookmarks({ ...bookmarks, appliedBookmark, bookmarkInfo });
     }
   };
 
@@ -57,6 +56,8 @@ const useBookmark = (props) => {
           qMetaDef: {
             title: qTitle || "Unnamed bookmark",
             description: qDescription,
+            createdDate: new Date(Date.now()),
+            modifiedDate: new Date(Date.now()),
           },
         },
       }),
@@ -77,8 +78,15 @@ const useBookmark = (props) => {
     console.log("update");
 
     const bookmarks = await getBookmarks();
+
     const bookmarkList = bookmarks.map((d, i) => {
-      return { key: d.qInfo.qId, value: d.qInfo.qId, text: d.qMeta.title };
+      return {
+        key: d.qInfo.qId,
+        value: d.qInfo.qId,
+        text: d.qMeta.title,
+        createdDate: d.qMeta.createdDate,
+        modifiedDate: d.qMeta.modifiedDate,
+      };
     });
     setBookmarks({ bookmarks, bookmarkList });
     // const _qLayout = await getLayout();

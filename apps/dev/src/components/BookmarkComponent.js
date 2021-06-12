@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { useTable } from "@motor-js/engine";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -10,6 +9,16 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useBookmark } from "@motor-js/engine";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Popover from "@material-ui/core/Popover";
+import IconButton from "@material-ui/core/IconButton";
+import Edit from "@material-ui/icons/Edit";
+import Delete from "@material-ui/icons/Delete";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const useStyles = makeStyles({
   table: {
@@ -29,49 +38,19 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-const BookmarComponent = () => {
-  const { bookmarkList } = useBookmark();
-  console.log(bookmarkList);
-  const cols = [
-    {
-      qField: "[Company Name]",
-      dataKey: "company",
-      qLabel: "Company Name",
-    },
-    {
-      qField: "=sum(Quantity)",
-      dataKey: "quantity",
-      qLabel: "Quantity Sold",
-    },
-    {
-      qField: "=sum(Quantity * Price)",
-      dataKey: "revenue",
-      qLabel: "Revenue",
-      qNumType: "M",
-      qNumFmt: "£#,##0",
-    },
-  ];
-
+const BookmarComponent = ({ anchorEl, open, handleClose }) => {
   const {
-    dataSet,
-    headerGroup,
-    select,
-    incrementPage,
-    decrementPage,
-  } = useTable({
-    cols,
-    qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
-  });
+    bookmarkList,
+    bookmarks,
+    applyBookmark,
+    createBookmark,
+    destroyBookmark,
+  } = useBookmark();
+  // const [anchorEl, setAnchorEl] = useState(null);
+  console.log(bookmarks);
 
   const classes = useStyles();
 
-  const handleSelect = (c, i) => {
-    // console.log(c);
-    select(c.columnId, [c.elemNumber], false);
-    // console.log("qLayout", getValue());
-
-    // doReload(1, true);
-  };
   const StyledTableCell = withStyles((theme) => ({
     head: {
       // backgroundColor: theme.palette.common.black,
@@ -85,39 +64,131 @@ const BookmarComponent = () => {
 
   const StyledTableRow = withStyles((theme) => ({
     root: {
-      "&:nth-of-type(odd)": {
-        backgroundColor: theme.palette.action.hover,
-      },
+      // "&:nth-of-type(odd)": {
+      //   backgroundColor: theme.palette.action.hover,
+      // },
     },
   }))(TableRow);
 
+  // const open = Boolean(anchorEl);
+  // const open = true;
+  const id = open ? "simple-popover" : undefined;
+  const bull = <span className={classes.bullet}>•</span>;
+  // const handleClick = (e, key) => console.log(key);
+  const handleClick = (e, key) => {
+    applyBookmark(key);
+    handleClose();
+  };
+  const deleteBookmark = (e, key) => {
+    destroyBookmark(key);
+  };
+
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <StyledTableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-          </StyledTableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {bookmarkList && (
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          // anchorReference="anchorPosition"
+          // anchorPosition={{ top: 60, left: 1000 }}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                Bookmarks
+              </Typography>
+            </CardContent>
+            <TableContainer component={Paper}>
+              <Table
+                stickyHeader
+                className={classes.table}
+                aria-label="simple table"
+              >
+                <TableHead>
+                  <StyledTableRow>
+                    <StyledTableCell>Name</StyledTableCell>
+                    <StyledTableCell>Created On</StyledTableCell>
+                    <StyledTableCell align="right" width="10%">
+                      {/* Fat&nbsp;(g) */}
+                      <IconButton
+                        style={{ padding: 8 }}
+                        // onClick={(event) => deleteBookmark(event, row.key)}
+                      >
+                        <Edit fontSize="small" />
+                      </IconButton>
+                    </StyledTableCell>
+                    <StyledTableCell align="right" width="10%">
+                      {/* Carbs&nbsp;(g) */}
+                      <IconButton style={{ padding: 8 }}>
+                        <Delete fontSize="small" />
+                      </IconButton>
+                    </StyledTableCell>
+                    {/*        <StyledTableCell align="right">
+                      Protein&nbsp;(g)
+                    </StyledTableCell> */}
+                  </StyledTableRow>
+                </TableHead>
+                <TableBody>
+                  {bookmarkList.map((row) => (
+                    <StyledTableRow key={row.key} hover>
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        onClick={(event) => handleClick(event, row.key)}
+                      >
+                        {row.text}
+                      </TableCell>
+                      <StyledTableCell>{row.createdDate}</StyledTableCell>
+                      <StyledTableCell align="right" width="10%">
+                        {/* {row.text} */}
+                        <IconButton
+                          style={{ padding: 8 }}
+                          // onClick={(event) => deleteBookmark(event, row.key)}
+                        >
+                          <Edit fontSize="small" />
+                        </IconButton>
+                      </StyledTableCell>
+                      <StyledTableCell align="right" width="10%">
+                        {/* {row.text} */}
+                        <IconButton
+                          style={{ padding: 8 }}
+                          onClick={(event) => deleteBookmark(event, row.key)}
+                        >
+                          <Delete fontSize="small" />
+                        </IconButton>
+                      </StyledTableCell>
+                      {/* <StyledTableCell align="right">
+                        {row.carbs}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.protein}
+                      </StyledTableCell> */}
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <CardActions style={{ width: "100%", justifyContent: "center" }}>
+              {/* <Button size="small">Learn More</Button> */}
+              <AddCircleIcon
+                fontSize="large"
+                onClick={() => createBookmark()}
+              />
+            </CardActions>
+          </Card>
+        </Popover>
+      )}
+    </>
   );
 };
 

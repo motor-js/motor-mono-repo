@@ -66,55 +66,14 @@ const ButtonComponent = () => {
             onClick={handleClick}
           >
             <BookmarkBorderIcon />
-          </IconButton>{" "}
-          <Popover
-            id={id}
+          </IconButton>
+
+          <BookmarkComponent
+            handleClose={handleClose}
             open={open}
             anchorEl={anchorEl}
-            // anchorReference="anchorPosition"
-            // anchorPosition={{ top: 60, left: 1000 }}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-          >
-            {/* <Typography className={classes.typography}> */}
-            <Card className={classes.root}>
-              <CardContent>
-                {/* <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Bookmarks
-                </Typography> */}
-                <Typography variant="h5" component="h2">
-                  Bookmarks
-                </Typography>
-                {/* <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                  {'"a benevolent smile"'}
-                </Typography> */}
-              </CardContent>
-              <BookmarkComponent />
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+          />
 
-            {/* <Button /> */}
-
-            {/* </Typography> */}
-          </Popover>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
