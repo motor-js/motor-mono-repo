@@ -8,6 +8,9 @@ import IconButton from "@material-ui/core/IconButton";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import MenuIcon from "@material-ui/icons/Menu";
 import Popover from "@material-ui/core/Popover";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 
 import BookmarkComponent from "./BookmarkComponent";
 
@@ -40,6 +43,7 @@ const ButtonComponent = () => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <div className={classes.root}>
@@ -72,16 +76,44 @@ const ButtonComponent = () => {
             onClose={handleClose}
             anchorOrigin={{
               vertical: "bottom",
-              horizontal: "center",
+              horizontal: "right",
             }}
             transformOrigin={{
               vertical: "top",
               horizontal: "right",
             }}
           >
-            <Typography className={classes.typography}>
+            {/* <Typography className={classes.typography}> */}
+            <Card className={classes.root}>
+              <CardContent>
+                {/* <Typography
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  Bookmarks
+                </Typography> */}
+                <Typography variant="h5" component="h2">
+                  Bookmarks
+                </Typography>
+                {/* <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+                <Typography variant="body2" component="p">
+                  well meaning and kindly.
+                  <br />
+                  {'"a benevolent smile"'}
+                </Typography> */}
+              </CardContent>
               <BookmarkComponent />
-            </Typography>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+
+            {/* <Button /> */}
+
+            {/* </Typography> */}
           </Popover>
           <Button color="inherit">Login</Button>
         </Toolbar>
