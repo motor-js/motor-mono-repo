@@ -74,13 +74,14 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
   // const open = true;
   const id = open ? "simple-popover" : undefined;
   const bull = <span className={classes.bullet}>•</span>;
-  // const handleClick = (e, key) => console.log(key);
-  const handleClick = (e, key) => {
-    applyBookmark(key);
+
+  const handleClick = (e, id) => {
+    applyBookmark(id);
     handleClose();
   };
-  const deleteBookmark = (e, key) => {
-    destroyBookmark(key);
+  const deleteBookmark = async (e, id) => {
+    const destroyed = await destroyBookmark(id);
+    console.log("destroyed", destroyed);
   };
 
   return (
@@ -116,45 +117,34 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
               >
                 <TableHead>
                   <StyledTableRow>
-                    <StyledTableCell>Name</StyledTableCell>
+                    <StyledTableCell>Ttile</StyledTableCell>
                     <StyledTableCell>Created On</StyledTableCell>
                     <StyledTableCell align="right" width="10%">
-                      {/* Fat&nbsp;(g) */}
-                      <IconButton
-                        style={{ padding: 8 }}
-                        // onClick={(event) => deleteBookmark(event, row.key)}
-                      >
+                      <IconButton style={{ padding: 8 }}>
                         <Edit fontSize="small" />
                       </IconButton>
                     </StyledTableCell>
                     <StyledTableCell align="right" width="10%">
-                      {/* Carbs&nbsp;(g) */}
                       <IconButton style={{ padding: 8 }}>
                         <Delete fontSize="small" />
                       </IconButton>
                     </StyledTableCell>
-                    {/*        <StyledTableCell align="right">
-                      Protein&nbsp;(g)
-                    </StyledTableCell> */}
                   </StyledTableRow>
                 </TableHead>
                 <TableBody>
                   {bookmarkList.map((row) => (
-                    <StyledTableRow key={row.key} hover>
+                    <StyledTableRow key={row.id} hover>
                       <TableCell
                         component="th"
                         scope="row"
-                        onClick={(event) => handleClick(event, row.key)}
+                        onClick={(event) => handleClick(event, row.id)}
                       >
-                        {row.text}
+                        {row.title}
                       </TableCell>
                       <StyledTableCell>{row.createdDate}</StyledTableCell>
                       <StyledTableCell align="right" width="10%">
                         {/* {row.text} */}
-                        <IconButton
-                          style={{ padding: 8 }}
-                          // onClick={(event) => deleteBookmark(event, row.key)}
-                        >
+                        <IconButton style={{ padding: 8 }}>
                           <Edit fontSize="small" />
                         </IconButton>
                       </StyledTableCell>
@@ -162,17 +152,11 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                         {/* {row.text} */}
                         <IconButton
                           style={{ padding: 8 }}
-                          onClick={(event) => deleteBookmark(event, row.key)}
+                          onClick={(event) => deleteBookmark(event, row.id)}
                         >
                           <Delete fontSize="small" />
                         </IconButton>
                       </StyledTableCell>
-                      {/* <StyledTableCell align="right">
-                        {row.carbs}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.protein}
-                      </StyledTableCell> */}
                     </StyledTableRow>
                   ))}
                 </TableBody>
