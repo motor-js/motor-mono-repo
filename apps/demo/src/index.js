@@ -18,7 +18,7 @@ ReactDOM.render(
       webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
       qcs: true,
     }}
-    licenseKey="testlicense"
+    licenseKey="U2FsdGVkX18F0eIS4Rkz49TnlMpqP3Yfos8sRJ/GvNY="
   >
     <App />
   </Motor>,

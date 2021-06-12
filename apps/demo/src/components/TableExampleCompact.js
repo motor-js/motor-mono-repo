@@ -50,8 +50,6 @@ const TableExampleCompact = () => {
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });
 
-  console.log(dataSet)
-
   const handleSelect = (c, i) => {
     // console.log(c);
     //select(c.columnId, [c.elemNumber], false);

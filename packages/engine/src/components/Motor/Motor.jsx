@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactWaterMark from "react-watermark-component"
 import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
@@ -28,15 +28,21 @@ function Motor({
   NotConnectedButtonText,
 }) {
 
-  //license key
-  LicenseCheck(licenseKey)
-
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
   const [newEngine, setNewEngine] = useState(() => useEngine(myConfig).then((val) => setNewEngine(val)))
+  const [validLicense, setValidLicense] = useState(true)
 
+  // check license key
+  const userKey = licenseKey ? LicenseCheck(licenseKey) : []
+
+  // check if license key is valid
+  useEffect(() => {
+    userKey.length > 0 ? setValidLicense(true) : setValidLicense(false)
+  },[licenseKey])
+  
+  // Old code for connection
   //console.log(newEngine)
-
   //const engineFinal = newEngine ? newEngine : { engine: engine, engineError: null, errorCode: null }
   //const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
   
@@ -56,13 +62,6 @@ function Motor({
 
   return (
     <EngineContext.Provider value={newEngine}>
-      <ReactWaterMark
-        waterMarkText={text}
-        openSecurityDefense
-        securityAlarm={beginAlarm}
-        options={options}
-      >
-     {/*} <License /> */}
         <Login
           config={myConfig}
           logo={logo}
@@ -89,8 +88,20 @@ function Motor({
           buttonColor={buttonColor}
           loginfontFamily={loginfontFamily}
         />
-          {children}
-        </ReactWaterMark>
+        { !validLicense ? 
+            <ReactWaterMark
+              waterMarkText={text}
+              openSecurityDefense
+              securityAlarm={beginAlarm}
+              options={options}
+            >
+            {children}
+           </ReactWaterMark>
+           :
+           <div>
+            {children}
+           </div>
+        }
     </EngineContext.Provider>
   );
 }
