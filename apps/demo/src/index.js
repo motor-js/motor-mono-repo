@@ -18,12 +18,14 @@ ReactDOM.render(
       webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
       qcs: true,
     }}
-    licenseKey="U2FsdGVkX18F0eIS4Rkz49TnlMpqP3Yfos8sRJ/GvNY="
+    licenseKey="+Hi2/egsvAM3Xq9md6xTfPjxxEjV971xk="
   >
     <App />
   </Motor>,
   document.getElementById("root")
 );
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

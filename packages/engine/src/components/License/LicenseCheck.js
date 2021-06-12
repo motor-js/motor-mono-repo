@@ -11,8 +11,9 @@ export function LicenseCheck (userInput) {
     licenses.push("MotorLicense-"+i)
   }
 
-  // decrypt the passed in license
-  var decrypt = CryptoAES.decrypt(userInput, "S@few/M0t0r");
+  // decrypt the passed in license "U2FsdGVkX1"
+  const toCheck = "U2FsdGVkX1"+userInput
+  var decrypt = CryptoAES.decrypt(toCheck, "S@few/M0t0r");
   var input = decrypt.toString(CryptoENC)
 
   //filter license
