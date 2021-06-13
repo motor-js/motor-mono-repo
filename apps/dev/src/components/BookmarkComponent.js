@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -19,24 +19,15 @@ import IconButton from "@material-ui/core/IconButton";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Alert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+import BookmarkDialogComponent from "./BookmarkDialogComponent";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
 
 const BookmarComponent = ({ anchorEl, open, handleClose }) => {
   const {
@@ -46,7 +37,9 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
     createBookmark,
     destroyBookmark,
   } = useBookmark();
-  // const [anchorEl, setAnchorEl] = useState(null);
+
+  // const [openSnackbar, setSnackbarOpen] = React.useState(true);
+  const [showDialog, setSHowDialog] = React.useState(false);
   console.log(bookmarks);
 
   const classes = useStyles();
@@ -62,18 +55,15 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
     },
   }))(TableCell);
 
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      // "&:nth-of-type(odd)": {
-      //   backgroundColor: theme.palette.action.hover,
-      // },
-    },
-  }))(TableRow);
+  // const TableRow = withStyles((theme) => ({
+  //   root: {
+  //     // "&:nth-of-type(odd)": {
+  //     //   backgroundColor: theme.palette.action.hover,
+  //     // },
+  //   },
+  // }))(TableRow);
 
-  // const open = Boolean(anchorEl);
-  // const open = true;
   const id = open ? "simple-popover" : undefined;
-  const bull = <span className={classes.bullet}>•</span>;
 
   const handleClick = (e, id) => {
     applyBookmark(id);
@@ -84,15 +74,25 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
     console.log("destroyed", destroyed);
   };
 
+  // const handleCSnackbarClose = () => {
+  //   setSnackbarOpen(false);
+  // };
+
   return (
     <>
+      {/* <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCSnackbarClose}
+      >
+        <Alert severity="error">This is an error alert — check it out!</Alert>
+      </Snackbar> */}
+      <BookmarkDialogComponent isOpen={showDialog} />
       {bookmarkList && (
         <Popover
           id={id}
           open={open}
           anchorEl={anchorEl}
-          // anchorReference="anchorPosition"
-          // anchorPosition={{ top: 60, left: 1000 }}
           onClose={handleClose}
           anchorOrigin={{
             vertical: "bottom",
@@ -116,7 +116,7 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                 aria-label="simple table"
               >
                 <TableHead>
-                  <StyledTableRow>
+                  <TableRow>
                     <StyledTableCell>Ttile</StyledTableCell>
                     <StyledTableCell>Created On</StyledTableCell>
                     <StyledTableCell align="right" width="10%">
@@ -129,11 +129,11 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                         <Delete fontSize="small" />
                       </IconButton>
                     </StyledTableCell>
-                  </StyledTableRow>
+                  </TableRow>
                 </TableHead>
                 <TableBody>
                   {bookmarkList.map((row) => (
-                    <StyledTableRow key={row.id} hover>
+                    <TableRow key={row.id} hover>
                       <TableCell
                         component="th"
                         scope="row"
@@ -144,7 +144,10 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                       <StyledTableCell>{row.createdDate}</StyledTableCell>
                       <StyledTableCell align="right" width="10%">
                         {/* {row.text} */}
-                        <IconButton style={{ padding: 8 }}>
+                        <IconButton
+                          style={{ padding: 8 }}
+                          onClick={() => setSHowDialog(true)}
+                        >
                           <Edit fontSize="small" />
                         </IconButton>
                       </StyledTableCell>
@@ -157,7 +160,7 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                           <Delete fontSize="small" />
                         </IconButton>
                       </StyledTableCell>
-                    </StyledTableRow>
+                    </TableRow>
                   ))}
                 </TableBody>
               </Table>

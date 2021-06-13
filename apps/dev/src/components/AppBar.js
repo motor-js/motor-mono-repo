@@ -11,6 +11,8 @@ import Popover from "@material-ui/core/Popover";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import ClearAllIcon from "@material-ui/icons/ClearAll";
+import { useButton } from "@motor-js/engine";
 
 import BookmarkComponent from "./BookmarkComponent";
 
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ButtonComponent = () => {
+  const { clearSelections } = useButton();
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -60,6 +63,13 @@ const ButtonComponent = () => {
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
+          <IconButton
+            aria-label="show 17 new notifications"
+            color="inherit"
+            onClick={clearSelections}
+          >
+            <ClearAllIcon />
+          </IconButton>
           <IconButton
             aria-label="show 17 new notifications"
             color="inherit"
