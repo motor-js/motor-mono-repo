@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,21 +16,25 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const BookmarkDialogComponent = ({ isOpen }) => {
-  const [open, setOpen] = useState(isOpen);
-  console.log("is", open);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+const BookmarkDialogComponent = ({
+  isOpen,
+  handleClose,
+  dialogTitle,
+  method,
+  title,
+  description,
+  bookmarkId,
+  mode,
+}) => {
+  const nameRef = useRef("");
+  const descriptionRef = useRef("");
   return (
     <Dialog
       open={isOpen}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <DialogTitle id="form-dialog-title">{dialogTitle}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           To subscribe to this website, please enter your email address here. We
@@ -39,18 +43,39 @@ const BookmarkDialogComponent = ({ isOpen }) => {
         <TextField
           autoFocus
           margin="dense"
-          id="name"
-          label="Email Address"
-          type="email"
+          id="title"
+          label="Title"
+          type="text"
           fullWidth
+          inputRef={nameRef}
+          defaultValue={title}
+        />
+        <TextField
+          margin="dense"
+          id="description"
+          label="Description (Optional)"
+          type="text"
+          fullWidth
+          multiline
+          inputRef={descriptionRef}
+          defaultValue={description}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleClose} color="primary">
-          Subscribe
+        <Button
+          onClick={() =>
+            method(
+              bookmarkId,
+              nameRef.current.value,
+              descriptionRef.current.value
+            )
+          }
+          color="primary"
+        >
+          {mode}
         </Button>
       </DialogActions>
     </Dialog>

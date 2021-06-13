@@ -12,6 +12,7 @@ const useBookmark = (props) => {
   const { engine, engineError } = useContext(EngineContext) || {};
   const [bookmarks, setBookmarks] = useState(null);
   const [error, setError] = useState(null);
+  // const [currentBookmark, setCurrentBookmark] = useState(null);
 
   const qObject = useRef(null);
 
@@ -22,6 +23,14 @@ const useBookmark = (props) => {
       }),
     []
   );
+
+  const getBookmarkLayout = async (qId) => {
+    const bookmark = await qObject.current.getBookmark({
+      qId,
+    });
+
+    return await bookmark.getLayout();
+  };
 
   const applyBookmark = async (qId) => {
     const bookmarkApplied =
@@ -37,6 +46,25 @@ const useBookmark = (props) => {
     }
   };
 
+  const updateBookmark = async (qId, qTitle, qDescription) => {
+    const bookmark = await getBookmark(qId);
+
+    await bookmark.setProperties({
+      qProp: {
+        qInfo: {
+          qId,
+          qType: "bookmark",
+        },
+        qMetaDef: {
+          title: qTitle,
+          description: qDescription,
+        },
+      },
+    });
+
+    updateBookmarks();
+  };
+
   const updateBookmarks = async () => {
     const bookmarks = await getBookmarks();
 
@@ -44,8 +72,7 @@ const useBookmark = (props) => {
       return {
         id: d.qInfo.qId,
         title: d.qMeta.title,
-        createdDate: d.qMeta.createdDate,
-        modifiedDate: d.qMeta.modifiedDate,
+        modifiedDate: d.qData.qBookmark.qUtcModifyTime,
       };
     });
     setBookmarks({ bookmarks, bookmarkList });
@@ -60,7 +87,7 @@ const useBookmark = (props) => {
     return bookmarkDestroyed;
   };
 
-  const createBookmark = async (qId, qTitle, qDescription) => {
+  const createBookmark = async (qTitle, qDescription, qId = null) => {
     // const qDoc = await engine;
     const bookmarkCreated = await qObject.current.createBookmark({
       qProp: {
@@ -71,8 +98,6 @@ const useBookmark = (props) => {
         qMetaDef: {
           title: qTitle || "Unnamed bookmark",
           description: qDescription,
-          createdDate: new Date(Date.now()),
-          modifiedDate: new Date(Date.now()),
         },
       },
     });
@@ -126,10 +151,10 @@ const useBookmark = (props) => {
     applyBookmark,
     createBookmark,
     destroyBookmark,
-    // qLayout,
-    // ...qLayout,
-    // qProperties,
-    // setProperties,
+    getBookmark,
+    getBookmarkLayout,
+    // currentBookmark,
+    updateBookmark,
     error,
   };
 };

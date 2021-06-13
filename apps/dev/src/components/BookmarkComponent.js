@@ -33,20 +33,30 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
   const {
     bookmarkList,
     bookmarks,
+    getBookmark,
+    updateBookmark,
+    getBookmarkLayout,
     applyBookmark,
     createBookmark,
     destroyBookmark,
   } = useBookmark();
 
   // const [openSnackbar, setSnackbarOpen] = React.useState(true);
-  const [showDialog, setSHowDialog] = React.useState(false);
-  console.log(bookmarks);
+  const [showDialog, setSHowDialog] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [bookmarkId, setBookmarkId] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [mode, setMode] = useState("");
+
+  const handleCloseDialog = () => {
+    setSHowDialog(false);
+  };
 
   const classes = useStyles();
 
   const StyledTableCell = withStyles((theme) => ({
     head: {
-      // backgroundColor: theme.palette.common.black,
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.common.white,
     },
@@ -54,6 +64,12 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
       fontSize: 14,
     },
   }))(TableCell);
+
+  const StyledIconButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.common.white,
+    },
+  }))(IconButton);
 
   // const TableRow = withStyles((theme) => ({
   //   root: {
@@ -69,9 +85,38 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
     applyBookmark(id);
     handleClose();
   };
+
   const deleteBookmark = async (e, id) => {
     const destroyed = await destroyBookmark(id);
-    console.log("destroyed", destroyed);
+  };
+
+  const handleCreateBookmarkDialog = () => {
+    setDialogTitle("Create Bookmark");
+    setTitle(null);
+    setDescription(null);
+    setMode("Create");
+    setSHowDialog(true);
+  };
+
+  const handleCreateBookmark = (id, name, description) => {
+    createBookmark(name, description);
+    setSHowDialog(false);
+  };
+
+  const handleUpdateBookmark = (id, name, description) => {
+    updateBookmark(id, name, description);
+    setSHowDialog(false);
+  };
+
+  const handleEditBookmark = async (e, id) => {
+    setDialogTitle("Edit Bookmark");
+
+    const currentbookmark = await getBookmarkLayout(id);
+    setBookmarkId(id);
+    setTitle(currentbookmark.qMeta.title);
+    setDescription(currentbookmark.qMeta.description);
+    setMode("Save");
+    setSHowDialog(true);
   };
 
   // const handleCSnackbarClose = () => {
@@ -87,7 +132,16 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
       >
         <Alert severity="error">This is an error alert — check it out!</Alert>
       </Snackbar> */}
-      <BookmarkDialogComponent isOpen={showDialog} />
+      <BookmarkDialogComponent
+        dialogTitle={dialogTitle}
+        isOpen={showDialog}
+        handleClose={handleCloseDialog}
+        method={mode === "Create" ? handleCreateBookmark : handleUpdateBookmark}
+        bookmarkId={bookmarkId}
+        title={title}
+        description={description}
+        mode={mode}
+      />
       {bookmarkList && (
         <Popover
           id={id}
@@ -118,16 +172,16 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>Ttile</StyledTableCell>
-                    <StyledTableCell>Created On</StyledTableCell>
+                    <StyledTableCell>Modified On</StyledTableCell>
                     <StyledTableCell align="right" width="10%">
-                      <IconButton style={{ padding: 8 }}>
+                      <StyledIconButton style={{ padding: 8 }}>
                         <Edit fontSize="small" />
-                      </IconButton>
+                      </StyledIconButton>
                     </StyledTableCell>
                     <StyledTableCell align="right" width="10%">
-                      <IconButton style={{ padding: 8 }}>
+                      <StyledIconButton style={{ padding: 8 }}>
                         <Delete fontSize="small" />
-                      </IconButton>
+                      </StyledIconButton>
                     </StyledTableCell>
                   </TableRow>
                 </TableHead>
@@ -141,18 +195,26 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                       >
                         {row.title}
                       </TableCell>
-                      <StyledTableCell>{row.createdDate}</StyledTableCell>
+                      <StyledTableCell
+                        onClick={(event) => handleClick(event, row.id)}
+                      >
+                        {new Date(
+                          Math.round((row.modifiedDate - 25569) * 86400 * 1000)
+                        )
+                          .toDateString()
+                          .split(" ")
+                          .slice(1)
+                          .join(" ")}
+                      </StyledTableCell>
                       <StyledTableCell align="right" width="10%">
-                        {/* {row.text} */}
                         <IconButton
                           style={{ padding: 8 }}
-                          onClick={() => setSHowDialog(true)}
+                          onClick={(event) => handleEditBookmark(event, row.id)}
                         >
                           <Edit fontSize="small" />
                         </IconButton>
                       </StyledTableCell>
                       <StyledTableCell align="right" width="10%">
-                        {/* {row.text} */}
                         <IconButton
                           style={{ padding: 8 }}
                           onClick={(event) => deleteBookmark(event, row.id)}
@@ -169,7 +231,7 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
               {/* <Button size="small">Learn More</Button> */}
               <AddCircleIcon
                 fontSize="large"
-                onClick={() => createBookmark()}
+                onClick={handleCreateBookmarkDialog}
               />
             </CardActions>
           </Card>
