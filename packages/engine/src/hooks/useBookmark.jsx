@@ -69,9 +69,11 @@ const useBookmark = (props) => {
     const bookmarks = await getBookmarks();
 
     const bookmarkList = bookmarks.map((d, i) => {
+      //add description
       return {
         id: d.qInfo.qId,
         title: d.qMeta.title,
+        description: d.qMeta.description,
         modifiedDate: d.qData.qBookmark.qUtcModifyTime,
       };
     });
