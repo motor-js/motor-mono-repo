@@ -38,7 +38,6 @@ const TableExampleCompact = () => {
     },
   ];
 
-  
   const {
     dataSet,
     headerGroup,
