@@ -186,8 +186,8 @@ const BookmarComponent = ({ anchorEl, open, handleClose }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {bookmarkList.map((row) => (
-                    <TableRow key={row.id} hover>
+                  {bookmarkList.map((row, id) => (
+                    <TableRow key={id} hover>
                       <TableCell
                         component="th"
                         scope="row"
