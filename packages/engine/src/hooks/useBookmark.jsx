@@ -1,18 +1,14 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
-import { deepMerge } from "../utils/object";
 
 // const initialProps = {
 //   qId: null,
 // };
 
 const useBookmark = (props) => {
-  // const { qId } = deepMerge(initialProps, props);
-
   const { engine, engineError } = useContext(EngineContext) || {};
   const [bookmarks, setBookmarks] = useState(null);
   const [error, setError] = useState(null);
-  // const [currentBookmark, setCurrentBookmark] = useState(null);
 
   const qObject = useRef(null);
 
@@ -69,7 +65,6 @@ const useBookmark = (props) => {
     const bookmarks = await getBookmarks();
 
     const bookmarkList = bookmarks.map((d, i) => {
-      //add description
       return {
         id: d.qInfo.qId,
         title: d.qMeta.title,
@@ -90,7 +85,6 @@ const useBookmark = (props) => {
   };
 
   const createBookmark = async (qTitle, qDescription, qId = null) => {
-    // const qDoc = await engine;
     const bookmarkCreated = await qObject.current.createBookmark({
       qProp: {
         qInfo: {
@@ -119,8 +113,6 @@ const useBookmark = (props) => {
   );
 
   const update = useCallback(async (qObj) => {
-    // setBookmarks(qObject.current);
-
     updateBookmarks();
   }, []);
 
@@ -155,7 +147,6 @@ const useBookmark = (props) => {
     destroyBookmark,
     getBookmark,
     getBookmarkLayout,
-    // currentBookmark,
     updateBookmark,
     error,
   };
