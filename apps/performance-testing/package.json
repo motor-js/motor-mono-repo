@@ -1,11 +1,11 @@
 {
-  "name": "motor-fusioncharts-line-semantic",
+  "name": "motor-fusioncharts-line-semantic-performance-testing",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@motor-js/engine": "^0.1.11",
+    "@motor-js/engine": "^0.1.13",
     "fusioncharts": "^3.17.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",

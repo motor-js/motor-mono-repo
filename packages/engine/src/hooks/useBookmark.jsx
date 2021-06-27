@@ -112,7 +112,7 @@ const useBookmark = (props) => {
     })
   );
 
-  const update = useCallback(async (qObj) => {
+  const update = useCallback(async () => {
     updateBookmarks();
   }, []);
 
@@ -127,9 +127,9 @@ const useBookmark = (props) => {
         qObject.current = qDoc;
 
         qObject.current.on("changed", () => {
-          update(qObject.current);
+          update();
         });
-        update(qObject.current);
+        update();
       } catch (err) {
         if (err.code === -2) {
           setError("Bookmark Not Found");

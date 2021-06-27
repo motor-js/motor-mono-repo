@@ -30,21 +30,13 @@ const LineExampleCompact = () => {
       qLabel: "TransID",
     },
     {
-      qField: '=Count({$<TransID={"<=20000"}>} TransID)',
-      qLabel: "Revenue",
+      qField: '=Count({$<TransID={"<=50000"}>} TransID)',
+      qLabel: "Transactions",
     },
   ];
 
-  const qPage = {
-    qTop: 0,
-    qLeft: 0,
-    qWidth: 2,
-    qHeight: 5000,
-  };
-
   const { dataSet, select } = useData({
     cols,
-    qPage,
   });
 
   const { data, valueKey, nameKey } = dataSet;
