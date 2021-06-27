@@ -10,13 +10,6 @@ import { deepMerge } from "../utils/object";
 
 import { EngineContext } from "../contexts/EngineProvider";
 import {
-  // getMeasureNames,
-  // getMeasureDetails,
-  // getDimensionNames,
-  // getDimensionDetails,
-  // getDatKeyInfo,
-  // getHeader,
-  // getOrder,
   hyperCubeChartTransform,
   multiDimHyperCubeTransform,
 } from "../utils/hyperCubeUtilities";
@@ -62,8 +55,6 @@ function reducer(state, action) {
         nameKey,
         valueKey,
         qListData,
-        // dimensionInfo,
-        // measureInfo,
         dataList,
         dataKeys,
         qLayout,
@@ -154,6 +145,8 @@ const useData = (props) => {
 
   const qPage = useRef(qPageProp);
 
+  // error trapping
+  const [error, setError] = useState();
   // page size
   const [pageSize, setPageSize] = useState(qPage.current.qHeight);
 
@@ -484,12 +477,15 @@ const useData = (props) => {
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
 
   const getData = useCallback(async () => {
-    const qDataPages = await qObject.current.getHyperCubeData(
-      "/qHyperCubeDef",
-      [qPage.current]
-    );
-
-    return qDataPages[0];
+    try {
+      const qDataPages = await qObject.current.getHyperCubeData(
+        "/qHyperCubeDef",
+        [qPage.current]
+      );
+      return qDataPages[0];
+    } catch (error) {
+      setError(error); // from creation or business logic
+    }
   }, []);
 
   const getMultiPageData = useCallback(async (numberOfPages) => {
@@ -498,20 +494,26 @@ const useData = (props) => {
     let qDataPages = null;
     let qMatrix = [];
 
-    for (var i = 0; i < numberOfPages; i++) {
-      qPages = {
-        ...qPages,
-        ...{ qTop: i * 1000 },
-      };
-      qDataPages = await qObjects.getHyperCubeData("/qHyperCubeDef", [qPages]);
+    try {
+      for (var i = 0; i < numberOfPages; i++) {
+        qPages = {
+          ...qPages,
+          ...{ qTop: i * 1000 },
+        };
+        qDataPages = await qObjects.getHyperCubeData("/qHyperCubeDef", [
+          qPages,
+        ]);
 
-      qMatrix.push(...qDataPages[0].qMatrix);
+        qMatrix.push(...qDataPages[0].qMatrix);
+      }
+
+      const qTails = qDataPages[0].qTails;
+      const qArea = qDataPages[0].qArea;
+
+      return { qTails, qMatrix, qArea };
+    } catch (error) {
+      setError(error); // from creation or business logic
     }
-
-    const qTails = qDataPages[0].qTails;
-    const qArea = qDataPages[0].qArea;
-
-    return { qTails, qMatrix, qArea };
   }, []);
 
   const getListsFromData = useCallback(async (i) => {
@@ -561,8 +563,9 @@ const useData = (props) => {
 
   const structureData = useCallback(async (layout, data) => {
     if (
-      layout.qHyperCube.qDimensionInfo.length === 0 &&
-      layout.qHyperCube.qMeasureInfo.length === 0
+      (layout.qHyperCube.qDimensionInfo.length === 0 &&
+        layout.qHyperCube.qMeasureInfo.length === 0) ||
+      !data
     )
       return;
 
@@ -570,7 +573,6 @@ const useData = (props) => {
       layout.qHyperCube.qDimensionInfo.length === 1
         ? hyperCubeChartTransform(data, layout.qHyperCube, cols)
         : multiDimHyperCubeTransform(data, layout.qHyperCube);
-
     return mData;
   }, []);
 
@@ -622,6 +624,7 @@ const useData = (props) => {
 
   const update = useCallback(async () => {
     const _qLayout = await getLayout();
+
     const _qData = await (Math.ceil(_qLayout.qHyperCube.qSize.qcy / pageSize) <=
     1
       ? getData()
