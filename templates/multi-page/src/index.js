@@ -21,6 +21,7 @@ ReactDOM.render(
     loginfontFamily={appSettings.loginfontFamily}
     NotConnectedheader={appSettings.NotConnectedheader}
     NotConnectedBody={appSettings.NotConnectedBody}
+    licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ55lg="
   >
     <Store>
       <NextApp />
