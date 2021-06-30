@@ -1,6 +1,6 @@
 {
   "name": "multi-page-mashup",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "private": true,
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
