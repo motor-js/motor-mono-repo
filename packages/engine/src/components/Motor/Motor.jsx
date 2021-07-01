@@ -30,7 +30,7 @@ function Motor({
 
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
-  const [newEngine, setNewEngine] = useState(() => useEngine(myConfig).then((val) => setNewEngine(val)))
+  const [newEngine, setNewEngine] = useState(() =>  engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig).then((val) => setNewEngine(val)))
   const [validLicense, setValidLicense] = useState(true)
 
   // check license key
@@ -43,8 +43,7 @@ function Motor({
   
   // Old code for connection
   //console.log(newEngine)
-  //const engineFinal = newEngine ? newEngine : { engine: engine, engineError: null, errorCode: null }
-  //const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig);
+  //const newEngine = engine ? { engine: engine, engineError: null, errorCode: null } : useEngine(myConfig).then((val) => val);
   
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('start alarm!'); };
