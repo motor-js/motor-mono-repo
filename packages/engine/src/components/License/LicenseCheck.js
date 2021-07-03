@@ -13,7 +13,7 @@ export function LicenseCheck (userInput) {
 
   var decrypt = CryptoAES.decrypt(userInput, "S@few/M0t0r");
   var input = decrypt.toString(CryptoENC)
-  console.log(input)
+
   //filter license
   var licenseExists = licenses.filter(lic => { return lic == input } );
 

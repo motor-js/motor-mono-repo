@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "lerna run start --parallel",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "pre-release": "lerna publish --dist-tag next"
   }
 }

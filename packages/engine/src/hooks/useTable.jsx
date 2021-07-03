@@ -181,7 +181,7 @@ const useTable = (props) => {
   // page decrement
   const decrementPage = () => {
     if (page == 0) {
-      console.log(pages);
+      //console.log(pages);
       handlePageChange(pages - 1);
     } else {
       const prevPage = page - 1;

@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { getCapabilityAPIs } from "../utils/CapApiUtils/ConnectCapAPI";
 const enigma = require("enigma.js");
 const schema = require("enigma.js/schemas/12.170.2.json");
 const SenseUtilities = require("enigma.js/sense-utilities");
@@ -50,13 +48,9 @@ async function useEngine (config, capabilityAPI) {
     },
   ];
 
- // const [engineError, setEngineError] = useState(false);
-//  const [app, setApp] = useState(null);
-//  const [errorCode, seErrorCode] = useState(null);
-  //const [engine, setEngine] = useState(() => {
-      if (config && config.qcs) {
-        const tenantUri = config.host;
-        const webIntegrationId = config.webIntId;
+  if (config && config.qcs) {
+      const tenantUri = config.host;
+      const webIntegrationId = config.webIntId;
 
         const fetchResult = await fetch(
           `https://${tenantUri}/api/v1/csrf-token`,
@@ -133,9 +127,7 @@ async function useEngine (config, capabilityAPI) {
           return { errorCode: -3 }
         }
       }
- // }, []);
 
- return _doc  //return { engine, engineError, errorCode, app };
 }
 
 export default useEngine;

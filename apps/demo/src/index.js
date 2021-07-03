@@ -1,27 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import NewApp from "./NewApp";
 import reportWebVitals from "./reportWebVitals";
-import { Motor } from "@motor-js/engine";
 import "semantic-ui-css/semantic.min.css";
 
 ReactDOM.render(
-  <Motor
-    config={{
-      //Enter your app config here..
-      host: "motor.eu.qlikcloud.com",
-      secure: true,
-      port: null,
-      prefix: "",
-      appId: "0294cf88-eb02-484a-b315-cf06b45ac347",
-      webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-      qcs: true,
-    }}
-    licenseKey="U2FsdGVkX19swZ0vBtxO7FmgPNwgAgFM6RFUEQi+jAY="
-  >
-    <App />
-  </Motor>,
+    <NewApp />,
   document.getElementById("root")
 );
 
