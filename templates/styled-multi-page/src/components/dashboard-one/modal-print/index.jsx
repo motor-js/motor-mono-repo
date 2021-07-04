@@ -7,7 +7,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-} from "../../ui";
+} from "../..";
 
 const ModalPrint = ({ show, onClose }) => {
   return (

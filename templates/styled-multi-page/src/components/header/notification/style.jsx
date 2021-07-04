@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled, { themeGet } from "../../../styled";
-import { MediaBody } from "../../ui";
+import { MediaBody } from "../..";
 
 export const StyledMediaBody = styled(({ ...rest }) => <MediaBody {...rest} />)`
   margin-left: 15px;

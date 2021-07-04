@@ -1,4 +1,4 @@
-import { Spinner } from "../ui";
+import { Spinner } from "..";
 import { StyledLoader } from "./style";
 
 const Preloader = () => {

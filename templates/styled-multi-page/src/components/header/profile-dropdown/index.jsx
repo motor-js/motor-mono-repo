@@ -8,7 +8,7 @@ import {
   LogOut,
 } from "react-feather";
 
-import { Avatar, AvatarInitial, DropdownToggle, Dropdown } from "../../ui";
+import { Avatar, AvatarInitial, DropdownToggle, Dropdown } from "../..";
 import {
   StyledDropMenu,
   StyledAuthorName,

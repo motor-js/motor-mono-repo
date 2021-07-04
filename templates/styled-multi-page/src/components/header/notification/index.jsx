@@ -1,6 +1,6 @@
 import React from "react";
-import { Media, MediaLeft } from "../../ui";
-import { Avatar, AvatarInitial } from "../../ui";
+import { Media, MediaLeft } from "../..";
+import { Avatar, AvatarInitial } from "../..";
 import { StyledMediaBody, StyledStrong, StyledText, StyledSpan } from "./style";
 
 const Notification = () => {

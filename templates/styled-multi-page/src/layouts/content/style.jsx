@@ -42,23 +42,20 @@ const conentCSS = css`
   ${borderStyle};
 `;
 
-export const StyledContent =
-  styled(
-    ({
-      p,
-      px,
-      py,
-      m,
-      mx,
-      my,
-      mt,
-      borderBottomWidth,
-      $fullHeight,
-      $align,
-      ...rest
-    }) => <div {...rest} />
-  ) <
-  IProps >
-  `
-    ${conentCSS}
+export const StyledContent = styled(
+  ({
+    p,
+    px,
+    py,
+    m,
+    mx,
+    my,
+    mt,
+    borderBottomWidth,
+    $fullHeight,
+    $align,
+    ...rest
+  }) => <div {...rest} />
+)`
+  ${conentCSS}
 `;

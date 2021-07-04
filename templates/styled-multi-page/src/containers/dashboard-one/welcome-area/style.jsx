@@ -1,5 +1,5 @@
 import styled, { device } from "../../../styled";
-import { Button } from "../../../components/ui";
+import { Button } from "../../../components";
 
 export const StyledWelcomeArea = styled.div`
   margin-bottom: 10px;

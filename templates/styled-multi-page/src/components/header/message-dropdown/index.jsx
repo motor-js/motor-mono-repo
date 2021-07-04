@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MessageSquare } from "react-feather";
-import { DropdownToggle, Dropdown } from "../../ui";
+import { DropdownToggle, Dropdown } from "../..";
 import Notification from "../notification";
 import {
   StyledDropMenu,

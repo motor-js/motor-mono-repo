@@ -7,7 +7,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-} from "../../ui";
+} from "../..";
 
 const ModalReport = ({ show, onClose }) => {
   return (

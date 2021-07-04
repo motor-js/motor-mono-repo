@@ -1,5 +1,5 @@
 import styled, { device, themeGet, space } from "../../../styled";
-import { Anchor, DropdownMenu } from "../../ui";
+import { Anchor, DropdownMenu } from "../..";
 
 export const StyledDropMenu = styled(({ ...rest }) => (
   <DropdownMenu {...rest} />

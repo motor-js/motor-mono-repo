@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled, { themeGet, css } from "../../styled";
-import { BreadcrumbItem, Breadcrumb } from "../ui";
+import { BreadcrumbItem, Breadcrumb } from "..";
 
 export const StyledBreadWrap = styled((props) => <Breadcrumb {...props} />)`
   background: transparent;
