@@ -1,3 +1,4 @@
+export { ApexCharts } from "apexcharts";
 export { Anchor } from "./ui/anchor";
 export { Avatar, AvatarInitial } from "./ui/avatar/avatar";
 export { Button } from "./ui/button/button";
@@ -38,3 +39,4 @@ export {
   ModalFooter,
 } from "./ui/modal/modal";
 export { Container, Row, Col } from "./grid/grid";
+export { default as SectionTitle } from "./ui/section-title";

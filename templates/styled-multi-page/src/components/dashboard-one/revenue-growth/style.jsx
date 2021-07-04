@@ -1,10 +1,14 @@
-import styled, { color as colorStyles, themeGet } from "../../../styled";
-import { CardHeader } from "@doar/components";
+import styled, { device, themeGet, color } from "../../../styled";
+import { CardHeader } from "../../../components";
 
 export const StyledHeader = styled(({ ...props }) => <CardHeader {...props} />)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  ${device.medium} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export const StyledList = styled.div`
@@ -12,14 +16,22 @@ export const StyledList = styled.div`
   list-style: none;
   display: flex;
   margin-bottom: 0px;
+  margin-top: 20px;
+  ${device.small} {
+    margin-top: 10px;
+  }
+  ${device.medium} {
+    margin-top: 0px;
+  }
 `;
 
 export const StyledListItem = styled.button`
   display: flex;
   align-items: center;
-  border: none;
+  cursor: pointer;
   padding: 0;
   background: transparent;
+  border: none;
   &.hidden {
     text-decoration: line-through;
   }
@@ -37,7 +49,7 @@ export const StyledBullet = styled.span`
   height: 10px;
   margin-right: 5px;
   width: 10px;
-  ${colorStyles};
+  ${color};
 `;
 
 export const StyledListText = styled.span`
@@ -48,30 +60,35 @@ export const StyledListText = styled.span`
   color: ${themeGet("colors.text3")};
 `;
 
-export const StyledBodyTitle = styled.h4`
-  letter-spacing: -0.5px;
-  font-family: ${themeGet("fonts.rubik")};
+export const StyledCardBodyWrap = styled.div`
+  padding-left: 20px;
+  padding-top: 20px;
+`;
+
+export const StyledCardBodyTitle = styled.h3`
+  margin-bottom: 5px;
   font-weight: 400;
-  margin-bottom: 10px;
+  letter-spacing: -1px;
+  font-family: ${themeGet("fonts.rubik")};
 `;
 
-export const StyledBodyStatus = styled(({ color, ...rest }) => (
-  <small {...rest} />
-))`
-  font-size: 11px;
-  ${colorStyles};
-`;
-
-export const StyledBodyText = styled.p`
+export const StyledCardBodySubtitle = styled.h6`
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 500;
+  font-weight: 600;
+  color: ${themeGet("colors.text2")};
+  margin-bottom: 10px;
+`;
+
+export const StyledCardBodyText = styled.p`
+  font-size: 12px;
   color: ${themeGet("colors.text3")};
+  margin-bottom: 0px;
 `;
 
 export const StyledChart = styled.div`
   position: relative;
-  margin-left: -10px;
-  height: 225px;
+  overflow: hidden;
+  margin: 0 10px 0;
 `;

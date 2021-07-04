@@ -1,5 +1,5 @@
 import styled, { themeGet, color as colorProps } from "../../../styled";
-import { CardHeader, CardBody } from "@doar/components";
+import { CardHeader, CardBody } from "../../../components";
 
 export const StyledCardHeader = styled(({ ...props }) => (
   <CardHeader {...props} />

@@ -1,5 +1,11 @@
-import { Card, Row, Col, ApexBarChart, SectionTitle } from "@doar/components";
-import { RetentionChart } from "@doar/shared/data/dashboard-one";
+import {
+  Card,
+  Row,
+  Col,
+  ApexBarChart,
+  SectionTitle,
+} from "../../../components";
+import { RetentionChart } from "../../data/dashboard-one";
 import {
   StyledCardHeader,
   StyledCardBody,
