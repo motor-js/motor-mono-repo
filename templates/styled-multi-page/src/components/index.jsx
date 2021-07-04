@@ -2,6 +2,29 @@ export { Anchor } from "./ui/anchor";
 export { Avatar, AvatarInitial } from "./ui/avatar/avatar";
 export { Button } from "./ui/button/button";
 export { BreadcrumbItem, Breadcrumb } from "./ui/breadcrumb/breadcrumb";
+export {
+  ApexBarChart,
+  ApexLineChart,
+  ApexAreaChart,
+  ApexPieChart,
+  ApexDonutChart,
+  ApexRadialChart,
+} from "./charts/apexchart/apexchart";
+export {
+  Card,
+  CardImage,
+  CardBody,
+  CardTitle,
+  CardText,
+  CardSubtitle,
+  CardLink,
+  CardHeader,
+  CardFooter,
+  CardImageOverlay,
+  CardGroup,
+  CardDeck,
+  CardColumns,
+} from "./ui/card/card";
 export { DropdownMenu, Dropdown, DropdownToggle } from "./ui/dropdown/dropdown";
 export { Spinner } from "./ui/spinner/spinner";
 export { Media, MediaBody, MediaLeft } from "./ui/media/media";

@@ -1,4 +1,4 @@
-import { Col } from "@doar/components";
+import { Col } from "../../../components";
 import Transaction from "../../../components/dashboard-one/transaction";
 import Customers from "../../../components/dashboard-one/customers";
 import RealTimeSales from "../../../components/dashboard-one/real-time-sales";

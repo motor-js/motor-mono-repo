@@ -1,4 +1,4 @@
-import styled, { space, css } from "@doar/shared/styled";
+import styled, { space, css } from "../../../styled";
 
 export const StyledInputGroup = styled(({ mb, ...rest }) => <div {...rest} />)`
   position: relative;

@@ -1,4 +1,4 @@
-import { Card, CardBody, ApexAreaChart } from "@doar/components";
+import { Card, CardBody, ApexAreaChart } from "../../../components";
 
 import {
   StyledCardTitle,

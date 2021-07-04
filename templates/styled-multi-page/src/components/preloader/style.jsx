@@ -1,4 +1,3 @@
-// import styled from "@doar/shared/styled";
 import styled from "../../styled";
 
 export const StyledLoader = styled.div`

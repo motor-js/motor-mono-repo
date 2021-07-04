@@ -1,4 +1,3 @@
-// import styled, { css, themeGet } from "@doar/shared/styled";
 import styled, { css, themeGet } from "../../../styled";
 
 export const StyledSpinner = styled.div`

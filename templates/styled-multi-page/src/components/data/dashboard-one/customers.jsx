@@ -1,5 +1,5 @@
-import img1 from "../../images/img23.jpg";
-import img2 from "../../images/img16.jpg";
+import img1 from "../../../images/img23.jpg";
+import img2 from "../../../images/img16.jpg";
 
 export const customers = [
   {
