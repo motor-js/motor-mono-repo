@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 
-export default (onClose) => {
+const useClickOutside = (onClose) => {
   const ref = useRef();
   const escapeListener = useCallback(
     (e) => {
@@ -28,3 +28,5 @@ export default (onClose) => {
   }, [escapeListener, clickListener]);
   return ref;
 };
+
+export default useClickOutside;
