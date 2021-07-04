@@ -1,5 +1,5 @@
 import styled, { css, device, themeGet } from "../../../styled";
-import { Button } from "../../button/button";
+import { Button } from "../../ui";
 import { Input } from "../../forms/form-elements";
 import { hexTorgb } from "../../../methods";
 

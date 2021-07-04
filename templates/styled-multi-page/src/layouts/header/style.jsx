@@ -1,5 +1,5 @@
 import styled, { device, themeGet, layout, space, css } from "../../styled";
-import { Button } from "../../components/button/button";
+import { Button } from "../../components/ui";
 
 export const StyledHeader = styled.header`
   position: relative;

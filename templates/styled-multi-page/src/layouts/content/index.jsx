@@ -1,5 +1,4 @@
 import React from "react";
-import { SpaceProps, BorderProps } from "@doar/shared/styled";
 import { Container } from "@doar/components";
 import { StyledContent } from "./style";
 

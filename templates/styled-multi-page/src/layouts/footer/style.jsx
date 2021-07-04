@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled, { themeGet, device } from "../../styled";
-import { Anchor } from "../../components/anchor";
+import { Anchor } from "../../components/ui";
 
 export const StyledFooter = styled.footer`
   font-size: 10px;

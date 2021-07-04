@@ -1,5 +1,5 @@
 import styled, { device, themeGet } from "../../styled";
-import { Anchor } from "../anchor";
+import { Anchor } from "../ui";
 
 export const StyledLogo = styled(({ ...rest }) => <Anchor {...rest} />)`
   font-weight: 700;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Bell } from "react-feather";
-import { DropdownToggle, Dropdown } from "../../dropdown/dropdown";
+import { DropdownToggle, Dropdown } from "../../ui";
 import Notification from "../notification";
 import {
   StyledDropMenu,

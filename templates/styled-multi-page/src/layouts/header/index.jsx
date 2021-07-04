@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { Search, Menu, X, ArrowLeft } from "react-feather";
-import { Button } from "../../components/button/button";
-import { Navbar } from "../../components/navbar/navbar";
+import { Button, Navbar } from "../../components/ui";
 import { menuData } from "../../components/data";
 import MessageDropdown from "../../components/header/message-dropdown";
 import NotificationDropdown from "../../components/header/notification-dropdown";
