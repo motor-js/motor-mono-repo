@@ -14,3 +14,4 @@ export {
   ModalBody,
   ModalFooter,
 } from "./ui/modal/modal";
+export { Container, Row, Col } from "./grid/grid";

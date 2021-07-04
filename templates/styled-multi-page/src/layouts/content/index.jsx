@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "@doar/components";
+import { Container } from "../../components";
 import { StyledContent } from "./style";
 
 const Content = ({ children, className, fullHeight, align, ...restProps }) => {
