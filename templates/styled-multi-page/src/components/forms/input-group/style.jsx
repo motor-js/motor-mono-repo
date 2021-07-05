@@ -29,51 +29,50 @@ export const StyledInputGroup = styled(({ mb, ...rest }) => <div {...rest} />)`
   ${space};
 `;
 
-export const StyledInputGroupWrap =
-  styled(({ mb, ...rest }) => <div {...rest} />) <
-  IWrap >
-  `
-    display: flex;
-    ${({ $dir }) =>
-      $dir === "append" &&
-      css`
-        margin-left: -1px;
-        .input-group-text,
-        .btn {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-        }
-        &:last-child {
-          .input-group-text {
-            &:not(:last-child) {
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-            }
-            & + .input-group-text {
-              margin-left: -1px;
-            }
+export const StyledInputGroupWrap = styled(({ mb, ...rest }) => (
+  <div {...rest} />
+))`
+  display: flex;
+  ${({ $dir }) =>
+    $dir === "append" &&
+    css`
+      margin-left: -1px;
+      .input-group-text,
+      .btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      &:last-child {
+        .input-group-text {
+          &:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+          & + .input-group-text {
+            margin-left: -1px;
           }
         }
-      `}
-    ${({ $dir }) =>
-      $dir === "prepend" &&
-      css`
-        margin-right: -1px;
-        .input-group-text,
-        .btn {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
-        &:first-child {
-          .input-group-text {
-            & + .input-group-text {
-              margin-left: -1px;
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-            }
+      }
+    `}
+  ${({ $dir }) =>
+    $dir === "prepend" &&
+    css`
+      margin-right: -1px;
+      .input-group-text,
+      .btn {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:first-child {
+        .input-group-text {
+          & + .input-group-text {
+            margin-left: -1px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
           }
         }
-      `}
+      }
+    `}
     ${space};
 `;
 

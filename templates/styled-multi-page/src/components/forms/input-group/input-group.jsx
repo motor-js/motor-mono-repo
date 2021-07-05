@@ -1,4 +1,3 @@
-import { FC } from "react";
 import classname from "classnames";
 import {
   StyledInputGroup,
