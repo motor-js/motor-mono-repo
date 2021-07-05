@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Card, Table } from "../../../components";
 import { StyledTheadTR, StyledTD } from "./style";
 

@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { X } from "react-feather";
 import {
   Modal,

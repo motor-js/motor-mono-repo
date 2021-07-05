@@ -1,10 +1,4 @@
-import styled, {
-  themeGet,
-  layout,
-  LayoutProps,
-  typography,
-  TypographyProps,
-} from "../../../styled";
+import styled, { themeGet, layout, typography } from "../../../styled";
 import { CardHeader, Table, Dropdown } from "../../../components";
 
 export const StyledHeader = styled(({ ...rest }) => <CardHeader {...rest} />)`
