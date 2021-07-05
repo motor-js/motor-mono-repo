@@ -72,3 +72,5 @@ export {
   InputGroupText,
 } from "./forms/input-group/input-group";
 export { Progress } from "./ui/progress/progress";
+export { Nav, NavLink, NavDivider } from "./ui/nav/nav";
+export { default as Text } from "./ui/text";
