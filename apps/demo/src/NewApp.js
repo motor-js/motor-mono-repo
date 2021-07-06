@@ -1,6 +1,7 @@
 import { Motor } from "@motor-js/engine";
 import useConnect from "./useConnect";
 import App from "./App";
+import { NebulaConnection } from "@motor-js/nebula";
 
 const NewApp = () => {
 
@@ -22,7 +23,9 @@ const NewApp = () => {
     <>
     { engine && 
       <Motor engine={engine}>
-        <App />
+        <NebulaConnection>
+          <App />
+        </NebulaConnection>
       </Motor>
     }
     </>

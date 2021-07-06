@@ -5,6 +5,7 @@ import NewApp from "./NewApp";
 import reportWebVitals from "./reportWebVitals";
 import "semantic-ui-css/semantic.min.css";
 
+
 ReactDOM.render(
     <NewApp />,
   document.getElementById("root")

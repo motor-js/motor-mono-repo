@@ -8,11 +8,12 @@ const initialState = {
   qData: null,
   listData: null,
   selections: null,
+  selectionsId: null,
 };
 
 function reducer(state, action) {
   const {
-    payload: { qData, listData, selections, qDoc },
+    payload: { qData, listData, selections, selectionsId, qDoc },
     type,
   } = action;
   switch (type) {
@@ -22,6 +23,7 @@ function reducer(state, action) {
         qData,
         listData,
         selections,
+        selectionsId
       };
     case "init":
       return {
@@ -63,7 +65,7 @@ const useList = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { listData, selections } = state;
+  const { listData, selections, selectionsId } = state;
 
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
@@ -142,6 +144,8 @@ const useList = (props) => {
           text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
           number: d[0].qNumber,
           state: d[0].qState,
+          value: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
+          label: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
         });
       });
       return data;
@@ -152,24 +156,40 @@ const useList = (props) => {
     const sel = data.qMatrix.filter((row) => row[0].qState === "S");
     const arr = [];
     sel.map((d) => {
-      const t = d[0].qElemNumber;
-      arr.push(t);
+      arr.push({
+        key: d[0].qElemNumber,
+        text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
+        number: d[0].qNumber,
+        state: d[0].qState,
+        value: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
+        label: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
+      });
     });
     return arr;
-
-    //return data.qMatrix.filter(row => row[0].qState === 'S')
   };
+
+  const getSelectionsId = (data) => {
+    const sel = data.qMatrix.filter((row) => row[0].qState === "S");
+    const arr = [];
+    sel.map((d) => {
+      arr.push(d[0].qElemNumber);
+    });
+    return arr;
+  };
+
 
   const update = useCallback(async () => {
     const _qData = await getData();
     const _listData = await structureData();
     if (_qData && _isMounted.current) {
       const _selections = await getSelections(_qData);
+      const _selId = await getSelectionsId(_qData);
       dispatch({
         type: "update",
         payload: {
           listData: _listData,
           selections: _selections,
+          selectionsId: _selId
         },
       });
     } else if (_isMounted.current) {
@@ -265,7 +285,13 @@ const useList = (props) => {
     acceptListObjectSearch,
     applyPatches,
     selections,
+    selectionsId,
     clearSelections,
+    motorListProps: {
+      clearSelections,
+      selections,
+      select,
+    }
   };
 };
 
