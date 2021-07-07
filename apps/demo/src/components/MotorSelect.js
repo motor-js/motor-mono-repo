@@ -8,11 +8,8 @@ function MotorSelect({
   theme,
   isMulti,
   closeMenuOnSelect,
-  closeMenuOnScroll,
-  escapeClearsValue,
   hideSelectedOptions,
   isSearchable,
-  loadingMessage,
   placeholder
 }) {
 
@@ -28,7 +25,10 @@ function MotorSelect({
     setSelectedValues(selections)
   ),[selections])
   
-  const handleChange = async(options,ac,name) => {
+  const handleChange = async(options,ac) => {
+    console.log(options)
+    console.log(ac)
+
     const removedVal = ac.removedValue
 
     if(ac.action === 'clear') {
@@ -37,6 +37,8 @@ function MotorSelect({
       await select([ac.option.key])
     } else if(selections.includes(removedVal)) {
        await select([removedVal.key])
+    } else if (!isMulti) {
+      await select([options.key], false)
     } else {
       const newSel = await options.filter((el) => !selections.includes(el));
       await select([newSel[0].key])
@@ -52,11 +54,8 @@ function MotorSelect({
       options={listData}
       onChange={handleChange}
       closeMenuOnSelect={closeMenuOnSelect}
-      closeMenuOnScroll={closeMenuOnScroll}
-      escapeClearsValue={escapeClearsValue}
       hideSelectedOptions={hideSelectedOptions}
       isSearchable={isSearchable}
-      loadingMessage={loadingMessage}
       placeholder={placeholder}
     />
   );
