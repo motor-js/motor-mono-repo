@@ -1,15 +1,15 @@
-import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
+import {
+  useCallback,
+  useRef,
+  useReducer,
+  useEffect,
+  useContext,
+  useState,
+} from "react";
 import { deepMerge } from "../utils/object";
 
 import { EngineContext } from "../contexts/EngineProvider";
 import {
-  // getMeasureNames,
-  // getMeasureDetails,
-  // getDimensionNames,
-  // getDimensionDetails,
-  // getDatKeyInfo,
-  // getHeader,
-  // getOrder,
   hyperCubeChartTransform,
   multiDimHyperCubeTransform,
 } from "../utils/hyperCubeUtilities";
@@ -34,8 +34,6 @@ function reducer(state, action) {
       nameKey,
       valueKey,
       qListData,
-      // measureInfo,
-      // dimensionInfo,
       dataList,
       dataKeys,
       qRData,
@@ -57,8 +55,6 @@ function reducer(state, action) {
         nameKey,
         valueKey,
         qListData,
-        // dimensionInfo,
-        // measureInfo,
         dataList,
         dataKeys,
         qLayout,
@@ -136,8 +132,6 @@ const useData = (props) => {
     nameKey,
     valueKey,
     qListData,
-    // dimensionInfo,
-    // measureInfo,
     dataList,
     dataKeys,
     qRData,
@@ -150,6 +144,11 @@ const useData = (props) => {
   const qObject = useRef(null);
 
   const qPage = useRef(qPageProp);
+
+  // error trapping
+  const [error, setError] = useState();
+  // page size
+  const [pageSize, setPageSize] = useState(qPage.current.qHeight);
 
   // Build qOtherTotalSpec object
   let totalSpec;
@@ -307,22 +306,6 @@ const useData = (props) => {
                   ? qOtherTotalSpec.qOtherLabel
                   : "Others",
               qAttributeExpressions,
-              // qAttributeExpressions: [
-              //   {
-              //     // chart fill color
-              //     qExpression: col.qFillStyle,
-              //     qLibraryId: "",
-              //     qAttribute: false,
-              //     id: "fill",
-              //   },
-              //   {
-              //     // chart stroke width
-              //     qExpression: col.qStroke,
-              //     qLibraryId: "",
-              //     qAttribute: false,
-              //     id: "stroke",
-              //   },
-              // ],
               qNullSuppression: col.qNullSuppression
                 ? col.qNullSuppression
                 : true,
@@ -353,22 +336,6 @@ const useData = (props) => {
                   ? qOtherTotalSpec.qOtherLabel
                   : "Others",
               qAttributeExpressions,
-              // qAttributeExpressions: [
-              //   {
-              //     // chart fill color
-              //     qExpression: col.qFillStyle,
-              //     qLibraryId: "",
-              //     qAttribute: false,
-              //     id: "fill",
-              //   },
-              //   {
-              //     // chart stroke width
-              //     qExpression: col.qStroke,
-              //     qLibraryId: "",
-              //     qAttribute: false,
-              //     id: "stroke",
-              //   },
-              // ],
               qNullSuppression: col.qNullSuppression
                 ? col.qNullSuppression
                 : true,
@@ -476,27 +443,6 @@ const useData = (props) => {
                 qSuppressMissing,
               },
               qAttributeExpressions,
-              // qAttributeExpressions: [
-              //   {
-              //     // chart fill color
-              //     qExpression: col.qFillStyle,
-              //     qLibraryId: "",
-              //     qAttribute: false,
-              //     id: "fill",
-              //   },
-              //   {
-              //     // chart stroke width
-              //     qExpression: col.qStroke,
-              //     qLibraryId: "",
-              //     qAttribute: false,
-              //     id: "stroke",
-              //   },
-              // ],
-              // qChartType: col.qChartType,
-              // qShowPoints: col.qShowPoints,
-              // qCurve: col.qCurve,
-              // qFillStyle: col.qFillStyle,
-              // qLegendShape: col.qLegendShape,
             };
           }
 
@@ -531,12 +477,43 @@ const useData = (props) => {
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
 
   const getData = useCallback(async () => {
-    const qDataPages = await qObject.current.getHyperCubeData(
-      "/qHyperCubeDef",
-      [qPage.current]
-    );
+    try {
+      const qDataPages = await qObject.current.getHyperCubeData(
+        "/qHyperCubeDef",
+        [qPage.current]
+      );
+      return qDataPages[0];
+    } catch (error) {
+      setError(error); // from creation or business logic
+    }
+  }, []);
 
-    return qDataPages[0];
+  const getMultiPageData = useCallback(async (numberOfPages) => {
+    const qObjects = qObject.current;
+    let qPages = qPage.current;
+    let qDataPages = null;
+    let qMatrix = [];
+
+    try {
+      for (var i = 0; i < numberOfPages; i++) {
+        qPages = {
+          ...qPages,
+          ...{ qTop: i * 1000 },
+        };
+        qDataPages = await qObjects.getHyperCubeData("/qHyperCubeDef", [
+          qPages,
+        ]);
+
+        qMatrix.push(...qDataPages[0].qMatrix);
+      }
+
+      const qTails = qDataPages[0].qTails;
+      const qArea = qDataPages[0].qArea;
+
+      return { qTails, qMatrix, qArea };
+    } catch (error) {
+      setError(error); // from creation or business logic
+    }
   }, []);
 
   const getListsFromData = useCallback(async (i) => {
@@ -586,8 +563,9 @@ const useData = (props) => {
 
   const structureData = useCallback(async (layout, data) => {
     if (
-      layout.qHyperCube.qDimensionInfo.length === 0 &&
-      layout.qHyperCube.qMeasureInfo.length === 0
+      (layout.qHyperCube.qDimensionInfo.length === 0 &&
+        layout.qHyperCube.qMeasureInfo.length === 0) ||
+      !data
     )
       return;
 
@@ -595,7 +573,6 @@ const useData = (props) => {
       layout.qHyperCube.qDimensionInfo.length === 1
         ? hyperCubeChartTransform(data, layout.qHyperCube, cols)
         : multiDimHyperCubeTransform(data, layout.qHyperCube);
-
     return mData;
   }, []);
 
@@ -645,99 +622,78 @@ const useData = (props) => {
     return metricObj;
   }, []);
 
-  const update = useCallback(
-    async (measureInfo) => {
-      const _qLayout = await getLayout();
-      const _qData = await getData();
+  const update = useCallback(async () => {
+    const _qLayout = await getLayout();
 
-      const _qListData = await getListData(_qLayout);
-      const _mData = await structureData(_qLayout, _qData);
+    const _qData = await (Math.ceil(_qLayout.qHyperCube.qSize.qcy / pageSize) <=
+    1
+      ? getData()
+      : getMultiPageData(Math.ceil(_qLayout.qHyperCube.qSize.qcy / pageSize)));
 
-      // const _measureDetails = await getMeasureInfo(_qLayout);
-      // const _dimensionDetails = await getDimensionInfo(_qLayout);
-      const _nameKey = await getNameKey(_qLayout);
-      const _valueKey = await getValueKey(_qLayout);
-      const _dataList = await getDataKeyList(_qListData, _qLayout);
+    const _qListData = await getListData(_qLayout);
+    const _mData = await structureData(_qLayout, _qData);
 
-      const _dataKeys = await getDataKeys(
-        _dataList,
-        _qLayout.qHyperCube.qMeasureInfo
-      );
+    const _nameKey = await getNameKey(_qLayout);
+    const _valueKey = await getValueKey(_qLayout);
+    const _dataList = await getDataKeyList(_qListData, _qLayout);
 
-      const _qTitle = await getTitle(_qLayout);
-      const _qSubTitle = qSubTitle;
+    const _dataKeys = await getDataKeys(
+      _dataList,
+      _qLayout.qHyperCube.qMeasureInfo
+    );
 
-      const _qMetrics = await getMetrics(_qLayout, qMetrics);
-      if (_qData && _isMounted.current) {
-        const _selections = _qData.qMatrix.filter(
-          (row) => row[0].qState === "S"
-        );
+    const _qTitle = await getTitle(_qLayout);
+    const _qSubTitle = qSubTitle;
 
-        // if (measureInfo) {
-        //   console.log("d", measureInfo);
-        //   measureInfo.map((d, i) => {
-        //     if (_qLayout.qHyperCube.qMeasureInfo[i]) {
-        //     _qLayout.qHyperCube.qMeasureInfo[i].qChartType = "bar";
-        //     _measureDetails[i] = "bar";
-        //     _qLayout.qHyperCube.qMeasureInfo[i].qShowPoints = d.qShowPoints;
-        //     _qLayout.qHyperCube.qMeasureInfo[i].qCurve = d.qCurve;
-        //     _qLayout.qHyperCube.qMeasureInfo[i].qFillStyle = d.qFillStyle;
-        //     _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape = d.qLegendShape;
-        //     // _qLayout.qHyperCube.qMeasureInfo[i].qLegendShape =
-        //     //   d.qLegendShape === "dashed" ? "5,2" : null;
-        //     }
-        //   });
-        // }
+    const _qMetrics = await getMetrics(_qLayout, qMetrics);
+    if (_qData && _isMounted.current) {
+      const _selections = _qData.qMatrix.filter((row) => row[0].qState === "S");
 
+      dispatch({
+        type: "update",
+        payload: {
+          title: _qTitle,
+          subTitle: _qSubTitle,
+          qData: _qData,
+          mData: _mData,
+          nameKey: _nameKey,
+          valueKey: _valueKey,
+          qListData: _qListData,
+          dataList: _dataList,
+          dataKeys: _dataKeys,
+          metrics: _qMetrics,
+          qLayout: _qLayout,
+          selections: _selections,
+        },
+      });
+    } else if (_isMounted.current) {
+      dispatch({
+        type: "update",
+        payload: {
+          title: _qTitle,
+          subTitle: _qSubTitle,
+          metrics: _qMetrics,
+          qData: _qData,
+          mData: _mData,
+          nameKey: _nameKey,
+          valueKey: _valueKey,
+          qListData: _qListData,
+          dataList: _dataList,
+          dataKeys: _dataKeys,
+          qLayout: _qLayout,
+        },
+      });
+    }
+    if (getQRData) {
+      const _qRData = await getReducedData();
+      if (_isMounted.current) {
         dispatch({
-          type: "update",
-          payload: {
-            title: _qTitle,
-            subTitle: _qSubTitle,
-            qData: _qData,
-            mData: _mData,
-            nameKey: _nameKey,
-            valueKey: _valueKey,
-            qListData: _qListData,
-            // dimensionInfo: _dimensionDetails,
-            // measureInfo: _measureDetails,
-            dataList: _dataList,
-            dataKeys: _dataKeys,
-            metrics: _qMetrics,
-            qLayout: _qLayout,
-            selections: _selections,
-          },
-        });
-      } else if (_isMounted.current) {
-        dispatch({
-          type: "update",
-          payload: {
-            title: _qTitle,
-            subTitle: _qSubTitle,
-            metrics: _qMetrics,
-            qData: _qData,
-            mData: _mData,
-            nameKey: _nameKey,
-            valueKey: _valueKey,
-            qListData: _qListData,
-            dataList: _dataList,
-            dataKeys: _dataKeys,
-            qLayout: _qLayout,
-          },
+          type: "updateReducedData",
+          payload: { qRData: _qRData },
         });
       }
-      if (getQRData) {
-        const _qRData = await getReducedData();
-        if (_isMounted.current) {
-          dispatch({
-            type: "updateReducedData",
-            payload: { qRData: _qRData },
-          });
-        }
-      }
-    },
-    [getData, getLayout, getQRData, getReducedData]
-  );
+    }
+  }, [getData, getLayout, getQRData, getReducedData]);
 
   const changePage = useCallback(
     (newPage) => {
@@ -855,8 +811,6 @@ const useData = (props) => {
     qData,
     mData,
     qListData,
-    // dimensionInfo,
-    // measureInfo,
     dataList,
     handlerChange,
     dataKeys,

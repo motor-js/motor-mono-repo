@@ -131,6 +131,9 @@ const useTable = (props) => {
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
 
+  // error trapping
+  const [error, setError] = useState();
+
   //======================
   // PAGING LOGIC
 
@@ -251,11 +254,15 @@ const useTable = (props) => {
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
 
   const getData = useCallback(async () => {
-    const qDataPages = await qObject.current.getHyperCubeData(
-      "/qHyperCubeDef",
-      [qPage.current]
-    );
-    return qDataPages[0];
+    try {
+      const qDataPages = await qObject.current.getHyperCubeData(
+        "/qHyperCubeDef",
+        [qPage.current]
+      );
+      return qDataPages[0];
+    } catch (error) {
+      setError(error); // from creation or business logic
+    }
   }, []);
 
   const getTitle = useCallback(async (layout) => {
@@ -298,7 +305,7 @@ const useTable = (props) => {
   const update = useCallback(async () => {
     const _qLayout = await getLayout();
     const _qTitle = await getTitle(_qLayout);
-    const _qValid = await validData(_qLayout, engine)
+    const _qValid = await validData(_qLayout, engine);
     const _qData = await getData();
 
     // Order colunns for dataKey
@@ -382,7 +389,7 @@ const useTable = (props) => {
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
     async (column) => {
-    // If no sort is set, we need to set a default sort order
+      // If no sort is set, we need to set a default sort order
       if (column.qSortIndicator === "N") {
         if (column.qPath.includes("qDimensions")) {
           await applyPatches([

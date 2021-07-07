@@ -1,0 +1,66 @@
+import {
+  Card,
+  Row,
+  Col,
+  ApexBarChart,
+  SectionTitle,
+} from "../../../components";
+import { RetentionChart } from "../../data/dashboard-one";
+import {
+  StyledCardHeader,
+  StyledCardBody,
+  StyledCardBodyTitle,
+  StyledCardBodySubtitle,
+  StyledCardBodyText,
+  StyledChart,
+} from "./style";
+
+const AccountRetention = () => {
+  return (
+    <Card>
+      <StyledCardHeader>
+        <SectionTitle
+          title="Account Retention"
+          desc="Number of customers who have active subscription with you."
+          descProps={{ fontSize: "12px" }}
+        />
+      </StyledCardHeader>
+      <StyledCardBody>
+        <StyledChart>
+          <ApexBarChart
+            series={RetentionChart.series}
+            options={RetentionChart.options}
+            width="100%"
+            height={282}
+          />
+        </StyledChart>
+        <Row>
+          <Col col={12} sm>
+            <StyledCardBodyTitle>
+              $1,680<small>.50</small>
+            </StyledCardBodyTitle>
+            <StyledCardBodySubtitle color="primary">
+              Expansions
+            </StyledCardBodySubtitle>
+            <StyledCardBodyText>
+              Customers who have upgraded the level of your products or service.
+            </StyledCardBodyText>
+          </Col>
+          <Col col={12} sm mt={["20px", "0px"]}>
+            <StyledCardBodyTitle>
+              $1,520<small>.00</small>
+            </StyledCardBodyTitle>
+            <StyledCardBodySubtitle color="pink">
+              Cancellations
+            </StyledCardBodySubtitle>
+            <StyledCardBodyText>
+              Customers who have ended their subscription with you.
+            </StyledCardBodyText>
+          </Col>
+        </Row>
+      </StyledCardBody>
+    </Card>
+  );
+};
+
+export default AccountRetention;
