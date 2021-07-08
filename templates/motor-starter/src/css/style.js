@@ -1,13 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { device, theme } from "../styled";
 
-import { IbmFontSans, InterUi, Rubik, FontAwesome } from "../fonts";
-
 const GlobalStyle = createGlobalStyle`
-    ${IbmFontSans};
-    ${InterUi};
-    ${Rubik};
-	${FontAwesome};
     * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;

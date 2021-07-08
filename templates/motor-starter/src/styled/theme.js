@@ -2,7 +2,7 @@ const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
 
 export const theme = {
     colors: {
-        primary: "#0168fa",
+        primary: "#EF6E71" /*#0168fa"*/,
         secondary: "#5f6d88",
         success: "#10b759",
         info: "#00b8d4",
@@ -66,8 +66,8 @@ export const theme = {
         h6: ["0.875rem", "0.875rem"],
     },
     fonts: {
-        body: `'IBM Plex Sans', sans-serif`,
-        heading: `'IBM Plex Sans', sans-serif`,
+        body: `'Roboto', sans-serif`,
+        heading: `'Roboto', sans-serif`,
         interUi: `-apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif`,
         rubik: `'Rubik', sans-serif`,
     },
