@@ -4,12 +4,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, theme } from "./styled";
 import { GlobalStyle } from "./css";
+import Store from '../src/store'
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <App />
-  </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
   ,
   document.getElementById('root')
 );

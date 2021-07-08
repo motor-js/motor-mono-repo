@@ -12,9 +12,9 @@ const WelcomeArea = () => {
       <StyledWelcomeArea>
         <StyledWelcomeLeft>
           <Breadcrumb
-            prev={[{ text: "Dashboard", link: "/" }]}
-            title="Website Analytics"
-            wcText="Welcome To Dashboard"
+            prev={[{ text: "Group 1", link: "/" }]}
+            title="Dashboard 2"
+            wcText="Welcome"
           />
         </StyledWelcomeLeft>
         <StyledWelcomeRight>

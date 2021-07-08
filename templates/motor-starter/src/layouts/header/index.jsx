@@ -1,8 +1,9 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useContext } from "react";
 import { Search, Menu, X, ArrowLeft } from "react-feather";
 import { Button, Navbar } from "../../components";
 import { menuData } from "../../components/data";
 import Logo from "../../components/logo";
+import NavSearch from "../../components/header/nav-search";
 
 /*
 import MessageDropdown from "../../components/header/message-dropdown";
@@ -31,113 +32,26 @@ import {
 
 const Header = ({ /*hasSidebar, sidebarLayout  */}) => {
 
-  const hasSidebar = false;
-
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const menuHandler = useCallback(() => {
-    setMenuOpen((prev) => !prev);
-    if (menuOpen) {
-      sidebarHandler(undefined, "open");
-    }
-  }, [menuOpen, /*sidebarHandler*/]);
-
-
-  const sidebarHandler = () => sidebarDispatch({
-    type: "TOGGLE_SIDEBAR",
-    payload: sidebarState === "open" ? "close" : "open",
-  });
-
-
-  /*const { sidebar, isBody } = useAppSelector((state) => state.ui);
   const [searchOpen, setSearchOpen] = useState(false);
+
   const searchHandler = useCallback(() => {
     setSearchOpen((prev) => !prev);
   }, []);
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const sidebarHandler = useCallback(
-    (_, isOpen = "open") => {
-      dispatch(toggleSidebar({ isOpen }));
-    },
-    [dispatch]
-  );
-
-  const bodyHandler = useCallback(() => {
-    dispatch(toggleBody());
-    dispatch(toggleSidebar({ isOpen: "open" }));
-  }, [dispatch]);
-
   const menuHandler = useCallback(() => {
     setMenuOpen((prev) => !prev);
-    if (menuOpen) {
-      sidebarHandler(undefined, "open");
-    }
-  }, [menuOpen, sidebarHandler]);
+  }, [menuOpen]);
 
-  useEffect(() => {
-    return () => {
-      sidebarHandler(undefined, "open");
-      bodyHandler();
-    };
-  }, [sidebarHandler, bodyHandler]);
-*/
   return (
     <>
-      <StyledHeader>
-        {/* 
-        {hasSidebar && sidebarLayout === 1 && (
-          <>
-            <StyledMenuBtn
-              variant="texted"
-              onClick={menuHandler}
-              $hasSidebar={hasSidebar}
-              $sidebarOpen={sidebar}
-              $bodyOpen={isBody}
-              className="menu-btn"
-            >
-              <Menu size={20} strokeWidth="2.5px" />
-            </StyledMenuBtn>
-            <StyledSidebarBtn
-              variant="texted"
-              onClick={!isBody ? sidebarHandler : bodyHandler}
-              $sidebarOpen={sidebar}
-              $bodyOpen={isBody}
-              className="sidebar-btn"
-            >
-              <ArrowLeft size={20} strokeWidth="2.5px" />
-            </StyledSidebarBtn>
-          </>
-        )}
-        {hasSidebar && sidebarLayout === 2 && (
-          <>
-            <StyledMenuBtn
-              variant="texted"
-              onClick={menuHandler}
-              $hasSidebar={hasSidebar}
-              $sidebarOpen={!sidebar}
-            >
-              <Menu size={20} strokeWidth="2.5px" />
-            </StyledMenuBtn>
-            <StyledSidebarBtn
-              variant="texted"
-              onClick={sidebarHandler}
-              $sidebarOpen={!sidebar}
-            >
-              <ArrowLeft size={20} strokeWidth="2.5px" />
-            </StyledSidebarBtn>
-          </>
-        )} */}
-        {!hasSidebar && (
+      <StyledHeader> 
           <StyledMenuBtn
             variant="texted"
             onClick={menuHandler}
-            $hasSidebar={hasSidebar}
-           // $sidebarOpen={!sidebar}
           >
             <Menu size={20} strokeWidth="2.5px" />
           </StyledMenuBtn>
-        )}
         <StyledLogo>
           <Logo />
         </StyledLogo>
@@ -166,7 +80,7 @@ const Header = ({ /*hasSidebar, sidebarLayout  */}) => {
           </StyledNavbarElement>
         </StyleNavbarRight>
       </StyledHeader>
-    {/*  <NavSearch isOpen={searchOpen} onClose={searchHandler} /> */}
+      <NavSearch isOpen={searchOpen} onClose={searchHandler} />
     </>
   );
 };

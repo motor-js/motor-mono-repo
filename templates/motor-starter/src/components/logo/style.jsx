@@ -1,21 +1,9 @@
 import styled, { device, themeGet } from "../../styled";
-import { Anchor } from "..";
 
-export const StyledLogo = styled(({ ...rest }) => <Anchor {...rest} />)`
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: -1px;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  position: relative;
-  color: ${themeGet("colors.gulf")};
-  margin-top: -4px;
-  span {
-    display: inline-block;
-    font-weight: 400;
-    color: ${themeGet("colors.primary")};
-  }
+export const StyledLogo = styled.img`
+  height: 40px;
+  width: 125px;
+  margin-top: 0px;
   ${device.small} {
     font-size: 22px;
   }

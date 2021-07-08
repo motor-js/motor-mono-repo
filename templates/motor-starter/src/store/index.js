@@ -1,51 +1,22 @@
 import React, { createContext, useReducer } from "react";
-import ThemeReducer from "reducers/theme";
-import LayoutReducer from "reducers/layout";
-import NavReducer from "reducers/nav";
-import { appSettings } from "settings";
+import SidebarReducer from "../reducers/sidebar";
 
-const { theme, layout, nav } = appSettings;
-
-const initialThemeState = {
-  theme,
-};
-
-const initialLayoutState = {
-  layout,
-};
-
-const initialNavState = {
-  nav,
+const initialSidebarState = {
+  sidebar: 'open',
 };
 
 const Store = ({ children }) => {
-  const [themeState, themeDispatch] = useReducer(
-    ThemeReducer,
-    initialThemeState
-  );
-
-  const [layoutState, layoutDispatch] = useReducer(
-    LayoutReducer,
-    initialLayoutState
-  );
-
-  const [navState, navDispatch] = useReducer(
-    NavReducer,
-    initialNavState
+  const [sidebarState, sidebarDispatch] = useReducer(
+    SidebarReducer,
+    initialSidebarState
   );
 
   return (
-    <ThemeContext.Provider value={[themeState, themeDispatch]}>
-      <LayoutContext.Provider value={[layoutState, layoutDispatch]}>
-        <NavContext.Provider value={[navState, navDispatch]}>
+    <SidebarContext.Provider value={[sidebarState, sidebarDispatch]}>
           {children}
-        </NavContext.Provider>
-      </LayoutContext.Provider>
-    </ThemeContext.Provider>
+    </SidebarContext.Provider>
   );
 };
 
-export const ThemeContext = createContext(initialThemeState);
-export const LayoutContext = createContext(initialLayoutState);
-export const NavContext = createContext(initialNavState);
+export const SidebarContext = createContext(initialSidebarState);
 export default Store;

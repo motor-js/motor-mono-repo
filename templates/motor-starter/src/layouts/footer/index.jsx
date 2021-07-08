@@ -1,5 +1,4 @@
 import React from "react";
-import { Heart } from "react-feather";
 import {
   StyledFooter,
   StyledFooterLeft,
@@ -13,6 +12,9 @@ const Footer = () => {
     <StyledFooter>
       <StyledFooterRight>
         <StyledFooterNav>
+          <StyledFotterNavLink path="https://docs.motor.so">
+            View Docs
+          </StyledFotterNavLink>
           <StyledFotterNavLink path="https://www.motor.so/contact">
             Get Help
           </StyledFotterNavLink>
