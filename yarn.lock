@@ -2500,18 +2500,6 @@
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
 
-"@motor-js/engine@^0.1.13":
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/@motor-js/engine/-/engine-0.1.13.tgz#3eb8fd195eb25b2c9c1f4c5ec6367e983191a7f7"
-  integrity sha512-ib/seIVI12i6/pz2T+A2qLsOY7g+hbhJw3Un23GATKRK16nK3mrtoMhkHP+RVScoSw/z3+AVIcjeGKM8O1MR7g==
-  dependencies:
-    crypto-js "^3.3.0"
-    enigma.js "^2.6.3"
-    prop-types "^15.7.2"
-    react "^17.0.1"
-    react-dom "^17.0.1"
-    react-watermark-component "^2.2.1"
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

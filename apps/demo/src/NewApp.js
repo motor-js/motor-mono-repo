@@ -17,7 +17,7 @@ const NewApp = () => {
   }
 
   const { engine } = useConnect({config})
-  console.log(engine)
+
 
   return (
     <>

@@ -5,6 +5,7 @@ import { useList } from "@motor-js/engine"
 import { NebulaContainer } from '@motor-js/nebula'
 import MotorSelect from "./components/MotorSelect"
 import { dark, light } from "./themes/theme.js"
+import { EngineContext } from "@motor-js/engine"
 
 export default function App() {
 
@@ -27,16 +28,11 @@ export default function App() {
 
 
   return (
-    <div className="App" style={{ padding: "10px", backgroundColor: 'black' }}>
-          <NebulaContainer 
-      render={{
-        id: '934a6a81-3ae1-432a-be51-199f634ffadb',
-      }}
-      styles={{
-        width: '80%',
-        height: 400,
-        paddingTop: 50,
-      }}
+    <div className="App" style={{ padding: "10px" }}>
+      test
+    <NebulaContainer  
+      render={{ id: 'jVfmGat' }}
+      styles={{ width: '80%', height: 400, paddingTop: 50}}
     />
       {/*<MotorSelect 
         listData={listData}
