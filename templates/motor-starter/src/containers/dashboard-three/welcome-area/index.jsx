@@ -4,6 +4,7 @@ import {
   StyledWelcomeLeft,
   StyledWelcomeRight,
 } from "./style";
+import { Button } from "../../../components";
 
 const WelcomeArea = () => {
 
@@ -12,12 +13,14 @@ const WelcomeArea = () => {
       <StyledWelcomeArea>
         <StyledWelcomeLeft>
           <Breadcrumb
-            prev={[{ text: "Group 1", link: "/" }]}
-            title="Dashboard 1"
+            prev={[{ text: "Group 2", link: "/dashboard-three" }]}
+            title="Dashboard 3"
             wcText="Welcome"
           />
         </StyledWelcomeLeft>
         <StyledWelcomeRight>
+          <Button mr={2}>Button</Button>
+          <Button ml={2}>Button</Button>
         </StyledWelcomeRight>
       </StyledWelcomeArea>
     </>

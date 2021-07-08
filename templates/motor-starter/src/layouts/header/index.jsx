@@ -3,7 +3,7 @@ import { Search, Menu, X, ArrowLeft } from "react-feather";
 import { Button, Navbar } from "../../components";
 import { menuData } from "../../components/data";
 import Logo from "../../components/logo";
-import NavSearch from "../../components/header/nav-search";
+import SearchBar from "../../components/search-bar";
 
 /*
 import MessageDropdown from "../../components/header/message-dropdown";
@@ -80,7 +80,7 @@ const Header = ({ /*hasSidebar, sidebarLayout  */}) => {
           </StyledNavbarElement>
         </StyleNavbarRight>
       </StyledHeader>
-      <NavSearch isOpen={searchOpen} onClose={searchHandler} />
+      <SearchBar isOpen={searchOpen} onClose={searchHandler} />
     </>
   );
 };

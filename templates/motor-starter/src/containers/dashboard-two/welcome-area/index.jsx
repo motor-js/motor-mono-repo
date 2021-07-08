@@ -18,7 +18,6 @@ const WelcomeArea = () => {
           />
         </StyledWelcomeLeft>
         <StyledWelcomeRight>
-          Hi
         </StyledWelcomeRight>
       </StyledWelcomeArea>
     </>

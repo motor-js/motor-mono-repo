@@ -6,7 +6,7 @@ import { NebulaContext } from '../../contexts/NebulaProvider'
 const NebulaConnection = ({ children }) => {
   
   const [nebula, setNebula] = useState(null);
-  const { engine } = useContext(EngineContext)
+  const { engine } = useContext(EngineContext) || {}
 
   const init = async () => {
     const _nebula = await nebulaPromise();

@@ -88,6 +88,12 @@ export const StyledCard = styled(
       background-color: ${themeGet("colors.info")};
       ${colorCSS};
     `}
+    ${(props) =>
+      props.$color === "light" &&
+      css`
+        background-color: ${themeGet("colors.gray50")};
+        ${colorCSS};
+      `}
     ${layout};
   ${space};
 `;

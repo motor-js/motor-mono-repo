@@ -3,7 +3,7 @@
   "version": "0.4.2",
   "private": true,
   "dependencies": {
-    "@motor-js/engine": "^0.2.2",
+    "@motor-js/engine": "^0.1.13",
     "@motor-js/nebula": "^0.0.14",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

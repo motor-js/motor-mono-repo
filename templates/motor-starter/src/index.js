@@ -4,13 +4,29 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, theme } from "./styled";
 import { GlobalStyle } from "./css";
-import Store from '../src/store'
+import { Motor } from '@motor-js/engine'
+import { appSettings, qlikConfig } from "./settings"
 
-ReactDOM.render(
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <App />
-    </ThemeProvider>
+  ReactDOM.render(
+    <Motor 
+      config={qlikConfig}
+      logo={appSettings.logo}
+      logoHeight={appSettings.logoHeight}
+      logoWidth={appSettings.logoWidth}
+      buttonColor={appSettings.buttonColor}
+      buttonFontColor={appSettings.buttonFontColor}
+      body={appSettings.body}
+      bodySub={appSettings.bodySub}
+      loginfontFamily={appSettings.loginfontFamily}
+      NotConnectedheader={appSettings.NotConnectedheader}
+      NotConnectedBody={appSettings.NotConnectedBody}
+      licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ55lg="
+    >
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </Motor>
   ,
   document.getElementById('root')
 );

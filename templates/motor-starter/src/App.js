@@ -4,6 +4,7 @@ import Preloader from "./components/preloader";
 
 const DashboardOne = lazy(() => import("./pages/dashboard-one"));
 const DashboardTwo = lazy(() => import("./pages/dashboard-two"));
+const DashboardThree = lazy(() => import("./pages/dashboard-three"));
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={DashboardOne} />
           <Route exact path="/dashboard-two" component={DashboardTwo} />
+          <Route exact path="/dashboard-three" component={DashboardThree} />
         </Switch>
       </Suspense>
     </Router>
