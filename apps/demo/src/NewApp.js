@@ -17,8 +17,6 @@ const NewApp = () => {
   }
 
   const { engine } = useConnect({config})
-
-
   return (
     <>
     { engine && 
@@ -30,7 +28,6 @@ const NewApp = () => {
     }
     </>
   )
-
 }
 
 export default NewApp

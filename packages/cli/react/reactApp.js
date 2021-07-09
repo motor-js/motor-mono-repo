@@ -128,11 +128,13 @@ const addTemplates = configList => {
   
   basicAdd.runActions({name: 'add'}).then(function (results) {
     // do something after the actions have run
+    console.log('results: ',results)
+
+    spinner.succeed();
+    resolve();
   });
 
-  
-  spinner.succeed();
-  resolve();
+
 
 /*
   const templateList = configList.reduce(
@@ -179,7 +181,7 @@ exports.create = async (appName, appDirectory) => {
   await commitGit();
 
   console.log(
-    `Your React Motor Mashup has been created 🎉.cd into ${appName} to get started.`.brightGreen
+    `Your React Motor Mashup has been created 🎉.  cd into ${appName} to get started.`.brightGreen
   );
 
   return true;
