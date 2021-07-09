@@ -1,4 +1,4 @@
-
+module.exports = `
 import React from "react";
 import { StyledBreadItem, StyledBreadWrap, PageHeading } from "./style";
 
@@ -19,3 +19,4 @@ const Breadcrumb = ({ prev, title, wcText }) => {
 };
 
 export default Breadcrumb;
+`
