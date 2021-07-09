@@ -1,0 +1,22 @@
+{
+  "name": "motor-cli",
+  "version": "0.0.1",
+  "description": "Motor cli tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "plop": "plop"
+  },
+  "keywords": [
+    "qlik",
+    "sense",
+    "mashups",
+    "generator",
+    "node"
+  ],
+  "author": "Motor",
+  "license": "ISC",
+  "dependencies": {
+    "plop": "^2.7.4"
+  }
+}

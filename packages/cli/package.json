@@ -16,8 +16,16 @@
   "dependencies": {
     "@motor-js/engine": "^0.2.2",
     "@motor-js/nebula": "^0.1.0",
+    "colors": "^1.4.0",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.1",
-    "ora": "^5.4.1"
+    "lodash.set": "^4.3.2",
+    "node-dir": "^0.1.17",
+    "node-plop": "^0.26.2",
+    "ora": "^5.4.1",
+    "shelljs": "^0.8.4"
+  },
+  "devDependencies": {
+    "plop": "^2.7.4"
   }
 }
