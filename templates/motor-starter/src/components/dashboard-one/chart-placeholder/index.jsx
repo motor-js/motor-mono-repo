@@ -10,7 +10,7 @@ const Chart = () => {
     <Card color='light'>
       <CardBody>
         <StyledCardTitle>{'PLACEHOLDER'}</StyledCardTitle>
-        <StyledCardBottom style={{ height: '200px'}}>
+        <StyledCardBottom>
         </StyledCardBottom>
       </CardBody>
     </Card>

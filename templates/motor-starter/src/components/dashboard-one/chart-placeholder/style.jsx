@@ -12,6 +12,7 @@ export const StyledCardTitle = styled.h6`
 export const StyledCardBottom = styled.div`
   display: flex;
   align-items: flex-end;
+  height: 200px;
   ${device.large} {
     display: block;
   }

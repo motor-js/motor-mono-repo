@@ -14,7 +14,7 @@ const Chart = () => {
     <Card color='light'>
       <CardBody>
         <StyledCardTitle>{'PLACEHOLDER'}</StyledCardTitle>
-        <StyledCardBottom style={{ height: '180px'}}>
+        <StyledCardBottom>
         </StyledCardBottom>
       </CardBody>
     </Card>

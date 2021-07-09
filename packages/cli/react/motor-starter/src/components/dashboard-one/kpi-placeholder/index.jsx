@@ -10,7 +10,7 @@ const KPI = ({ data }) => {
     <Card color='light'>
       <CardBody>
         <StyledCardTitle>{'PLACEHOLDER'}</StyledCardTitle>
-        <StyledCardBottom style={{ height: '80px'}}>
+        <StyledCardBottom>
         </StyledCardBottom>
       </CardBody>
     </Card>

@@ -2,6 +2,10 @@ module.exports = function (plop) {
   
   const templateFiles = [
     "motor-starter/src/components/breadcrumb/*",
+    "motor-starter/src/components/dashboard-one/chart-placeholder/*",
+    "motor-starter/src/components/dashboard-one/kpi-placeholder/*",
+    "motor-starter/src/components/dashboard-two/**/*",
+    "motor-starter/src/components/dashboard-three/**/*",
     "motor-starter/src/components/forms/form-elements/**/*",
     "motor-starter/src/components/forms/input-group/*",
     "motor-starter/src/components/grid/*",
