@@ -1450,6 +1450,79 @@
     "@types/yargs" "^15.0.0"
     "chalk" "^4.0.0"
 
+"@motor-js/engine@^0.2.2":
+  "integrity" "sha512-+USFlDs3MhzxK6i/a7SGk2jBQTf71F8dwNFSvClLcIAHsyBHLmAlzf6IlD11UVwFDKBhfx1Z6/DsY2N9pipHEQ=="
+  "resolved" "https://registry.npmjs.org/@motor-js/engine/-/engine-0.2.2.tgz"
+  "version" "0.2.2"
+  dependencies:
+    "crypto-js" "^3.3.0"
+    "enigma.js" "^2.6.3"
+    "prop-types" "^15.7.2"
+    "react" "^17.0.1"
+    "react-dom" "^17.0.1"
+    "react-watermark-component" "^2.2.1"
+
+"@motor-js/nebula@^0.1.0":
+  "integrity" "sha512-GHe6xApRdrHiH0VZA1o3WNYfE57sU8HVPZU04ds1/cCyp7rkZK8V3UlbPknxxWqfCyYoJ9jhe5YE3h0oOq1uLA=="
+  "resolved" "https://registry.npmjs.org/@motor-js/nebula/-/nebula-0.1.0.tgz"
+  "version" "0.1.0"
+  dependencies:
+    "@motor-js/engine" "^0.2.2"
+    "@nebula.js/sn-bar-chart" "^0.8.13"
+    "@nebula.js/sn-combo-chart" "^0.19.1"
+    "@nebula.js/sn-funnel-chart" "^0.3.16"
+    "@nebula.js/sn-line-chart" "^0.9.12"
+    "@nebula.js/sn-mekko-chart" "^1.0.4"
+    "@nebula.js/sn-pie-chart" "^0.7.16"
+    "@nebula.js/sn-sankey-chart" "^0.5.11"
+    "@nebula.js/sn-table" "^0.2.2"
+    "@nebula.js/stardust" "^1.1.1"
+
+"@nebula.js/sn-bar-chart@^0.8.13":
+  "integrity" "sha512-aPkDtYe/HVLppntw5eH1B0a16V3MZkn9p+AjWCyrk8+qEdBhBHBu5dqLR45BAf+m31TzT8kvThwCfbXdO6BkYw=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-bar-chart/-/sn-bar-chart-0.8.28.tgz"
+  "version" "0.8.28"
+
+"@nebula.js/sn-combo-chart@^0.19.1":
+  "integrity" "sha512-pXZ/4A184NFOA8Yev0krwjrDwDqtPEmmjtmRpR9FtbkRQurW43pjjz5hj2MEv5F5vQtMzug9d2KNd7VjHIosfQ=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-combo-chart/-/sn-combo-chart-0.19.1.tgz"
+  "version" "0.19.1"
+
+"@nebula.js/sn-funnel-chart@^0.3.16":
+  "integrity" "sha512-E1QJN3ZdXMUAYhrxIyKQ5LKY61DkvZbmJzurDt2+V3MPevmkrfhj6igAamfaUJll3/wBjeGmBNfO1CAmfiAeUg=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-funnel-chart/-/sn-funnel-chart-0.3.22.tgz"
+  "version" "0.3.22"
+
+"@nebula.js/sn-line-chart@^0.9.12":
+  "integrity" "sha512-Ivc6KqyrEYjGywO+ICgsBrAFWOFZg62dn7t/gL2XCa22OIzmuuDCGw4iTILnZwv/RzHLkqug8katv6Kbu7FRgg=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-line-chart/-/sn-line-chart-0.9.26.tgz"
+  "version" "0.9.26"
+
+"@nebula.js/sn-mekko-chart@^1.0.4":
+  "integrity" "sha512-68bpPo8MvbnVwTIPl2gJQp5pGOTtwFvFV4CUDKVnJR0w+62URAxsA5YiRdl16oHmocxqVZSWtZXW/neNHWYvuw=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-mekko-chart/-/sn-mekko-chart-1.0.4.tgz"
+  "version" "1.0.4"
+
+"@nebula.js/sn-pie-chart@^0.7.16":
+  "integrity" "sha512-honhaY4yms+ZdjzC/IbOV7nGLUU3H/+OsS1KEkDxMAFVgyWuNkZ84unhjfr1deD6NzIhy36E6hoRx3Juuw+juA=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-pie-chart/-/sn-pie-chart-0.7.26.tgz"
+  "version" "0.7.26"
+
+"@nebula.js/sn-sankey-chart@^0.5.11":
+  "integrity" "sha512-m50TbXiLr3xA8SLXqU0fUW1SxWdZl+wfxHbJ2UEY9SNjd834RMljDWn0PXgpkfYGWGZYV9beN9RVpEpQ8ImaBA=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-sankey-chart/-/sn-sankey-chart-0.5.16.tgz"
+  "version" "0.5.16"
+
+"@nebula.js/sn-table@^0.2.2":
+  "integrity" "sha512-qVMK/i2hhXHCwiWxdeseakhTH0NQjCiW7T7Ai9ROm3KqAXax4FPye6h6Vq3I9TfNMETmIW3S+ZLv6KXDjlwhbA=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/sn-table/-/sn-table-0.2.5.tgz"
+  "version" "0.2.5"
+
+"@nebula.js/stardust@^1.1", "@nebula.js/stardust@^1.1.1", "@nebula.js/stardust@^1.x", "@nebula.js/stardust@>=0.6.0":
+  "integrity" "sha512-e7XL8hPpv1m7E7fLFQBS67mE6XMEb1YCXdRxvGN8hy+ETCy/wsJlsAdws3cB+T3Zgid8TNueg3c0HSeZA23gKg=="
+  "resolved" "https://registry.npmjs.org/@nebula.js/stardust/-/stardust-1.4.0.tgz"
+  "version" "1.4.0"
+
 "@nodelib/fs.scandir@2.1.4":
   "integrity" "sha512-33g3pMJk3bg5nXbL/+CY6I2eJDzZAni49PfJnL5fghPTggPvBd/pFNSgJsdAgWptuFu7qq/ERvOYFlhvsLTCKA=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz"
@@ -3727,6 +3800,11 @@
     "randombytes" "^2.0.0"
     "randomfill" "^1.0.3"
 
+"crypto-js@^3.3.0":
+  "integrity" "sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q=="
+  "resolved" "https://registry.npmjs.org/crypto-js/-/crypto-js-3.3.0.tgz"
+  "version" "3.3.0"
+
 "crypto-random-string@^1.0.0":
   "integrity" "sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4="
   "resolved" "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-1.0.0.tgz"
@@ -4421,6 +4499,11 @@
     "graceful-fs" "^4.1.2"
     "memory-fs" "^0.5.0"
     "tapable" "^1.0.0"
+
+"enigma.js@^2.6.3":
+  "integrity" "sha512-Iu/mSpd3t4q7iaLlpFNXbkqv0rbCPibGtYbEHBRbC1kJHI4Pk3yEHABygU1af094gmbYKm4OCR8iKS/AsujKvA=="
+  "resolved" "https://registry.npmjs.org/enigma.js/-/enigma.js-2.7.3.tgz"
+  "version" "2.7.3"
 
 "enquirer@^2.3.5":
   "integrity" "sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg=="
@@ -5478,6 +5561,11 @@
   dependencies:
     "duplexer" "^0.1.1"
     "pify" "^4.0.1"
+
+"hammerjs@^2.0.8":
+  "integrity" "sha1-BO93hiz/K7edMPdpIJWTAiK/YPE="
+  "resolved" "https://registry.npmjs.org/hammerjs/-/hammerjs-2.0.8.tgz"
+  "version" "2.0.8"
 
 "handle-thing@^2.0.0":
   "integrity" "sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg=="
@@ -8171,6 +8259,21 @@
   "resolved" "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz"
   "version" "2.1.0"
 
+"picasso-plugin-hammer@>=0.35.1":
+  "integrity" "sha512-dhGkWQ890BYvBjRzAEZqDGlX/FfJAxB1KSAnMVw0AubERlQeiajpWZSPKdTXMkZzZRH3GwnjnprzzGgcVjyMWw=="
+  "resolved" "https://registry.npmjs.org/picasso-plugin-hammer/-/picasso-plugin-hammer-1.2.1.tgz"
+  "version" "1.2.1"
+
+"picasso-plugin-q@>=0.35.1":
+  "integrity" "sha512-wc01i/9mm5jVAx2lnQ5HmLLJWvwHsgCJjoctoLObG9VwwH04leIRoqZ03lSkrIW0nGBzN7FUsod2dRE+dhDeig=="
+  "resolved" "https://registry.npmjs.org/picasso-plugin-q/-/picasso-plugin-q-1.2.1.tgz"
+  "version" "1.2.1"
+
+"picasso.js@>=0.35.1":
+  "integrity" "sha512-qIH/zCu2RtfXEamBV7j7QosSFhH69rAs1/tZ0AN+C8I6Qa/RNM7J6LqkxGIsWe92rOvQF1eduGVgXeEdyd5BMg=="
+  "resolved" "https://registry.npmjs.org/picasso.js/-/picasso.js-1.2.1.tgz"
+  "version" "1.2.1"
+
 "picomatch@^2.0.4", "picomatch@^2.0.5", "picomatch@^2.2.1", "picomatch@^2.2.2":
   "integrity" "sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg=="
   "resolved" "https://registry.npmjs.org/picomatch/-/picomatch-2.2.2.tgz"
@@ -9226,7 +9329,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^17.0.2":
+"react-dom@*", "react-dom@^17.0.1", "react-dom@^17.0.2":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -9321,7 +9424,12 @@
   optionalDependencies:
     "fsevents" "^2.1.3"
 
-"react@*", "react@^17.0.2", "react@>= 16", "react@17.0.2":
+"react-watermark-component@^2.2.1":
+  "integrity" "sha1-6UJdTl2tMrFdmIXDz9DXPQuv640="
+  "resolved" "https://registry.npmjs.org/react-watermark-component/-/react-watermark-component-2.2.1.tgz"
+  "version" "2.2.1"
+
+"react@*", "react@^0.14.7 || ^15.0.0 || ^16.0.0", "react@^17.0.1", "react@^17.0.2", "react@>= 16", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
