@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Preloader from "./components/preloader";
 
-function App() {
+const DashboardOne = lazy(() => import("./pages/dashboard-one"));
+const DashboardTwo = lazy(() => import("./pages/dashboard-two"));
+const DashboardThree = lazy(() => import("./pages/dashboard-three"));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<Preloader />}>
+        <Switch>
+          <Route exact path="/" component={DashboardOne} />
+          <Route exact path="/dashboard-two" component={DashboardTwo} />
+          <Route exact path="/dashboard-three" component={DashboardThree} />
+        </Switch>
+      </Suspense>
+    </Router>
   );
-}
+};
 
 export default App;
