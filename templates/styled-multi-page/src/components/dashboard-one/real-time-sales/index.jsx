@@ -31,17 +31,17 @@ const RealTimeSales = () => {
     },
     {
       qName: "TOTAL SALES CHANGE",
-      qExpr: "num(Sum(today),'#,##0%')",
+      qExpr: "num(Sum(today)/Sum(yesterday),'#,##0%')",
       qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
     {
       qName: "AVG. SALES PER DAY",
-      qExpr: "num(Sum(today),'$#,##0')",
+      qExpr: "num(Avg(today),'$#,##0')",
       qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
     {
       qName: "AVG. SALES PER DAY CHNAGE",
-      qExpr: "num(Sum(today),'#,##%')",
+      qExpr: "num(Avg(today)/Avg(yesterday),'#,##%')",
       qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
   ];
@@ -185,7 +185,8 @@ const RealTimeSales = () => {
               {/* $150,200{" "} */}
               {metrics && metrics["TOTAL SALES"]}{" "}
               <StyledBodyStatus color="success">
-                <i className="fa fa-arrow-up" /> 0.20%
+                <i className="fa fa-arrow-up" />{" "}
+                {metrics && metrics["TOTAL SALES CHANGE"]}
               </StyledBodyStatus>
             </StyledBodyTitle>
             <StyledBodyText>Total Sales</StyledBodyText>
@@ -195,7 +196,8 @@ const RealTimeSales = () => {
               {/* $21,880{" "} */}
               {metrics && metrics["AVG. SALES PER DAY"]}{" "}
               <StyledBodyStatus color="danger">
-                <i className="fa fa-arrow-down" /> 1.04%
+                <i className="fa fa-arrow-down" />{" "}
+                {metrics && metrics["AVG. SALES PER DAY CHNAGE"]}
               </StyledBodyStatus>
             </StyledBodyTitle>
             <StyledBodyText>Avg. Sales Per Day</StyledBodyText>
