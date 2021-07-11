@@ -5,7 +5,8 @@ import {
   ApexBarChart,
   SectionTitle,
 } from "../../../components";
-import { RetentionChart } from "../../data/dashboard-one";
+import { useData } from "@motor-js/engine";
+
 import {
   StyledCardHeader,
   StyledCardBody,
@@ -16,6 +17,115 @@ import {
 } from "./style";
 
 const AccountRetention = () => {
+  const cols = [
+    {
+      qField: "[categories]",
+      qLabel: "categories",
+    },
+    {
+      qField: "=sum(Series1)",
+      qLabel: "Series1",
+    },
+    {
+      qField: "=sum(Series2)",
+      qLabel: "Series2",
+    },
+  ];
+
+  // TODO sort order
+
+  const { dataSet } = useData({
+    cols,
+  });
+
+  const { data } = dataSet;
+
+  const RetentionChart = {
+    options: {
+      chart: {
+        stacked: true,
+        toolbar: {
+          show: false,
+        },
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      responsive: [
+        {
+          breakpoint: 575,
+          options: {
+            chart: {
+              height: 220,
+            },
+          },
+        },
+        {
+          breakpoint: 1199,
+          options: {
+            chart: {
+              height: 228,
+            },
+          },
+        },
+      ],
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "50%",
+          endingShape: "rounded",
+        },
+      },
+      xaxis: {
+        categories: (data && data.map((n) => n.categories)) || [],
+
+        tooltip: {
+          enabled: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: false,
+        },
+      },
+      yaxis: {
+        show: false,
+      },
+      legend: {
+        show: false,
+      },
+      grid: {
+        borderColor: "#ffffff",
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+      fill: {
+        opacity: 1,
+      },
+      colors: ["#69b2f8", "#f0f1f5"],
+    },
+    series: [
+      {
+        data: (data && data.map((n) => n.Series1)) || [],
+      },
+      {
+        data: (data && data.map((n) => n.Series2)) || [],
+      },
+    ],
+  };
+
   return (
     <Card>
       <StyledCardHeader>
