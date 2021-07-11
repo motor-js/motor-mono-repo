@@ -9,7 +9,7 @@ import {
   HorizontalBarChart,
   SectionTitle,
 } from "../../..//components";
-import { RealTimeSalesData } from "../../data/dashboard-one";
+
 import {
   StyledBodyTitle,
   StyledBullet,
@@ -60,28 +60,71 @@ const RealTimeSales = () => {
     },
   ];
 
-  // const qSortByLoadOrder = 0;
-
   const { dataSet, metrics } = useData({
     cols,
     qMetrics,
-    // qSortByLoadOrder,
   });
 
-  // console.log("check sort order of dimension", dataSet);
-  console.log("metrics", metrics);
+  // console.log("check sort order of dimension", dataSet); //TODO sort by laodorder
 
-  const { data } = dataSet;
+  const { data, dataKeys } = dataSet;
+
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      display: false,
+      labels: {
+        display: false,
+      },
+    },
+    scales: {
+      yAxes: [
+        {
+          gridLines: {
+            display: false,
+          },
+          ticks: {
+            display: false,
+            beginAtZero: true,
+            fontSize: 10,
+            fontColor: "#182b49",
+          },
+        },
+      ],
+      xAxes: [
+        {
+          gridLines: {
+            display: true,
+            color: "#eceef4",
+          },
+          barPercentage: 0.6,
+          ticks: {
+            beginAtZero: true,
+            fontSize: 10,
+            fontColor: "#8392a5",
+            max: 80,
+          },
+        },
+      ],
+    },
+  };
+  const RealTimeSalesData = {
+    datasets: [{}, {}],
+  };
 
   const inputEl = useRef(null);
   const [legendRendered, setLegendRendered] = useState(false);
   const [, forceUpdate] = useState();
-  RealTimeSalesData.data.labels = (data && data.map((n) => n.Category)) || [];
-  RealTimeSalesData.data.datasets[0].data =
-    (data && data.map((n) => n.today)) || [];
-  RealTimeSalesData.data.datasets[1].data =
+  RealTimeSalesData.labels = (data && data.map((n) => n.Category)) || [];
+  RealTimeSalesData.datasets[0].data = (data && data.map((n) => n.today)) || [];
+  RealTimeSalesData.datasets[0].backgroundColor = "#69b2f8";
+  RealTimeSalesData.datasets[0].lebel = (dataKeys && dataKeys[0]) || null;
+  RealTimeSalesData.datasets[1].data =
     (data && data.map((n) => n.yesterday)) || [];
-  const { datasets } = RealTimeSalesData.data;
+  RealTimeSalesData.datasets[1].backgroundColor = "#d1e6fa";
+  RealTimeSalesData.datasets[0].lebel = (dataKeys && dataKeys[1]) || null;
+  const { datasets } = RealTimeSalesData;
 
   const handleLegendClick = (datasetIndex) => {
     const chart = inputEl.current.chartInstance;
@@ -139,7 +182,8 @@ const RealTimeSales = () => {
         <Row mb="36px">
           <Col col>
             <StyledBodyTitle>
-              $150,200{" "}
+              {/* $150,200{" "} */}
+              {metrics && metrics["TOTAL SALES"]}{" "}
               <StyledBodyStatus color="success">
                 <i className="fa fa-arrow-up" /> 0.20%
               </StyledBodyStatus>
@@ -148,7 +192,8 @@ const RealTimeSales = () => {
           </Col>
           <Col col>
             <StyledBodyTitle>
-              $21,880{" "}
+              {/* $21,880{" "} */}
+              {metrics && metrics["AVG. SALES PER DAY"]}{" "}
               <StyledBodyStatus color="danger">
                 <i className="fa fa-arrow-down" /> 1.04%
               </StyledBodyStatus>
@@ -158,8 +203,8 @@ const RealTimeSales = () => {
         </Row>
         <StyledChart>
           <HorizontalBarChart
-            data={RealTimeSalesData.data}
-            options={RealTimeSalesData.options}
+            data={RealTimeSalesData}
+            options={options}
             width={341}
             height={225}
             ref={inputEl}
