@@ -4,7 +4,7 @@ import {
   ListGroupItem,
   SectionTitle,
 } from "../../../components";
-import { customers } from "../../data/dashboard-one";
+// import { customers } from "../../data/dashboard-one";
 import Item from "./item";
 import {
   StyledHeader,
@@ -13,6 +13,47 @@ import {
   StyledFooter,
   StyledFooterLink,
 } from "./style";
+
+import img1 from "../../../images/img23.80b3363e.jpg";
+import img2 from "../../../images/img16.6a70955e.jpg";
+
+const customers = [
+  {
+    id: "#00222",
+    name: "Socrates Itumay",
+    bg: "gray600",
+    chat_link: "/apps/chat",
+    profile_link: "/profile-view",
+  },
+  {
+    id: "#00221",
+    name: "Reynante Labares",
+    image: img1,
+    chat_link: "/apps/chat",
+    profile_link: "/profile-view",
+  },
+  {
+    id: "#00220",
+    name: "Marianne Audrey",
+    image: img2,
+    chat_link: "/apps/chat",
+    profile_link: "/profile-view",
+  },
+  {
+    id: "#00219",
+    name: "Owen Bongcaras",
+    bg: "indigo",
+    chat_link: "/apps/chat",
+    profile_link: "/profile-view",
+  },
+  {
+    id: "#00218",
+    name: "Kirby Avendula",
+    bg: "primary",
+    chat_link: "/apps/chat",
+    profile_link: "/profile-view",
+  },
+];
 
 const Customers = () => {
   return (
