@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState } from "react";
+import { useData } from "@motor-js/engine";
 import {
   Card,
   CardBody,
@@ -22,9 +23,64 @@ import {
 } from "./style";
 
 const RealTimeSales = () => {
+  const qMetrics = [
+    {
+      qName: "TOTAL SALES",
+      qExpr: "num(Sum(today),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+    {
+      qName: "TOTAL SALES CHANGE",
+      qExpr: "num(Sum(today),'#,##0%')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+    {
+      qName: "AVG. SALES PER DAY",
+      qExpr: "num(Sum(today),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+    {
+      qName: "AVG. SALES PER DAY CHNAGE",
+      qExpr: "num(Sum(today),'#,##%')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+  ];
+  const cols = [
+    {
+      qField: "[time]",
+      qLabel: "Category",
+    },
+    {
+      qField: "=sum(today)",
+      qLabel: "today",
+    },
+    {
+      qField: "=sum(yesterday)",
+      qLabel: "yesterday",
+    },
+  ];
+
+  // const qSortByLoadOrder = 0;
+
+  const { dataSet, metrics } = useData({
+    cols,
+    qMetrics,
+    // qSortByLoadOrder,
+  });
+
+  // console.log("check sort order of dimension", dataSet);
+  console.log("metrics", metrics);
+
+  const { data } = dataSet;
+
   const inputEl = useRef(null);
   const [legendRendered, setLegendRendered] = useState(false);
   const [, forceUpdate] = useState();
+  RealTimeSalesData.data.labels = (data && data.map((n) => n.Category)) || [];
+  RealTimeSalesData.data.datasets[0].data =
+    (data && data.map((n) => n.today)) || [];
+  RealTimeSalesData.data.datasets[1].data =
+    (data && data.map((n) => n.yesterday)) || [];
   const { datasets } = RealTimeSalesData.data;
 
   const handleLegendClick = (datasetIndex) => {
