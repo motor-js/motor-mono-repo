@@ -17,6 +17,7 @@
   "author": "Motor",
   "license": "ISC",
   "dependencies": {
+    "@motor-js/engine": "^0.2.2",
     "plop": "^2.7.4"
   }
 }

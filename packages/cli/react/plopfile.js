@@ -1,22 +1,22 @@
 module.exports = function (plop) {
   
   const templateFiles = [
-    "motor-starter/src/components/breadcrumb/*",
-    "motor-starter/src/components/dashboard-one/chart-placeholder/*",
-    "motor-starter/src/components/dashboard-one/kpi-placeholder/*",
-    "motor-starter/src/components/dashboard-two/**/*",
-    "motor-starter/src/components/dashboard-three/**/*",
-    "motor-starter/src/components/forms/form-elements/**/*",
-    "motor-starter/src/components/forms/input-group/*",
-    "motor-starter/src/components/grid/*",
-    "motor-starter/src/components/logo/*",
-    "motor-starter/src/components/search-bar/*",
-    "motor-starter/src/components/static/*",
+    "finance-motor/src/components/**/**/*",
+    "finance-motor/src/containers/**/**/*",
+    "finance-motor/src/css/*",
+    "finance-motor/src/hooks/*",
+    "finance-motor/src/layouts/**/*",
+    "finance-motor/src/methods/*",
+    "finance-motor/src/pages/*",
+    "finance-motor/src/settings/*",
+    "finance-motor/src/styled/*",
+    "finance-motor/src/App.js",
+    "finance-motor/src/index.js",
   ]
 
   plop.addHelper('cwd', (p) => process.cwd());
 
-  plop.setGenerator("newApp", {
+  plop.setGenerator("finance-motor", {
 
     // Succintly describes what generator does.
     description: "Copy components",
@@ -25,10 +25,11 @@ module.exports = function (plop) {
     // Here we "add" new files from our templates or boilerplates.
     actions: [
       {
-        name: "add",
+        name: "addMany",
         type: "addMany",
         destination: '/{{cwd}}',
-        templateFiles: templateFiles
+        templateFiles: templateFiles,
+        force: true
       },
     ]
 

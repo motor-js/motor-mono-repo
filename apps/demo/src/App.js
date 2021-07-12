@@ -2,7 +2,6 @@ import React from "react";
 //import Table from "./components/TableExampleCompact";
 //import ButtonComponent from "./components/ButtonComponent";
 import { useList } from "@motor-js/engine"
-import { NebulaContainer } from '@motor-js/nebula'
 import MotorSelect from "./components/MotorSelect"
 import { dark, light } from "./themes/theme.js"
 import { EngineContext } from "@motor-js/engine"
@@ -30,10 +29,6 @@ export default function App() {
   return (
     <div className="App" style={{ padding: "10px" }}>
       test
-    <NebulaContainer  
-      render={{ id: 'jVfmGat' }}
-      styles={{ width: '80%', height: 400, paddingTop: 50}}
-    />
       {/*<MotorSelect 
         listData={listData}
         motorListProps={motorListProps}

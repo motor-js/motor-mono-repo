@@ -1,8 +1,6 @@
 import { Motor } from "@motor-js/engine";
 import useConnect from "./useConnect";
 import App from "./App";
-import { NebulaConnection } from "@motor-js/nebula";
-
 const NewApp = () => {
 
   const config= {
@@ -20,10 +18,18 @@ const NewApp = () => {
   return (
     <>
     { engine && 
-      <Motor engine={engine}>
-        <NebulaConnection>
+      <Motor //engine={engine}
+        config={{  
+          host: "motor.eu.qlikcloud.com", // Qlik Sense Host
+          secure: true, // Whether your host is secure of not (HTTPS / HTTP)
+          port: null, // Qlik Sense site port
+          prefix: "", // Prefix
+          appId: "0294cf88-eb02-484a-b315-cf06b45ac347", // Application Id
+          webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
+          qcs: true, // whether you are connecting to a Qlik Cloud site or not
+        }}
+        >
           <App />
-        </NebulaConnection>
       </Motor>
     }
     </>

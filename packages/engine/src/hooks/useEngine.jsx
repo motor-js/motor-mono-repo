@@ -1,10 +1,11 @@
+import { useState } from "react";
 const enigma = require("enigma.js");
 const schema = require("enigma.js/schemas/12.170.2.json");
 const SenseUtilities = require("enigma.js/sense-utilities");
 
 const MAX_RETRIES = 3;
 
-async function useEngine (config, capabilityAPI) {
+function useEngine(config) {
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -48,9 +49,13 @@ async function useEngine (config, capabilityAPI) {
     },
   ];
 
-  if (config && config.qcs) {
-      const tenantUri = config.host;
-      const webIntegrationId = config.webIntId;
+  const [engineError, setEngineError] = useState(false);
+  const [errorCode, seErrorCode] = useState(null);
+  const [engine, setEngine] = useState(() => {
+    (async () => {
+      if (config && config.qcs) {
+        const tenantUri = config.host;
+        const webIntegrationId = config.webIntId;
 
         const fetchResult = await fetch(
           `https://${tenantUri}/api/v1/csrf-token`,
@@ -68,10 +73,10 @@ async function useEngine (config, capabilityAPI) {
 
         const csrfToken = fetchResult.headers.get("qlik-csrf-token");
         if (csrfToken == null) {
-          
-          console.warn("Not logged in");
-          return { errorCode: -1 }
+          console.log("Not logged in");
+          seErrorCode(-1);
 
+          return -1;
         }
         const session = enigma.create({
           schema,
@@ -87,12 +92,16 @@ async function useEngine (config, capabilityAPI) {
         });
         session.on("closed", () => {
           console.warn("Session was closed");
-          return { errorCode: -3 }
+          seErrorCode(-3);
+
+          return -3;
         });
         const _global = await session.open();
-        const _doc = await _global.openDoc(config.appId)
-        
-        return { engine: _doc, errorCode: 1 }
+        const _doc = await _global.openDoc(config.appId);
+        setEngine(_doc);
+        seErrorCode(1);
+
+        return 1;
       }
       if (config) {
         const myConfig = config;
@@ -111,23 +120,30 @@ async function useEngine (config, capabilityAPI) {
           });
           session.on("closed", () => {
             console.warn("Session was closed");
+            seErrorCode(-3);
 
-           return { errorCode: -3 }
+            return -3;
           });
           const _global = await session.open();
           const _doc = await _global.openDoc(config.appId);
- 
-          return { engine: _doc, errorCode: 1 };
+          setEngine(_doc);
+          seErrorCode(1);
 
+          return 1;
         } catch (err) {
           console.warn("Captured Error", err);
           if (err.code === 1003) {
-            console.warn("No engine. App Not found.");
+            setEngineError("No engine. App Not found.");
           }
-          return { errorCode: -3 }
+          seErrorCode(-2);
+
+          return -2;
         }
       }
+    })();
+  }, []);
 
+  return { engine, engineError, errorCode };
 }
 
 export default useEngine;

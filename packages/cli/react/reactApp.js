@@ -13,23 +13,20 @@ const askQuestions = async () => {
   const selectedConfigList = [];
 
   const questions = reactConfigList.map(config => ({
-    type: "list",
     name: config.name,
+    type: config.type,
     message: config.question,
     choices: config.choices,
+    actions: config.actions
   }));
 
   const answers = await inquirer.prompt(questions);
 
   reactConfigList.forEach(config => {
-    const matchingAnswer = answers[config.name];
-
-    if (matchingAnswer && matchingAnswer === "motor-starter") {
       selectedConfigList.push(config);
-    }
   });
 
-  return selectedConfigList;
+  return { selectedConfigList, answers}
 };
 
 
@@ -54,14 +51,17 @@ const createReactApp = appName => {
   });
 };
 
-const installPackages = async configList => {
+const installPackages = async (configList, answers) => {
   let dependencies = [];
   let devDependencies = [];
 
   configList.forEach(config => {
-    dependencies = [...dependencies, ...config.dependencies];
-    devDependencies = [...devDependencies, ...config.devDependencies];
-  });
+    if(config.name === 'template') {
+      const selected = config.actions.filter(p => { return  p.choice === answers.template})
+      dependencies = selected[0].dependencies = [...dependencies, ...selected[0].dependencies];
+      devDependencies = [...devDependencies, ...selected[0].devDependencies];
+    }
+  })
 
   await new Promise(resolve => {
     const spinner = ora("Installing additional dependencies...".brightMagenta).start();
@@ -80,6 +80,7 @@ const installPackages = async configList => {
       resolve();
     });
   });
+
 };
 
 const updatePackageDotJson = (configList) => {
@@ -115,45 +116,24 @@ const updatePackageDotJson = (configList) => {
 };
 
 
-const addTemplates = configList => {
+const addTemplates = () => {
 
   const spinner = ora("Adding files...".brightMagenta);
-  spinner.color = 'yellow';
 
   return new Promise(resolve => {
   // load an instance of plop from a plopfile
   const plop = nodePlop(__dirname+`/plopfile.js`);
   // get a generator by name
-  const basicAdd = plop.getGenerator('newApp');
+  const basicAdd = plop.getGenerator("finance-motor");
   
-  basicAdd.runActions({name: 'add'}).then(function (results) {
-    // do something after the actions have run
-    console.log('results: ',results)
+    basicAdd.runActions({name: 'addMany'}).then(function (results) {
+      // do something after the actions have run
+      console.log('results: ',results)
 
-    spinner.succeed();
-    resolve();
-  });
-
-
-
-/*
-  const templateList = configList.reduce(
-    (acc, val) => [...acc, ...val.templates],
-    []
-  );
-
-  return new Promise(resolve => {
-    templateList.forEach(template => {
-      // outputFile creates a directory when it doesn't exist
-      fse.outputFile(template.path, template.file, err => {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      spinner.succeed();
+      resolve();
     });
-*/
-  //  spinner.succeed();
-  //  resolve();
+
   });
 };
 
@@ -172,13 +152,13 @@ const commitGit = () => {
 };
 
 exports.create = async (appName, appDirectory) => {
-  const selectedConfigList = await askQuestions(appName, appDirectory);
+  const { selectedConfigList, answers } = await askQuestions(appName, appDirectory);
 
   await createReactApp(appName);
-  await installPackages(selectedConfigList);
-  await updatePackageDotJson(selectedConfigList);
-  await addTemplates(selectedConfigList);
-  await commitGit();
+  await installPackages(selectedConfigList, answers);
+  //await updatePackageDotJson(selectedConfigList);
+  //await addTemplates(selectedConfigList);
+  //await commitGit();
 
   console.log(
     `Your React Motor Mashup has been created 🎉.  cd into ${appName} to get started.`.brightGreen
