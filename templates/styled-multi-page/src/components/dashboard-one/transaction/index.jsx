@@ -6,6 +6,7 @@ import {
   ListGroupItem,
   SectionTitle,
 } from "../../../components";
+import { flattenData } from "../../../methods";
 import Item from "./item";
 import {
   StyledHeader,
@@ -14,24 +15,6 @@ import {
   StyledFooter,
   StyledFooterLink,
 } from "./style";
-
-const flattenData = (d) => {
-  let arr = [];
-  let newObj = {};
-  d.map((res) => {
-    Object.keys(res).forEach((item) => {
-      if (item === "key") {
-        newObj[item] = res[item];
-      } else {
-        newObj[item] = res[item].text;
-      }
-    });
-    arr.push(newObj);
-    newObj = {};
-    return null;
-  });
-  return arr;
-};
 
 const Transaction = () => {
   const [transaction, setTransaction] = useState(null);
@@ -72,13 +55,9 @@ const Transaction = () => {
     cols,
   });
 
-  // console.log(dataSet);
-
   useEffect(() => {
     const data = dataSet && flattenData(dataSet);
-    // dataSet && setLoading(false);
     setTransaction(data);
-    // console.log(data);
   }, [dataSet]);
   return (
     <Card height="100%">
