@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { BarChart2 } from "react-feather";
+import { useTable } from "@motor-js/engine";
 import {
   Card,
   CardBody,
@@ -8,8 +10,8 @@ import {
   MediaBody,
   SectionTitle,
 } from "../../../components";
-import { recentEarnings } from "../../data/dashboard-one";
-import { flatDeep } from "../../../methods";
+
+// import { flatDeep } from "../../../methods";
 import {
   StyledHeader,
   StyledMediaWrap,
@@ -22,9 +24,84 @@ import {
   StyledTDRate,
 } from "./style";
 
+const flattenData = (d) => {
+  let arr = [];
+  let newObj = {};
+  d.map((res) => {
+    Object.keys(res).forEach((item) => {
+      if (item === "key") {
+        newObj[item] = res[item];
+      } else {
+        newObj[item] = res[item].text;
+      }
+    });
+    arr.push(newObj);
+    newObj = {};
+    return null;
+  });
+  return arr;
+};
+
 const RecentEarnings = () => {
+  const [recentEarnings, setRecentEarnings] = useState(null);
+
+  const cols = [
+    {
+      dataKey: "date",
+      qField: "date",
+      qLabel: "date",
+    },
+    {
+      dataKey: "sales_count",
+      qField: "sales_count",
+      qLabel: "sales_count",
+    },
+    {
+      dataKey: "gross_earnings",
+      qField: "gross_earnings",
+      qLabel: "gross_earnings",
+    },
+    {
+      dataKey: "tax_withheld",
+      qField: "tax_withheld",
+      qLabel: "tax_withheld",
+    },
+    {
+      dataKey: "earning",
+      qField: "net_earinings_earning",
+      qLabel: "earning",
+    },
+    {
+      dataKey: "growth",
+      qField: "net_earinings_growth",
+      qLabel: "growth",
+    },
+    {
+      dataKey: "status",
+      qField: "net_earinings_status",
+      qLabel: "status",
+    },
+  ];
+
+  const { dataSet } = useTable({
+    cols,
+  });
+
+  useEffect(() => {
+    const data = dataSet && flattenData(dataSet);
+    // dataSet && setLoading(false);
+    setRecentEarnings(data);
+  }, [dataSet]);
+  // const keys =
+  //   recentEarnings &&
+  //   [...new Set(flatDeep(recentEarnings.map((sale) => Object.keys(sale))))] |
+  //     [];
   const keys = [
-    ...new Set(flatDeep(recentEarnings.map((sale) => Object.keys(sale)))),
+    "DATE",
+    "SALES COUNT",
+    "GROSS EARNINGS",
+    "TAX WITHHELD",
+    "NET EARININGS",
   ];
 
   return (
@@ -80,41 +157,40 @@ const RecentEarnings = () => {
           </Media>
         </StyledMediaWrap>
       </CardBody>
-      <StyledTable>
-        <thead>
-          <tr>
-            {keys.map((key) => (
-              <StyledTH key={key}>{key.replace(/_/g, " ")}</StyledTH>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {recentEarnings.map((ear) => (
-            <tr key={ear.date}>
-              <StyledTD color="text3">{ear.date}</StyledTD>
-              <StyledTD fontWeight="500">{ear.sales_count}</StyledTD>
-              <StyledTD color="teal">+ {ear.gross_earnings}</StyledTD>
-              <StyledTD color="pink">- {ear.tax_withheld}</StyledTD>
-              <StyledTD fontWeight="500">
-                {ear.net_earinings.earning}{" "}
-                <StyledTDRate
-                  color={
-                    ear.net_earinings.status === "up" ? "success" : "danger"
-                  }
-                >
-                  {ear.net_earinings.status === "up" && (
-                    <i className="fa fa-arrow-up" />
-                  )}
-                  {ear.net_earinings.status === "down" && (
-                    <i className="fa fa-arrow-down" />
-                  )}{" "}
-                  {ear.net_earinings.growth}
-                </StyledTDRate>
-              </StyledTD>
+
+      {recentEarnings && (
+        <StyledTable>
+          <thead>
+            <tr>
+              {keys.map((key) => (
+                <StyledTH key={key}>{key.replace(/_/g, " ")}</StyledTH>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </StyledTable>
+          </thead>
+          <tbody>
+            {recentEarnings.map((ear) => (
+              <tr key={ear.date}>
+                <StyledTD color="text3">{ear.date}</StyledTD>
+                <StyledTD fontWeight="500">{ear.sales_count}</StyledTD>
+                <StyledTD color="teal">+ {ear.gross_earnings}</StyledTD>
+                <StyledTD color="pink">- {ear.tax_withheld}</StyledTD>
+                <StyledTD fontWeight="500">
+                  {ear.earning}{" "}
+                  <StyledTDRate
+                    color={ear.status === "up" ? "success" : "danger"}
+                  >
+                    {ear.status === "up" && <i className="fa fa-arrow-up" />}
+                    {ear.status === "down" && (
+                      <i className="fa fa-arrow-down" />
+                    )}{" "}
+                    {ear.growth}
+                  </StyledTDRate>
+                </StyledTD>
+              </tr>
+            ))}
+          </tbody>
+        </StyledTable>
+      )}
     </Card>
   );
 };
