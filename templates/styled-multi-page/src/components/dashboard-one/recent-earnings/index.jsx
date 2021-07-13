@@ -11,7 +11,6 @@ import {
   SectionTitle,
 } from "../../../components";
 
-// import { flatDeep } from "../../../methods";
 import {
   StyledHeader,
   StyledMediaWrap,
@@ -89,13 +88,9 @@ const RecentEarnings = () => {
 
   useEffect(() => {
     const data = dataSet && flattenData(dataSet);
-    // dataSet && setLoading(false);
     setRecentEarnings(data);
   }, [dataSet]);
-  // const keys =
-  //   recentEarnings &&
-  //   [...new Set(flatDeep(recentEarnings.map((sale) => Object.keys(sale))))] |
-  //     [];
+
   const keys = [
     "DATE",
     "SALES COUNT",
