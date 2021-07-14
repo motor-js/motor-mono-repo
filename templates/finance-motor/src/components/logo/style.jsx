@@ -1,4 +1,4 @@
-import styled, { device, themeGet } from "../../styled";
+import styled, { device } from "../../styled";
 
 export const StyledLogo = styled.img`
   height: 40px;

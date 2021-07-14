@@ -20,11 +20,16 @@ export const StyledText = styled.p`
 
 export const StyledSpan = styled.span`
   color: ${themeGet("colors.text3")};
+  padding: 2px;
   font-size: 11px;
   font-family: ${themeGet("fonts.interUi")};
+  cursor: pointer;
+  &:hover {
+    background-color: ${(props) => hexTorgb(props.theme.colors.light, 0.5)};
+  }
 `;
 
-export const StyledDropItem = styled((props) => <Anchor {...props} />)`
+export const StyledSelectionItem = styled((props) => <Anchor {...props} />)`
   transition: none;
   border-radius: 0.25rem;
   white-space: normal;
@@ -33,7 +38,4 @@ export const StyledDropItem = styled((props) => <Anchor {...props} />)`
   width: auto;
   display: block;
   overflow: hidden;
-  &:hover {
-    background-color: ${(props) => hexTorgb(props.theme.colors.light, 0.5)};
-  }
 `;

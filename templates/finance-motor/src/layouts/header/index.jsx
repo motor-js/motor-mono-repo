@@ -1,5 +1,5 @@
 import { useState, useCallback, } from "react";
-import { Search, Menu, X, Sliders } from "react-feather";
+import { Search, Menu, X } from "react-feather";
 import { useSelections } from "@motor-js/engine"
 
 import { Button, Navbar } from "../../components";
@@ -19,7 +19,6 @@ import {
   StyledNavbarBody,
   StyledNavbarTitle,
   StyledMenuBtn,
-  StyledNavBtn
 } from "./style";
 
 const Header = () => {
@@ -35,7 +34,7 @@ const Header = () => {
 
   const menuHandler = useCallback(() => {
     setMenuOpen((prev) => !prev);
-  }, [menuOpen]);
+  }, []);
 
   return (
     <>

@@ -83,6 +83,7 @@ const installPackages = async (configList, answers) => {
 
 };
 
+/*
 const updatePackageDotJson = (configList) => {
   const spinner = ora("Updating package.json scripts...".brightMagenta);
 
@@ -91,6 +92,9 @@ const updatePackageDotJson = (configList) => {
     []
   );
 
+  console.log(configList)
+  console.log(packageEntries)
+  
   return new Promise((resolve) => {
     const rawPackage = fse.readFileSync("package.json");
     const package = JSON.parse(rawPackage);
@@ -113,8 +117,9 @@ const updatePackageDotJson = (configList) => {
       resolve();
     });
   });
+  
 };
-
+*/
 
 const addTemplates = () => {
 
@@ -128,8 +133,7 @@ const addTemplates = () => {
   
     basicAdd.runActions({name: 'addMany'}).then(function (results) {
       // do something after the actions have run
-      console.log('results: ',results)
-
+      //console.log('results: ',results)
       spinner.succeed();
       resolve();
     });
@@ -153,15 +157,15 @@ const commitGit = () => {
 
 exports.create = async (appName, appDirectory) => {
   const { selectedConfigList, answers } = await askQuestions(appName, appDirectory);
-
   await createReactApp(appName);
   await installPackages(selectedConfigList, answers);
+  /*  Inserting package entries descoped for first release */
   //await updatePackageDotJson(selectedConfigList);
-  //await addTemplates(selectedConfigList);
-  //await commitGit();
+  await addTemplates(selectedConfigList);
+  await commitGit();
 
   console.log(
-    `Your React Motor Mashup has been created 🎉.  cd into ${appName} to get started.`.brightGreen
+    `Your React Motor Mashup has been created 🎉. cd into ${appName} to get started.`.brightGreen
   );
 
   return true;

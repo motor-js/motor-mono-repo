@@ -1,10 +1,13 @@
 {
-  "name": "motor",
+  "name": "@motor-js/cli",
   "version": "0.0.3",
   "description": "CLI tool for generating Qlik Sense Mashups",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "motor": "index.js"
   },
   "keywords": [
     "Qlik",
@@ -17,6 +20,7 @@
     "@motor-js/engine": "^0.2.4",
     "@motor-js/nebula": "^0.1.2",
     "colors": "^1.4.0",
+    "commander": "^8.0.0",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.1",
     "lodash.set": "^4.3.2",
@@ -28,5 +32,5 @@
   "devDependencies": {
     "plop": "^2.7.4"
   },
-  "gitHead": "13e241a90175aa135782e2acdd6be5479b8bd641"
+  "gitHead": "98c69ebbb9de1f0800b9d8874bafffaca077e435"
 }

@@ -1,40 +1,23 @@
 import React from "react";
-import {
-  StyledDropItem,
-} from "./style";
-import { StyledMediaBody, StyledStrong, StyledText, StyledSpan } from "./style";
-import { Media, MediaLeft } from "..";
-import { Avatar, AvatarInitial } from "..";
+import { Trash2 } from "react-feather";
+import { StyledMediaBody, StyledSelectionItem,StyledStrong, StyledText, StyledSpan } from "./style";
+import { Media } from "..";
 
 const SelectionItem = ({ selections, clear }) => {
 
-  const { qField, qSelected, qSelectedCount } = selections;
+  const { qField, qSelected } = selections;
 
   return (
-    <StyledDropItem>
-        <Media>
-          <StyledMediaBody>
-            <StyledStrong>{qField}</StyledStrong>
-            <StyledText>{qSelected}</StyledText>
-            <StyledSpan onClick={() => clear(qField)}>DELETE</StyledSpan>
-          </StyledMediaBody>
-        </Media>
-    </StyledDropItem>
+    <StyledSelectionItem>
+      <Media>
+        <StyledMediaBody>
+          <StyledStrong>{qField}</StyledStrong>
+          <StyledText>{qSelected}</StyledText>
+          <StyledSpan onClick={() => clear(qField)}><Trash2 size={8}/> Delete</StyledSpan>
+        </StyledMediaBody>
+      </Media>
+    </StyledSelectionItem>
   );
 };
 
 export default SelectionItem;
-
-/*
- <MediaLeft>
-  <Avatar size="sm" shape="circle" status="online">
-    <AvatarInitial>df</AvatarInitial>
-    </Avatar>
-  </MediaLeft>
-  <StyledMediaBody>
-    <StyledStrong>Socrates Itumay</StyledStrong>
-    <StyledText>nam libero tempore cum so...</StyledText>
-    <StyledSpan>Mar 15 12:32pm</StyledSpan>
-  </StyledMediaBody>
-
-*/
