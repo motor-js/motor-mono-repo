@@ -1,22 +1,17 @@
 import React from "react";
 //import Table from "./components/TableExampleCompact";
 //import ButtonComponent from "./components/ButtonComponent";
-import { useList } from "@motor-js/engine"
-import MotorSelect from "./components/MotorSelect"
-import { dark, light } from "./themes/theme.js"
-import { EngineContext } from "@motor-js/engine"
+import { useList } from "@motor-js/engine";
+import MotorSelect from "./components/MotorSelect";
+import { dark, light } from "./themes/theme.js";
+import { EngineContext } from "@motor-js/engine";
 
 export default function App() {
+  const dimension = ["Company Name"];
 
-  const dimension = ['Company Name'];
-
-  const {
-    listData,
-    motorListProps,
-  } = useList({
+  const { listData, motorListProps } = useList({
     dimension,
   });
-
 
   /*
   To Do:
@@ -24,7 +19,6 @@ export default function App() {
   - Add size prop
   - 
   */
-
 
   return (
     <div className="App" style={{ padding: "10px" }}>
