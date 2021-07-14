@@ -19,5 +19,6 @@
   "dependencies": {
     "@motor-js/engine": "^0.2.3",
     "plop": "^2.7.4"
-  }
+  },
+  "gitHead": "13e241a90175aa135782e2acdd6be5479b8bd641"
 }

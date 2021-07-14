@@ -15,7 +15,7 @@ export const Anchor = ({
 }) => {
   const internal = /^\/(?!\/)/.test(path);
   if (!internal) {
-    const isHash = path.startsWith("#");
+    const isHash = path && path.startsWith("#");
     if (isHash) {
       return (
         <StyledAnchor
