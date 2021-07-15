@@ -9,7 +9,7 @@ const menus = [
         {
         id: 2,
         label: "Helpdesk Management",
-        url: "/dashboard-four" 
+        url: "/helpdesk" 
       },
 ];
 

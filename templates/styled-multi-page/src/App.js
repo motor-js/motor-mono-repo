@@ -12,7 +12,7 @@ const App = () => {
       <Suspense fallback={<Preloader />}>
         <Switch>
           <Route exact path="/" component={DashboardOne} />
-          <Route exact path="/dashboard-four" component={DashboardFour} />
+          <Route exact path="/helpdesk" component={DashboardFour} />
 
         </Switch>
       </Suspense>
