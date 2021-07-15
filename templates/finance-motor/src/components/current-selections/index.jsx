@@ -1,21 +1,24 @@
 import React from "react";
-import { Bell } from "react-feather";
-import { useSelections } from "@motor-js/engine"
+import { Bell, Trash, ArrowLeftCircle, ArrowRightCircle } from "react-feather";
+import { useButton } from "@motor-js/engine"
 import { DropdownToggle, Dropdown } from "..";
-import Notification from "../notification";
+import SelectionItem from "../selection-item";
 import {
   StyledDropMenu,
   StyledDropHeader,
-  StyledDropItem,
+  StyledDropBody,
   StyledDropFooter,
   StyledBadge,
+  StyledDropItem,
+  StyledText
 } from "./style";
 
-const CurrentSelections = () => {
+const CurrentSelections = ({ selections, clear }) => {
 
-  const { selections, clearSelections } = useSelections();
+  const handleClear = (field) => clear(field);
+  const { clearSelections } = useButton()
 
-  console.log(selections)
+  const handleClearAll = () => clearSelections()
 
   return (
     <Dropdown direction="down">
@@ -25,13 +28,22 @@ const CurrentSelections = () => {
       </DropdownToggle>
       <StyledDropMenu>
         <StyledDropHeader>Current Selections</StyledDropHeader>
-        <StyledDropItem path="/apps/chat">
-          <Notification />
-        </StyledDropItem>
+        <StyledDropBody>
+        { selections && selections.length > 0 ? 
+          selections.map((data, i) => ( 
+            <SelectionItem key={i} selections={data} clear={handleClear} />
+          )) :
+          <StyledText>nothing selected yet..</StyledText>
+        }
+        </StyledDropBody>
+        { selections && selections.length > 0 &&
+          <StyledDropFooter>
+            <StyledDropItem onClick={handleClearAll}><Trash size={12}/> Clear All</StyledDropItem>
+            <StyledDropItem onClick={handleClearAll}><ArrowLeftCircle size={12}/> Back</StyledDropItem>
+            <StyledDropItem onClick={handleClearAll}><ArrowRightCircle size={12}/> Forward</StyledDropItem>
+          </StyledDropFooter>
+        }
       </StyledDropMenu>
-      <StyledDropFooter>
-
-      </StyledDropFooter>
     </Dropdown>
   );
 };

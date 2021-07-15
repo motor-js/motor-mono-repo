@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled, { device, themeGet } from "../../styled";
+import { DropdownMenu, Anchor } from "..";
 import { hexTorgb } from "../../methods";
-import { Anchor, DropdownMenu } from "..";
 
 export const StyledDropMenu = styled(({ ...rest }) => (
   <DropdownMenu {...rest} />
@@ -68,23 +68,17 @@ export const StyledDropHeader = styled.div`
   margin-bottom: 5px;
 `;
 
-export const StyledDropItem = styled((props) => <Anchor {...props} />)`
-  transition: none;
-  border-radius: 0.25rem;
-  white-space: normal;
-  padding: 8px 10px;
-  margin: 0 5px;
-  width: auto;
-  display: block;
-  &:hover {
-    background-color: ${(props) => hexTorgb(props.theme.colors.light, 0.5)};
-  }
-`;
+export const StyledDropBody = styled.div`
+  max-height: 500px;
+  overflow-y: scroll;
+`
 
 export const StyledDropFooter = styled.div`
+  display: flex;
+  justify-content: center;
   margin-top: 5px;
   border-top: 1px solid ${themeGet("colors.border")};
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   font-size: 10px;
   font-weight: 500;
@@ -111,3 +105,31 @@ export const StyledBadge = styled.span`
   line-height: 2;
   border-radius: 100%;
 `;
+
+export const StyledDropItem = styled((props) => <Anchor {...props} />)`
+  transition: none;
+  border-radius: 0.25rem;
+  white-space: normal;
+  padding: 8px 10px;
+  margin: 0 5px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  cursor: pointer;
+  align-items: center;
+  &:hover {
+    background-color: ${(props) => hexTorgb(props.theme.colors.light, 0.5)};
+  }
+`;
+
+export const StyledText = styled.div`
+  font-weight: 500;
+  color: ${themeGet("colors.text3")};
+  text-align: center;
+  padding: 5px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+

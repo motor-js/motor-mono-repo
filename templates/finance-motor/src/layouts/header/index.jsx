@@ -1,5 +1,7 @@
 import { useState, useCallback, } from "react";
-import { Search, Menu, X, Sliders } from "react-feather";
+import { Search, Menu, X } from "react-feather";
+import { useSelections } from "@motor-js/engine"
+
 import { Button, Navbar } from "../../components";
 import { menuData } from "../../components/data";
 import Logo from "../../components/logo";
@@ -17,7 +19,6 @@ import {
   StyledNavbarBody,
   StyledNavbarTitle,
   StyledMenuBtn,
-  StyledNavBtn
 } from "./style";
 
 const Header = () => {
@@ -25,15 +26,15 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  const { selections, clearSelections } = useSelections();
+
   const searchHandler = useCallback(() => {
     setSearchOpen((prev) => !prev);
   }, []);
 
- // const selectionsHandler = () 
-
   const menuHandler = useCallback(() => {
     setMenuOpen((prev) => !prev);
-  }, [menuOpen]);
+  }, []);
 
   return (
     <>
@@ -66,7 +67,7 @@ const Header = () => {
         </StyledNavbarWrap>
         <StyleNavbarRight>
           <StyledNavbarElement mr={["8px", "15px"]}>
-            <CurrentSelections  />
+            <CurrentSelections selections={selections} clear={clearSelections} />
           </StyledNavbarElement>
           <StyledNavbarElement mr={["8px", "15px"]}>
           <Button variant="texted" onClick={searchHandler}>

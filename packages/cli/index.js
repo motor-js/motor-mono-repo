@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const inquirer = require("inquirer");
 const reactApp = require("./react/reactApp");
+const { program } = require('commander')
 
 const askAppQuestions = () => {
   const questions = [
@@ -37,4 +38,6 @@ const run = async () => {
   return process.exit(0);
 };
 
-run();
+program.command('create')
+.description('Creates a React Motor mashup. You will be prompted to configure your mashup details')
+.action(run());
