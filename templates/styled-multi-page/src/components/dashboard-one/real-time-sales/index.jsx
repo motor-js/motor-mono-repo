@@ -55,7 +55,7 @@ const RealTimeSales = () => {
       qLabel: "today",
     },
     {
-      qField: "=sum(yesterday)",
+      qField: "=sum(yesterday)", // TODO why does today and yesterday not appear in legend
       qLabel: "yesterday",
     },
   ];
@@ -123,7 +123,7 @@ const RealTimeSales = () => {
   RealTimeSalesData.datasets[1].data =
     (data && data.map((n) => n.yesterday)) || [];
   RealTimeSalesData.datasets[1].backgroundColor = "#d1e6fa";
-  RealTimeSalesData.datasets[0].lebel = (dataKeys && dataKeys[1]) || null;
+  RealTimeSalesData.datasets[1].lebel = (dataKeys && dataKeys[1]) || null;
   const { datasets } = RealTimeSalesData;
 
   const handleLegendClick = (datasetIndex) => {
@@ -159,7 +159,7 @@ const RealTimeSales = () => {
                 typeof tick.fillStyle === "string"
                   ? tick.fillStyle // lines
                   : "linear-gradient(to bottom, #13B080, rgba(23,172,126,0.4))"; // canvas gradient
-              const isHidden = chart.getDatasetMeta(tick.datasetIndex).hidden;
+              const isHidden = chart.getDatasetMeta(tick.datasetIndex).hidden; // TODO when hidden should only show one item
               return (
                 <StyledListItem
                   type="button"
