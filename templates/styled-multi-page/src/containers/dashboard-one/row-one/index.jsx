@@ -184,11 +184,6 @@ const RowOne = () => {
     ],
   };
 
-  console.log(conversionChart1);
-  console.log(conversionChart2);
-  console.log(conversionChart3);
-  console.log(conversionChart4);
-
   const conversions = [
     {
       id: 1,
