@@ -1,10 +1,9 @@
 import { StyledLogo } from "./style";
+import logoLight from "../static/motor-red.png";
 
 const Logo = () => {
   return (
-    <StyledLogo path="/">
-      do<span>ar</span>
-    </StyledLogo>
+    <StyledLogo src={logoLight} alt="Logo" />
   );
 };
 
