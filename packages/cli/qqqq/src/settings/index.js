@@ -1,6 +1,6 @@
 export const qlikConfig = {
   //Enter your app config here..
-  host: TEST!, // Qlik Sense Host
+  host: [object Object], // Qlik Sense Host
   secure: true, // Whether your host is secure of not (HTTPS / HTTP)
   port: null, // Qlik Sense site port
   prefix: "", // Prefix
