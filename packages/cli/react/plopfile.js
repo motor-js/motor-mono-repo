@@ -1,3 +1,4 @@
+
 module.exports = function (plop) {
   
   const templateFiles = [
@@ -16,10 +17,10 @@ module.exports = function (plop) {
 
   plop.addHelper('cwd', (p) => process.cwd());
 
-  plop.setGenerator("finance-motor", {
+  plop.setGenerator("create-files", {
 
     // Succintly describes what generator does.
-    description: "Copy components",
+    description: "Create components",
 
     // List of actions to take.
     // Here we "add" new files from our templates or boilerplates.
@@ -31,9 +32,17 @@ module.exports = function (plop) {
         templateFiles: templateFiles,
         force: true
       },
+      {
+        name: "addConfig",
+        type: "add",
+        path: '/{{cwd}}/src/settings/index.js',
+        templateFile: 'plop-templates/qlikConfig.js.hbs',
+        force: true
+      },
     ]
 
-  } );
+  });
+
 };
 
 
