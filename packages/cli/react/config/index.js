@@ -27,11 +27,10 @@ module.exports = [
     packageEntries: [],
   }]
   },
-  /*
   {
     name: "deployment",
     type: "list",
-    question: "Please select your Qlik deploymeny type",
+    question: "Please select your Qlik deployment type",
     choices: ['Qlik Sense SaaS'],
     dependencies: [],
     devDependencies: [],
@@ -55,12 +54,11 @@ module.exports = [
   },
   {
     name: "webIntId",
-    question: "Please enter your web application id",
+    question: "Please enter your web integration id",
     choices: [],
     dependencies: [],
     devDependencies: [],
     packageEntries: [],
   },
-  */
 ]
 

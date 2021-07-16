@@ -19,7 +19,7 @@
   "dependencies": {
     "@motor-js/engine": "^0.2.4",
     "@motor-js/nebula": "^0.1.2",
-    "colors": "^1.4.0",
+    "chalk": "^4.1.1",
     "commander": "^8.0.0",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.1",
