@@ -1,7 +1,7 @@
-import styled, { css, device, themeGet } from "../../styled";
+import styled, { css, device, themeGet } from "../../theme";
 import { Button } from "..";
 import { Input } from "../forms/form-elements";
-import { hexTorgb } from "../../methods";
+import { hexTorgb } from "../../util";
 
 export const StyledSearch = styled.div`
   position: fixed;
@@ -96,6 +96,9 @@ export const StyledSearchClose = styled(({ ...rest }) => <Button {...rest} />)`
 export const StyledSearchBody = styled.div`
   padding: 15px 15px 20px;
   background-color: #fff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 60%;
   font-size: 13px;
   ${device.large} {
     padding: 25px 25px 30px;
@@ -115,7 +118,9 @@ export const StyledNavList = styled.ul`
   padding-left: 0;
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
+  height: 80%;
   margin-bottom: 0;
   ${device.large} {
     flex-direction: row;
@@ -123,13 +128,8 @@ export const StyledNavList = styled.ul`
 `;
 
 export const StyledNavListItem = styled.li`
-  &:not(:first-of-type) {
-    margin-top: 2px;
-    ${device.large} {
-      margin-top: 0;
-      margin-left: 5px;
-    }
-  }
+  margin: 2px;
+  cursor: pointer;
 `;
 
 export const StyledNavBtn = styled.a`

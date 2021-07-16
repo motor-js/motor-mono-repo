@@ -7,7 +7,7 @@ import styled, {
   border as borderStyle,
   typography,
   themeGet,
-} from "../../../styled";
+} from "../../../theme";
 import tinycolor2 from "tinycolor2";
 import { Link } from "react-router-dom";
 

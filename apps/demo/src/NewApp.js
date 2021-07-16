@@ -17,7 +17,7 @@ const NewApp = () => {
   const { engine } = useConnect({config})
   return (
     <>
-    { engine && 
+    { //engine && 
       <Motor //engine={engine}
         config={{  
           host: "motor.eu.qlikcloud.com", // Qlik Sense Host

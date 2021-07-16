@@ -1,8 +1,21 @@
 import {
   BarChart2,
+  Calendar,
+  MessageSquare,
+  Users,
+  FileText,
+  Mail,
+  LogIn,
+  UserPlus,
+  UserCheck,
+  ShieldOff,
+  User,
   File,
   PieChart,
   Package,
+  Layers,
+  Box,
+  Archive,
 } from "react-feather";
 
 const menus = [
@@ -10,36 +23,40 @@ const menus = [
     id: 1,
     label: "Group 1",
     url: "/",
-    Icon: PieChart,
     submenu: [
       {
         id: 11,
         label: "Dashboard 1",
         url: "/",
-        Icon: BarChart2,
+        Icon: PieChart,
       },
       {
         id: 12,
         label: "Dashboard 2",
-        url: "/dashboard-two",
-        Icon: PieChart,
+        url: "/",
+        Icon: BarChart2,
       }
     ],
   },
   {
-    id: 2,
-    label: "Group 2",
+    id: 1,
+    label: "Group 1",
     url: "/",
-    Icon: Package,
     submenu: [
       {
-        id: 21,
-        label: "Dashboard 3",
-        url: "/dashboard-three",
-        Icon: File,
+        id: 11,
+        label: "Dashboard 1",
+        url: "/",
+        Icon: PieChart,
+      },
+      {
+        id: 12,
+        label: "Dashboard 2",
+        url: "/",
+        Icon: BarChart2,
       }
     ],
-  }
+  },
 ];
 
 export default menus;

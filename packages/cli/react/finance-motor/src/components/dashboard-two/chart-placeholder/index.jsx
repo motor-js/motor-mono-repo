@@ -2,11 +2,7 @@ import { Card, CardBody } from "../..";
 
 import {
   StyledCardTitle,
-  StyledCardBottom,
-  StyledCardRate,
-  StyledCardText,
-  StyledCardChangePercent,
-  StyledChart,
+  StyledCardBottom
 } from "./style";
 
 const Chart = () => {

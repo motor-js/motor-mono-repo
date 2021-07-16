@@ -2,10 +2,10 @@ import React from "react";
 import Header from "./header";
 import Footer from "./footer";
 
-const Layout = ({ children, hasSidebar, hideFooter, sidebarLayout }) => {
+const Layout = ({ children, hideFooter }) => {
   return (
     <>
-      <Header hasSidebar={hasSidebar} sidebarLayout={sidebarLayout} />
+      <Header />
       {children}
       {!hideFooter && <Footer />}
     </>

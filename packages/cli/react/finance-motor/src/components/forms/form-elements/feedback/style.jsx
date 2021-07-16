@@ -1,4 +1,4 @@
-import styled, { themeGet, css } from "../../../../styled";
+import styled, { themeGet, css } from "../../../../theme";
 
 export const StyledFeedback = styled.div`
   width: 100%;

@@ -1,4 +1,4 @@
-import styled, { css, themeGet } from "../../../styled";
+import styled, { css, themeGet } from "../../../theme";
 
 export const StyledSpinner = styled.div`
   ${({ $color }) =>

@@ -14,7 +14,6 @@ const WelcomeArea = () => {
           <Breadcrumb
             prev={[{ text: "Group 1", link: "/" }]}
             title="Dashboard 2"
-            wcText="Welcome"
           />
         </StyledWelcomeLeft>
         <StyledWelcomeRight>

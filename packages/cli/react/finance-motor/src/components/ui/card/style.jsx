@@ -9,7 +9,7 @@ import styled, {
   color as colorStyles,
   position as positionProps,
   border as borderStyles,
-} from "../../../styled";
+} from "../../../theme";
 import { Anchor } from "../anchor";
 
 const colorCSS = css`

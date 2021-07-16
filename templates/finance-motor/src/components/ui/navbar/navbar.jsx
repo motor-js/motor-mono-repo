@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { getSiblings } from "../../../methods";
+import { getSiblings } from "../../../util";
 import { useClickOutside } from "../../../hooks";
 import {
   StyledNavbar,

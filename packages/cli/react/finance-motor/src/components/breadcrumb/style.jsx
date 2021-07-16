@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import styled, { themeGet, css } from "../../styled";
+import styled, { themeGet, css } from "../../theme";
 import { BreadcrumbItem, Breadcrumb } from "..";
 
 export const StyledBreadWrap = styled((props) => <Breadcrumb {...props} />)`

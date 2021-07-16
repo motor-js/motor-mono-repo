@@ -6,7 +6,7 @@ import styled, {
   space,
   border as borderStyles,
   device,
-} from "../../../styled";
+} from "../../../theme";
 import tinycolor2 from "tinycolor2";
 
 export const InputStyles = css`

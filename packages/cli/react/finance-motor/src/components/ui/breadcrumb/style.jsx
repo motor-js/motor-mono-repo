@@ -1,4 +1,4 @@
-import styled, { space, css, themeGet } from "../../../styled";
+import styled, { space, css, themeGet } from "../../../theme";
 
 export const StyledNav = styled.nav``;
 

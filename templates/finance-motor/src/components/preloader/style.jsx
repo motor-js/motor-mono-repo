@@ -1,4 +1,4 @@
-import styled from "../../styled";
+import styled from "../../theme";
 
 export const StyledLoader = styled.div`
   width: 100%;

@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import styled, { themeGet, device } from "../../styled";
+import styled, { themeGet, device } from "../../theme";
 import { Anchor } from "../../components";
 
 export const StyledFooter = styled.footer`

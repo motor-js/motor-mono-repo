@@ -7,7 +7,7 @@ import styled, {
   layout,
   css,
   themeGet,
-} from "../../../styled";
+} from "../../../theme";
 import { Link } from "react-router-dom";
 
 const anchorStyle = css`

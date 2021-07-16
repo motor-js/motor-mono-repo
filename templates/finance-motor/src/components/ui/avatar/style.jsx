@@ -5,7 +5,7 @@ import styled, {
   space,
   color as colorStyles,
   typography,
-} from "../../../styled";
+} from "../../../theme";
 
 export const StyledAvatar = styled(({ display, mr, ...rest }) => (
   <div {...rest} />

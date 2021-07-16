@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import styled from "../../../../styled";
+import styled from "../../../../theme";
 import {
   InputStyles,
   SuccessInputStyles,

@@ -1,4 +1,4 @@
-import styled, { device } from "../../../styled";
+import styled, { device } from "../../../theme";
 
 export const StyledWelcomeArea = styled.div`
   margin-bottom: 10px;

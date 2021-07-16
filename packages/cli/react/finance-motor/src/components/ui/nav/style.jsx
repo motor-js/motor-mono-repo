@@ -5,7 +5,7 @@ import styled, {
   space,
   device,
   typography,
-} from "../../../styled";
+} from "../../../theme";
 import { Anchor } from "../anchor";
 
 export const StyledNav = styled(

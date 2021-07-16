@@ -1,20 +1,12 @@
-import { useState, useCallback, useContext } from "react";
-import { Search, Menu, X, ArrowLeft } from "react-feather";
+import { useState, useCallback, } from "react";
+import { Search, Menu, X } from "react-feather";
+import { useSelections } from "@motor-js/engine"
+
 import { Button, Navbar } from "../../components";
 import { menuData } from "../../components/data";
 import Logo from "../../components/logo";
 import SearchBar from "../../components/search-bar";
-
-/*
-import MessageDropdown from "../../components/header/message-dropdown";
-import NotificationDropdown from "../../components/header/notification-dropdown";
-import ProfileDropdown from "../../components/header/profile-dropdown";
-import NavSearch from "../../components/header/nav-search";
-
-//import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { toggleSidebar, toggleBody } from "../../redux/slices/ui";
-*/
-
+import CurrentSelections from "../../components/current-selections";
 
 import {
   StyledHeader,
@@ -27,13 +19,14 @@ import {
   StyledNavbarBody,
   StyledNavbarTitle,
   StyledMenuBtn,
-  StyledSidebarBtn,
 } from "./style";
 
-const Header = ({ /*hasSidebar, sidebarLayout  */}) => {
+const Header = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+
+  const { selections, clearSelections } = useSelections();
 
   const searchHandler = useCallback(() => {
     setSearchOpen((prev) => !prev);
@@ -41,7 +34,7 @@ const Header = ({ /*hasSidebar, sidebarLayout  */}) => {
 
   const menuHandler = useCallback(() => {
     setMenuOpen((prev) => !prev);
-  }, [menuOpen]);
+  }, []);
 
   return (
     <>
@@ -73,10 +66,13 @@ const Header = ({ /*hasSidebar, sidebarLayout  */}) => {
           </StyledNavbarMenu>
         </StyledNavbarWrap>
         <StyleNavbarRight>
-          <StyledNavbarElement>
-            <Button variant="texted" onClick={searchHandler}>
-              <Search className="header-icon" />
-            </Button>
+          <StyledNavbarElement mr={["8px", "15px"]}>
+            <CurrentSelections selections={selections} clear={clearSelections} />
+          </StyledNavbarElement>
+          <StyledNavbarElement mr={["8px", "15px"]}>
+          <Button variant="texted" onClick={searchHandler}>
+            <Search className="header-icon" />
+          </Button>
           </StyledNavbarElement>
         </StyleNavbarRight>
       </StyledHeader>

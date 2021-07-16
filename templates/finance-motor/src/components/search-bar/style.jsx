@@ -1,7 +1,7 @@
-import styled, { css, device, themeGet } from "../../styled";
+import styled, { css, device, themeGet } from "../../theme";
 import { Button } from "..";
 import { Input } from "../forms/form-elements";
-import { hexTorgb } from "../../methods";
+import { hexTorgb } from "../../util";
 
 export const StyledSearch = styled.div`
   position: fixed;

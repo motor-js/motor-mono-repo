@@ -34,4 +34,3 @@ export { Container, Row, Col } from "./grid/grid";
 export { Nav, NavLink, NavDivider } from "./ui/nav/nav";
 //export { default as Text } from "./ui/text";
 export { Button } from "./ui/button/button";
-export { ButtonGroup, ButtonToolbar } from "./ui/button-group/button-group";

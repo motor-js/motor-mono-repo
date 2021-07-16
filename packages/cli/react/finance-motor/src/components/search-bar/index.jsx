@@ -1,5 +1,7 @@
-import { Search, X } from "react-feather";
+import { useState, useEffect } from "react";
+import { X } from "react-feather";
 import { Input } from "../forms/form-elements";
+import { useSearch } from "@motor-js/engine"
 import {
   StyledSearch,
   StyledSearchHeader,
@@ -15,6 +17,23 @@ import {
 
 const SearchBar = ({ isOpen, onClose }) => {
 
+  const [options, setOptions] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+
+  const qCount = 100;
+  const qGroupItemCount = 100;
+
+  const { 
+    flatResults,
+    flatSelect,
+  } = useSearch({ 
+    searchValue,
+    qCount,
+    qGroupItemCount
+  })
+
+
+  // Temporary Search suggestions for you to update
   const searchSuggestions = [
     {
     item: "Search Term A"
@@ -27,6 +46,19 @@ const SearchBar = ({ isOpen, onClose }) => {
     }
   ];
 
+  const handleSearch = (value) => (
+    setSearchValue(value)
+  )
+
+  const handleSelect = (val, dim) => {
+    flatSelect(dim,val)
+    onClose()
+  };
+
+  useEffect(() => {
+    setOptions(flatResults)
+  },[flatResults])
+
   return (
     <StyledSearch $isOpen={isOpen}>
       <StyledSearchHeader>
@@ -37,11 +69,8 @@ const SearchBar = ({ isOpen, onClose }) => {
           placeholder="Type and hit enter to search..."
           customStyle="noborder"
           fontSize={["14px", null, null, "16px"]}
-          onChange={(e) => ( console.log(e.target.value))}
+          onChange={(e) => handleSearch(e.target.value)}
         />
-        <StyledSearchBtn variant="texted" color="light">
-          <Search />
-        </StyledSearchBtn>
         <StyledSearchClose variant="texted" onClick={onClose}>
           <X />
         </StyledSearchClose>
@@ -49,31 +78,19 @@ const SearchBar = ({ isOpen, onClose }) => {
       <StyledSearchBody>
         <StyledSearchTitle>Search Results</StyledSearchTitle>
         <StyledNavList>
-          
-          <StyledNavListItem>
-            <StyledNavBtn href="#">Result 1</StyledNavBtn>
-          </StyledNavListItem>
-          <StyledNavListItem>
-            <StyledNavBtn href="#">Result 1</StyledNavBtn>
-          </StyledNavListItem>
-          <StyledNavListItem>
-            <StyledNavBtn href="#">Result 1</StyledNavBtn>
-          </StyledNavListItem>
-          <StyledNavListItem>
-            <StyledNavBtn href="#">Result 1</StyledNavBtn>
-          </StyledNavListItem>
-          <StyledNavListItem>
-            <StyledNavBtn href="#">Result 1</StyledNavBtn>
-          </StyledNavListItem>
-
+          { options && options.map((data,i) => (
+            <StyledNavListItem key={i} >
+              <StyledNavBtn onClick={() => handleSelect(data.value, data.dimension)}>{data.value}</StyledNavBtn>
+            </StyledNavListItem>
+          ))}
         </StyledNavList>
       </StyledSearchBody>
       <StyledSearchBody>
         <StyledNavDivider />
         <StyledSearchTitle>Search Suggestions</StyledSearchTitle>
         <StyledNavList>
-          {searchSuggestions.map((data) => (
-            <StyledNavListItem>
+          {searchSuggestions.map((data, i) => (
+            <StyledNavListItem key={i}>
               <StyledNavBtn href="#">{data.item}</StyledNavBtn>
             </StyledNavListItem>
           ))}

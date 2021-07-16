@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, theme } from "./styled";
+import { ThemeProvider, theme } from "./theme";
 import { GlobalStyle } from "./css";
 import { Motor } from '@motor-js/engine'
 import { appSettings, qlikConfig } from "./settings"

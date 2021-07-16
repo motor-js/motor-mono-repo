@@ -4,7 +4,7 @@ import styled, {
   border as borderStyle,
   css,
   themeGet,
-} from "../../styled";
+} from "../../theme";
 
 const conentCSS = css`
   padding: 20px;

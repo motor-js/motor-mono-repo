@@ -1,4 +1,4 @@
-import styled, { space, css, device, border, typography } from "../../styled";
+import styled, { space, css, device, border, typography } from "../../theme";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 
 export const StyledContainer = styled(

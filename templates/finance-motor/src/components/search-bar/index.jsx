@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, X } from "react-feather";
+import { X } from "react-feather";
 import { Input } from "../forms/form-elements";
 import { useSearch } from "@motor-js/engine"
 import {
@@ -71,9 +71,6 @@ const SearchBar = ({ isOpen, onClose }) => {
           fontSize={["14px", null, null, "16px"]}
           onChange={(e) => handleSearch(e.target.value)}
         />
-        <StyledSearchBtn variant="texted" color="light">
-          <Search />
-        </StyledSearchBtn>
         <StyledSearchClose variant="texted" onClick={onClose}>
           <X />
         </StyledSearchClose>
