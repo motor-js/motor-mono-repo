@@ -4,7 +4,7 @@ import { deepMerge } from "../utils/object";
 
 const initialProps = {
   qId: null,
-  qName: null,
+  // qName: null,
   qComment: undefined,
   qNumberPresentation: undefined,
   qIncludeInBookmark: false,
@@ -12,9 +12,11 @@ const initialProps = {
 };
 
 const useVariable = (props) => {
+  const qName = typeof props === "string" ? props : props.qName || null;
+
   const {
     qId,
-    qName,
+    // qName,
     qComment,
     qNumberPresentation,
     qIncludeInBookmark,
@@ -46,7 +48,7 @@ const useVariable = (props) => {
       qComment,
       qNumberPresentation,
       qIncludeInBookmark,
-      qDefinition,
+      qDefinition: qDefinition.toString(),
     };
 
     return qProp;
@@ -62,7 +64,7 @@ const useVariable = (props) => {
   ) => {
     const qDoc = await engine;
 
-    let qObject;
+    let qLocalObject;
 
     if (!qId && !qName && !qDefinition) {
       const qSessionObject = await qDoc.createSessionObject({
@@ -74,25 +76,27 @@ const useVariable = (props) => {
           qType: "variable",
         },
       });
-      qObject = await qSessionObject.getLayout();
-      setQLayout(qObject);
+      qLocalObject = await qSessionObject.getLayout();
+      setQLayout(qLocalObject);
     }
     if (qId && !qDefinition) {
-      qObject = await qDoc.getVariableById({
+      qLocalObject = await qDoc.getVariableById({
         qId,
       });
     }
     if (qName && !qDefinition) {
-      qObject = await qDoc.getVariableByName({
+      qLocalObject = await qDoc.getVariableByName({
         qName,
       });
     }
     if (qName && qDefinition) {
       try {
-        qObject = await getVaribale(null, qName);
+        qLocalObject = await qDoc.getVariableByName({
+          qName,
+        });
       } catch (err) {
-        if (!qObject) {
-          qObject = await qDoc.createSessionVariable(
+        if (!qLocalObject) {
+          qLocalObject = await qDoc.createSessionVariable(
             generateQProp(
               qId,
               qName,
@@ -102,7 +106,9 @@ const useVariable = (props) => {
               qDefinition
             )
           );
-          setQLayout(qObject);
+
+          qObject.current = await qLocalObject;
+          update(qObject.current);
         }
         if ((error.code = 18001)) {
           setError("Variable already exists");
@@ -112,7 +118,7 @@ const useVariable = (props) => {
       }
     }
 
-    return qObject;
+    return qLocalObject;
   };
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
@@ -137,9 +143,36 @@ const useVariable = (props) => {
           qComment || qProperties.qComment,
           qNumberPresentation || qProperties.qNumberPresentation,
           qIncludeInBookmark || qProperties.qIncludeInBookmark,
-          qDefinition || qProperties.qDefinition
+          qDefinition.toString() || qProperties.qDefinition.toString()
         )
       );
+      update(qObject.current);
+    }
+  }, []);
+
+  const setValue = useCallback(async (value) => {
+    // const {
+    //   qId,
+    //   qName,
+    //   qComment,
+    //   qNumberPresentation,
+    //   qIncludeInBookmark,
+    //   qDefinition,
+    // } = props;
+    if (qObject.current) {
+      const qProperties = await getProperties();
+
+      const qObject = await qObject.current.setProperties(
+        generateQProp(
+          qProperties.qInfo.qId,
+          qProperties.qName,
+          qProperties.qComment,
+          qProperties.qNumberPresentation,
+          qProperties.qIncludeInBookmark,
+          value.toString()
+        )
+      );
+      update(qObject.current);
     }
   }, []);
 
@@ -170,6 +203,7 @@ const useVariable = (props) => {
         qObject.current.on("changed", () => {
           update(qObject.current);
         });
+
         update(qObject.current);
       } catch (err) {
         if (err.code === -2) {
@@ -190,6 +224,7 @@ const useVariable = (props) => {
     ...qLayout,
     qProperties,
     setProperties,
+    setValue,
     error,
   };
 };
