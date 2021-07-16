@@ -73,15 +73,6 @@ export const StyledSearchInput = styled(({ ...rest }) => <Input {...rest} />)`
   }
 `;
 
-export const StyledSearchBtn = styled(({ ...rest }) => <Button {...rest} />)`
-  svg {
-    width: 20px;
-    height: 20px;
-    stroke-width: 2.8px;
-    margin-top: -2px;
-  }
-`;
-
 export const StyledSearchClose = styled(({ ...rest }) => <Button {...rest} />)`
   color: ${themeGet("colors.text3")};
   margin-left: 5px;

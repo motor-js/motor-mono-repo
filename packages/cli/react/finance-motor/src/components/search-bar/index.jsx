@@ -5,7 +5,6 @@ import { useSearch } from "@motor-js/engine"
 import {
   StyledSearch,
   StyledSearchHeader,
-  StyledSearchBtn,
   StyledSearchClose,
   StyledSearchBody,
   StyledSearchTitle,

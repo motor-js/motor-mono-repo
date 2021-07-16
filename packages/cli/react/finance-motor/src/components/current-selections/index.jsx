@@ -18,8 +18,6 @@ const CurrentSelections = ({ selections, clear }) => {
   const handleClear = (field) => clear(field);
   const { clearSelections, previousSelection, nextSelection } = useButton()
 
-  const handleClearAll = () => clearSelections()
-
   return (
     <Dropdown direction="down">
       <DropdownToggle variant="texted">

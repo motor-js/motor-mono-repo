@@ -12,17 +12,11 @@ module.exports = [
   name: "template",
   type: "list",
   question: "Please select your Motor template",
-  choices: ["Finance","Retail"],
+  choices: ["Solar"],
   actions: [
     {
-    choice: "Finance",
+    choice: "Solar",
     dependencies: ["@motor-js/engine","@motor-js/nebula"],
-    devDependencies: [],
-    packageEntries: [],
-  },
-  {
-    choice: "Retail",
-    dependencies: ["@motor-js/engine"],
     devDependencies: [],
     packageEntries: [],
   }]
@@ -32,33 +26,18 @@ module.exports = [
     type: "list",
     question: "Please select your Qlik deployment type",
     choices: ['Qlik Sense SaaS'],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
   {
     name: "tenant",
     question: "Please enter your tenant name (e.g. motor.eu.qlikcloud.com)",
-    choices: [],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
   {
     name: "appId",
     question: "Please enter your application id",
-    choices: [],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
   {
     name: "webIntId",
     question: "Please enter your web integration id",
-    choices: [],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
 ]
 
