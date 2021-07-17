@@ -3,24 +3,24 @@ import { EngineContext } from "../contexts/EngineProvider";
 import { deepMerge } from "../utils/object";
 
 const initialProps = {
-  qId: null,
+  id: null,
   // qName: null,
-  qComment: undefined,
-  qNumberPresentation: undefined,
-  qIncludeInBookmark: false,
-  qDefinition: null,
+  comment: undefined,
+  numberPresentation: undefined,
+  includeInBookmark: false,
+  definition: null,
 };
 
 const useVariable = (props) => {
-  const qName = typeof props === "string" ? props : props.qName || null;
+  const name = typeof props === "string" ? props : props.name || null;
 
   const {
-    qId,
+    id,
     // qName,
-    qComment,
-    qNumberPresentation,
-    qIncludeInBookmark,
-    qDefinition,
+    comment,
+    numberPresentation,
+    includeInBookmark,
+    definition,
   } = deepMerge(initialProps, props);
 
   const { engine, engineError } = useContext(EngineContext) || {};
@@ -151,14 +151,6 @@ const useVariable = (props) => {
   }, []);
 
   const setValue = useCallback(async (value) => {
-    // const {
-    //   qId,
-    //   qName,
-    //   qComment,
-    //   qNumberPresentation,
-    //   qIncludeInBookmark,
-    //   qDefinition,
-    // } = props;
     if (qObject.current) {
       const qProperties = await getProperties();
 
@@ -192,12 +184,12 @@ const useVariable = (props) => {
 
       try {
         qObject.current = await getVaribale(
-          qId,
-          qName,
-          qComment,
-          qNumberPresentation,
-          qIncludeInBookmark,
-          qDefinition
+          id,
+          name,
+          comment,
+          numberPresentation,
+          includeInBookmark,
+          definition
         );
 
         qObject.current.on("changed", () => {
@@ -213,7 +205,7 @@ const useVariable = (props) => {
         }
       }
     })();
-  }, [qId, qName, engine]);
+  }, [id, name, engine]);
 
   if (qLayout && qLayout.qVariableList) {
     qLayout.variableList = qLayout.qVariableList.qItems;
