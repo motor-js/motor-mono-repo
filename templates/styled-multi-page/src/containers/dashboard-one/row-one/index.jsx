@@ -1,7 +1,7 @@
 import { Col } from "../../../components";
 // import { conversions } from "../../../components/data/dashboard-one";
 import Conversion from "../../../components/dashboard-one/conversion";
-import { useData } from "@motor-js/engine";
+import { useData, useTable } from "@motor-js/engine";
 
 const RowOne = () => {
   const cols = [
@@ -30,6 +30,42 @@ const RowOne = () => {
 
   const { dataSet } = useData({
     cols,
+  });
+  const conversionCols = [
+    {
+      dataKey: "id",
+      qField: "conversions_id",
+      qLabel: "id",
+    },
+    {
+      dataKey: "title",
+      qField: "title",
+      qLabel: "title",
+    },
+    {
+      dataKey: "rate",
+      qField: "rate",
+      qLabel: "rate",
+    },
+    {
+      dataKey: "percentageChange",
+      qField: "percentageChange",
+      qLabel: "percentageChange",
+    },
+    {
+      dataKey: "growthChange",
+      qField: "growthChange",
+      qLabel: "growthChange",
+    },
+    {
+      dataKey: "timeChange",
+      qField: "timeChange",
+      qLabel: "timeChange",
+    },
+  ];
+
+  const { dataSet: dataSet2 } = useTable({
+    cols: conversionCols,
   });
 
   const { data } = dataSet;
@@ -187,64 +223,63 @@ const RowOne = () => {
   const conversions = [
     {
       id: 1,
-      title: "Conversion Rate",
-      rate: "0.81%",
+      title: dataSet2 && dataSet2[0].title.text,
+      rate: dataSet2 && dataSet2[0].rate.text,
       change: {
-        percentage: "1.2%",
-        growth: "up",
-        time: "than last week",
+        percentage: dataSet2 && dataSet2[0].percentageChange.text,
+        growth: dataSet2 && dataSet2[0].growthChange.text,
+        time: dataSet2 && dataSet2[0].timeChange.text,
       },
       chart: conversionChart1,
     },
     {
       id: 2,
-      title: "Unique Purchases",
-      rate: "3,137",
+      title: dataSet2 && dataSet2[1].title.text,
+      rate: dataSet2 && dataSet2[1].rate.text,
       change: {
-        percentage: "0.7%",
-        growth: "down",
-        time: "than last week",
+        percentage: dataSet2 && dataSet2[1].percentageChange.text,
+        growth: dataSet2 && dataSet2[1].growthChange.text,
+        time: dataSet2 && dataSet2[1].timeChange.text,
       },
       chart: conversionChart2,
     },
     {
       id: 3,
-      title: "Avg. Order Value",
-      rate: "$306.20",
+      title: dataSet2 && dataSet2[2].title.text,
+      rate: dataSet2 && dataSet2[2].rate.text,
       change: {
-        percentage: "0.3%",
-        growth: "down",
-        time: "than last week",
+        percentage: dataSet2 && dataSet2[2].percentageChange.text,
+        growth: dataSet2 && dataSet2[2].growthChange.text,
+        time: dataSet2 && dataSet2[2].timeChange.text,
       },
       chart: conversionChart3,
     },
     {
       id: 4,
-      title: "Order Quantity",
-      rate: "1,650",
+      title: dataSet2 && dataSet2[3].title.text,
+      rate: dataSet2 && dataSet2[3].rate.text,
       change: {
-        percentage: "2.1%",
-        growth: "up",
-        time: "than last week",
+        percentage: dataSet2 && dataSet2[3].percentageChange.text,
+        growth: dataSet2 && dataSet2[3].growthChange.text,
+        time: dataSet2 && dataSet2[3].timeChange.text,
       },
       chart: conversionChart4,
     },
   ];
 
-  // console.log("conversions", conversions);
-  // console.log("dataSet", dataSet);
   return (
     <>
-      {conversions.map((data) => (
-        <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
-          <Conversion
-            title={data.title}
-            rate={data.rate}
-            change={data.change}
-            chart={data.chart}
-          />
-        </Col>
-      ))}
+      {dataSet2 &&
+        conversions.map((data) => (
+          <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
+            <Conversion
+              title={data.title}
+              rate={data.rate}
+              change={data.change}
+              chart={data.chart}
+            />
+          </Col>
+        ))}
     </>
   );
 };
