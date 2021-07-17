@@ -1,8 +1,8 @@
 import { Card, CardBody, SectionTitle } from "../../../components";
-import img1 from "../../../images/img15.jpg";
-import img2 from "../../../images/img14.jpg";
-import img3 from "../../../images/img23.jpg";
-import img4 from "../../../images/img22.jpg";
+import img1 from "../../../images/Katherine Lumaad.jpg";
+import img2 from "../../../images/Adrian Monino.jpg";
+import img3 from "../../../images/Rolando Paloso.jpg";
+import img4 from "../../../images/Dyanne Rose Aceron.jpg";
 import Item from "./item";
 import { StyledHeader } from "./style";
 
