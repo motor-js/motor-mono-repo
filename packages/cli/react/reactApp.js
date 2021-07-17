@@ -62,21 +62,22 @@ const installPackages = async (configList, answers) => {
 
   await new Promise(resolve => {
     const spinner = ora(chalk.magentaBright("🔍 Installing additional dependencies...")).start();
-
     shell.exec(`npm install --save ${dependencies.join(" ")}`, () => {
-      spinner.succeed();
-      resolve();
+      shell.exec(`npm install --save ${devDependencies.join(" ")}`, () => {
+        spinner.succeed();
+        resolve();
+      });
     });
   });
 
-  await new Promise(resolve => {
+  /*await new Promise(resolve => {
     const spinner = ora(chalk.magentaBright("🔍 Installing additional dev dependencies...")).start();
 
     shell.exec(`npm install --save-dev ${devDependencies.join(" ")}`, () => {
       spinner.succeed();
       resolve();
     });
-  });
+  });*/
 
 };
 

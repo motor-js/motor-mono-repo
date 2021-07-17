@@ -16,8 +16,15 @@ module.exports = [
   actions: [
     {
     choice: "Solar",
-    dependencies: ["@motor-js/engine","@motor-js/nebula"],
-    devDependencies: [],
+    dependencies: [
+      "@motor-js/engine",
+      "@styled-system/theme-get",
+      "classnames",
+    ],
+    devDependencies: [
+      "react-feather",
+      "react-router-dom",
+    ],
     packageEntries: [],
   }]
   },
