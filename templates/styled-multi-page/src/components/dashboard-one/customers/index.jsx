@@ -14,9 +14,6 @@ import {
   StyledFooter,
   StyledFooterLink,
 } from "./style";
-
-import img1 from "../../../images/img23.80b3363e.jpg";
-import img2 from "../../../images/img16.6a70955e.jpg";
 import { useEffect, useState } from "react";
 
 const Customers = () => {
