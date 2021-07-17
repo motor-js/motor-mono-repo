@@ -6,7 +6,7 @@ import { menuData } from "../../components/data";
 import MessageDropdown from "../../components/header/message-dropdown";
 import NotificationDropdown from "../../components/header/notification-dropdown";
 import ProfileDropdown from "../../components/header/profile-dropdown";
-import NavSearch from "../../components/header/nav-search";
+
 import Logo from "../../components/logo";
 import SearchBar from "../../components/search-bar";
 import CurrentSelections from "../../components/current-selections";
@@ -164,7 +164,6 @@ const Header = ({ hasSidebar, sidebarLayout }) => {
           </StyledNavbarElement>
         </StyleNavbarRight>
       </StyledHeader>
-      {/* <NavSearch isOpen={searchOpen} onClose={searchHandler} /> */}
     </>
   );
 };

@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled, { themeGet } from "../../styled";
-import { MediaBody, Anchor } from "..";
+import { MediaBody } from "..";
 import { hexTorgb } from "../../methods";
 
 export const StyledMediaBody = styled(({ ...rest }) => <MediaBody {...rest} />)`
@@ -29,7 +29,7 @@ export const StyledSpan = styled.span`
   }
 `;
 
-export const StyledSelectionItem = styled((props) => <Anchor {...props} />)`
+export const StyledSelectionItem = styled.span`
   transition: none;
   border-radius: 0.25rem;
   white-space: normal;

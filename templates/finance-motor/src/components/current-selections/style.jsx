@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled, { device, themeGet } from "../../styled";
-import { DropdownMenu, Anchor } from "..";
+import { DropdownMenu } from "..";
 import { hexTorgb } from "../../methods";
 
 export const StyledDropMenu = styled(({ ...rest }) => (
@@ -71,7 +71,7 @@ export const StyledDropHeader = styled.div`
 export const StyledDropBody = styled.div`
   max-height: 500px;
   overflow-y: scroll;
-`
+`;
 
 export const StyledDropFooter = styled.div`
   display: flex;
@@ -106,7 +106,7 @@ export const StyledBadge = styled.span`
   border-radius: 100%;
 `;
 
-export const StyledDropItem = styled((props) => <Anchor {...props} />)`
+export const StyledDropItem = styled.span`
   transition: none;
   border-radius: 0.25rem;
   white-space: normal;
@@ -132,4 +132,3 @@ export const StyledText = styled.div`
     cursor: pointer;
   }
 `;
-

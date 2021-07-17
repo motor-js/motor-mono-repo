@@ -1,5 +1,3 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
 import { Trash2 } from "react-feather";
 import {
   StyledMediaBody,
@@ -11,12 +9,10 @@ import {
 import { Media } from "..";
 
 const SelectionItem = ({ selections, clear }) => {
-  const location = useLocation();
-
   const { qField, qSelected } = selections;
 
   return (
-    <StyledSelectionItem path={location.pathname}>
+    <StyledSelectionItem>
       <Media>
         <StyledMediaBody>
           <StyledStrong>{qField}</StyledStrong>
