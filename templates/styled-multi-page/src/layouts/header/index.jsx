@@ -139,12 +139,12 @@ const Header = ({ hasSidebar, sidebarLayout }) => {
           </StyledNavbarMenu>
         </StyledNavbarWrap>
         <StyleNavbarRight>
-          {/*    <StyledNavbarElement mr={["8px", "15px"]}>
-           <CurrentSelections
+          <StyledNavbarElement mr={["8px", "15px"]}>
+            <CurrentSelections
               selections={selections}
               clear={clearSelections}
             />
-          </StyledNavbarElement> */}
+          </StyledNavbarElement>
           <StyledNavbarElement>
             <Button variant="texted" onClick={searchHandler}>
               <Search className="header-icon" />
