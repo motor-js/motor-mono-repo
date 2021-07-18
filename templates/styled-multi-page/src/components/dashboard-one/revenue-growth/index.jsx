@@ -5,7 +5,7 @@ import {
   CardBody,
   Row,
   Col,
-  ApexCharts,
+  // ApexCharts,
   ApexAreaChart,
   SectionTitle,
 } from "../../../components";
@@ -145,9 +145,9 @@ const RevenueGrowth = () => {
   };
 
   const chartToggle = (e) => {
-    const target = e.currentTarget;
-    target.classList.toggle("hidden");
-    ApexCharts.exec(options.chart.id, "toggleSeries", target.value);
+    // const target = e.currentTarget;
+    // target.classList.toggle("hidden");
+    // ApexCharts.exec(options.chart.id, "toggleSeries", target.value);
   };
 
   return (

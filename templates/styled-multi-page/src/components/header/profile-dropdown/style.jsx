@@ -63,6 +63,25 @@ export const StyledAuthorRole = styled.p`
   color: ${themeGet("colors.text3")};
   margin-bottom: 25px;
 `;
+export const StyledReload = styled.p`
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: ${themeGet("colors.text2")};
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  clear: both;
+  font-weight: 400;
+  width: 100%;
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 15px;
+  }
+`;
 
 export const StyledDropItem = styled(({ mt, ...rest }) => <Anchor {...rest} />)`
   padding: 0;

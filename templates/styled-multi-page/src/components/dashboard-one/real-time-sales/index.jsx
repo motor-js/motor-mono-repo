@@ -116,7 +116,7 @@ const RealTimeSales = () => {
 
   const inputEl = useRef(null);
   const [legendRendered, setLegendRendered] = useState(false);
-  const [, forceUpdate] = useState();
+  // const [, forceUpdate] = useState();
   RealTimeSalesData.labels = (data && data.map((n) => n.Category)) || [];
   RealTimeSalesData.datasets[0].data = (data && data.map((n) => n.today)) || [];
   RealTimeSalesData.datasets[0].backgroundColor = "#69b2f8";
@@ -128,13 +128,13 @@ const RealTimeSales = () => {
   const { datasets } = RealTimeSalesData;
 
   const handleLegendClick = (datasetIndex) => {
-    const chart = inputEl.current.chartInstance;
-    chart.getDatasetMeta(datasetIndex).hidden =
-      chart.getDatasetMeta(datasetIndex).hidden === null
-        ? true
-        : !chart.getDatasetMeta(datasetIndex).hidden;
-    chart.update(); // re-draw chart to hide dataset
-    forceUpdate({}); // re-draw component to update legend styles
+    // const chart = inputEl.current.chartInstance;
+    // chart.getDatasetMeta(datasetIndex).hidden =
+    //   chart.getDatasetMeta(datasetIndex).hidden === null
+    //     ? true
+    //     : !chart.getDatasetMeta(datasetIndex).hidden;
+    // chart.update(); // re-draw chart to hide dataset
+    // forceUpdate({}); // re-draw component to update legend styles
   };
 
   const plugins = [
