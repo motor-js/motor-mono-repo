@@ -30,6 +30,7 @@ const AgentPoints = () => {
   const { dataSet } = useTable({
     cols,
   });
+
   return (
     <Card>
       <StyledHeader>
@@ -39,6 +40,7 @@ const AgentPoints = () => {
         {dataSet &&
           dataSet.map((data, i) => (
             <Item
+              key={dataSet[i].key}
               mt="25px"
               image={dataSet[i].agentImage.text}
               name={dataSet[i].agentName.text}
