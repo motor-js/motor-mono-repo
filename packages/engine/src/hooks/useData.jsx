@@ -12,6 +12,7 @@ import { EngineContext } from "../contexts/EngineProvider";
 import {
   hyperCubeChartTransform,
   multiDimHyperCubeTransform,
+  validData,
 } from "../utils/hyperCubeUtilities";
 
 const initialState = {
@@ -624,6 +625,7 @@ const useData = (props) => {
 
   const update = useCallback(async () => {
     const _qLayout = await getLayout();
+    const _qValid = await validData(_qLayout, engine);
 
     const _qData = await (Math.ceil(_qLayout.qHyperCube.qSize.qcy / pageSize) <=
     1
