@@ -62,6 +62,7 @@ const RealTimeSales = () => {
 
   const { dataSet, metrics } = useData({
     cols,
+    qSortByAscii: 0,
     qMetrics,
   });
 

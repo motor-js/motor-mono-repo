@@ -66,6 +66,9 @@ const RecentEarnings = () => {
 
   const { dataSet } = useTable({
     cols,
+    sortCriteria: {
+      qSortByAscii: 0,
+    },
   });
 
   useEffect(() => {

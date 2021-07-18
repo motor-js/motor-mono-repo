@@ -53,12 +53,14 @@ const Customers = () => {
 
   const { dataSet } = useTable({
     cols,
+    sortCriteria: {
+      qSortByAscii: 0,
+    },
   });
   useEffect(() => {
     const data = dataSet && flattenData(dataSet);
-    // dataSet && setLoading(false);
+
     setCustomers(data);
-    // console.log(data);
   }, [dataSet]);
   return (
     <Card height="100%">
