@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Edit3,
   User,
@@ -7,6 +6,8 @@ import {
   Settings,
   LogOut,
 } from "react-feather";
+
+import logo from "../../static/m-logo.jpg";
 
 import { Avatar, AvatarInitial, DropdownToggle, Dropdown } from "../..";
 import {
@@ -22,12 +23,14 @@ const ProfileDropdown = () => {
     <Dropdown direction="down">
       <DropdownToggle variant="texted">
         <Avatar size="sm" shape="circle">
-          <AvatarInitial>df</AvatarInitial>
+          {/* <AvatarInitial>df</AvatarInitial> */}
+          {logo && <img src={logo} alt={"logo"} />}
         </Avatar>
       </DropdownToggle>
       <StyledDropMenu>
         <Avatar size="lg" shape="circle">
-          <AvatarInitial>df</AvatarInitial>
+          {/* <AvatarInitial>df</AvatarInitial> */}
+          {logo && <img src={logo} alt={"logo"} />}
         </Avatar>
         <StyledAuthorName>Katherine Pechon</StyledAuthorName>
         <StyledAuthorRole>Administrator</StyledAuthorRole>
