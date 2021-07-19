@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import styled, { themeGet, device, css } from "../../../theme";
 import tinycolor2 from "tinycolor2";
 import { Anchor } from "../anchor";

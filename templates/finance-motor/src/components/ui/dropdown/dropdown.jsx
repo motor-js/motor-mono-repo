@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable react/jsx-props-no-spreading */
 import { Children, useState, useCallback, useEffect, useRef } from "react";
 import classnames from "classnames";
 import { useClickOutside } from "../../../hooks";

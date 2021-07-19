@@ -49,24 +49,43 @@ const createReactApp = appName => {
 };
 
 const installPackages = async (configList, answers) => {
-  let dependencies = [];
+  let dependencies1 = [];
+  let dependencies2 = [];
+  let dependencies3 = [];
+  let dependencies4 = [];
+  let dependencies5 = [];
   let devDependencies = [];
 
   configList.forEach(config => {
     if(config.name === 'template') {
       const selected = config.actions.filter(p => { return  p.choice === answers.template})
-      dependencies = selected[0].dependencies = [...dependencies, ...selected[0].dependencies];
-      devDependencies = [...devDependencies, ...selected[0].devDependencies];
+      dependencies1 = selected[0].dependencies1 = [...dependencies1, ...selected[0].dependencies1];
+    //  dependencies2 = selected[0].dependencies2 = [...dependencies2, ...selected[0].dependencies2];
+    //  dependencies3 = selected[0].dependencies3 = [...dependencies3, ...selected[0].dependencies3];
+    //  dependencies4 = selected[0].dependencies4 = [...dependencies4, ...selected[0].dependencies4];
+    //  dependencies5 = selected[0].dependencies5 = [...dependencies5, ...selected[0].dependencies5];
+      //devDependencies = [...devDependencies, ...selected[0].devDependencies];
     }
   })
 
   await new Promise(resolve => {
     const spinner = ora(chalk.magentaBright("🔍 Installing additional dependencies...")).start();
-    shell.exec(`npm install --save ${dependencies.join(" ")}`, () => {
-      shell.exec(`npm install --save ${devDependencies.join(" ")}`, () => {
-        spinner.succeed();
-        resolve();
-      });
+    shell.exec(`npm install --save ${dependencies1.join(" ")} --legacy-peer-deps`, () => {
+     // shell.exec(`npm install --save ${dependencies2.join(" ")}`, () => {
+       // shell.exec(`npm install --save  ${dependencies3.join(" ")}`, () => {
+          console.log(dependencies3.join(" "))
+          spinner.succeed();
+          resolve();
+          /*shell.exec(`npm install --save ${dependencies4.join(" ")}`, () => {
+            console.log(dependencies4.join(" "))
+            shell.exec(`npm install --save ${dependencies5.join(" ")}`, () => {
+              console.log(dependencies5.join(" "))
+  
+            });;
+          });
+          */
+    //    });
+   //   });
     });
   });
 
@@ -89,15 +108,14 @@ const addTemplates = (answers) => {
   return new Promise(resolve => {
     // load an instance of plop from a plopfile
     const plop = nodePlop(__dirname+`/plopfile.js`);
-    
+
     // get a generator by name
     const basicAdd = plop.getGenerator("create-files");
 
     basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function () {
       spinner.succeed();
       resolve();
-    });
-   
+    }); 
   });
 
 };

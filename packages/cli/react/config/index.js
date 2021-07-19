@@ -16,17 +16,36 @@ module.exports = [
   actions: [
     {
     choice: "Solar",
-    dependencies: [
+    dependencies1: [
       "@motor-js/engine",
       "@styled-system/theme-get",
       "classnames",
+      "@motor-js/nebula",
+      "react-feather",
+      "react-router-dom",
+      "styled-bootstrap-grid",
+      "styled-components",
+      "styled-system",
+      "tinycolor2",
     ],
-    devDependencies: [
+    dependencies2: [
+      "@motor-js/nebula",
       "react-feather",
       "react-router-dom",
     ],
+    dependencies3: [
+      "styled-bootstrap-grid",
+    ],
+    dependencies4: [
+      "styled-components",
+    ],
+    dependencies5: [
+      "styled-system",
+      "tinycolor2",
+    ],
+    devDependencies: [],
     packageEntries: [],
-  }]
+    }]
   },
   {
     name: "deployment",

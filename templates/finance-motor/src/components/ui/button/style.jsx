@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import styled, {
   css,
   space,
@@ -980,6 +978,7 @@ export const StyledLink = styled(
 
 export const StyledAnchor = styled(
   ({ mt, mb, ml, mr, px, py, display, borderWidth, fontSize, ...props }) => (
+    // eslint-disable-next-line
     <a {...props} />
   )
 )`

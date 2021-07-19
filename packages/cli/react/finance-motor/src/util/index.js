@@ -12,7 +12,6 @@ export const getSiblings = (elem) => {
 
 export const hexTorgb = (hex, opacity) => {
   const h = hex.replace("#", "");
-  // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
   const hh = h.match(new RegExp(`(.{${h.length / 3}})`, "g"));
   const rgba = [];
   if (!hh) return;

@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
+
 import styled, {
   css,
   space,
