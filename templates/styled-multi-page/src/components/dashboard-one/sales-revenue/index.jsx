@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import { Card, CardBody, VectorMap, SectionTitle } from "../../../components";
+import { useTable } from "@motor-js/engine";
 import usajson from "../../data/maps/usa.json";
-import { salesRevenues } from "../../data/dashboard-one";
-import { flatDeep } from "../../../methods";
+import { flattenData } from "../../../methods";
 import {
   StyledHeader,
   StyledHeaderRight,
@@ -14,9 +15,37 @@ import {
 } from "./style";
 
 const SalesRevenue = () => {
-  const keys = [
-    ...new Set(flatDeep(salesRevenues.map((sale) => Object.keys(sale)))),
+  const [salesRevenues, setSalesRevenues] = useState(null);
+  const cols = [
+    {
+      dataKey: "state",
+      qField: "state",
+      qLabel: "state",
+    },
+    {
+      dataKey: "order",
+      qField: "order",
+      qLabel: "order",
+    },
+    {
+      dataKey: "earning",
+      qField: "earning",
+      qLabel: "earning",
+    },
   ];
+
+  const { dataSet } = useTable({
+    cols,
+    sortCriteria: {
+      qSortByAscii: 0,
+    },
+  });
+
+  useEffect(() => {
+    const data = dataSet && flattenData(dataSet);
+    setSalesRevenues(data);
+  }, [dataSet]);
+  const keys = ["STATES", "ORDERS", "EARNINGS"];
 
   return (
     <Card height={[null, null, null, "100%"]}>
@@ -50,13 +79,14 @@ const SalesRevenue = () => {
             </tr>
           </thead>
           <tbody>
-            {salesRevenues.map((rev) => (
-              <tr key={rev.state}>
-                <StyledTD>{rev.state}</StyledTD>
-                <StyledTD>{rev.order}</StyledTD>
-                <StyledTD>{rev.earning}</StyledTD>
-              </tr>
-            ))}
+            {salesRevenues &&
+              salesRevenues.map((rev) => (
+                <tr key={rev.state}>
+                  <StyledTD>{rev.state}</StyledTD>
+                  <StyledTD>{rev.order}</StyledTD>
+                  <StyledTD>{rev.earning}</StyledTD>
+                </tr>
+              ))}
           </tbody>
         </StyledTable>
       </CardBody>

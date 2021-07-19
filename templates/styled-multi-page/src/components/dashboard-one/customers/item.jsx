@@ -23,6 +23,7 @@ const Item = ({ id, name, image, bg, chat_link, profile_link }) => {
     <>
       <Avatar display={["none", "block"]}>
         {image && <img src={image} alt={name} />}
+
         {!image && (
           <AvatarInitial bg={bg} opacity={op}>
             {name.substring(0, 1)}

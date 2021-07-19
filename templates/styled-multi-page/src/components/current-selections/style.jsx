@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import styled, { device, themeGet } from "../../theme";
-import { DropdownMenu, Anchor } from "..";
-import { hexTorgb } from "../../util";
+import styled, { device, themeGet } from "../../styled";
+import { DropdownMenu } from "..";
+import { hexTorgb } from "../../methods";
 
 export const StyledDropMenu = styled(({ ...rest }) => (
   <DropdownMenu {...rest} />

@@ -1,14 +1,15 @@
+import { useData } from "@motor-js/engine";
+
 import {
   Card,
   CardBody,
   Row,
   Col,
-  ApexCharts,
+  // ApexCharts,
   ApexAreaChart,
   SectionTitle,
 } from "../../../components";
 
-import { RevenueChart } from "../../data/dashboard-one";
 import {
   StyledHeader,
   StyledList,
@@ -23,11 +24,130 @@ import {
 } from "./style";
 
 const RevenueGrowth = () => {
-  const { series, options } = RevenueChart;
+  const cols = [
+    {
+      qField: "TimeSeries",
+      qLabel: "TimeSeries",
+    },
+    {
+      qField: "=sum([Growth Actual])",
+      qLabel: "Growth Actual",
+    },
+    {
+      qField: "=sum(Actual)",
+      qLabel: "Actual",
+    },
+    {
+      qField: "=sum(Plan)",
+      qLabel: "Plan",
+    },
+  ];
+
+  const { dataSet } = useData({
+    cols,
+  });
+  const { data } = dataSet;
+  const series = [
+    {
+      name: "Growth Actual",
+      data: data
+        ? data.map((e) => [parseInt(e.TimeSeries, 10), e["Growth Actual"]])
+        : [],
+    },
+    {
+      name: "Actual",
+      data: data
+        ? data.map((e) => [parseInt(e.TimeSeries, 10), e["Actual"]])
+        : [],
+    },
+    {
+      name: "Plan",
+      data: data
+        ? data.map((e) => [parseInt(e.TimeSeries, 10), e["Plan"]])
+        : [],
+    },
+  ];
+  const options = {
+    chart: {
+      type: "area",
+      stacked: true,
+      id: "revenue-growth",
+      zoom: {
+        enabled: false,
+      },
+      toolbar: {
+        show: false,
+      },
+    },
+    colors: ["#69b2f8", "#00E396", "#d1e6fa"],
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+      width: 1,
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        opacityFrom: 0.6,
+        opacityTo: 0.8,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    xaxis: {
+      type: "datetime",
+      tooltip: {
+        enabled: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+    },
+    yaxis: {
+      show: false,
+    },
+    grid: {
+      borderColor: "#ffffff",
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: false,
+        },
+      },
+      column: {
+        colors: "#ffffff",
+        opacity: 1,
+      },
+    },
+    tooltip: {
+      fillSeriesColor: "#ffffff",
+    },
+    responsive: [
+      {
+        breakpoint: 575,
+        options: {
+          chart: {
+            height: 200,
+          },
+          xaxis: {
+            show: false,
+          },
+        },
+      },
+    ],
+  };
+
   const chartToggle = (e) => {
-    const target = e.currentTarget;
-    target.classList.toggle("hidden");
-    ApexCharts.exec(options.chart.id, "toggleSeries", target.value);
+    // const target = e.currentTarget;
+    // target.classList.toggle("hidden");
+    // ApexCharts.exec(options.chart.id, "toggleSeries", target.value);
   };
 
   return (
@@ -65,12 +185,14 @@ const RevenueGrowth = () => {
           </Row>
         </StyledCardBodyWrap>
         <StyledChart>
-          <ApexAreaChart
-            options={options}
-            series={series}
-            width="100%"
-            height={280}
-          />
+          {data && (
+            <ApexAreaChart
+              options={options}
+              series={series}
+              width="100%"
+              height={280}
+            />
+          )}
         </StyledChart>
       </CardBody>
     </Card>

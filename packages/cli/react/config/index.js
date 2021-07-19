@@ -28,21 +28,6 @@ module.exports = [
       "styled-system",
       "tinycolor2",
     ],
-    dependencies2: [
-      "@motor-js/nebula",
-      "react-feather",
-      "react-router-dom",
-    ],
-    dependencies3: [
-      "styled-bootstrap-grid",
-    ],
-    dependencies4: [
-      "styled-components",
-    ],
-    dependencies5: [
-      "styled-system",
-      "tinycolor2",
-    ],
     devDependencies: [],
     packageEntries: [],
     }]

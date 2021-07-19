@@ -1,12 +1,15 @@
 import { useState, useCallback, useEffect } from "react";
 import { Search, Menu, X, ArrowLeft } from "react-feather";
+import { useSelections } from "@motor-js/engine";
 import { Button, Navbar } from "../../components";
 import { menuData } from "../../components/data";
 import MessageDropdown from "../../components/header/message-dropdown";
 import NotificationDropdown from "../../components/header/notification-dropdown";
 import ProfileDropdown from "../../components/header/profile-dropdown";
-import NavSearch from "../../components/header/nav-search";
+
 import Logo from "../../components/logo";
+import SearchBar from "../../components/search-bar";
+import CurrentSelections from "../../components/current-selections";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { toggleSidebar, toggleBody } from "../../redux/slices/ui";
 import {
@@ -30,6 +33,8 @@ const Header = ({ hasSidebar, sidebarLayout }) => {
   const searchHandler = useCallback(() => {
     setSearchOpen((prev) => !prev);
   }, []);
+
+  const { selections, clearSelections } = useSelections();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const sidebarHandler = useCallback(
@@ -134,6 +139,12 @@ const Header = ({ hasSidebar, sidebarLayout }) => {
           </StyledNavbarMenu>
         </StyledNavbarWrap>
         <StyleNavbarRight>
+          <StyledNavbarElement mr={["8px", "15px"]}>
+            <CurrentSelections
+              selections={selections}
+              clear={clearSelections}
+            />
+          </StyledNavbarElement>
           <StyledNavbarElement>
             <Button variant="texted" onClick={searchHandler}>
               <Search className="header-icon" />
@@ -148,9 +159,11 @@ const Header = ({ hasSidebar, sidebarLayout }) => {
           <StyledNavbarElement ml={["15px", "20px", "30px"]}>
             <ProfileDropdown />
           </StyledNavbarElement>
+          <StyledNavbarElement ml={["15px", "20px", "30px"]}>
+            <SearchBar isOpen={searchOpen} onClose={searchHandler} />
+          </StyledNavbarElement>
         </StyleNavbarRight>
       </StyledHeader>
-      <NavSearch isOpen={searchOpen} onClose={searchHandler} />
     </>
   );
 };

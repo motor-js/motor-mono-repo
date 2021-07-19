@@ -14,7 +14,9 @@ import {
 
 const CurrentSelections = ({ selections, clear }) => {
   const handleClear = (field) => clear(field);
-  const { clearSelections, previousSelection, nextSelection } = useButton()
+  const { clearSelections } = useButton();
+
+  const handleClearAll = () => clearSelections();
 
   return (
     <Dropdown direction="down">
@@ -35,11 +37,19 @@ const CurrentSelections = ({ selections, clear }) => {
             <StyledText>nothing selected yet..</StyledText>
           )}
         </StyledDropBody>
-        <StyledDropFooter>
-          <StyledDropItem onClick={clearSelections}><Trash size={12}/> Clear All</StyledDropItem>
-          <StyledDropItem onClick={previousSelection}><ArrowLeftCircle size={12}/> Back</StyledDropItem>
-           <StyledDropItem onClick={nextSelection}><ArrowRightCircle size={12}/> Forward</StyledDropItem>
-        </StyledDropFooter>
+        {selections && selections.length > 0 && (
+          <StyledDropFooter>
+            <StyledDropItem onClick={handleClearAll}>
+              <Trash size={12} /> Clear All
+            </StyledDropItem>
+            <StyledDropItem onClick={handleClearAll}>
+              <ArrowLeftCircle size={12} /> Back
+            </StyledDropItem>
+            <StyledDropItem onClick={handleClearAll}>
+              <ArrowRightCircle size={12} /> Forward
+            </StyledDropItem>
+          </StyledDropFooter>
+        )}
       </StyledDropMenu>
     </Dropdown>
   );

@@ -50,42 +50,20 @@ const createReactApp = appName => {
 
 const installPackages = async (configList, answers) => {
   let dependencies1 = [];
-  let dependencies2 = [];
-  let dependencies3 = [];
-  let dependencies4 = [];
-  let dependencies5 = [];
   let devDependencies = [];
 
   configList.forEach(config => {
     if(config.name === 'template') {
       const selected = config.actions.filter(p => { return  p.choice === answers.template})
       dependencies1 = selected[0].dependencies1 = [...dependencies1, ...selected[0].dependencies1];
-    //  dependencies2 = selected[0].dependencies2 = [...dependencies2, ...selected[0].dependencies2];
-    //  dependencies3 = selected[0].dependencies3 = [...dependencies3, ...selected[0].dependencies3];
-    //  dependencies4 = selected[0].dependencies4 = [...dependencies4, ...selected[0].dependencies4];
-    //  dependencies5 = selected[0].dependencies5 = [...dependencies5, ...selected[0].dependencies5];
-      //devDependencies = [...devDependencies, ...selected[0].devDependencies];
     }
   })
 
   await new Promise(resolve => {
     const spinner = ora(chalk.magentaBright("🔍 Installing additional dependencies...")).start();
     shell.exec(`npm install --save ${dependencies1.join(" ")} --legacy-peer-deps`, () => {
-     // shell.exec(`npm install --save ${dependencies2.join(" ")}`, () => {
-       // shell.exec(`npm install --save  ${dependencies3.join(" ")}`, () => {
-          console.log(dependencies3.join(" "))
           spinner.succeed();
           resolve();
-          /*shell.exec(`npm install --save ${dependencies4.join(" ")}`, () => {
-            console.log(dependencies4.join(" "))
-            shell.exec(`npm install --save ${dependencies5.join(" ")}`, () => {
-              console.log(dependencies5.join(" "))
-  
-            });;
-          });
-          */
-    //    });
-   //   });
     });
   });
 
@@ -182,30 +160,21 @@ const updatePackageDotJson = (configList) => {
     []
   );
 
-  console.log(configList)
-  console.log(packageEntries)
-  
-  return new Promise((resolve) => {
-    const rawPackage = fse.readFileSync("package.json");
-    const package = JSON.parse(rawPackage);
+  const { tenant, appId, webIntId } = answers
+  const spinner = ora("📁 Adding files..."); 
 
-    packageEntries.forEach((script) => {
-      // Lodash `set` allows us to dynamically set nested keys within objects
-      // i.e. scripts.foo = "bar" will add an entry to the foo field in scripts
-      set(package, script.key, script.value);
-    });
+  return new Promise(resolve => {
+    // load an instance of plop from a plopfile
+    const plop = nodePlop(__dirname+`/plopfile.js`);
+    
+    // get a generator by name
+    const basicAdd = plop.getGenerator("create-files");
 
-    fse.writeFile("package.json", JSON.stringify(package, null, 2), function (
-      err
-    ) {
-      if (err) {
-        spinner.fail();
-        return console.log(err);
-      }
-
+    basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function () {
       spinner.succeed();
       resolve();
     });
+   
   });
   
 };
