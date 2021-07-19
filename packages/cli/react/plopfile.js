@@ -2,21 +2,21 @@
 module.exports = function (plop) {
   
   const templateFiles = [
-    "finance-motor/src/components/**/**/*",
-    "finance-motor/src/containers/**/**/*",
-    "finance-motor/src/css/*",
-    "finance-motor/src/hooks/*",
-    "finance-motor/src/layouts/**/*",
-    "finance-motor/src/methods/*",
-    "finance-motor/src/pages/*",
-    "finance-motor/src/settings/*",
-    "finance-motor/src/theme/*",
-    "finance-motor/src/util/*",
-    "finance-motor/src/App.js",
-    "finance-motor/src/index.css",
-    "finance-motor/src/index.js",
-    "finance-motor/src/reportWebVitals.js",
-    "finance-motor/src/setupTests.js",
+    "solar-motor/src/components/**/**/*",
+    "solar-motor/src/containers/**/**/*",
+    "solar-motor/src/css/*",
+    "solar-motor/src/hooks/*",
+    "solar-motor/src/layouts/**/*",
+    "solar-motor/src/methods/*",
+    "solar-motor/src/pages/*",
+    "solar-motor/src/settings/*",
+    "solar-motor/src/theme/*",
+    "solar-motor/src/util/*",
+    "solar-motor/src/App.js",
+    "solar-motor/src/index.css",
+    "solar-motor/src/index.js",
+    "solar-motor/src/reportWebVitals.js",
+    "solar-motor/src/setupTests.js",
   ]
 
   plop.addHelper('cwd', (p) => process.cwd());
