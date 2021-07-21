@@ -1,64 +1,43 @@
+import { useData } from "@motor-js/engine";
 import {
   Card,
   CardBody,
   SectionTitle,
   HorizontalBarChart,
 } from "../../../components";
-// import { ticketRequestChart } from "../../data/dashboard-four";
 import { StyledHeader, StyledChart } from "./style";
 
 const TicketRequest = () => {
-  // const cols = [
-  //   {
-  //     qField: "Date",
-  //     qLabel: "Date",
-  //   },
+  const cols = [
+    {
+      qField: "labels",
+      qLabel: "labels",
+    },
 
-  //   {
-  //     qField: "=sum([New Tickets])",
-  //     qLabel: "New Tickets",
-  //   },
-  //   {
-  //     qField: "=sum([Solved Tickets])",
-  //     qLabel: "Solved Tickets",
-  //   },
-  //   {
-  //     qField: "=sum([Open Tickets])",
-  //     qLabel: "Open Tickets",
-  //   },
-  // ];
+    {
+      qField: "=sum(value1)",
+      qLabel: "value1",
+    },
+    {
+      qField: "=sum(value2)",
+      qLabel: "value2",
+    },
+  ];
 
-  // const { dataSet } = useData({
-  //   cols,
-  // });
+  const { dataSet, title } = useData({
+    cols,
+    qTitle: "Tickets By Request Type",
+    qSortByAscii: 0,
+  });
 
-  // const { data } = dataSet;
-
-  // const newTickets = data
-  //   ? data.map((n) => [parseInt(n["Date"]), n["New Tickets"]])
-  //   : [];
-
-  // const solvedTickets = data
-  //   ? data.map((n) => [parseInt(n["Date"]), n["Solved Tickets"]])
-  //   : [];
-
-  // const openTickets = data
-  //   ? data.map((n) => [parseInt(n["Date"]), n["Open Tickets"]])
-  //   : [];
+  const { data } = dataSet;
 
   const ticketRequestChart = {
     data: {
-      labels: [
-        "Modification",
-        "Code Request",
-        "Feature Request",
-        "Bug Fix",
-        "Integration",
-        "Production",
-      ],
+      labels: data ? data.map((n) => n["labels"]) : [],
       datasets: [
         {
-          data: [90, 60, 50, 95, 50, 60],
+          data: data ? data.map((n) => n["value1"]) : [],
           backgroundColor: [
             "#65e0e0",
             "#69b2f8",
@@ -69,7 +48,7 @@ const TicketRequest = () => {
           ],
         },
         {
-          data: [60, 50, 70, 45, 70, 30],
+          data: data ? data.map((n) => n["value2"]) : [],
           backgroundColor: "#e5e9f2",
         },
       ],
@@ -120,22 +99,25 @@ const TicketRequest = () => {
     },
   };
 
-  console.log("ticketRequestChart", ticketRequestChart);
   return (
     <Card>
-      <StyledHeader>
-        <SectionTitle title="Tickets By Request Type" />
-      </StyledHeader>
-      <CardBody>
-        <StyledChart>
-          <HorizontalBarChart
-            data={ticketRequestChart.data}
-            options={ticketRequestChart.options}
-            width={395}
-            height={260}
-          />
-        </StyledChart>
-      </CardBody>
+      {data && (
+        <>
+          <StyledHeader>
+            <SectionTitle title={title} />
+          </StyledHeader>
+          <CardBody>
+            <StyledChart>
+              <HorizontalBarChart
+                data={ticketRequestChart.data}
+                options={ticketRequestChart.options}
+                width={395}
+                height={260}
+              />
+            </StyledChart>
+          </CardBody>
+        </>
+      )}
     </Card>
   );
 };
