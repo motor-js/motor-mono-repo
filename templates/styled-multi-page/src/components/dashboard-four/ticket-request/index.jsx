@@ -38,6 +38,7 @@ const TicketRequest = () => {
       datasets: [
         {
           data: data ? data.map((n) => n["value1"]) : [],
+          barPercentage: 0.5,
           backgroundColor: [
             "#65e0e0",
             "#69b2f8",
@@ -73,7 +74,6 @@ const TicketRequest = () => {
             gridLines: {
               display: false,
             },
-            barPercentage: 0.5,
             ticks: {
               beginAtZero: true,
               fontSize: 13,

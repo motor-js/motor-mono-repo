@@ -66,8 +66,6 @@ const RealTimeSales = () => {
     qMetrics,
   });
 
-  // console.log("check sort order of dimension", dataSet); //TODO sort by laodorder
-
   const { data, dataKeys } = dataSet;
 
   const options = {
@@ -99,7 +97,6 @@ const RealTimeSales = () => {
             display: true,
             color: "#eceef4",
           },
-          barPercentage: 0.6,
           ticks: {
             beginAtZero: true,
             fontSize: 10,
@@ -116,11 +113,12 @@ const RealTimeSales = () => {
 
   const inputEl = useRef(null);
   const [legendRendered, setLegendRendered] = useState(false);
-  // const [, forceUpdate] = useState();
   RealTimeSalesData.labels = (data && data.map((n) => n.Category)) || [];
+  RealTimeSalesData.datasets[0].categoryPercentage = 0.9;
   RealTimeSalesData.datasets[0].data = (data && data.map((n) => n.today)) || [];
   RealTimeSalesData.datasets[0].backgroundColor = "#69b2f8";
   RealTimeSalesData.datasets[0].lebel = (dataKeys && dataKeys[0]) || null;
+  RealTimeSalesData.datasets[1].categoryPercentage = 0.9;
   RealTimeSalesData.datasets[1].data =
     (data && data.map((n) => n.yesterday)) || [];
   RealTimeSalesData.datasets[1].backgroundColor = "#d1e6fa";
