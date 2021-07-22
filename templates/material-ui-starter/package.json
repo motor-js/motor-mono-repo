@@ -1,13 +1,13 @@
 {
   "name": "material-ui-starter",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
-    "@motor-js/engine": "^0.2.6",
-    "@motor-js/nebula": "^0.1.4",
+    "@motor-js/engine": "^0.2.7",
+    "@motor-js/nebula": "^0.1.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
