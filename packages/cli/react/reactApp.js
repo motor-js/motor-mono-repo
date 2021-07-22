@@ -61,7 +61,7 @@ const installPackages = async (configList, answers) => {
 
   await new Promise(resolve => {
     const spinner = ora(chalk.magentaBright("🔍 Installing additional dependencies...")).start();
-    shell.exec(`npm install --save ${dependencies1.join(" ")} --legacy-peer-deps`, () => {
+    shell.exec(`yarn install --save ${dependencies1.join(" ")}`, () => {
           spinner.succeed();
           resolve();
     });
@@ -129,20 +129,15 @@ exports.create = async (appName, appDirectory) => {
   console.log(
 `
 
-
 🎉  Your React Motor Mashup has been created 🎉 
 
-
 Get started with ...
-
 `+chalk.cyanBright(`cd`)+ ` ${appName}`+`
 `+chalk.cyanBright(`yarn start`)+`
-
 
 Any questions? Reach out to us at` + chalk.cyanBright(` hello@motor-js.io`)+`
 Read through our docs at ` + chalk.cyanBright(`https://docs.motor.so`)+`
 Join our growing community at ` + chalk.cyanBright(`https://discord.com/invite/jmjx78N59b`)+`
-
 
 `
 );

@@ -15,7 +15,7 @@
     "Node.js"
   ],
   "author": "Motor",
-  "license": "ISC",
+  "license": "https://www.motor.so/license",
   "dependencies": {
     "chalk": "^4.1.1",
     "commander": "^8.0.0",
