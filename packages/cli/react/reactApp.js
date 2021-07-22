@@ -61,7 +61,7 @@ const installPackages = async (configList, answers) => {
 
   await new Promise(resolve => {
     const spinner = ora(chalk.magentaBright("🔍 Installing additional dependencies...")).start();
-    shell.exec(`yarn install --save ${dependencies1.join(" ")}`, () => {
+    shell.exec(`npm install --save ${dependencies1.join(" ")} --legacy-peer-deps`, () => {
           spinner.succeed();
           resolve();
     });
