@@ -28,17 +28,16 @@ export default function App() {
 
   return (
     <div className="App" style={{ padding: "10px" }}>
-      test
-      {/*<MotorSelect 
+      <MotorSelect 
         listData={listData}
         motorListProps={motorListProps}
-        theme={dark}
+        theme={light}
         isMulti={true}
         closeMenuOnSelect={false}
         hideSelectedOptions={false}
         isSearchable={true}
         placeholder="Company Name.."
-      />*/}
+      />
     </div>
   );
 }

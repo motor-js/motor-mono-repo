@@ -128,18 +128,13 @@ const useList = (props) => {
     return qDataPages[0];
   }, []);
 
-  const structureData = useCallback(async () => {
+  const structureData = useCallback(async (_qData) => {
     if (!listData) {
-      let data = [];
-      const qDataPages = await qObject.current.getListObjectData(
-        "/qListObjectDef",
-        [qPage.current]
-      );
-
-      if (!qDataPages[0]) return null;
-
-      qDataPages[0].qMatrix.map((d, i) => {
-        data.push({
+      
+      if (!_qData) return null;
+      let _listData = []
+      _qData.qMatrix.map((d, i) => {
+        _listData.push({
           key: d[0].qElemNumber,
           text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
           number: d[0].qNumber,
@@ -148,11 +143,17 @@ const useList = (props) => {
           label: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
         });
       });
-      return data;
+      // Get Selections
+      const _selections = _listData && _listData.filter(row => row.state === "S");
+      // Get Selection ID
+      const _selId = _selections && _selections.map(d => d.key);
+
+      return { _selId, _selections, _listData };
     }
   }, [listData]);
 
-  const getSelections = (data) => {
+  /*const getSelections = (data) => {
+    console.log('GET SEL')
     const sel = data.qMatrix.filter((row) => row[0].qState === "S");
     const arr = [];
     sel.map((d) => {
@@ -176,14 +177,14 @@ const useList = (props) => {
     });
     return arr;
   };
-
+  */
 
   const update = useCallback(async () => {
     const _qData = await getData();
-    const _listData = await structureData();
+    const { _selId, _selections, _listData } = await structureData(_qData);
     if (_qData && _isMounted.current) {
-      const _selections = await getSelections(_qData);
-      const _selId = await getSelectionsId(_qData);
+     // const _selections = await getSelections(_qData);
+     // const _selId = await getSelectionsId(_qData);
       dispatch({
         type: "update",
         payload: {

@@ -103,7 +103,7 @@ const commitGit = () => {
 
   return new Promise(resolve => {
     shell.exec(
-      'git add . && git commit --no-verify -m "Secondary commit from Create Frontend App"',
+      'git add . && git commit --no-verify -m "Secondary commit from Motor"',
       () => {
         spinner.succeed();
         resolve();
@@ -135,7 +135,7 @@ Get started with ...
 `+chalk.cyanBright(`cd`)+ ` ${appName}`+`
 `+chalk.cyanBright(`yarn start`)+`
 
-Any questions? Reach out to us at` + chalk.cyanBright(` hello@motor-js.io`)+`
+Any questions? Reach out to us at ` + chalk.cyanBright(`hello@motor-js.io`)+`
 Read through our docs at ` + chalk.cyanBright(`https://docs.motor.so`)+`
 Join our growing community at ` + chalk.cyanBright(`https://discord.com/invite/jmjx78N59b`)+`
 
