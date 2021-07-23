@@ -122,7 +122,7 @@ exports.create = async (appName, appDirectory) => {
   await createReactApp(appName);
   await installPackages(selectedConfigList, answers);
   /*  Inserting package entries descoped for first release */
-  //await updatePackageDotJson(selectedConfigList);
+  // await updatePackageDotJson(selectedConfigList);
   await addTemplates(answers);
   await commitGit();
 
