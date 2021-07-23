@@ -1,5 +1,5 @@
+import { useTable } from "@motor-js/engine";
 import { Col } from "../../../components";
-// import { RadialData } from "../../../components/data/dashboard-four";
 import RadialPercentage from "../../../components/dashboard-four/radial-percentage";
 
 const chartOptions = {
@@ -66,50 +66,89 @@ const chart2 = {
   },
 };
 
-const RadialData = [
-  {
-    id: 1,
-    title: "Time to Resolved Complaint",
-    desc: "The average time taken to resolve complaints.",
-    min: "7m:32s",
-    sec: "Goal: 8m:0s",
-    chart: chart1,
-  },
-  {
-    id: 2,
-    title: "Average Speed of Answer",
-    desc: "Measure how quickly support staff answer incoming calls.",
-    min: "0m:20s",
-    sec: "Goal: 0m:10s",
-    chart: chart2,
-  },
-];
-
-console.log("RadialData", RadialData);
-
 const RightRowOne = () => {
+  const cols = [
+    {
+      dataKey: "id",
+      qField: "radial_id",
+      qLabel: "id",
+    },
+    {
+      dataKey: "title",
+      qField: "radial_title",
+      qLabel: "title",
+    },
+    {
+      dataKey: "desc",
+      qField: "desc",
+      qLabel: "desc",
+    },
+    {
+      dataKey: "min",
+      qField: "min",
+      qLabel: "mon",
+    },
+    {
+      dataKey: "sec",
+      qField: "sec",
+      qLabel: "sec",
+    },
+  ];
+
+  const { dataSet } = useTable({
+    cols,
+    qSortCriterias: [
+      {
+        qSortByAscii: 0,
+        qSortByLoadOrder: 1,
+      },
+    ],
+  });
+
+  const RadialData = dataSet
+    ? [
+        {
+          id: dataSet[0].id.text,
+          title: dataSet[0].title.text,
+          desc: dataSet[0].desc.text,
+          min: dataSet[0].min.text,
+          sec: dataSet[0].sec.text,
+          chart: chart1,
+        },
+        {
+          id: dataSet[1].id.text,
+          title: dataSet[1].title.text,
+          desc: dataSet[1].desc.text,
+          min: dataSet[1].min.text,
+          sec: dataSet[1].sec.text,
+          chart: chart2,
+        },
+      ]
+    : [];
+
   let restProps = {};
   return (
     <>
-      {RadialData.map((data, i) => {
-        if (i !== 0) {
-          restProps = {
-            ...restProps,
-            mt: ["10px", null, 0, "10px"],
-          };
-        }
-        return (
-          <Col key={data.id} col={12} md={6} lg={12} {...restProps}>
-            <RadialPercentage
-              title={data.title}
-              desc={data.desc}
-              min={data.min}
-              sec={data.sec}
-              chart={data.chart}
-            />
-          </Col>
-        );
-      })}
+      {dataSet &&
+        RadialData.map((data, i) => {
+          if (i !== 0) {
+            restProps = {
+              ...restProps,
+              mt: ["10px", null, 0, "10px"],
+            };
+          }
+          return (
+            <Col key={data.id} col={12} md={6} lg={12} {...restProps}>
+              <RadialPercentage
+                title={data.title}
+                desc={data.desc}
+                min={data.min}
+                sec={data.sec}
+                chart={data.chart}
+              />
+            </Col>
+          );
+        })}
     </>
   );
 };

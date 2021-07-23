@@ -44,21 +44,21 @@ export const hasKey = (obj, key) => {
   return !!Object.prototype.hasOwnProperty.call(obj, key);
 };
 
-export const generateDayWiseTimeSeries = (baseval, count, yrange) => {
-  let i = 0;
-  let value = baseval;
-  const series = [];
-  while (i < count) {
-    const y =
-      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+// export const generateDayWiseTimeSeries = (baseval, count, yrange) => {
+//   let i = 0;
+//   let value = baseval;
+//   const series = [];
+//   while (i < count) {
+//     const y =
+//       // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+//       Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
-    series.push([value, y]);
-    value += 86400000;
-    i += 1;
-  }
-  return series;
-};
+//     series.push([value, y]);
+//     value += 86400000;
+//     i += 1;
+//   }
+//   return series;
+// };
 
 export const flattenData = (d) => {
   let arr = [];

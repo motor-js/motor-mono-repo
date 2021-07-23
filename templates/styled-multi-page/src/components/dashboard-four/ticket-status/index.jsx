@@ -1,3 +1,5 @@
+import { useData } from "@motor-js/engine";
+
 import {
   Card,
   CardBody,
@@ -9,7 +11,7 @@ import {
   Col,
   Progress,
 } from "../../../components";
-// import { ticketChart } from "../../data/dashboard-four";
+
 import {
   StyledHeader,
   StyledHeaderLeft,
@@ -24,80 +26,95 @@ import {
   StyledRate,
 } from "./style";
 
-import { generateDayWiseTimeSeries } from "../../../methods";
+const TicketStatus = () => {
+  const cols = [
+    {
+      qField: "Date",
+      qLabel: "Date",
+    },
 
-const ticketChart = {
-  options: {
-    chart: {
-      id: "ticket-chart",
-      height: 480,
-      type: "line",
-      stacked: true,
-      toolbar: {
-        show: false,
-      },
+    {
+      qField: "=sum([New Tickets])",
+      qLabel: "New Tickets",
     },
-    states: {
-      hover: {
-        filter: {
-          type: "none",
-        },
-      },
+    {
+      qField: "=sum([Solved Tickets])",
+      qLabel: "Solved Tickets",
     },
-    dataLabels: {
-      enabled: false,
+    {
+      qField: "=sum([Open Tickets])",
+      qLabel: "Open Tickets",
     },
-    stroke: {
-      width: 1.5,
-    },
-    fill: {
-      type: "solid",
-      opacity: 1,
-    },
-    grid: {
-      borderColor: "#485e9029",
-      xaxis: {
-        lines: {
+  ];
+
+  const { dataSet } = useData({
+    cols,
+  });
+
+  const { data } = dataSet;
+
+  const newTickets = data
+    ? data.map((n) => [parseInt(n["Date"]), n["New Tickets"]])
+    : [];
+
+  const solvedTickets = data
+    ? data.map((n) => [parseInt(n["Date"]), n["Solved Tickets"]])
+    : [];
+
+  const openTickets = data
+    ? data.map((n) => [parseInt(n["Date"]), n["Open Tickets"]])
+    : [];
+
+  const ticketChart = {
+    options: {
+      chart: {
+        id: "ticket-chart",
+        height: 480,
+        type: "line",
+        stacked: true,
+        toolbar: {
           show: false,
         },
       },
-      yaxis: {
-        lines: {
-          show: true,
+      states: {
+        hover: {
+          filter: {
+            type: "none",
+          },
         },
       },
-    },
-    xaxis: {
-      type: "datetime",
-      axisTicks: {
-        show: false,
+      dataLabels: {
+        enabled: false,
       },
-      axisBorder: {
-        show: false,
+      stroke: {
+        width: 1.5,
       },
-      tickAmount: 6,
-      labels: {
-        style: {
-          colors: ["#67788e"],
-          fontSize: "9px",
-          fontFamily: "Inter UI",
-          fontWeight: 500,
-          cssClass: "apexcharts-xaxis-label",
+      fill: {
+        type: "solid",
+        opacity: 1,
+      },
+      grid: {
+        borderColor: "#485e9029",
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: true,
+          },
         },
       },
-    },
-    yaxis: [
-      {
+      xaxis: {
+        type: "datetime",
         axisTicks: {
           show: false,
         },
         axisBorder: {
           show: false,
         },
-        min: 0,
-        max: 90,
         tickAmount: 6,
-        decimalsInFloat: false,
         labels: {
           style: {
             colors: ["#67788e"],
@@ -108,63 +125,61 @@ const ticketChart = {
           },
         },
       },
-    ],
-    colors: ["#69b2f8", "#65e0e0", "#0168fa"],
-    legend: {
-      show: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    plotOptions: {
-      bar: {
-        columnWidth: "55%",
+      yaxis: [
+        {
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+          },
+          min: 0,
+          max: 90,
+          tickAmount: 6,
+          decimalsInFloat: false,
+          labels: {
+            style: {
+              colors: ["#67788e"],
+              fontSize: "9px",
+              fontFamily: "Inter UI",
+              fontWeight: 500,
+              cssClass: "apexcharts-xaxis-label",
+            },
+          },
+        },
+      ],
+      colors: ["#69b2f8", "#65e0e0", "#0168fa"],
+      legend: {
+        show: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "55%",
+        },
       },
     },
-  },
-  series: [
-    {
-      name: "New Tickets",
-      type: "column",
-      data: generateDayWiseTimeSeries(
-        new Date("11 Feb 2017 GMT").getTime(),
-        30,
-        {
-          min: 10,
-          max: 50,
-        }
-      ),
-    },
-    {
-      name: "Solved Tickets",
-      type: "column",
-      data: generateDayWiseTimeSeries(
-        new Date("11 Feb 2017 GMT").getTime(),
-        30,
-        {
-          min: 10,
-          max: 30,
-        }
-      ),
-    },
-    {
-      name: "Open Tickets",
-      type: "line",
-      data: generateDayWiseTimeSeries(
-        new Date("11 Feb 2017 GMT").getTime(),
-        30,
-        {
-          min: 20,
-          max: 30,
-        }
-      ),
-    },
-  ],
-};
+    series: [
+      {
+        name: "New Tickets",
+        type: "column",
+        data: newTickets,
+      },
+      {
+        name: "Solved Tickets",
+        type: "column",
+        data: solvedTickets,
+      },
+      {
+        name: "Open Tickets",
+        type: "line",
+        data: openTickets,
+      },
+    ],
+  };
 
-console.log("ticketChart", ticketChart.series);
-
-const TicketStatus = () => {
   const { series, options } = ticketChart;
   const chartToggle = (e) => {
     const target = e.currentTarget;
