@@ -1,33 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, theme } from "./theme";
-import { GlobalStyle } from "./css";
-import { Motor } from '@motor-js/engine'
-import { appSettings, qlikConfig } from "./settings"
 
-  ReactDOM.render(
-    <Motor 
-      config={qlikConfig}
-      logo={appSettings.logo}
-      logoHeight={appSettings.logoHeight}
-      logoWidth={appSettings.logoWidth}
-      buttonColor={appSettings.buttonColor}
-      buttonFontColor={appSettings.buttonFontColor}
-      body={appSettings.body}
-      bodySub={appSettings.bodySub}
-      loginfontFamily={appSettings.loginfontFamily}
-      NotConnectedheader={appSettings.NotConnectedheader}
-      NotConnectedBody={appSettings.NotConnectedBody}
-      licenseKey=""
-    >
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
-    </Motor>
-  ,
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
