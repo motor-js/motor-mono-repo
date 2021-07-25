@@ -1,6 +1,7 @@
 import { Filter as FilterIcon } from "react-feather";
 import { DropdownToggle, Dropdown } from "../..";
-import Notification from "../notification";
+import { useList } from "@motor-js/engine";
+import Filter from "../../../components/filter";
 import {
   StyledDropMenu,
   StyledDropHeader,
@@ -9,6 +10,17 @@ import {
 } from "./style";
 
 const FilterDropDown = () => {
+  const { listData, motorListProps } = useList({
+    dimension: ["state"],
+  });
+
+  const {
+    listData: listDataAgent,
+    motorListProps: motorListPropsAgent,
+  } = useList({
+    dimension: ["agentName"],
+  });
+
   return (
     <Dropdown direction="down">
       <DropdownToggle variant="texted">
@@ -17,17 +29,27 @@ const FilterDropDown = () => {
       </DropdownToggle>
       <StyledDropMenu>
         <StyledDropHeader>FILTERS</StyledDropHeader>
-        <StyledDropItem path="/profile-view">
-          <Notification />
+        <StyledDropItem>
+          <Filter
+            listData={listData}
+            motorListProps={motorListProps}
+            isMulti={true}
+            closeMenuOnSelect={false}
+            hideSelectedOptions={false}
+            isSearchable={true}
+            placeholder="State.."
+          />
         </StyledDropItem>
-        <StyledDropItem path="/profile-view">
-          <Notification />
-        </StyledDropItem>
-        <StyledDropItem path="/profile-view">
-          <Notification />
-        </StyledDropItem>
-        <StyledDropItem path="/profile-view">
-          <Notification />
+        <StyledDropItem>
+          <Filter
+            listData={listDataAgent}
+            motorListProps={motorListPropsAgent}
+            isMulti={true}
+            closeMenuOnSelect={false}
+            hideSelectedOptions={false}
+            isSearchable={true}
+            placeholder="Agent.."
+          />
         </StyledDropItem>
       </StyledDropMenu>
     </Dropdown>

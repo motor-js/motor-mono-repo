@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled, { device, themeGet } from "../../../styled";
 import { hexTorgb } from "../../../methods";
-import { Anchor, DropdownMenu } from "../..";
+import { DropdownMenu } from "../..";
 
 export const StyledDropMenu = styled(({ ...rest }) => (
   <DropdownMenu {...rest} />
@@ -68,7 +68,7 @@ export const StyledDropHeader = styled.div`
   margin-bottom: 5px;
 `;
 
-export const StyledDropItem = styled((props) => <Anchor {...props} />)`
+export const StyledDropItem = styled.div`
   transition: none;
   border-radius: 0.25rem;
   white-space: normal;
