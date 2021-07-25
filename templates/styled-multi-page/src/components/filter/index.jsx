@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
+import { useList } from "@motor-js/engine";
 import Select from "react-select";
 import { light } from "./style";
 
 function Filter({
-  listData,
-  motorListProps,
+  // listData,
+  // motorListProps,
+  dimension,
   isMulti,
   closeMenuOnSelect,
   hideSelectedOptions,
   isSearchable,
   placeholder,
 }) {
+  const { listData, motorListProps } = useList({
+    dimension,
+  });
   const { clearSelections, selections, select } = motorListProps;
 
   const [selectedValues, setSelectedValues] = useState("");
