@@ -3,8 +3,7 @@ import { Search, Menu, X, ArrowLeft } from "react-feather";
 import { useSelections } from "@motor-js/engine";
 import { Button, Navbar } from "../../components";
 import { menuData } from "../../components/data";
-import MessageDropdown from "../../components/header/message-dropdown";
-import NotificationDropdown from "../../components/header/notification-dropdown";
+import FilterDropdown from "../../components/header/filter-dropdown";
 import ProfileDropdown from "../../components/header/profile-dropdown";
 
 import Logo from "../../components/logo";
@@ -151,10 +150,7 @@ const Header = ({ hasSidebar, sidebarLayout }) => {
             </Button>
           </StyledNavbarElement>
           <StyledNavbarElement ml={["8px", "15px"]}>
-            <MessageDropdown />
-          </StyledNavbarElement>
-          <StyledNavbarElement ml={["8px", "15px"]}>
-            <NotificationDropdown />
+            <FilterDropdown />
           </StyledNavbarElement>
           <StyledNavbarElement ml={["15px", "20px", "30px"]}>
             <ProfileDropdown />
