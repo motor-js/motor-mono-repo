@@ -5,7 +5,6 @@ import {
   CardBody,
   Row,
   Col,
-  // ApexCharts,
   ApexAreaChart,
   SectionTitle,
 } from "../../../components";
@@ -24,6 +23,18 @@ import {
 } from "./style";
 
 const RevenueGrowth = () => {
+  const qMetrics = [
+    {
+      qName: "MRR GROWTH",
+      qExpr: "num(Sum([Growth Actual]*100),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+    {
+      qName: "AVG MRR GROWTH",
+      qExpr: "num(Avg([Growth Actual]*100),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+  ];
   const cols = [
     {
       qField: "TimeSeries",
@@ -43,10 +54,12 @@ const RevenueGrowth = () => {
     },
   ];
 
-  const { dataSet } = useData({
+  const { dataSet, metrics } = useData({
     cols,
+    qMetrics,
   });
   const { data } = dataSet;
+
   const series = [
     {
       name: "Growth Actual",
@@ -167,7 +180,9 @@ const RevenueGrowth = () => {
         <StyledCardBodyWrap>
           <Row>
             <Col sm={5}>
-              <StyledCardBodyTitle>$620,076</StyledCardBodyTitle>
+              <StyledCardBodyTitle>
+                {metrics && metrics["MRR GROWTH"]}
+              </StyledCardBodyTitle>
               <StyledCardBodySubtitle>MRR Growth</StyledCardBodySubtitle>
               <StyledCardBodyText>
                 Measure How Fast You’re Growing Monthly Recurring Revenue.{" "}
@@ -175,7 +190,10 @@ const RevenueGrowth = () => {
               </StyledCardBodyText>
             </Col>
             <Col sm={5} mt={["20px", "0px"]}>
-              <StyledCardBodyTitle>$1,200</StyledCardBodyTitle>
+              <StyledCardBodyTitle>
+                {" "}
+                {metrics && metrics["AVG MRR GROWTH"]}
+              </StyledCardBodyTitle>
               <StyledCardBodySubtitle>AVG. MRR/CUSTOMER</StyledCardBodySubtitle>
               <StyledCardBodyText>
                 The revenue generated per account on a monthly or yearly basis.{" "}
