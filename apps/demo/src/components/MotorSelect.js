@@ -26,8 +26,7 @@ function MotorSelect({
   ),[selections])
   
   const handleChange = async(options,ac) => {
-    console.log(options)
-    console.log(ac)
+    console.log('CALLED')
 
     const removedVal = ac.removedValue
 

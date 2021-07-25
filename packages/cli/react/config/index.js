@@ -12,53 +12,43 @@ module.exports = [
   name: "template",
   type: "list",
   question: "Please select your Motor template",
-  choices: ["Finance","Retail"],
+  choices: ["Solar"],
   actions: [
     {
-    choice: "Finance",
-    dependencies: ["@motor-js/engine","@motor-js/nebula"],
+    choice: "Solar",
+    dependencies1: [
+      "@motor-js/engine",
+      "@styled-system/theme-get",
+      "classnames",
+      "@motor-js/nebula",
+      "react-feather",
+      "react-router-dom",
+      "styled-bootstrap-grid",
+      "styled-components",
+      "styled-system",
+      "tinycolor2",
+    ],
     devDependencies: [],
     packageEntries: [],
-  },
-  {
-    choice: "Retail",
-    dependencies: ["@motor-js/engine"],
-    devDependencies: [],
-    packageEntries: [],
-  }]
+    }]
   },
   {
     name: "deployment",
     type: "list",
     question: "Please select your Qlik deployment type",
     choices: ['Qlik Sense SaaS'],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
   {
     name: "tenant",
     question: "Please enter your tenant name (e.g. motor.eu.qlikcloud.com)",
-    choices: [],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
   {
     name: "appId",
     question: "Please enter your application id",
-    choices: [],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
   {
     name: "webIntId",
     question: "Please enter your web integration id",
-    choices: [],
-    dependencies: [],
-    devDependencies: [],
-    packageEntries: [],
   },
 ]
 
