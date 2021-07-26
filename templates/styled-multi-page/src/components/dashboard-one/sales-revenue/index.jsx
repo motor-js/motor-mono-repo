@@ -24,12 +24,12 @@ const SalesRevenue = () => {
     },
     {
       dataKey: "order",
-      qField: "order",
+      qField: "=num(Sum([order]),'#,##0')",
       qLabel: "order",
     },
     {
       dataKey: "earning",
-      qField: "earning",
+      qField: "=num(Sum([earning]),'$#,##0')",
       qLabel: "earning",
     },
   ];
