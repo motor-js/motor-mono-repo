@@ -29,11 +29,11 @@ const ProfileDropdown = () => {
         </Avatar>
         <StyledAuthorName>{qTitle}</StyledAuthorName>
         <StyledAuthorRole>Application</StyledAuthorRole>
-        <StyledReload path="/profile-view">
+        <StyledReload>
           <Calendar size="24" />
           {new Date(qLastReloadTime).toLocaleDateString()}
         </StyledReload>
-        <StyledReload path="/profile-view" mt="10px">
+        <StyledReload mt="10px">
           <Clock size="24" />
           {new Date(qLastReloadTime).toLocaleTimeString()}
         </StyledReload>
