@@ -126,7 +126,7 @@ const AccountRetention = () => {
       fill: {
         opacity: 1,
       },
-      colors: ["#69b2f8", "#f0f1f5"],
+      colors: ["#fe7372", "#f0f1f5"],
     },
     series: [
       {
