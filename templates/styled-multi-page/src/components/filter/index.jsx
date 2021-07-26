@@ -4,8 +4,6 @@ import Select from "react-select";
 import { light } from "./style";
 
 function Filter({
-  // listData,
-  // motorListProps,
   dimension,
   isMulti,
   closeMenuOnSelect,

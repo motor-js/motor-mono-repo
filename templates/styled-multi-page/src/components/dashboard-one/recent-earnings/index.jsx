@@ -34,27 +34,32 @@ const RecentEarnings = () => {
     },
     {
       dataKey: "sales_count",
-      qField: "sales_count",
+      // qField: "sales_count",
+      qField: "=num(Sum(sales_count),'#,##0')",
       qLabel: "sales_count",
     },
     {
       dataKey: "gross_earnings",
-      qField: "gross_earnings",
+      // qField: "gross_earnings",
+      qField: "=num(Sum(gross_earnings),'$#,##0')",
       qLabel: "gross_earnings",
     },
     {
       dataKey: "tax_withheld",
-      qField: "tax_withheld",
+      // qField: "tax_withheld",
+      qField: "=num(Sum(tax_withheld),'$#,##0')",
       qLabel: "tax_withheld",
     },
     {
       dataKey: "earning",
-      qField: "net_earinings_earning",
+      // qField: "net_earinings_earning",
+      qField: "=num(Sum(earning),'$#,##0')",
       qLabel: "earning",
     },
     {
       dataKey: "growth",
-      qField: "net_earinings_growth",
+      // qField: "net_earinings_growth",
+      qField: "=num(Avg(net_earinings_growth),'#,##0.0%')",
       qLabel: "growth",
     },
     {

@@ -160,7 +160,6 @@ const AccountRetention = () => {
         <Row>
           <Col col={12} sm>
             <StyledCardBodyTitle>
-              {/* $1,680<small>.50</small> */}
               {metrics && metrics["Series1"]}
               <small>.50</small>
             </StyledCardBodyTitle>
