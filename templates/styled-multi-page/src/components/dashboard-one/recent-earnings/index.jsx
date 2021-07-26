@@ -4,8 +4,8 @@ import { useTable } from "@motor-js/engine";
 import {
   Card,
   CardBody,
-  ButtonGroup,
-  Button,
+  // ButtonGroup,
+  // Button,
   Media,
   MediaBody,
   SectionTitle,
@@ -98,14 +98,14 @@ const RecentEarnings = () => {
             desc="Your sales and referral earnings over the last 30 days"
           />
         </div>
-        <ButtonGroup mt={["20px", "0px"]}>
+        {/* <ButtonGroup mt={["20px", "0px"]}>
           <Button size="xs" color="white" active>
             Range
           </Button>
           <Button size="xs" color="white">
             Period
           </Button>
-        </ButtonGroup>
+        </ButtonGroup> */}
       </StyledHeader>
       <CardBody py={["30px", "30px"]}>
         <StyledMediaWrap>
