@@ -44,9 +44,8 @@ const AccountRetention = () => {
     },
   ];
 
-  // TODO sort order
-
   const { dataSet, metrics } = useData({
+    qSortByAscii: 0,
     cols,
     qMetrics,
   });

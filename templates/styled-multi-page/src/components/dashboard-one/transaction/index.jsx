@@ -37,6 +37,7 @@ const Transaction = () => {
     {
       dataKey: "count",
       qField: "count",
+      // qField: "=num(Sum(count),'$#,##0.00')",
       qLabel: "count",
     },
     {
