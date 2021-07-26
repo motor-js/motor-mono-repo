@@ -133,6 +133,7 @@ exports.create = async (appName, appDirectory) => {
 
 Get started with ...
 `+chalk.cyanBright(`cd`)+ ` ${appName}`+`
+`+chalk.cyanBright(`yarn install`)+`
 `+chalk.cyanBright(`yarn start`)+`
 
 Any questions? Reach out to us at ` + chalk.cyanBright(`hello@motor-js.io`)+`
