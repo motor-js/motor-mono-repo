@@ -8,8 +8,8 @@ import {
 import {
   StyledHeader,
   StyledTitle,
-  StyledHeaderRight,
-  StyledIcon,
+  // StyledHeaderRight,
+  // StyledIcon,
   StyledListMiddle,
   StyledListTitle,
   StyledListText,
@@ -25,14 +25,14 @@ const Transaction = () => {
     <Card height="100%">
       <StyledHeader>
         <StyledTitle>Transaction History</StyledTitle>
-        <StyledHeaderRight>
+        {/* <StyledHeaderRight>
           <StyledIcon href="#" aria-label="refesh">
             <i className="fa fa-redo" />
           </StyledIcon>
           <StyledIcon href="#" ml="10px" aria-label="more options">
             <i className="fa fa-ellipsis-v" />
           </StyledIcon>
-        </StyledHeaderRight>
+        </StyledHeaderRight> */}
       </StyledHeader>
       <ListGroup flush>
         <ListGroupItem display="flex" px={[null, "20px"]}>
@@ -97,7 +97,7 @@ const Transaction = () => {
         </ListGroupItem>
       </ListGroup>
       <StyledFooter>
-        <StyledFooterLink href="/invoice">
+        <StyledFooterLink>
           View All Transactions <i className="icon ion-md-arrow-down mg-l-5" />
         </StyledFooterLink>
       </StyledFooter>
