@@ -110,7 +110,7 @@ const RecentEarnings = () => {
       <CardBody py={["30px", "30px"]}>
         <StyledMediaWrap>
           <Media>
-            <StyledMedaLeft bg="teal">
+            <StyledMedaLeft bg="#fe7372">
               <BarChart2 size="24" />
             </StyledMedaLeft>
             <MediaBody>
@@ -119,7 +119,7 @@ const RecentEarnings = () => {
             </MediaBody>
           </Media>
           <Media mt={["20px", "0px"]} ml={[null, "15px", "40px"]}>
-            <StyledMedaLeft bg="pink">
+            <StyledMedaLeft bg="#71fecf">
               <BarChart2 size="24" />
             </StyledMedaLeft>
             <MediaBody>
@@ -130,7 +130,7 @@ const RecentEarnings = () => {
             </MediaBody>
           </Media>
           <Media mt={["20px", "0px"]} ml={[null, "15px", "40px"]}>
-            <StyledMedaLeft bg="primary">
+            <StyledMedaLeft bg="#71cffe">
               <BarChart2 size="24" />
             </StyledMedaLeft>
             <MediaBody>

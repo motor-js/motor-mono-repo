@@ -23,15 +23,15 @@ const Footer = () => {
         </StyledFooterNav>
       </StyledFooterRight>
       <StyledFooterLeft>
-        <span>&copy; Doar {new Date().getFullYear()} </span>
+        <span>&copy; Motor {new Date().getFullYear()} </span>
         <span className="copright-link">
           MADE WITH <Heart size="24" /> BY{"  "}
           <a
-            href="https://themeforest.net/user/bootxperts/portfolio"
+            href="https://www.motor.so/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            BootXperts
+            Motor Team
           </a>
         </span>
       </StyledFooterLeft>

@@ -64,8 +64,8 @@ const SalesRevenue = () => {
             data={usajson}
             height="200px"
             width="100%"
-            color="#d1e6fa"
-            selectedColor="#69b2f8"
+            color="#FE9A9A"
+            selectedColor="#fe7372"
             checkedLayers={["us-ca", "us-wy", "us-tx", "us-ny", "us-fl"]}
             tooltip
           />

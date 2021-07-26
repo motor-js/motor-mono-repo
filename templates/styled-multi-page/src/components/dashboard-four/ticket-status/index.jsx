@@ -148,7 +148,9 @@ const TicketStatus = () => {
           },
         },
       ],
-      colors: ["#69b2f8", "#65e0e0", "#0168fa"],
+      // colors: ["#69b2f8", "#65e0e0", "#0168fa"],
+      // colors: ["#71cffe", "#71fecf", "#fe7372"],
+      colors: ["#fe7372", "#71fecf", "#71cffe"],
       legend: {
         show: false,
       },

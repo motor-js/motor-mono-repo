@@ -92,7 +92,9 @@ const RevenueGrowth = () => {
         show: false,
       },
     },
-    colors: ["#69b2f8", "#00E396", "#d1e6fa"],
+    // colors: ["#69b2f8", "#00E396", "#d1e6fa"],
+    colors: ["#71cffe", "#71fecf", "#fe7372"],
+    // colors: ["#fe7372", "#71fecf", "#71cffe"],
     dataLabels: {
       enabled: false,
     },
@@ -191,7 +193,6 @@ const RevenueGrowth = () => {
             </Col>
             <Col sm={5} mt={["20px", "0px"]}>
               <StyledCardBodyTitle>
-                {" "}
                 {metrics && metrics["AVG MRR GROWTH"]}
               </StyledCardBodyTitle>
               <StyledCardBodySubtitle>AVG. MRR/CUSTOMER</StyledCardBodySubtitle>

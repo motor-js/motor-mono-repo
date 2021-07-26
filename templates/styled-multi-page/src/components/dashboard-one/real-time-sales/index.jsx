@@ -116,12 +116,12 @@ const RealTimeSales = () => {
   RealTimeSalesData.labels = (data && data.map((n) => n.Category)) || [];
   RealTimeSalesData.datasets[0].categoryPercentage = 0.9;
   RealTimeSalesData.datasets[0].data = (data && data.map((n) => n.today)) || [];
-  RealTimeSalesData.datasets[0].backgroundColor = "#69b2f8";
+  RealTimeSalesData.datasets[0].backgroundColor = "#fe7372";
   RealTimeSalesData.datasets[0].lebel = (dataKeys && dataKeys[0]) || null;
   RealTimeSalesData.datasets[1].categoryPercentage = 0.9;
   RealTimeSalesData.datasets[1].data =
     (data && data.map((n) => n.yesterday)) || [];
-  RealTimeSalesData.datasets[1].backgroundColor = "#d1e6fa";
+  RealTimeSalesData.datasets[1].backgroundColor = "#71cffe";
   RealTimeSalesData.datasets[1].lebel = (dataKeys && dataKeys[1]) || null;
   const { datasets } = RealTimeSalesData;
 
