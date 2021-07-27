@@ -17,6 +17,18 @@ import {
 } from "./style";
 
 const AccountRetention = () => {
+  const qMetrics = [
+    {
+      qName: "Series1",
+      qExpr: "num(Sum([Series1]),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+    {
+      qName: "Series2",
+      qExpr: "num(Sum([Series2]),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+    },
+  ];
   const cols = [
     {
       qField: "[categories]",
@@ -32,10 +44,10 @@ const AccountRetention = () => {
     },
   ];
 
-  // TODO sort order
-
-  const { dataSet } = useData({
+  const { dataSet, metrics } = useData({
+    qSortByAscii: 0,
     cols,
+    qMetrics,
   });
 
   const { data } = dataSet;
@@ -114,7 +126,7 @@ const AccountRetention = () => {
       fill: {
         opacity: 1,
       },
-      colors: ["#69b2f8", "#f0f1f5"],
+      colors: ["#fe7372", "#f0f1f5"],
     },
     series: [
       {
@@ -147,7 +159,8 @@ const AccountRetention = () => {
         <Row>
           <Col col={12} sm>
             <StyledCardBodyTitle>
-              $1,680<small>.50</small>
+              {metrics && metrics["Series1"]}
+              <small>.50</small>
             </StyledCardBodyTitle>
             <StyledCardBodySubtitle color="primary">
               Expansions
@@ -158,7 +171,8 @@ const AccountRetention = () => {
           </Col>
           <Col col={12} sm mt={["20px", "0px"]}>
             <StyledCardBodyTitle>
-              $1,520<small>.00</small>
+              {metrics && metrics["Series2"]}
+              <small>.00</small>
             </StyledCardBodyTitle>
             <StyledCardBodySubtitle color="pink">
               Cancellations

@@ -1,70 +1,57 @@
 import { Col } from "../../../components";
 import Conversion from "../../../components/dashboard-one/conversion";
-import { useData, useTable } from "@motor-js/engine";
+import { useData } from "@motor-js/engine";
 
 const RowOne = () => {
-  const cols = [
+  const qMetrics = [
     {
-      qField: "Period",
-      qLabel: "Period",
-    },
-
-    {
-      qField: "=sum(Conversions)",
-      qLabel: "Conversions",
+      qName: "TOTAL SALES",
+      qExpr: "num(Sum(today),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
     {
-      qField: "=sum(Purchases)",
-      qLabel: "Purchases",
+      qName: "uniquePurchase",
+      // qExpr: "num(Sum(today)/Sum(yesterday),'#,##0%')",
+      qExpr: "num(Count( distinct Purchases),'#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
     {
-      qField: "=sum(Values)",
-      qLabel: "Values",
+      qName: "avgOrderValue",
+      qExpr: "num(Avg(Values),'$#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
     {
-      qField: "=sum(Quantities)",
-      qLabel: "Quantities",
-    },
-  ];
-
-  const { dataSet } = useData({
-    cols,
-  });
-  const conversionCols = [
-    {
-      dataKey: "id",
-      qField: "conversions_id",
-      qLabel: "id",
-    },
-    {
-      dataKey: "title",
-      qField: "title",
-      qLabel: "title",
-    },
-    {
-      dataKey: "rate",
-      qField: "rate",
-      qLabel: "rate",
-    },
-    {
-      dataKey: "percentageChange",
-      qField: "percentageChange",
-      qLabel: "percentageChange",
-    },
-    {
-      dataKey: "growthChange",
-      qField: "growthChange",
-      qLabel: "growthChange",
-    },
-    {
-      dataKey: "timeChange",
-      qField: "timeChange",
-      qLabel: "timeChange",
+      qName: "quantities",
+      qExpr: "num(Sum(Quantities),'#,##0')",
+      qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
   ];
 
-  const { dataSet: dataSet2 } = useTable({
-    cols: conversionCols,
+  const { dataSet, metrics } = useData({
+    cols: [
+      {
+        qField: "Period",
+        qLabel: "Period",
+      },
+
+      {
+        qField: "=sum(Conversions)",
+        qLabel: "Conversions",
+      },
+      {
+        qField: "=sum(Purchases)",
+        qLabel: "Purchases",
+      },
+      {
+        qField: "=sum(Values)",
+        qLabel: "Values",
+      },
+      {
+        qField: "=sum(Quantities)",
+        qLabel: "Quantities",
+      },
+    ],
+    qMetrics,
   });
 
   const { data } = dataSet;
@@ -222,45 +209,45 @@ const RowOne = () => {
   const conversions = [
     {
       id: 1,
-      title: dataSet2 && dataSet2[0].title.text,
-      rate: dataSet2 && dataSet2[0].rate.text,
+      title: "Conversion Rate",
+      rate: Math.random().toFixed(2) + "%",
       change: {
-        percentage: dataSet2 && dataSet2[0].percentageChange.text,
-        growth: dataSet2 && dataSet2[0].growthChange.text,
-        time: dataSet2 && dataSet2[0].timeChange.text,
+        percentage: Math.random().toFixed(1) + "%",
+        growth: "up",
+        time: "than last week",
       },
       chart: conversionChart1,
     },
     {
       id: 2,
-      title: dataSet2 && dataSet2[1].title.text,
-      rate: dataSet2 && dataSet2[1].rate.text,
+      title: "Unique Purchases",
+      rate: metrics && metrics["uniquePurchase"],
       change: {
-        percentage: dataSet2 && dataSet2[1].percentageChange.text,
-        growth: dataSet2 && dataSet2[1].growthChange.text,
-        time: dataSet2 && dataSet2[1].timeChange.text,
+        percentage: Math.random().toFixed(1) + "%",
+        growth: "down",
+        time: "than last week",
       },
       chart: conversionChart2,
     },
     {
       id: 3,
-      title: dataSet2 && dataSet2[2].title.text,
-      rate: dataSet2 && dataSet2[2].rate.text,
+      title: "Avg. Order Value",
+      rate: metrics && metrics["avgOrderValue"],
       change: {
-        percentage: dataSet2 && dataSet2[2].percentageChange.text,
-        growth: dataSet2 && dataSet2[2].growthChange.text,
-        time: dataSet2 && dataSet2[2].timeChange.text,
+        percentage: Math.random().toFixed(1) + "%",
+        growth: "down",
+        time: "than last week",
       },
       chart: conversionChart3,
     },
     {
       id: 4,
-      title: dataSet2 && dataSet2[3].title.text,
-      rate: dataSet2 && dataSet2[3].rate.text,
+      title: "Order Quantity",
+      rate: metrics && metrics["quantities"],
       change: {
-        percentage: dataSet2 && dataSet2[3].percentageChange.text,
-        growth: dataSet2 && dataSet2[3].growthChange.text,
-        time: dataSet2 && dataSet2[3].timeChange.text,
+        percentage: Math.random().toFixed(1) + "%",
+        growth: "up",
+        time: "than last week",
       },
       chart: conversionChart4,
     },
@@ -268,7 +255,7 @@ const RowOne = () => {
 
   return (
     <>
-      {dataSet2 &&
+      {metrics &&
         conversions.map((data) => (
           <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
             <Conversion

@@ -103,13 +103,13 @@ const Complaints = () => {
         min: 0,
         max: 55,
       },
-      colors: ["#0168fa"],
+      colors: ["#fe7372"],
       legend: {
         show: false,
       },
       fill: {
         opacity: 0.05,
-        colors: ["#0168fa"],
+        colors: ["#fe7372"],
         type: "solid",
       },
       tooltip: {

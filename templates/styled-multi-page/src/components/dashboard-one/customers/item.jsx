@@ -36,13 +36,13 @@ const Item = ({ id, name, image, bg, chat_link, profile_link }) => {
       </StyledListMiddle>
       <StyledListEnd>
         <StyledNavIcon>
-          <StyledNavLink href={chat_link} display={["none", "block"]}>
+          <StyledNavLink display={["none", "block"]}>
             <Mail size="24" />
           </StyledNavLink>
-          <StyledNavLink href="#" display={["none", "block"]}>
+          <StyledNavLink display={["none", "block"]}>
             <Slash size="24" />
           </StyledNavLink>
-          <StyledNavLink href={profile_link} display={["none", "block"]}>
+          <StyledNavLink display={["none", "block"]}>
             <User size="24" />
           </StyledNavLink>
           <StyledDropdown direction="left">

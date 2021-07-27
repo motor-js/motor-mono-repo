@@ -11,9 +11,9 @@ import Item from "./item";
 import {
   StyledHeader,
   StyledHeaderRight,
-  StyledIcon,
-  StyledFooter,
-  StyledFooterLink,
+  // StyledIcon,
+  // StyledFooter,
+  // StyledFooterLink,
 } from "./style";
 
 const Transaction = () => {
@@ -37,6 +37,7 @@ const Transaction = () => {
     {
       dataKey: "count",
       qField: "count",
+      // qField: "=num(Sum(count),'$#,##0.00')",
       qLabel: "count",
     },
     {
@@ -64,12 +65,12 @@ const Transaction = () => {
       <StyledHeader>
         <SectionTitle title="Transaction History" />
         <StyledHeaderRight>
-          <StyledIcon href="#" aria-label="refesh">
+          {/* <StyledIcon href="#" aria-label="refesh">
             <i className="fa fa-redo" />
           </StyledIcon>
           <StyledIcon href="#" ml="10px" aria-label="more options">
             <i className="fa fa-ellipsis-v" />
-          </StyledIcon>
+          </StyledIcon> */}
         </StyledHeaderRight>
       </StyledHeader>
       <ListGroup flush>
@@ -86,11 +87,11 @@ const Transaction = () => {
             </ListGroupItem>
           ))}
       </ListGroup>
-      <StyledFooter>
+      {/* <StyledFooter>
         <StyledFooterLink href="/invoice">
           View All Transactions <i className="icon ion-md-arrow-down mg-l-5" />
         </StyledFooterLink>
-      </StyledFooter>
+      </StyledFooter> */}
     </Card>
   );
 };

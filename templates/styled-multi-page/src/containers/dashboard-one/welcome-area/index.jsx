@@ -1,24 +1,24 @@
-import { useState } from "react";
-import { Mail, Printer, File } from "react-feather";
+// import { useState } from "react";
+// import { Mail, Printer, File } from "react-feather";
 import Breadcrumb from "../../../components/breadcrumb";
-import ModalPrint from "../../../components/dashboard-one/modal-print";
-import ModalReport from "../../../components/dashboard-one/modal-report";
+// import ModalPrint from "../../../components/dashboard-one/modal-print";
+// import ModalReport from "../../../components/dashboard-one/modal-report";
 import {
   StyledWelcomeArea,
   StyledWelcomeLeft,
   StyledWelcomeRight,
-  StyledButton,
+  // StyledButton,
 } from "./style";
 
 const WelcomeArea = () => {
-  const [showPrintModal, setShowPrintModal] = useState(false);
-  const [showReportModal, setShowReportModal] = useState(false);
-  const handlePrintModal = () => {
-    setShowPrintModal((prev) => !prev);
-  };
-  const handleReportModal = () => {
-    setShowReportModal((prev) => !prev);
-  };
+  // const [showPrintModal, setShowPrintModal] = useState(false);
+  // const [showReportModal, setShowReportModal] = useState(false);
+  // const handlePrintModal = () => {
+  //   setShowPrintModal((prev) => !prev);
+  // };
+  // const handleReportModal = () => {
+  //   setShowReportModal((prev) => !prev);
+  // };
   return (
     <>
       <StyledWelcomeArea>
@@ -30,11 +30,11 @@ const WelcomeArea = () => {
           />
         </StyledWelcomeLeft>
         <StyledWelcomeRight>
-          <StyledButton size="sm" color="white" path="/apps/mail" hasIcon>
+          {/* <StyledButton size="sm" color="white" path="/apps/mail" hasIcon>
             <Mail />
             Email
-          </StyledButton>
-          <StyledButton
+          </StyledButton> */}
+          {/* <StyledButton
             size="sm"
             color="white"
             hasIcon
@@ -43,15 +43,15 @@ const WelcomeArea = () => {
           >
             <Printer />
             Print
-          </StyledButton>
-          <StyledButton size="sm" ml="10px" hasIcon onClick={handleReportModal}>
+          </StyledButton> */}
+          {/* <StyledButton size="sm" ml="10px" hasIcon onClick={handleReportModal}>
             <File />
             Generate Report
-          </StyledButton>
+          </StyledButton> */}
         </StyledWelcomeRight>
       </StyledWelcomeArea>
-      <ModalPrint show={showPrintModal} onClose={handlePrintModal} />
-      <ModalReport show={showReportModal} onClose={handleReportModal} />
+      {/* <ModalPrint show={showPrintModal} onClose={handlePrintModal} />
+      <ModalReport show={showReportModal} onClose={handleReportModal} /> */}
     </>
   );
 };

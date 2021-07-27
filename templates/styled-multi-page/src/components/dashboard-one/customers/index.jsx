@@ -10,9 +10,9 @@ import Item from "./item";
 import {
   StyledHeader,
   StyledHeaderRight,
-  StyledIcon,
-  StyledFooter,
-  StyledFooterLink,
+  // StyledIcon,
+  // StyledFooter,
+  // StyledFooterLink,
 } from "./style";
 import { useEffect, useState } from "react";
 
@@ -67,12 +67,12 @@ const Customers = () => {
       <StyledHeader>
         <SectionTitle title="New Customers" />
         <StyledHeaderRight>
-          <StyledIcon href="#" aria-label="refresh">
+          {/* <StyledIcon href="#" aria-label="refresh">
             <i className="fa fa-redo" />
           </StyledIcon>
           <StyledIcon href="#" ml="10px" aria-label="more options">
             <i className="fa fa-ellipsis-v" />
-          </StyledIcon>
+          </StyledIcon> */}
         </StyledHeaderRight>
       </StyledHeader>
       <ListGroup flush>
@@ -90,11 +90,11 @@ const Customers = () => {
             </ListGroupItem>
           ))}
       </ListGroup>
-      <StyledFooter>
+      {/* <StyledFooter>
         <StyledFooterLink href="/profile-view">
           View More Customers <i className="icon ion-md-arrow-down mg-l-5" />
         </StyledFooterLink>
-      </StyledFooter>
+      </StyledFooter> */}
     </Card>
   );
 };

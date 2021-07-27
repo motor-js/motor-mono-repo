@@ -54,7 +54,7 @@ const chart1 = {
   series: [86],
   options: {
     ...chartOptions,
-    colors: ["#65e0e0"],
+    colors: ["#fe7372"],
   },
 };
 
@@ -62,7 +62,7 @@ const chart2 = {
   series: [69],
   options: {
     ...chartOptions,
-    colors: ["#69b2f8"],
+    colors: ["#71fecf"],
   },
 };
 

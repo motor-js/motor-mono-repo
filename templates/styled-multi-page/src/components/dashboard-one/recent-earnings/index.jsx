@@ -4,8 +4,8 @@ import { useTable } from "@motor-js/engine";
 import {
   Card,
   CardBody,
-  ButtonGroup,
-  Button,
+  // ButtonGroup,
+  // Button,
   Media,
   MediaBody,
   SectionTitle,
@@ -34,27 +34,32 @@ const RecentEarnings = () => {
     },
     {
       dataKey: "sales_count",
-      qField: "sales_count",
+      // qField: "sales_count",
+      qField: "=num(Sum(sales_count),'#,##0')",
       qLabel: "sales_count",
     },
     {
       dataKey: "gross_earnings",
-      qField: "gross_earnings",
+      // qField: "gross_earnings",
+      qField: "=num(Sum(gross_earnings),'$#,##0')",
       qLabel: "gross_earnings",
     },
     {
       dataKey: "tax_withheld",
-      qField: "tax_withheld",
+      // qField: "tax_withheld",
+      qField: "=num(Sum(tax_withheld),'$#,##0')",
       qLabel: "tax_withheld",
     },
     {
       dataKey: "earning",
-      qField: "net_earinings_earning",
+      // qField: "net_earinings_earning",
+      qField: "=num(Sum(earning),'$#,##0')",
       qLabel: "earning",
     },
     {
       dataKey: "growth",
-      qField: "net_earinings_growth",
+      // qField: "net_earinings_growth",
+      qField: "=num(Avg(net_earinings_growth),'#,##0.0%')",
       qLabel: "growth",
     },
     {
@@ -93,19 +98,19 @@ const RecentEarnings = () => {
             desc="Your sales and referral earnings over the last 30 days"
           />
         </div>
-        <ButtonGroup mt={["20px", "0px"]}>
+        {/* <ButtonGroup mt={["20px", "0px"]}>
           <Button size="xs" color="white" active>
             Range
           </Button>
           <Button size="xs" color="white">
             Period
           </Button>
-        </ButtonGroup>
+        </ButtonGroup> */}
       </StyledHeader>
       <CardBody py={["30px", "30px"]}>
         <StyledMediaWrap>
           <Media>
-            <StyledMedaLeft bg="teal">
+            <StyledMedaLeft bg="#fe7372">
               <BarChart2 size="24" />
             </StyledMedaLeft>
             <MediaBody>
@@ -114,7 +119,7 @@ const RecentEarnings = () => {
             </MediaBody>
           </Media>
           <Media mt={["20px", "0px"]} ml={[null, "15px", "40px"]}>
-            <StyledMedaLeft bg="pink">
+            <StyledMedaLeft bg="#71fecf">
               <BarChart2 size="24" />
             </StyledMedaLeft>
             <MediaBody>
@@ -125,7 +130,7 @@ const RecentEarnings = () => {
             </MediaBody>
           </Media>
           <Media mt={["20px", "0px"]} ml={[null, "15px", "40px"]}>
-            <StyledMedaLeft bg="primary">
+            <StyledMedaLeft bg="#71cffe">
               <BarChart2 size="24" />
             </StyledMedaLeft>
             <MediaBody>
