@@ -12,7 +12,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Motor config={qlikConfig}>
+      <Motor config={qlikConfig} licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ55lg=">
         <App />
       </Motor>
     </ThemeProvider>

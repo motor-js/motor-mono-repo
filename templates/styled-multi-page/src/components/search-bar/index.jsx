@@ -36,13 +36,13 @@ const SearchBar = ({ isOpen, onClose }) => {
   // Temporary Search suggestions for you to update
   const searchSuggestions = [
     {
-    item: "Search Term A"
+    item: "California"
     },
     {
-      item: "Search Term B"
+      item: "Florida"
     },
     {
-      item: "Search Term C"
+      item: "New York"
     }
   ];
 
