@@ -133,7 +133,6 @@ exports.create = async (appName, appDirectory) => {
 
 Get started with ...
 `+chalk.cyanBright(`cd`)+ ` ${appName}`+`
-`+chalk.cyanBright(`yarn install`)+`
 `+chalk.cyanBright(`yarn start`)+`
 
 Any questions? Reach out to us at ` + chalk.cyanBright(`hello@motor-js.io`)+`
@@ -148,6 +147,9 @@ Join our growing community at ` + chalk.cyanBright(`https://discord.com/invite/j
 
 
 /*
+`+chalk.cyanBright(`yarn install`)+`
+
+
 const updatePackageDotJson = (configList) => {
   const spinner = ora("Updating package.json scripts...".brightMagenta);
 

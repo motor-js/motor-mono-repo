@@ -49,7 +49,7 @@ function Motor({
     chunkHeight: 90,
     textAlign: "left",
     textBaseline: "bottom",
-    globalAlpha: 0.17,
+    globalAlpha: 0.27,
     font: "16px Roboto sans-serif",
     rotateAngle: -0.19,
     fillStyle: "#666",
