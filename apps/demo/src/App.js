@@ -13,7 +13,7 @@ export default function App() {
 
   const {
     listData,
-    motorListProps,
+   // motorListProps,
   } = useList({
     dimension,
   });
@@ -52,7 +52,7 @@ export default function App() {
           paddingTop: 50,
         }}
       />
-      <MotorSelect 
+     {/*} <MotorSelect 
         listData={listData}
         motorListProps={motorListProps}
         theme={light}
@@ -61,7 +61,7 @@ export default function App() {
         hideSelectedOptions={false}
         isSearchable={true}
         placeholder="Company Name.."
-      />
+      /> */}
     </div>
   );
 }
