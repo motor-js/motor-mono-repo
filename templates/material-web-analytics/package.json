@@ -1,6 +1,6 @@
 {
   "name": "material-web-analytics",
-  "version": "0.1.14",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@date-io/moment": "1.x",
@@ -8,8 +8,8 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.40",
     "@material-ui/pickers": "^3.2.9",
-    "@motor-js/engine": "^0.2.8",
-    "@motor-js/nebula": "^0.1.8",
+    "@motor-js/engine": "^0.3.0",
+    "@motor-js/nebula": "^0.2.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
