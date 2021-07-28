@@ -11,7 +11,6 @@ import kpi from '@nebula.js/sn-kpi';
 import actionButton from '@nebula.js/sn-action-button';
 import gridChart from '@nebula.js/sn-grid-chart';
 import bulletChart from '@nebula.js/sn-bullet-chart'
-import orgChart from '@nebula.js/sn-org-chart'
 import scatterPlot from '@nebula.js/sn-scatter-plot'
 
 const configure = embed.createConfiguration({
@@ -72,10 +71,6 @@ const configure = embed.createConfiguration({
     {
       name: 'bulletchart',
       load: () => bulletChart,
-    },
-    {
-      name: 'orgchart',
-      load: () => orgChart,
     },
     {
       name: 'scatterplot',
