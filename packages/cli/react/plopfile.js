@@ -7,7 +7,6 @@ module.exports = function (plop) {
     "solar-motor/src/css/*",
     "solar-motor/src/hooks/*",
     "solar-motor/src/layouts/**/*",
-    "solar-motor/src/methods/*",
     "solar-motor/src/pages/*",
     "solar-motor/src/settings/*",
     "solar-motor/src/theme/*",
