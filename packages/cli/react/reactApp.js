@@ -81,7 +81,7 @@ const installPackages = async (configList, answers) => {
 const addTemplates = (answers) => {
 
   const { tenant, appId, webIntId } = answers
-  const spinner = ora("📁 Adding files..."); 
+  const spinner = ora("📁 Files Added .."); 
 
   return new Promise(resolve => {
     // load an instance of plop from a plopfile
@@ -91,10 +91,10 @@ const addTemplates = (answers) => {
     // get a generator by name
     const basicAdd = plop.getGenerator("create-files");
 
-    basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function (err) {
+    basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function (files) {
 
-      console.log('actions error',err)
-      
+      console.log(files)
+
       spinner.succeed();
       resolve();
     }); 
@@ -137,6 +137,7 @@ exports.create = async (appName, appDirectory) => {
 
 Get started with ...
 `+chalk.cyanBright(`cd`)+ ` ${appName}`+`
+`+chalk.cyanBright(`yarn install`)+`
 `+chalk.cyanBright(`yarn start`)+`
 
 Any questions? Reach out to us at ` + chalk.cyanBright(`hello@motor-js.io`)+`

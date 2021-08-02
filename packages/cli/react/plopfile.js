@@ -31,14 +31,14 @@ module.exports = function (plop) {
       {
         name: "addMany",
         type: "addMany",
-        destination: '/{{cwd}}',
+        destination: '{{cwd}}',
         templateFiles: templateFiles,
         force: true
       },
       {
         name: "addConfig",
         type: "add",
-        path: '/{{cwd}}/src/settings/index.js',
+        path: '{{cwd}}/src/settings/index.js',
         templateFile: 'plop-templates/qlikConfig.js.hbs',
         force: true
       },
