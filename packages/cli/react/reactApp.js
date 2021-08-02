@@ -87,10 +87,14 @@ const addTemplates = (answers) => {
     // load an instance of plop from a plopfile
     const plop = nodePlop(__dirname+`/plopfile.js`);
 
+    console.log('node dir',__dirname)
     // get a generator by name
     const basicAdd = plop.getGenerator("create-files");
 
-    basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function () {
+    basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function (err) {
+
+      console.log('actions error',err)
+      
       spinner.succeed();
       resolve();
     }); 
