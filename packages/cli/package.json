@@ -25,10 +25,8 @@
     "node-dir": "^0.1.17",
     "node-plop": "^0.26.2",
     "ora": "^5.4.1",
+    "plop": "^2.7.4",
     "shelljs": "^0.8.4"
-  },
-  "devDependencies": {
-    "plop": "^2.7.4"
   },
   "gitHead": "a4b8e89428adb75833b44d4f5f27635b63bb88ce"
 }
