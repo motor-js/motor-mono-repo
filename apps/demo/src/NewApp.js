@@ -1,7 +1,7 @@
 import { Motor } from "@motor-js/engine";
 import useConnect from "./useConnect";
 import App from "./App";
-import { NebulaConnection } from '@motor-js/nebula'
+//import { NebulaConnection } from '@motor-js/nebula'
 
 const NewApp = () => {
   const config = {
@@ -16,6 +16,7 @@ const NewApp = () => {
   };
 
   const { engine } = useConnect({ config });
+  
   return (
     <>
       {/* { engine &&  */}
@@ -30,9 +31,7 @@ const NewApp = () => {
           qcs: true, // whether you are connecting to a Qlik Cloud site or not
         }}
       >
-        <NebulaConnection>
-          <App />
-        </NebulaConnection>
+        <App />
       </Motor>
       {/* } */}
     </>

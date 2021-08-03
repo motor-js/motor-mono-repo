@@ -256,6 +256,8 @@ const useList = (props) => {
   }, [generateQProp, engine, update]);
 
   useEffect(() => () => (_isMounted.current = false), []);
+  
+  console.log('engine!')
 
   return {
     layout,
@@ -271,6 +273,7 @@ const useList = (props) => {
     selectionsId,
     clearSelections,
     motorListProps: {
+      layout,
       clearSelections,
       selections,
       select,

@@ -5,7 +5,6 @@ import { useList, useData } from "@motor-js/engine"
 import MotorSelect from "./components/MotorSelect"
 import { dark, light } from "./themes/theme.js"
 import { EngineContext } from "@motor-js/engine"
-import { NebulaContainer } from '@motor-js/nebula'
 
 export default function App() {
 
@@ -13,10 +12,15 @@ export default function App() {
 
   const {
     listData,
+    layout
    // motorListProps,
   } = useList({
     dimension,
   });
+
+
+  console.log('layout: ',layout)
+  console.log('listData: ',listData)
 
   const qMetrics = [{
     qName: "KPI 1",
@@ -42,7 +46,7 @@ export default function App() {
 
   return (
     <div className="App" style={{ padding: "10px" }}>
-      <NebulaContainer 
+    {/*  <NebulaContainer 
         render={{
           id: 'pwHnpwK',
         }}
@@ -52,7 +56,7 @@ export default function App() {
           paddingTop: 50,
         }}
       />
-     {/*} <MotorSelect 
+     } <MotorSelect 
         listData={listData}
         motorListProps={motorListProps}
         theme={light}
