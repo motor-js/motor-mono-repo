@@ -12,16 +12,18 @@ export default function App() {
 
   const {
     listData,
-    layout
+    layout,
+    changePage,
    // motorListProps,
   } = useList({
     dimension,
   });
+  
+ // console.log('layout: ',layout)
+ console.log('listData: ',listData)
 
 
-  console.log('layout: ',layout)
-  console.log('listData: ',listData)
-
+  /*
   const qMetrics = [{
     qName: "KPI 1",
     qExpr: "=$(vQuantity)",
@@ -33,19 +35,13 @@ export default function App() {
   } = useData({
     qMetrics,
   });
+*/
 
-  console.log('metric: ',metrics)
-
-  /*
-  To Do:
-  - Add color prop for select color - should mirror table
-  - Add size prop
-  - 
-  */
-
+  const handleChangePage = () => ( changePage({ qTop: 100 }))
 
   return (
     <div className="App" style={{ padding: "10px" }}>
+      <button onClick={handleChangePage}>change page</button>
     {/*  <NebulaContainer 
         render={{
           id: 'pwHnpwK',

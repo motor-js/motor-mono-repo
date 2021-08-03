@@ -130,9 +130,7 @@ const useList = (props) => {
     return qDataPages[0];
   }, []);
 
-  const structureData = useCallback(async (_qData) => {
-    if (!listData) {
-      
+  const structureData = useCallback(async (_qData) => {     
       if (!_qData) return null;
       let _listData = []
       _qData.qMatrix.map((d, i) => {
@@ -145,13 +143,13 @@ const useList = (props) => {
           label: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
         });
       });
+
       // Get Selections
       const _selections = _listData && _listData.filter(row => row.state === "S");
       // Get Selection ID
       const _selId = _selections && _selections.map(d => d.key);
 
       return { _selId, _selections, _listData };
-    }
   }, [listData]);
 
   const getLayout = useCallback(() => qObject.current.getLayout(), [])
@@ -181,7 +179,7 @@ const useList = (props) => {
         },
       });
     }
-  }, [getData, structureData, getLayout]);
+  }, [getData, structureData, getLayout, changePage]);
 
   const changePage = useCallback(
     (newPage) => {
