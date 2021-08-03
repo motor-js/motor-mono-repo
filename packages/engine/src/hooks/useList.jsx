@@ -67,7 +67,7 @@ const useList = (props) => {
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { listData, selections, selectionsId } = state;
+  const { layout, listData, selections, selectionsId } = state;
 
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
@@ -256,8 +256,6 @@ const useList = (props) => {
   }, [generateQProp, engine, update]);
 
   useEffect(() => () => (_isMounted.current = false), []);
-  
-  console.log('engine!')
 
   return {
     layout,
