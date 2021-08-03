@@ -212,7 +212,7 @@ const useList = (props) => {
     []
   );
 
-  const searchListObjectFor = useCallback(
+  const searchList = useCallback(
     (string) => qObject.current.searchListObjectFor("/qListObjectDef", string),
     []
   );
@@ -262,7 +262,7 @@ const useList = (props) => {
     select,
     beginSelections,
     endSelections,
-    searchListObjectFor,
+    searchList,
     acceptListObjectSearch,
     applyPatches,
     selections,
