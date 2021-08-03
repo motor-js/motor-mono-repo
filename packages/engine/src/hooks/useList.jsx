@@ -217,7 +217,7 @@ const useList = (props) => {
     []
   );
 
-  const acceptListObjectSearch = useCallback(
+  const confirmListSearch = useCallback(
     (ignoreLock = false) =>
       qObject.current.acceptListObjectSearch(
         "/qListObjectDef",
@@ -263,7 +263,7 @@ const useList = (props) => {
     beginSelections,
     endSelections,
     searchList,
-    acceptListObjectSearch,
+    confirmListSearch,
     applyPatches,
     selections,
     selectionsId,
@@ -273,6 +273,8 @@ const useList = (props) => {
       clearSelections,
       selections,
       select,
+      searchList,
+      confirmListSearch,
     }
   };
 };
