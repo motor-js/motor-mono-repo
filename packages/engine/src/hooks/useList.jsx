@@ -273,6 +273,8 @@ const useList = (props) => {
       clearSelections,
       selections,
       select,
+      beginSelections,
+      endSelections,
       searchList,
       confirmListSearch,
       changePage
