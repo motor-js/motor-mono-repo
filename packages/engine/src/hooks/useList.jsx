@@ -275,6 +275,7 @@ const useList = (props) => {
       select,
       searchList,
       confirmListSearch,
+      changePage
     }
   };
 };
