@@ -1,12 +1,12 @@
 {
   "name": "e-commerce",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "private": true,
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
     "@ant-design/icons": "^4.5.0",
-    "@motor-js/engine": "^0.3.8",
-    "@motor-js/nebula": "^0.2.8",
+    "@motor-js/engine": "^0.3.9",
+    "@motor-js/nebula": "^0.2.9",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
