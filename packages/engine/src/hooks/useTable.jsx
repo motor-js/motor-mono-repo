@@ -475,6 +475,23 @@ const useTable = (props) => {
     page, //current page
     pageSize, //page size
     pages, //number of pages
+    dataGridProps: {
+      page,
+      pages,
+      pageSize,
+      incrementPage,
+      decrementPage,
+      handlePageChange,
+      handleSortChange,
+      select,
+      title,
+      beginSelections,
+      endSelections,
+      clearSelections,
+      applyPatches,
+      changePage,
+      selections,
+    }
   };
 };
 

@@ -826,23 +826,7 @@ const useData = (props) => {
     changePage,
     selections,
     select,
-    applyPatches,
-    dataGridProps: {
-      title,
-      subTitle,
-      page,
-      pages,
-      incrementPage,
-      decrementPage,
-      handlePageChange,
-      select,
-      beginSelections,
-      endSelections,
-      clearSelections,
-      handlerChange,
-      changePage,
-      selections,
-    }
+    applyPatches
   };
 };
 
