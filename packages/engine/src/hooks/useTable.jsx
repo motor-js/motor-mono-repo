@@ -475,6 +475,7 @@ const useTable = (props) => {
     page, //current page
     pageSize, //page size
     pages, //number of pages
+    // table props
     dataGridProps: {
       page,
       pages,
