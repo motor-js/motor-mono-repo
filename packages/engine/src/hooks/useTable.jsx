@@ -488,7 +488,6 @@ const useTable = (props) => {
       title,
       beginSelections,
       endSelections,
-      clearSelections,
       applyPatches,
       changePage,
       selections,
