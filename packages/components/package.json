@@ -1,0 +1,32 @@
+{
+  "name": "components",
+  "version": "0.0.1",
+  "description": "Motor components",
+  "keywords": [
+    "motor",
+    "qlik",
+    "sense",
+    "mashups"
+  ],
+  "author": "lureilly1 <lureilly1@gmail.com>",
+  "homepage": "https://motor.so",
+  "license": "ISC",
+  "main": "lib/components.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motor-js/motor-mono-repo.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/motor-js/motor-mono-repo/issues"
+  }
+}
