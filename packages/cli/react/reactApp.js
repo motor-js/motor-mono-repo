@@ -95,6 +95,7 @@ const addTemplates = (answers) => {
 
       console.log(files)
 
+      
       spinner.succeed();
       resolve();
     }); 
