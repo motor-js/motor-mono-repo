@@ -81,16 +81,21 @@ const installPackages = async (configList, answers) => {
 const addTemplates = (answers) => {
 
   const { tenant, appId, webIntId } = answers
-  const spinner = ora("📁 Adding files..."); 
+  const spinner = ora("📁 Files Added .."); 
 
   return new Promise(resolve => {
     // load an instance of plop from a plopfile
     const plop = nodePlop(__dirname+`/plopfile.js`);
 
+    console.log('node dir',__dirname)
     // get a generator by name
     const basicAdd = plop.getGenerator("create-files");
 
-    basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function () {
+    basicAdd.runActions({ tenant: tenant, appId: appId, webIntId: webIntId }).then(function (files) {
+
+      console.log(files)
+
+      
       spinner.succeed();
       resolve();
     }); 
@@ -122,7 +127,7 @@ exports.create = async (appName, appDirectory) => {
   await createReactApp(appName);
   await installPackages(selectedConfigList, answers);
   /*  Inserting package entries descoped for first release */
-  //await updatePackageDotJson(selectedConfigList);
+  // await updatePackageDotJson(selectedConfigList);
   await addTemplates(answers);
   await commitGit();
 
@@ -133,6 +138,7 @@ exports.create = async (appName, appDirectory) => {
 
 Get started with ...
 `+chalk.cyanBright(`cd`)+ ` ${appName}`+`
+`+chalk.cyanBright(`yarn install`)+`
 `+chalk.cyanBright(`yarn start`)+`
 
 Any questions? Reach out to us at ` + chalk.cyanBright(`hello@motor-js.io`)+`
@@ -147,6 +153,9 @@ Join our growing community at ` + chalk.cyanBright(`https://discord.com/invite/j
 
 
 /*
+`+chalk.cyanBright(`yarn install`)+`
+
+
 const updatePackageDotJson = (configList) => {
   const spinner = ora("Updating package.json scripts...".brightMagenta);
 

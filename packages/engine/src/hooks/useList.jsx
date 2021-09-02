@@ -6,6 +6,7 @@ const initialState = {
   qDoc: null,
   qObject: null,
   qData: null,
+  layout: null,
   listData: null,
   selections: null,
   selectionsId: null,
@@ -13,7 +14,7 @@ const initialState = {
 
 function reducer(state, action) {
   const {
-    payload: { qData, listData, selections, selectionsId, qDoc },
+    payload: { qData, layout, listData, selections, selectionsId, qDoc },
     type,
   } = action;
   switch (type) {
@@ -21,6 +22,7 @@ function reducer(state, action) {
       return {
         ...state,
         qData,
+        layout,
         listData,
         selections,
         selectionsId
@@ -60,12 +62,12 @@ const useList = (props) => {
     autoSortByState,
   } = deepMerge(initialProps, props);
 
-  const { engine, engineError } = useContext(EngineContext) || {};
+  const { engine } = useContext(EngineContext) || {};
 
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { listData, selections, selectionsId } = state;
+  const { layout, listData, selections, selectionsId } = state;
 
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
@@ -128,9 +130,7 @@ const useList = (props) => {
     return qDataPages[0];
   }, []);
 
-  const structureData = useCallback(async (_qData) => {
-    if (!listData) {
-      
+  const structureData = useCallback(async (_qData) => {     
       if (!_qData) return null;
       let _listData = []
       _qData.qMatrix.map((d, i) => {
@@ -143,43 +143,19 @@ const useList = (props) => {
           label: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
         });
       });
+
       // Get Selections
       const _selections = _listData && _listData.filter(row => row.state === "S");
       // Get Selection ID
       const _selId = _selections && _selections.map(d => d.key);
 
       return { _selId, _selections, _listData };
-    }
   }, [listData]);
 
-  /*const getSelections = (data) => {
-    console.log('GET SEL')
-    const sel = data.qMatrix.filter((row) => row[0].qState === "S");
-    const arr = [];
-    sel.map((d) => {
-      arr.push({
-        key: d[0].qElemNumber,
-        text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
-        number: d[0].qNumber,
-        state: d[0].qState,
-        value: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
-        label: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
-      });
-    });
-    return arr;
-  };
-
-  const getSelectionsId = (data) => {
-    const sel = data.qMatrix.filter((row) => row[0].qState === "S");
-    const arr = [];
-    sel.map((d) => {
-      arr.push(d[0].qElemNumber);
-    });
-    return arr;
-  };
-  */
+  const getLayout = useCallback(() => qObject.current.getLayout(), [])
 
   const update = useCallback(async () => {
+    const _qLayout = await getLayout()
     const _qData = await getData();
     const { _selId, _selections, _listData } = await structureData(_qData);
     if (_qData && _isMounted.current) {
@@ -188,6 +164,7 @@ const useList = (props) => {
       dispatch({
         type: "update",
         payload: {
+          layout: _qLayout,
           listData: _listData,
           selections: _selections,
           selectionsId: _selId
@@ -197,11 +174,12 @@ const useList = (props) => {
       dispatch({
         type: "update",
         payload: {
+          layout: _qLayout,
           listData: _listData,
         },
       });
     }
-  }, [getData, structureData]);
+  }, [getData, structureData, getLayout, changePage]);
 
   const changePage = useCallback(
     (newPage) => {
@@ -234,12 +212,12 @@ const useList = (props) => {
     []
   );
 
-  const searchListObjectFor = useCallback(
+  const searchList = useCallback(
     (string) => qObject.current.searchListObjectFor("/qListObjectDef", string),
     []
   );
 
-  const acceptListObjectSearch = useCallback(
+  const confirmListSearch = useCallback(
     (ignoreLock = false) =>
       qObject.current.acceptListObjectSearch(
         "/qListObjectDef",
@@ -265,6 +243,7 @@ const useList = (props) => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
+      
       // ToDo: make sure init is not called on every render - convert qDoc to qEngine
       if (_isMounted.current) dispatch({ type: "init", payload: { qDoc } });
       qObject.current.on("changed", () => {
@@ -277,21 +256,28 @@ const useList = (props) => {
   useEffect(() => () => (_isMounted.current = false), []);
 
   return {
+    layout,
     listData,
     changePage,
     select,
     beginSelections,
     endSelections,
-    searchListObjectFor,
-    acceptListObjectSearch,
+    searchList,
+    confirmListSearch,
     applyPatches,
     selections,
     selectionsId,
     clearSelections,
     motorListProps: {
+      layout,
       clearSelections,
       selections,
       select,
+      beginSelections,
+      endSelections,
+      searchList,
+      confirmListSearch,
+      changePage
     }
   };
 };

@@ -7,7 +7,6 @@ module.exports = function (plop) {
     "solar-motor/src/css/*",
     "solar-motor/src/hooks/*",
     "solar-motor/src/layouts/**/*",
-    "solar-motor/src/methods/*",
     "solar-motor/src/pages/*",
     "solar-motor/src/settings/*",
     "solar-motor/src/theme/*",
@@ -32,14 +31,14 @@ module.exports = function (plop) {
       {
         name: "addMany",
         type: "addMany",
-        destination: '/{{cwd}}',
+        destination: '{{cwd}}',
         templateFiles: templateFiles,
         force: true
       },
       {
         name: "addConfig",
         type: "add",
-        path: '/{{cwd}}/src/settings/index.js',
+        path: '{{cwd}}/src/settings/index.js',
         templateFile: 'plop-templates/qlikConfig.js.hbs',
         force: true
       },

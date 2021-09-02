@@ -1,12 +1,10 @@
 import { Filter as FilterIcon } from "react-feather";
 import { DropdownToggle, Dropdown } from "../..";
-
 import Filter from "../../../components/filter";
 import {
   StyledDropMenu,
   StyledDropHeader,
   StyledDropItem,
-  StyledBadge,
 } from "./style";
 
 const FilterDropDown = () => {
@@ -14,7 +12,7 @@ const FilterDropDown = () => {
     <Dropdown direction="down">
       <DropdownToggle variant="texted">
         <FilterIcon className="header-icon" />
-        <StyledBadge>2</StyledBadge>
+        {/*<StyledBadge>2</StyledBadge>*/}
       </DropdownToggle>
       <StyledDropMenu>
         <StyledDropHeader>FILTERS</StyledDropHeader>

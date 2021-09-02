@@ -2508,10 +2508,20 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@nebula.js/sn-action-button@^1.12.0":
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/@nebula.js/sn-action-button/-/sn-action-button-1.12.0.tgz#db90873e4a3abf3a217aa65edd043557cb95fb97"
+  integrity sha512-Iz+PYDcpcp8buHWUN5ardB8ttkkPylXV5NO2SwYxQkCOsYJ5ecu4boK5ibfp52erXfBNd6sB/6TZ3+dscyagSg==
+
 "@nebula.js/sn-bar-chart@^0.8.13":
   version "0.8.28"
   resolved "https://registry.yarnpkg.com/@nebula.js/sn-bar-chart/-/sn-bar-chart-0.8.28.tgz#be4cbcb272c92e2b5ffafed8f2c4295e9f614144"
   integrity sha512-aPkDtYe/HVLppntw5eH1B0a16V3MZkn9p+AjWCyrk8+qEdBhBHBu5dqLR45BAf+m31TzT8kvThwCfbXdO6BkYw==
+
+"@nebula.js/sn-bullet-chart@^0.6.21":
+  version "0.6.21"
+  resolved "https://registry.yarnpkg.com/@nebula.js/sn-bullet-chart/-/sn-bullet-chart-0.6.21.tgz#d7fe8e8bcda2565ba5b83bc8b1777486744baffd"
+  integrity sha512-Hf+biYT5wB1ANaw8WouDbajaFUPMcUK6exipTF0YKLxZJ5lG5inDX+1RwVx6ps198dk7Da17tZDP44wQfRUnvw==
 
 "@nebula.js/sn-combo-chart@^0.19.1":
   version "0.19.1"
@@ -2522,6 +2532,16 @@
   version "0.3.22"
   resolved "https://registry.yarnpkg.com/@nebula.js/sn-funnel-chart/-/sn-funnel-chart-0.3.22.tgz#a0ad94aed5f03a1795b93759b8a9596d08b997a6"
   integrity sha512-E1QJN3ZdXMUAYhrxIyKQ5LKY61DkvZbmJzurDt2+V3MPevmkrfhj6igAamfaUJll3/wBjeGmBNfO1CAmfiAeUg==
+
+"@nebula.js/sn-grid-chart@^0.6.23":
+  version "0.6.23"
+  resolved "https://registry.yarnpkg.com/@nebula.js/sn-grid-chart/-/sn-grid-chart-0.6.23.tgz#9d8cb479cf0100f7cb44e0f79c51f85ac3cd4337"
+  integrity sha512-+cjLqaZZjiUHM9HgcnGajPmbBQPbmpxYDN1lJ3ZfNEFXZfiT1mD7hhHq49A7wlCaKpptfwKLZMbfZ2GiJVkDkA==
+
+"@nebula.js/sn-kpi@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@nebula.js/sn-kpi/-/sn-kpi-0.5.5.tgz#06f28ef077454151700180b2b1832ffa47f53394"
+  integrity sha512-E6yxrZpBn5g9RAtqqRjwAFnC0LiLG68sdi6H1ZM+ZawfYI1FasgbWaEX5i4M4coQPlGWh3WvFd5xgGTjpE0yOg==
 
 "@nebula.js/sn-line-chart@^0.9.12":
   version "0.9.26"
@@ -2542,6 +2562,11 @@
   version "0.5.16"
   resolved "https://registry.yarnpkg.com/@nebula.js/sn-sankey-chart/-/sn-sankey-chart-0.5.16.tgz#40fd743400544185292879c6a178b7f11aec721f"
   integrity sha512-m50TbXiLr3xA8SLXqU0fUW1SxWdZl+wfxHbJ2UEY9SNjd834RMljDWn0PXgpkfYGWGZYV9beN9RVpEpQ8ImaBA==
+
+"@nebula.js/sn-scatter-plot@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@nebula.js/sn-scatter-plot/-/sn-scatter-plot-0.6.0.tgz#897c3af7c8559c24b1fd0747fb781fe8fa99f5f6"
+  integrity sha512-RJ9pfaGY2ITHm4ojbuA71gDEeBKPtpoCS9VU3KUQiGxD1taAfza0zMiuw3pzhyQ56CSP7fIB187v5ODbGZEwzQ==
 
 "@nebula.js/sn-table@^0.2.2":
   version "0.2.5"

@@ -826,7 +826,7 @@ const useData = (props) => {
     changePage,
     selections,
     select,
-    applyPatches,
+    applyPatches
   };
 };
 
