@@ -10,7 +10,7 @@ const NewApp = () => {
     secure: true,
     port: null,
     prefix: "",
-    appId: "0294cf88-eb02-484a-b315-cf06b45ac347",
+    appId: "bc5878d0-2d3c-49ad-80cb-c35e5fa5cbe9",
     webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
     qcs: true,
   };
@@ -26,7 +26,7 @@ const NewApp = () => {
           secure: true, // Whether your host is secure of not (HTTPS / HTTP)
           port: null, // Qlik Sense site port
           prefix: "", // Prefix
-          appId: "0294cf88-eb02-484a-b315-cf06b45ac347", // Application Id
+          appId: "bc5878d0-2d3c-49ad-80cb-c35e5fa5cbe9", // Application Id
           webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
           qcs: true, // whether you are connecting to a Qlik Cloud site or not
         }}

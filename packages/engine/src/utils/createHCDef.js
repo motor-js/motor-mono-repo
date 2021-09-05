@@ -48,7 +48,7 @@ function createDef(
           col.qType &&
           col.qType === "dimension") ||
         Array.isArray(col.qField) ||
-        (typeof col === "object" && !col.qField.startsWith("="));
+        (typeof col === "object" && !col.qLibraryId && !col.qField.startsWith("="));
 
       if (isDimension && !qInterColumnSortOrderSet) {
         myqInterColumnSortOrder[i] = sortIndex;
@@ -124,7 +124,7 @@ function createDef(
           qShowTotalsAbove: true,
         };
       }
-      if (typeof col === "object" && col.qLibraryId) {
+      if (typeof col === "object" && col.qLibraryId && col.qType === "dimension") {
         return {
           qLibraryId: col.qLibraryId,
           qType: col.qType,
@@ -198,7 +198,7 @@ function createDef(
           },
         };
       }
-      if (typeof col === "object") {
+      if (typeof col === "object" && !col.qLibraryId) {
         return {
           qDef: {
             qDef: col.qField,
@@ -211,6 +211,46 @@ function createDef(
               qThou: ",",
             },
           },
+          qSortBy: {
+            qSortByNumeric,
+            qSortByExpression,
+            qExpression,
+            qSuppressMissing,
+          },
+          qAttributeExpressions: [
+            {
+              // cell background color
+              qExpression: col.qCondBackgroundFormat,
+              qLibraryId: "",
+              qAttribute: false,
+              id: "cellBackgroundColor",
+            },
+            {
+              // cell text color
+              qExpression: col.qCondTextFormat,
+              qLibraryId: "",
+              qAttribute: false,
+              id: "cellForegroundColor",
+            },
+            {
+              // chart fill color
+              qExpression: col.qCondChartColor,
+              qLibraryId: "",
+              qAttribute: false,
+              id: "colorTheme",
+            },
+          ],
+          qChartType: col.qChartType,
+          qShowPoints: col.qShowPoints,
+          qCurve: col.qCurve,
+          qFillStyle: col.qFillStyle,
+          qLegendShape: col.qLegendShape,
+        };
+      }
+      if (typeof col === "object" && col.qLibraryId && col.qType === "measure") {
+        return {
+          qLibraryId: col.qLibraryId,
+          qDef: { },
           qSortBy: {
             qSortByNumeric,
             qSortByExpression,
