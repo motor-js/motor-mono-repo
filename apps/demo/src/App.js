@@ -9,37 +9,72 @@ import { EngineContext } from "@motor-js/engine"
 export default function App() {
 
   const cols = 
-  [{
-    qField: "[OrderDateMonth]",
-   // dataKey: 'Order',
-    qLabel: "Order Date",
-  },
-  {
-    qField: "=sum(Price)",
-    qLabel: "Price",
-  },
-  {
-    qField: "",
-    qLibraryId: "dWHamW",
-    qType: "measure",
-   // dataKey: 'MI',
-    qLabel: "Revenue",
-    qNumType: 'M',
-    qNumFmt: '#,##0'
-  }]
+  [
+    {
+      qField: "=sum(Quantity * Price)",
+      dataKey: "revenue",
+      qLabel: "rev",
+      qNumType: "M",
+      qNumFmt: "£#,##0",
+      columnCategory: 'Metrics'
+    },
+    {
+      qField: "=sum(Quantity)",
+      dataKey: "profit",
+      qLabel: "profit",
+      qNumType: "M",
+      qNumFmt: "£#,##0",
+      columnCategory: 'Metrics'
+    },
+    {
+      qField: "[Company Name]",
+      dataKey: "company",
+      qLabel: "Company Name",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "[Company Name]",
+      dataKey: "company1",
+      qLabel: "Company",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "_Image",
+      dataKey: "img",
+      qLabel: "Image",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "Body Location",
+      dataKey: "body_location",
+      qLabel: "Body Location",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "Quantity",
+      dataKey: "quantity",
+      qLabel: "Quantity",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "Source",
+      dataKey: "source",
+      qLabel: "Source",
+      columnCategory: 'Dimensions'
+    }
+]
 
   const { 
     dataSet,
-  } = useData({
+  } = useTable({
     cols
   })
 
- console.log('dataSet: ',dataSet)
+  console.log(dataSet)
 
   return (
     <div className="App" style={{ padding: "10px" }}>
       <button>change page</button>
-
     </div>
   );
 }
