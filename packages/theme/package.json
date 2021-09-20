@@ -1,6 +1,6 @@
 {
   "name": "theme",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Theme for Motor components",
   "keywords": [
     "qlik",
@@ -31,6 +31,6 @@
   },
   "gitHead": "3c109670c03d3208ad695046aa19f178df400014",
   "dependencies": {
-    "@motor-js/engine": "^0.3.12"
+    "@motor-js/engine": "^0.3.13"
   }
 }
