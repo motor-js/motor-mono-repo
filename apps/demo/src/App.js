@@ -17,6 +17,58 @@ export default function App() {
       qNumType: "M",
       qNumFmt: "£#,##0",
       columnCategory: 'Metrics'
+    }
+]
+
+const cols1 = [
+  {
+    qField: "=sum(Quantity * Price)",
+    dataKey: "revenue",
+    qLabel: "rev",
+    qNumType: "M",
+    qNumFmt: "£#,##0",
+    columnCategory: 'Metrics'
+  },
+  {
+    qField: "=sum(Quantity)",
+    dataKey: "profit",
+    qLabel: "profit",
+    qNumType: "M",
+    qNumFmt: "£#,##0",
+    columnCategory: 'Metrics'
+  },
+]
+
+  const { 
+    dataSet,
+    updateCols,
+  } = useTable({
+    cols,
+  })
+
+  console.log(dataSet)
+
+  const handleColsChange = () => updateCols(cols1)
+
+  return (
+    <div className="App" style={{ padding: "10px" }}>
+      <button onClick={handleColsChange}>change page</button>
+    </div>
+  );
+}
+
+
+
+/*
+  const cols = 
+  [
+    {
+      qField: "=sum(Quantity * Price)",
+      dataKey: "revenue",
+      qLabel: "rev",
+      qNumType: "M",
+      qNumFmt: "£#,##0",
+      columnCategory: 'Metrics'
     },
     {
       qField: "=sum(Quantity)",
@@ -64,17 +116,5 @@ export default function App() {
     }
 ]
 
-  const { 
-    dataSet,
-  } = useTable({
-    cols
-  })
 
-  console.log(dataSet)
-
-  return (
-    <div className="App" style={{ padding: "10px" }}>
-      <button>change page</button>
-    </div>
-  );
-}
+*/

@@ -125,13 +125,13 @@ const useTable = (props) => {
     selections,
   } = state;
 
-  //filter cols to just return the active cols
-  const newCols = cols.filter((col) => col.columnActive === undefined || col.columnActive)
+  // filter cols to just return the active cols
+  const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
   
-  //console.log('called')
+  console.log(newCols)
 
   // load engine from props
-  //const myEngine = props.engine;
+  // const myEngine = props.engine;
   const { engine, engineError } = useContext(EngineContext) || {};
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
@@ -306,7 +306,7 @@ const useTable = (props) => {
     return dataSet;
   }, []);
 
-  const update = useCallback(async () => {
+  const update = useCallback(async (newCols) => {
     const _qLayout = await getLayout();
     const _qTitle = await getTitle(_qLayout);
     const _qValid = await validData(_qLayout, engine);
@@ -389,6 +389,8 @@ const useTable = (props) => {
     []
   );
 
+  const updateCols = (cols) => setNewCols(cols)
+
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
     async (column) => {
@@ -444,15 +446,15 @@ const useTable = (props) => {
 
   useEffect(() => {
     if (!engine) return;
-    if (qObject.current) return;
+    //if (qObject.current) return;
     (async () => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
       qObject.current.on("changed", () => {
-        update(qProp.qHyperCubeDef.qMeasures);
+        update(newCols);
       });
-      update(qProp.qHyperCubeDef.qMeasures);
+      update(newCols);
     })();
   }, [generateQProp, engine, update]);
 
@@ -478,6 +480,7 @@ const useTable = (props) => {
     page, //current page
     pageSize, //page size
     pages, //number of pages
+    updateCols,
     // table props
     dataGridProps: {
       page,
@@ -487,6 +490,7 @@ const useTable = (props) => {
       decrementPage,
       handlePageChange,
       handleSortChange,
+      updateCols,
       select,
       title,
       beginSelections,
