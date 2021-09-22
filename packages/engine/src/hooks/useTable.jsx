@@ -127,9 +127,8 @@ const useTable = (props) => {
 
   // filter cols to just return the active cols
   const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
+  const [newColsUnfiltered, setNewColsUnfiltered] = useState(cols)
   
-  console.log(newCols)
-
   // load engine from props
   // const myEngine = props.engine;
   const { engine, engineError } = useContext(EngineContext) || {};
@@ -389,7 +388,10 @@ const useTable = (props) => {
     []
   );
 
-  const updateCols = (cols) => setNewCols(cols)
+  const updateCols = (cols) => {
+    setNewCols(cols)
+    setNewColsUnfiltered(cols)
+  }
 
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
@@ -482,6 +484,7 @@ const useTable = (props) => {
     pages, //number of pages
     updateCols,
     newCols,
+    newColsUnfiltered,
     // table props
     dataGridProps: {
       page,
@@ -493,6 +496,7 @@ const useTable = (props) => {
       handleSortChange,
       updateCols,
       newCols,
+      newColsUnfiltered,
       select,
       title,
       beginSelections,
