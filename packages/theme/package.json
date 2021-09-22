@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/motor-js/motor-mono-repo/issues"
   },
-  "gitHead": "a0206b9750276287b96082e19f720d22aab43638",
+  "gitHead": "bec8ef2828bd3a3ba8d9b4a7ecee201771ca9338",
   "dependencies": {
     "@motor-js/engine": "^0.3.14"
   }

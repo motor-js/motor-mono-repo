@@ -481,6 +481,7 @@ const useTable = (props) => {
     pageSize, //page size
     pages, //number of pages
     updateCols,
+    newCols,
     // table props
     dataGridProps: {
       page,
@@ -491,6 +492,7 @@ const useTable = (props) => {
       handlePageChange,
       handleSortChange,
       updateCols,
+      newCols,
       select,
       title,
       beginSelections,
