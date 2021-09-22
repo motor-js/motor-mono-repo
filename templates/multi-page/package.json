@@ -1,12 +1,12 @@
 {
   "name": "multi-page-mashup",
-  "version": "0.3.18",
+  "version": "0.3.19",
   "private": true,
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
     "@ant-design/icons": "^4.5.0",
-    "@motor-js/engine": "^0.3.15",
-    "@motor-js/nebula": "^0.2.18",
+    "@motor-js/engine": "^0.3.16",
+    "@motor-js/nebula": "^0.2.19",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
