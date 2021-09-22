@@ -389,7 +389,7 @@ const useTable = (props) => {
   );
 
   const updateCols = (cols) => {
-    setNewCols(cols)
+    setNewCols(cols.filter((col) => col.columnActive === undefined || col.columnActive))
     setNewColsUnfiltered(cols)
   }
 
