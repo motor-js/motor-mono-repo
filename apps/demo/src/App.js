@@ -39,11 +39,13 @@ const cols1 = [
   },
 ]
 
+const columns = React.useMemo(() => cols, [])
+
   const { 
     dataSet,
     updateCols,
   } = useTable({
-    cols,
+    cols
   })
 
   console.log(dataSet)
