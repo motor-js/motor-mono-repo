@@ -44,6 +44,7 @@ const columns = React.useMemo(() => cols, [])
   const { 
     dataSet,
     updateCols,
+    incrementPage
   } = useTable({
     cols
   })
@@ -52,9 +53,10 @@ const columns = React.useMemo(() => cols, [])
 
   const handleColsChange = () => updateCols(cols1)
 
+  
   return (
     <div className="App" style={{ padding: "10px" }}>
-      <button onClick={handleColsChange}>change page</button>
+      <button onClick={incrementPage}>change page</button>
     </div>
   );
 }

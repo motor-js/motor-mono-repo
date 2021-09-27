@@ -357,7 +357,7 @@ const useTable = (props) => {
         ...qPage.current,
         ...newPage,
       };
-      update();
+      update(newCols);
     },
     [update]
   );
