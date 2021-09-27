@@ -1,6 +1,6 @@
 {
   "name": "components",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Motor components",
   "keywords": [
     "motor",
@@ -31,6 +31,6 @@
   },
   "gitHead": "9a25ae745fd5d8da444d1f854acea0c3f2a184a4",
   "dependencies": {
-    "@motor-js/engine": "^0.3.17"
+    "@motor-js/engine": "^0.3.18"
   }
 }
