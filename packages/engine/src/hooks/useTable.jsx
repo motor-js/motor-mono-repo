@@ -125,8 +125,12 @@ const useTable = (props) => {
     selections,
   } = state;
 
+  // filter cols to just return the active cols
+  const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
+  const [newColsUnfiltered, setNewColsUnfiltered] = useState(cols)
+  
   // load engine from props
-  //const myEngine = props.engine;
+  // const myEngine = props.engine;
   const { engine, engineError } = useContext(EngineContext) || {};
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
@@ -136,7 +140,6 @@ const useTable = (props) => {
 
   //======================
   // PAGING LOGIC
-
   // page size
   const [pageSize, setPageSize] = useState(qPage.current.qHeight);
 
@@ -219,7 +222,7 @@ const useTable = (props) => {
 
   const generateQProp = useCallback(() => {
     const qProp = createDef(
-      cols,
+      newCols,
       qTitle,
       qHyperCubeDef,
       qSortByAscii,
@@ -238,7 +241,7 @@ const useTable = (props) => {
 
     return qProp;
   }, [
-    cols,
+    newCols,
     qTitle,
     qExpression,
     qHyperCubeDef,
@@ -290,28 +293,27 @@ const useTable = (props) => {
     []
   );
 
-  const structureData = useCallback(async (layout, data, cols) => {
+  const structureData = useCallback(async (layout, data, newCols) => {
     // let useNumonFirstDim;
     const dataSet = hyperCubeTransform(
       data,
       layout.qHyperCube,
       // useNumonFirstDim,
-      cols
+      newCols
     );
 
     return dataSet;
   }, []);
 
-  const update = useCallback(async () => {
+  const update = useCallback(async (newCols) => {
     const _qLayout = await getLayout();
     const _qTitle = await getTitle(_qLayout);
     const _qValid = await validData(_qLayout, engine);
     const _qData = await getData();
 
     // Order colunns for dataKey
-    const _orderedCols = await orderCols(cols);
-    const _dataSet =
-      _qData && (await structureData(_qLayout, _qData, _orderedCols));
+    const _orderedCols = await orderCols(newCols);
+    const _dataSet = _qData && (await structureData(_qLayout, _qData, _orderedCols));
     const _headerGroup = _qData && (await getHeader(_qLayout, _orderedCols));
     if (_qData && _isMounted.current) {
       const _selections = _qData.qMatrix.filter((row) => row[0].qState === "S");
@@ -355,7 +357,7 @@ const useTable = (props) => {
         ...qPage.current,
         ...newPage,
       };
-      update();
+      update(newCols);
     },
     [update]
   );
@@ -385,6 +387,11 @@ const useTable = (props) => {
     (patches) => qObject.current.applyPatches(patches),
     []
   );
+
+  const updateCols = (cols) => {
+    setNewCols(cols.filter((col) => col.columnActive === undefined || col.columnActive))
+    setNewColsUnfiltered(cols)
+  }
 
   // takes column data and sorted the table, applies reverse sort
   const handleSortChange = useCallback(
@@ -441,15 +448,15 @@ const useTable = (props) => {
 
   useEffect(() => {
     if (!engine) return;
-    if (qObject.current) return;
+    //if (qObject.current) return;
     (async () => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
       qObject.current.on("changed", () => {
-        update(qProp.qHyperCubeDef.qMeasures);
+        update(newCols);
       });
-      update(qProp.qHyperCubeDef.qMeasures);
+      update(newCols);
     })();
   }, [generateQProp, engine, update]);
 
@@ -475,6 +482,9 @@ const useTable = (props) => {
     page, //current page
     pageSize, //page size
     pages, //number of pages
+    updateCols,
+    newCols,
+    newColsUnfiltered,
     // table props
     dataGridProps: {
       page,
@@ -484,6 +494,9 @@ const useTable = (props) => {
       decrementPage,
       handlePageChange,
       handleSortChange,
+      updateCols,
+      newCols,
+      newColsUnfiltered,
       select,
       title,
       beginSelections,

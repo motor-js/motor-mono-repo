@@ -1,6 +1,6 @@
 {
   "name": "theme",
-  "version": "0.0.5",
+  "version": "0.0.11",
   "description": "Theme for Motor components",
   "keywords": [
     "qlik",
@@ -29,8 +29,8 @@
   "bugs": {
     "url": "https://github.com/motor-js/motor-mono-repo/issues"
   },
-  "gitHead": "5c81278ba4896b6ad30bd69961b64c35275fe6b2",
+  "gitHead": "9a25ae745fd5d8da444d1f854acea0c3f2a184a4",
   "dependencies": {
-    "@motor-js/engine": "^0.3.12"
+    "@motor-js/engine": "^0.3.18"
   }
 }

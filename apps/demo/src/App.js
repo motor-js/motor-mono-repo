@@ -9,37 +9,116 @@ import { EngineContext } from "@motor-js/engine"
 export default function App() {
 
   const cols = 
-  [{
-    qField: "[OrderDateMonth]",
-   // dataKey: 'Order',
-    qLabel: "Order Date",
+  [
+    {
+      qField: "=sum(Quantity * Price)",
+      dataKey: "revenue",
+      qLabel: "rev",
+      qNumType: "M",
+      qNumFmt: "£#,##0",
+      columnCategory: 'Metrics'
+    }
+]
+
+const cols1 = [
+  {
+    qField: "=sum(Quantity * Price)",
+    dataKey: "revenue",
+    qLabel: "rev",
+    qNumType: "M",
+    qNumFmt: "£#,##0",
+    columnCategory: 'Metrics'
   },
   {
-    qField: "=sum(Price)",
-    qLabel: "Price",
+    qField: "=sum(Quantity)",
+    dataKey: "profit",
+    qLabel: "profit",
+    qNumType: "M",
+    qNumFmt: "£#,##0",
+    columnCategory: 'Metrics'
   },
-  {
-    qField: "",
-    qLibraryId: "dWHamW",
-    qType: "measure",
-   // dataKey: 'MI',
-    qLabel: "Revenue",
-    qNumType: 'M',
-    qNumFmt: '#,##0'
-  }]
+]
+
+const columns = React.useMemo(() => cols, [])
 
   const { 
     dataSet,
-  } = useData({
+    updateCols,
+    incrementPage
+  } = useTable({
     cols
   })
 
- console.log('dataSet: ',dataSet)
+  console.log(dataSet)
 
+  const handleColsChange = () => updateCols(cols1)
+
+  
   return (
     <div className="App" style={{ padding: "10px" }}>
-      <button>change page</button>
-
+      <button onClick={incrementPage}>change page</button>
     </div>
   );
 }
+
+
+
+/*
+  const cols = 
+  [
+    {
+      qField: "=sum(Quantity * Price)",
+      dataKey: "revenue",
+      qLabel: "rev",
+      qNumType: "M",
+      qNumFmt: "£#,##0",
+      columnCategory: 'Metrics'
+    },
+    {
+      qField: "=sum(Quantity)",
+      dataKey: "profit",
+      qLabel: "profit",
+      qNumType: "M",
+      qNumFmt: "£#,##0",
+      columnCategory: 'Metrics'
+    },
+    {
+      qField: "[Company Name]",
+      dataKey: "company",
+      qLabel: "Company Name",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "[Company Name]",
+      dataKey: "company1",
+      qLabel: "Company",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "_Image",
+      dataKey: "img",
+      qLabel: "Image",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "Body Location",
+      dataKey: "body_location",
+      qLabel: "Body Location",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "Quantity",
+      dataKey: "quantity",
+      qLabel: "Quantity",
+      columnCategory: 'Dimensions'
+    },
+    {
+      qField: "Source",
+      dataKey: "source",
+      qLabel: "Source",
+      columnCategory: 'Dimensions'
+    }
+]
+
+
+*/

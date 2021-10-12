@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/engine",
   "license": "https://www.motor.so/license",
-  "version": "0.3.12",
+  "version": "0.3.18",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -21,5 +21,5 @@
     "react-dom": "^17.0.1",
     "react-watermark-component": "^2.2.1"
   },
-  "gitHead": "a4b8e89428adb75833b44d4f5f27635b63bb88ce"
+  "gitHead": "9a25ae745fd5d8da444d1f854acea0c3f2a184a4"
 }
