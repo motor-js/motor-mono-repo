@@ -5,11 +5,29 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import SimpleLineChart from "./SimpleLineChart";
+import Months from "./common/Months";
 
 import Topbar from "./Topbar";
+const numeral = require("numeral");
+numeral.defaultFormat("0,000");
 
 const backgroundShape = require("../images/shape.svg");
+
+const monthRange = Months;
+const monthlyPayment = 100;
+const monthlyInterest = 10;
+
+const data = Array.from({ length: 1 + 10 }, (value, i) => {
+  const delayed = i < 10;
+  return {
+    name: monthRange[i],
+    Type: delayed ? 0 : Math.ceil(monthlyPayment).toFixed(0),
+    OtherType: Math.ceil(monthlyInterest).toFixed(0),
+  };
+});
 
 const styles = (theme) => ({
   root: {
@@ -85,6 +103,26 @@ const styles = (theme) => ({
     position: "absolute",
     top: "40%",
     left: "40%",
+  },
+  loanAvatar: {
+    display: "inline-block",
+    verticalAlign: "center",
+    width: 16,
+    height: 16,
+    marginRight: 10,
+    marginBottom: -2,
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
+  },
+  interestAvatar: {
+    display: "inline-block",
+    verticalAlign: "center",
+    width: 16,
+    height: 16,
+    marginRight: 10,
+    marginBottom: -2,
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.light,
   },
 });
 
@@ -213,24 +251,57 @@ class Main extends Component {
               </Grid>
               <Grid container item xs={12}>
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>
+                  <Paper
+                    className={classes.paper}
+                    style={{ position: "relative" }}
+                  >
                     <div>
-                      <div className={classes.box}>
-                        <Typography color="secondary" gutterBottom>
-                          Full box
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                          This is an example of a full-width box
-                        </Typography>
+                      <Typography variant="subtitle1" gutterBottom>
+                        Some details
+                      </Typography>
+                      <Typography variant="body1">
+                        Details about the graph
+                      </Typography>
+                      <div style={{ marginTop: 14, marginBottom: 14 }}>
+                        <div className={classes.inlining}>
+                          <Avatar className={classes.loanAvatar}></Avatar>
+                          <Typography
+                            className={classes.inlining}
+                            variant="subtitle2"
+                            gutterBottom
+                          >
+                            Type
+                          </Typography>
+                          <Typography
+                            className={classes.inlining}
+                            color="secondary"
+                            variant="h6"
+                            gutterBottom
+                          >
+                            {numeral(monthlyPayment).format()} units
+                          </Typography>
+                        </div>
+                        <div className={classes.inlining}>
+                          <Avatar className={classes.interestAvatar}></Avatar>
+                          <Typography
+                            className={classes.inlining}
+                            variant="subtitle2"
+                            gutterBottom
+                          >
+                            Othe type
+                          </Typography>
+                          <Typography
+                            className={classes.inlining}
+                            color="secondary"
+                            variant="h6"
+                            gutterBottom
+                          >
+                            {numeral(monthlyInterest).format()} units
+                          </Typography>
+                        </div>
                       </div>
-                      <div className={classes.alignRight}>
-                        <Button
-                          color="primary"
-                          variant="contained"
-                          className={classes.actionButtom}
-                        >
-                          Learn more
-                        </Button>
+                      <div>
+                        <SimpleLineChart data={data} />
                       </div>
                     </div>
                   </Paper>
