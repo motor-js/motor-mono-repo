@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 
-const logo = require("../images/logo.svg");
+const logo = require("../images/motor-red.png");
 
 const styles = (theme) => ({
   appBar: {
@@ -110,15 +110,16 @@ class Topbar extends Component {
               <div className={classes.inline}>
                 <Typography variant="h6" color="inherit" noWrap>
                   <Link to="/" className={classes.link}>
-                    <img width={20} src={logo} alt="" />
-                    <span className={classes.tagline}>Material Sense</span>
+                    <span className={classes.tagline}>
+                      <img width={100} src={logo} alt="" />{" "}
+                    </span>
                   </Link>
                 </Typography>
               </div>
               {!this.props.noTabs && (
                 <React.Fragment>
                   <div className={classes.productLogo}>
-                    <Typography>A material UI Template</Typography>
+                    <Typography>A Motor Showcase Dashboard</Typography>
                   </div>
                 </React.Fragment>
               )}
