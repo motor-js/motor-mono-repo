@@ -8,7 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import SimpleLineChart from "./SimpleLineChart";
-// import Months from "./common/Months";
 
 import Topbar from "./Topbar";
 const numeral = require("numeral");
