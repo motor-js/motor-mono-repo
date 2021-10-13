@@ -127,12 +127,6 @@ const styles = (theme) => ({
 });
 
 class Main extends Component {
-  state = {
-    learnMoredialog: false,
-    getStartedDialog: false,
-    monthlyPayment: 0,
-  };
-
   componentDidMount() {}
 
   openDialog = (event) => {
@@ -153,7 +147,7 @@ class Main extends Component {
 
   render() {
     const { classes } = this.props;
-    const { monthlyPayment, monthlyInterest } = this.state;
+
     return (
       <React.Fragment>
         <CssBaseline />
