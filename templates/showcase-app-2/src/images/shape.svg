@@ -1,11 +1,1 @@
-
-<svg width="1440px" height="1296px" viewBox="0 0 1440 1296" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="01-01-01-Playground-Copy" transform="translate(0.000000, -420.000000)">
-            <rect fill="#F8F8F8" x="0" y="0" width="1440" height="1716"></rect>
-            <g id="Background" transform="translate(0.000000, 520.000000)" fill="#84D0E4" opacity="0.900000036">
-                <polygon id="Rectangle" points="1.13686838e-12 335 1440 1.36424205e-12 1440 3588.96771 1.13686838e-12 3588.96771"></polygon>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg id="SvgjsSvg1001" width="288" height="288" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"><defs id="SvgjsDefs1002"></defs><g id="SvgjsG1008" transform="matrix(1,0,0,1,0,0)"><svg xmlns="http://www.w3.org/2000/svg" width="288" height="288" viewBox="0 0 1440 1296"><g fill="none" fill-rule="evenodd" transform="translate(0 -420)"><rect width="1440" height="1716" fill="#f0f0f0" class="colorF8F8F8 svgShape"></rect><polygon fill="#ff7373" points="0 335 1440 0 1440 3588.968 0 3588.968" opacity=".9" transform="translate(0 520)" class="color84D0E4 svgShape"></polygon></g></svg></g></svg>
