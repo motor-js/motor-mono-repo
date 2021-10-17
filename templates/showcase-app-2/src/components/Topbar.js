@@ -20,7 +20,7 @@ const logo = require("../images/motor-red.png");
 
 const styles = (theme) => ({
   appBar: {
-    position: "relative",
+    position: "sticky",
     boxShadow: "none",
     borderBottom: `1px solid ${theme.palette.grey["100"]}`,
     backgroundColor: "white",
