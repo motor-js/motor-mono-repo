@@ -16,8 +16,18 @@ numeral.defaultFormat("0,000");
 
 const backgroundShape = require("../images/shape.svg");
 
-const monthlyPayment = 100;
-const monthlyInterest = 10;
+const qMetrics = [
+  {
+    qName: "Series1",
+    qExpr: "num(Sum([Series1]),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "Series2",
+    qExpr: "num(Sum([Series2]),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+];
 
 const cols = [
   {
@@ -136,7 +146,7 @@ function Main(props) {
   const { dataSet, metrics } = useData({
     qSortByAscii: 0,
     cols,
-    // qMetrics,
+    qMetrics,
   });
 
   const { data } = dataSet;
@@ -262,7 +272,8 @@ function Main(props) {
                           variant="h6"
                           gutterBottom
                         >
-                          {numeral(monthlyPayment).format()} units
+                          {numeral(metrics && metrics["Series1"]).format()}{" "}
+                          units
                         </Typography>
                       </div>
                       <div className={classes.inlining}>
@@ -280,7 +291,8 @@ function Main(props) {
                           variant="h6"
                           gutterBottom
                         >
-                          {numeral(monthlyInterest).format()} units
+                          {numeral(metrics && metrics["Series2"]).format()}{" "}
+                          units
                         </Typography>
                       </div>
                     </div>
