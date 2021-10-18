@@ -6,7 +6,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import SimpleLineChart from "./SimpleLineChart";
 import { useData } from "@motor-js/engine";
 
@@ -110,8 +109,8 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   box: {
-    marginBottom: 40,
-    height: 65,
+    marginBottom: 10,
+    height: 55,
   },
   inlining: {
     display: "inline-block",
@@ -194,15 +193,6 @@ function Main(props) {
                     {numeral(metrics && metrics["uniquePurchase"]).format()}
                   </Typography>
                 </div>
-                {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    className={classes.actionButtom}
-                  >
-                    Learn more
-                  </Button>
-                </div> */}
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -219,15 +209,6 @@ function Main(props) {
                     {metrics && metrics["avgOrderValue"]}
                   </Typography>
                 </div>
-                {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    className={classes.actionButtom}
-                  >
-                    Learn more
-                  </Button>
-                </div> */}
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -244,18 +225,6 @@ function Main(props) {
                     {numeral(metrics && metrics["quantities"]).format()}
                   </Typography>
                 </div>
-                {/* <div className={classes.alignRight}>
-                  <Button variant="outlined" className={classes.actionButtom}>
-                    Learn more
-                  </Button>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    className={classes.actionButtom}
-                  >
-                    Dashboard
-                  </Button>
-                </div> */}
               </Paper>
             </Grid>
             <Grid container item xs={12}>
