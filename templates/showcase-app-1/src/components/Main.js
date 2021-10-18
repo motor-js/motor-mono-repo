@@ -149,7 +149,7 @@ function Main(props) {
     qMetrics,
   });
 
-  const { data } = dataSet;
+  const { data, dataKeys } = dataSet;
 
   return (
     <React.Fragment>
@@ -297,7 +297,7 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleLineChart data={data} />
+                      <SimpleLineChart data={data} dataKeys={dataKeys} />
                     </div>
                   </div>
                 </Paper>
