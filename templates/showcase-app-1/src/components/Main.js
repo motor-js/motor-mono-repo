@@ -18,13 +18,29 @@ const backgroundShape = require("../images/shape.svg");
 
 const qMetrics = [
   {
-    qName: "Series1",
+    qName: "EXPANSIONS",
     qExpr: "num(Sum([Series1]),'$#,##0')",
     qType: "qStringExpression", // qValueExpression if a pure number is to be returned
   },
   {
-    qName: "Series2",
+    qName: "CANCELLATIONS",
     qExpr: "num(Sum([Series2]),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "uniquePurchase",
+    // qExpr: "num(Sum(today)/Sum(yesterday),'#,##0%')",
+    qExpr: "num(Count( distinct Purchases),'#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "avgOrderValue",
+    qExpr: "num(Avg(Values),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "quantities",
+    qExpr: "num(Sum(Quantities),'#,##0')",
     qType: "qStringExpression", // qValueExpression if a pure number is to be returned
   },
 ];
@@ -172,13 +188,13 @@ function Main(props) {
                     color="secondary"
                     gutterBottom
                   >
-                    First title
+                    Unique Purchases
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    A first title style <br /> with two lines
+                    {numeral(metrics && metrics["uniquePurchase"]).format()}
                   </Typography>
                 </div>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Button
                     color="primary"
                     variant="contained"
@@ -186,7 +202,7 @@ function Main(props) {
                   >
                     Learn more
                   </Button>
-                </div>
+                </div> */}
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -197,13 +213,13 @@ function Main(props) {
                     color="secondary"
                     gutterBottom
                   >
-                    Another box
+                    Average Order Value
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    A default box
+                    {metrics && metrics["avgOrderValue"]}
                   </Typography>
                 </div>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Button
                     color="primary"
                     variant="contained"
@@ -211,7 +227,7 @@ function Main(props) {
                   >
                     Learn more
                   </Button>
-                </div>
+                </div> */}
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -222,14 +238,13 @@ function Main(props) {
                     color="secondary"
                     gutterBottom
                   >
-                    A box with a carousel
+                    Quantities
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    If you click in Getting Started, you will see a nice
-                    carousel
+                    {numeral(metrics && metrics["quantities"]).format()}
                   </Typography>
                 </div>
-                <div className={classes.alignRight}>
+                {/* <div className={classes.alignRight}>
                   <Button variant="outlined" className={classes.actionButtom}>
                     Learn more
                   </Button>
@@ -240,7 +255,7 @@ function Main(props) {
                   >
                     Dashboard
                   </Button>
-                </div>
+                </div> */}
               </Paper>
             </Grid>
             <Grid container item xs={12}>
@@ -251,11 +266,11 @@ function Main(props) {
                 >
                   <div>
                     <Typography variant="subtitle1" gutterBottom>
-                      Some details
+                      Account Retention
                     </Typography>
-                    <Typography variant="body1">
+                    {/* <Typography variant="body1">
                       Details about the graph
-                    </Typography>
+                    </Typography> */}
                     <div style={{ marginTop: 14, marginBottom: 14 }}>
                       <div className={classes.inlining}>
                         <Avatar className={classes.loanAvatar}></Avatar>
@@ -264,7 +279,7 @@ function Main(props) {
                           variant="subtitle2"
                           gutterBottom
                         >
-                          Type
+                          EXPANSIONS
                         </Typography>
                         <Typography
                           className={classes.inlining}
@@ -272,7 +287,7 @@ function Main(props) {
                           variant="h6"
                           gutterBottom
                         >
-                          {numeral(metrics && metrics["Series1"]).format()}{" "}
+                          {numeral(metrics && metrics["EXPANSIONS"]).format()}{" "}
                           units
                         </Typography>
                       </div>
@@ -283,7 +298,7 @@ function Main(props) {
                           variant="subtitle2"
                           gutterBottom
                         >
-                          Othe type
+                          CANCELLATIONS
                         </Typography>
                         <Typography
                           className={classes.inlining}
@@ -291,7 +306,9 @@ function Main(props) {
                           variant="h6"
                           gutterBottom
                         >
-                          {numeral(metrics && metrics["Series2"]).format()}{" "}
+                          {numeral(
+                            metrics && metrics["CANCELLATIONS"]
+                          ).format()}{" "}
                           units
                         </Typography>
                       </div>
