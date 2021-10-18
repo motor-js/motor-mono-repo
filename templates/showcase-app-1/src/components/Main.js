@@ -237,9 +237,6 @@ function Main(props) {
                     <Typography variant="subtitle1" gutterBottom>
                       Account Retention
                     </Typography>
-                    {/* <Typography variant="body1">
-                      Details about the graph
-                    </Typography> */}
                     <div style={{ marginTop: 14, marginBottom: 14 }}>
                       <div className={classes.inlining}>
                         <Avatar className={classes.loanAvatar}></Avatar>
