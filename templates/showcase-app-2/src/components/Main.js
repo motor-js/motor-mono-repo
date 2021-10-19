@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import SimpleLineChart from "./SimpleLineChart";
+import SimpleBarChart from "./SimpleBarChart";
 import { useData } from "@motor-js/engine";
 
 import Topbar from "./Topbar";
@@ -279,7 +279,7 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleLineChart data={data} dataKeys={dataKeys} />
+                      <SimpleBarChart data={data} dataKeys={dataKeys} />
                     </div>
                   </div>
                 </Paper>{" "}
