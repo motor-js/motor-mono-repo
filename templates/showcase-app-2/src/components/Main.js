@@ -6,8 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import SimpleLineChart from "./SimpleLineChart";
+import { useData } from "@motor-js/engine";
 
 import Topbar from "./Topbar";
 const numeral = require("numeral");
@@ -15,64 +15,49 @@ numeral.defaultFormat("0,000");
 
 const backgroundShape = require("../images/shape.svg");
 
-const Months = [
-  "01 December 2018",
-  "01 January 2019",
-  "01 February 2019",
-  "01 March 2019",
-  "01 April 2019",
-  "01 May 2019",
-  "01 June 2019",
-  "01 July 2019",
-  "01 August 2019",
-  "01 September 2019",
-  "01 October 2019",
-  "01 November 2019",
-  "01 December 2019",
-  "01 January 2020",
-  "01 March 2020",
-  "01 April 2020",
-  "01 May 2020",
-  "01 June 2020",
-  "01 July 2020",
-  "01 August 2020",
-  "01 September 2020",
-  "01 October 2020",
-  "01 November 2020",
-  "01 December 2020",
-  "01 January 2020",
-  "01 February 2020",
-  "01 March 2020",
-  "01 April 2020",
+const qMetrics = [
+  {
+    qName: "EXPANSIONS",
+    qExpr: "num(Sum([Series1]),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "CANCELLATIONS",
+    qExpr: "num(Sum([Series2]),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "uniquePurchase",
+    // qExpr: "num(Sum(today)/Sum(yesterday),'#,##0%')",
+    qExpr: "num(Count( distinct Purchases),'#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "avgOrderValue",
+    qExpr: "num(Avg(Values),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "quantities",
+    qExpr: "num(Sum(Quantities),'#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
 ];
 
-const monthRange = Months;
-const monthlyPayment = 100;
-const monthlyInterest = 10;
-
-// const cols = [
-//   {
-//     qField: "[categories]",
-//     qLabel: "categories",
-//   },
-//   {
-//     qField: "=sum(Series1)",
-//     qLabel: "Series1",
-//   },
-//   {
-//     qField: "=sum(Series2)",
-//     qLabel: "Series2",
-//   },
-// ];
-
-const data = Array.from({ length: 1 + 10 }, (value, i) => {
-  const delayed = i < 10;
-  return {
-    name: monthRange[i],
-    Type: delayed ? 0 : Math.ceil(monthlyPayment).toFixed(0),
-    OtherType: Math.ceil(monthlyInterest).toFixed(0),
-  };
-});
+const cols = [
+  {
+    qField: "[categories]",
+    qLabel: "name",
+  },
+  {
+    qField: "=sum(Series1)",
+    qLabel: "Type",
+  },
+  {
+    qField: "=sum(Series2)",
+    qLabel: "OtherType",
+  },
+];
 
 const styles = (theme) => ({
   root: {
@@ -124,8 +109,8 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   box: {
-    marginBottom: 40,
-    height: 65,
+    marginBottom: 10,
+    height: 55,
   },
   inlining: {
     display: "inline-block",
@@ -170,9 +155,15 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.primary.light,
   },
 });
-
 function Main(props) {
   const { classes } = props;
+  const { dataSet, metrics } = useData({
+    qSortByAscii: 0,
+    cols,
+    qMetrics,
+  });
+
+  const { data, dataKeys } = dataSet;
 
   return (
     <React.Fragment>
@@ -195,20 +186,11 @@ function Main(props) {
                     color="secondary"
                     gutterBottom
                   >
-                    First title
+                    Unique Purchases
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    A first title style <br /> with two lines
+                    {numeral(metrics && metrics["uniquePurchase"]).format()}
                   </Typography>
-                </div>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    className={classes.actionButtom}
-                  >
-                    Learn more
-                  </Button>
                 </div>
               </Paper>
             </Grid>
@@ -220,20 +202,11 @@ function Main(props) {
                     color="secondary"
                     gutterBottom
                   >
-                    Another box
+                    Average Order Value
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    A default box
+                    {metrics && metrics["avgOrderValue"]}
                   </Typography>
-                </div>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    className={classes.actionButtom}
-                  >
-                    Learn more
-                  </Button>
                 </div>
               </Paper>
             </Grid>
@@ -245,24 +218,11 @@ function Main(props) {
                     color="secondary"
                     gutterBottom
                   >
-                    A box with a carousel
+                    Quantities
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    If you click in Getting Started, you will see a nice
-                    carousel
+                    {numeral(metrics && metrics["quantities"]).format()}
                   </Typography>
-                </div>
-                <div className={classes.alignRight}>
-                  <Button variant="outlined" className={classes.actionButtom}>
-                    Learn more
-                  </Button>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    className={classes.actionButtom}
-                  >
-                    Dashboard
-                  </Button>
                 </div>
               </Paper>
             </Grid>
@@ -274,10 +234,7 @@ function Main(props) {
                 >
                   <div>
                     <Typography variant="subtitle1" gutterBottom>
-                      Some details
-                    </Typography>
-                    <Typography variant="body1">
-                      Details about the graph
+                      Account Retention
                     </Typography>
                     <div style={{ marginTop: 14, marginBottom: 14 }}>
                       <div className={classes.inlining}>
@@ -287,7 +244,7 @@ function Main(props) {
                           variant="subtitle2"
                           gutterBottom
                         >
-                          Type
+                          EXPANSIONS
                         </Typography>
                         <Typography
                           className={classes.inlining}
@@ -295,7 +252,8 @@ function Main(props) {
                           variant="h6"
                           gutterBottom
                         >
-                          {numeral(monthlyPayment).format()} units
+                          {numeral(metrics && metrics["EXPANSIONS"]).format()}{" "}
+                          units
                         </Typography>
                       </div>
                       <div className={classes.inlining}>
@@ -305,7 +263,7 @@ function Main(props) {
                           variant="subtitle2"
                           gutterBottom
                         >
-                          Othe type
+                          CANCELLATIONS
                         </Typography>
                         <Typography
                           className={classes.inlining}
@@ -313,15 +271,18 @@ function Main(props) {
                           variant="h6"
                           gutterBottom
                         >
-                          {numeral(monthlyInterest).format()} units
+                          {numeral(
+                            metrics && metrics["CANCELLATIONS"]
+                          ).format()}{" "}
+                          units
                         </Typography>
                       </div>
                     </div>
                     <div>
-                      <SimpleLineChart data={data} />
+                      <SimpleLineChart data={data} dataKeys={dataKeys} />
                     </div>
                   </div>
-                </Paper>
+                </Paper>{" "}
               </Grid>
             </Grid>
           </Grid>
