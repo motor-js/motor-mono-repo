@@ -4,6 +4,8 @@ import { createTheme } from "@material-ui/core/styles";
 import "./App.css";
 import Routes from "./routes";
 import { red } from "@material-ui/core/colors";
+import { qlikConfig } from "./config";
+import { Motor } from "@motor-js/engine";
 
 const theme = createTheme({
   palette: {
@@ -25,7 +27,11 @@ class App extends Component {
     return (
       <div>
         <ThemeProvider theme={theme}>
+          <Motor
+            config={qlikConfig}
+          >
           <Routes />
+          </Motor>
         </ThemeProvider>
       </div>
     );
