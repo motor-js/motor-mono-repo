@@ -1,36 +1,25 @@
 {
-  "name": "components",
-  "version": "0.0.11",
-  "description": "Motor components",
-  "keywords": [
-    "motor",
-    "qlik",
-    "sense",
-    "mashups"
-  ],
-  "author": "lureilly1 <lureilly1@gmail.com>",
-  "homepage": "https://motor.so",
-  "license": "ISC",
-  "main": "lib/components.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
+  "name": "@motor-js/components",
+  "license": "https://www.motor.so/license",
+  "version": "0.0.1",
+  "main": "lib/index.ts",
+  "umd:main": "lib/index.ts",
+  "module": "lib/index.es.ts",
+  "source": "src/index.ts",
   "files": [
     "lib"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/motor-js/motor-mono-repo.git"
-  },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "start": "microbundle --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "watch": "microbundle watch --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx"
   },
-  "bugs": {
-    "url": "https://github.com/motor-js/motor-mono-repo/issues"
-  },
-  "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd",
   "dependencies": {
-    "@motor-js/engine": "^0.3.18"
-  }
+    "crypto-js": "^3.3.0",
+    "enigma.js": "^2.6.3",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-watermark-component": "^2.2.1"
+  },
+  "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd"
 }

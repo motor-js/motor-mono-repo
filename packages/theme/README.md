@@ -1,11 +1,11 @@
-# `theme`
+# `components`
 
 > TODO: description
 
 ## Usage
 
 ```
-const theme = require('theme');
+const components = require('components');
 
 // TODO: DEMONSTRATE API
 ```
