@@ -5,6 +5,7 @@ import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
 import { LicenseCheck } from "../License/LicenseCheck"
+import { ThemeProvider, theme } from "@motor-js/theme"
 
 function Motor({
   engine,
@@ -30,33 +31,29 @@ function Motor({
 
   //const [myTheme, setMyTheme] = useState(defaultTheme)
   const [myConfig, setMyConfig] = useState(config);
-  const [validLicense, setValidLicense] = useState(true)
+  const [validLicense, setValidLicense] = useState( licenseKey ? LicenseCheck(licenseKey) : false)
   const newEngine =  engine ? { engine: engine, engineError: null, errorCode: null } :  useEngine(myConfig)
 
-  // check license key
-  const userKey = licenseKey ? LicenseCheck(licenseKey) : []
+  console.log('VL',validLicense)
 
-  // check if license key is valid
-  useEffect(() => {
-    userKey.length > 0 ? setValidLicense(true) : setValidLicense(false)
-  },[licenseKey])
-  
   const text = `Powered by Motor`;
-  const beginAlarm = function() { console.error('start alarm!'); };
+  const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
   
   const options = {
     chunkWidth: 200,
     chunkHeight: 90,
     textAlign: "left",
     textBaseline: "bottom",
-    globalAlpha: 0.27,
-    font: "16px Roboto sans-serif",
+    globalAlpha: 0.47,
+    font: "18px Roboto sans-serif",
     rotateAngle: -0.19,
-    fillStyle: "#666",
+    fillStyle: "#EA4345",
   };
 
+  console.log('RENDER')
   return (
     <EngineContext.Provider value={newEngine}>
+      <ThemeProvider theme={theme}>
         <Login
           config={myConfig}
           logo={logo}
@@ -97,8 +94,10 @@ function Motor({
             {children}
            </div>
         }
+      </ThemeProvider>
     </EngineContext.Provider>
   );
 }
 
 export default Motor;
+

@@ -21,7 +21,6 @@ Filter.propTypes = {
 };
 
 Filter.defaultProps = {
-
 };
 
 export default Filter;

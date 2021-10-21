@@ -30,6 +30,7 @@ const NewApp = () => {
           webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
           qcs: true, // whether you are connecting to a Qlik Cloud site or not
         }}
+        //licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ"
       >
         <App />
       </Motor>

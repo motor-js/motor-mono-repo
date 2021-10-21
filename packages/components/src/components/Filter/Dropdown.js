@@ -11,7 +11,7 @@ import {
   NoItems
  } from './styles/DropdownTheme';
 import CheckIcon from '../Icons/CheckIcon';
-import { ThemeContext } from 'styled-components';
+import { ThemeContext } from '@motor-js/theme';
 
 const Checkbox = ({ className, checked, selected, colorTheme, ...props }) => (
   <CheckboxContainer className={className}>
@@ -37,8 +37,10 @@ const Dropdown = ({
 }) => {
 
   const themeContext = useContext(ThemeContext);
-  const itemHeight = themeContext.filter.size[size].itemHeight
 
+  console.log('themeContext',themeContext)
+
+  const itemHeight = themeContext.filter.size[size].itemHeight
 
   const hasNextPage = items.length < numberOfItems ? true : false
   const itemCount = hasNextPage ? pageHeight + 1 : pageHeight;
