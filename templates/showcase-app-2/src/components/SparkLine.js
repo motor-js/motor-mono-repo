@@ -2,64 +2,19 @@ import React from "react";
 import Chart from "react-apexcharts";
 import { withTheme } from "@material-ui/styles";
 
-var randomizeArray = function (arg) {
-  var array = arg.slice();
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
-
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-};
-
 function SimpleBarChart(props) {
-  const { theme, data, options } = props;
+  const { theme, dataKeys, data, options } = props;
 
-  var sparklineData = [
-    47,
-    45,
-    54,
-    38,
-    56,
-    24,
-    65,
-    31,
-    37,
-    39,
-    62,
-    51,
-    35,
-    41,
-    35,
-    27,
-    93,
-    53,
-    61,
-    27,
-    54,
-    43,
-    19,
-    46,
-  ];
+  const series = data
+    ? dataKeys.map((n, i) => ({
+        name: n,
+        data: data.map((d) => d && parseInt(d[n])),
+      }))
+    : [];
 
-  const series = [
-    {
-      data: randomizeArray(sparklineData),
-    },
-  ];
-
-  // console.log(theme.palette);
   const kpiOptions = {
     chart: {
-      type: "area",
+      type: options.type,
       height: 160,
       sparkline: {
         enabled: true,
@@ -69,8 +24,11 @@ function SimpleBarChart(props) {
       curve: "straight",
     },
     fill: {
-      opacity: 0.3,
+      opacity: options.fillOpacity,
     },
+    // xaxis: {
+    //   categories: data ? data.map((n) => (n && n["name"]) || "untitled") : [],
+    // },
     yaxis: {
       min: 0,
     },

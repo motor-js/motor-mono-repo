@@ -45,7 +45,7 @@ const qMetrics = [
   },
 ];
 
-const cols = [
+const cols1 = [
   {
     qField: "[categories]",
     qLabel: "name",
@@ -166,13 +166,15 @@ function Main(props) {
   const { classes } = props;
   const { dataSet, metrics } = useData({
     qSortByAscii: 0,
-    cols,
+    cols: cols1,
     qMetrics,
   });
 
-  const { data } = dataSet;
+  const { data, dataKeys } = dataSet;
 
   const options1 = {
+    type: "area",
+    fillOpacity: 0.3,
     title: {
       text: "UNIQUE PURCHASES",
     },
@@ -181,6 +183,8 @@ function Main(props) {
     },
   };
   const options2 = {
+    type: "area",
+    fillOpacity: 0.3,
     title: {
       text: "AVERAGE ORDER VALUE",
     },
@@ -189,6 +193,8 @@ function Main(props) {
     },
   };
   const options3 = {
+    type: "line",
+    fillOpacity: 1,
     title: {
       text: "QUANTITIES",
     },
@@ -213,21 +219,33 @@ function Main(props) {
             <Grid item xs={12} md={4}>
               <Paper className={classes.kpiPaper}>
                 <div className={classes.box}>
-                  <SparkLine options={options1} />
+                  <SparkLine
+                    options={options1}
+                    dataKeys={dataKeys}
+                    data={data}
+                  />
                 </div>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
               <Paper className={classes.kpiPaper}>
                 <div className={classes.box}>
-                  <SparkLine options={options2} />
+                  <SparkLine
+                    options={options2}
+                    dataKeys={dataKeys}
+                    data={data}
+                  />
                 </div>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
               <Paper className={classes.kpiPaper}>
                 <div className={classes.box}>
-                  <SparkLine options={options3} />
+                  <SparkLine
+                    options={options3}
+                    dataKeys={dataKeys}
+                    data={data}
+                  />
                 </div>
               </Paper>
             </Grid>
