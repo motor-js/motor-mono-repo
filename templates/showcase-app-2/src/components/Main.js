@@ -176,7 +176,7 @@ function Main(props) {
     qMetrics,
   });
 
-  const { data, dataKeys } = dataSet1;
+  const { data: data1, dataKeys: dataKeys1 } = dataSet1;
   const { data: data2, dataKeys: dataKeys2 } = dataSet2;
   // const { data: data2, dataKeys: dataKeys3 } = dataSet3;
 
@@ -229,8 +229,8 @@ function Main(props) {
                 <div className={classes.box}>
                   <SparkLine
                     options={options1}
-                    dataKeys={dataKeys}
-                    data={data}
+                    dataKeys={dataKeys1}
+                    data={data1}
                   />
                 </div>
               </Paper>
@@ -251,8 +251,8 @@ function Main(props) {
                 <div className={classes.box}>
                   <SparkLine
                     options={options3}
-                    dataKeys={dataKeys}
-                    data={data}
+                    dataKeys={dataKeys1}
+                    data={data1}
                   />
                 </div>
               </Paper>
@@ -310,7 +310,7 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleBarChart data={data} />
+                      <SimpleBarChart data={data1} />
                     </div>
                   </div>
                 </Paper>{" "}
