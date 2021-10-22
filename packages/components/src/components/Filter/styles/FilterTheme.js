@@ -56,7 +56,7 @@ export const FilterTagWrapper = styled.div`
 export const SelectTag = styled.span`
   display: flex;
   align-items: center;
-  padding-left: 8px;
+  padding: 8px;
   margin: 2px;
   font-size: ${props => props.theme.filter.size[props.size].fontSize};
   border-radius:  ${props => props.theme.filter.borderRadius};
@@ -94,6 +94,8 @@ export const SelectButton = styled.button`
 
 export const SelectTagText = styled.span`
   padding-right: 5px;
+  max-width: 100px;
+  overflow: hidden;
 `
 
 export const IconWrapper = styled.div`

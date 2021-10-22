@@ -37,8 +37,8 @@ const Dropdown = ({
 
   console.log(items)
   console.log('r',...rest)
-  const themeContext = {...rest}.theme
-  const itemHeight = themeContext.filter.size[size].itemHeight
+ // const themeContext = {...rest}.theme
+  const itemHeight = 35 //themeContext.filter.size[size].itemHeight
 
   const hasNextPage = items.length < numberOfItems ? true : false
   const itemCount = hasNextPage ? pageHeight + 1 : pageHeight;

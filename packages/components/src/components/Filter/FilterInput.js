@@ -64,8 +64,8 @@ const FilterInput = ({
     } else {
       return (
         selectionsLabels && selectionsLabels.map((sel,i) => (
-          <SelectTag size={size} key={sel.key}>
-            <SelectTagText>{sel.text}</SelectTagText>
+          <SelectTag {...rest} size={size} key={sel.key}>
+            <SelectTagText {...rest}>{sel.text}</SelectTagText>
             <SelectButton {...rest} onClick={() => handleDeselectCallback(sel)}>
               <XIcon stroke="black" strokeWidth={1} height="12px" width="12px" padding="10px" />
             </SelectButton>

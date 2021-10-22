@@ -9,7 +9,7 @@ export const StyledDropdownItem = styled.div`
   display: flex;
   align-items: center;
   &:hover {
-    background-color:  ${props => transparentize(0.92,props.theme.colors[props.colorTheme][500])};
+    background-color: ${props => transparentize(0.92,props.theme.colors[props.colorTheme][500])};
   }
 `;
 

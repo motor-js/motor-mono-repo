@@ -51,7 +51,22 @@ const columns = React.useMemo(() => cols, [])
 
 
   const dimension = ['Link']
-  const { listData, motorListProps, pageHeight } = useList({dimension})
+  const pageHeight = 100
+
+  const {    
+    listData,
+    motorListProps,
+    clearSelections
+  } = useList({
+    dimension,
+    qPage: {
+    qTop: 0,
+    qLeft: 0,
+    qWidth: 1,
+    qHeight: pageHeight,
+  },
+  autoSortByState: true
+})
   
   console.log(listData)
 

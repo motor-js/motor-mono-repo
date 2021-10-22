@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReactWaterMark from "react-watermark-component"
+import ReactWaterMark from "../Watermark"
 import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
 import NotConnected from "../NotConnected";
