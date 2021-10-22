@@ -164,13 +164,21 @@ const styles = (theme) => ({
 
 function Main(props) {
   const { classes } = props;
-  const { dataSet, metrics } = useData({
+  const { dataSet: dataSet1, metrics: metrics1 } = useData({
     qSortByAscii: 0,
     cols: cols1,
     qMetrics,
   });
 
-  const { data, dataKeys } = dataSet;
+  const { dataSet: dataSet2, metrics: metrics2 } = useData({
+    qSortByAscii: 0,
+    cols: cols1,
+    qMetrics,
+  });
+
+  const { data, dataKeys } = dataSet1;
+  const { data: data2, dataKeys: dataKeys2 } = dataSet2;
+  // const { data: data2, dataKeys: dataKeys3 } = dataSet3;
 
   const options1 = {
     type: "area",
@@ -232,8 +240,8 @@ function Main(props) {
                 <div className={classes.box}>
                   <SparkLine
                     options={options2}
-                    dataKeys={dataKeys}
-                    data={data}
+                    dataKeys={dataKeys2}
+                    data={data2}
                   />
                 </div>
               </Paper>
@@ -275,7 +283,7 @@ function Main(props) {
                           variant="h6"
                           gutterBottom
                         >
-                          {numeral(metrics && metrics["EXPANSIONS"]).format()}{" "}
+                          {numeral(metrics1 && metrics1["EXPANSIONS"]).format()}{" "}
                           units
                         </Typography>
                       </div>
@@ -295,7 +303,7 @@ function Main(props) {
                           gutterBottom
                         >
                           {numeral(
-                            metrics && metrics["CANCELLATIONS"]
+                            metrics1 && metrics1["CANCELLATIONS"]
                           ).format()}{" "}
                           units
                         </Typography>
