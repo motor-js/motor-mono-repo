@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import SimpleBarChart from "./SimpleBarChart";
+import SparkLine from "./SparkLine";
 import { useData } from "@motor-js/engine";
 
 import Topbar from "./Topbar";
@@ -81,6 +82,11 @@ const styles = (theme) => ({
     textAlign: "left",
     color: theme.palette.text.secondary,
   },
+  kpiPaper: {
+    padding: "15px 0px 0px",
+    textAlign: "left",
+    color: theme.palette.text.secondary,
+  },
   rangeLabel: {
     display: "flex",
     justifyContent: "space-between",
@@ -110,7 +116,7 @@ const styles = (theme) => ({
   },
   box: {
     marginBottom: 10,
-    height: 55,
+    height: 160,
   },
   inlining: {
     display: "inline-block",
@@ -155,6 +161,7 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.primary.light,
   },
 });
+
 function Main(props) {
   const { classes } = props;
   const { dataSet, metrics } = useData({
@@ -164,6 +171,31 @@ function Main(props) {
   });
 
   const { data } = dataSet;
+
+  const options1 = {
+    title: {
+      text: "UNIQUE PURCHASES",
+    },
+    subtitle: {
+      text: "$235,312",
+    },
+  };
+  const options2 = {
+    title: {
+      text: "AVERAGE ORDER VALUE",
+    },
+    subtitle: {
+      text: "$235,312",
+    },
+  };
+  const options3 = {
+    title: {
+      text: "QUANTITIES",
+    },
+    subtitle: {
+      text: "$235,312",
+    },
+  };
 
   return (
     <React.Fragment>
@@ -179,50 +211,23 @@ function Main(props) {
             className={classes.grid}
           >
             <Grid item xs={12} md={4}>
-              <Paper className={classes.paper}>
+              <Paper className={classes.kpiPaper}>
                 <div className={classes.box}>
-                  <Typography
-                    style={{ textTransform: "uppercase" }}
-                    color="secondary"
-                    gutterBottom
-                  >
-                    Unique Purchases
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    {numeral(metrics && metrics["uniquePurchase"]).format()}
-                  </Typography>
+                  <SparkLine options={options1} />
                 </div>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Paper className={classes.paper}>
+              <Paper className={classes.kpiPaper}>
                 <div className={classes.box}>
-                  <Typography
-                    style={{ textTransform: "uppercase" }}
-                    color="secondary"
-                    gutterBottom
-                  >
-                    Average Order Value
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    {metrics && metrics["avgOrderValue"]}
-                  </Typography>
+                  <SparkLine options={options2} />
                 </div>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Paper className={classes.paper}>
+              <Paper className={classes.kpiPaper}>
                 <div className={classes.box}>
-                  <Typography
-                    style={{ textTransform: "uppercase" }}
-                    color="secondary"
-                    gutterBottom
-                  >
-                    Quantities
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    {numeral(metrics && metrics["quantities"]).format()}
-                  </Typography>
+                  <SparkLine options={options3} />
                 </div>
               </Paper>
             </Grid>
