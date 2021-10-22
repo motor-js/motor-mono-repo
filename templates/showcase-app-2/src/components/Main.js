@@ -54,6 +54,34 @@ const cols1 = [
     qField: "=sum(Series1)",
     qLabel: "Type",
   },
+  // {
+  //   qField: "=sum(Series2)",
+  //   qLabel: "OtherType",
+  // },
+];
+const cols2 = [
+  {
+    qField: "[categories]",
+    qLabel: "name",
+  },
+  // {
+  //   qField: "=sum(Series1)",
+  //   qLabel: "Type",
+  // },
+  {
+    qField: "=sum(Series2)",
+    qLabel: "OtherType",
+  },
+];
+const cols3 = [
+  {
+    qField: "[categories]",
+    qLabel: "name",
+  },
+  {
+    qField: "=sum(Series1)",
+    qLabel: "Type",
+  },
   {
     qField: "=sum(Series2)",
     qLabel: "OtherType",
@@ -172,13 +200,18 @@ function Main(props) {
 
   const { dataSet: dataSet2, metrics: metrics2 } = useData({
     qSortByAscii: 0,
-    cols: cols1,
+    cols: cols2,
+    qMetrics,
+  });
+  const { dataSet: dataSet3, metrics: metrics3 } = useData({
+    qSortByAscii: 0,
+    cols: cols3,
     qMetrics,
   });
 
   const { data: data1, dataKeys: dataKeys1 } = dataSet1;
   const { data: data2, dataKeys: dataKeys2 } = dataSet2;
-  // const { data: data2, dataKeys: dataKeys3 } = dataSet3;
+  const { data: data3, dataKeys: dataKeys3 } = dataSet3;
 
   const options1 = {
     type: "area",
@@ -251,8 +284,8 @@ function Main(props) {
                 <div className={classes.box}>
                   <SparkLine
                     options={options3}
-                    dataKeys={dataKeys1}
-                    data={data1}
+                    dataKeys={dataKeys3}
+                    data={data3}
                   />
                 </div>
               </Paper>
@@ -310,7 +343,7 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleBarChart data={data1} />
+                      <SimpleBarChart data={data3} />
                     </div>
                   </div>
                 </Paper>{" "}
