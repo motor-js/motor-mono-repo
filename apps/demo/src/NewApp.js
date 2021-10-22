@@ -15,7 +15,7 @@ const NewApp = () => {
     qcs: true,
   };
 
-  const { engine } = useConnect({ config });
+ // const { engine } = useConnect({ config });
   
   return (
     <>
@@ -34,7 +34,6 @@ const NewApp = () => {
       >
         <App />
       </Motor>
-      {/* } */}
     </>
   );
 };

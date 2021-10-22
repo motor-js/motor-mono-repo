@@ -49,10 +49,11 @@ const columns = React.useMemo(() => cols, [])
     cols
   })
 
-  console.log(dataSet)
 
   const dimension = ['Link']
   const { listData, motorListProps, pageHeight } = useList({dimension})
+  
+  console.log(listData)
 
   const handleColsChange = () => updateCols(cols1)
 

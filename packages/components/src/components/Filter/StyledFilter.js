@@ -1,5 +1,5 @@
 /* eslint-disable prefer-template */
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Dropdown from './Dropdown'
 import useOutsideClick from "../../hooks/useOutsideClick";
 import FilterInput from "./FilterInput";
@@ -19,13 +19,9 @@ function StyledFilter({
   placeholder,
   onSelectionChange,
   defaultSelections,
-  colorTheme,
   size,
   ...rest
 }) {
-
-  console.log('size',size)
-
 
   // Ref for click outside functionality
   const filterRef = useRef();
@@ -120,8 +116,8 @@ function StyledFilter({
     placeholderState,
     singleSelection,
     selections,
-    colorTheme,
     size,
+    ...rest
   }
 
   const dropdownProps = {
@@ -131,22 +127,21 @@ function StyledFilter({
     numberOfItems,
     dropHeight: viewportHeight,
     handleSelectCallback,
-    colorTheme,
-    size
+    size,
+    ...rest
   }
 
   return (
-    <div>test</div> /*
     <FilterWrapper 
+      ref={filterRef}
       size={size}
-      colorTheme={colorTheme} 
       {...rest}
-      ref={filterRef}>
+    >
       <FilterInput {...filterInputProps} />
       { listOpen && 
         <Dropdown {...dropdownProps} /> 
       }
-    </FilterWrapper>*/
+    </FilterWrapper>
   );
 }
 

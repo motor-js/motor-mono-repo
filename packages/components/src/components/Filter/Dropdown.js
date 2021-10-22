@@ -11,12 +11,11 @@ import {
   NoItems
  } from './styles/DropdownTheme';
 import CheckIcon from '../Icons/CheckIcon';
-import { ThemeContext } from '@motor-js/theme';
 
-const Checkbox = ({ className, checked, selected, colorTheme, ...props }) => (
-  <CheckboxContainer className={className}>
-    <HiddenCheckbox selected={selected} {...props} />
-    <StyledCheckbox colorTheme={colorTheme} selected={selected}>
+const Checkbox = ({ className, checked, selected, ...rest }) => (
+  <CheckboxContainer className={className} {...rest}>
+    <HiddenCheckbox selected={selected} {...rest}/>
+    <StyledCheckbox {...rest} selected={selected}>
       <CheckIcon />
     </StyledCheckbox>
   </CheckboxContainer>
@@ -32,14 +31,13 @@ const Dropdown = ({
   pageHeight,
   dropHeight,
   handleSelectCallback,
-  colorTheme,
-  size
+  size,
+  ...rest
 }) => {
 
-  const themeContext = useContext(ThemeContext);
-
-  console.log('themeContext',themeContext)
-
+  console.log(items)
+  console.log('r',...rest)
+  const themeContext = {...rest}.theme
   const itemHeight = themeContext.filter.size[size].itemHeight
 
   const hasNextPage = items.length < numberOfItems ? true : false
@@ -56,6 +54,7 @@ const Dropdown = ({
 
   // Render an item or a loading indicator.
   const Item = ({ index, style }) => {
+    
     let content;
     let select;
     let state;
@@ -79,10 +78,10 @@ const Dropdown = ({
             style={style}
             onClick={() => handleSelect(select)}
             selected={state}
-            colorTheme={colorTheme}
+            {...rest}
           >
-            <Checkbox className="drop-item" selected={state} colorTheme={colorTheme} />
-            <StyledDropdownText className="drop-item">{content}</StyledDropdownText>
+            <Checkbox className="drop-item" selected={state} {...rest} />
+            <StyledDropdownText className="drop-item" {...rest}>{content}</StyledDropdownText>
           </StyledDropdownItem>
         }
       </div>
@@ -99,7 +98,7 @@ const Dropdown = ({
       {({ onItemsRendered, ref }) => (
         items.length > 0 ?
         (
-          <StyledList size={size}>
+          <StyledList size={size} {...rest}>
           <List
             className="list"
             itemCount={itemCount}
@@ -114,7 +113,7 @@ const Dropdown = ({
           </List>
           </StyledList>
         ) : (
-         <NoItems size={size}>No results found.</NoItems>
+         <NoItems size={size} {...rest}>No results found.</NoItems>
         )
       )}
     </InfiniteLoader>

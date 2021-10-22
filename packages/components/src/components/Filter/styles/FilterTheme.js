@@ -33,9 +33,9 @@ export const FilterInputOutline = styled.div`
 `
 
 export const InputContainer = styled.div`
-display: grid;
-flex: 1 1 0%;
-flex-wrap: wrap;
+  display: grid;
+  flex: 1 1 0%;
+  flex-wrap: wrap;
 
 `
 
