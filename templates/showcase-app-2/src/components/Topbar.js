@@ -8,9 +8,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import MenuIcon from "@material-ui/icons/Menu";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
+
+import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
+
 import ListItem from "@material-ui/core/ListItem";
+import Drawer from "@material-ui/core/Drawer";
 import ListItemText from "@material-ui/core/ListItemText";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { Link as MaterialLink } from "@material-ui/core";
@@ -18,12 +24,40 @@ import Menu from "./Menu";
 
 const logo = require("../images/motor-red.png");
 
+const top100Films = [
+  { label: "The Shawshank Redemption", year: 1994 },
+  { label: "The Godfather", year: 1972 },
+  { label: "The Godfather: Part II", year: 1974 },
+  { label: "The Dark Knight", year: 2008 },
+  { label: "12 Angry Men", year: 1957 },
+  { label: "Schindler's List", year: 1993 },
+  { label: "Pulp Fiction", year: 1994 },
+  {
+    label: "The Lord of the Rings: The Return of the King",
+    year: 2003,
+  },
+];
+
 const styles = (theme) => ({
   appBar: {
+    zIndex: theme.zIndex.drawer + 1,
     position: "sticky",
     boxShadow: "none",
     borderBottom: `1px solid ${theme.palette.grey["100"]}`,
     backgroundColor: "white",
+  },
+  // drawer: {
+  //   width: "100%",
+  //   flexShrink: 0,
+  // },
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    margin: "10px",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
   },
   inline: {
     display: "inline",
@@ -35,6 +69,10 @@ const styles = (theme) => ({
       justifyContent: "space-evenly",
       alignItems: "center",
     },
+  },
+  drawGrid: {
+    display: "flex",
+    margin: "10px",
   },
   link: {
     textDecoration: "none",
@@ -82,11 +120,19 @@ class Topbar extends Component {
   state = {
     value: 0,
     menuDrawer: false,
+    filterDrawer: false,
   };
 
   handleChange = (event, value) => {
     this.setState({ value });
   };
+
+  FilterDrawChange = (event) => {
+    this.setState({ filterDrawer: !this.state.filterDrawer });
+  };
+  // FilterDrawClose = (event) => {
+  //   this.setState({ filterDrawer: false });
+  // };
 
   mobileMenuOpen = (event) => {
     this.setState({ menuDrawer: true });
@@ -122,45 +168,73 @@ class Topbar extends Component {
     const { classes } = this.props;
 
     return (
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Grid container spacing={10} alignItems="baseline">
-            <Grid item xs={12} className={classes.flex}>
-              <div className={classes.inline}>
-                <Typography variant="h6" color="inherit" noWrap>
-                  <Link to="/" className={classes.link}>
-                    <span className={classes.tagline}>
-                      <img width={100} src={logo} alt="" />
-                    </span>
-                  </Link>
-                </Typography>
-              </div>
-              {!this.props.noTabs && (
-                <React.Fragment>
-                  <div className={classes.productLogo}>
-                    <Typography>A Motor Showcase Dashboard</Typography>
-                  </div>
-                  <div className={classes.iconContainer}>
-                    <IconButton
-                      onClick={this.mobileMenuOpen}
-                      className={classes.iconButton}
-                      color="inherit"
-                      aria-label="Menu"
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                  </div>
-                  <div className={classes.tabContainer}>
-                    <SwipeableDrawer
-                      anchor="right"
-                      open={this.state.menuDrawer}
-                      onClose={this.mobileMenuClose}
-                      onOpen={this.mobileMenuOpen}
-                    >
-                      <AppBar title="Menu" />
-                      <List>
+      <React.Fragment>
+        <AppBar position="absolute" color="default" className={classes.appBar}>
+          <Toolbar>
+            <Grid container spacing={10} alignItems="baseline">
+              <Grid item xs={12} className={classes.flex}>
+                <div className={classes.inline}>
+                  <Typography variant="h6" color="inherit" noWrap>
+                    <Link to="/" className={classes.link}>
+                      <span className={classes.tagline}>
+                        <img width={100} src={logo} alt="" />
+                      </span>
+                    </Link>
+                  </Typography>
+                </div>
+                {!this.props.noTabs && (
+                  <React.Fragment>
+                    <div className={classes.productLogo}>
+                      <Typography>A Motor Showcase Dashboard</Typography>
+                    </div>
+                    <div className={classes.iconContainer}>
+                      <IconButton
+                        onClick={this.mobileMenuOpen}
+                        className={classes.iconButton}
+                        color="inherit"
+                        aria-label="Menu"
+                      >
+                        <MenuIcon />
+                      </IconButton>
+                    </div>
+                    <div className={classes.tabContainer}>
+                      <SwipeableDrawer
+                        anchor="right"
+                        open={this.state.menuDrawer}
+                        onClose={this.mobileMenuClose}
+                        onOpen={this.mobileMenuOpen}
+                      >
+                        <AppBar title="Menu" />
+                        <List>
+                          {Menu.map((item, index) => (
+                            <ListItem
+                              component={item.external ? MaterialLink : Link}
+                              href={item.external ? item.pathname : null}
+                              to={
+                                item.external
+                                  ? null
+                                  : {
+                                      pathname: item.pathname,
+                                      search: this.props.location.search,
+                                    }
+                              }
+                              button
+                              key={item.label}
+                            >
+                              <ListItemText primary={item.label} />
+                            </ListItem>
+                          ))}
+                        </List>
+                      </SwipeableDrawer>
+                      <Tabs
+                        value={this.current() || this.state.value}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        onChange={this.handleChange}
+                      >
                         {Menu.map((item, index) => (
-                          <ListItem
+                          <Tab
+                            key={index}
                             component={item.external ? MaterialLink : Link}
                             href={item.external ? item.pathname : null}
                             to={
@@ -171,45 +245,83 @@ class Topbar extends Component {
                                     search: this.props.location.search,
                                   }
                             }
-                            button
-                            key={item.label}
-                          >
-                            <ListItemText primary={item.label} />
-                          </ListItem>
+                            classes={{ root: classes.tabItem }}
+                            label={item.label}
+                          />
                         ))}
-                      </List>
-                    </SwipeableDrawer>
-                    <Tabs
-                      value={this.current() || this.state.value}
-                      indicatorColor="primary"
-                      textColor="primary"
-                      onChange={this.handleChange}
-                    >
-                      {Menu.map((item, index) => (
-                        <Tab
-                          key={index}
-                          component={item.external ? MaterialLink : Link}
-                          href={item.external ? item.pathname : null}
-                          to={
-                            item.external
-                              ? null
-                              : {
-                                  pathname: item.pathname,
-                                  search: this.props.location.search,
-                                }
-                          }
-                          classes={{ root: classes.tabItem }}
-                          label={item.label}
-                        />
-                      ))}
-                    </Tabs>
-                  </div>
-                </React.Fragment>
-              )}
+                      </Tabs>
+                    </div>
+                  </React.Fragment>
+                )}
+              </Grid>
             </Grid>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.FilterDrawChange}
+              edge="start"
+              className={classes.menuButton}
+            >
+              <FilterListIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          // className={classes.drawer}
+          variant="persistent"
+          anchor="top"
+          open={this.state.filterDrawer}
+          // open={open}
+          // classes={{
+          //   paper: classes.drawerPaper,
+          // }}
+        >
+          <div className={classes.drawerHeader}></div>
+
+          {/* <List>
+                {["Filters", "Filter1", "Filter2", "Filter3"].map(
+                  (text, index) => (
+                    <ListItem button key={text}>
+                      <ListItemIcon>
+                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+                    </ListItem>
+                  )
+                )}
+              </List> */}
+          <Grid item xs={12} className={classes.drawGrid}>
+            <Autocomplete
+              disablePortal
+              getOptionLabel={(option) =>
+                typeof option === "string" || option instanceof String
+                  ? option
+                  : ""
+              }
+              id="combo-box-demo"
+              options={top100Films}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Filter 1" />
+              )}
+            />
+            <Autocomplete
+              disablePortal
+              getOptionLabel={(option) =>
+                typeof option === "string" || option instanceof String
+                  ? option
+                  : ""
+              }
+              id="combo-box-demo"
+              options={top100Films}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Filter 2" />
+              )}
+            />
           </Grid>
-        </Toolbar>
-      </AppBar>
+        </Drawer>
+      </React.Fragment>
     );
   }
 }
