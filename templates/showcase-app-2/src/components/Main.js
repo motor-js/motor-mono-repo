@@ -316,7 +316,7 @@ function Main(props) {
               <Paper className={classes.kpiPaper}>
                 <div className={classes.box}>
                   <SparkLine
-                    options={options3}
+                    options={options4}
                     dataKeys={dataKeys3}
                     data={data3}
                   />
