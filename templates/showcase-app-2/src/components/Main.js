@@ -198,12 +198,12 @@ function Main(props) {
     qMetrics,
   });
 
-  const { dataSet: dataSet2, metrics: metrics2 } = useData({
+  const { dataSet: dataSet2 } = useData({
     qSortByAscii: 0,
     cols: cols2,
     qMetrics,
   });
-  const { dataSet: dataSet3, metrics: metrics3 } = useData({
+  const { dataSet: dataSet3 } = useData({
     qSortByAscii: 0,
     cols: cols3,
     qMetrics,
