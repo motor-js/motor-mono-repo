@@ -100,7 +100,7 @@ const styles = (theme) => ({
   },
   grid: {
     width: 1200,
-    marginTop: 40,
+    marginTop: 20,
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 20px)",
     },
@@ -297,6 +297,129 @@ function Main(props) {
             </Grid>
             <Grid container item xs={12}>
               <Grid item xs={12}>
+                <Paper
+                  className={classes.paper}
+                  style={{ position: "relative" }}
+                >
+                  <div>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Account Retention
+                    </Typography>
+                    <div style={{ marginTop: 14, marginBottom: 14 }}>
+                      <div className={classes.inlining}>
+                        <Avatar className={classes.loanAvatar}></Avatar>
+                        <Typography
+                          className={classes.inlining}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          EXPANSIONS
+                        </Typography>
+                        <Typography
+                          className={classes.inlining}
+                          color="secondary"
+                          variant="h6"
+                          gutterBottom
+                        >
+                          {numeral(metrics1 && metrics1["EXPANSIONS"]).format()}{" "}
+                          units
+                        </Typography>
+                      </div>
+                      <div className={classes.inlining}>
+                        <Avatar className={classes.interestAvatar}></Avatar>
+                        <Typography
+                          className={classes.inlining}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          CANCELLATIONS
+                        </Typography>
+                        <Typography
+                          className={classes.inlining}
+                          color="secondary"
+                          variant="h6"
+                          gutterBottom
+                        >
+                          {numeral(
+                            metrics1 && metrics1["CANCELLATIONS"]
+                          ).format()}{" "}
+                          units
+                        </Typography>
+                      </div>
+                    </div>
+                    <div>
+                      <SimpleBarChart data={data3} />
+                    </div>
+                  </div>
+                </Paper>{" "}
+              </Grid>
+            </Grid>
+            {/* <Grid container item xs={12}> */}
+            <Grid
+              spacing={4}
+              alignItems="center"
+              justifyContent="center"
+              container
+              className={classes.grid}
+            >
+              <Grid item xs={6}>
+                <Paper
+                  className={classes.paper}
+                  style={{ position: "relative" }}
+                >
+                  <div>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Account Retention
+                    </Typography>
+                    <div style={{ marginTop: 14, marginBottom: 14 }}>
+                      <div className={classes.inlining}>
+                        <Avatar className={classes.loanAvatar}></Avatar>
+                        <Typography
+                          className={classes.inlining}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          EXPANSIONS
+                        </Typography>
+                        <Typography
+                          className={classes.inlining}
+                          color="secondary"
+                          variant="h6"
+                          gutterBottom
+                        >
+                          {numeral(metrics1 && metrics1["EXPANSIONS"]).format()}{" "}
+                          units
+                        </Typography>
+                      </div>
+                      <div className={classes.inlining}>
+                        <Avatar className={classes.interestAvatar}></Avatar>
+                        <Typography
+                          className={classes.inlining}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          CANCELLATIONS
+                        </Typography>
+                        <Typography
+                          className={classes.inlining}
+                          color="secondary"
+                          variant="h6"
+                          gutterBottom
+                        >
+                          {numeral(
+                            metrics1 && metrics1["CANCELLATIONS"]
+                          ).format()}{" "}
+                          units
+                        </Typography>
+                      </div>
+                    </div>
+                    <div>
+                      <SimpleBarChart data={data3} />
+                    </div>
+                  </div>
+                </Paper>{" "}
+              </Grid>
+              <Grid item xs={6}>
                 <Paper
                   className={classes.paper}
                   style={{ position: "relative" }}
