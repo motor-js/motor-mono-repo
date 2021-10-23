@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import SimpleLineChart from "./SimpleLineChart";
+import ApexChart from "./ApexChart";
 import { useData } from "@motor-js/engine";
 
 import Topbar from "./Topbar";
@@ -59,6 +59,17 @@ const cols = [
     qLabel: "OtherType",
   },
 ];
+
+const options = {
+  type: "line",
+  fillOpacity: 1,
+  title: {
+    text: "UNIQUE PURCHASES",
+  },
+  // subtitle: {
+  //   text: numeral(metrics1 && metrics1["EXPANSIONS"]).format(),
+  // },
+};
 
 const styles = (theme) => ({
   root: {
@@ -161,7 +172,7 @@ function Dashboard(props) {
   const { classes } = props;
 
   const currentPath = props.location.pathname;
-  const { dataSet, metrics } = useData({
+  const { dataSet, dataKeys, metrics } = useData({
     qSortByAscii: 0,
     cols,
     qMetrics,
@@ -283,7 +294,12 @@ function Dashboard(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleLineChart data={data} />
+                      {/* <ApexChart data={data} /> */}
+                      <ApexChart
+                        options={options}
+                        dataKeys={dataKeys}
+                        data={data}
+                      />
                     </div>
                   </div>
                 </Paper>

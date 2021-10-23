@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import SimpleBarChart from "./SimpleBarChart";
+import ApexChart from "./ApexChart";
 import SparkLine from "./SparkLine";
 import { useData } from "@motor-js/engine";
 
@@ -235,7 +235,35 @@ function Main(props) {
     },
   };
   const options3 = {
+    type: "bar",
+    fillOpacity: 1,
+    title: {
+      text: "QUANTITIES",
+    },
+    subtitle: {
+      text: "$235,312",
+      //   text:
+      //     metrics1 &&
+      //     parseInt(metrics1["EXPANSIONS"], 10) +
+      //       parseInt(metrics1["CANCELLATIONS"], 10),
+    },
+  };
+  const options4 = {
     type: "line",
+    fillOpacity: 1,
+    title: {
+      text: "QUANTITIES",
+    },
+    subtitle: {
+      text: "$235,312",
+      //   text:
+      //     metrics1 &&
+      //     parseInt(metrics1["EXPANSIONS"], 10) +
+      //       parseInt(metrics1["CANCELLATIONS"], 10),
+    },
+  };
+  const options5 = {
+    type: "radar",
     fillOpacity: 1,
     title: {
       text: "QUANTITIES",
@@ -348,7 +376,11 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleBarChart data={data3} />
+                      <ApexChart
+                        options={options3}
+                        dataKeys={dataKeys3}
+                        data={data3}
+                      />
                     </div>
                   </div>
                 </Paper>{" "}
@@ -414,7 +446,11 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleBarChart data={data3} />
+                      <ApexChart
+                        options={options4}
+                        dataKeys={dataKeys3}
+                        data={data3}
+                      />
                     </div>
                   </div>
                 </Paper>{" "}
@@ -471,7 +507,11 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <SimpleBarChart data={data3} />
+                      <ApexChart
+                        options={options5}
+                        dataKeys={dataKeys3}
+                        data={data3}
+                      />
                     </div>
                   </div>
                 </Paper>{" "}
