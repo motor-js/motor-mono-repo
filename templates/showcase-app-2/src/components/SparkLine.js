@@ -26,12 +26,14 @@ function SimpleBarChart(props) {
     fill: {
       opacity: options.fillOpacity,
     },
-    // xaxis: {
-    //   categories: data ? data.map((n) => (n && n["name"]) || "untitled") : [],
-    // },
-    yaxis: {
-      min: 0,
+    xaxis: {
+      type: "category",
+      labels: { show: false },
     },
+    labels: data ? data.map((n) => (n && n["name"]) || "untitled") : [],
+    // yaxis: {
+    //   min: 0,
+    // },
     colors: theme.palette.kpi,
     title: {
       text: options.title.text,
@@ -43,6 +45,11 @@ function SimpleBarChart(props) {
         fontWeight: theme.typography.kpi.title.fontWeight,
       },
     },
+    // tooltip: {
+    //   // theme: false,
+    //   fillSeriesColor: true,
+    //   // style: { fontSize: "36px" },
+    // },
     subtitle: {
       text: options.subtitle.text,
       offsetX: theme.kpi.subtitle.offsetX,

@@ -215,7 +215,7 @@ function Main(props) {
 
   const options1 = {
     type: "area",
-    fillOpacity: 0.3,
+    fillOpacity: 1,
     title: {
       text: "UNIQUE PURCHASES",
     },
@@ -224,7 +224,7 @@ function Main(props) {
     },
   };
   const options2 = {
-    type: "area",
+    type: "bar",
     fillOpacity: 0.3,
     title: {
       text: "AVERAGE ORDER VALUE",
