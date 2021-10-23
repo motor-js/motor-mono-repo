@@ -220,7 +220,7 @@ function Main(props) {
       text: "UNIQUE PURCHASES",
     },
     subtitle: {
-      text: "$235,312",
+      text: numeral(metrics1 && metrics1["EXPANSIONS"]).format(),
     },
   };
   const options2 = {
@@ -230,7 +230,8 @@ function Main(props) {
       text: "AVERAGE ORDER VALUE",
     },
     subtitle: {
-      text: "$235,312",
+      // text: "$235,312",
+      text: metrics1 && metrics1["CANCELLATIONS"],
     },
   };
   const options3 = {
@@ -241,6 +242,10 @@ function Main(props) {
     },
     subtitle: {
       text: "$235,312",
+      //   text:
+      //     metrics1 &&
+      //     parseInt(metrics1["EXPANSIONS"], 10) +
+      //       parseInt(metrics1["CANCELLATIONS"], 10),
     },
   };
 
