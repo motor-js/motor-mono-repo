@@ -230,7 +230,6 @@ function Main(props) {
       text: "AVERAGE ORDER VALUE",
     },
     subtitle: {
-      // text: "$235,312",
       text: metrics1 && metrics1["CANCELLATIONS"],
     },
   };
@@ -242,12 +241,9 @@ function Main(props) {
     },
     subtitle: {
       text: "$235,312",
-      //   text:
-      //     metrics1 &&
-      //     parseInt(metrics1["EXPANSIONS"], 10) +
-      //       parseInt(metrics1["CANCELLATIONS"], 10),
     },
   };
+
   const options4 = {
     type: "line",
     fillOpacity: 1,
@@ -255,11 +251,12 @@ function Main(props) {
       text: "QUANTITIES",
     },
     subtitle: {
-      text: "$235,312",
-      //   text:
-      //     metrics1 &&
-      //     parseInt(metrics1["EXPANSIONS"], 10) +
-      //       parseInt(metrics1["CANCELLATIONS"], 10),
+      // text: "$235,312",
+      text: numeral(
+        metrics1 &&
+          parseInt(metrics1["EXPANSIONS"].replace(/[$,]+/g, ""), 10) +
+            parseInt(metrics1["CANCELLATIONS"].replace(/[$,]+/g, ""), 10)
+      ).format(),
     },
   };
   const options5 = {
