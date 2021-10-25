@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@motor-js/components": "^0.0.1",
+    "@motor-js/core": "^0.1.8",
     "@motor-js/engine": "^0.3.18",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
