@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import withStyles from "@material-ui/styles/withStyles";
 import { withRouter } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -6,8 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import SimpleLineChart from "./SimpleLineChart";
+import { useData } from "@motor-js/engine";
 
 import Topbar from "./Topbar";
 const numeral = require("numeral");
@@ -15,49 +15,49 @@ numeral.defaultFormat("0,000");
 
 const backgroundShape = require("../images/shape.svg");
 
-const Months = [
-  "01 December 2018",
-  "01 January 2019",
-  "01 February 2019",
-  "01 March 2019",
-  "01 April 2019",
-  "01 May 2019",
-  "01 June 2019",
-  "01 July 2019",
-  "01 August 2019",
-  "01 September 2019",
-  "01 October 2019",
-  "01 November 2019",
-  "01 December 2019",
-  "01 January 2020",
-  "01 March 2020",
-  "01 April 2020",
-  "01 May 2020",
-  "01 June 2020",
-  "01 July 2020",
-  "01 August 2020",
-  "01 September 2020",
-  "01 October 2020",
-  "01 November 2020",
-  "01 December 2020",
-  "01 January 2020",
-  "01 February 2020",
-  "01 March 2020",
-  "01 April 2020",
+const qMetrics = [
+  {
+    qName: "EXPANSIONS",
+    qExpr: "num(Sum([Series1]),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "CANCELLATIONS",
+    qExpr: "num(Sum([Series2]),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "uniquePurchase",
+    // qExpr: "num(Sum(today)/Sum(yesterday),'#,##0%')",
+    qExpr: "num(Count( distinct Purchases),'#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "avgOrderValue",
+    qExpr: "num(Avg(Values),'$#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
+  {
+    qName: "quantities",
+    qExpr: "num(Sum(Quantities),'#,##0')",
+    qType: "qStringExpression", // qValueExpression if a pure number is to be returned
+  },
 ];
 
-const monthRange = Months;
-const monthlyPayment = 100;
-const monthlyInterest = 10;
-
-const data = Array.from({ length: 1 + 10 }, (value, i) => {
-  const delayed = i < 10;
-  return {
-    name: monthRange[i],
-    Type: delayed ? 0 : Math.ceil(monthlyPayment).toFixed(0),
-    OtherType: Math.ceil(monthlyInterest).toFixed(0),
-  };
-});
+const cols = [
+  {
+    qField: "[categories]",
+    qLabel: "name",
+  },
+  {
+    qField: "=sum(Series1)",
+    qLabel: "Type",
+  },
+  {
+    qField: "=sum(Series2)",
+    qLabel: "OtherType",
+  },
+];
 
 const styles = (theme) => ({
   root: {
@@ -109,8 +109,8 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   box: {
-    marginBottom: 40,
-    height: 65,
+    marginBottom: 10,
+    height: 55,
   },
   inlining: {
     display: "inline-block",
@@ -156,197 +156,142 @@ const styles = (theme) => ({
   },
 });
 
-class Main extends Component {
-  componentDidMount() {}
+function Main(props) {
+  const { classes } = props;
+  const { dataSet, metrics } = useData({
+    qSortByAscii: 0,
+    cols,
+    qMetrics,
+  });
 
-  openDialog = (event) => {
-    this.setState({ learnMoredialog: true });
-  };
+  const { data, dataKeys } = dataSet;
 
-  dialogClose = (event) => {
-    this.setState({ learnMoredialog: false });
-  };
-
-  openGetStartedDialog = (event) => {
-    this.setState({ getStartedDialog: true });
-  };
-
-  closeGetStartedDialog = (event) => {
-    this.setState({ getStartedDialog: false });
-  };
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Topbar />
-        <div className={classes.root}>
-          <Grid container justifyContent="center">
-            <Grid
-              spacing={4}
-              alignItems="center"
-              justifyContent="center"
-              container
-              className={classes.grid}
-            >
-              <Grid item xs={12} md={4}>
-                <Paper className={classes.paper}>
-                  <div className={classes.box}>
-                    <Typography
-                      style={{ textTransform: "uppercase" }}
-                      color="secondary"
-                      gutterBottom
-                    >
-                      First title
-                    </Typography>
-                    <Typography variant="body2" gutterBottom>
-                      A first title style <br /> with two lines
-                    </Typography>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      className={classes.actionButtom}
-                    >
-                      Learn more
-                    </Button>
-                  </div>
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Paper className={classes.paper}>
-                  <div className={classes.box}>
-                    <Typography
-                      style={{ textTransform: "uppercase" }}
-                      color="secondary"
-                      gutterBottom
-                    >
-                      Another box
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                      A default box
-                    </Typography>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      className={classes.actionButtom}
-                    >
-                      Learn more
-                    </Button>
-                  </div>
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Paper className={classes.paper}>
-                  <div className={classes.box}>
-                    <Typography
-                      style={{ textTransform: "uppercase" }}
-                      color="secondary"
-                      gutterBottom
-                    >
-                      A box with a carousel
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                      If you click in Getting Started, you will see a nice
-                      carousel
-                    </Typography>
-                  </div>
-                  <div className={classes.alignRight}>
-                    <Button
-                      onClick={this.openDialog}
-                      variant="outlined"
-                      className={classes.actionButtom}
-                    >
-                      Learn more
-                    </Button>
-                    <Button
-                      onClick={this.openGetStartedDialog}
-                      color="primary"
-                      variant="contained"
-                      className={classes.actionButtom}
-                    >
-                      Dashboard
-                    </Button>
-                  </div>
-                </Paper>
-              </Grid>
-              <Grid container item xs={12}>
-                <Grid item xs={12}>
-                  <Paper
-                    className={classes.paper}
-                    style={{ position: "relative" }}
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Topbar />
+      <div className={classes.root}>
+        <Grid container justifyContent="center">
+          <Grid
+            spacing={4}
+            alignItems="center"
+            justifyContent="center"
+            container
+            className={classes.grid}
+          >
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <div className={classes.box}>
+                  <Typography
+                    style={{ textTransform: "uppercase" }}
+                    color="secondary"
+                    gutterBottom
                   >
-                    <div>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Some details
-                      </Typography>
-                      <Typography variant="body1">
-                        Details about the graph
-                      </Typography>
-                      <div style={{ marginTop: 14, marginBottom: 14 }}>
-                        <div className={classes.inlining}>
-                          <Avatar className={classes.loanAvatar}></Avatar>
-                          <Typography
-                            className={classes.inlining}
-                            variant="subtitle2"
-                            gutterBottom
-                          >
-                            Type
-                          </Typography>
-                          <Typography
-                            className={classes.inlining}
-                            color="secondary"
-                            variant="h6"
-                            gutterBottom
-                          >
-                            {numeral(monthlyPayment).format()} units
-                          </Typography>
-                        </div>
-                        <div className={classes.inlining}>
-                          <Avatar className={classes.interestAvatar}></Avatar>
-                          <Typography
-                            className={classes.inlining}
-                            variant="subtitle2"
-                            gutterBottom
-                          >
-                            Othe type
-                          </Typography>
-                          <Typography
-                            className={classes.inlining}
-                            color="secondary"
-                            variant="h6"
-                            gutterBottom
-                          >
-                            {numeral(monthlyInterest).format()} units
-                          </Typography>
-                        </div>
+                    Unique Purchases
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    {numeral(metrics && metrics["uniquePurchase"]).format()}
+                  </Typography>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <div className={classes.box}>
+                  <Typography
+                    style={{ textTransform: "uppercase" }}
+                    color="secondary"
+                    gutterBottom
+                  >
+                    Average Order Value
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    {metrics && metrics["avgOrderValue"]}
+                  </Typography>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <div className={classes.box}>
+                  <Typography
+                    style={{ textTransform: "uppercase" }}
+                    color="secondary"
+                    gutterBottom
+                  >
+                    Quantities
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    {numeral(metrics && metrics["quantities"]).format()}
+                  </Typography>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid container item xs={12}>
+              <Grid item xs={12}>
+                <Paper
+                  className={classes.paper}
+                  style={{ position: "relative" }}
+                >
+                  <div>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Account Retention
+                    </Typography>
+                    <div style={{ marginTop: 14, marginBottom: 14 }}>
+                      <div className={classes.inlining}>
+                        <Avatar className={classes.loanAvatar}></Avatar>
+                        <Typography
+                          className={classes.inlining}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          EXPANSIONS
+                        </Typography>
+                        <Typography
+                          className={classes.inlining}
+                          color="secondary"
+                          variant="h6"
+                          gutterBottom
+                        >
+                          {numeral(metrics && metrics["EXPANSIONS"]).format()}{" "}
+                          units
+                        </Typography>
                       </div>
-                      <div>
-                        <SimpleLineChart data={data} />
+                      <div className={classes.inlining}>
+                        <Avatar className={classes.interestAvatar}></Avatar>
+                        <Typography
+                          className={classes.inlining}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          CANCELLATIONS
+                        </Typography>
+                        <Typography
+                          className={classes.inlining}
+                          color="secondary"
+                          variant="h6"
+                          gutterBottom
+                        >
+                          {numeral(
+                            metrics && metrics["CANCELLATIONS"]
+                          ).format()}{" "}
+                          units
+                        </Typography>
                       </div>
                     </div>
-                  </Paper>
-                </Grid>
+                    <div>
+                      <SimpleLineChart data={data} dataKeys={dataKeys} />
+                    </div>
+                  </div>
+                </Paper>
               </Grid>
             </Grid>
           </Grid>
-          {/* <SwipeDialog
-            open={this.state.learnMoredialog}
-            onClose={this.dialogClose}
-          /> */}
-          {/* <InstructionDialog
-            open={this.state.getStartedDialog}
-            onClose={this.closeGetStartedDialog}
-          /> */}
-        </div>
-      </React.Fragment>
-    );
-  }
+        </Grid>
+      </div>
+    </React.Fragment>
+  );
 }
+// }
 
 export default withRouter(withStyles(styles)(Main));

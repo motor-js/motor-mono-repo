@@ -15,6 +15,10 @@ const theme = createTheme({
     primary: {
       main: red[400],
     },
+    chart: {
+      0: red[900],
+      1: red[400],
+    },
   },
   typography: {
     // Use the system font instead of the default Roboto font.
