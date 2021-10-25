@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+// import React, { useRef, useEffect } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
 import { useData } from "@motor-js/engine";
@@ -25,6 +26,12 @@ const BarExampleCompact = () => {
     chart: {
       height: 350,
       type: "bar",
+      events: {
+        click: function (event, chartContext, config) {
+          console.log(config);
+          // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+        },
+      },
     },
     plotOptions: {
       bar: {
