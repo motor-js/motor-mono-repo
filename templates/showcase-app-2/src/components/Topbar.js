@@ -21,22 +21,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { Link as MaterialLink } from "@material-ui/core";
 import Menu from "./Menu";
+import Filter from "./Filter"
 
 const logo = require("../images/motor-red.png");
 
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
-  {
-    label: "The Lord of the Rings: The Return of the King",
-    year: 2003,
-  },
-];
 
 const styles = (theme) => ({
   appBar: {
@@ -277,48 +265,11 @@ class Topbar extends Component {
           // }}
         >
           <div className={classes.drawerHeader}></div>
-
-          {/* <List>
-                {["Filters", "Filter1", "Filter2", "Filter3"].map(
-                  (text, index) => (
-                    <ListItem button key={text}>
-                      <ListItemIcon>
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                      </ListItemIcon>
-                      <ListItemText primary={text} />
-                    </ListItem>
-                  )
-                )}
-              </List> */}
           <Grid item xs={12} className={classes.drawGrid}>
-            <Autocomplete
-              disablePortal
-              getOptionLabel={(option) =>
-                typeof option === "string" || option instanceof String
-                  ? option
-                  : ""
-              }
-              id="combo-box-demo"
-              options={top100Films}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Filter 1" />
-              )}
-            />
-            <Autocomplete
-              disablePortal
-              getOptionLabel={(option) =>
-                typeof option === "string" || option instanceof String
-                  ? option
-                  : ""
-              }
-              id="combo-box-demo"
-              options={top100Films}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Filter 2" />
-              )}
-            />
+              <Filter 
+                dimension={['[categories]']}  
+                label='Categories'
+              />
           </Grid>
         </Drawer>
       </React.Fragment>
