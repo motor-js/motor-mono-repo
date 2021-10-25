@@ -1,135 +1,67 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable no-use-before-define */
+
+import React, { useEffect, useState } from 'react';
+import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { VariableSizeList } from 'react-window';
-import { Typography } from '@material-ui/core';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { useList } from '@motor-js/engine'
 
-const LISTBOX_PADDING = 8; // px
-
-function renderRow(props) {
-  const { data, index, style } = props;
-  return React.cloneElement(data[index], {
-    style: {
-      ...style,
-      top: style.top + LISTBOX_PADDING,
-    },
-  });
-}
-
-const OuterElementContext = React.createContext({});
-
-const OuterElementType = React.forwardRef((props, ref) => {
-  const outerProps = React.useContext(OuterElementContext);
-  return <div ref={ref} {...props} {...outerProps} />;
-});
-
-function useResetCache(data) {
-  const ref = React.useRef(null);
-  React.useEffect(() => {
-    if (ref.current != null) {
-      ref.current.resetAfterIndex(0, true);
-    }
-  }, [data]);
-  return ref;
-}
-
-// Adapter for react-window
-const ListboxComponent = React.forwardRef(function ListboxComponent(props, ref) {
-  const { children, ...other } = props;
-  const itemData = React.Children.toArray(children);
-  const theme = useTheme();
-  const smUp = useMediaQuery(theme.breakpoints.up('sm'), { noSsr: true });
-  const itemCount = itemData.length;
-  const itemSize = smUp ? 36 : 48;
-
-  const getChildSize = (child) => {
-    if (React.isValidElement(child) && child.type === ListSubheader) {
-      return 48;
-    }
-
-    return itemSize;
-  };
-
-  const getHeight = () => {
-    if (itemCount > 8) {
-      return 8 * itemSize;
-    }
-    return itemData.map(getChildSize).reduce((a, b) => a + b, 0);
-  };
-
-  const gridRef = useResetCache(itemCount);
-
-  return (
-    <div ref={ref}>
-      <OuterElementContext.Provider value={other}>
-        <VariableSizeList
-          itemData={itemData}
-          height={getHeight() + 2 * LISTBOX_PADDING}
-          width="100%"
-          ref={gridRef}
-          outerElementType={OuterElementType}
-          innerElementType="ul"
-          itemSize={(index) => getChildSize(itemData[index])}
-          overscanCount={5}
-          itemCount={itemCount}
-        >
-          {renderRow}
-        </VariableSizeList>
-      </OuterElementContext.Provider>
-    </div>
-  );
-});
-
-ListboxComponent.propTypes = {
-  children: PropTypes.node,
-};
-
-
-const useStyles = makeStyles({
-  listbox: {
-    boxSizing: 'border-box',
-    '& ul': {
-      padding: 0,
-      margin: 0,
-    },
-  },
-});
-
-
-
-const renderGroup = (params) => [
-  <ListSubheader key={params.key} component="div">
-    {params.group}
-  </ListSubheader>,
-  params.children,
-];
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />
+const checkedIcon = <CheckBoxIcon fontSize="small" />
 
 export default function Filter({ dimension, label }) {
-  
-  const classes = useStyles();
-  const { listData, select  } = useList({ dimension })
-  const options = listData
-  const handleChange = (obj, val, reas) => select([val.key],true);
 
+  const [val, setValue] = useState([]);
+  const { listData, select, selections, clearSelections  } = useList({ dimension })
+
+  useEffect(() => {
+    selections && setValue(selections)
+  },[selections])
+
+  const handleChange = (obj, val, reas) => {
+    if (reas === "clear") {
+      clearSelections();
+    } else if (reas === 'remove-option') {
+      const newSel = selections.filter(({ key: id1 }) => !val.some(({ key: id2 }) => id2 === id1));
+      select([newSel[0].key]);
+    } else {
+      const newSel = val.filter((el) => !selections.includes(el));
+      select([newSel[0].key]);
+    }
+  }
   return (
-    <Autocomplete
-      id="virtualize-demo"
-      style={{ width: 300, padding: 0 }}
-      onChange={handleChange}
-      disableListWrap
-      classes={classes}
-      ListboxComponent={ListboxComponent}
-      id="test"
-      renderGroup={renderGroup}
-      options={options}
-      getOptionLabel={option => option.text}
-      renderInput={(params) => <TextField {...params} variant="outlined" label={label} />}
-      renderOption={(option) => <Typography noWrap>{option.text}</Typography>}
-    />
+    <div>
+      { listData && 
+        <Autocomplete
+          multiple
+          id="checkboxes-tags-demo"
+          options={listData}
+          disableCloseOnSelect
+          freeSolo
+          size='small'
+          onChange={handleChange}
+          value={val}
+          getOptionLabel={(option) => option.text}
+          renderOption={(option, { selected }) => (
+            <React.Fragment>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {option.text}
+            </React.Fragment>
+          )}
+          style={{ width: 500 }}
+          renderInput={(params) => (
+            <TextField {...params} variant="outlined" label={label} placeholder={label} />
+          )}
+        />
+        }
+    </div>
   );
 }
+
