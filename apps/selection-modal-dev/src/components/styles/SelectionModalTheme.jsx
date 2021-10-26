@@ -4,7 +4,17 @@ import { color, space } from "styled-system";
 export const SelectionModalWrapper = styled.div`
   ${space};
   ${color};
-  font-size: 12px;
+  margin: 5px 5px;
+  top: 0px;
+  left: 0px;
+  width: 180px;
+  position: absolute;
+  z-index: 100;
+  box-sizing: border-box;
+  border: 1px solid #cccccc;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const SelectionModalButton = styled.button`
@@ -20,6 +30,7 @@ export const SelectionModalButton = styled.button`
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  display: inline-block;
 `;
 
 export const SelectionModalButtonConfirm = styled(SelectionModalButton)`
