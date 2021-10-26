@@ -58,7 +58,7 @@ function StyledSelectionModal({
           margin={margin}
         >
           <SelectionModalButtonCancel
-            theme={theme}
+            // theme={theme}
             type="button"
             className="cancelSelections"
             bckgColor={bckgColorCancel}

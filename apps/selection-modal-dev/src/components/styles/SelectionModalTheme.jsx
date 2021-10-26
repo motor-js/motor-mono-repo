@@ -28,7 +28,7 @@ export const SelectionModalButtonConfirm = styled(SelectionModalButton)`
   border-size: ${(props) => props.theme.selectionModal.border.size.confirm};
   border-style: ${(props) => props.theme.selectionModal.border.style.confirm};
   border-radius: ${(props) => props.theme.selectionModal.border.radius.confirm};
-  color: ${((props) => props.theme.selectionModal.color.confirm, props.theme)};
+  color: ${(props) => props.theme.selectionModal.color.confirm};
 
   &:hover {
     opacity: ${(props) => props.theme.selectionModal.hoverOpacity.confirm};
