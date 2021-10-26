@@ -2,7 +2,8 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const BarExampleCompact = (props) => {
-  const { data } = props;
+  //   const [dataPointIndex, setDataPointIndex] = useState([]);
+  const { data, setSelection } = props;
 
   const options = {
     chart: {
@@ -10,9 +11,13 @@ const BarExampleCompact = (props) => {
       type: "bar",
       events: {
         click: function (event, chartContext, config) {
-          console.log(config);
+          //   setDataPointIndex(0);
+          setSelection(
+            config.config.series[0].elemNumber[config.dataPointIndex]
+          );
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
+        updated: function (chartContext, config) {},
       },
     },
     plotOptions: {
@@ -32,6 +37,16 @@ const BarExampleCompact = (props) => {
         colors: ["#304758"],
       },
     },
+    // colors: [
+    //   function ({ value, seriesIndex, dataPointIndex, w }) {
+    //     console.log("tt");
+    //     if (dataPointIndex === 0) {
+    //       return "#7E36AF";
+    //     } else {
+    //       return "#D9534F";
+    //     }
+    //   },
+    // ],
 
     xaxis: {
       categories: data
@@ -93,6 +108,7 @@ const BarExampleCompact = (props) => {
     {
       name: "Revenue",
       data: data ? data.map((n) => n && parseInt(n["Revenue"])) : [],
+      elemNumber: data ? data.map((n) => n && parseInt(n["elemNumber"])) : [],
     },
   ];
 

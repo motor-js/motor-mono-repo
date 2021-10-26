@@ -19,6 +19,21 @@ const BarWrapper = () => {
     // setShowBrush(false);
   };
 
+  const setSelection = (id) => {
+    beginSelections();
+
+    const array = currentSelectionIds;
+    const index = array.indexOf(id);
+    if (index > -1) {
+      array.splice(index, 1);
+    } else {
+      array.push(id);
+    }
+    setCurrentSelectionIds(array);
+
+    select(0, array);
+  };
+
   // const useOutsideClick =
   //   (ref,
   //   () => {
@@ -44,7 +59,7 @@ const BarWrapper = () => {
     },
   ];
 
-  const { dataSet, endSelections } = useData({
+  const { dataSet, endSelections, select, beginSelections } = useData({
     cols,
   });
 
@@ -54,13 +69,14 @@ const BarWrapper = () => {
     <div className="app">
       <div className="row">
         <div className="mixed-chart">
-          {data && <Bar data={data} />}
+          {data && <Bar data={data} setSelection={setSelection} />}
           <SelectionModal
             // isOpen={!isEmpty(currentSelectionIds)}
-            isOpen={true}
+            isOpen={currentSelectionIds.length !== 0}
             cancelCallback={cancelCallback}
             confirmCallback={confirmCallback}
             offsetX={0}
+
             // width={width}
           />
         </div>
