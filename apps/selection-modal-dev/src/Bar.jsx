@@ -1,27 +1,93 @@
-// import React, { useRef, useEffect } from "react";
 import React from "react";
 import Chart from "react-apexcharts";
 
-import { useData } from "@motor-js/engine";
+const BarExampleCompact = (props) => {
+  const { data } = props;
 
-const Bar = (props) => {
-  const { options } = props;
-  const cols = [
-    {
-      qField: "[Category]",
-      qLabel: "Category",
+  const options = {
+    chart: {
+      height: 450,
+      type: "bar",
+      events: {
+        click: function (event, chartContext, config) {
+          console.log(config);
+          // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+        },
+      },
     },
-    {
-      qField: "=sum(Quantity * Price)",
-      qLabel: "Revenue",
+    plotOptions: {
+      bar: {
+        borderRadius: 10,
+        dataLabels: {
+          position: "top", // top, center, bottom
+        },
+      },
     },
-  ];
+    dataLabels: {
+      enabled: true,
 
-  const { dataSet } = useData({
-    cols,
-  });
+      offsetY: -20,
+      style: {
+        fontSize: "12px",
+        colors: ["#304758"],
+      },
+    },
 
-  const { data } = dataSet;
+    xaxis: {
+      categories: data
+        ? data.map((n) => (n && n["Category"]) || "untitled")
+        : [],
+
+      position: "bottom",
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      crosshairs: {
+        fill: {
+          type: "gradient",
+          gradient: {
+            colorFrom: "#D8E3F0",
+            colorTo: "#BED1E6",
+            stops: [0, 100],
+            opacityFrom: 0.4,
+            opacityTo: 0.5,
+          },
+        },
+      },
+      tooltip: {
+        enabled: true,
+      },
+    },
+    yaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        show: false,
+        formatter: function (val) {
+          return val + "%";
+        },
+      },
+    },
+    legend: {
+      position: "right",
+      offsetY: 40,
+    },
+    title: {
+      text: "Monthly Inflation in Argentina, 2002",
+      floating: true,
+      align: "center",
+      style: {
+        color: "#444",
+      },
+    },
+  };
 
   const series = [
     {
@@ -49,4 +115,4 @@ const Bar = (props) => {
   );
 };
 
-export default Bar;
+export default BarExampleCompact;

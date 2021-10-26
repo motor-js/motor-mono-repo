@@ -2,8 +2,6 @@ import "./App.css";
 import { Card } from "semantic-ui-react";
 import BarWrapper from "./BarWrapper";
 
-import isEmpty from "./utils/isEmpty";
-
 export default function App() {
   return (
     <div className="App">
