@@ -4,7 +4,7 @@ import { color, space } from "styled-system";
 export const SelectionModalWrapper = styled.div`
   ${space};
   ${color};
-  font-size: ${(props) => props.theme.selectionModal.size[props.size].fontSize};
+  font-size: 12px;
 `;
 
 export const SelectionModalButton = styled.button`
@@ -23,28 +23,27 @@ export const SelectionModalButton = styled.button`
 `;
 
 export const SelectionModalButtonConfirm = styled(SelectionModalButton)`
-  background-color: ${(props) => props.theme.colors.gray[200]};
-  border-color: ${(props) => props.theme.selectionModal.border.color.confirm};
-  border-size: ${(props) => props.theme.selectionModal.border.size.confirm};
-  border-style: ${(props) => props.theme.selectionModal.border.style.confirm};
-  border-radius: ${(props) => props.theme.selectionModal.border.radius.confirm};
-  color: ${(props) => props.theme.selectionModal.color.confirm};
+  background-color: "gray";
+  border-color: "white";
+  border-size: "none";
+  border-style: "none";
+  border-radius: "8px";
+  color: "white";
 
   &:hover {
-    opacity: ${(props) => props.theme.selectionModal.hoverOpacity.confirm};
+    opacity: 0.7;
   }
 `;
 
 export const SelectionModalButtonCancel = styled(SelectionModalButton)`
-  background-color: ${((props) => props.theme.selectionModal.bckgColor.cancel,
-  props.theme)};
-  border-color: ${(props) => props.theme.selectionModal.border.color.cancel};
-  border-size: ${(props) => props.theme.selectionModal.border.size.cancel};
-  border-style: ${(props) => props.theme.selectionModal.border.style.cancel};
-  border-radius: ${(props) => props.theme.selectionModal.border.radius.cancel};
-  color: ${(props) => props.theme.selectionModal.color.cancel};
+  background-color: "#dc423f";
+  border-color: "white";
+  border-size: "none";
+  border-style: "none";
+  border-radius: "8px";
+  color: "white";
 
   &:hover {
-    opacity: ${(props) => props.theme.selectionModal.hoverOpacity.cancel};
+    opacity: 0.7;
   }
 `;

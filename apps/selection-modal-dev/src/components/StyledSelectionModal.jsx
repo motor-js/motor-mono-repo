@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef } from "react";
 
 import {
   SelectionModalWrapper,
@@ -70,7 +70,8 @@ function StyledSelectionModal({
             hoverOpacity={hoverOpacityCancel}
             onClick={cancelSelections}
           >
-            {buttonType || theme.selectionModal.buttonType === "icon" ? (
+            {/* {buttonType || theme.selectionModal.buttonType === "icon" ? ( */}
+            {buttonType ? (
               <Times className="cancelSelections" size={20} />
             ) : (
               <div className="cancelSelections">CANCEL</div>
@@ -88,11 +89,8 @@ function StyledSelectionModal({
             hoverOpacity={hoverOpacityConfirm}
             onClick={confirmSelections}
           >
-            {buttonType || theme.selectionModal.buttonType === "icon" ? (
-              <Check size={20} />
-            ) : (
-              <div>CONFIRM</div>
-            )}
+            {/* {buttonType || theme.selectionModal.buttonType === "icon" ? ( */}
+            {buttonType ? <Check size={20} /> : <div>CONFIRM</div>}
           </SelectionModalButtonConfirm>
         </SelectionModalWrapper>
       )}
