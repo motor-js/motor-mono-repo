@@ -23,12 +23,12 @@ export const SelectionModalButton = styled.button`
 `;
 
 export const SelectionModalButtonConfirm = styled(SelectionModalButton)`
-  background-color: "gray";
-  border-color: "white";
-  border-size: "none";
-  border-style: "none";
-  border-radius: "8px";
-  color: "white";
+  background-color: gray;
+  border-color: white;
+  border-size: none;
+  border-style: none;
+  border-radius: 8px;
+  color: white;
 
   &:hover {
     opacity: 0.7;
@@ -36,12 +36,12 @@ export const SelectionModalButtonConfirm = styled(SelectionModalButton)`
 `;
 
 export const SelectionModalButtonCancel = styled(SelectionModalButton)`
-  background-color: "#dc423f";
-  border-color: "white";
-  border-size: "none";
-  border-style: "none";
-  border-radius: "8px";
-  color: "white";
+  background-color: #dc423f;
+  border-color: white;
+  border-size: none;
+  border-style: none;
+  border-radius: 8px;
+  color: white;
 
   &:hover {
     opacity: 0.7;
