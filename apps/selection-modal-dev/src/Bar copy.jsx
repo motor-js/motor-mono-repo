@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Chart from "react-apexcharts";
 
 const BarExampleCompact = (props) => {
   //   const [dataPointIndex, setDataPointIndex] = useState([]);
-  //   const [dataPointIndex, setDataPointIndex] = useState([]);
-  const { data, setSelection } = props;
+  const [chartType, setChartType] = useState("bar");
 
+  const { data, setSelection } = props;
   const options = {
     states: {
       //   hover: {
@@ -29,10 +29,28 @@ const BarExampleCompact = (props) => {
           //   setDataPointIndex(0);
           //   console.log(config.config.title.text);
           //   config.config.title.text = "ff";
+          //          title: {
+          //   text: "Monthly Inflation in Argentina, 2002",
+          //   floating: true,
+          //   align: "center",
+          //   style: {
+          //     color: "#444",
+          //   },
+          // },
+          //   console.log(chartOptions);
+          setChartType(chartType === "bar" ? "area" : "bar");
+          setChartOptions({
+            chart: {
+              height: 450,
+              type: chartType === "bar" ? "area" : "bar",
+              //   type: "bar",
+            },
+          });
 
-          setSelection(
-            config.config.series[0].elemNumber[config.dataPointIndex]
-          );
+          console.log(chartType);
+          //   setSelection(
+          //     config.config.series[0].elemNumber[config.dataPointIndex]
+          //   );
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
         updated: function (chartContext, config) {},
@@ -121,6 +139,7 @@ const BarExampleCompact = (props) => {
       },
     },
   };
+  const [chartOptions, setChartOptions] = useState(options);
 
   const series = [
     {
@@ -136,11 +155,12 @@ const BarExampleCompact = (props) => {
         <div className="mixed-chart">
           {data && (
             <Chart
-              options={options}
+              options={chartOptions}
               series={series}
-              type="bar"
+              type={chartType}
               width="100%"
-              height={options.chart.height}
+              //   height={chartOptions.chart.height}
+              height="200px"
             />
           )}
         </div>
