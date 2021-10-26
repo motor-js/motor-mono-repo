@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Bar from "./Bar";
 import SelectionModal from "./components/SelectionModal";
+// import useOutsideClick from "./hooks/useOutsideClick";
 
 import { useData } from "@motor-js/engine";
 
 const BarWrapper = () => {
   const [currentSelectionIds, setCurrentSelectionIds] = useState([]);
+  const chartRef = useRef();
 
   const cancelCallback = () => {
     endSelections(false);
@@ -35,7 +37,7 @@ const BarWrapper = () => {
   };
 
   // const useOutsideClick =
-  //   (ref,
+  //   (chartRef,
   //   () => {
   //     if (
   //       event.target.classList.contains("cancelSelections") ||
@@ -47,6 +49,21 @@ const BarWrapper = () => {
   //       if (outsideClick && selections) confirmCallback();
   //     }
   //   });
+
+  // useOutsideClick(chartRef, () => {
+  //   if (
+  //     // eslint-disable-next-line  no-restricted-globals
+  //     event.target.classList.contains("cancelSelections") ||
+  //     // eslint-disable-next-line  no-restricted-globals
+  //     event.target.parentNode.classList.contains("cancelSelections")
+  //   )
+  //     return;
+  //   if (currentSelectionIds.length !== 0) {
+  //     // eslint-disable-next-line  no-restricted-globals
+  //     const outsideClick = !chartRef.current.contains(event.target);
+  //     if (outsideClick) confirmCallback();
+  //   }
+  // });
 
   const cols = [
     {
@@ -68,7 +85,7 @@ const BarWrapper = () => {
   return (
     <div className="app">
       <div className="row">
-        <div className="mixed-chart">
+        <div className="mixed-chart" ref={chartRef}>
           {data && <Bar data={data} setSelection={setSelection} />}
           <SelectionModal
             // isOpen={!isEmpty(currentSelectionIds)}

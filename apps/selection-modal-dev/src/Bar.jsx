@@ -3,18 +3,36 @@ import Chart from "react-apexcharts";
 
 const BarExampleCompact = (props) => {
   //   const [dataPointIndex, setDataPointIndex] = useState([]);
+  //   const [dataPointIndex, setDataPointIndex] = useState([]);
   const { data, setSelection } = props;
 
   const options = {
+    states: {
+      //   hover: {
+      //     filter: {
+      //       type: "lighten",
+      //       value: 0.15,
+      //     },
+      //   },
+      active: {
+        allowMultipleDataPointsSelection: true,
+        // filter: {
+        //   type: "none" /* none, lighten, darken */,
+        // },
+      },
+    },
     chart: {
       height: 450,
       type: "bar",
       events: {
         click: function (event, chartContext, config) {
           //   setDataPointIndex(0);
-          setSelection(
-            config.config.series[0].elemNumber[config.dataPointIndex]
-          );
+          console.log(config.config.title.text);
+          config.config.title.text = "ff";
+
+          //   setSelection(
+          //     config.config.series[0].elemNumber[config.dataPointIndex]
+          //   );
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
         updated: function (chartContext, config) {},
