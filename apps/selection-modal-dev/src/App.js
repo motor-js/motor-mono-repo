@@ -1,6 +1,9 @@
 import "./App.css";
 import { Card } from "semantic-ui-react";
 import Bar from "./Bar";
+import SelectionModal from "./components/SelectionModal";
+
+import isEmpty from "./utils/isEmpty";
 
 export default function App() {
   return (
@@ -10,6 +13,13 @@ export default function App() {
           <Card.Content style={{ margin: "20px" }}>
             <Bar />
             {/* <ButtonComponent /> */}
+            <SelectionModal
+              isOpen={!isEmpty(currentSelectionIds)}
+              cancelCallback={cancelCallback}
+              confirmCallback={confirmCallback}
+              offsetX={0}
+              // width={width}
+            />
           </Card.Content>
         </Card>
       </div>

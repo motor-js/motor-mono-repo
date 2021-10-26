@@ -24,13 +24,27 @@ const BarExampleCompact = () => {
 
   const options = {
     chart: {
-      height: 350,
+      height: 450,
       type: "bar",
       events: {
         click: function (event, chartContext, config) {
           console.log(config);
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
+
+        // dataPointSelection(event, chartContext, config) {
+        //   // gets the position of the marker in the series
+        //   const dp = config.dataPointIndex;
+        //   console.log(config);
+
+        //   // use the series position of the clicked marker to find the corresponding x axis data at that point in the series
+        //   let date = chartContext.data.twoDSeriesX[dp];
+
+        //   //   console.log("data", date);
+
+        //   // convert to date
+        //   //   date = moment(date).toDate()
+        // },
       },
     },
     plotOptions: {
@@ -119,7 +133,13 @@ const BarExampleCompact = () => {
       <div className="row">
         <div className="mixed-chart">
           {data && (
-            <Chart options={options} series={series} type="bar" width="100%" />
+            <Chart
+              options={options}
+              series={series}
+              type="bar"
+              width="100%"
+              height={options.chart.height}
+            />
           )}
         </div>
       </div>
