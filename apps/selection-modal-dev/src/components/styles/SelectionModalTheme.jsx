@@ -34,7 +34,7 @@ export const SelectionModalButton = styled.button`
 `;
 
 export const SelectionModalButtonConfirm = styled(SelectionModalButton)`
-  background-color: gray;
+  background-color: #009845;
   border-color: white;
   border-size: none;
   border-style: none;

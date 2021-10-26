@@ -27,20 +27,22 @@ const BarExampleCompact = (props) => {
       events: {
         click: function (event, chartContext, config) {
           //   setDataPointIndex(0);
-          //   console.log(config.config.title.text);
-          //   config.config.title.text = "ff";
 
-          setSelection(
-            config.config.series[0].elemNumber[config.dataPointIndex]
-          );
+          if (config.dataPointIndex !== -1) {
+            setSelection(
+              config.config.series[0].elemNumber[config.dataPointIndex]
+            );
+          }
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
-        updated: function (chartContext, config) {},
+        // updated: function (chartContext, config) {},
       },
     },
     plotOptions: {
       bar: {
         borderRadius: 10,
+        // horizontal: true,
+        distributed: true, // must have this for multicoloured
         dataLabels: {
           position: "top", // top, center, bottom
         },
@@ -55,6 +57,19 @@ const BarExampleCompact = (props) => {
         colors: ["#304758"],
       },
     },
+    colors: [
+      "#33b2df",
+      "#546E7A",
+      "#d4526e",
+      "#13d8aa",
+      "#A5978B",
+      "#2b908f",
+      "#f9a3a4",
+      "#90ee7e",
+      "#f48024",
+      "#69d2e7",
+    ],
+
     // colors: [
     //   function ({ value, seriesIndex, dataPointIndex, w }) {
     //     console.log("tt");
@@ -138,7 +153,7 @@ const BarExampleCompact = (props) => {
             <Chart
               options={options}
               series={series}
-              type="bar"
+              type={options.chart.type}
               width="100%"
               height={options.chart.height}
             />

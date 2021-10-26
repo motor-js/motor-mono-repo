@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Bar from "./Bar";
 import SelectionModal from "./components/SelectionModal";
-// import useOutsideClick from "./hooks/useOutsideClick";
+import useOutsideClick from "./hooks/useOutsideClick";
 
 import { useData } from "@motor-js/engine";
 
@@ -36,34 +36,20 @@ const BarWrapper = () => {
     select(0, array);
   };
 
-  // const useOutsideClick =
-  //   (chartRef,
-  //   () => {
-  //     if (
-  //       event.target.classList.contains("cancelSelections") ||
-  //       event.target.parentNode.classList.contains("cancelSelections")
-  //     )
-  //       return;
-  //     if (!isEmpty(currentSelectionIds)) {
-  //       const outsideClick = !ref.current.contains(event.target);
-  //       if (outsideClick && selections) confirmCallback();
-  //     }
-  //   });
-
-  // useOutsideClick(chartRef, () => {
-  //   if (
-  //     // eslint-disable-next-line  no-restricted-globals
-  //     event.target.classList.contains("cancelSelections") ||
-  //     // eslint-disable-next-line  no-restricted-globals
-  //     event.target.parentNode.classList.contains("cancelSelections")
-  //   )
-  //     return;
-  //   if (currentSelectionIds.length !== 0) {
-  //     // eslint-disable-next-line  no-restricted-globals
-  //     const outsideClick = !chartRef.current.contains(event.target);
-  //     if (outsideClick) confirmCallback();
-  //   }
-  // });
+  useOutsideClick(chartRef, () => {
+    if (
+      // eslint-disable-next-line  no-restricted-globals
+      event.target.classList.contains("cancelSelections") ||
+      // eslint-disable-next-line  no-restricted-globals
+      event.target.parentNode.classList.contains("cancelSelections")
+    )
+      return;
+    if (currentSelectionIds.length !== 0) {
+      // eslint-disable-next-line  no-restricted-globals
+      const outsideClick = !chartRef.current.contains(event.target);
+      if (outsideClick) confirmCallback();
+    }
+  });
 
   const cols = [
     {
@@ -86,16 +72,20 @@ const BarWrapper = () => {
     <div className="app">
       <div className="row">
         <div className="mixed-chart" ref={chartRef}>
-          {data && <Bar data={data} setSelection={setSelection} />}
-          <SelectionModal
-            // isOpen={!isEmpty(currentSelectionIds)}
-            isOpen={currentSelectionIds.length !== 0}
-            cancelCallback={cancelCallback}
-            confirmCallback={confirmCallback}
-            offsetX={0}
+          {data && (
+            <React.Fragment>
+              <Bar data={data} setSelection={setSelection} />
+              <SelectionModal
+                // isOpen={!isEmpty(currentSelectionIds)}
+                isOpen={currentSelectionIds.length !== 0}
+                cancelCallback={cancelCallback}
+                confirmCallback={confirmCallback}
+                offsetX={0}
 
-            // width={width}
-          />
+                // width={width}
+              />
+            </React.Fragment>
+          )}
         </div>
       </div>
     </div>
