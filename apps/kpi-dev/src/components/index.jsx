@@ -1,5 +1,5 @@
 export { ApexCharts } from "apexcharts";
-export { Anchor } from "./ui/anchor";
+// export { Anchor } from "./ui/anchor";
 // export { Avatar, AvatarInitial } from "./ui/avatar/avatar";
 
 export {
@@ -12,18 +12,17 @@ export {
 } from "./charts/apexchart";
 export {
   Card,
-  CardImage,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardSubtitle,
-  CardLink,
-  CardHeader,
-  CardFooter,
-  CardImageOverlay,
-  CardGroup,
-  CardDeck,
-  CardColumns,
-} from "./ui/card/card";
+  // CardImage,
+  CardBody, // CardTitle,
+} from // CardText,
+// CardSubtitle,
+// CardLink,
+// CardHeader,
+// CardFooter,
+// CardImageOverlay,
+// CardGroup,
+// CardDeck,
+// CardColumns,
+"./ui/card/card";
 
 // export { Container, Row, Col } from "./grid/grid";
