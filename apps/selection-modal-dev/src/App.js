@@ -1,6 +1,7 @@
 import "./App.css";
 import { Card } from "semantic-ui-react";
 import BarWrapper from "./BarWrapper";
+import ButtonComponent from "./Button";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
         <Card fluid>
           <Card.Content style={{ margin: "20px" }}>
             <BarWrapper />
+            <ButtonComponent />
           </Card.Content>
         </Card>
       </div>
