@@ -32,6 +32,7 @@ const BarExampleCompact = (props) => {
             setSelection(
               config.config.series[0].elemNumber[config.dataPointIndex]
             );
+            // event.path[0].style.fill = "red";
           }
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
