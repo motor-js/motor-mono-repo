@@ -1,19 +1,9 @@
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Preloader from "./components/preloader";
+import React from "react";
 
-const DashboardOne = lazy(() => import("./pages/dashboard-one"));
+import DashboardOne from "./pages/dashboard-one";
 
 const App = () => {
-  return (
-    <Router>
-      <Suspense fallback={<Preloader />}>
-        <Switch>
-          <Route exact path="/" component={DashboardOne} />
-        </Switch>
-      </Suspense>
-    </Router>
-  );
+  return <DashboardOne />;
 };
 
 export default App;
