@@ -1,4 +1,5 @@
-import { Col } from "../components";
+import { Col, Row } from "../components";
+import Content from "../layouts/content";
 import Conversion from "../components/kpi";
 import { useData } from "@motor-js/engine";
 
@@ -254,19 +255,21 @@ const RowOne = () => {
   ];
 
   return (
-    <>
-      {metrics &&
-        conversions.map((data) => (
-          <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
-            <Conversion
-              title={data.title}
-              rate={data.rate}
-              change={data.change}
-              chart={data.chart}
-            />
-          </Col>
-        ))}
-    </>
+    <Content>
+      <Row gutters={10}>
+        {metrics &&
+          conversions.map((data) => (
+            <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
+              <Conversion
+                title={data.title}
+                rate={data.rate}
+                change={data.change}
+                chart={data.chart}
+              />
+            </Col>
+          ))}
+      </Row>
+    </Content>
   );
 };
 

@@ -1,9 +1,9 @@
 import React from "react";
 
-import DashboardOne from "./pages/dashboard-one";
+import RowOne from "./containers";
 
 const App = () => {
-  return <DashboardOne />;
+  return <RowOne />;
 };
 
 export default App;
