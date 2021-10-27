@@ -70,7 +70,7 @@ const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
             offsetX={0}
           />
           {/* <ChartComponent dataSet={dataSet} setSelection={setSelection} /> */}
-          {renderChart(dataSet, setSelection, chartOptions)}
+          {renderChart({ dataSet, setSelection, chartOptions })}
         </React.Fragment>
       )}
     </div>

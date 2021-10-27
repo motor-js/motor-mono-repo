@@ -34,13 +34,7 @@ export default function App() {
             <SelectionChart
               qlikParams={qlikParams}
               chartOptions={chartOptions}
-              renderChart={(dataSet, setSelection, chartOptions) => (
-                <ChartComponent
-                  dataSet={dataSet}
-                  setSelection={setSelection}
-                  chartOptions={chartOptions}
-                />
-              )}
+              renderChart={(settings) => <ChartComponent settings={settings} />}
             />
 
             <ButtonComponent />
