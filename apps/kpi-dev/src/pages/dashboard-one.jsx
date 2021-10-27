@@ -1,7 +1,7 @@
 import React from "react";
 import { Row } from "../components";
 import Content from "../layouts/content";
-import RowOne from "../containers/dashboard-one/row-one";
+import RowOne from "../containers";
 
 const DashboardOne = () => {
   return (
