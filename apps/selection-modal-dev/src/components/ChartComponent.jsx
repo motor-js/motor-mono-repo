@@ -1,8 +1,8 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-const ChartComponent = (props) => {
-  const { dataSet, setSelection } = props;
+const ChartComponent = ({ dataSet, setSelection, chartOptions }) => {
+  // const { dataSet, setSelection } = props;
 
   const { data, valueKey, nameKey } = dataSet;
 

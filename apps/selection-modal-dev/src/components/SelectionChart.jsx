@@ -1,14 +1,12 @@
 import React, { useState, useRef } from "react";
-import ChartComponent from "./ChartComponent";
 import SelectionModal from "./SelectionModal";
 import useOutsideClick from "../hooks/useOutsideClick";
 
 import { useData } from "@motor-js/engine";
 
-const SelectionChart = (props) => {
+const SelectionChart = ({ qlikParams, renderChart }) => {
   const [currentSelectionIds, setCurrentSelectionIds] = useState([]);
   const chartRef = useRef();
-  const { qlikParams } = props;
 
   const cancelCallback = () => {
     endSelections(false);
@@ -71,7 +69,8 @@ const SelectionChart = (props) => {
                 confirmCallback={confirmCallback}
                 offsetX={0}
               />
-              <ChartComponent dataSet={dataSet} setSelection={setSelection} />
+              {/* <ChartComponent dataSet={dataSet} setSelection={setSelection} /> */}
+              {renderChart(dataSet, setSelection)}
             </React.Fragment>
           )}
         </div>
