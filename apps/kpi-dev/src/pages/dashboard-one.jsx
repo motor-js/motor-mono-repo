@@ -1,6 +1,6 @@
 import React from "react";
 
-import RowOne from "../containers/dashboard-one/row-one";
+import RowOne from "../containers";
 
 const DashboardOne = () => {
   return (

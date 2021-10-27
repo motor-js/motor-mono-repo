@@ -29,5 +29,3 @@ export {
 export { Spinner } from "./ui/spinner/spinner";
 
 export { Container, Row, Col } from "./grid/grid";
-
-export { default as Text } from "./ui/text";
