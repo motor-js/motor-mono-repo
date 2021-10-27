@@ -28,15 +28,6 @@ export {
 
 export { Spinner } from "./ui/spinner/spinner";
 
-export {
-  Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalClose,
-  ModalBody,
-  ModalFooter,
-} from "./ui/modal/modal";
 export { Container, Row, Col } from "./grid/grid";
-export { default as SectionTitle } from "./ui/section-title";
 
 export { default as Text } from "./ui/text";
