@@ -1,6 +1,6 @@
-import { Col, Row } from "../components";
+// import { Row } from "../components";
 import Content from "../layouts/content";
-import Conversion from "../components/kpi";
+import { KPI, Col, Row } from "../components/kpi";
 import { useData } from "@motor-js/engine";
 
 const RowOne = () => {
@@ -210,7 +210,7 @@ const RowOne = () => {
   const conversions = [
     {
       id: 1,
-      title: "Conversion Rate",
+      title: "KPI Rate",
       rate: Math.random().toFixed(2) + "%",
       change: {
         percentage: Math.random().toFixed(1) + "%",
@@ -260,7 +260,7 @@ const RowOne = () => {
         {metrics &&
           conversions.map((data) => (
             <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
-              <Conversion
+              <KPI
                 title={data.title}
                 rate={data.rate}
                 change={data.change}

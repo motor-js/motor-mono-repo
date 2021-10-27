@@ -1,4 +1,8 @@
-import { Card, CardBody, ApexAreaChart } from "..";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import ApexChart from "react-apexcharts";
+import classNames from "classnames";
+
+import { Card, CardBody } from "..";
 
 import {
   StyledCardTitle,
@@ -7,9 +11,69 @@ import {
   StyledCardText,
   StyledCardChangePercent,
   StyledChart,
+  StyledCol,
+  StyledRow,
 } from "./style";
 
-const Conversion = ({ title, rate, change, chart }) => {
+const ApexAreaChart = ({ options, series, width, height }) => {
+  return (
+    <ApexChart
+      type="area"
+      options={options}
+      series={series}
+      height={height}
+      width={width}
+    />
+  );
+};
+
+export const Col = ({ className, ...props }) => {
+  const { smOrder, mdOrder, lgOrder, xlOrder } = props;
+  const restProps = props;
+  let orderSm;
+  let orderMd;
+  let orderlg;
+  let orderXl;
+
+  if (smOrder === 0 || mdOrder === 0 || lgOrder === 0 || xlOrder === 0) {
+    if (smOrder === 0) {
+      orderSm = `order-sm-${smOrder}`;
+      delete restProps.smOrder;
+    }
+    if (mdOrder === 0) {
+      orderMd = `order-md-${mdOrder}`;
+      delete restProps.mdOrder;
+    }
+    if (lgOrder === 0) {
+      orderlg = `order-lg-${lgOrder}`;
+      delete restProps.lgOrder;
+    }
+    if (xlOrder === 0) {
+      orderXl = `order-xl-${xlOrder}`;
+      delete restProps.xlOrder;
+    }
+  }
+
+  return (
+    <StyledCol
+      className={classNames(className, orderSm, orderMd, orderlg, orderXl)}
+      {...restProps}
+    />
+  );
+};
+
+export const Row = ({ className, gutters, noGutter, ...props }) => {
+  return (
+    <StyledRow
+      $gutters={gutters}
+      $noGutter={noGutter}
+      className={className}
+      {...props}
+    />
+  );
+};
+
+export const KPI = ({ title, rate, change, chart }) => {
   return (
     <Card>
       <CardBody>
@@ -40,5 +104,3 @@ const Conversion = ({ title, rate, change, chart }) => {
     </Card>
   );
 };
-
-export default Conversion;
