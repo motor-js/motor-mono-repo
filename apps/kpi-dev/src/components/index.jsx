@@ -27,17 +27,9 @@ export {
   CardDeck,
   CardColumns,
 } from "./ui/card/card";
-export { ListGroup, ListGroupItem } from "./ui/list-group/list-group";
-export {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  DropdownDivider,
-} from "./ui/dropdown/dropdown";
+
 export { Spinner } from "./ui/spinner/spinner";
-export { Media, MediaBody, MediaLeft } from "./ui/media/media";
-export { Navbar } from "./ui/navbar/navbar";
+
 export {
   Modal,
   ModalHeader,
@@ -57,20 +49,6 @@ export {
   PieChart,
   DonutChart,
 } from "./charts/chart-js/chart-js";
-// export {
-//   Input,
-//   Checkbox,
-//   Radio,
-//   Select,
-//   Textarea,
-//   Label,
-//   FormGroup,
-// } from "./forms/form-elements";
-// export {
-//   InputGroup,
-//   InputGroupAddon,
-//   InputGroupText,
-// } from "./forms/input-group/input-group";
-export { Progress } from "./ui/progress/progress";
+
 export { Nav, NavLink, NavDivider } from "./ui/nav/nav";
 export { default as Text } from "./ui/text";
