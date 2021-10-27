@@ -9,7 +9,7 @@ export {
   ApexPieChart,
   ApexDonutChart,
   ApexRadialChart,
-} from "./charts/apexchart/apexchart";
+} from "./charts/apexchart";
 export {
   Card,
   CardImage,
