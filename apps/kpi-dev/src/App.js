@@ -1,6 +1,6 @@
 import React from "react";
 
-import RowOne from "./containers";
+import RowOne from "./components/containers";
 
 const App = () => {
   return <RowOne />;
