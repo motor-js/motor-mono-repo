@@ -1,4 +1,4 @@
-import styled, { themeGet, css, device } from "../../../styled";
+import styled, { themeGet, css, device } from "../../styled";
 
 export const StyledCardTitle = styled.h6`
   font-size: 11px;

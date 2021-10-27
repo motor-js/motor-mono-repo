@@ -1,5 +1,5 @@
 import { Col } from "../components";
-import Conversion from "../components/dashboard-one/conversion";
+import Conversion from "../components/kpi";
 import { useData } from "@motor-js/engine";
 
 const RowOne = () => {
