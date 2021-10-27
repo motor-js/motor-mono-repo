@@ -35,6 +35,9 @@ const BarExampleCompact = (props) => {
           }
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
+        dataPointMouseEnter: function (event) {
+          event.path[0].style.cursor = "pointer";
+        },
         // updated: function (chartContext, config) {},
       },
     },
