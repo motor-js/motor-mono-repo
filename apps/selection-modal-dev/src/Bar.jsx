@@ -33,6 +33,7 @@ const BarExampleCompact = (props) => {
               config.config.series[0].elemNumber[config.dataPointIndex]
             );
             // event.path[0].style.fill = "red";
+            // console.log(event.path[1].childNodes); // get all bars
           }
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },

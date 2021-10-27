@@ -7,7 +7,7 @@ import {
 } from "./styles/SelectionModalTheme";
 // import useOutsideClick from '../../Hooks/useOutsideClick'
 // import { ThemeContext } from "styled-components";
-import { Check, Times } from "@styled-icons/fa-solid";
+// import { Check, Times } from "@styled-icons/fa-solid";
 // import defaultTheme from "../../themes/defaultTheme";
 
 function StyledSelectionModal({
@@ -71,11 +71,13 @@ function StyledSelectionModal({
             onClick={cancelSelections}
           >
             {/* {buttonType || theme.selectionModal.buttonType === "icon" ? ( */}
-            {buttonType ? (
+            {/* {buttonType ? (
               <Times className="cancelSelections" size={20} />
             ) : (
               <div className="cancelSelections">CANCEL</div>
-            )}
+            )} */}
+
+            <div className="cancelSelections">CANCEL</div>
           </SelectionModalButtonCancel>
           <SelectionModalButtonConfirm
             type="button"
@@ -90,7 +92,9 @@ function StyledSelectionModal({
             onClick={confirmSelections}
           >
             {/* {buttonType || theme.selectionModal.buttonType === "icon" ? ( */}
-            {buttonType ? <Check size={20} /> : <div>CONFIRM</div>}
+            {/* {buttonType ? <Check size={20} /> : <div>CONFIRM</div>} */}
+
+            <div>CONFIRM</div>
           </SelectionModalButtonConfirm>
         </SelectionModalWrapper>
       )}
