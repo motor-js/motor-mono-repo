@@ -7,6 +7,7 @@ import {
   StyledCardHeading,
   StyledCardText,
   StyledCardSubtitle,
+  StyledCardLink,
   StyledCardHeader,
   StyledCardFooter,
   StyledCardImgOverlay,
@@ -115,6 +116,22 @@ export const CardSubtitle = ({ children, className, ...restProps }) => {
     >
       {children}
     </StyledCardSubtitle>
+  );
+};
+
+/**
+ * Card Link Component
+ */
+
+export const CardLink = ({ children, className, path, ...restProps }) => {
+  return (
+    <StyledCardLink
+      path={path}
+      className={classnames(className, "card-link")}
+      {...restProps}
+    >
+      {children}
+    </StyledCardLink>
   );
 };
 

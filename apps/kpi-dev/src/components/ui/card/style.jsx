@@ -10,7 +10,7 @@ import styled, {
   position as positionProps,
   border as borderStyles,
 } from "../../../styled";
-// import { Anchor } from "../anchor";
+import { Anchor } from "../anchor";
 
 const colorCSS = css`
   color: #ffffff;
@@ -226,6 +226,36 @@ export const StyledCardSubtitle = styled(
   margin-top: -0.375rem;
   margin-bottom: 0.5rem;
   color: ${themeGet("colors.gray600")};
+  ${space};
+  ${typography};
+  ${colorStyles};
+`;
+
+export const StyledCardLink = styled(
+  ({
+    ml,
+    mr,
+    mt,
+    mb,
+    pl,
+    pr,
+    pt,
+    pb,
+    fontSize,
+    fontFamily,
+    fontWeight,
+    textAlign,
+    lineHeight,
+    letterSpacing,
+    color,
+    bg,
+    ...props
+  }) => <Anchor {...props} />
+)`
+  color: ${themeGet("colors.primary")};
+  &:not(:first-of-type) {
+    margin-left: 1.25rem;
+  }
   ${space};
   ${typography};
   ${colorStyles};
