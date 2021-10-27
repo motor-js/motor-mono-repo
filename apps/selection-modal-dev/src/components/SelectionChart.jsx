@@ -4,7 +4,7 @@ import useOutsideClick from "../hooks/useOutsideClick";
 
 import { useData } from "@motor-js/engine";
 
-const SelectionChart = ({ qlikParams, renderChart }) => {
+const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
   const [currentSelectionIds, setCurrentSelectionIds] = useState([]);
   const chartRef = useRef();
 
@@ -58,24 +58,24 @@ const SelectionChart = ({ qlikParams, renderChart }) => {
   } = useData(qlikParams);
 
   return (
-    <div className="app">
-      <div className="row">
-        <div className="mixed-chart" ref={chartRef}>
-          {dataSet && (
-            <React.Fragment>
-              <SelectionModal
-                isOpen={currentSelectionIds.length !== 0}
-                cancelCallback={cancelCallback}
-                confirmCallback={confirmCallback}
-                offsetX={0}
-              />
-              {/* <ChartComponent dataSet={dataSet} setSelection={setSelection} /> */}
-              {renderChart(dataSet, setSelection)}
-            </React.Fragment>
-          )}
-        </div>
-      </div>
+    // <div className="app">
+    //   <div className="row">
+    <div ref={chartRef}>
+      {dataSet && (
+        <React.Fragment>
+          <SelectionModal
+            isOpen={currentSelectionIds.length !== 0}
+            cancelCallback={cancelCallback}
+            confirmCallback={confirmCallback}
+            offsetX={0}
+          />
+          {/* <ChartComponent dataSet={dataSet} setSelection={setSelection} /> */}
+          {renderChart(dataSet, setSelection, chartOptions)}
+        </React.Fragment>
+      )}
     </div>
+    //   </div>
+    // </div>
   );
 };
 

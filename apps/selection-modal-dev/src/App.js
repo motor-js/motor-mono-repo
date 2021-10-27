@@ -17,9 +17,13 @@ const cols = [
 
 const qlikParams = { cols };
 
-//<Counter renderCount={(count) => <span>The count is {count}!</span>} />
-
-//    <ChartComponent dataSet={dataSet} setSelection={setSelection} />
+const chartOptions = {
+  chart: {
+    type: "bar",
+    height: 450,
+    width: "100%",
+  },
+};
 
 export default function App() {
   return (
@@ -29,10 +33,16 @@ export default function App() {
           <Card.Content style={{ margin: "20px" }}>
             <SelectionChart
               qlikParams={qlikParams}
-              renderChart={(dataSet, setSelection) => (
-                <ChartComponent dataSet={dataSet} setSelection={setSelection} />
+              chartOptions={chartOptions}
+              renderChart={(dataSet, setSelection, chartOptions) => (
+                <ChartComponent
+                  dataSet={dataSet}
+                  setSelection={setSelection}
+                  chartOptions={chartOptions}
+                />
               )}
             />
+
             <ButtonComponent />
           </Card.Content>
         </Card>

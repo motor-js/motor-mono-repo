@@ -22,9 +22,13 @@ const ChartComponent = ({ dataSet, setSelection, chartOptions }) => {
       },
     },
     chart: {
-      height: 450,
-      width: "100%",
-      type: "bar",
+      // height: 450,
+      // width: "100%",
+      // type: "bar",
+      // type: "line",
+      height: chartOptions.chart.height,
+      width: chartOptions.chart.width,
+      type: chartOptions.chart.type,
       events: {
         click: function (event, chartContext, config) {
           //   setDataPointIndex(0);
@@ -139,21 +143,23 @@ const ChartComponent = ({ dataSet, setSelection, chartOptions }) => {
   ];
 
   return (
-    <div className="app">
-      <div className="row">
-        <div className="mixed-chart">
-          {data && (
-            <Chart
-              options={options}
-              series={series}
-              type={options.chart.type}
-              width={options.chart.width}
-              height={options.chart.height}
-            />
-          )}
-        </div>
-      </div>
-    </div>
+    // <div className="app">
+    //   <div className="row">
+    //     <div className="mixed-chart">
+    <React.Fragment>
+      {data && (
+        <Chart
+          options={options}
+          series={series}
+          type={options.chart.type}
+          width={options.chart.width}
+          height={options.chart.height}
+        />
+      )}
+    </React.Fragment>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 
