@@ -40,8 +40,8 @@ export {
 } from "./ui/modal/modal";
 export { Container, Row, Col } from "./grid/grid";
 export { default as SectionTitle } from "./ui/section-title";
-export { Table } from "./ui/table/table";
-export { VectorMap } from "./maps/vector-map/vector-map";
+// export { Table } from "./ui/table/table";
+// export { VectorMap } from "./maps/vector-map/vector-map";
 export {
   BarChart,
   HorizontalBarChart,
@@ -50,5 +50,5 @@ export {
   DonutChart,
 } from "./charts/chart-js/chart-js";
 
-export { Nav, NavLink, NavDivider } from "./ui/nav/nav";
+// export { Nav, NavLink, NavDivider } from "./ui/nav/nav";
 export { default as Text } from "./ui/text";
