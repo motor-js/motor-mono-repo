@@ -1,24 +1,23 @@
 import React, { useState, useRef } from "react";
-import Bar from "./Bar";
-import SelectionModal from "./components/SelectionModal";
-import useOutsideClick from "./hooks/useOutsideClick";
+import ChartComponent from "./ChartComponent";
+import SelectionModal from "./SelectionModal";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 import { useData } from "@motor-js/engine";
 
-const BarWrapper = () => {
+const SelectionChart = (props) => {
   const [currentSelectionIds, setCurrentSelectionIds] = useState([]);
   const chartRef = useRef();
+  const { qlikParams } = props;
 
   const cancelCallback = () => {
     endSelections(false);
     setCurrentSelectionIds([]);
-    // setShowBrush(false);
   };
 
   const confirmCallback = async () => {
     await endSelections(true);
     setCurrentSelectionIds([]);
-    // setShowBrush(false);
   };
 
   const setSelection = (id) => {
@@ -51,39 +50,28 @@ const BarWrapper = () => {
     }
   });
 
-  const cols = [
-    {
-      qField: "[Category]",
-      qLabel: "Category",
-    },
-    {
-      qField: "=sum(Quantity * Price)",
-      qLabel: "Revenue",
-    },
-  ];
-
-  const { dataSet, endSelections, select, beginSelections } = useData({
-    cols,
-  });
-
-  const { data } = dataSet;
+  const {
+    // metrics,
+    // title,
+    dataSet,
+    endSelections,
+    select,
+    beginSelections,
+  } = useData(qlikParams);
 
   return (
     <div className="app">
       <div className="row">
         <div className="mixed-chart" ref={chartRef}>
-          {data && (
+          {dataSet && (
             <React.Fragment>
-              <Bar data={data} setSelection={setSelection} />
               <SelectionModal
-                // isOpen={!isEmpty(currentSelectionIds)}
                 isOpen={currentSelectionIds.length !== 0}
                 cancelCallback={cancelCallback}
                 confirmCallback={confirmCallback}
                 offsetX={0}
-
-                // width={width}
               />
+              <ChartComponent dataSet={dataSet} setSelection={setSelection} />
             </React.Fragment>
           )}
         </div>
@@ -92,4 +80,4 @@ const BarWrapper = () => {
   );
 };
 
-export default BarWrapper;
+export default SelectionChart;

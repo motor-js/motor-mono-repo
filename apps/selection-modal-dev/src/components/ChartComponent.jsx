@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
-const BarExampleCompact = (props) => {
-  //   const [dataPointIndex, setDataPointIndex] = useState([]);
-  const [chartType, setChartType] = useState("bar");
+const ChartComponent = (props) => {
+  const { dataSet, setSelection } = props;
 
-  const { data, setSelection } = props;
+  const { data, valueKey, nameKey } = dataSet;
+
   const options = {
     states: {
       //   hover: {
@@ -23,42 +23,32 @@ const BarExampleCompact = (props) => {
     },
     chart: {
       height: 450,
+      width: "100%",
       type: "bar",
       events: {
         click: function (event, chartContext, config) {
           //   setDataPointIndex(0);
-          //   console.log(config.config.title.text);
-          //   config.config.title.text = "ff";
-          //          title: {
-          //   text: "Monthly Inflation in Argentina, 2002",
-          //   floating: true,
-          //   align: "center",
-          //   style: {
-          //     color: "#444",
-          //   },
-          // },
-          //   console.log(chartOptions);
-          setChartType(chartType === "bar" ? "area" : "bar");
-          setChartOptions({
-            chart: {
-              height: 450,
-              type: chartType === "bar" ? "area" : "bar",
-              //   type: "bar",
-            },
-          });
 
-          console.log(chartType);
-          //   setSelection(
-          //     config.config.series[0].elemNumber[config.dataPointIndex]
-          //   );
+          if (config.dataPointIndex !== -1) {
+            setSelection(
+              config.config.series[0].elemNumber[config.dataPointIndex]
+            );
+            // event.path[0].style.fill = "red";
+            // console.log(event.path[1].childNodes); // get all bars
+          }
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
         },
-        updated: function (chartContext, config) {},
+        dataPointMouseEnter: function (event) {
+          event.path[0].style.cursor = "pointer";
+        },
+        // updated: function (chartContext, config) {},
       },
     },
     plotOptions: {
       bar: {
         borderRadius: 10,
+        // horizontal: true,
+        distributed: true, // must have this for multicoloured
         dataLabels: {
           position: "top", // top, center, bottom
         },
@@ -73,21 +63,21 @@ const BarExampleCompact = (props) => {
         colors: ["#304758"],
       },
     },
-    // colors: [
-    //   function ({ value, seriesIndex, dataPointIndex, w }) {
-    //     console.log("tt");
-    //     if (dataPointIndex === 0) {
-    //       return "#7E36AF";
-    //     } else {
-    //       return "#D9534F";
-    //     }
-    //   },
-    // ],
+    colors: [
+      "#33b2df",
+      "#546E7A",
+      "#d4526e",
+      "#13d8aa",
+      "#A5978B",
+      "#2b908f",
+      "#f9a3a4",
+      "#90ee7e",
+      "#f48024",
+      "#69d2e7",
+    ],
 
     xaxis: {
-      categories: data
-        ? data.map((n) => (n && n["Category"]) || "untitled")
-        : [],
+      categories: data ? data.map((n) => (n && n[nameKey]) || "untitled") : [],
 
       position: "bottom",
       axisBorder: {
@@ -139,12 +129,11 @@ const BarExampleCompact = (props) => {
       },
     },
   };
-  const [chartOptions, setChartOptions] = useState(options);
 
   const series = [
     {
-      name: "Revenue",
-      data: data ? data.map((n) => n && parseInt(n["Revenue"])) : [],
+      name: valueKey,
+      data: data ? data.map((n) => n && parseInt(n[valueKey])) : [],
       elemNumber: data ? data.map((n) => n && parseInt(n["elemNumber"])) : [],
     },
   ];
@@ -155,12 +144,11 @@ const BarExampleCompact = (props) => {
         <div className="mixed-chart">
           {data && (
             <Chart
-              options={chartOptions}
+              options={options}
               series={series}
-              type={chartType}
-              width="100%"
-              //   height={chartOptions.chart.height}
-              height="200px"
+              type={options.chart.type}
+              width={options.chart.width}
+              height={options.chart.height}
             />
           )}
         </div>
@@ -169,4 +157,4 @@ const BarExampleCompact = (props) => {
   );
 };
 
-export default BarExampleCompact;
+export default ChartComponent;
