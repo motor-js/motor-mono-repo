@@ -1,7 +1,26 @@
-// import { Row } from "../components";
-import Content from "../content";
-import { KPI, Col, Row } from "../kpi";
 import { useData } from "@motor-js/engine";
+// import Content from "../content";
+import { KPI, Col, Row } from "../kpi";
+import { StyledContainer, StyledContent } from "./style";
+
+const Container = ({ className, ...props }) => {
+  return <StyledContainer className={className} {...props} />;
+};
+
+const Content = ({ children, className, fullHeight, align, ...restProps }) => {
+  return (
+    <StyledContent
+      $fullHeight={fullHeight}
+      $align={align}
+      className={className}
+      {...restProps}
+    >
+      <Container className="container" pl="0" pr="0">
+        {children}
+      </Container>
+    </StyledContent>
+  );
+};
 
 const RowOne = () => {
   const qMetrics = [

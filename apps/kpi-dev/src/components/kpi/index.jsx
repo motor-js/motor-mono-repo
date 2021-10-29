@@ -2,9 +2,9 @@
 import ApexChart from "react-apexcharts";
 import classNames from "classnames";
 
-import { Card, CardBody } from "..";
-
 import {
+  StyledCard,
+  StyledCardBody,
   StyledCardTitle,
   StyledCardBottom,
   StyledCardRate,
@@ -14,6 +14,37 @@ import {
   StyledCol,
   StyledRow,
 } from "./style";
+
+/**
+ * Card Component
+ */
+
+export const Card = ({ children, className, color, ...restProps }) => {
+  return (
+    <StyledCard
+      className={classNames(className, "card")}
+      {...restProps}
+      $color={color}
+    >
+      {children}
+    </StyledCard>
+  );
+};
+
+/**
+ * Card Body Component
+ */
+
+export const CardBody = ({ children, className, ...restProps }) => {
+  return (
+    <StyledCardBody
+      className={classNames(className, "card-body")}
+      {...restProps}
+    >
+      {children}
+    </StyledCardBody>
+  );
+};
 
 const ApexAreaChart = ({ options, series, width, height }) => {
   return (
