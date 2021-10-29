@@ -1,5 +1,5 @@
 // import { Row } from "../components";
-import Content from "../../layouts/content";
+import Content from "../content";
 import { KPI, Col, Row } from "../kpi";
 import { useData } from "@motor-js/engine";
 

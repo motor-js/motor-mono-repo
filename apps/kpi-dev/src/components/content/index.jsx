@@ -1,6 +1,9 @@
 import React from "react";
-import { Container } from "../../components";
-import { StyledContent } from "./style";
+import { StyledContainer, StyledContent } from "./style";
+
+const Container = ({ className, ...props }) => {
+  return <StyledContainer className={className} {...props} />;
+};
 
 const Content = ({ children, className, fullHeight, align, ...restProps }) => {
   return (

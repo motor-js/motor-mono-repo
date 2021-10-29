@@ -1,3 +1,5 @@
+import { Container } from "styled-bootstrap-grid";
+
 import styled, {
   device,
   space,
@@ -58,4 +60,12 @@ export const StyledContent = styled(
   }) => <div {...rest} />
 )`
   ${conentCSS}
+`;
+
+export const StyledContainer = styled(
+  ({ p, pl, pr, pt, pb, m, ml, mr, mt, mb, ...props }) => (
+    <Container {...props} />
+  )
+)`
+  ${space};
 `;

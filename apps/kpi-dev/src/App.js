@@ -1,9 +1,9 @@
 import React from "react";
 
-import RowOne from "./components/containers";
+import KpiContainer from "./components/kpiContainer";
 
 const App = () => {
-  return <RowOne />;
+  return <KpiContainer />;
 };
 
 export default App;
