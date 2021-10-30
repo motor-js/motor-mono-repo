@@ -29,7 +29,6 @@ const qMetrics = [
   },
   {
     qName: "uniquePurchase",
-    // qExpr: "num(Sum(today)/Sum(yesterday),'#,##0%')",
     qExpr: "num(Count( distinct Purchases),'#,##0')",
     qType: "qStringExpression", // qValueExpression if a pure number is to be returned
   },
@@ -47,17 +46,17 @@ const qMetrics = [
 
 const cols1 = [
   {
-    qField: "[categories]",
-    qLabel: "name",
+    qField: "[Period]",
+    qLabel: "Period",
   },
   {
-    qField: "=sum(Series1)",
-    qLabel: "Type",
+    qField: "=sum(Conversions)",
+    qLabel: "Conversions",
   },
 ];
 const cols2 = [
   {
-    qField: "[designation]",
+    qField: "[Period]",
     qLabel: "name",
   },
 
@@ -202,9 +201,9 @@ function Main(props) {
     qMetrics,
   });
 
-  const { data: data1, dataKeys: dataKeys1 } = dataSet1;
-  const { data: data2, dataKeys: dataKeys2 } = dataSet2;
-  const { data: data3, dataKeys: dataKeys3 } = dataSet3;
+  const { data: data1, dataKeys: dataKeys1, nameKey: nameKey1 } = dataSet1;
+  const { data: data2, dataKeys: dataKeys2, nameKey: nameKey2 } = dataSet2;
+  const { data: data3, dataKeys: dataKeys3, nameKey: nameKey3 } = dataSet3;
 
   const options1 = {
     type: "area",
@@ -287,6 +286,7 @@ function Main(props) {
                     options={options1}
                     dataKeys={dataKeys1}
                     data={data1}
+                    nameKey={nameKey1}
                   />
                 </div>
               </Paper>
@@ -298,6 +298,7 @@ function Main(props) {
                     options={options2}
                     dataKeys={dataKeys2}
                     data={data2}
+                    nameKey={nameKey2}
                   />
                 </div>
               </Paper>
@@ -309,6 +310,7 @@ function Main(props) {
                     options={options4}
                     dataKeys={dataKeys3}
                     data={data3}
+                    nameKey={nameKey3}
                   />
                 </div>
               </Paper>

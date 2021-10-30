@@ -8,8 +8,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import MenuIcon from "@material-ui/icons/Menu";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
+// import Autocomplete from "@material-ui/lab/Autocomplete";
+// import TextField from "@material-ui/core/TextField";
 
 import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
@@ -270,6 +270,7 @@ class Topbar extends Component {
           <Grid item xs={12} className={classes.drawGrid}>
             <Filter dimension={["[categories]"]} label="Categories" />
             <Filter dimension={["[designation]"]} label="Designation" />
+            <Filter dimension={["[agentName]"]} label="Agent Name" />
           </Grid>
         </Drawer>
       </React.Fragment>
