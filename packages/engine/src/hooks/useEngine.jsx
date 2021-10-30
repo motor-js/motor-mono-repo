@@ -106,6 +106,8 @@ function useEngine(config) {
       if (config) {
         const myConfig = config;
         const url = SenseUtilities.buildUrl(myConfig);
+
+        
         try {
           const session = enigma.create({
             schema,
