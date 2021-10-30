@@ -6,14 +6,13 @@ import KPI from "./components/kpi";
 const App = () => {
   const qMetrics = [
     {
-      qName: "TOTAL SALES",
-      qExpr: "num(Sum(today),'$#,##0')",
+      qName: "uniquePurchase",
+      qExpr: "num(Count( distinct Purchases),'#,##0')",
       qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
     {
-      qName: "uniquePurchase",
-      // qExpr: "num(Sum(today)/Sum(yesterday),'#,##0%')",
-      qExpr: "num(Count( distinct Purchases),'#,##0')",
+      qName: "TOTAL SALES",
+      qExpr: "num(Sum(today),'$#,##0')",
       qType: "qStringExpression", // qValueExpression if a pure number is to be returned
     },
     {
@@ -55,15 +54,13 @@ const App = () => {
     qMetrics,
   });
 
-  const { data } = dataSet;
+  const { data, nameKey, valueKey } = dataSet;
 
-  const labels = data ? data.map((n) => n["Period"]) : [];
+  const labels = data ? data.map((n) => n[nameKey]) : [];
 
   const chart = {
     options: {
       type: "area",
-      // height:
-      // width:
       chart: {
         id: "sparkline2",
         sparkline: {
@@ -93,14 +90,14 @@ const App = () => {
     },
     series: [
       {
-        name: "Purchases",
-        data: data ? data.map((n) => n["Purchases"]) : [],
+        name: valueKey,
+        data: data ? data.map((n) => n[valueKey]) : [],
       },
     ],
   };
 
   const title = "Unique Purchases";
-  const rate = metrics && metrics["uniquePurchase"];
+  const rate = metrics && Object.values(metrics)[0];
   const change = {
     percentage: Math.random().toFixed(1) + "%",
     growth: "down",
