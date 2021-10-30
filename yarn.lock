@@ -18150,6 +18150,11 @@ react-use-measure@^2.0.4:
   dependencies:
     debounce "^1.2.0"
 
+react-watermark-component@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-watermark-component/-/react-watermark-component-2.2.1.tgz#e9425d4e5dad32b15d9885c3cfd0d73d0bafeb8d"
+  integrity sha1-6UJdTl2tMrFdmIXDz9DXPQuv640=
+
 react-window-infinite-loader@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/react-window-infinite-loader/-/react-window-infinite-loader-1.0.7.tgz#958ef1a689d20dce122ef377583acd987760aee8"

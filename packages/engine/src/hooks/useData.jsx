@@ -229,7 +229,7 @@ const useData = (props) => {
         _qHyperCubeDef.qDimensions[0].qDef.qFieldDefs = [cols[0]];
       qProp.qInfo.qType = "HyperCube";
       qProp.qHyperCubeDef = _qHyperCubeDef;
-      
+
       return qProp;
     }
     const myqInterColumnSortOrder = qInterColumnSortOrder || [];
@@ -247,7 +247,9 @@ const useData = (props) => {
               col.qLibraryId &&
               col.qType &&
               col.qType === "dimension") ||
-            (typeof col === "object" && !col.qLibraryId && !col.qField.startsWith("="));
+            (typeof col === "object" &&
+              !col.qLibraryId &&
+              !col.qField.startsWith("="));
 
           if (isDimension && !qInterColumnSortOrderSet) {
             myqInterColumnSortOrder[i] = sortIndex;
@@ -313,7 +315,11 @@ const useData = (props) => {
               qShowTotalsAbove: true,
             };
           }
-          if (typeof col === "object" && col.qLibraryId && col.qType === "dimension") {
+          if (
+            typeof col === "object" &&
+            col.qLibraryId &&
+            col.qType === "dimension"
+          ) {
             const qAttributeExpressions = [];
             if (col.qAttributeExpressions) {
               for (const [id, qExpression] of Object.entries(
@@ -375,7 +381,7 @@ const useData = (props) => {
 
       qProp.qListObjects.push(listDef);
     }
-    
+
     const qMeasures =
       cols &&
       cols
@@ -446,7 +452,11 @@ const useData = (props) => {
             };
           }
 
-          if (typeof col === "object" && col.qLibraryId && col.qType === "measure") {
+          if (
+            typeof col === "object" &&
+            col.qLibraryId &&
+            col.qType === "measure"
+          ) {
             const qAttributeExpressions = [];
             if (col.qAttributeExpressions) {
               for (const [id, qExpression] of Object.entries(
@@ -851,7 +861,16 @@ const useData = (props) => {
     changePage,
     selections,
     select,
-    applyPatches
+    applyPatches,
+    motorDataProps: {
+      metrics,
+      qLayout,
+      title,
+      subTitle,
+      dataSet,
+      endSelections,
+      beginSelections,
+    },
   };
 };
 

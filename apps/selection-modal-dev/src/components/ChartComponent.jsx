@@ -2,8 +2,9 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const ChartComponent = ({ settings }) => {
-  const { dataSet, setSelection, chartOptions } = settings;
+  const { motorDataProps, setSelection, chartOptions } = settings;
 
+  const { dataSet } = motorDataProps;
   const { data, valueKey, nameKey } = dataSet;
 
   const options = {

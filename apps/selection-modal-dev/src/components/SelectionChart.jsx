@@ -48,18 +48,11 @@ const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
     }
   });
 
-  const {
-    // metrics,
-    // title,
-    dataSet,
-    endSelections,
-    select,
-    beginSelections,
-  } = useData(qlikParams);
+  const { motorDataProps } = useData(qlikParams);
+
+  const { dataSet, endSelections, select, beginSelections } = motorDataProps;
 
   return (
-    // <div className="app">
-    //   <div className="row">
     <div ref={chartRef}>
       {dataSet && (
         <React.Fragment>
@@ -69,13 +62,10 @@ const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
             confirmCallback={confirmCallback}
             offsetX={0}
           />
-          {/* <ChartComponent dataSet={dataSet} setSelection={setSelection} /> */}
-          {renderChart({ dataSet, setSelection, chartOptions })}
+          {renderChart({ motorDataProps, setSelection, chartOptions })}
         </React.Fragment>
       )}
     </div>
-    //   </div>
-    // </div>
   );
 };
 
