@@ -54,23 +54,16 @@ const cols1 = [
     qField: "=sum(Series1)",
     qLabel: "Type",
   },
-  // {
-  //   qField: "=sum(Series2)",
-  //   qLabel: "OtherType",
-  // },
 ];
 const cols2 = [
   {
-    qField: "[categories]",
+    qField: "[designation]",
     qLabel: "name",
   },
-  // {
-  //   qField: "=sum(Series1)",
-  //   qLabel: "Type",
-  // },
+
   {
     qField: "=sum(Series2)",
-    qLabel: "OtherType",
+    qLabel: "Monthly Sales",
   },
 ];
 const cols3 = [
