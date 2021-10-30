@@ -135,3 +135,5 @@ export const KPI = ({ title, rate, change, chart }) => {
     </Card>
   );
 };
+
+export default KPI;

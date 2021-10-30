@@ -274,21 +274,36 @@ const RowOne = () => {
   ];
 
   return (
-    <Content>
-      <Row gutters={10}>
-        {metrics &&
-          conversions.map((data) => (
-            <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
-              <KPI
-                title={data.title}
-                rate={data.rate}
-                change={data.change}
-                chart={data.chart}
-              />
-            </Col>
-          ))}
-      </Row>
-    </Content>
+    // <Content>
+    //   <Row gutters={10}>
+    //     {metrics &&
+    //       conversions.map((data) => (
+    //         <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
+    //           <KPI
+    //             title={data.title}
+    //             rate={data.rate}
+    //             change={data.change}
+    //             chart={data.chart}
+    //           />
+    //         </Col>
+    //       ))}
+    //   </Row>
+    // </Content>
+    <>
+      {/* <Row gutters={10} className="test"> */}
+      {metrics &&
+        conversions.map((data) => (
+          // <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data.id}>
+          <KPI
+            title={data.title}
+            rate={data.rate}
+            change={data.change}
+            chart={data.chart}
+          />
+          // </Col>
+        ))}
+      {/* </Row> */}
+    </>
   );
 };
 
