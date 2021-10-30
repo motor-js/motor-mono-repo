@@ -59,8 +59,11 @@ const App = () => {
 
   const labels = data ? data.map((n) => n["Period"]) : [];
 
-  const kpiChart = {
+  const chart = {
     options: {
+      type: "area",
+      // height:
+      // width:
       chart: {
         id: "sparkline2",
         sparkline: {
@@ -107,7 +110,7 @@ const App = () => {
   return (
     <>
       {metrics && (
-        <KPI title={title} rate={rate} change={change} chart={kpiChart} />
+        <KPI title={title} rate={rate} change={change} chart={chart} />
       )}
       ;
     </>

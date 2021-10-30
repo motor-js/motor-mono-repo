@@ -46,18 +46,6 @@ export const CardBody = ({ children, className, ...restProps }) => {
   );
 };
 
-const ApexAreaChart = ({ options, series, width, height }) => {
-  return (
-    <ApexChart
-      type="area"
-      options={options}
-      series={series}
-      height={height}
-      width={width}
-    />
-  );
-};
-
 export const Col = ({ className, ...props }) => {
   const { smOrder, mdOrder, lgOrder, xlOrder } = props;
   const restProps = props;
@@ -124,10 +112,12 @@ export const KPI = ({ title, rate, change, chart }) => {
         </StyledCardBottom>
         <StyledChart>
           {chart && (
-            <ApexAreaChart
+            <ApexChart
+              type={chart?.type}
               options={chart?.options}
               series={chart?.series}
-              height={70}
+              height={chart?.height || 70}
+              width={chart?.width}
             />
           )}
         </StyledChart>
