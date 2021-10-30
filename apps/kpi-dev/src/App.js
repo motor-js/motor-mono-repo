@@ -27,30 +27,20 @@ const App = () => {
     },
   ];
 
-  const { dataSet, metrics } = useData({
-    cols: [
-      {
-        qField: "Period",
-        qLabel: "Period",
-      },
+  const cols = [
+    {
+      qField: "Period",
+      qLabel: "Period",
+    },
 
-      {
-        qField: "=sum(Conversions)",
-        qLabel: "Conversions",
-      },
-      {
-        qField: "=sum(Purchases)",
-        qLabel: "Purchases",
-      },
-      {
-        qField: "=sum(Values)",
-        qLabel: "Values",
-      },
-      {
-        qField: "=sum(Quantities)",
-        qLabel: "Quantities",
-      },
-    ],
+    {
+      qField: "=sum(Conversions)",
+      qLabel: "Conversions",
+    },
+  ];
+
+  const { dataSet, metrics } = useData({
+    cols,
     qMetrics,
   });
 
