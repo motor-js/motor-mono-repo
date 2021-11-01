@@ -5,10 +5,11 @@ import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
 import { LicenseCheck } from "../License/LicenseCheck"
-import { ThemeProvider, theme } from "@motor-js/theme"
+import { ThemeProvider, defaultTheme } from "@motor-js/theme"
 
 function Motor({
   engine,
+  theme§  ,
   children,
   licenseKey,
   config,
@@ -37,6 +38,8 @@ function Motor({
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
   
+  const nextTheme = deepMerge(myTheme, theme)
+
   const options = {
     chunkWidth: 200,
     chunkHeight: 90,
@@ -48,7 +51,6 @@ function Motor({
     fillStyle: "#EA4345",
   };
 
-  console.log('RENDER')
   return (
     <EngineContext.Provider value={newEngine}>
       <ThemeProvider theme={theme}>

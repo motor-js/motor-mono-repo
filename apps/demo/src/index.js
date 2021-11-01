@@ -18,6 +18,13 @@ ReactDOM.render(
       qcs: true, // whether you are connecting to a Qlik Cloud site or not
     }}
     //licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ"
+    theme={{ 
+      sizes: {
+        body: {
+          small: "0.675rem"
+        }
+      }
+    }}
     >
   <NewApp />
   </Motor>,

@@ -153,7 +153,7 @@ const useTable = (props) => {
     },
     [changePage, pageSize]
   );
-  window.setPage = setPage;
+  if (typeof window !== "undefined") { window.setPage = setPage };
 
   // calculated number of pages
   const [pages, _setPages] = useState(0);

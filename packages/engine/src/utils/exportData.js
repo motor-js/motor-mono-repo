@@ -6,7 +6,7 @@ const exportData = (engine, config, id, filename) => {
   const server = _secure + host + _port + prefix;
   engine.getObject(id).then((model) => {
     model.exportData("CSV_C", "/qHyperCubeDef", filename, "P").then((url) => {
-      window.open(server + url.qUrl, "_blank");
+      if (typeof window !== "undefined") { window.open(server + url.qUrl, "_blank")};
     });
   });
 };

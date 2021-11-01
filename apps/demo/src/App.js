@@ -59,7 +59,6 @@ const columns = React.useMemo(() => cols, [])
     dimension,
     autoSortByState: true
   })
-  
 
   const handleColsChange = () => updateCols(cols1)
 
@@ -69,8 +68,7 @@ const columns = React.useMemo(() => cols, [])
       <Filter 
         listData={listData}
         motorListProps={motorListProps}
-        m={10}
-        
+        m={10}   
     /> 
     </div>
   );
