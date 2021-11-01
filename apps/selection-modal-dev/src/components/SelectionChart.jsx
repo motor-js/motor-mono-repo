@@ -8,8 +8,8 @@ const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
   const [currentSelectionIds, setCurrentSelectionIds] = useState([]);
   const chartRef = useRef();
 
-  const cancelCallback = () => {
-    endSelections(false);
+  const cancelCallback = async () => {
+    await endSelections(false);
     setCurrentSelectionIds([]);
   };
 
@@ -62,7 +62,12 @@ const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
             confirmCallback={confirmCallback}
             offsetX={0}
           />
-          {renderChart({ motorDataProps, setSelection, chartOptions })}
+          {renderChart({
+            motorDataProps,
+            setSelection,
+            setCurrentSelectionIds,
+            chartOptions,
+          })}
         </React.Fragment>
       )}
     </div>
