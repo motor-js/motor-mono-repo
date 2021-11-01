@@ -50,42 +50,25 @@ const columns = React.useMemo(() => cols, [])
   })
 
   const dimension = ['Link']
-  const pageHeight = 100
 
   const {    
     listData,
     motorListProps,
   } = useList({
     dimension,
-    qPage: {
-    qTop: 0,
-    qLeft: 0,
-    qWidth: 1,
-    qHeight: pageHeight,
-  },
-  autoSortByState: true
+    autoSortByState: true
 })
-  
-  console.log(listData)
 
   const handleColsChange = () => updateCols(cols1)
 
   return (
-    <div className="App" style={{ padding: "10px" }}>
+    <div className="App">
       <button onClick={incrementPage}>change page</button>
       <Filter 
         listData={listData}
-        colorTheme="pink"
         motorListProps={motorListProps}
-        pageHeight={pageHeight}
-        singleSelection={false}
-        selectionLabelLimit={5}
-        m={10}
-        size="medium"
-        placeholder="Select.."
-        onSelectionChange={() => {}}
-        unselectedFormatting="highlight"
-    /> 
+        p={20}
+      /> 
     </div>
   );
 }

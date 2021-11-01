@@ -11,7 +11,7 @@ export const StyledDropdownItem = styled.div`
   &:hover {
     background-color: ${props => transparentize(0.92,props.theme.colors[props.colorTheme][500])};
   }
-
+  cursor: pointer;
 `;
 
 export const StyledList = styled.div`

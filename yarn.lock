@@ -2892,6 +2892,33 @@
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
 
+"@motor-js/components@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@motor-js/components/-/components-0.0.1.tgz#5fc65ed767a8aee81fd3783f071f757cae1a33f5"
+  integrity sha512-M2MPew6Na+Fv+Oc1jX2nryEFE5F/NFvrHsPrS3Und2KoGihTAP2bER3P1XC93aheGhs5OLsbJmI5p8FR+9Pb9Q==
+  dependencies:
+    "@motor-js/engine" "^0.3.0"
+    polished "^4.1.3"
+    prop-types "^15.7.2"
+    react "^17.0.1"
+    react-dom "^17.0.1"
+    react-window "^1.8.6"
+    react-window-infinite-loader "^1.0.7"
+    styled-components "^5.3.3"
+
+"@motor-js/theme@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@motor-js/theme/-/theme-0.0.1.tgz#b5eebfc7c5d8285ae8cc7f5c5d30c2f5f650c468"
+  integrity sha512-JIoa/o8Xaav/PgQwPeNXVIZFcCGSF4ABQ5A56g13G2K23d8j5hTeZk4VgviLall/HYIs559UOSggY/AtfZ830w==
+  dependencies:
+    crypto-js "^3.3.0"
+    enigma.js "^2.6.3"
+    prop-types "^15.7.2"
+    react "^17.0.1"
+    react-dom "^17.0.1"
+    styled-components "^5.3.3"
+    styled-system "^5.1.5"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
