@@ -89,20 +89,16 @@ function App() {
   };
 
   const title = "Unique Purchases";
-  const rate = metrics && Object.values(metrics)[0];
+  const vakue = metrics && Object.values(metrics)[0];
   const change = {
     percentage: Math.random().toFixed(1) + "%",
     growth: "up",
     time: "than last week",
   };
   return (
-    <div className="App" style={{ padding: '10px'}}>
+    <div className="App" style={{ padding: "10px" }}>
       {metrics && (
-        <KPI 
-          title={title} 
-          rate={rate} 
-          change={change} 
-          chart={chart} />
+        <KPI title={title} vakue={vakue} change={change} chart={chart} />
       )}
     </div>
   );
