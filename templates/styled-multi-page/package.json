@@ -1,12 +1,12 @@
 {
   "name": "styled-multi-page",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "private": true,
   "dependencies": {
     "@motor-js/components": "^0.0.3",
-    "@motor-js/engine": "^0.3.20",
-    "@motor-js/nebula": "^0.2.23",
-    "@motor-js/theme": "^0.0.3",
+    "@motor-js/engine": "^0.3.21",
+    "@motor-js/nebula": "^0.2.24",
+    "@motor-js/theme": "^0.0.4",
     "@reduxjs/toolkit": "^1.6.0",
     "@south-paw/react-vector-maps": "^3.1.0",
     "@styled-system/theme-get": "^5.1.2",
