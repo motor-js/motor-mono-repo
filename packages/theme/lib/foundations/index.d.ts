@@ -182,9 +182,11 @@ declare const foundations: {
             xl: string;
         };
         body: {
+            xsmall: string;
             small: string;
             medium: string;
             large: string;
+            xlarge: string;
         };
         h1: string[];
         h2: string[];
