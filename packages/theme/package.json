@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/theme",
   "license": "https://www.motor.so/license",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -20,6 +20,5 @@
     "styled-components": "^5.3.3",
     "styled-system": "^5.1.5"
   },
-  "peerDependencies": {},
   "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd"
 }
