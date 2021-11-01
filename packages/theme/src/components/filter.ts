@@ -13,14 +13,17 @@ const filter = {
   size: {
       small: {
           fontSize: sizes.body.small,
+          tagSize:  sizes.body.xsmall,
           itemHeight: 28,
       },
       medium: {
           fontSize: sizes.body.medium,
+          tagSize:  sizes.body.small,
           itemHeight: 30,
       },
       large: {
            fontSize: sizes.body.large,
+           tagSize:  sizes.body.medium,
            itemHeight: 32,
       },
   }

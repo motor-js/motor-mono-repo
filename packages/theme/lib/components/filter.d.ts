@@ -6,14 +6,17 @@ declare const filter: {
     size: {
         small: {
             fontSize: string;
+            tagSize: string;
             itemHeight: number;
         };
         medium: {
             fontSize: string;
+            tagSize: string;
             itemHeight: number;
         };
         large: {
             fontSize: string;
+            tagSize: string;
             itemHeight: number;
         };
     };

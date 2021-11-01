@@ -57,7 +57,7 @@ const FilterInput = ({
       <SelectTag size={size} {...rest}>
         <SelectTagText {...rest}>{`${numberOfSelections}`+' of '+`${numberOfItems}`}</SelectTagText>
         <SelectButton {...rest} onClick={deselectAllCallback}>
-        <XIcon stroke="black" strokeWidth={1} height="12px" width="12px" />
+        <XIcon stroke="black" strokeWidth={1} height="14px" width="14px" />
         </SelectButton>
       </SelectTag>
       )
@@ -67,7 +67,7 @@ const FilterInput = ({
           <SelectTag {...rest} size={size} key={sel.key}>
             <SelectTagText {...rest}>{sel.text}</SelectTagText>
             <SelectButton {...rest} onClick={() => handleDeselectCallback(sel)}>
-              <XIcon stroke="black" strokeWidth={1} height="12px" width="12px" padding="10px" />
+              <XIcon stroke="black" strokeWidth={1} height="14px" width="14px" padding="10px" />
             </SelectButton>
           </SelectTag>
         ))

@@ -49,14 +49,12 @@ const columns = React.useMemo(() => cols, [])
     cols
   })
 
-
   const dimension = ['Link']
   const pageHeight = 100
 
   const {    
     listData,
     motorListProps,
-    clearSelections
   } = useList({
     dimension,
     qPage: {
@@ -87,7 +85,7 @@ const columns = React.useMemo(() => cols, [])
         placeholder="Select.."
         onSelectionChange={() => {}}
         unselectedFormatting="highlight"
-      />
+    /> 
     </div>
   );
 }

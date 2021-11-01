@@ -46,7 +46,7 @@ export const StyledFilterInput = styled.input`
   margin: 2px;
   outline: 0px !important;
   width: 100%;
- 
+  padding: 4px 0px;
 `
 
 export const FilterTagWrapper = styled.div` 
@@ -56,13 +56,14 @@ export const FilterTagWrapper = styled.div`
 export const SelectTag = styled.span`
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 0px 0px 0px 4px;
   margin: 2px;
   font-size: ${props => props.theme.filter.size[props.size].fontSize};
   border-radius:  ${props => props.theme.filter.borderRadius};
   background-color:  ${props => props.theme.colors.gray[200]};
   color: ${props => props.theme.colors.black};
   white-space: nowrap;
+  text-overflow: ellipsis;
 `
 
 export const StyledSingleSelect = styled.span`
@@ -93,9 +94,12 @@ export const SelectButton = styled.button`
 `
 
 export const SelectTagText = styled.span`
-  padding-right: 5px;
+  padding: 2px 8px 2px 2px;
   max-width: 100px;
   overflow: hidden;
+  font-size: 85%;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 `
 
 export const IconWrapper = styled.div`

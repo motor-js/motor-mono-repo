@@ -11,6 +11,7 @@ export const StyledDropdownItem = styled.div`
   &:hover {
     background-color: ${props => transparentize(0.92,props.theme.colors[props.colorTheme][500])};
   }
+
 `;
 
 export const StyledList = styled.div`
@@ -49,7 +50,7 @@ export const StyledCheckbox = styled.div`
   background: ${props => props.selected === 'S' ? props.theme.colors[props.colorTheme][500] : 'white'};
   border-radius: 4px;
   transition: all 150ms;
-  border: 1px solid ${props => props.selected === 'S' ? props.theme.colors.brand[500] : props.theme.filter.border};
+  border: 1px solid ${props => props.selected === 'S' ? props.theme.colors.brand[500] :  props.theme.colors.gray[300] };
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px ${props => props.theme.colors.brand[400]};
@@ -65,5 +66,7 @@ export const CheckboxContainer = styled.div`
 `
 
 export const StyledDropdownText = styled.span`
-
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
