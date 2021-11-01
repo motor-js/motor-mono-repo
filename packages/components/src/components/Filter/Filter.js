@@ -19,14 +19,14 @@ function Filter({ ...rest }) {
   );
 }
 
-Filter.PropTypes = {
+Filter.propTypes = {
   /** Dimension from Qlik Data Model to render in the Filter  */
-  litData: PropTypes.array.isRequired,
+  listData: PropTypes.array,
   /** color theme */
   colorTheme: PropTypes.oneOf(['brand','gray','red','orange','yellow','green',
   'teal','pink','blue','cyan', 'purple',]),
   /** whether the filter accepts just a single selection */
-  singleSelection: PropTypes.boolean,
+  singleSelection: PropTypes.bool,
   /** Page height from the hook  */
   pageHeight: PropTypes.number,
   /** number of selection items displayed in the filter until they are grouped */
@@ -34,7 +34,9 @@ Filter.PropTypes = {
   /** size of the filter */
   size: PropTypes.oneOf(['small','medium','large']),
   /** Input placeholder text */
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  /** on selections change */
+  onSelectionChange: PropTypes.func
 };
 
 Filter.defaultProps = {
@@ -43,7 +45,8 @@ Filter.defaultProps = {
   pageHeight: 50,
   selectionLabelLimit: 5,
   size: 'medium',
-  placeholder: 'Select..'
+  placeholder: 'Select..',
+  onSelectionChange: () => {}
 };
 
 export default Filter;

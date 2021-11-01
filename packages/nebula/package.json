@@ -18,7 +18,9 @@
     "watch": "microbundle watch --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx"
   },
   "dependencies": {
+    "@motor-js/components": "^0.0.3",
     "@motor-js/engine": "^0.3.21",
+    "@motor-js/theme": "^0.0.4",
     "@nebula.js/sn-action-button": "^1.12.0",
     "@nebula.js/sn-bar-chart": "^0.8.13",
     "@nebula.js/sn-bullet-chart": "^0.6.21",

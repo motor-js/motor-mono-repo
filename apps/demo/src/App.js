@@ -50,6 +50,7 @@ const columns = React.useMemo(() => cols, [])
   })
 
   const dimension = ['Link']
+  //const pageHeight = 100
 
   const {    
     listData,
@@ -57,18 +58,20 @@ const columns = React.useMemo(() => cols, [])
   } = useList({
     dimension,
     autoSortByState: true
-})
+  })
+  
 
   const handleColsChange = () => updateCols(cols1)
 
   return (
-    <div className="App">
+    <div className="App" style={{ padding: "10px" }}>
       <button onClick={incrementPage}>change page</button>
       <Filter 
         listData={listData}
         motorListProps={motorListProps}
-        p={20}
-      /> 
+        m={10}
+        
+    /> 
     </div>
   );
 }
