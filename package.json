@@ -8,7 +8,6 @@
     "packages/*",
     "apps/*",
     "templates/*",
-    "websites/*"
   ],
   "devDependencies": {
     "lerna": "^3.22.1",
