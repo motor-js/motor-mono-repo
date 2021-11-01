@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import ApexChart from "./ApexChart";
+import ApexChartWrapper from "./ApexChartWrapper";
 import SparkLine from "./SparkLine";
 import { useData } from "@motor-js/engine";
 
@@ -195,11 +196,13 @@ function Main(props) {
     cols: cols2,
     qMetrics,
   });
-  const { dataSet: dataSet3 } = useData({
-    qSortByAscii: 0,
-    cols: cols3,
-    qMetrics,
-  });
+  const { dataSet: dataSet3, endSelections, select, beginSelections } = useData(
+    {
+      qSortByAscii: 0,
+      cols: cols3,
+      qMetrics,
+    }
+  );
 
   const { data: data1, dataKeys: dataKeys1, nameKey: nameKey1 } = dataSet1;
   const { data: data2, dataKeys: dataKeys2, nameKey: nameKey2 } = dataSet2;
@@ -368,10 +371,13 @@ function Main(props) {
                       </div>
                     </div>
                     <div>
-                      <ApexChart
+                      <ApexChartWrapper
                         options={options3}
                         dataKeys={dataKeys3}
                         data={data3}
+                        endSelections={endSelections}
+                        select={select}
+                        beginSelections={beginSelections}
                       />
                     </div>
                   </div>

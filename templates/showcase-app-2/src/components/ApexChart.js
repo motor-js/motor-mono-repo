@@ -1,21 +1,92 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Chart from "react-apexcharts";
+import ApexCharts from "apexcharts";
 import { withTheme } from "@material-ui/styles";
 
-function ApexChart(props) {
-  const { theme, dataKeys, data, options } = props;
+function ApexChart({
+  theme,
+  dataKeys,
+  data,
+  setSelection,
+  currentSelectionIds,
+  options,
+}) {
+  useEffect(() => {
+    ApexCharts.exec(
+      "mychart",
+      "updateOptions",
+      {
+        fill: {
+          colors: theme.palette.chart,
+        },
+      },
+      false,
+      true
+    );
+  }, [currentSelectionIds, theme.palette.chart]);
 
   const series = data
     ? dataKeys.map((n, i) => ({
         name: n,
         data: data.map((d) => d && parseInt(d[n])),
+        elemNumber: data ? data.map((n) => n && parseInt(n["elemNumber"])) : [],
       }))
     : [];
 
   const chartOptions = {
+    states: {
+      active: {
+        allowMultipleDataPointsSelection: false,
+        filter: {
+          type: "none" /* none, lighten, darken */,
+        },
+      },
+    },
     chart: {
+      id: "mychart",
       height: 350,
       type: options.type,
+      events: {
+        click: function (event, chartContext, config) {
+          if (config.dataPointIndex !== -1 && setSelection) {
+            setSelection(
+              config.config.series[0].elemNumber[config.dataPointIndex]
+            );
+            console.log(currentSelectionIds);
+          }
+
+          if (currentSelectionIds.length !== 0)
+            ApexCharts.exec(
+              "mychart",
+              "updateOptions",
+              {
+                fill: {
+                  colors: [
+                    function ({ value, seriesIndex, dataPointIndex, w }) {
+                      if (
+                        currentSelectionIds.indexOf(
+                          w.config.series[seriesIndex].elemNumber[
+                            dataPointIndex
+                          ]
+                        ) === -1
+                      ) {
+                        return "rgba(255, 0, 0, 0.2)";
+                      } else {
+                        return "#C13D40";
+                      }
+                    },
+                  ],
+                },
+              },
+              false,
+              true
+            );
+          // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+        },
+        dataPointMouseEnter: function (event) {
+          event.path[0].style.cursor = "pointer";
+        },
+      },
     },
     plotOptions: {
       bar: {
@@ -97,23 +168,13 @@ function ApexChart(props) {
     // },
   };
 
-  // const series = [
-  //   {
-  //     name: "Type",
-  //     data: data ? data.map((n) => n && parseInt(n["Type"])) : [],
-  //   },
-  //   {
-  //     name: "OtherType",
-  //     data: data ? data.map((n) => n && parseInt(n["OtherType"])) : [],
-  //   },
-  // ];
-
   return (
     <div className="app">
       <div className="row">
         <div className="mixed-chart">
           {data && (
             <Chart
+              // ref={myContainer}
               options={chartOptions}
               series={series}
               type={chartOptions.chart.type}

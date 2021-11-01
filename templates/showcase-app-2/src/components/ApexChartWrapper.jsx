@@ -1,21 +1,30 @@
 import React, { useState, useRef } from "react";
+import ApexChart from "./ApexChart";
 import SelectionModal from "./SelectionModal";
 import useOutsideClick from "../hooks/useOutsideClick";
 
-import { useData } from "@motor-js/engine";
-
-const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
+const ApexChartWrapper = ({
+  options,
+  dataKeys,
+  data,
+  endSelections,
+  select,
+  beginSelections,
+}) => {
   const [currentSelectionIds, setCurrentSelectionIds] = useState([]);
   const chartRef = useRef();
 
   const cancelCallback = async () => {
     await endSelections(false);
     setCurrentSelectionIds([]);
+
+    // setShowBrush(false);
   };
 
   const confirmCallback = async () => {
     await endSelections(true);
     setCurrentSelectionIds([]);
+    // setShowBrush(false);
   };
 
   const setSelection = (id) => {
@@ -48,30 +57,32 @@ const SelectionChart = ({ qlikParams, renderChart, chartOptions }) => {
     }
   });
 
-  const { motorDataProps } = useData(qlikParams);
-
-  const { dataSet, endSelections, select, beginSelections } = motorDataProps;
-
   return (
-    <div ref={chartRef}>
-      {dataSet && (
-        <React.Fragment>
-          <SelectionModal
-            isOpen={currentSelectionIds.length !== 0}
-            cancelCallback={cancelCallback}
-            confirmCallback={confirmCallback}
-            offsetX={0}
-          />
-          {renderChart({
-            motorDataProps,
-            setSelection,
-            setCurrentSelectionIds,
-            chartOptions,
-          })}
-        </React.Fragment>
-      )}
+    <div className="app">
+      <div className="row">
+        <div className="mixed-chart" ref={chartRef}>
+          {data && (
+            <React.Fragment>
+              {/* <ApexChart data={data} setSelection={setSelection} /> */}
+              <ApexChart
+                data={data}
+                setSelection={setSelection}
+                currentSelectionIds={currentSelectionIds}
+                options={options}
+                dataKeys={dataKeys}
+              />
+              <SelectionModal
+                isOpen={currentSelectionIds.length !== 0}
+                cancelCallback={cancelCallback}
+                confirmCallback={confirmCallback}
+                offsetX={0}
+              />
+            </React.Fragment>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default SelectionChart;
+export default ApexChartWrapper;
