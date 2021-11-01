@@ -1,14 +1,16 @@
 import { Col, Row } from "styled-bootstrap-grid";
-import styled, {
-  space,
-  themeGet,
-  layout,
-  css,
-  device,
-  border,
-  typography,
-  position as positionProps,
-} from "../../styled";
+
+import styled, { css } from "styled-components";
+
+const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
+
+export const device = {
+  small: `@media screen and (min-width: ${breakpoints[0]})`,
+  medium: `@media screen and (min-width: ${breakpoints[1]})`,
+  large: `@media screen and (min-width: ${breakpoints[2]})`,
+  xlarge: `@media screen and (min-width: ${breakpoints[3]})`,
+  xxlarge: `@media screen and (min-width: ${breakpoints[4]})`,
+};
 
 const colorCSS = css`
   color: #ffffff;
@@ -48,46 +50,44 @@ export const StyledCard = styled(
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid ${themeGet("colors.border")};
-  border-radius: ${themeGet("radii.rounded")};
+  border: 1px solid #485e9029;
+  border-radius: 4px;
   ${(props) =>
     props.$color === "primary" &&
     css`
-      background-color: ${themeGet("colors.primary")};
+      background-color: #ff7272;
       ${colorCSS};
     `}
   ${(props) =>
     props.$color === "secondary" &&
     css`
-      background-color: ${themeGet("colors.secondary")};
+      background-color: #5f6d88;
       ${colorCSS};
     `}
     ${(props) =>
     props.$color === "success" &&
     css`
-      background-color: ${themeGet("colors.success")};
+      background-color: #10b759;
       ${colorCSS};
     `}
     ${(props) =>
     props.$color === "warning" &&
     css`
-      background-color: ${themeGet("colors.warning")};
+      background-color: #ffc107;
       ${colorCSS};
     `}
     ${(props) =>
     props.$color === "danger" &&
     css`
-      background-color: ${themeGet("colors.danger")};
+      background-color: #dc3545;
       ${colorCSS};
     `}
     ${(props) =>
     props.$color === "info" &&
     css`
-      background-color: ${themeGet("colors.info")};
+      background-color: #00b8d4;
       ${colorCSS};
     `}
-    ${layout};
-  ${space};
 `;
 
 export const StyledCardBody = styled(
@@ -114,9 +114,6 @@ export const StyledCardBody = styled(
   ${device.small} {
     padding: 20px;
   }
-  ${space};
-  ${positionProps};
-  ${typography};
 `;
 
 export const StyledCardTitle = styled.h6`
@@ -124,7 +121,7 @@ export const StyledCardTitle = styled.h6`
   letter-spacing: 0.5px;
   text-transform: uppercase;
   font-weight: 600;
-  color: ${themeGet("colors.text2")};
+  color: #1b2e4b;
   margin-bottom: 8px;
 `;
 
@@ -143,13 +140,13 @@ export const StyledCardRate = styled.h3`
   line-height: 1.1;
   margin-right: 5px;
   margin-bottom: 0px;
-  font-family: ${themeGet("fonts.rubik")};
+  font-family: Rubik sans-serif;
   font-weight: 400;
 `;
 
 export const StyledCardText = styled.p`
   margin-bottom: 0px;
-  color: ${themeGet("colors.text3")};
+  color: #8392a5;
   font-size: 11px;
 `;
 
@@ -158,13 +155,13 @@ export const StyledCardChangePercent = styled.span`
   ${({ $growth }) =>
     $growth === "up" &&
     css`
-      color: ${themeGet("colors.success")};
+      color: #10b759;
     `}
 
   ${({ $growth }) =>
     $growth === "down" &&
     css`
-      color: ${themeGet("colors.danger")};
+      color: #dc3545;
     `}
 `;
 
@@ -205,15 +202,11 @@ export const StyledCol = styled(
       order: 0;
     }
   }
-  ${space};
-  ${border};
-  ${typography};
 `;
 
 export const StyledRow = styled(
   ({ p, pl, pr, pt, pb, m, ml, mr, mt, mb, ...props }) => <Row {...props} />
 )`
-  ${space};
   ${({ $gutters }) =>
     !!$gutters &&
     css`
