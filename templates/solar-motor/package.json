@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@motor-js/components": "^0.0.1",
-    "@motor-js/core": "^0.1.8",
     "@motor-js/engine": "^0.3.18",
     "@motor-js/theme": "^0.0.1",
     "@styled-system/theme-get": "^5.1.2",
