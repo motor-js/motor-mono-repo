@@ -161,7 +161,8 @@ class Topbar extends Component {
       <React.Fragment>
         <AppBar position="absolute" color="default" className={classes.appBar}>
           <Toolbar>
-            <Grid container spacing={10} alignItems="baseline">
+            {/* <Grid container spacing={10} alignItems="baseline"> */}
+            <Grid container alignItems="baseline">
               <Grid item xs={12} className={classes.flex}>
                 <div className={classes.inline}>
                   <Typography variant="h6" color="inherit" noWrap>
