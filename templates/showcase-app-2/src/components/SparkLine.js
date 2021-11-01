@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import { withTheme } from "@material-ui/styles";
 
 function SimpleBarChart(props) {
-  const { theme, dataKeys, data, options } = props;
+  const { theme, dataKeys, nameKey, data, options } = props;
 
   const series = data
     ? dataKeys.map((n, i) => ({
@@ -30,7 +30,7 @@ function SimpleBarChart(props) {
       type: "category",
       labels: { show: false },
     },
-    labels: data ? data.map((n) => (n && n["name"]) || "untitled") : [],
+    labels: data ? data.map((n) => (n && n[nameKey]) || "untitled") : [],
     // yaxis: {
     //   min: 0,
     // },
@@ -67,7 +67,6 @@ function SimpleBarChart(props) {
     <div className="app">
       <div className="row">
         <div className="mixed-chart">
-          {/* {data && ( */}
           <Chart
             options={kpiOptions}
             series={series}
@@ -75,7 +74,6 @@ function SimpleBarChart(props) {
             width="100%"
             height={kpiOptions.chart.height}
           />
-          {/* )} */}
         </div>
       </div>
     </div>

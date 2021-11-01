@@ -8,8 +8,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import MenuIcon from "@material-ui/icons/Menu";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
+// import Autocomplete from "@material-ui/lab/Autocomplete";
+// import TextField from "@material-ui/core/TextField";
 
 import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
@@ -21,10 +21,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { Link as MaterialLink } from "@material-ui/core";
 import Menu from "./Menu";
-import Filter from "./Filter"
+import Filter from "./Filter";
 
 const logo = require("../images/motor-red.png");
-
 
 const styles = (theme) => ({
   appBar: {
@@ -60,7 +59,10 @@ const styles = (theme) => ({
   },
   drawGrid: {
     display: "flex",
-    margin: "10px",
+    // margin: "10px",
+    marginBottom: "20px",
+    justifyContent: "space-evenly",
+    // alignItems: "center",
   },
   link: {
     textDecoration: "none",
@@ -264,12 +266,11 @@ class Topbar extends Component {
           //   paper: classes.drawerPaper,
           // }}
         >
-          <div className={classes.drawerHeader}></div>
+          <div className={classes.drawerHeader} />
           <Grid item xs={12} className={classes.drawGrid}>
-              <Filter 
-                dimension={['[categories]']}  
-                label='Categories'
-              />
+            <Filter dimension={["[categories]"]} label="Categories" />
+            <Filter dimension={["[designation]"]} label="Designation" />
+            <Filter dimension={["[agentName]"]} label="Agent Name" />
           </Grid>
         </Drawer>
       </React.Fragment>

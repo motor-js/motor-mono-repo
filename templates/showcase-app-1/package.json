@@ -9,6 +9,7 @@
     "@material-ui/lab": "^4.0.0-alpha.16",
     "@material-ui/styles": "^4.0.0",
     "@motor-js/components": "^0.0.1",
+    "@motor-js/core": "^0.1.8",
     "@motor-js/engine": "^0.3.0",
     "@motor-js/theme": "^0.0.1",
     "gh-pages": "^2.0.1",
