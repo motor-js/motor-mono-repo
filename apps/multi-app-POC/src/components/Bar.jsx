@@ -1,6 +1,6 @@
 import React, { useRef, useLayoutEffect, useEffect, useContext } from "react";
 
-import { useData, useButton } from "@motor-js/engine";
+import { useData, useButton, useSelections } from "@motor-js/engine";
 import { Context } from "../Store";
 
 // Configure any reguired theme
@@ -13,14 +13,7 @@ am4core.useTheme(am4themes_animated);
 const BarExampleCompact = ({ id }) => {
   const [state, dispatch] = useContext(Context);
   const { selectValues } = useButton();
-  // console.log(1, state.primaryAppSelections && state.primaryAppSelections[0]);
 
-  // selectValues(["Fitness"], "Category");
-  // if (state.primaryAppSelections && state.primaryAppSelections.length !== 0) {
-  //   // if (state.primaryAppSelections.length === 0) return;
-  //   console.log(state.primaryAppSelections[0]);
-  //   selectValues([state.primaryAppSelections[0].qSelected], "Category");
-  // }
   const colors = [
     "#B03060",
     "#FE9A76",
@@ -46,9 +39,6 @@ const BarExampleCompact = ({ id }) => {
     {
       qField: "=sum(Quantity * Price)",
       qLabel: "Revenue",
-      // useFormatting: true,
-      // qNumType: "M",
-      // qNumFmt: "£#,##0",
     },
   ];
 
@@ -117,6 +107,7 @@ const BarExampleCompact = ({ id }) => {
       // if (state.primaryAppSelections.length === 0) return;
       console.log(state.primaryAppSelections[0]);
       selectValues([state.primaryAppSelections[0].qSelected], "Category");
+      dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: null });
     }
     if (chart.current) {
       chart.current.data = data;
