@@ -106,7 +106,10 @@ const BarExampleCompact = ({ id }) => {
     if (state.primaryAppSelections && state.primaryAppSelections.length !== 0) {
       // if (state.primaryAppSelections.length === 0) return;
       console.log(state.primaryAppSelections[0]);
-      selectValues([state.primaryAppSelections[0].qSelected], "Category");
+      selectValues(
+        [state.primaryAppSelections[0].qSelected],
+        state.primaryAppSelections[0].qField
+      );
       dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: null });
     }
     if (chart.current) {
