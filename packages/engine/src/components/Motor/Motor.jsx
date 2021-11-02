@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactWaterMark from "../Watermark"
 import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
@@ -9,7 +9,7 @@ import { ThemeProvider, defaultTheme } from "@motor-js/theme"
 
 function Motor({
   engine,
-  theme§  ,
+  theme,
   children,
   licenseKey,
   config,
@@ -38,7 +38,7 @@ function Motor({
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
   
-  const nextTheme = deepMerge(myTheme, theme)
+  const nextTheme = deepMerge(defaultTheme, theme)
 
   const options = {
     chunkWidth: 200,
@@ -53,7 +53,7 @@ function Motor({
 
   return (
     <EngineContext.Provider value={newEngine}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={nextTheme}>
         <Login
           config={myConfig}
           logo={logo}

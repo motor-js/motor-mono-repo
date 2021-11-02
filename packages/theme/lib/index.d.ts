@@ -1,5 +1,5 @@
 import styled, { ThemeProvider, ThemeContext } from "styled-components";
-import theme from "./theme";
+import defaultTheme from "./theme";
 export declare const device: {
     small: string;
     medium: string;
@@ -7,6 +7,6 @@ export declare const device: {
     xlarge: string;
     xxlarge: string;
 };
-export { ThemeProvider, ThemeContext, theme, };
+export { ThemeProvider, ThemeContext, defaultTheme, };
 export * from "styled-system";
 export default styled;

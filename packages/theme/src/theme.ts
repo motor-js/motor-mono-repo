@@ -1,11 +1,11 @@
 import components from "./components"
 import foundations from "./foundations"
 
-const theme = {
+const defaultTheme = {
     ...components,
     ...foundations,
 } 
 
-export type Theme = typeof theme
+export type Theme = typeof defaultTheme
 
-export default theme
+export default defaultTheme

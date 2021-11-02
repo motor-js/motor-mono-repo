@@ -1,4 +1,4 @@
-declare const theme: {
+declare const defaultTheme: {
     borders: {
         none: number;
         "1px": string;
@@ -326,5 +326,5 @@ declare const theme: {
         };
     };
 };
-export declare type Theme = typeof theme;
-export default theme;
+export declare type Theme = typeof defaultTheme;
+export default defaultTheme;

@@ -2,7 +2,7 @@ import styled, {
     ThemeProvider,
     ThemeContext
 } from "styled-components";
-import theme from "./theme";
+import defaultTheme from "./theme";
 
 const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
 
@@ -17,7 +17,7 @@ export const device = {
 export {
     ThemeProvider,
     ThemeContext,
-    theme,
+    defaultTheme,
 };
 
 export * from "styled-system";

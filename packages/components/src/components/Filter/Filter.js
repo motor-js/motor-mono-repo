@@ -2,11 +2,11 @@
 import { useContext } from "react";
 import StyledFilter from "./StyledFilter";
 import { EngineContext } from "@motor-js/engine"
-import { ThemeContext, theme } from "@motor-js/theme"
+import { ThemeContext, defaultTheme } from "@motor-js/theme"
 import PropTypes from "prop-types"
 
 function Filter({ ...rest }) {
-  const myTheme = useContext(ThemeContext) || theme;
+  const myTheme = useContext(ThemeContext) || defaultTheme;
   const { engine, engineError } = useContext(EngineContext);
 
   return (
