@@ -9,7 +9,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 am4core.useTheme(am4themes_animated);
 
-const PieExampleCompact = () => {
+const PieExampleCompact = ({ id }) => {
   const colors = [
     "#B03060",
     "#FE9A76",
@@ -47,7 +47,7 @@ const PieExampleCompact = () => {
 
   useLayoutEffect(() => {
     // Create chart instance
-    let x = am4core.create("chartdiv", am4charts.PieChart);
+    let x = am4core.create(id, am4charts.PieChart);
 
     // Add data
     x.data = data;
@@ -82,7 +82,7 @@ const PieExampleCompact = () => {
     }
   }, [data]);
 
-  return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
+  return <div id={id} style={{ width: "100%", height: "500px" }}></div>;
 };
 
 export default PieExampleCompact;
