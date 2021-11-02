@@ -1,6 +1,6 @@
 import React, { useRef, useLayoutEffect, useEffect, useContext } from "react";
 
-import { useData, useButton } from "@motor-js/engine";
+import { useData, useButton, useSelections } from "@motor-js/engine";
 import { Context } from "../Store";
 
 // Configure any reguired theme
@@ -13,14 +13,8 @@ am4core.useTheme(am4themes_animated);
 const BarExampleCompact = ({ id }) => {
   const [state, dispatch] = useContext(Context);
   const { selectValues } = useButton();
-  // console.log(1, state.primaryAppSelections && state.primaryAppSelections[0]);
+  const { selections, clearSelections } = useSelections();
 
-  // selectValues(["Fitness"], "Category");
-  // if (state.primaryAppSelections && state.primaryAppSelections.length !== 0) {
-  //   // if (state.primaryAppSelections.length === 0) return;
-  //   console.log(state.primaryAppSelections[0]);
-  //   selectValues([state.primaryAppSelections[0].qSelected], "Category");
-  // }
   const colors = [
     "#B03060",
     "#FE9A76",
@@ -39,16 +33,12 @@ const BarExampleCompact = ({ id }) => {
 
   const cols = [
     {
-      // qField: "[OrderDate]",
       qField: "[Category]",
       qLabel: "Category",
     },
     {
       qField: "=sum(Quantity * Price)",
       qLabel: "Revenue",
-      // useFormatting: true,
-      // qNumType: "M",
-      // qNumFmt: "£#,##0",
     },
   ];
 
@@ -113,13 +103,15 @@ const BarExampleCompact = ({ id }) => {
 
   // Load data into chart
   useEffect(() => {
-    if (state.primaryAppSelections && state.primaryAppSelections.length !== 0) {
-      // if (state.primaryAppSelections.length === 0) return;
-      console.log(state.primaryAppSelections[0]);
-      selectValues([state.primaryAppSelections[0].qSelected], "Category");
-    }
     if (chart.current) {
       chart.current.data = data;
+    }
+    console.log(state);
+    if (state.primaryAppSelections && state.primaryAppSelections.length !== 0) {
+      // if (state.primaryAppSelections.length === 0) return;
+      console.log(state.primaryAppSelections[0].qSelected);
+      // console.log("selections", selections);
+      selectValues([state.primaryAppSelections[0].qSelected], "Category");
     }
   }, [data, state]);
 
