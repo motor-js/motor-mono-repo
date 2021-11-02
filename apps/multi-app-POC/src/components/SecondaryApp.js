@@ -5,6 +5,7 @@ import { Motor } from "@motor-js/engine";
 import { qlikConfigApp2 } from "../config";
 
 export default function SecondaryApp() {
+  //  dispatch({type: 'SET_POSTS', payload: postsData});
   return (
     <Motor config={qlikConfigApp2}>
       <Card fluid>

@@ -1,15 +1,20 @@
-import React, { useRef, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect, useContext } from "react";
 
-import { useData } from "@motor-js/engine";
+import { useData, useSelections } from "@motor-js/engine";
 
 // Configure any reguired theme
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+import { Context } from "../Store";
+
 am4core.useTheme(am4themes_animated);
 
 const PieExampleCompact = ({ id }) => {
+  const [state, dispatch] = useContext(Context);
+  const { selections, clearSelections } = useSelections();
+
   const colors = [
     "#B03060",
     "#FE9A76",
@@ -61,7 +66,7 @@ const PieExampleCompact = ({ id }) => {
 
     pieSeries.slices.template.events.on(
       "hit",
-      function (ev) {
+      async function (ev) {
         select(0, [ev.target.elemNumber], false);
       },
       this
@@ -79,6 +84,8 @@ const PieExampleCompact = ({ id }) => {
     if (chart.current) {
       data && data.map((element, index) => (element.fill = colors[index]));
       chart.current.data = data;
+      // console.log("pie selections 2", selections);
+      dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: selections });
     }
   }, [data]);
 

@@ -1,6 +1,7 @@
-import React, { useRef, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect, useContext } from "react";
 
-import { useData } from "@motor-js/engine";
+import { useData, useButton } from "@motor-js/engine";
+import { Context } from "../Store";
 
 // Configure any reguired theme
 import * as am4core from "@amcharts/amcharts4/core";
@@ -10,6 +11,12 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 am4core.useTheme(am4themes_animated);
 
 const BarExampleCompact = ({ id }) => {
+  const [state, dispatch] = useContext(Context);
+  const { selectValues } = useButton();
+  console.log(1, state.primaryAppSelections && state.primaryAppSelections[0]);
+
+  // selectValues(["Fitness"], "Category");
+
   const colors = [
     "#B03060",
     "#FE9A76",
