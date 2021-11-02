@@ -84,7 +84,6 @@ const PieExampleCompact = ({ id }) => {
     if (chart.current) {
       data && data.map((element, index) => (element.fill = colors[index]));
       chart.current.data = data;
-      // console.log("pie selections 2", selections);
       dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: selections });
     }
   }, [data]);

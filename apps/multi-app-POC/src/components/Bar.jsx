@@ -13,10 +13,13 @@ am4core.useTheme(am4themes_animated);
 const BarExampleCompact = ({ id }) => {
   const [state, dispatch] = useContext(Context);
   const { selectValues } = useButton();
-  console.log(1, state.primaryAppSelections && state.primaryAppSelections[0]);
+  // console.log(1, state.primaryAppSelections && state.primaryAppSelections[0]);
 
   // selectValues(["Fitness"], "Category");
-
+  if (state.primaryAppSelections && state.primaryAppSelections.length !== 0) {
+    // if (state.primaryAppSelections.length === 0) return;
+    console.log(state.primaryAppSelections[0]);
+  }
   const colors = [
     "#B03060",
     "#FE9A76",
