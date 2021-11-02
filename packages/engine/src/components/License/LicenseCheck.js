@@ -2,8 +2,8 @@ import CryptoAES from 'crypto-js/aes'
 import CryptoENC from 'crypto-js/enc-utf8'
 
 export function LicenseCheck (userInput) {
-  
-  var i;
+  var i
+  var check
   const licenses = []
 
   //Create array of unencrypted licernses
@@ -13,27 +13,10 @@ export function LicenseCheck (userInput) {
 
   var decrypt = CryptoAES.decrypt(userInput, "S@few/M0t0r");
   var input = decrypt.toString(CryptoENC)
-  var check
+
   //filter license
   var licenseExists = licenses.filter(lic => { return lic == input } );
 
-  licenseExists.length > 0 ? check === true :  check === false
+  licenseExists.length > 0 ? check = true :  check = false
   return check
 }
-
-  /*
-  //Encrypt all the licenses
-  licenses.map(data => {
-    var encrypt = CryptoAES.encrypt(data, "S@few/M0t0r");
-    var key = encrypt.toString()
-    encryptedList.push(key)
-  })
-  */
-
-
-  //var encrypt = CryptoAES.encrypt("MotorLicense-1", "S@few/M0t0r");
-  //var decrypt = CryptoAES.decrypt(encrypt.toString(), "S@few/M0t0r");
-  
-  //var decrypt = CryptoAES.decrypt('U2FsdGVkX18F0eIS4Rkz49TnlMpqP3Yfos8sRJ/GvNY=', "S@few/M0t0r");
-  //console.log(decrypt.toString(CryptoENC))
-  //console.log(decrypt.toString(CryptoJS.enc.Hex))

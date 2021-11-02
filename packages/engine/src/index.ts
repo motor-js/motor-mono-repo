@@ -13,7 +13,6 @@ export { default as useGlobal } from "./hooks/useGlobal";
 export { default as useButton } from "./hooks/useButton";
 export { default as useSearch } from "./hooks/useSearch";
 export { default as useSelections } from "./hooks/useSelections";
-export { default as useCapability } from "./hooks/useCapability";
 export { default as useApp } from "./hooks/useApp";
 export { default as useLayout } from "./hooks/useLayout";
 export { default as useVariable } from "./hooks/useVariable";

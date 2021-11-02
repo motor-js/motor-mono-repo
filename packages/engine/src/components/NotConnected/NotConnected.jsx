@@ -7,8 +7,8 @@ import useEngine from "../../hooks/useEngine";
 const NotConnected = ({ config, ...rest }) => {
   // const { errorCode } = useContext(EngineContext) || useEngine(myConfig);
   const engineContext = useContext(EngineContext);
-  const engineConfigContext = useEngine(config);
-  const { errorCode } = engineContext || engineConfigContext;
+  //const engineConfigContext = useEngine({ config, engineState: null})
+  const { errorCode } = engineContext //|| engineConfigContext;
 
   return (
     <div

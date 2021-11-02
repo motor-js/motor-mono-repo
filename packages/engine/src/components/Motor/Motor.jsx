@@ -6,6 +6,7 @@ import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
 import { LicenseCheck } from "../License/LicenseCheck"
 import { ThemeProvider, defaultTheme } from "@motor-js/theme"
+import { deepMerge } from '../../utils/object'
 
 function Motor({
   engine,
@@ -30,11 +31,15 @@ function Motor({
   NotConnectedButtonText,
 }) {
 
-  //const [myTheme, setMyTheme] = useState(defaultTheme)
+  const engineState = engine
+
   const [myConfig, setMyConfig] = useState(config);
   const [validLicense, setValidLicense] = useState( licenseKey ? LicenseCheck(licenseKey) : false)
-  const newEngine =  engine ? { engine: engine, engineError: null, errorCode: null } :  useEngine(myConfig)
-
+  
+  const newEngine =  useEngine({config, engineState})
+  
+  //console.log('NEW ENGINE',newEngine)
+  
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
   

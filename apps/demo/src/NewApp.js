@@ -1,6 +1,8 @@
 
-import useConnect from "./useConnect";
+
 import App from "./App";
+import { useList, EngineContext } from '@motor-js/engine'
+import { useContext } from "react";
 //import { NebulaConnection } from '@motor-js/nebula'
 
 const NewApp = () => {
@@ -15,12 +17,15 @@ const NewApp = () => {
     qcs: true,
   };
 
- // const { engine } = useConnect({ config });
-  
+  const dimension = ['Country']
+  const { listData } = useList({ dimension })
+
+  console.log(listData)
+
   return (
     <>
       {/* { engine &&  */}
-        <App />
+       <div>TEST</div>
     </>
   );
 };

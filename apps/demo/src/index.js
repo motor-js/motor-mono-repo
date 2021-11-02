@@ -2,12 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import NewApp from "./NewApp";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "semantic-ui-css/semantic.min.css";
-import { Motor } from "@motor-js/engine";
+
 
 ReactDOM.render(
-  <Motor //engine={engine}
+ /*} <Motor //engine={engine}
     config={{
       host: "motor.eu.qlikcloud.com", // Qlik Sense Host
       secure: true, // Whether your host is secure of not (HTTPS / HTTP)
@@ -17,17 +18,20 @@ ReactDOM.render(
       webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
       qcs: true, // whether you are connecting to a Qlik Cloud site or not
     }}
-    //licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ"
+    licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ55lg="
     theme={{ 
-      sizes: {
-        body: {
-          small: "0.675rem"
+      filter: {
+        size: {
+          medium: {
+            fontSize: '14px',
+          }
         }
       }
     }}
-    >
-  <NewApp />
-  </Motor>,
+  > 
+</Motor>
+*/
+  <App />,
   document.getElementById("root")
 );
 

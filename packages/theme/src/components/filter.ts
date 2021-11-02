@@ -3,7 +3,6 @@ import colors from '../foundations/colors'
 import radii from '../foundations/radii'
 import sizes from '../foundations/sizes'
 
-
 export type Filter = typeof filter
 
 const filter = {

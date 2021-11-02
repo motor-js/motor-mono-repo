@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const enigma = require("enigma.js");
 const schema = require("enigma.js/schemas/12.170.2.json");
 const SenseUtilities = require("enigma.js/sense-utilities");
 
 const MAX_RETRIES = 3;
 
-function useEngine(config) {
+function useEngine(props) {
+
+  const { myConfig, engineState } = props;
+  const config = myConfig 
+
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -51,9 +55,19 @@ function useEngine(config) {
 
   const [engineError, setEngineError] = useState(false);
   const [errorCode, seErrorCode] = useState(null);
-  const [engine, setEngine] = useState(() => {
+  const [engine, setEngine] = useState(null);
+
+  useEffect(() => {
     (async () => {
-      if (config && config.qcs) {
+      if(!config ) {
+        setEngine(engineState)
+        seErrorCode(null)
+        setEngineError(null)
+        
+        return 4
+      }
+       else if (!engineState && config && config.qcs) {
+        console.log('called')
         const tenantUri = config.host;
         const webIntegrationId = config.webIntId;
 
@@ -103,11 +117,11 @@ function useEngine(config) {
 
         return 1;
       }
-      if (config) {
+      if (!engineState && config) {
+        console.log('called')
         const myConfig = config;
         const url = SenseUtilities.buildUrl(myConfig);
 
-        
         try {
           const session = enigma.create({
             schema,
@@ -142,8 +156,9 @@ function useEngine(config) {
           return -2;
         }
       }
+    
     })();
-  }, []);
+  }, [engineState, config]);
 
   return { engine, engineError, errorCode };
 }
