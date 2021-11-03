@@ -13,6 +13,7 @@ am4core.useTheme(am4themes_animated);
 const BarExampleCompact = ({ id }) => {
   const [state, dispatch] = useContext(Context);
   const { selectValues } = useButton();
+  const { selections, clearSelections } = useSelections();
 
   const colors = [
     "#B03060",
@@ -105,9 +106,22 @@ const BarExampleCompact = ({ id }) => {
   useEffect(() => {
     if (state.primaryAppSelections && state.primaryAppSelections.length !== 0) {
       // if (state.primaryAppSelections.length === 0) return;
-      console.log(state.primaryAppSelections[0]);
+      // console.log(state.primaryAppSelections[0].qSelected);
+      // console.log(
+      //   state.primaryAppSelections[0].qSelected.replace(/, /g, '","')
+      // );
+
+      // const valuesToSelect =
+      //   state.primaryAppSelections[0].qSelected.length === 1
+      //     ? [state.primaryAppSelections[0].qSelected]
+      //     : [state.primaryAppSelections[0].qSelected.replace(/, /g, '","')];
+
+      // console.log(valuesToSelect);
+      console.log(selections);
       selectValues(
+        // [state.primaryAppSelections[0].qSelected.replace(/, /g, '","')],  // .split(",")
         [state.primaryAppSelections[0].qSelected],
+        // valuesToSelect,
         state.primaryAppSelections[0].qField
       );
       dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: null });
