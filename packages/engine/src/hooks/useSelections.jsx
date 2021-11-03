@@ -19,12 +19,6 @@ const useSelectionObject = () => {
     if (qObject.current) {
       setQLayout(_qLayout);
       setSelections(sel);
-      // const selItems = sel.map((element, index) => {
-      //   return {
-      //     qField: element.qField,
-      //     qItems: element.qSelected.split(", "),
-      //   };
-      // });
       setSelectionItems(
         sel.map((element, index) => {
           return {
