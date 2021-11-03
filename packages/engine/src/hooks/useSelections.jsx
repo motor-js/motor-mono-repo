@@ -10,6 +10,7 @@ const useSelectionObject = () => {
   const qObject = useRef(null);
   const [qLayout, setQLayout] = useState(null);
   const [selections, setSelections] = useState(null);
+  const [selectionItems, setSelectionItems] = useState(null);
   const [error, setError] = useState(null);
 
   const update = useCallback(async () => {
@@ -18,6 +19,20 @@ const useSelectionObject = () => {
     if (qObject.current) {
       setQLayout(_qLayout);
       setSelections(sel);
+      // const selItems = sel.map((element, index) => {
+      //   return {
+      //     qField: element.qField,
+      //     qItems: element.qSelected.split(", "),
+      //   };
+      // });
+      setSelectionItems(
+        sel.map((element, index) => {
+          return {
+            qField: element.qField,
+            qItems: element.qSelected.split(", "),
+          };
+        })
+      );
     }
   }, []);
 
@@ -67,7 +82,7 @@ const useSelectionObject = () => {
     })();
   }, [engine]);
 
-  return { qLayout, selections, clearSelections };
+  return { qLayout, selections, selectionItems, clearSelections };
 };
 
 export default useSelectionObject;

@@ -13,7 +13,7 @@ am4core.useTheme(am4themes_animated);
 
 const PieExampleCompact = ({ id }) => {
   const [state, dispatch] = useContext(Context);
-  const { selections, clearSelections } = useSelections();
+  const { selections, selectionItems, clearSelections } = useSelections();
 
   const colors = [
     "#B03060",
@@ -84,7 +84,9 @@ const PieExampleCompact = ({ id }) => {
     if (chart.current) {
       data && data.map((element, index) => (element.fill = colors[index]));
       chart.current.data = data;
-      dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: selections });
+      // console.log("app1", selections);
+      // console.log("app1-selectionItems", selectionItems);
+      dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: selectionItems });
     }
   }, [data]);
 
