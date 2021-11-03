@@ -7,8 +7,7 @@ const MAX_RETRIES = 3;
 
 function useEngine(props) {
 
-  const { myConfig, engineState } = props;
-  const config = myConfig 
+  const { config, engineState } = props;
 
   const responseInterceptors = [
     {
@@ -59,15 +58,16 @@ function useEngine(props) {
 
   useEffect(() => {
     (async () => {
-      if(!config ) {
+      if(!config) {
+        console.log('called no config')
         setEngine(engineState)
         seErrorCode(null)
         setEngineError(null)
         
         return 4
       }
-       else if (!engineState && config && config.qcs) {
-        console.log('called')
+       else if (config && config.qcs) {
+        console.log('called qcs')
         const tenantUri = config.host;
         const webIntegrationId = config.webIntId;
 
@@ -117,8 +117,8 @@ function useEngine(props) {
 
         return 1;
       }
-      if (!engineState && config) {
-        console.log('called')
+      if (config && !config.qcs) {
+        console.log('called qse')
         const myConfig = config;
         const url = SenseUtilities.buildUrl(myConfig);
 

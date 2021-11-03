@@ -32,14 +32,9 @@ function Motor({
 }) {
 
   const engineState = engine
-
-  const [myConfig, setMyConfig] = useState(config);
-  const [validLicense, setValidLicense] = useState( licenseKey ? LicenseCheck(licenseKey) : false)
-  
-  const newEngine =  useEngine({config, engineState})
-  
-  //console.log('NEW ENGINE',newEngine)
-  
+  const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
+  const newEngine = useEngine({config, engineState})
+  console.log(newEngine)
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
   
@@ -60,7 +55,7 @@ function Motor({
     <EngineContext.Provider value={newEngine}>
       <ThemeProvider theme={nextTheme}>
         <Login
-          config={myConfig}
+          config={config}
           logo={logo}
           logoHeight={logoHeight}
           logoWidth={logoWidth}
@@ -75,7 +70,7 @@ function Motor({
           loginfontFamily={loginfontFamily}
         />
         <NotConnected
-          config={myConfig}
+          config={config}
           header={NotConnectedheader}
           body={NotConnectedBody}
           size={size}

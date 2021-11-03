@@ -1,3 +1,30 @@
+export const getFieldsFromDimensions = async (qDoc, dim) => {
+  const Dim = dim
+  const getDims = await qDoc.createSessionObject(
+    {
+      "qInfo": {
+      "qType": "DimensionList",
+      "qId": ""
+      },
+      "qDimensionListDef": {
+      "qType": "dimension",
+      "qData": {
+      "title": "/qMetaDef/title",
+      "tags": "/qMetaDef/tags",
+      "grouping": "/qDim/qGrouping",
+      "info": "/qDimInfos"
+      }
+      }
+      }
+  )
+    const layout = await getDims.getLayout()
+    const item = layout.qDimensionList.qItems.filter(function(item) {
+      return item.qData.title === dim
+    });
+    
+    return item
+}
+
 export function hyperCubeChartTransform(
   qData,
   qHyperCube,

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useContext } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
+import { getFieldsFromDimensions } from "../utils/hyperCubeUtilities"
 
 const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
   
@@ -96,8 +97,17 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
   const flatSelect = useCallback((dim, value) =>
     (async () => {
       const qDoc = await engine;
+      // If the dimension is a master item, we are using this helper function
+      // to identify the field in the data model
+      const masterItem = await getFieldsFromDimensions(qDoc, dim)
+      let field 
+      if(masterItem.length > 0) {
+        field = masterItem[0].qData.info[0].qName
+      } else {
+        field = dim
+      }
       // eslint-disable-next-line no-unused-expressions
-      const qField = await qDoc.getField(dim)
+      const qField = await qDoc.getField(field)
       qField.select(value)
     })()
   );

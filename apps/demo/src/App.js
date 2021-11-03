@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 //import Table from "./components/TableExampleCompact";
 //import ButtonComponent from "./components/ButtonComponent";
 import { useList, useData, useTable } from "@motor-js/engine"
 import { dark, light } from "./themes/theme.js"
-import { EngineContext } from "@motor-js/engine"
+import { EngineContext, useSearch } from "@motor-js/engine"
 import { Filter } from "@motor-js/components"
 import useConnect from "./useConnect"
 import { Motor } from "@motor-js/engine";
+
 import NewApp from "./NewApp.js";
+
 
 export default function App() {
 
@@ -42,63 +44,33 @@ const cols1 = [
   },
 ]
 
-const columns = React.useMemo(() => cols, [])
-
-  const { 
-    dataSet,
-    updateCols,
-    incrementPage
-  } = useTable({
-    cols
-  })
-
-  const dimension = ['Link']
-  //const pageHeight = 100
-
-  const {    
-    listData,
-    motorListProps,
-  } = useList({
-    dimension,
-    autoSortByState: true
-  })
-
-
   const config = {
     host: "motor.eu.qlikcloud.com", // Qlik Sense Host
     secure: true, // Whether your host is secure of not (HTTPS / HTTP)
     port: null, // Qlik Sense site port
     prefix: "", // Prefix
-    appId: "bc5878d0-2d3c-49ad-80cb-c35e5fa5cbe9", // Application Id
+    appId: "f3c7c25f-90da-4286-ac1d-ca9885d896059", // Application Id
     webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
     qcs: true, // whether you are connecting to a Qlik Cloud site or not
   }
 
-  const { engine } = useConnect({config})
-  const handleColsChange = () => updateCols(cols1)
+ // const { engine} = useConnect({config})
 
   return (
     <div className="App" style={{ padding: "10px" }}>
-     <Motor 
-      engine={engine}
-     /* config={{
-        host: "motor.eu.qlikcloud.com",
-        secure: true,
-        port: null,
-        prefix: "",
-        appId: "bc5878d0-2d3c-49ad-80cb-c35e5fa5cbe9",
-        webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-        qcs: true,
-      }}*/
-    >
+        <Motor 
+          config={{
+            host: "motor.eu.qlikcloud.com",
+            secure: true,
+            port: null,
+            prefix: "",
+            appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
+            webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
+            qcs: true,
+          }}
+        >
       <NewApp />
-    </Motor> 
-      <button onClick={incrementPage}>change page</button>
-    {/*}  <Filter 
-        listData={listData}
-        motorListProps={motorListProps}
-        m={10}
-  /> */}
+      </Motor> 
     </div>
   );
 }
