@@ -8,6 +8,7 @@ import {
   StyledCheckbox,
   CheckboxContainer,
   StyledDropdownText,
+  DropdownWrapper,
   NoItems
  } from './styles/DropdownTheme';
 import CheckIcon from '../Icons/CheckIcon';
@@ -87,33 +88,35 @@ const Dropdown = ({
   }
 
   return (
-    <InfiniteLoader
-      isItemLoaded={isItemLoaded}
-      itemCount={itemCount}
-      loadMoreItems={loadMoreItems}
-      threshold={80}
-    > 
-      {({ onItemsRendered, ref }) => (
-        items.length > 0 ?
-        (
-          <StyledList size={size} {...rest}>
-          <List
-            className="list"
-            itemCount={itemCount}
-            onItemsRendered={onItemsRendered}
-            ref={ref}
-            height={dropHeight}
-            width={"100%"}
-            itemSize={itemHeight}
-          >
-            {Item}
-          </List>
-          </StyledList>
-        ) : (
-         <NoItems size={size} {...rest}>No results found.</NoItems>
-        )
-      )}
-    </InfiniteLoader>
+    <DropdownWrapper>
+      <InfiniteLoader
+        isItemLoaded={isItemLoaded}
+        itemCount={itemCount}
+        loadMoreItems={loadMoreItems}
+        threshold={80}
+      > 
+        {({ onItemsRendered, ref }) => (
+          items.length > 0 ?
+          (
+            <StyledList size={size} {...rest}>
+            <List
+              className="list"
+              itemCount={itemCount}
+              onItemsRendered={onItemsRendered}
+              ref={ref}
+              height={dropHeight}
+              width={"100%"}
+              itemSize={itemHeight}
+            >
+              {Item}
+            </List>
+            </StyledList>
+          ) : (
+          <NoItems size={size} {...rest}>No results found.</NoItems>
+          )
+        )}
+      </InfiniteLoader>
+    </DropdownWrapper>
   )
 }
 

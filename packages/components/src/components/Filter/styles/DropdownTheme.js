@@ -4,6 +4,13 @@ import {transparentize } from 'polished'
 import { commonStyles, unselected } from '../../../styling/mixins';
 import { Icon } from '../../Icons/styles/StyledIcon'
 
+export const DropdownWrapper = styled.div`
+  width: 100%;
+  position: absolute;
+  z-index:1000;
+  background-color: white;
+`
+
 export const StyledDropdownItem = styled.div`
   width: 100%;
   display: flex;

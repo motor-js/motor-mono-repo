@@ -2,11 +2,11 @@ import { spacing } from "./spacing"
 
 const fontSizes = {
   body: {
-    xsmall: "0.675rem",
-    small: "0.775rem",
-    medium: "0.875rem",
-    large: "0.975rem",
-    xlarge: "1.075rem",
+    xsmall: "0.775rem",
+    small: "0.875rem",
+    medium: "0.975rem",
+    large: "1.075rem",
+    xlarge: "1.175rem",
   },
   h1: ["2.1875rem", "2.1875rem", "2.1875rem", "2.1875rem"],
   h2: ["1.75rem", "1.75rem", "1.75rem"],

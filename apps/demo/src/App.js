@@ -7,6 +7,7 @@ import { EngineContext, useSearch } from "@motor-js/engine"
 import { Filter } from "@motor-js/components"
 import useConnect from "./useConnect"
 import { Motor } from "@motor-js/engine";
+import { ThemeProvider, theme } from "./theme/index";
 
 import NewApp from "./NewApp.js";
 
@@ -45,32 +46,34 @@ const cols1 = [
 ]
 
   const config = {
-    host: "motor.eu.qlikcloud.com", // Qlik Sense Host
-    secure: true, // Whether your host is secure of not (HTTPS / HTTP)
-    port: null, // Qlik Sense site port
-    prefix: "", // Prefix
-    appId: "f3c7c25f-90da-4286-ac1d-ca9885d896059", // Application Id
-    webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
-    qcs: true, // whether you are connecting to a Qlik Cloud site or not
+    host: "sense-motor.adviseinc.co.uk",
+    secure: true,
+    port: 19077,
+    prefix: "",
+    appId: 'a6dfbb9f-b02a-401e-af98-349b4dd71458',
+    redirectFileName: 'auth3.html'
   }
 
- // const { engine} = useConnect({config})
+  const { engine, errorCode, loginUri, user } = useConnect({ config })
 
   return (
     <div className="App" style={{ padding: "10px" }}>
-        <Motor 
-          config={{
-            host: "motor.eu.qlikcloud.com",
-            secure: true,
-            port: null,
-            prefix: "",
-            appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
-            webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-            qcs: true,
-          }}
-        >
-      <NewApp />
-      </Motor> 
+      <ThemeProvider theme={theme}>
+          <Motor engine={engine}
+          /*
+            config={{
+              host: "motor.eu.qlikcloud.com",
+              secure: true,
+              port: null,
+              prefix: "",
+              appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
+              webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
+              qcs: true,
+            }}*/
+          >
+        <NewApp />
+        </Motor> 
+      </ThemeProvider>
     </div>
   );
 }
