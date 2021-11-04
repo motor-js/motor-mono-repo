@@ -11,7 +11,7 @@ import { Context } from "../Store";
 
 am4core.useTheme(am4themes_animated);
 
-const PieExampleCompact = ({ id }) => {
+const PieExampleCompact = ({ id, dataSet, setSelection }) => {
   const [state, dispatch] = useContext(Context);
   const { selections, selectionItems, clearSelections } = useSelections();
 
@@ -31,20 +31,20 @@ const PieExampleCompact = ({ id }) => {
     "#000000",
   ];
 
-  const cols = [
-    {
-      qField: "[Category]",
-      qLabel: "Category",
-    },
-    {
-      qField: "=sum(Quantity * Price)",
-      qLabel: "Revenue",
-    },
-  ];
+  // const cols = [
+  //   {
+  //     qField: "[Category]",
+  //     qLabel: "Category",
+  //   },
+  //   {
+  //     qField: "=sum(Quantity * Price)",
+  //     qLabel: "Revenue",
+  //   },
+  // ];
 
-  const { dataSet, select } = useData({
-    cols,
-  });
+  // const { dataSet, select } = useData({
+  //   cols,
+  // });
 
   const { data, nameKey, valueKey } = dataSet;
 
@@ -67,7 +67,11 @@ const PieExampleCompact = ({ id }) => {
     pieSeries.slices.template.events.on(
       "hit",
       async function (ev) {
-        select(0, [ev.target.elemNumber], false);
+        // select(0, [ev.target.elemNumber], false);
+        //  if (config.dataPointIndex !== -1) {
+
+        setSelection(ev.target.elemNumber);
+        //  }
       },
       this
     );
@@ -84,8 +88,6 @@ const PieExampleCompact = ({ id }) => {
     if (chart.current) {
       data && data.map((element, index) => (element.fill = colors[index]));
       chart.current.data = data;
-      // console.log("app1", selections);
-      // console.log("app1-selectionItems", selectionItems);
       dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: selectionItems });
     }
   }, [data]);

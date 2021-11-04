@@ -1,5 +1,5 @@
 import { Card } from "semantic-ui-react";
-import Pie from "./Pie";
+import PieWrapper from "./PieWrapper";
 import ButtonComponent from "./Button";
 import { Motor } from "@motor-js/engine";
 import { qlikConfigApp1 } from "../config";
@@ -9,7 +9,7 @@ export default function PrimaryApp() {
     <Motor config={qlikConfigApp1}>
       <Card fluid>
         <Card.Content style={{ margin: "20px" }}>
-          <Pie id={"chartdiv"} />
+          <PieWrapper id={"chartdiv"} />
           <ButtonComponent />
         </Card.Content>
       </Card>

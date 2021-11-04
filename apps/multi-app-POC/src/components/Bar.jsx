@@ -110,9 +110,9 @@ const BarExampleCompact = ({ id }) => {
 
         state.primaryAppSelections[0].qField
       );
+
       dispatch({ type: "SET_PRIMARY_APP_SELECTIONS", payload: null });
     }
-    // console.log("app2", selections);
 
     if (chart.current) {
       chart.current.data = data;
