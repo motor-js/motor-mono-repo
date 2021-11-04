@@ -92,28 +92,30 @@ export const Row = ({ className, gutters, noGutter, ...props }) => {
   );
 };
 
-export const KPI = ({ title, rate, change, chart }) => {
+export const KPI = ({ title, vakue, change, chart }) => {
   return (
     <Card>
       <CardBody>
         <StyledCardTitle>{title}</StyledCardTitle>
         <StyledCardBottom>
-          <StyledCardRate>{rate}</StyledCardRate>
-          <StyledCardText>
-            <StyledCardChangePercent $growth={change.growth}>
-              {change?.percentage}{" "}
-              {change?.growth === "up" && <i className="fa fa-arrow-up" />}
-              {change?.growth === "down" && (
-                <i className="fa fa-arrow-down" />
-              )}{" "}
-            </StyledCardChangePercent>
-            {change?.time && <>{change?.time}</>}
-          </StyledCardText>
+          <StyledCardRate>{vakue}</StyledCardRate>
+          {change && (
+            <StyledCardText>
+              <StyledCardChangePercent $growth={change.growth}>
+                {change?.percentage}{" "}
+                {change?.growth === "up" && <i className="fa fa-arrow-up" />}
+                {change?.growth === "down" && (
+                  <i className="fa fa-arrow-down" />
+                )}{" "}
+              </StyledCardChangePercent>
+              {change?.time && <>{change?.time}</>}
+            </StyledCardText>
+          )}
         </StyledCardBottom>
         <StyledChart>
           {chart && (
             <ApexChart
-              type={chart?.type}
+              type={chart?.options.type}
               options={chart?.options}
               series={chart?.series}
               height={chart?.height || 70}

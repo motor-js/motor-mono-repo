@@ -7,16 +7,26 @@ let qObject = null;
 const useSelectionObject = () => {
   const { engine } = useContext(EngineContext) || {};
 
-  const _isMounted = useRef(true);
+  const qObject = useRef(null);
   const [qLayout, setQLayout] = useState(null);
   const [selections, setSelections] = useState(null);
+  const [selectionItems, setSelectionItems] = useState(null);
+  const [error, setError] = useState(null);
 
   const update = useCallback(async () => {
-    const _qLayout = await qObject.getLayout();
+    const _qLayout = await qObject.current.getLayout();
     const sel = await getSelections(_qLayout);
-    if (_isMounted.current) {
+    if (qObject.current) {
       setQLayout(_qLayout);
       setSelections(sel);
+      setSelectionItems(
+        sel.map((element, index) => {
+          return {
+            qField: element.qField,
+            qItems: element.qSelected.split(", "),
+          };
+        })
+      );
     }
   }, []);
 
@@ -39,27 +49,34 @@ const useSelectionObject = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line no-empty
-    if (engine === undefined) {
-    } else {
-      (async () => {
-        const qProp = {
-          qInfo: { qType: "SelectionObject" },
-          qSelectionObjectDef: {},
-        };
-        qDoc = await engine;
-        qObject = await qDoc.createSessionObject(qProp);
-        qObject.on("changed", () => {
+    if (!engine) return;
+    if (qObject.current) return;
+
+    (async () => {
+      const qProp = {
+        qInfo: { qType: "SelectionObject" },
+        qSelectionObjectDef: {},
+      };
+      const qDoc = await engine;
+
+      try {
+        qObject.current = await qDoc.createSessionObject(qProp);
+
+        qObject.current.on("changed", () => {
           update();
         });
         update();
-      })();
-    }
-  }, [engine, update]);
+      } catch (err) {
+        if (err.code === -2) {
+          setError("SelectionObject error ");
+        } else {
+          setError(err);
+        }
+      }
+    })();
+  }, [engine]);
 
-  useEffect(() => () => (_isMounted.current = false), []);
-
-  return { qLayout, selections, clearSelections };
+  return { qLayout, selections, selectionItems, clearSelections };
 };
 
 export default useSelectionObject;
