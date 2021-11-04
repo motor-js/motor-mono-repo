@@ -29,7 +29,6 @@ export const FilterInputOutline = styled.div`
     border: 1px solid ${props => props.theme.colors[props.colorTheme][500]};
     outline: none;
   }
-
 `
 
 export const InputContainer = styled.div`
