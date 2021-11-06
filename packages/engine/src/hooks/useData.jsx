@@ -870,6 +870,7 @@ const useData = (props) => {
       dataSet,
       endSelections,
       beginSelections,
+      select,
     },
   };
 };
