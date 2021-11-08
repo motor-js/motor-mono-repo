@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/components",
   "license": "https://www.motor.so/license",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -22,8 +22,8 @@
     "react-window-infinite-loader": "^1.0.7"
   },
   "devDependencies": {
-    "@motor-js/engine": "^0.3.25",
-    "@motor-js/theme": "^0.0.9"
+    "@motor-js/engine": "^0.3.26",
+    "@motor-js/theme": "^0.0.10"
   },
   "peerDependencies": {
     "@motor-js/engine": "^0.3.19",
