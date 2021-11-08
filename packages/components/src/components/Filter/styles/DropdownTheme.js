@@ -15,30 +15,35 @@ export const StyledDropdownItem = styled.div.attrs((props) => {
 
   let bkgClr;
   let txtClr;
-  switch (props.state) {
+
+  switch (props.selected) {
     case "S":
-      bkgClr = red;
+      bkgClr = '';
     //  txtClr = selectColor(props.theme.filter.color.selectedFont, props.theme);
       break;
     case "O":
-   //   bkgClr = props.theme.global.backgroungColor;
+      bkgClr = '';
    //   txtClr = props.theme.global.color.font;
       break;
     case "A":
-  //    bkgClr = selectColor(props.theme.filter.color.altSelection, props.theme);
+      bkgClr = props.theme.colors.gray[100]
    //   txtClr = props.theme.global.color.font;
       break;
     case "X":
-  //    bkgClr = selectColor(props.theme.filter.color.notSelected, props.theme);
+      bkgClr = props.theme.colors.gray[400]
    //   txtClr = props.theme.global.color.font;
       break;
     default:
-      bkgClr = red;
+      bkgClr = '';
    //   txtClr = props.theme.global.color.font;
       break;
   }
 
-  return  bkgClr;
+  return  {
+    style: {
+    backgroundColor: bkgClr
+    }
+  }
 })`
 width: 100%;
 display: flex;

@@ -19,7 +19,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-window": "^1.8.6",
-    "react-window-infinite-loader": "^1.0.7"
+    "react-window-infinite-loader": "^1.0.7",
+    "styled-system": "^5.1.5"
   },
   "devDependencies": {
     "@motor-js/engine": "^0.3.26",
