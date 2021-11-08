@@ -5,7 +5,6 @@ import NewApp from "./NewApp";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "semantic-ui-css/semantic.min.css";
-import { ThemeProvider, theme } from "./theme";
 
 ReactDOM.render(
     <App />,

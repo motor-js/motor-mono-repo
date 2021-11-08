@@ -20,4 +20,4 @@ export { default as useBookmark } from "./hooks/useBookmark";
 
 //Contexts
 export { EngineContext } from "./contexts/EngineProvider";
-export { ThemeContext } from "./contexts/ThemeProvider";
+

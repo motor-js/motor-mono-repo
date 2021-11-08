@@ -7,6 +7,9 @@ import PropTypes from "prop-types"
 
 function Filter({ ...rest }) {
   const myTheme = useContext(ThemeContext) || defaultTheme;
+
+  console.log(myTheme)
+  
   const { engine, engineError } = useContext(EngineContext);
 
   return (

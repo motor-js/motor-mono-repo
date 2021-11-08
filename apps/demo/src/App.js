@@ -2,12 +2,12 @@ import React, { useState } from "react";
 //import Table from "./components/TableExampleCompact";
 //import ButtonComponent from "./components/ButtonComponent";
 import { useList, useData, useTable } from "@motor-js/engine"
-import { dark, light } from "./themes/theme.js"
 import { EngineContext, useSearch } from "@motor-js/engine"
 import { Filter } from "@motor-js/components"
 import useConnect from "./useConnect"
 import { Motor } from "@motor-js/engine";
-import { ThemeProvider, theme } from "./theme/index";
+import { ThemeProvider, defaultTheme } from "@motor-js/theme";
+
 
 import NewApp from "./NewApp.js";
 
@@ -58,7 +58,7 @@ const cols1 = [
 
   return (
     <div className="App" style={{ padding: "10px" }}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={defaultTheme}>
           <Motor engine={engine}
           /*
             config={{
@@ -71,7 +71,7 @@ const cols1 = [
               qcs: true,
             }}*/
           >
-        <NewApp />
+          <NewApp />
         </Motor> 
       </ThemeProvider>
     </div>

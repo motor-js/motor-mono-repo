@@ -1,7 +1,8 @@
- /** @jsxImportSource theme-ui */ 
-import styled from 'styled-components'
+import styled from '@motor-js/theme'
 import { color, layout, space } from 'styled-system'
 import { transparentize } from 'polished';
+
+console.log(styled)
 
 export const FilterWrapper = styled.div`
   ${space};

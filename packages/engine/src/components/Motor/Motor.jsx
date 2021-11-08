@@ -5,7 +5,6 @@ import Login from "../Login";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
 import { LicenseCheck } from "../License/LicenseCheck"
-import { deepMerge } from '../../utils/object'
 
 function Motor({
   engine,
@@ -36,8 +35,6 @@ function Motor({
 
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
-  
-  const nextTheme = deepMerge(defaultTheme, theme)
 
   const options = {
     chunkWidth: 200,
