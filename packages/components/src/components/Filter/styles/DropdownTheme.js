@@ -1,6 +1,6 @@
 import styled from '@motor-js/theme'
 //import { color, layout, space } from 'styled-system'
-import {transparentize } from 'polished'
+import { transparentize } from 'polished'
 import { commonStyles } from '../../../styling/mixins';
 import { Icon } from '../../Icons/styles/StyledIcon'
 
