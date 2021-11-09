@@ -57,9 +57,12 @@ const cols1 = [
 
  const newTheme = extendTheme(theme)
 
+ console.log('df: ',defaultTheme)
+ console.log('new: ',newTheme)
+
   return (
     <div className="App" style={{ padding: "10px" }}>
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={newTheme}>
           <Motor engine={engine}
           /*
             config={{
