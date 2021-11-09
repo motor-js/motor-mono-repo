@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css } from '@motor-js/theme'
 
 export const commonStyles = css`
   border: ${props => props.theme.filter.border};
