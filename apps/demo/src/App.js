@@ -6,11 +6,9 @@ import { EngineContext, useSearch } from "@motor-js/engine"
 import { Filter } from "@motor-js/components"
 import useConnect from "./useConnect"
 import { Motor } from "@motor-js/engine";
-import { ThemeProvider, defaultTheme } from "@motor-js/theme";
-
-
+import { ThemeProvider, defaultTheme, extendTheme } from "@motor-js/theme";
+import { theme } from "./theme/theme"
 import NewApp from "./NewApp.js";
-
 
 export default function App() {
 
@@ -55,6 +53,9 @@ const cols1 = [
   }
 
   const { engine, errorCode, loginUri, user } = useConnect({ config })
+
+
+ const newTheme = extendTheme(theme)
 
   return (
     <div className="App" style={{ padding: "10px" }}>
