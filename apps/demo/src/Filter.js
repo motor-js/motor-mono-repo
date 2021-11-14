@@ -9,8 +9,6 @@ import { Filter } from "@motor-js/components"
 const NewApp = ({ dimension}) => {
 
   const { listData, motorListProps } = useList({ dimension })
-
-  console.log(listData)
   
   return (
     <>

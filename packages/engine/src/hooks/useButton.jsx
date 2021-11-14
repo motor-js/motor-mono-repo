@@ -79,7 +79,7 @@ const useButton = (props) => {
 
   const exportData = (filename) => {
     const { host, secure, port, prefix } = config;
-
+    
     const id = qLayout.qInfo.qId;
     const filenameExport = filename || "Data Export";
     const _secure = secure ? "https://" : "http://";
@@ -87,7 +87,7 @@ const useButton = (props) => {
     const server = _secure + host + _port + prefix;
     engine.getObject(id).then((model) => {
       model.exportData("CSV_C", "/qHyperCubeDef", "Test", "P").then((url) => {
-        console.log(url.qUrl, url.qWarnings);
+         console.log(url.qUrl, url.qWarnings);
         // window.open(server + url.qUrl, '_blank')
       });
     });

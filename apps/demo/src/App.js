@@ -63,8 +63,9 @@ const cols1 = [
   return (
     <div className="App" style={{ padding: "10px" }}>
       <ThemeProvider theme={newTheme}>
-          <Motor engine={engine}
-          /*
+          <Motor 
+          //engine={engine}
+          
             config={{
               host: "motor.eu.qlikcloud.com",
               secure: true,
@@ -73,7 +74,7 @@ const cols1 = [
               appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
               webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
               qcs: true,
-            }}*/
+            }}
           >
           <NewApp />
         </Motor> 
