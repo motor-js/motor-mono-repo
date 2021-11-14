@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 //import { NebulaConnection } from '@motor-js/nebula'
 import MotorFilter from "./Filter"
 import MaterialTable from "./components/MaterialTable";
+import MotorKPI from "./KPI";
 
 const NewApp = () => {
 
@@ -12,6 +13,7 @@ const NewApp = () => {
 
   return (
     <div>
+      <div style={{ width: '400px', padding: '10px' }}><MotorKPI /></div>
       <MotorFilter
         dimension={["BURGER" ]}
         m={10}

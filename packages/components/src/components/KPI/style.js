@@ -1,5 +1,14 @@
+import styled, { css } from '@motor-js/theme'
 
-import styled, { css } from "@motor-js/theme";
+const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
+
+export const device = {
+  small: `@media screen and (min-width: ${breakpoints[0]})`,
+  medium: `@media screen and (min-width: ${breakpoints[1]})`,
+  large: `@media screen and (min-width: ${breakpoints[2]})`,
+  xlarge: `@media screen and (min-width: ${breakpoints[3]})`,
+  xxlarge: `@media screen and (min-width: ${breakpoints[4]})`,
+};
 
 const colorCSS = css`
   color: #ffffff;
@@ -55,8 +64,28 @@ export const StyledCard = styled(
     `}
     ${(props) =>
     props.$color === "success" &&
-    
-
+    css`
+      background-color: #10b759;
+      ${colorCSS};
+    `}
+    ${(props) =>
+    props.$color === "warning" &&
+    css`
+      background-color: #ffc107;
+      ${colorCSS};
+    `}
+    ${(props) =>
+    props.$color === "danger" &&
+    css`
+      background-color: #dc3545;
+      ${colorCSS};
+    `}
+    ${(props) =>
+    props.$color === "info" &&
+    css`
+      background-color: #00b8d4;
+      ${colorCSS};
+    `}
 `;
 
 export const StyledCardBody = styled(
@@ -86,7 +115,7 @@ export const StyledCardBody = styled(
 `;
 
 export const StyledCardTitle = styled.h6`
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   font-weight: 600;
@@ -109,7 +138,6 @@ export const StyledCardRate = styled.h3`
   line-height: 1.1;
   margin-right: 5px;
   margin-bottom: 0px;
-  font-family: Rubik sans-serif;
   font-weight: 400;
 `;
 

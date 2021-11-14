@@ -18,7 +18,7 @@ export {
     ThemeProvider,
     defaultTheme,
     css,
-    extendTheme
+    extendTheme,
 };
 
 export * from "styled-system";

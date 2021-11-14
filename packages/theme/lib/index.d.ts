@@ -9,6 +9,6 @@ export declare const device: {
     xlarge: string;
     xxlarge: string;
 };
-export { ThemeContext, ThemeProvider, defaultTheme, css, extendTheme };
+export { ThemeContext, ThemeProvider, defaultTheme, css, extendTheme, };
 export * from "styled-system";
 export default styled;

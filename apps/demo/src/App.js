@@ -65,7 +65,6 @@ const cols1 = [
       <ThemeProvider theme={newTheme}>
           <Motor 
           //engine={engine}
-          
             config={{
               host: "motor.eu.qlikcloud.com",
               secure: true,
