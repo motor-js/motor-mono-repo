@@ -4,10 +4,11 @@ import { useContext, useState } from "react";
 //import { NebulaConnection } from '@motor-js/nebula'
 import MotorFilter from "./Filter"
 import MaterialTable from "./components/MaterialTable";
-import { useButton } from "@motor-js/engine"
 
 const NewApp = () => {
 
+  // const { global } = useContext(EngineContext) 
+  // console.log('GLOB: ',global)
 
   return (
     <div>

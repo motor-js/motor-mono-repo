@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactWaterMark from "../Watermark"
 import { EngineContext } from "../../contexts/EngineProvider";
 import Login from "../Login";
@@ -8,7 +8,6 @@ import { LicenseCheck } from "../License/LicenseCheck"
 
 function Motor({
   engine,
-  theme,
   children,
   licenseKey,
   config,

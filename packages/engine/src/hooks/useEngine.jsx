@@ -55,7 +55,8 @@ function useEngine(props) {
   const [engineError, setEngineError] = useState(false);
   const [errorCode, seErrorCode] = useState(null);
   const [engine, setEngine] = useState(null);
-
+  const [global, setGlobal] = useState(null)
+  
   useEffect(() => {
     (async () => {
       if(!config) {
@@ -67,7 +68,6 @@ function useEngine(props) {
         return 4
       }
        else if (config && config.qcs) {
-        console.log('called qcs')
         const tenantUri = config.host;
         const webIntegrationId = config.webIntId;
 
@@ -82,7 +82,7 @@ function useEngine(props) {
             },
           }
         ).catch((error) => {
-          console.log("caught failed fetch", error);
+          console.warn("caught failed fetch", error);
         });
 
         const csrfToken = fetchResult.headers.get("qlik-csrf-token");
@@ -112,6 +112,7 @@ function useEngine(props) {
         });
         const _global = await session.open();
         const _doc = await _global.openDoc(config.appId);
+        setGlobal(_global)
         setEngine(_doc);
         seErrorCode(1);
 
@@ -142,6 +143,7 @@ function useEngine(props) {
           });
           const _global = await session.open();
           const _doc = await _global.openDoc(config.appId);
+          setGlobal(_global)
           setEngine(_doc);
           seErrorCode(1);
 
@@ -160,7 +162,7 @@ function useEngine(props) {
     })();
   }, [engineState, config]);
 
-  return { engine, engineError, errorCode };
+  return { engine, engineError, errorCode, global };
 }
 
 export default useEngine;
