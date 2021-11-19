@@ -6,7 +6,7 @@ const SenseUtilities = require("enigma.js/sense-utilities");
 const MAX_RETRIES = 3;
 
 function useEngine(props) {
-
+  
   const { config, engineState } = props;
 
   const responseInterceptors = [
@@ -55,8 +55,9 @@ function useEngine(props) {
   const [engineError, setEngineError] = useState(false);
   const [errorCode, seErrorCode] = useState(null);
   const [engine, setEngine] = useState(null);
-  const [global, setGlobal] = useState(null)
-  
+  const [user, setUser] = useState(null)
+  const [loginUri, setLoginUri] = useState(null)
+
   useEffect(() => {
     (async () => {
       if(!config) {
@@ -67,7 +68,8 @@ function useEngine(props) {
         
         return 4
       }
-       else if (config && config.qcs) {
+       else if (config && config.qcs || config.qsServerType === 'cloud' ) {
+
         const tenantUri = config.host;
         const webIntegrationId = config.webIntId;
 
@@ -92,6 +94,7 @@ function useEngine(props) {
 
           return -1;
         }
+
         const session = enigma.create({
           schema,
           url: `wss://${tenantUri}/app/${config.appId}?qlik-web-integration-id=${webIntegrationId}&qlik-csrf-token=${csrfToken}`,
@@ -111,15 +114,21 @@ function useEngine(props) {
           return -3;
         });
         const _global = await session.open();
-        const _doc = await _global.openDoc(config.appId);
-        setGlobal(_global)
-        setEngine(_doc);
+        const _user = await _global.getAuthenticatedUser()
+
+        if(!config.global) {
+          const _doc = await _global.openDoc(config.appId);
+          setEngine(_doc);
+        } else {
+          setEngine(_global);
+        }
+        //setUser(_user)
         seErrorCode(1);
 
         return 1;
       }
-      if (config && !config.qcs) {
-        console.log('called qse')
+      if (config && config.qsServerType === 'desktop') {
+        console.log('qs desktop')
         const myConfig = config;
         const url = SenseUtilities.buildUrl(myConfig);
 
@@ -142,9 +151,15 @@ function useEngine(props) {
             return -3;
           });
           const _global = await session.open();
-          const _doc = await _global.openDoc(config.appId);
-          setGlobal(_global)
-          setEngine(_doc);
+          const _user = await _global.getAuthenticatedUser()
+
+          if(!config.global) {
+            const _doc = await _global.openDoc(config.appId);
+            setEngine(_doc);
+          } else {
+            setEngine(_global);
+          }
+          setUser(_user)
           seErrorCode(1);
 
           return 1;
@@ -158,11 +173,67 @@ function useEngine(props) {
           return -2;
         }
       }
-    
+
+      if (config && config.qsServerType === 'onPrem') {
+
+        const reloadURI = encodeURIComponent(`https://${config.host}/content/Default/${config.redirectFileName}`);
+        const url = `wss:/${config.host}/app/engineData?reloadURI=${reloadURI}`;
+        const session = enigma.create({
+          schema,
+          url: url,
+          suspendOnClose: false
+        });
+
+        session.on('notification:OnAuthenticationInformation', (authInfo) => {
+          
+          if (authInfo.mustAuthenticate) {
+            console.warn("Not logged in");
+            setLoginUri(authInfo.loginUri)
+            seErrorCode(-1);
+             return -1;
+               // window.location.href = authInfo.loginUri;
+          } else {
+            session.on("closed", (t) => {
+              console.warn("Session was closed");
+              seErrorCode(-3);
+              return -3;
+          });
+          }
+        });
+
+            session.on("error", () => {
+                console.warn("Captured session error");
+            });
+            session.on('suspended', () => {
+              console.log('Session was suspended');
+             // session.resume();
+            });
+            
+
+          try {
+            const _global = await session.open();
+            const _user = await _global.getAuthenticatedUser()
+           
+            if(!config.global) {
+              const _doc = await _global.openDoc(config.appId);
+              setEngine(_doc);
+            } else {
+              setEngine(_global);
+            }
+            setUser(_user)
+            seErrorCode(1);
+            return 1
+          } catch (err) {
+            if (err.code) {
+              console.log('Tried to communicate on a session that is closed');
+            }
+          }
+      }
+
     })();
   }, [engineState, config]);
 
-  return { engine, engineError, errorCode, global };
+  return { engine, engineError, errorCode, user, loginUri };
 }
 
 export default useEngine;

@@ -213,7 +213,9 @@ const useList = (props) => {
   );
 
   const searchList = useCallback(
-    (string) => qObject.current.searchListObjectFor("/qListObjectDef", string),
+    (string) => {
+      qObject.current && qObject.current.searchListObjectFor("/qListObjectDef",string)
+    },
     []
   );
 
@@ -243,7 +245,7 @@ const useList = (props) => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
-      
+      console.log('obj!L ',qObject.current)
       // ToDo: make sure init is not called on every render - convert qDoc to qEngine
       if (_isMounted.current) dispatch({ type: "init", payload: { qDoc } });
       qObject.current.on("changed", () => {

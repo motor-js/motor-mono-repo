@@ -52,32 +52,38 @@ const cols1 = [
     redirectFileName: 'auth3.html'
   }
 
-  const { engine, errorCode, loginUri, user } = useConnect({ config })
 
+  const qse = {
+    host: "sense-motor.adviseinc.co.uk",
+    secure: true,
+    port: 19077,
+    prefix: "",
+    appId: "a6dfbb9f-b02a-401e-af98-349b4dd71458",
+    redirectFileName: "auth1.html",
+    qsServerType: "onPrem",
+    global: true
+  };
 
- const newTheme = extendTheme(theme)
-
- console.log('df: ',defaultTheme)
- console.log('new: ',newTheme)
-
+  const cloud = {
+    host: "motor.eu.qlikcloud.com",
+    secure: true,
+    port: null,
+    prefix: "",
+    appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
+    webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
+    qcs: true,
+  }
+  
   return (
     <div className="App" style={{ padding: "10px" }}>
-      <ThemeProvider theme={newTheme}>
+     
           <Motor 
           //engine={engine}
-            config={{
-              host: "motor.eu.qlikcloud.com",
-              secure: true,
-              port: null,
-              prefix: "",
-              appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
-              webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-              qcs: true,
-            }}
+            config={qse}
           >
           <NewApp />
         </Motor> 
-      </ThemeProvider>
+  
     </div>
   );
 }

@@ -31,6 +31,7 @@ function StyledFilter({
   const [numberOfSelections, setNumberOfSelections] = useState(null)
   const [currPageHeight, setCurrPageHeight] = useState(pageHeight)
   const [placeholderState, setPlaceholderState] = useState(placeholder)
+  const [searchValue, setSearchValue] = useState("")
   //const [defaultSelectionState, setDefaultSelections] = useState(null)
 
   useEffect(() => {
@@ -64,22 +65,35 @@ function StyledFilter({
     filterRef,
     () => {
       if (listOpen) { 
-        setListOpen(false) 
+        console.log('outside!')
+        setListOpen(!listOpen) 
+        //setSearchValue('')
         changePage({ qTop: 0, qHeight: pageHeight })
       }
     },[]
   );
 
-  const handleSearchCallback = (e) => searchList(e.target.value)
-
+  const handleSearchCallback = (e) => setSearchValue(e.target.value)
+  
+  useEffect(() => {
+    searchList(searchValue)
+  },[searchValue])
+  
   const handleKeyDownCallback = (e) => {
-    e.key === 'Enter' && confirmListSearch()
+    if(e.key === 'Enter') {
+      confirmListSearch() 
+      setSearchValue("")
+    }
   }
 
-  const handleDeselectCallback = (d) => select([d.key], true);
+  const handleDeselectCallback = (d) => {
+    select([d.key], true)
+    setSearchValue("")
+  }
 
   const deselectAllCallback = () => { 
     clearSelections()
+    setSearchValue("")
   } 
 
   const handleInputSelectCallback = () => setListOpen(true)
@@ -91,6 +105,7 @@ function StyledFilter({
     const { key } = item;
     const toggleSelections = !singleSelection;
     select([key],toggleSelections);
+    setSearchValue("")
     onSelectionChange();
   }
 
@@ -117,6 +132,7 @@ function StyledFilter({
     singleSelection,
     selections,
     size,
+    searchValue,
     ...rest
   }
 
@@ -138,7 +154,7 @@ function StyledFilter({
       {...rest}
     >
       <FilterInput {...filterInputProps} />
-      { listOpen && 
+      { listData && listOpen && 
         <Dropdown {...dropdownProps} /> 
       }
     </FilterWrapper>

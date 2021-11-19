@@ -8,22 +8,26 @@ import MotorKPI from "./KPI";
 
 const NewApp = () => {
 
-  // const { global } = useContext(EngineContext) 
-  // console.log('GLOB: ',global)
+ //  const { engine } = useContext(EngineContext) 
+ //  console.log('engine: ',engine)
 
   return (
     <div>
-      <div style={{ width: '400px', padding: '10px' }}><MotorKPI /></div>
-      <MotorFilter
+       {/* <MotorFilter
         dimension={["BURGER" ]}
         m={10}
       />
+      <div style={{ width: '400px', padding: '10px' }}><MotorKPI /></div>
+           
+
       <MotorFilter
         dimension={["RESTAURANT" ]}
       />
       <div>
         <MaterialTable />
       </div>
+      */}
+
     </div>
   );
 };

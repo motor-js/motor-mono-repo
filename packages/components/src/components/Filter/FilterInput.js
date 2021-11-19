@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import {
   FilterInputWrapper,
   FilterInputOutline,
@@ -20,6 +20,7 @@ const useFocus = () => {
   return [ htmlElRef, setFocus ] 
 }
 
+
 const FilterInput = ({ 
   selectionsLabels,
   selectionLabelLimit,
@@ -34,6 +35,7 @@ const FilterInput = ({
   placeholderState,
   singleSelection,
   size,
+  searchValue,
   ...rest
 }) => {
 
@@ -46,7 +48,7 @@ const FilterInput = ({
   }
 
   const renderItems = () => {
-  //limit selections logic
+    //limit selections logic
     if(singleSelection && selectionsLabels && selectionsLabels.length > 0) {
       return (
       <StyledSingleSelect size={size} {...rest}>{selectionsLabels[0].text}</StyledSingleSelect>
@@ -87,6 +89,7 @@ const FilterInput = ({
         onChange={(e) => handleSearch(e)} 
         onKeyDown={handleKeyDownCallback}
         placeholder={placeholderState}
+        value={searchValue}
         {...rest}
       />
       </InputContainer>
