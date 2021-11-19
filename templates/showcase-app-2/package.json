@@ -1,6 +1,6 @@
 {
   "name": "material-sense",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "private": true,
   "homepage": "https://alexanmtz.github.io/material-sense",
   "dependencies": {
@@ -8,9 +8,9 @@
     "@material-ui/icons": "^4.2.0",
     "@material-ui/lab": "^4.0.0-alpha.16",
     "@material-ui/styles": "^4.0.0",
-    "@motor-js/components": "^0.0.13",
-    "@motor-js/engine": "^0.3.28",
-    "@motor-js/theme": "^0.0.13",
+    "@motor-js/components": "^0.0.14",
+    "@motor-js/engine": "^0.3.29",
+    "@motor-js/theme": "^0.0.14",
     "apexcharts": "^3.27.3",
     "gh-pages": "^2.0.1",
     "numeral": "^2.0.6",
