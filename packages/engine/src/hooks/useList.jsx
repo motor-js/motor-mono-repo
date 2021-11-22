@@ -66,11 +66,8 @@ const useList = (props) => {
 
   // Need config context to find out if Motor is connecting to Global or App instance
   const config = useContext(ConfigContext)
-  console.log('conf',config.global)
   // if global instance, use the App Context
   const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
-  
-  console.log('engine',engine)
   
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -1,26 +1,24 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { AppContext } from '../../contexts/AppContext'
-import { EngineContext } from "../../contexts/EngineProvider";
+import React from "react";
+import ReactWaterMark from "../Watermark"
+import { AppContext } from "../../contexts/AppContext";
+import { ConfigContext } from "../../contexts/ConfigProvider";
+import useEngine from "../../hooks/useEngine";
 
-const AppProvider = ({ children, app }) => {
+function AppProvider({
+  engine,
+  children,
+  config,
+}) {
 
-  const [appObj, setAppObj] = useState({engine: null })
-  const { engine } = useContext(EngineContext)
-  console.log(appObj)
-
-  useEffect(() => {
-    async function getApp() {
-      const _doc = engine && await engine.openDoc(app);
-      setAppObj({engine: _doc})
-    }
-    getApp()
-  },[engine])
+  const engineState = engine
+  const newEngine = useEngine({config, engineState})
 
   return (
-    <AppContext.Provider value={appObj}>
-      {children}
+    <AppContext.Provider value={newEngine}>
+        {children}
     </AppContext.Provider>
-  )
+  );
 }
 
-export default AppProvider
+export default AppProvider;
+

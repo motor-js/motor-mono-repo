@@ -14,7 +14,32 @@ const NewApp = () => {
 
   return (
     <div>
-      <AppProvider app={"a6dfbb9f-b02a-401e-af98-349b4dd71458"}>
+      <AppProvider 
+      config={{
+        host: "sense-motor.adviseinc.co.uk",
+        secure: true,
+        port: 19077,
+        prefix: "",
+        appId: "a6dfbb9f-b02a-401e-af98-349b4dd71458",
+        redirectFileName: "auth1.html",
+        qsServerType: "onPrem",
+      }}>
+      <MotorFilter
+        dimension={["BURGER" ]}
+        m={10}
+      />
+      </AppProvider>
+
+      <AppProvider 
+        config={{
+          host: "sense-motor.adviseinc.co.uk",
+          secure: true,
+          port: 19077,
+          prefix: "",
+          appId: "cf38eabe-cf49-45c8-b006-9a6f38947669",
+          redirectFileName: "auth1.html",
+          qsServerType: "onPrem",
+        }}>
       <MotorFilter
         dimension={["BURGER" ]}
         m={10}

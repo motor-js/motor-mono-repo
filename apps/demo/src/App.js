@@ -79,7 +79,6 @@ const cols1 = [
     <div className="App" style={{ padding: "10px" }}>
      
           <Motor 
-          //engine={engine}
             config={qse}
           >
           <NewApp />
