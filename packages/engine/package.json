@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/engine",
   "license": "https://www.motor.so/license",
-  "version": "0.3.29",
+  "version": "0.3.30",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -14,8 +14,8 @@
     "watch": "microbundle watch --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx"
   },
   "dependencies": {
-    "@motor-js/components": "^0.0.14",
-    "@motor-js/theme": "^0.0.14",
+    "@motor-js/components": "^0.0.15",
+    "@motor-js/theme": "^0.0.15",
     "crypto-js": "^3.3.0",
     "enigma.js": "^2.6.3",
     "prop-types": "^15.7.2",
