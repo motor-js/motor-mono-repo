@@ -34,7 +34,7 @@ const Dropdown = ({
   handleSelectCallback,
   size,
   ...rest
-}, ref) => {
+}, dropRef) => {
 
   const themeContext = {...rest}.theme
   const itemHeight = themeContext.filter.size[size].itemHeight
@@ -88,7 +88,7 @@ const Dropdown = ({
   }
 
   return (
-    <DropdownWrapper ref={ref}>
+    <DropdownWrapper ref={dropRef}>
       <InfiniteLoader
         isItemLoaded={isItemLoaded}
         itemCount={itemCount}

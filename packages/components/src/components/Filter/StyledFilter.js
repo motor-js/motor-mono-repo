@@ -67,7 +67,6 @@ function StyledFilter({
   },
     () => {
       if (listOpen) { 
-        console.log('outside!')
         setListOpen(!listOpen) 
         setSearchValue('')
         changePage({ qTop: 0, qHeight: pageHeight })
