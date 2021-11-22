@@ -20,4 +20,5 @@ export { default as useBookmark } from "./hooks/useBookmark";
 
 //Contexts
 export { EngineContext } from "./contexts/EngineProvider";
+export { default as AppProvider } from "./components/AppProvider";
 

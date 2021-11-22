@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import MotorFilter from "./Filter"
 import MaterialTable from "./components/MaterialTable";
 import MotorKPI from "./KPI";
+import { AppProvider } from "@motor-js/engine"
 
 const NewApp = () => {
 
@@ -13,11 +14,12 @@ const NewApp = () => {
 
   return (
     <div>
+      <AppProvider app={"a6dfbb9f-b02a-401e-af98-349b4dd71458"}>
       <MotorFilter
         dimension={["BURGER" ]}
         m={10}
       />
-           
+      </AppProvider>
       <div>
         {/*<MaterialTable /
         

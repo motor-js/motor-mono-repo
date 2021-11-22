@@ -80,7 +80,7 @@ const cols1 = [
      
           <Motor 
           //engine={engine}
-            config={cloud}
+            config={qse}
           >
           <NewApp />
         </Motor> 

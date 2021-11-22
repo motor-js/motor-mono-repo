@@ -1,6 +1,8 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
+import { AppContext } from "../contexts/AppContext";
+import { ConfigContext } from "../contexts/ConfigProvider";
 
 const initialState = {
   qDoc: null,
@@ -62,8 +64,14 @@ const useList = (props) => {
     autoSortByState,
   } = deepMerge(initialProps, props);
 
-  const { engine } = useContext(EngineContext) || {};
-
+  // Need config context to find out if Motor is connecting to Global or App instance
+  const config = useContext(ConfigContext)
+  console.log('conf',config.global)
+  // if global instance, use the App Context
+  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+  
+  console.log('engine',engine)
+  
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -245,7 +253,6 @@ const useList = (props) => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
-      console.log('obj!L ',qObject.current)
       // ToDo: make sure init is not called on every render - convert qDoc to qEngine
       if (_isMounted.current) dispatch({ type: "init", payload: { qDoc } });
       qObject.current.on("changed", () => {

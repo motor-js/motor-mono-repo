@@ -1,6 +1,7 @@
 import React from "react";
 import ReactWaterMark from "../Watermark"
 import { EngineContext } from "../../contexts/EngineProvider";
+import { ConfigContext } from "../../contexts/ConfigProvider";
 import Login from "../Login";
 import QSELogin from "../QSELogin";
 import NotConnected from "../NotConnected";
@@ -50,6 +51,7 @@ function Motor({
 
   return (
     <EngineContext.Provider value={newEngine}>
+      <ConfigContext.Provider value={config}>
       { config.qsServerType === 'onPrem' ?
       <div>
         <QSELogin
@@ -126,6 +128,7 @@ function Motor({
            </div>
         }
         </div>
+      </ConfigContext.Provider>
     </EngineContext.Provider>
   );
 }
