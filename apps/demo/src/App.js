@@ -71,7 +71,8 @@ const cols1 = [
     prefix: "",
     appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
     webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-    qcs: true,
+    qsServerType: "cloud",
+    //qcs: true,
   }
   
   return (
@@ -79,7 +80,7 @@ const cols1 = [
      
           <Motor 
           //engine={engine}
-            config={qse}
+            config={cloud}
           >
           <NewApp />
         </Motor> 

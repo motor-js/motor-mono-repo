@@ -128,7 +128,7 @@ function useEngine(props) {
         return 1;
       }
       if (config && config.qsServerType === 'desktop') {
-        console.log('qs desktop')
+        
         const myConfig = config;
         const url = SenseUtilities.buildUrl(myConfig);
 

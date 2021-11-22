@@ -1,6 +1,6 @@
 /* eslint-disable prefer-template */
 import React, { useState, useEffect, useRef } from "react";
-import Dropdown from './Dropdown'
+import DropdownRef from './Dropdown'
 import useOutsideClick from "../../hooks/useOutsideClick";
 import FilterInput from "./FilterInput";
 import {
@@ -25,6 +25,7 @@ function StyledFilter({
 
   // Ref for click outside functionality
   const filterRef = useRef();
+  const dropRef = useRef();
 
   const [listOpen, setListOpen] = useState(false);
   const [selectionsLabels, setSelectionsLabels] = useState(null)
@@ -61,13 +62,14 @@ function StyledFilter({
     numberOfSelections && numberOfSelections !== 0 ? setPlaceholderState("") : setPlaceholderState(placeholder)
   },[numberOfSelections])
 
-  useOutsideClick(
-    filterRef,
+  useOutsideClick({
+    filterRef, dropRef
+  },
     () => {
       if (listOpen) { 
         console.log('outside!')
         setListOpen(!listOpen) 
-        //setSearchValue('')
+        setSearchValue('')
         changePage({ qTop: 0, qHeight: pageHeight })
       }
     },[]
@@ -155,7 +157,7 @@ function StyledFilter({
     >
       <FilterInput {...filterInputProps} />
       { listData && listOpen && 
-        <Dropdown {...dropdownProps} /> 
+        <DropdownRef ref={dropRef} {...dropdownProps} /> 
       }
     </FilterWrapper>
   );

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, forwardRef } from 'react';
 import InfiniteLoader from 'react-window-infinite-loader'
 import { FixedSizeList as List } from 'react-window';
 import { 
@@ -34,7 +34,7 @@ const Dropdown = ({
   handleSelectCallback,
   size,
   ...rest
-}) => {
+}, ref) => {
 
   const themeContext = {...rest}.theme
   const itemHeight = themeContext.filter.size[size].itemHeight
@@ -88,7 +88,7 @@ const Dropdown = ({
   }
 
   return (
-    <DropdownWrapper>
+    <DropdownWrapper ref={ref}>
       <InfiniteLoader
         isItemLoaded={isItemLoaded}
         itemCount={itemCount}
@@ -120,5 +120,6 @@ const Dropdown = ({
   )
 }
 
-export default Dropdown;
+const DropdownRef = forwardRef(Dropdown);
+export default DropdownRef;
 

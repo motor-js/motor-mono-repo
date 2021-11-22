@@ -13,21 +13,19 @@ const NewApp = () => {
 
   return (
     <div>
-       {/* <MotorFilter
+      <MotorFilter
         dimension={["BURGER" ]}
         m={10}
       />
-      <div style={{ width: '400px', padding: '10px' }}><MotorKPI /></div>
            
-
-      <MotorFilter
-        dimension={["RESTAURANT" ]}
-      />
       <div>
-        <MaterialTable />
+        {/*<MaterialTable /
+        
+              <div style={{ width: '400px', padding: '10px' }}><MotorKPI /></div>
+              
+              >*/}
       </div>
-      */}
-
+      
     </div>
   );
 };

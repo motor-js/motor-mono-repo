@@ -5,6 +5,7 @@ export const FilterWrapper = styled.div`
   ${space};
   ${color};
   font-size: ${props => props.theme.filter.size[props.size].fontSize};
+  position: relative;
 `;
 
 export const FilterInputWrapper = styled.div`
