@@ -8,6 +8,8 @@ import {
 } from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
+import { AppContext } from "../contexts/AppContext";
+import { ConfigContext } from "../contexts/ConfigProvider";
 import createDef from "../utils/createHCDef";
 import {
   getHeader,
@@ -131,9 +133,9 @@ const useTable = (props) => {
   const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
   const [newColsUnfiltered, setNewColsUnfiltered] = useState(cols)
 
-  // load engine from props
-  // const myEngine = props.engine;
-  const { engine, engineError } = useContext(EngineContext) || {};
+  const configGlobal = useContext(ConfigContext)
+  const { engine } = useContext( configGlobal.global ? AppContext : EngineContext) || {};
+
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
 

@@ -64,9 +64,8 @@ const useList = (props) => {
     autoSortByState,
   } = deepMerge(initialProps, props);
 
-  // Need config context to find out if Motor is connecting to Global or App instance
+
   const config = useContext(ConfigContext)
-  // if global instance, use the App Context
   const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
   
   const _isMounted = useRef(true);

@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback, useRef, useContext } from "react";
+import { getFieldsFromDimensions } from "../utils/hyperCubeUtilities";
 import { EngineContext } from "../contexts/EngineProvider";
-import { getFieldsFromDimensions } from "../utils/hyperCubeUtilities"
+import { AppContext } from "../contexts/AppContext";
+import { ConfigContext } from "../contexts/ConfigProvider";
 
 const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
   
   const [groupResults, setGroupResults] = useState([]);
   const [flatResults, setFlatResults] = useState([]);
   const _isMounted = useRef(true);
-  const { engine } = useContext(EngineContext) || {};
+  
+  const config = useContext(ConfigContext)
+  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
 
   useEffect(() => {
     if (engine === undefined) {
