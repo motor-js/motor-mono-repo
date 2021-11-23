@@ -50,7 +50,6 @@ const TableExampleCompact = () => {
   });
 
   const handleSelect = (c, i) => {
-    // console.log(c);
     //select(c.columnId, [c.elemNumber], false);
     // doReload(1, true);
   };

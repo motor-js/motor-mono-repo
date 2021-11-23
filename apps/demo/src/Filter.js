@@ -1,10 +1,11 @@
 
 
 import App from "./App";
-import { useList, } from '@motor-js/engine'
+import { useList } from '@motor-js/engine'
 import { useContext, useState } from "react";
 //import { NebulaConnection } from '@motor-js/nebula'
 import { Filter } from "@motor-js/components"
+import { ThemeContext } from "@motor-js/theme";
 
 const NewApp = ({ dimension}) => {
 
@@ -17,7 +18,7 @@ const NewApp = ({ dimension}) => {
           size="small"
           motorListProps={motorListProps}
           colorTheme="orange"
-          />
+        />
     </>
   );
 };
