@@ -207,7 +207,7 @@ const useList = (props) => {
 
   const select = useCallback(
     (qElemNumber, toggle = true, ignoreLock = false) =>
-      qObject.current.selectListObjectValues(
+      qObject.current && qObject.current.selectListObjectValues(
         "/qListObjectDef",
         qElemNumber,
         toggle,
@@ -225,7 +225,7 @@ const useList = (props) => {
 
   const confirmListSearch = useCallback(
     (ignoreLock = false) =>
-      qObject.current.acceptListObjectSearch(
+      qObject.current && qObject.current.acceptListObjectSearch(
         "/qListObjectDef",
         true,
         ignoreLock
@@ -239,7 +239,7 @@ const useList = (props) => {
   );
 
   const clearSelections = useCallback(
-    () => qObject.current.clearSelections("/qListObjectDef"),
+    () => qObject.current &&  qObject.current.clearSelections("/qListObjectDef"),
     []
   );
 
