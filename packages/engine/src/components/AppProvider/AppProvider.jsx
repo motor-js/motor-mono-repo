@@ -1,7 +1,6 @@
 import React from "react";
 import ReactWaterMark from "../Watermark"
 import { AppContext } from "../../contexts/AppContext";
-import { ConfigContext } from "../../contexts/ConfigProvider";
 import useEngine from "../../hooks/useEngine";
 
 function AppProvider({
@@ -12,6 +11,8 @@ function AppProvider({
 
   const engineState = engine
   const newEngine = useEngine({config, engineState})
+
+  console.log('engine!!',newEngine)
 
   return (
     <AppContext.Provider value={newEngine}>

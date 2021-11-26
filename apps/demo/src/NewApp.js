@@ -12,12 +12,11 @@ const NewApp = () => {
  //  const { engine } = useContext(EngineContext) 
  //  console.log('engine: ',engine)
  const theme = useContext(ThemeContext)
- console.log('the',theme)
 
   return (
     <div>
       <MotorFilter
-        dimension={["BURGER" ]}
+        dimension={["BURGER"]}
         m={10}
       />
 

@@ -73,6 +73,7 @@ function useEngine(props) {
         const tenantUri = config.host;
         const webIntegrationId = config.webIntId;
 
+        console.log('CALLED CLOUD')
         const fetchResult = await fetch(
           `https://${tenantUri}/api/v1/csrf-token`,
           {
@@ -175,14 +176,16 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem') {
-
         const reloadURI = encodeURIComponent(`https://${config.host}/content/Default/${config.redirectFileName}`);
         const url = `wss:/${config.host}/app/${config.appId}?reloadURI=${reloadURI}`;
+
         const session = enigma.create({
           schema,
           url: url,
           suspendOnClose: false
         });
+
+       // session.on('traffic:*', (direction, msg) => console.log(direction, msg));
 
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
           
@@ -201,13 +204,14 @@ function useEngine(props) {
           }
         });
 
-            session.on("error", () => {
+        session.on("error", () => {
                 console.warn("Captured session error");
-            });
-            session.on('suspended', () => {
+        });
+        
+        session.on('suspended', () => {
               console.log('Session was suspended');
              // session.resume();
-            });
+        });
             
 
           try {

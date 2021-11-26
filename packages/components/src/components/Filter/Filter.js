@@ -10,8 +10,7 @@ function Filter({ ...rest }) {
   const { engine, engineError } = useContext(EngineContext) || {}
 
   const theme =  useContext(ThemeContext)
-  console.log('filter theme: ',theme)
-  
+
   return (
     <StyledFilter
       engine={engine}

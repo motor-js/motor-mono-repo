@@ -1,7 +1,7 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
-import { EngineContext } from "../contexts/EngineProvider";
-import { AppContext } from "../contexts/AppContext";
+import { EngineContext } from "../contexts/EngineProvider"; // MOTOR
+import { AppContext } from "../contexts/AppContext";  // APP PROVIDER
 import { ConfigContext } from "../contexts/ConfigProvider";
 
 const initialState = {
