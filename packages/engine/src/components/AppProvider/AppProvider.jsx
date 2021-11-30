@@ -12,8 +12,6 @@ function AppProvider({
   const engineState = engine
   const newEngine = useEngine({config, engineState})
 
-  console.log('engine!!',newEngine)
-
   return (
     <AppContext.Provider value={newEngine}>
         {children}

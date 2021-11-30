@@ -54,7 +54,16 @@ function useGlobal(config) {
   const [errorCode, seErrorCode] = useState(null);
   const [global, setGlobal] = useState(() => {
     (async () => {
-      if (config && config.qcs) {
+      if(!config) {
+        console.log('called no config')
+        setEngine(engineState)
+        seErrorCode(null)
+        setEngineError(null)
+        
+        return 4
+      }
+       else if (config && config.qcs || config.qsServerType === 'cloud' ) {
+
         const tenantUri = config.host;
         const webIntegrationId = config.webIntId;
 
@@ -69,7 +78,7 @@ function useGlobal(config) {
             },
           }
         ).catch((error) => {
-          console.log("caught failed fetch", error);
+          console.warn("caught failed fetch", error);
         });
 
         const csrfToken = fetchResult.headers.get("qlik-csrf-token");
@@ -79,6 +88,7 @@ function useGlobal(config) {
 
           return -1;
         }
+
         const session = enigma.create({
           schema,
           url: `wss://${tenantUri}/app/${config.appId}?qlik-web-integration-id=${webIntegrationId}&qlik-csrf-token=${csrfToken}`,
@@ -98,25 +108,17 @@ function useGlobal(config) {
           return -3;
         });
         const _global = await session.open();
-        const engineVersion = await _global.engineVersion();
-        const docList = await _global.getDocList({});
-        const oSName = await _global.oSName();
-        const oSVersion = await _global.oSVersion();
-        setGlobal({
-          global: _global,
-          docList,
-          engineVersion,
-          oSName,
-          oSVersion,
-        });
-
+        setGlobal(_global)
+        //setUser(_user)
         seErrorCode(1);
 
         return 1;
       }
-      if (config) {
+      if (config && config.qsServerType === 'desktop') {
+        
         const myConfig = config;
         const url = SenseUtilities.buildUrl(myConfig);
+
         try {
           const session = enigma.create({
             schema,
@@ -136,37 +138,77 @@ function useGlobal(config) {
             return -3;
           });
           const _global = await session.open();
-
-          const engineVersion = await _global.engineVersion();
-          const docList = await _global.getDocList({});
-          const oSName = await _global.oSName();
-          const oSVersion = await _global.oSVersion();
-          setGlobal({
-            global: _global,
-            docList,
-            engineVersion,
-            oSName,
-            oSVersion,
-          });
-
+          setGlobal(_global)
           seErrorCode(1);
 
           return 1;
         } catch (err) {
           console.warn("Captured Error", err);
           if (err.code === 1003) {
-            setGlobalError("No engine. App Not found.");
+            setEngineError("No engine. App Not found.");
           }
           seErrorCode(-2);
 
           return -2;
         }
       }
-    })(null);
+
+      if (config && config.qsServerType === 'onPrem') {
+        const reloadURI = encodeURIComponent(`https://${config.host}/content/Default/${config.redirectFileName}`);
+        const url = `wss:/${config.host}/app/${config.appId}?reloadURI=${reloadURI}`;
+
+        const session = enigma.create({
+          schema,
+          url: url,
+          suspendOnClose: false
+        });
+
+       // session.on('traffic:*', (direction, msg) => console.log(direction, msg));
+
+        session.on('notification:OnAuthenticationInformation', (authInfo) => {
+          
+          if (authInfo.mustAuthenticate) {
+            console.warn("Not logged in");
+            setLoginUri(authInfo.loginUri)
+            seErrorCode(-1);
+             return -1;
+               // window.location.href = authInfo.loginUri;
+          } else {
+            session.on("closed", (t) => {
+              console.warn("Session was closed");
+              seErrorCode(-3);
+              return -3;
+          });
+          }
+        });
+
+        session.on("error", () => {
+                console.warn("Captured session error");
+        });
+        
+        session.on('suspended', () => {
+              console.log('Session was suspended');
+             // session.resume();
+        });
+            
+          try {
+            const _global = await session.open();
+            setGlobal(_global)
+            seErrorCode(1)
+
+            return 1
+          } catch (err) {
+            if (err.code) {
+              console.log('Tried to communicate on a session that is closed');
+            }
+          }
+      }
+
+    })();
   }, []);
 
   return {
-    ...global,
+    global,
     globalError,
     errorCode,
   };
