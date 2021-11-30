@@ -168,26 +168,25 @@ function useGlobal(config) {
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
           
           if (authInfo.mustAuthenticate) {
-            console.warn("Not logged in");
-            setLoginUri(authInfo.loginUri)
-            seErrorCode(-1);
+            //console.warn("Not logged in");
+            //seErrorCode(-1);
              return -1;
                // window.location.href = authInfo.loginUri;
           } else {
             session.on("closed", (t) => {
-              console.warn("Session was closed");
-              seErrorCode(-3);
+              //console.warn("Session was closed");
+              //seErrorCode(-3);
               return -3;
           });
           }
         });
 
         session.on("error", () => {
-                console.warn("Captured session error");
+          //  console.warn("Captured session error");
         });
         
         session.on('suspended', () => {
-              console.log('Session was suspended');
+            //  console.log('Session was suspended');
              // session.resume();
         });
             
