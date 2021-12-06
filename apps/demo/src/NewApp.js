@@ -1,57 +1,47 @@
-
-
 import App from "./App";
-import { useList, useSearch, EngineContext } from '@motor-js/engine'
+import { useList, useGlobal, useSearch, EngineContext } from '@motor-js/engine'
 import { useContext, useState } from "react";
 //import { NebulaConnection } from '@motor-js/nebula'
-import { Filter } from "@motor-js/components"
+import MotorFilter from "./Filter"
+import MaterialTable from "./components/MaterialTable";
+import MotorKPI from "./KPI";
+import { ThemeContext } from "@motor-js/theme"
 
 const NewApp = () => {
 
-  const dimension = ['BURGER']
-  const { listData, motorListProps } = useList({ dimension })
+ //  const { engine } = useContext(EngineContext) 
+ //  console.log('engine: ',engine)
+ const theme = useContext(ThemeContext)
 
-  const [options, setOptions] = useState([])
-  const [searchValue, setSearchValue] = useState("1");
+ const { global } = useGlobal({
+  host: "sense-motor.adviseinc.co.uk",
+  secure: true,
+  port: 19077,
+  prefix: "",
+  appId: "cf38eabe-cf49-45c8-b006-9a6f38947669",
+  redirectFileName: "auth.html",
+  qsServerType: "onPrem",
+  global: true
+});
 
-  const qCount = 100;
-  const qGroupItemCount = 100;
-
-  const { 
-    flatResults,
-    flatSelect,
-  } = useSearch({ 
-    searchValue,
-    qCount,
-    qGroupItemCount
-  })
-
-  const handleSelect = (dim, val) => {
-    flatSelect(dim,val)
-  };
+console.log('global: ',global)
 
   return (
-    <>
-      {/* { engine &&  */}
-       <button onClick={() => handleSelect('Restaurant','Burger King')}>change page</button>
-       <div style={{
+    <div>
+      <MotorFilter
+        dimension={["BURGER"]}
+        m={10}
+      />
 
-       }}>
-        <Filter 
-          listData={listData}
-          size="small"
-          motorListProps={motorListProps}
-        />
-        <Filter 
-          listData={listData}
-          motorListProps={motorListProps}
-        />
-        <Filter 
-          listData={listData}
-          motorListProps={motorListProps}
-        />
-        </div>
-    </>
+      <div>
+        {/*<MaterialTable /
+        
+              <div style={{ width: '400px', padding: '10px' }}><MotorKPI /></div>
+              
+              >*/}
+      </div>
+      
+    </div>
   );
 };
 

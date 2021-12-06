@@ -8,6 +8,8 @@ import {
 } from "react";
 import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
+import { AppContext } from "../contexts/AppContext";
+import { ConfigContext } from "../contexts/ConfigProvider";
 import createDef from "../utils/createHCDef";
 import {
   getHeader,
@@ -63,6 +65,7 @@ function reducer(state, action) {
 }
 
 const initialProps = {
+  config: null,
   cols: null,
   qHyperCubeDef: null,
   qTitle: null,
@@ -90,6 +93,7 @@ const initialProps = {
 
 const useTable = (props) => {
   const {
+    config,
     cols,
     qTitle,
     qHyperCubeDef,
@@ -128,10 +132,10 @@ const useTable = (props) => {
   // filter cols to just return the active cols
   const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
   const [newColsUnfiltered, setNewColsUnfiltered] = useState(cols)
-  
-  // load engine from props
-  // const myEngine = props.engine;
-  const { engine, engineError } = useContext(EngineContext) || {};
+
+  const configGlobal = useContext(ConfigContext)
+  const { engine } = useContext( configGlobal.global ? AppContext : EngineContext) || {};
+
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
 
@@ -140,6 +144,8 @@ const useTable = (props) => {
 
   //======================
   // PAGING LOGIC
+  //qPage State (so we can dynamically change the page height and trigger new data)
+  const [newPage, setNewPage] = useState(qPage)
   // page size
   const [pageSize, setPageSize] = useState(qPage.current.qHeight);
 
@@ -184,13 +190,18 @@ const useTable = (props) => {
   // page decrement
   const decrementPage = () => {
     if (page == 0) {
-      //console.log(pages);
       handlePageChange(pages - 1);
     } else {
       const prevPage = page - 1;
       handlePageChange(prevPage);
     }
   };
+
+  const changePageSize = useCallback((size) => {
+    const newObj = { 'current': { ...newPage.current, qHeight: size } }
+    setNewPage(newObj)
+    setPageSize(size)
+  },[])
 
   // Find the total size of the Hypercube
   useEffect(() => {
@@ -256,17 +267,17 @@ const useTable = (props) => {
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);
 
-  const getData = useCallback(async () => {
+  const getData = useCallback(async (newPage) => {
     try {
       const qDataPages = await qObject.current.getHyperCubeData(
         "/qHyperCubeDef",
-        [qPage.current]
+        [newPage.current]
       );
       return qDataPages[0];
     } catch (error) {
       setError(error); // from creation or business logic
     }
-  }, []);
+  }, [newPage]);
 
   const getTitle = useCallback(async (layout) => {
     return layout.qHyperCube.qTitle;
@@ -274,7 +285,7 @@ const useTable = (props) => {
 
   const getReducedData = useCallback(
     () => async () => {
-      const { qWidth } = qPage.current;
+      const { qWidth } = newPage.current;
       const _qPage = {
         qTop: 0,
         qLeft: 0,
@@ -309,8 +320,8 @@ const useTable = (props) => {
     const _qLayout = await getLayout();
     const _qTitle = await getTitle(_qLayout);
     const _qValid = await validData(_qLayout, engine);
-    const _qData = await getData();
-
+    const _qData = await getData(newPage);
+    
     // Order colunns for dataKey
     const _orderedCols = await orderCols(newCols);
     const _dataSet = _qData && (await structureData(_qLayout, _qData, _orderedCols));
@@ -349,13 +360,13 @@ const useTable = (props) => {
         });
       }
     }
-  }, [getData, getLayout, getQRData, getReducedData]);
+  }, [getData, getLayout, getQRData, getReducedData, newPage]);
 
   const changePage = useCallback(
-    (newPage) => {
-      qPage.current = {
-        ...qPage.current,
-        ...newPage,
+    (newP) => {
+      newPage.current = {
+        ...newPage.current,
+        ...newP,
       };
       update(newCols);
     },
@@ -462,6 +473,25 @@ const useTable = (props) => {
 
   useEffect(() => () => (_isMounted.current = false), []);
 
+  const exportData = (filename, exportType) => {
+    const { host, secure, port, prefix } = config;
+    
+    const id = qLayout.qInfo.qId;
+    console.log('ID: ',id)
+    const filenameExport = filename || "Data Export";
+    const _secure = secure ? "https://" : "http://";
+    const _port = port ? `:${port}` : "";
+    const server = _secure + host + _port + prefix;
+    engine.getObject(id).then((model) => {
+      console.log(model)
+      //export type: P for Possible, A for All
+ //    model.exportData("CSV_C", "/qHyperCubeDef", filenameExport, exportType).then((url) => {
+  //       console.log(url);
+        // window.open(server + url.qUrl, '_blank')
+  //    });
+    });
+  };
+
   return {
     beginSelections,
     endSelections,
@@ -473,6 +503,8 @@ const useTable = (props) => {
     handleSortChange,
     qRData,
     changePage,
+    setPageSize,
+    changePageSize,
     selections,
     select,
     applyPatches,
@@ -485,6 +517,7 @@ const useTable = (props) => {
     updateCols,
     newCols,
     newColsUnfiltered,
+    exportData,
     // table props
     dataGridProps: {
       page,

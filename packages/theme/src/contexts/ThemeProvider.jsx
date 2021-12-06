@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ThemeContext } from '@motor-js/theme'
+import { ThemeContext } from 'styled-components'
 import { deepMerge } from '../utils/object'
 
 ThemeContext.Extend = ({ children, value }) => (

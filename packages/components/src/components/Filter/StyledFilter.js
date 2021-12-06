@@ -1,6 +1,6 @@
 /* eslint-disable prefer-template */
 import React, { useState, useEffect, useRef } from "react";
-import Dropdown from './Dropdown'
+import DropdownRef from './Dropdown'
 import useOutsideClick from "../../hooks/useOutsideClick";
 import FilterInput from "./FilterInput";
 import {
@@ -25,12 +25,14 @@ function StyledFilter({
 
   // Ref for click outside functionality
   const filterRef = useRef();
+  const dropRef = useRef();
 
   const [listOpen, setListOpen] = useState(false);
   const [selectionsLabels, setSelectionsLabels] = useState(null)
   const [numberOfSelections, setNumberOfSelections] = useState(null)
   const [currPageHeight, setCurrPageHeight] = useState(pageHeight)
   const [placeholderState, setPlaceholderState] = useState(placeholder)
+  const [searchValue, setSearchValue] = useState("")
   //const [defaultSelectionState, setDefaultSelections] = useState(null)
 
   useEffect(() => {
@@ -60,26 +62,39 @@ function StyledFilter({
     numberOfSelections && numberOfSelections !== 0 ? setPlaceholderState("") : setPlaceholderState(placeholder)
   },[numberOfSelections])
 
-  useOutsideClick(
-    filterRef,
+  useOutsideClick({
+    filterRef, dropRef
+  },
     () => {
       if (listOpen) { 
-        setListOpen(false) 
+        setListOpen(!listOpen) 
+        setSearchValue('')
         changePage({ qTop: 0, qHeight: pageHeight })
       }
     },[]
   );
 
-  const handleSearchCallback = (e) => searchList(e.target.value)
-
+  const handleSearchCallback = (e) => setSearchValue(e.target.value)
+  
+  useEffect(() => {
+    searchList(searchValue)
+  },[searchValue])
+  
   const handleKeyDownCallback = (e) => {
-    e.key === 'Enter' && confirmListSearch()
+    if(e.key === 'Enter') {
+      confirmListSearch() 
+      setSearchValue("")
+    }
   }
 
-  const handleDeselectCallback = (d) => select([d.key], true);
+  const handleDeselectCallback = (d) => {
+    select([d.key], true)
+    setSearchValue("")
+  }
 
   const deselectAllCallback = () => { 
     clearSelections()
+    setSearchValue("")
   } 
 
   const handleInputSelectCallback = () => setListOpen(true)
@@ -91,6 +106,7 @@ function StyledFilter({
     const { key } = item;
     const toggleSelections = !singleSelection;
     select([key],toggleSelections);
+    setSearchValue("")
     onSelectionChange();
   }
 
@@ -117,6 +133,7 @@ function StyledFilter({
     singleSelection,
     selections,
     size,
+    searchValue,
     ...rest
   }
 
@@ -138,8 +155,8 @@ function StyledFilter({
       {...rest}
     >
       <FilterInput {...filterInputProps} />
-      { listOpen && 
-        <Dropdown {...dropdownProps} /> 
+      { listData && listOpen && 
+        <DropdownRef ref={dropRef} {...dropdownProps} /> 
       }
     </FilterWrapper>
   );

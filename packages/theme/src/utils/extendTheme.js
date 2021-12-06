@@ -1,6 +1,6 @@
 import { deepMerge } from "./object";
-import { theme } from "..";
+import defaultTheme from "../theme";
 
 export function extendTheme(value) {
-  return deepMerge(theme, value)
+  return deepMerge(defaultTheme, value)
 }

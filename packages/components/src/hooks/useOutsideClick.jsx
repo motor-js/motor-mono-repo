@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
 
-const useOutsideClick = (ref, callback) => {
-
+const useOutsideClick = ({filterRef, dropRef}, callback) => {
+  
   const handleClick = (e) => {
-
-    if (ref.current && !ref.current.contains(e.target)) {
+    if (
+      filterRef.current && 
+      !filterRef.current.contains(e.target) && 
+      dropRef.current && 
+      !dropRef.current.contains(e.target) 
+      ) {
       callback();
     }
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick, { capture: true });
 
     return () => {
-      document.removeEventListener('click', handleClick);
+      document.removeEventListener('click', handleClick, { capture: true });
     };
   });
 };

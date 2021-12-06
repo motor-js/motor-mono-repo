@@ -1,12 +1,11 @@
- /** @jsxImportSource theme-ui */ 
-import styled from 'styled-components'
-import { color, layout, space } from 'styled-system'
+import styled, { color, space } from '@motor-js/theme'
 import { transparentize } from 'polished';
 
 export const FilterWrapper = styled.div`
   ${space};
   ${color};
   font-size: ${props => props.theme.filter.size[props.size].fontSize};
+  position: relative;
 `;
 
 export const FilterInputWrapper = styled.div`
@@ -35,7 +34,6 @@ export const InputContainer = styled.div`
   display: grid;
   flex: 1 1 0%;
   flex-wrap: wrap;
-
 `
 
 export const StyledFilterInput = styled.input`

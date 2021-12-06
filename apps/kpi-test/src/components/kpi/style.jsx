@@ -1,16 +1,5 @@
-import { Col, Row } from "styled-bootstrap-grid";
 
-import styled, { css } from "styled-components";
-
-const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
-
-export const device = {
-  small: `@media screen and (min-width: ${breakpoints[0]})`,
-  medium: `@media screen and (min-width: ${breakpoints[1]})`,
-  large: `@media screen and (min-width: ${breakpoints[2]})`,
-  xlarge: `@media screen and (min-width: ${breakpoints[3]})`,
-  xxlarge: `@media screen and (min-width: ${breakpoints[4]})`,
-};
+import styled, { css } from "@motor-js/theme";
 
 const colorCSS = css`
   color: #ffffff;
@@ -66,28 +55,8 @@ export const StyledCard = styled(
     `}
     ${(props) =>
     props.$color === "success" &&
-    css`
-      background-color: #10b759;
-      ${colorCSS};
-    `}
-    ${(props) =>
-    props.$color === "warning" &&
-    css`
-      background-color: #ffc107;
-      ${colorCSS};
-    `}
-    ${(props) =>
-    props.$color === "danger" &&
-    css`
-      background-color: #dc3545;
-      ${colorCSS};
-    `}
-    ${(props) =>
-    props.$color === "info" &&
-    css`
-      background-color: #00b8d4;
-      ${colorCSS};
-    `}
+    
+
 `;
 
 export const StyledCardBody = styled(

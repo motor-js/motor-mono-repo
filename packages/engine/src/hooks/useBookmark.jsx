@@ -1,12 +1,17 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
+import { AppContext } from "../contexts/AppContext";
+import { ConfigContext } from "../contexts/ConfigProvider";
 
 // const initialProps = {
 //   qId: null,
 // };
 
 const useBookmark = (props) => {
-  const { engine, engineError } = useContext(EngineContext) || {};
+   
+   const config = useContext(ConfigContext)
+   const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+
   const [bookmarks, setBookmarks] = useState(null);
   const [error, setError] = useState(null);
 

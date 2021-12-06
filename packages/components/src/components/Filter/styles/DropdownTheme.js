@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from '@motor-js/theme'
 //import { color, layout, space } from 'styled-system'
-import {transparentize } from 'polished'
-import { commonStyles, unselected } from '../../../styling/mixins';
+import { transparentize } from 'polished'
+import { commonStyles } from '../../../styling/mixins';
 import { Icon } from '../../Icons/styles/StyledIcon'
 
 export const DropdownWrapper = styled.div`
@@ -11,15 +11,48 @@ export const DropdownWrapper = styled.div`
   background-color: white;
 `
 
-export const StyledDropdownItem = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  &:hover {
-    background-color: ${props => transparentize(0.92,props.theme.colors[props.colorTheme][500])};
+export const StyledDropdownItem = styled.div.attrs((props) => {
+
+  let bkgClr;
+  let txtClr;
+
+  switch (props.selected) {
+    case "S":
+      bkgClr = '';
+    //  txtClr = selectColor(props.theme.filter.color.selectedFont, props.theme);
+      break;
+    case "O":
+      bkgClr = '';
+   //   txtClr = props.theme.global.color.font;
+      break;
+    case "A":
+      bkgClr = props.theme.colors.gray[100]
+   //   txtClr = props.theme.global.color.font;
+      break;
+    case "X":
+      bkgClr = props.theme.colors.gray[400]
+   //   txtClr = props.theme.global.color.font;
+      break;
+    default:
+      bkgClr = '';
+   //   txtClr = props.theme.global.color.font;
+      break;
   }
-  cursor: pointer;
-`;
+
+  return  {
+    style: {
+    backgroundColor: bkgClr
+    }
+  }
+})`
+width: 100%;
+display: flex;
+align-items: center;
+&:hover {
+  background-color: ${props => transparentize(0.92,props.theme.colors[props.colorTheme][500])};
+}
+cursor: pointer;
+`
 
 export const StyledList = styled.div`
   ${commonStyles};

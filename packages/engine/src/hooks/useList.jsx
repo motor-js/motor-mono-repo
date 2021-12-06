@@ -1,6 +1,8 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
-import { EngineContext } from "../contexts/EngineProvider";
+import { EngineContext } from "../contexts/EngineProvider"; // MOTOR
+import { AppContext } from "../contexts/AppContext";  // APP PROVIDER
+import { ConfigContext } from "../contexts/ConfigProvider";
 
 const initialState = {
   qDoc: null,
@@ -62,8 +64,10 @@ const useList = (props) => {
     autoSortByState,
   } = deepMerge(initialProps, props);
 
-  const { engine } = useContext(EngineContext) || {};
 
+  const config = useContext(ConfigContext)
+  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+  
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -203,7 +207,7 @@ const useList = (props) => {
 
   const select = useCallback(
     (qElemNumber, toggle = true, ignoreLock = false) =>
-      qObject.current.selectListObjectValues(
+      qObject.current && qObject.current.selectListObjectValues(
         "/qListObjectDef",
         qElemNumber,
         toggle,
@@ -213,13 +217,15 @@ const useList = (props) => {
   );
 
   const searchList = useCallback(
-    (string) => qObject.current.searchListObjectFor("/qListObjectDef", string),
+    (string) => {
+      qObject.current && qObject.current.searchListObjectFor("/qListObjectDef",string)
+    },
     []
   );
 
   const confirmListSearch = useCallback(
     (ignoreLock = false) =>
-      qObject.current.acceptListObjectSearch(
+      qObject.current && qObject.current.acceptListObjectSearch(
         "/qListObjectDef",
         true,
         ignoreLock
@@ -233,7 +239,7 @@ const useList = (props) => {
   );
 
   const clearSelections = useCallback(
-    () => qObject.current.clearSelections("/qListObjectDef"),
+    () => qObject.current &&  qObject.current.clearSelections("/qListObjectDef"),
     []
   );
 
@@ -243,7 +249,6 @@ const useList = (props) => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
-      
       // ToDo: make sure init is not called on every render - convert qDoc to qEngine
       if (_isMounted.current) dispatch({ type: "init", payload: { qDoc } });
       qObject.current.on("changed", () => {

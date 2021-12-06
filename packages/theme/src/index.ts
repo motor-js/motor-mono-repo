@@ -1,8 +1,7 @@
-import styled, {
-    ThemeProvider,
-    ThemeContext
-} from "styled-components";
+import styled, { css, ThemeProvider } from "styled-components";
+import { ThemeContext } from "./contexts/ThemeProvider";
 import defaultTheme from "./theme";
+import { extendTheme } from "./utils/extendTheme"
 
 const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
 
@@ -15,10 +14,13 @@ export const device = {
 };
 
 export {
-    ThemeProvider,
     ThemeContext,
+    ThemeProvider,
     defaultTheme,
+    css,
+    extendTheme,
 };
+
 
 export * from "styled-system";
 export default styled;

@@ -1,5 +1,7 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
+import { AppContext } from "../contexts/AppContext";
+import { ConfigContext } from "../contexts/ConfigProvider";
 import { deepMerge } from "../utils/object";
 import createDef from "../utils/createHCDef";
 
@@ -21,7 +23,9 @@ const useButton = (props) => {
     props
   );
 
-  const { engine, engineError } = useContext(EngineContext) || {};
+  const configGlobal = useContext(ConfigContext)
+  const { engine } = useContext( configGlobal.global ? AppContext : EngineContext) || {};
+
   const [qLayout, setQLayout] = useState(null);
 
   const _isMounted = useRef(true);
@@ -79,7 +83,7 @@ const useButton = (props) => {
 
   const exportData = (filename) => {
     const { host, secure, port, prefix } = config;
-
+    
     const id = qLayout.qInfo.qId;
     const filenameExport = filename || "Data Export";
     const _secure = secure ? "https://" : "http://";
@@ -87,7 +91,7 @@ const useButton = (props) => {
     const server = _secure + host + _port + prefix;
     engine.getObject(id).then((model) => {
       model.exportData("CSV_C", "/qHyperCubeDef", "Test", "P").then((url) => {
-        console.log(url.qUrl, url.qWarnings);
+         console.log(url.qUrl, url.qWarnings);
         // window.open(server + url.qUrl, '_blank')
       });
     });
