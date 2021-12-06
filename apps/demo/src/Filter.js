@@ -11,7 +11,7 @@ const NewApp = ({ dimension}) => {
 
   const { listData, motorListProps } = useList({ dimension })
   
-  //console.log('listData: ',listData)
+  console.log('listData: ',listData)
   return (
     <>
         <Filter 

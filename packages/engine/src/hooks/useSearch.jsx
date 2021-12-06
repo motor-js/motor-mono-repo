@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef, useContext } from "react";
 import { getFieldsFromDimensions } from "../utils/hyperCubeUtilities";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
-import { ConfigContext } from "../contexts/ConfigProvider";
 
 const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
   
@@ -10,9 +9,8 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
   const [flatResults, setFlatResults] = useState([]);
   const _isMounted = useRef(true);
   
-  const config = useContext(ConfigContext)
-  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
-
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
+  
   useEffect(() => {
     if (engine === undefined) {
     } else {

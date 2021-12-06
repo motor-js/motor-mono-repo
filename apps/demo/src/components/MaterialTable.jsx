@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
+import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useTable } from '@motor-js/engine';
-import Button from  '@mui/material/Button';
 
 export default function MaterialTable() {
   
@@ -22,18 +22,9 @@ export default function MaterialTable() {
     qcs: true,
   }
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-  
+  const [dataSize, setDataSize] = useState(null)
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const cols = [
     {
@@ -53,38 +44,70 @@ export default function MaterialTable() {
     }
   ];
 
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: 'red',
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 14,
+    }
+  }));
+
+
   const { 
     dataSet,
     headerGroup,
-    exportData,
+    qLayout,
+    changePageSize,
+    handlePageChange,
+    incrementPage
   } = useTable({
     cols,
-    config
+    config,
+    qPage: {
+      qTop: 0,
+      qLeft: 0,
+      qWidth: 10,
+      qHeight: 10,
+    },
   });
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+    handlePageChange(newPage)
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    changePageSize(+event.target.value)
+    setPage(0);
+  };
+  
+  useEffect(() => {
+    qLayout && setDataSize(qLayout.qHyperCube.qSize.qcy)
+  },[qLayout])
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <Button onClick={() => exportData('data','A')}>Export Data</Button>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {headerGroup && headerGroup.map((column) => (
-                <TableCell
+                <StyledTableCell
                   key={column.qInterColumnIndex}
                   align={'left'}
                   style={{ minWidth: 170 }}
                 >
                   {column.title}
-                </TableCell>
+                </StyledTableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {dataSet && 
               dataSet
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              //.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, i) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={i}>
@@ -105,7 +128,7 @@ export default function MaterialTable() {
       {<TablePagination
         rowsPerPageOptions={[10, 20, 30]}
         component="div"
-        count={dataSet && dataSet.length}
+        count={dataSize}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -61,7 +61,6 @@ function useEngine(props) {
   useEffect(() => {
     (async () => {
       if(!config) {
-        console.log('called no config')
         setEngine(engineState)
         seErrorCode(null)
         setEngineError(null)
@@ -73,7 +72,6 @@ function useEngine(props) {
         const tenantUri = config.host;
         const webIntegrationId = config.webIntId;
 
-        console.log('CALLED CLOUD')
         const fetchResult = await fetch(
           `https://${tenantUri}/api/v1/csrf-token`,
           {

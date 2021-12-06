@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
-import { ConfigContext } from "../contexts/ConfigProvider";
 
 let qDoc = null;
 let qObject = null;
 
 const useSelectionObject = () => {
 
-  const config = useContext(ConfigContext)
-  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
 
   const qObject = useRef(null);
   const [qLayout, setQLayout] = useState(null);

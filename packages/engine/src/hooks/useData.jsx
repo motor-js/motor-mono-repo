@@ -10,7 +10,6 @@ import { deepMerge } from "../utils/object";
 
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
-import { ConfigContext } from "../contexts/ConfigProvider";
 
 import {
   hyperCubeChartTransform,
@@ -143,11 +142,10 @@ const useData = (props) => {
     selections,
   } = state;
 
-  const config = useContext(ConfigContext)
   const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
 
   const qObject = useRef(null);
-
+  
   const qPage = useRef(qPageProp);
 
   // error trapping

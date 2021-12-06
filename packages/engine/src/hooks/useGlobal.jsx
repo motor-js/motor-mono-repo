@@ -55,7 +55,6 @@ function useGlobal(config) {
   const [global, setGlobal] = useState(() => {
     (async () => {
       if(!config) {
-        console.log('called no config')
         setEngine(engineState)
         seErrorCode(null)
         setEngineError(null)
