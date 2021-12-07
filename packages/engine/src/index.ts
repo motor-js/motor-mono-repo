@@ -5,7 +5,6 @@ export { default as NotConnected } from "./components/NotConnected";
 
 //Hooks
 export { default as useEngine } from "./hooks/useEngine";
-export { default as useHyperCube } from "./hooks/useHyperCube";
 export { default as useList } from "./hooks/useList";
 export { default as useData } from "./hooks/useData";
 export { default as useTable } from "./hooks/useTable";
