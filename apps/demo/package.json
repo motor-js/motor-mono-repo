@@ -1,12 +1,12 @@
 {
   "name": "demo",
-  "version": "0.5.44",
+  "version": "0.5.45",
   "private": true,
   "dependencies": {
     "@emotion/styled": "^11.3.0",
-    "@motor-js/components": "^0.0.23",
-    "@motor-js/engine": "^0.3.38",
-    "@motor-js/theme": "^0.0.23",
+    "@motor-js/components": "^0.0.24",
+    "@motor-js/engine": "^0.3.39",
+    "@motor-js/theme": "^0.0.24",
     "@mui/material": "^5.1.0",
     "@styled-system/theme-get": "^5.1.2",
     "@testing-library/jest-dom": "^5.11.4",
