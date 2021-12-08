@@ -82,7 +82,7 @@ export default function MaterialTable() {
     qLayout && setDataSize(qLayout.qHyperCube.qSize.qcy)
   },[qLayout])
 
-  const handleExport = () => exportData('test','P')
+  const handleExport = () => exportData()
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
