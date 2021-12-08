@@ -142,10 +142,10 @@ const useData = (props) => {
     selections,
   } = state;
 
-  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
 
   const qObject = useRef(null);
-  
+
   const qPage = useRef(qPageProp);
 
   // error trapping
