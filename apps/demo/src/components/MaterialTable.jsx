@@ -60,7 +60,6 @@ export default function MaterialTable() {
     qLayout,
     changePageSize,
     handlePageChange,
-    incrementPage
   } = useTable({
     cols,
     config,

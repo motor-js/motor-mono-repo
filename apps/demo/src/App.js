@@ -10,10 +10,10 @@ export default function App() {
 
   return (
     <div className="App" style={{ padding: "10px" }}>
-        <Motor config={globalSAASConfig}>
-          <AppProvider config={qlikSAASConfig}>
+        <Motor config={qlikConfig}>
+          <AppProvider config={qlikConfig}>
           <NewApp />
-        </AppProvider>
+          </AppProvider>
         </Motor> 
     </div>
   );
