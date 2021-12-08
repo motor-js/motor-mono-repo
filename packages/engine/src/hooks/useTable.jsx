@@ -476,18 +476,15 @@ const useTable = (props) => {
     const { host, secure, port, prefix } = config;
     
     const id = qLayout.qInfo.qId;
-    console.log('ID: ',id)
     const filenameExport = filename || "Data Export";
     const _secure = secure ? "https://" : "http://";
     const _port = port ? `:${port}` : "";
-    const server = _secure + host + _port + prefix;
+    const server = _secure + host //+ _port + prefix;
     engine.getObject(id).then((model) => {
-      console.log(model)
       //export type: P for Possible, A for All
- //    model.exportData("CSV_C", "/qHyperCubeDef", filenameExport, exportType).then((url) => {
-  //       console.log(url);
-        // window.open(server + url.qUrl, '_blank')
-  //    });
+     model.exportData("CSV_C", "/qHyperCubeDef", filenameExport, exportType).then((url) => {
+         window.open(server + url.qUrl, '_blank')
+      });
     });
   };
 

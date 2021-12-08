@@ -9,7 +9,7 @@ import {
   EngineContext
 } from "@motor-js/engine";
 import { Suspense } from "react";
-
+import { qlikConfig } from "../config";
 
 const TableExampleCompact = () => {
 
@@ -38,13 +38,17 @@ const TableExampleCompact = () => {
     },
   ];
 
+  const config = qlikConfig
+  
   const {
     dataSet,
     headerGroup,
     select,
     incrementPage,
     decrementPage,
+    exportData
   } = useTable({
+    config
     cols,
     qPage: { qTop: 0, qLeft: 0, qWidth: 5, qHeight: 10 },
   });

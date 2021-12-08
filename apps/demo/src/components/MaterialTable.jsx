@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
+import Button from '@mui/material/Button';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -9,18 +10,12 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useTable } from '@motor-js/engine';
+import { qlikConfig } from "../config";
+
 
 export default function MaterialTable() {
   
-  const config = {
-    host: "motor.eu.qlikcloud.com",
-    secure: true,
-    port: null,
-    prefix: "",
-    appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
-    webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-    qcs: true,
-  }
+  const config = qlikConfig
 
   const [dataSize, setDataSize] = useState(null)
   const [page, setPage] = useState(0);
@@ -60,6 +55,7 @@ export default function MaterialTable() {
     qLayout,
     changePageSize,
     handlePageChange,
+    exportData,
   } = useTable({
     cols,
     config,
@@ -86,8 +82,11 @@ export default function MaterialTable() {
     qLayout && setDataSize(qLayout.qHyperCube.qSize.qcy)
   },[qLayout])
 
+  const handleExport = () => exportData('test','P')
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Button onClick={handleExport}>Export</Button>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
