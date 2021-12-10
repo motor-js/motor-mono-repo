@@ -7,13 +7,15 @@ import { qlikConfig, globalConfig, qlikSAASConfig, qlikSAASConfig2, globalSAASCo
 
 export default function App() {
 
+  const newTheme = extendTheme({ filter: { size: { medium: { fontSize: '50px' }}}})
+
   return (
     <div className="App" style={{ padding: "10px" }}>
-        <Motor 
-        config={qlikSAASConfig}
-        >
+      <Motor config={qlikSAASConfig}>
+        <ThemeProvider theme={newTheme}>
           <NewApp />
-        </Motor> 
+        </ThemeProvider>
+      </Motor> 
     </div>
   );
 }

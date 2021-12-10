@@ -79,20 +79,20 @@ const FilterInput = ({
 
   return (
     <FilterInputOutline onClick={handleFocus} {...rest}>
-    <FilterInputWrapper {...rest}>
-      {renderItems()}
-      <InputContainer {...rest}>
-      <StyledFilterInput
-        ref={inputRef}
-        size={size}
-        onSelect={handleInputSelectCallback}
-        onChange={(e) => handleSearch(e)} 
-        onKeyDown={handleKeyDownCallback}
-        placeholder={placeholderState}
-        value={searchValue}
-        {...rest}
-      />
-      </InputContainer>
+      <FilterInputWrapper {...rest} onClick={() => handleInputSelectCallback()}>
+        {renderItems()}
+        <InputContainer {...rest}>
+          <StyledFilterInput
+            ref={inputRef}
+            size={size}
+           // onSelect={handleInputSelectCallback}
+            onChange={(e) => handleSearch(e)} 
+            onKeyDown={handleKeyDownCallback}
+            placeholder={placeholderState}
+            value={searchValue}
+            {...rest}
+          />
+        </InputContainer>
       </FilterInputWrapper>
       <div style={{ display: 'flex', flexDirection: 'row'}}>
       <IconWrapper onClick={deselectAllCallback}>

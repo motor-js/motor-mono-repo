@@ -10,27 +10,6 @@ import { qlikConfig, globalConfig, qlikSAASConfig, qlikSAASConfig2 } from "./con
 
 const NewApp = () => {
 
- //  const { engine } = useContext(EngineContext) 
- //  console.log('engine: ',engine)
- const theme = useContext(ThemeContext)
-
- const { global } = useGlobal({
-  host: "sense-motor.adviseinc.co.uk",
-  secure: true,
-  port: 19077,
-  prefix: "",
-  appId: "cf38eabe-cf49-45c8-b006-9a6f38947669",
-  redirectFileName: "auth.html",
-  qsServerType: "onPrem",
-  global: true
-});
-
-const dimension = ['BURGER']
-
-const { listData} = useList()
-
-console.log('global: ',global)
-
   return (
     <div>
       <MotorFilter
