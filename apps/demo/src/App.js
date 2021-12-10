@@ -7,13 +7,12 @@ import { qlikConfig, globalConfig, qlikSAASConfig, qlikSAASConfig2, globalSAASCo
 
 export default function App() {
 
-
   return (
     <div className="App" style={{ padding: "10px" }}>
-        <Motor config={qlikConfig}>
-          <AppProvider config={qlikConfig}>
+        <Motor 
+        config={qlikSAASConfig}
+        >
           <NewApp />
-          </AppProvider>
         </Motor> 
     </div>
   );

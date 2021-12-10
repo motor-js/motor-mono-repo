@@ -25,6 +25,10 @@ const NewApp = () => {
   global: true
 });
 
+const dimension = ['BURGER']
+
+const { listData} = useList()
+
 console.log('global: ',global)
 
   return (
@@ -33,13 +37,13 @@ console.log('global: ',global)
         dimension={["BURGER"]}
         m={10}
       />
-       <AppProvider config={qlikSAASConfig2}>
+      {/* <AppProvider config={qlikSAASConfig2}> 
         <MotorFilter
           dimension={["Country"]}
           m={10}
         />
-      </AppProvider>
-    <MaterialTable />
+     </AppProvider> 
+    <MaterialTable />*/}
     </div>
   );
 };
