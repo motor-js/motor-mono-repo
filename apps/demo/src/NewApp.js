@@ -1,5 +1,5 @@
 import App from "./App";
-import { useList, useGlobal, useSearch, EngineContext, AppProvider } from '@motor-js/engine'
+import { useList, useGlobal, useSelections, useSearch, EngineContext, AppProvider } from '@motor-js/engine'
 import { useContext, useState } from "react";
 //import { NebulaConnection } from '@motor-js/nebula'
 import MotorFilter from "./Filter"
@@ -9,6 +9,13 @@ import { ThemeContext } from "@motor-js/theme"
 import { qlikConfig, globalConfig, qlikSAASConfig, qlikSAASConfig2 } from "./config.js";
 
 const NewApp = () => {
+
+
+  const { selections, selectionItems } = useSelections()
+
+  console.log('selections: ',selections)
+  console.log('selectionsItems: ',selectionItems)
+
 
   return (
     <div>

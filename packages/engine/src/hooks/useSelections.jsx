@@ -13,6 +13,7 @@ const useSelectionObject = () => {
   const [qLayout, setQLayout] = useState(null);
   const [selections, setSelections] = useState(null);
   const [selectionItems, setSelectionItems] = useState(null);
+  const [selectionList, setSelectionList] = useState(null);
   const [error, setError] = useState(null);
 
   const update = useCallback(async () => {
@@ -21,6 +22,8 @@ const useSelectionObject = () => {
     if (qObject.current) {
       setQLayout(_qLayout);
       setSelections(sel);
+      /*
+      //Old logic
       setSelectionItems(
         sel.map((element, index) => {
           return {
@@ -29,6 +32,17 @@ const useSelectionObject = () => {
           };
         })
       );
+      */
+      setSelectionItems(
+        sel.map((element, index) => {
+          let items = []
+          element.qSelectedFieldSelectionInfo.map((e) => items.push(e.qName))  
+          return ({
+            qField: element.qField,
+            qItems: items,
+          })
+        })
+      )
     }
   }, []);
 
