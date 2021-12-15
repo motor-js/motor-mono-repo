@@ -3,6 +3,17 @@ import PropTypes from 'prop-types'
 import { ThemeContext } from 'styled-components'
 import { deepMerge } from '../utils/object'
 
+const ThemeProvider = ({ theme, children}) => {
+  return (
+      <ThemeContext.Provider value={theme}>
+        {children}
+      </ThemeContext.Provider>
+  )
+}
+
+export { ThemeProvider }
+
+/*
 ThemeContext.Extend = ({ children, value }) => (
   <ThemeContext.Consumer>
     {theme => (
@@ -19,3 +30,4 @@ ThemeContext.Extend.propTypes = {
 }
 
 export { ThemeContext }
+*/

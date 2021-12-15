@@ -1,6 +1,7 @@
 import { useContext, forwardRef } from 'react';
 import InfiniteLoader from 'react-window-infinite-loader'
 import { FixedSizeList as List } from 'react-window';
+import { ThemeContext, defaultTheme } from '@motor-js/theme';
 import { 
   StyledDropdownItem,
   StyledList,
@@ -36,7 +37,7 @@ const Dropdown = ({
   ...rest
 }, dropRef) => {
 
-  const themeContext = {...rest}.theme
+  const themeContext = useContext(ThemeContext) || defaultTheme
   const itemHeight = themeContext.filter.size[size].itemHeight
 
   const hasNextPage = items.length < numberOfItems ? true : false
