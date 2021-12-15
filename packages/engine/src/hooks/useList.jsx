@@ -1,8 +1,7 @@
 import { useCallback, useRef, useReducer, useEffect, useContext } from "react";
 import { deepMerge } from "../utils/object";
-import { EngineContext } from "../contexts/EngineProvider"; // MOTOR
-import { AppContext } from "../contexts/AppContext";  // APP PROVIDER
-import { ConfigContext } from "../contexts/ConfigProvider";
+import { EngineContext } from "../contexts/EngineProvider"; 
+import { AppContext } from "../contexts/AppContext"; 
 
 const initialState = {
   qDoc: null,
@@ -64,9 +63,7 @@ const useList = (props) => {
     autoSortByState,
   } = deepMerge(initialProps, props);
 
-
-  const config = useContext(ConfigContext)
-  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
   
   const _isMounted = useRef(true);
   const [state, dispatch] = useReducer(reducer, initialState);

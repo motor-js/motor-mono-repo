@@ -9,9 +9,14 @@ import { ThemeContext } from "@motor-js/theme";
 
 const NewApp = ({ dimension}) => {
 
-  const { listData, motorListProps } = useList({ dimension })
+  const { 
+    listData,
+    motorListProps,
+    select
+  } = useList({ dimension,})
   
-  //console.log('listData: ',listData)
+  
+  console.log('listData: ',listData)
   return (
     <>
         <Filter 

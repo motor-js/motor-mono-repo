@@ -1,7 +1,6 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
-import { ConfigContext } from "../contexts/ConfigProvider";
 import { deepMerge } from "../utils/object";
 import createDef from "../utils/createHCDef";
 
@@ -23,8 +22,7 @@ const useButton = (props) => {
     props
   );
 
-  const configGlobal = useContext(ConfigContext)
-  const { engine } = useContext( configGlobal.global ? AppContext : EngineContext) || {};
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
 
   const [qLayout, setQLayout] = useState(null);
 

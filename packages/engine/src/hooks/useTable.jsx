@@ -9,7 +9,6 @@ import {
 import { deepMerge } from "../utils/object";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
-import { ConfigContext } from "../contexts/ConfigProvider";
 import createDef from "../utils/createHCDef";
 import {
   getHeader,
@@ -133,8 +132,7 @@ const useTable = (props) => {
   const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
   const [newColsUnfiltered, setNewColsUnfiltered] = useState(cols)
 
-  const configGlobal = useContext(ConfigContext)
-  const { engine } = useContext( configGlobal.global ? AppContext : EngineContext) || {};
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
 
   const qObject = useRef(null);
   const qPage = useRef(qPageProp);
@@ -176,6 +174,7 @@ const useTable = (props) => {
   //handle page change
   const handlePageChange = useCallback(
     (pageIndex) => {
+      console.log(pageIndex)
       setPage(pageIndex);
     },
     [setPage]
@@ -477,18 +476,16 @@ const useTable = (props) => {
     const { host, secure, port, prefix } = config;
     
     const id = qLayout.qInfo.qId;
-    console.log('ID: ',id)
     const filenameExport = filename || "Data Export";
+    const _exportType = exportType || "P";
     const _secure = secure ? "https://" : "http://";
     const _port = port ? `:${port}` : "";
-    const server = _secure + host + _port + prefix;
+    const server = _secure + host //+ _port + prefix;
     engine.getObject(id).then((model) => {
-      console.log(model)
       //export type: P for Possible, A for All
- //    model.exportData("CSV_C", "/qHyperCubeDef", filenameExport, exportType).then((url) => {
-  //       console.log(url);
-        // window.open(server + url.qUrl, '_blank')
-  //    });
+      model.exportData("CSV_C", "/qHyperCubeDef", filenameExport, _exportType).then((url) => {
+         window.open(server + url.qUrl, '_blank')
+      });
     });
   };
 

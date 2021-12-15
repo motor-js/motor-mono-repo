@@ -1,11 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
-import { ConfigContext } from "../contexts/ConfigProvider";
 
 const useLayout = () => {
-  const config = useContext(ConfigContext)
-  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+  
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
 
   const [layout, setLayout] = useState(null);
   const [error, setError] = useState(null);

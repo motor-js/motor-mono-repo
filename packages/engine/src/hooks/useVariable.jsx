@@ -1,7 +1,6 @@
 import { useContext, useCallback, useEffect, useRef, useState } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
-import { ConfigContext } from "../contexts/ConfigProvider";
 import { deepMerge } from "../utils/object";
 
 const initialProps = {
@@ -25,8 +24,7 @@ const useVariable = (props) => {
     definition,
   } = deepMerge(initialProps, props);
 
-  const config = useContext(ConfigContext)
-  const { engine } = useContext( config.global ? AppContext : EngineContext) || {};
+  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
 
   const [qLayout, setQLayout] = useState(null);
   const [qProperties, setQProperties] = useState(null);
