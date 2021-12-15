@@ -1,5 +1,4 @@
-import styled, { css, ThemeProvider } from "styled-components";
-import { ThemeContext } from "./contexts/ThemeProvider";
+import styled, { css, ThemeProvider, ThemeContext } from "styled-components";
 import defaultTheme from "./theme";
 import { extendTheme } from "./utils/extendTheme";
 export declare const device: {

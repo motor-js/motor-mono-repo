@@ -8,8 +8,6 @@ import {
 } from "./styles/FilterTheme";
 
 function StyledFilter({
-  engine,
-  engineError,
   listData,
   motorListProps,
   singleSelection,
@@ -42,6 +40,8 @@ function StyledFilter({
   const { 
     layout,
     select,
+    endSelections,
+    beginSelections,
     selections,
     searchList,
     confirmListSearch,
@@ -70,6 +70,7 @@ function StyledFilter({
         setListOpen(!listOpen) 
         setSearchValue('')
         changePage({ qTop: 0, qHeight: pageHeight })
+        endSelections(true)
       }
     },[]
   );
@@ -97,15 +98,28 @@ function StyledFilter({
     setSearchValue("")
   } 
 
-  const handleInputSelectCallback = () => setListOpen(true)
+  const handleInputSelectCallback = () => {
+    if (!listOpen) {
+      beginSelections()
+      setListOpen(true)
+    } 
+  }
 
-  const handleIconSelectCallback = () => setListOpen(!listOpen)
+  const handleIconSelectCallback = () => {
+    if (listOpen) {
+      endSelections(true)
+    } else {
+      beginSelections()
+    }
+    setListOpen(!listOpen)
+  }
 
   const handleSelectCallback = (item) => {
     setPlaceholderState("")
-    const { key } = item;
-    const toggleSelections = !singleSelection;
-    select([key],toggleSelections);
+    const { key } = item
+    const toggleSelections = !singleSelection
+    select([key],toggleSelections)
+    
     setSearchValue("")
     onSelectionChange();
   }
