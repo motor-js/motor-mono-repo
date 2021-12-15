@@ -25,12 +25,6 @@ const NewApp = () => {
   global: true
 });
 
-const dimension = ['BURGER']
-
-const { listData} = useList()
-
-console.log('global: ',global)
-
   return (
     <div>
       <MotorFilter
