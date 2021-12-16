@@ -12,10 +12,11 @@ const MotorFilter = ({ dimension}) => {
   
   return (
     <>
-        <Filter 
+        <Filter
+          m={10}
           listData={listData}
           motorListProps={motorListProps}
-          colorTheme="orange"
+          colorTheme="blue"
         />
     </>
   );

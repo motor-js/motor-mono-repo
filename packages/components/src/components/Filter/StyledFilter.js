@@ -31,7 +31,6 @@ function StyledFilter({
   const [currPageHeight, setCurrPageHeight] = useState(pageHeight)
   const [placeholderState, setPlaceholderState] = useState(placeholder)
   const [searchValue, setSearchValue] = useState("")
-  //const [defaultSelectionState, setDefaultSelections] = useState(null)
 
   useEffect(() => {
     listData && setCurrPageHeight(listData.length)
@@ -45,6 +44,7 @@ function StyledFilter({
     selections,
     searchList,
     confirmListSearch,
+    cancelListSearch,
     clearSelections,
     changePage,
   } = motorListProps
@@ -75,12 +75,12 @@ function StyledFilter({
     },[]
   );
 
-  const handleSearchCallback = (e) => setSearchValue(e.target.value)
-  
-  useEffect(() => {
-    searchList(searchValue)
-  },[searchValue])
-  
+  const handleSearchCallback = (e) => {
+    setSearchValue(e.target.value)
+    searchList(e.target.value)
+  }
+ 
+
   const handleKeyDownCallback = (e) => {
     if(e.key === 'Enter') {
       confirmListSearch() 
@@ -116,12 +116,12 @@ function StyledFilter({
 
   const handleSelectCallback = (item) => {
     setPlaceholderState("")
+    setSearchValue("")
     const { key } = item
     const toggleSelections = !singleSelection
     select([key],toggleSelections)
-    
-    setSearchValue("")
     onSelectionChange();
+    //endSelections(true)
   }
 
 

@@ -14,7 +14,7 @@ ReactDOM.render(
         secure: true,
         port: null,
         prefix: "",
-        appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
+        appId: "18f7a1f3-4605-4c59-8d01-849119d82621",
         webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
         qcs: true,
       }}

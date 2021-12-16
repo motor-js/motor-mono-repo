@@ -90,10 +90,10 @@ export const StyledCheckbox = styled.div`
   background: ${props => props.selected === 'S' ? props.theme.colors[props.colorTheme][500] : 'white'};
   border-radius: 4px;
   transition: all 150ms;
-  border: 1px solid ${props => props.selected === 'S' ? props.theme.colors.brand[500] :  props.theme.colors.gray[300] };
+  border: 1px solid ${props => props.selected === 'S' ? props.theme.colors[props.colorTheme][500] :  props.theme.colors.gray[300] };
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 3px ${props => props.theme.colors.brand[400]};
+    box-shadow: 0 0 0 3px ${props => props.theme.colors[props.colorTheme][400]};
   }
 
   ${Icon} {
