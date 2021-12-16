@@ -19,7 +19,7 @@
     "react-dom": "^17.0.1",
     "styled-system": "^5.1.5"
   },
-  "devDependencies": {
+  "peerDependencies": {
     "styled-components": "^5.3.3"
   },
   "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd"

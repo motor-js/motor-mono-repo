@@ -19,6 +19,10 @@ const NewApp = () => {
         dimension={["BURGER"]}
         m={10}
       />
+      <MotorFilter
+        dimension={["RESTAURANT"]}
+        m={10}
+      />
       {/* <AppProvider config={qlikSAASConfig2}> 
         <MotorFilter
           dimension={["Country"]}
