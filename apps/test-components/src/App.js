@@ -5,7 +5,7 @@ import MotorFilter from './MotorFilter';
 function App() {
   return (
     <div className="App">
-      <MotorFilter />
+      <MotorFilter dimension={['BURGER']}/>
     </div>
   );
 }

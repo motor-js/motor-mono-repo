@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@motor-js/theme'
 import { Icon } from './styles/StyledIcon'
 
 const StyledIcon = styled.svg`

@@ -23,8 +23,7 @@
     "react-window": "^1.8.6",
     "react-window-infinite-loader": "^1.0.7"
   },
-  "devDependencies": {
-    "@motor-js/engine": "^0.3.29",
+  "peerDependencies": {
     "@motor-js/theme": "^0.0.25"
   },
   "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd"
