@@ -22,7 +22,8 @@
     "react-window-infinite-loader": "^1.0.7"
   },
   "peerDependencies": {
-    "@motor-js/theme": "^0.0.25"
+    "@motor-js/theme": "^0.0.25",
+    "styled-components": "^5.3.3"
   },
   "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd"
 }

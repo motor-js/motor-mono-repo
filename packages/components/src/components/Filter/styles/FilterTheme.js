@@ -1,4 +1,5 @@
-import styled, { color, space } from '@motor-js/theme'
+import styled from 'styled-components'
+import { color, space } from '@motor-js/theme'
 import { transparentize } from 'polished';
 
 export const FilterWrapper = styled.div`

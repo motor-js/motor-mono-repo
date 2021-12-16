@@ -16,10 +16,8 @@ export {
     ThemeContext,
     ThemeProvider,
     defaultTheme,
-    css,
     extendTheme,
 };
 
 
 export * from "styled-system";
-export default styled;

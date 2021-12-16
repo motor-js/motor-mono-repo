@@ -1,4 +1,4 @@
-import styled, { css } from '@motor-js/theme'
+import styled, { css } from 'styled-compoennts'
 
 const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
 

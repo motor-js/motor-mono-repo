@@ -1,4 +1,4 @@
-import styled from '@motor-js/theme'
+import styled from 'styled-components'
 
 const StyledIcon = styled.svg`
   fill: none;

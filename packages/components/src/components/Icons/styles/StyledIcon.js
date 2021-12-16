@@ -1,4 +1,4 @@
-import styled from '@motor-js/theme'
+import styled from 'styled-components'
 
 export const Icon = styled.svg`
   stroke-width: ${props => props.strokeWidth};
