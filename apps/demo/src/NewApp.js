@@ -13,10 +13,6 @@ const NewApp = () => {
 
   const { selections, selectionItems } = useSelections()
 
-  console.log('selections: ',selections)
-  console.log('selectionsItems: ',selectionItems)
-
-
   return (
     <div>
       <MotorFilter
