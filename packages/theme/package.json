@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/theme",
   "license": "https://www.motor.so/license",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
