@@ -1,4 +1,4 @@
-import styled, { css, ThemeProvider, ThemeContext } from "styled-components";
+import { ThemeProvider, ThemeContext } from "styled-components";
 import defaultTheme from "./theme";
 import { extendTheme } from "./utils/extendTheme"
 
