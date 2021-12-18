@@ -1,6 +1,8 @@
+import { extendTheme } from "@motor-js/theme"
+
 const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
 
-export const theme = {
+export const theme = extendTheme({
     colors: {
         primary: "#EF6E71" /*#0168fa"*/,
         secondary: "#5f6d88",
@@ -101,4 +103,4 @@ export const theme = {
             bg: "red",
         },
     },
-};
+});

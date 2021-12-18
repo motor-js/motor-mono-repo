@@ -1,5 +1,5 @@
 import { Col } from "../../../components/grid/grid";
-import KPI from "../../../components/dashboard-one/kpi-placeholder"
+import KPI from "../../../components/kpi-placeholder"
 
 const RowOne = () => {
 

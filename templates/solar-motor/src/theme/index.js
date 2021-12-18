@@ -2,7 +2,6 @@ import styled, {
     createGlobalStyle,
     css,
     keyframes,
-    ThemeProvider,
 } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
 import tinycolor from "tinycolor2";
@@ -19,14 +18,15 @@ export const device = {
     xxlarge: `@media screen and (min-width: ${breakpoints[4]})`,
 };
 
+console.log(theme)
+
 export {
     createGlobalStyle,
     css,
     keyframes,
-    ThemeProvider,
     themeGet,
-    theme,
     tinycolor,
+    theme,
     Container,
     Row,
     Col,

@@ -1,8 +1,8 @@
-import { Card, CardBody } from "../..";
+import { Card, CardBody } from "..";
 
 import {
   StyledCardTitle,
-  StyledCardBottom
+  StyledCardBottom,
 } from "./style";
 
 const Chart = () => {
