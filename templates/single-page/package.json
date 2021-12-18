@@ -1,6 +1,6 @@
 {
   "name": "single-page-mashup",
-  "version": "0.3.52",
+  "version": "0.3.53",
   "homepage": "./",
   "private": true,
   "dependencies": {
@@ -8,8 +8,8 @@
     "@ant-design/icons": "^4.5.0",
     "@motor-js/components": "^0.0.30",
     "@motor-js/engine": "^0.3.46",
-    "@motor-js/nebula": "^0.2.52",
-    "@motor-js/theme": "^0.0.30",
+    "@motor-js/nebula": "^0.2.53",
+    "@motor-js/theme": "^0.0.31",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
