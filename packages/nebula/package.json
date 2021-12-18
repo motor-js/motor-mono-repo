@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/nebula",
   "license": "MIT",
-  "version": "0.2.51",
+  "version": "0.2.52",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@motor-js/components": "^0.0.30",
-    "@motor-js/engine": "^0.3.45",
-    "@motor-js/theme": "^0.0.29",
+    "@motor-js/engine": "^0.3.46",
+    "@motor-js/theme": "^0.0.30",
     "@nebula.js/sn-action-button": "^1.12.0",
     "@nebula.js/sn-bar-chart": "^0.8.13",
     "@nebula.js/sn-bullet-chart": "^0.6.21",
