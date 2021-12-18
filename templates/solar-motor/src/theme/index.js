@@ -7,6 +7,7 @@ import { themeGet } from "@styled-system/theme-get";
 import tinycolor from "tinycolor2";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 import { theme } from "./theme";
+import { defaultTheme } from "@motor-js/theme"
 
 const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
 
@@ -18,7 +19,7 @@ export const device = {
     xxlarge: `@media screen and (min-width: ${breakpoints[4]})`,
 };
 
-console.log(theme)
+console.log('d: ',defaultTheme)
 
 export {
     createGlobalStyle,

@@ -1,5 +1,5 @@
 import { Col } from "../../../components/grid/grid";
-import Chart from "../../../components/dashboard-three/chart-placeholder";
+import Chart from "../../../components/chart-placeholder";
 
 const RowOne = () => {
   return (

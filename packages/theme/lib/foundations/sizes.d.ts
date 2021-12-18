@@ -1,36 +1,4 @@
-import { spacing } from "./spacing";
-declare const largeSizes: {
-    max: string;
-    min: string;
-    full: string;
-    "3xs": string;
-    "2xs": string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    "2xl": string;
-    "3xl": string;
-    "4xl": string;
-    "5xl": string;
-    "6xl": string;
-    "7xl": string;
-    "8xl": string;
-};
-declare const container: {
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-};
-declare const sizes: {
-    container: {
-        sm: string;
-        md: string;
-        lg: string;
-        xl: string;
-    };
+declare const fontSizes: {
     body: {
         xsmall: string;
         small: string;
@@ -44,58 +12,5 @@ declare const sizes: {
     h4: string[];
     h5: string[];
     h6: string[];
-    max: string;
-    min: string;
-    full: string;
-    "3xs": string;
-    "2xs": string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    "2xl": string;
-    "3xl": string;
-    "4xl": string;
-    "5xl": string;
-    "6xl": string;
-    "7xl": string;
-    "8xl": string;
-    px: string;
-    0.5: string;
-    1: string;
-    1.5: string;
-    2: string;
-    2.5: string;
-    3: string;
-    3.5: string;
-    4: string;
-    5: string;
-    6: string;
-    7: string;
-    8: string;
-    9: string;
-    10: string;
-    12: string;
-    14: string;
-    16: string;
-    20: string;
-    24: string;
-    28: string;
-    32: string;
-    36: string;
-    40: string;
-    44: string;
-    48: string;
-    52: string;
-    56: string;
-    60: string;
-    64: string;
-    72: string;
-    80: string;
-    96: string;
 };
-export declare type Sizes = typeof spacing & typeof largeSizes & {
-    container: typeof container;
-};
-export default sizes;
+export default fontSizes;
