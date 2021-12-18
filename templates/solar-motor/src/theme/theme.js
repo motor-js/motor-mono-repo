@@ -13,6 +13,9 @@ export const theme = extendTheme({
         light: "#e5e9f2",
         dark: "#3b4863",
         text: "#001737",
+        text2: "#1b2e4b",
+        text3: "#8392a5",
+        text4: "#c0ccda",
         heading: "#001737",
         link: "#001737",
         background: "#ffffff",
@@ -28,6 +31,9 @@ export const theme = extendTheme({
         interUi: `-apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif`,
         rubik: `'Rubik', sans-serif`,
     },
+    fontSize: {
+        body: "0.875rem",
+      },
     fontWeights: {
         body: 400,
         heading: 500,

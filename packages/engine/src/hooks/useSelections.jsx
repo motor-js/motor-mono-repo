@@ -14,8 +14,6 @@ const useSelectionObject = () => {
   const [qLayout, setQLayout] = useState(null);
   const [selections, setSelections] = useState(null);
   const [selectionItems, setSelectionItems] = useState(null);
-  const [selectionList, setSelectionList] = useState(null);
-  const [error, setError] = useState(null);
 
   const update = useCallback(async () => {
     const _qLayout = await qObject.current.getLayout();
@@ -52,10 +50,10 @@ const useSelectionObject = () => {
     return selections;
   };
 
-  const clearSelections = async (field, value) => {
-    if (field) {
+  const clearSelections = async (dim, value) => {
+    if (dim) {
       const masterItem = await getFieldsFromDimensions(qDoc, dim)
-      let field 
+      let field
       if(masterItem.length > 0) {
         field = masterItem[0].qData.info[0].qName
       } else {
