@@ -1,14 +1,14 @@
 {
   "name": "material-ui-starter",
-  "version": "0.2.50",
+  "version": "0.2.51",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
-    "@motor-js/components": "^0.0.29",
-    "@motor-js/engine": "^0.3.44",
-    "@motor-js/nebula": "^0.2.50",
+    "@motor-js/components": "^0.0.30",
+    "@motor-js/engine": "^0.3.45",
+    "@motor-js/nebula": "^0.2.51",
     "@motor-js/theme": "^0.0.29",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
