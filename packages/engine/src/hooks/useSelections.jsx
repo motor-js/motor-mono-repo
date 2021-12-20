@@ -4,7 +4,6 @@ import { AppContext } from "../contexts/AppContext";
 import { getFieldsFromDimensions } from "../utils/hyperCubeUtilities";
 
 let qDoc = null;
-let qObject = null;
 
 const useSelectionObject = () => {
 
@@ -51,23 +50,27 @@ const useSelectionObject = () => {
   };
 
   const clearSelections = async (dim, value) => {
-    if (dim) {
-      const masterItem = await getFieldsFromDimensions(qDoc, dim)
-      let field
-      if(masterItem.length > 0) {
-        field = masterItem[0].qData.info[0].qName
+    (async () => {
+      const qDoc = await engine;
+      if (dim) {
+        console.log(dim)
+        const masterItem = await getFieldsFromDimensions(qDoc, dim)
+        let field
+        if(masterItem.length > 0) {
+          field = masterItem[0].qData.info[0].qName
+        } else {
+          field = dim
+        }
+        const qField = await qDoc.getField(field)
+        if (value) {
+          await qField.toggleSelect(value);
+        } else {
+          await qField.clear();
+        }
       } else {
-        field = dim
+        qDoc.clearAll();
       }
-      const qField = await qDoc.getField(field)
-      if (value) {
-        await qField.toggleSelect(value);
-      } else {
-        await qField.clear();
-      }
-    } else {
-      qDoc.clearAll();
-    }
+    })()
   };
 
   useEffect(() => {
