@@ -1,6 +1,6 @@
 {
   "name": "showcase-app-1",
-  "version": "0.1.33",
+  "version": "0.1.34",
   "private": true,
   "homepage": "https://alexanmtz.github.io/material-sense",
   "dependencies": {
@@ -9,7 +9,7 @@
     "@material-ui/lab": "^4.0.0-alpha.16",
     "@material-ui/styles": "^4.0.0",
     "@motor-js/components": "^0.0.30",
-    "@motor-js/engine": "^0.3.47",
+    "@motor-js/engine": "^0.3.48",
     "@motor-js/theme": "^0.0.31",
     "gh-pages": "^2.0.1",
     "numeral": "^2.0.6",

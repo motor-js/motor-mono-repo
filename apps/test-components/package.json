@@ -1,10 +1,10 @@
 {
   "name": "test-components",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "dependencies": {
     "@motor-js/components": "^0.0.30",
-    "@motor-js/engine": "^0.3.47",
+    "@motor-js/engine": "^0.3.48",
     "@motor-js/theme": "^0.0.31",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",

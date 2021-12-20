@@ -1,6 +1,6 @@
 {
   "name": "material-web-analytics",
-  "version": "0.2.54",
+  "version": "0.2.55",
   "private": true,
   "dependencies": {
     "@date-io/moment": "1.x",
@@ -9,8 +9,8 @@
     "@material-ui/lab": "^4.0.0-alpha.40",
     "@material-ui/pickers": "^3.2.9",
     "@motor-js/components": "^0.0.30",
-    "@motor-js/engine": "^0.3.47",
-    "@motor-js/nebula": "^0.2.54",
+    "@motor-js/engine": "^0.3.48",
+    "@motor-js/nebula": "^0.2.55",
     "@motor-js/theme": "^0.0.31",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
