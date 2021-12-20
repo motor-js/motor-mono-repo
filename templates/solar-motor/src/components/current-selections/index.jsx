@@ -16,7 +16,7 @@ const CurrentSelections = ({ selections, clear }) => {
 
   const handleClear = (field) => clear(field);
   
-  const { previousSelection, nextSelection } = useButton()
+  const { previousSelection, nextSelection, clearSelections } = useButton()
 
   return (
     <Dropdown direction="down">
@@ -38,7 +38,7 @@ const CurrentSelections = ({ selections, clear }) => {
           )}
         </StyledDropBody>
         <StyledDropFooter>
-          <StyledDropItem onClick={clear}><Trash size={12}/> Clear All</StyledDropItem>
+          <StyledDropItem onClick={clearSelections}><Trash size={12}/> Clear All</StyledDropItem>
           <StyledDropItem onClick={previousSelection}><ArrowLeftCircle size={12}/> Back</StyledDropItem>
            <StyledDropItem onClick={nextSelection}><ArrowRightCircle size={12}/> Forward</StyledDropItem>
         </StyledDropFooter>

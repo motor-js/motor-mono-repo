@@ -4,7 +4,7 @@ import {
   StyledCardBottom
 } from "./style";
 
-const KPI = ({ data }) => {
+const KpiPlaceholder = () => {
   return (
     <Card color='light'>
       <CardBody>
@@ -16,4 +16,4 @@ const KPI = ({ data }) => {
   );
 };
 
-export default KPI;
+export default KpiPlaceholder;
