@@ -53,7 +53,6 @@ const useSelectionObject = () => {
     (async () => {
       const qDoc = await engine;
       if (dim) {
-        console.log(dim)
         const masterItem = await getFieldsFromDimensions(qDoc, dim)
         let field
         if(masterItem.length > 0) {
