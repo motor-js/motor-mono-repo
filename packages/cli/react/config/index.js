@@ -23,7 +23,7 @@ module.exports = [
       "@motor-js/theme@next",
       "@motor-js/components@next",
       "react-feather",
-      "react-router-dom",
+      "react-router-dom@^5.2.0",
       "styled-bootstrap-grid",
       "styled-components",
       "styled-system",
