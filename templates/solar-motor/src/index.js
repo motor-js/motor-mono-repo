@@ -21,7 +21,6 @@ import { appSettings, qlikConfig } from "./settings"
       loginfontFamily={appSettings.loginfontFamily}
       NotConnectedheader={appSettings.NotConnectedheader}
       NotConnectedBody={appSettings.NotConnectedBody}
-      licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ55lg="
     >
       <ThemeProvider theme={theme}>
         <GlobalStyle />
