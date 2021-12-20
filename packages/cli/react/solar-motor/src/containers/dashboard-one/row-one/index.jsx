@@ -30,7 +30,7 @@ const RowOne = () => {
             title={"Example KPI"} 
             rate={"1,000"} 
             change={{
-              percentage: Math.random().toFixed(1) + "%",
+              percentage: "10%",
               growth: "up",
               time: "than last week",
             }}
