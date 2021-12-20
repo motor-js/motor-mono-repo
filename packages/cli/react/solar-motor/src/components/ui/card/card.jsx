@@ -20,7 +20,7 @@ import {
  * Card Component
  */
 
-export const Card = ({ children, className, color, ...restProps }) => {
+export const Card = ({ children, className, color }) => {
   return (
     <StyledCard
       className={classnames(className, "card")}

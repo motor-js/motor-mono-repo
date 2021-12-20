@@ -42,7 +42,7 @@ const KPI = ({ title, rate, change, chart }) => {
           </StyledChart>
         </CardBody>
       ) : (
-        <CardBody style={{ height: "163px" }}>
+        <CardBody>
           <PreloaderChart />
         </CardBody>
       )}
