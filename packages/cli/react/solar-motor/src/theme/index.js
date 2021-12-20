@@ -2,7 +2,6 @@ import styled, {
     createGlobalStyle,
     css,
     keyframes,
-    ThemeProvider,
 } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
 import tinycolor from "tinycolor2";
@@ -23,10 +22,9 @@ export {
     createGlobalStyle,
     css,
     keyframes,
-    ThemeProvider,
     themeGet,
-    theme,
     tinycolor,
+    theme,
     Container,
     Row,
     Col,

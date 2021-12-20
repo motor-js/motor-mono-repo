@@ -13,7 +13,7 @@ import styled, {
 import { Anchor } from "../anchor";
 
 const colorCSS = css`
-  color: #001737;
+  color: #ffffff;
   .card-header {
     border-bottom-color: rgba(255, 255, 255, 0.1);
   }
@@ -21,7 +21,7 @@ const colorCSS = css`
   .card-title,
   p,
   small {
-    color: #001737;
+    color: #ffffff;
   }
 `;
 

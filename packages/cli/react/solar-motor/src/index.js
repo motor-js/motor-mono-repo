@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Motor } from '@motor-js/engine'
-import { ThemeProvider } from "@motor-js/theme";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { theme } from './theme';
+import { theme } from "./theme";
 import { GlobalStyle } from "./css";
+import { ThemeProvider } from '@motor-js/theme'
+import { Motor } from '@motor-js/engine'
 import { appSettings, qlikConfig } from "./settings"
 
   ReactDOM.render(
@@ -21,7 +21,6 @@ import { appSettings, qlikConfig } from "./settings"
       loginfontFamily={appSettings.loginfontFamily}
       NotConnectedheader={appSettings.NotConnectedheader}
       NotConnectedBody={appSettings.NotConnectedBody}
-      licenseKey=""
     >
       <ThemeProvider theme={theme}>
         <GlobalStyle />

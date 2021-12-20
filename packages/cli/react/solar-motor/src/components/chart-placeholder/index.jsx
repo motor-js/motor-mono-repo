@@ -1,4 +1,4 @@
-import { Card, CardBody } from "../..";
+import { Card, CardBody } from "..";
 
 import {
   StyledCardTitle,

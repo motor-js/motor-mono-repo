@@ -9,7 +9,7 @@ const DashboardThree = lazy(() => import("./pages/dashboard-three"));
 const App = () => {
   return (
     <Router>
-      <Suspense fallback={<Preloader />}>
+      <Suspense fallback={<Preloader size={"lg"} />}>
         <Switch>
           <Route exact path="/" component={DashboardOne} />
           <Route exact path="/dashboard-two" component={DashboardTwo} />
