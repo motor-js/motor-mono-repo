@@ -1,6 +1,6 @@
 {
   "name": "solar-motor",
-  "version": "0.2.53",
+  "version": "0.2.54",
   "private": true,
   "dependencies": {
     "@motor-js/components": "^0.0.30",
