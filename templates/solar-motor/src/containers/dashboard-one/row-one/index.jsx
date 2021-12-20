@@ -19,6 +19,13 @@ const RowOne = () => {
   const { metrics } = useData({
     qMetrics
   });
+
+  const change = {
+    percentage: "10%",
+    growth: "up",
+    time: "than last week",
+  }
+
 */
 
   return (
@@ -29,11 +36,7 @@ const RowOne = () => {
           <KPI 
             title={"Example KPI"} 
             rate={"1,000"} 
-            change={{
-              percentage: "10%",
-              growth: "up",
-              time: "than last week",
-            }}
+            change={change}
             chart={false}
           />
           */}

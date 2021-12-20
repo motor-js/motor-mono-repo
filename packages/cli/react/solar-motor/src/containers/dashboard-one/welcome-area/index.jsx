@@ -16,7 +16,7 @@ const WelcomeArea = () => {
             title="Dashboard 1"
           />
         </StyledWelcomeLeft>
-        <StyledWelcomeRight style={{ width: "300px" }}>
+        <StyledWelcomeRight>
         </StyledWelcomeRight>
       </StyledWelcomeArea>
     </>

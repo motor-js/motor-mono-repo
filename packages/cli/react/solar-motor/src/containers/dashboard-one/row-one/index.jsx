@@ -20,11 +20,8 @@ const RowOne = () => {
     qMetrics
   });
 
-  const change = {
-    percentage: "10%",
-    growth: "up",
-    time: "than last week",
-  }
+
+  
 */
 
   return (
