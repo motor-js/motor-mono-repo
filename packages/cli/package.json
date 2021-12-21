@@ -1,6 +1,6 @@
 {
   "name": "@motor-js/cli",
-  "version": "0.2.65",
+  "version": "0.2.66",
   "description": "CLI tool for generating Qlik Sense Mashups",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "license": "https://www.motor.so/license",
   "dependencies": {
     "@motor-js/components": "^0.0.30",
-    "@motor-js/engine": "^0.3.49",
+    "@motor-js/engine": "^0.3.50",
     "@motor-js/theme": "^0.0.31",
     "chalk": "^4.1.1",
     "commander": "^8.0.0",
