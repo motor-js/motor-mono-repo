@@ -174,6 +174,10 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem') {
+
+        console.log('reloadURI:', reloadURI)
+        console.log('url:', url)
+        
         const reloadURI = encodeURIComponent(`https://${config.host}/content/Default/${config.redirectFileName}`);
         const url = `wss:/${config.host}/app/${config.appId}?reloadURI=${reloadURI}`;
 

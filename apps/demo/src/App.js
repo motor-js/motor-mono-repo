@@ -12,11 +12,7 @@ export default function App() {
 
   return (
     <div className="App" style={{ padding: "10px" }}>
-      <Motor config={qlikSAASConfig} >
-        <ThemeProvider theme={newTheme}>
-          <NewApp />
-        </ThemeProvider>
-      </Motor> 
+        TEST
     </div>
   );
 }
