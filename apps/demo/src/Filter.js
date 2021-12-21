@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { Filter } from "@motor-js/components"
 
 
-const MotorFilter = ({ dimension}) => {
+const MotorFilter = ({ dimension, m}) => {
 
   const { 
     listData,
@@ -18,8 +18,7 @@ const MotorFilter = ({ dimension}) => {
   return (
     <>
         <Filter 
-          listData={listData}
-          size="small"
+          listData={listData}      
           motorListProps={motorListProps}
           colorTheme="orange"
         />
