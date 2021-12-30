@@ -9,10 +9,11 @@ export default function App() {
 
   const newTheme = defaultTheme //extendTheme({ filter: { size: { medium: { fontSize: '50px' }}}})
 
-
   return (
     <div className="App" style={{ padding: "10px" }}>
-        TEST
+      <ThemeProvider theme={newTheme}>
+        <NewApp />
+      </ThemeProvider>
     </div>
   );
 }

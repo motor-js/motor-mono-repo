@@ -20,13 +20,15 @@ const NewApp = () => {
         m={50}
       />
 
-      {/* <AppProvider config={qlikSAASConfig2}> 
+      {/* 
+      <AppProvider config={qlikSAASConfig2}> 
         <MotorFilter
           dimension={["Country"]}
           m={10}
         />
      </AppProvider> 
-    <MaterialTable />*/}
+    <MaterialTable />
+    */}
     </div>
   );
 };

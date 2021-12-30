@@ -2,6 +2,10 @@
 import StyledFilter from "./StyledFilter";
 import PropTypes from "prop-types"
 
+/**
+ * A multi-select Filter component
+ */
+
 function Filter({ ...rest }) {
 
   return (

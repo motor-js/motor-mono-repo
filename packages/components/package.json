@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "start": "microbundle --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx",
-    "watch": "microbundle watch --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx"
+    "watch": "microbundle watch --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "polished": "^4.1.3",
@@ -22,10 +24,17 @@
   "peerDependencies": {
     "@motor-js/theme": "^0.0.25",
     "react": ">=17.0.0",
-    "react-dom": ">=17.0.0",
-    "styled-components": "^5.3.3"
+    "react-dom": ">=17.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@motor-js/engine": "^0.3.50",
+    "@motor-js/theme": "^0.0.31",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/react": "^6.4.9",
+    "babel-loader": "^8.2.3",
     "styled-components": "^5.3.3"
   },
   "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd"
