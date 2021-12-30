@@ -1,7 +1,6 @@
 import { ThemeProvider, ThemeContext } from "styled-components";
 import defaultTheme from "./theme";
 import { extendTheme } from "./utils/extendTheme"
-import { themeGet } from "@styled-system/theme-get";
 
 const breakpoints = ["576px", "768px", "992px", "1200px", "1400px"];
 
@@ -18,8 +17,6 @@ export {
     ThemeProvider,
     defaultTheme,
     extendTheme,
-    themeGet,
 };
-
 
 export * from "styled-system";
