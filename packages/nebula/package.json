@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/nebula",
   "license": "MIT",
-  "version": "0.2.59",
+  "version": "0.2.60",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -18,7 +18,7 @@
     "watch": "microbundle watch --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx"
   },
   "dependencies": {
-    "@motor-js/components": "^0.0.32",
+    "@motor-js/components": "^0.0.33",
     "@motor-js/engine": "^0.3.51",
     "@motor-js/theme": "^0.0.33",
     "@nebula.js/sn-action-button": "^1.12.0",
