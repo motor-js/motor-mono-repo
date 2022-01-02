@@ -1,11 +1,11 @@
 {
   "name": "test-components",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@motor-js/components": "^0.0.33",
-    "@motor-js/engine": "^0.3.51",
-    "@motor-js/theme": "^0.0.33",
+    "@motor-js/components": "^0.1.0",
+    "@motor-js/engine": "^0.4.0",
+    "@motor-js/theme": "^0.1.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

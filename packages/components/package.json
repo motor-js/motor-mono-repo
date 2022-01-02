@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/components",
   "license": "https://www.motor.so/license",
-  "version": "0.0.33",
+  "version": "0.1.0",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
-    "@motor-js/engine": "^0.3.51",
-    "@motor-js/theme": "^0.0.33",
+    "@motor-js/engine": "^0.4.0",
+    "@motor-js/theme": "^0.1.0",
     "@storybook/addon-actions": "^6.4.9",
     "@storybook/addon-essentials": "^6.4.9",
     "@storybook/addon-links": "^6.4.9",
