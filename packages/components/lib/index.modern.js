@@ -89,7 +89,7 @@ cursor: pointer;
 `)),Dr=Wt.div(Cr||(Cr=Ir`
   display: flex;
   flexDirection: row;
-  border-radius: ${0};
+  border-radius: ${0} //cprops.theme.filter.borderRadius};
   border: ${0};
   &:hover {
     border:  ${0};
@@ -99,7 +99,7 @@ cursor: pointer;
     border: 1px solid ${0};
     outline: none;
   }
-`),e=>e.theme.filter.borderRadius,e=>e.theme.filter.border,e=>e.theme.filter.borderHovered,e=>e.theme.colors[e.colorTheme][500]),jr=Wt.div($r||($r=Ir`
+`),e=>console.log(e.theme),e=>e.theme.filter.border,e=>e.theme.filter.borderHovered,e=>e.theme.colors[e.colorTheme][500]),jr=Wt.div($r||($r=Ir`
   display: grid;
   flex: 1 1 0%;
   flex-wrap: wrap;

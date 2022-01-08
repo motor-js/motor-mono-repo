@@ -18,7 +18,7 @@ export const FilterInputWrapper = styled.div`
 export const FilterInputOutline = styled.div`
   display: flex;
   flexDirection: row;
-  border-radius: ${props => props.theme.filter.borderRadius};
+  border-radius: ${props => console.log(props.theme)} //cprops.theme.filter.borderRadius};
   border: ${props => props.theme.filter.border};
   &:hover {
     border:  ${props => props.theme.filter.borderHovered};

@@ -8,8 +8,6 @@ const MotorFilter = ({ dimension}) => {
     motorListProps,
   } = useList({ dimension })
   
-  console.log(listData)
-  
   return (
     <>
         <Filter

@@ -16,6 +16,8 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@motor-js/engine": "^0.4.0",
+    "@motor-js/theme": "^0.1.0",
     "polished": "^4.1.3",
     "prop-types": "^15.7.2",
     "react-window": "^1.8.6",
