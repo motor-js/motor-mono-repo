@@ -87,10 +87,10 @@ export const StyledCheckbox = styled.div`
   width: 14px;
   height: 14px;
   margin: 0px 5px;
-  background: ${props => props.selected === 'S' ? props.theme.colors[props.colorTheme][500] : 'white'};
+  background: ${props => props.selected === 'S' | props.selected === 'L' ? props.theme.colors[props.colorTheme][500] : 'white'};
   border-radius: 4px;
   transition: all 150ms;
-  border: 1px solid ${props => props.selected === 'S' ? props.theme.colors[props.colorTheme][500] :  props.theme.colors.gray[300] };
+  border: 1px solid ${props => props.selected === 'S' | props.selected === 'L' ? props.theme.colors[props.colorTheme][500] :  props.theme.colors.gray[300] };
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px ${props => props.theme.colors[props.colorTheme][400]};
