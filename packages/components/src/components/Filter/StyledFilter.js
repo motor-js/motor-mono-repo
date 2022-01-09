@@ -1,11 +1,12 @@
 /* eslint-disable prefer-template */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import DropdownRef from './Dropdown'
 import useOutsideClick from "../../hooks/useOutsideClick";
 import FilterInput from "./FilterInput";
 import {
   FilterWrapper,
 } from "./styles/FilterTheme";
+import { ThemeContext } from '@motor-js/theme'
 
 function StyledFilter({
   listData,
@@ -49,6 +50,9 @@ function StyledFilter({
     clearSelections,
     changePage,
   } = motorListProps
+
+  const newTheme = useContext(ThemeContext)
+  console.log('nT: ',newTheme)
 
   const numberOfItems = layout && layout.qListObject.qSize.qcy
   const viewportHeight = parseInt(dropHeight, 10);
