@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/engine",
   "license": "https://www.motor.so/license",
-  "version": "0.3.40",
+  "version": "0.4.1",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -16,9 +16,11 @@
   "dependencies": {
     "crypto-js": "^3.3.0",
     "enigma.js": "^2.6.3",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "prop-types": "^15.7.2"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "gitHead": "0893129bbf97d348090d52caa5666c82f96506fd"
 }

@@ -2,7 +2,7 @@ import borders from "./borders"
 import colors from "./colors"
 import radii from "./radii"
 import shadows from "./shadows"
-import sizes from "./sizes"
+import fontSizes from "./sizes"
 import typography from "./typography"
 
 const foundations = {
@@ -10,7 +10,7 @@ const foundations = {
   colors,
   radii,
   shadows,
-  sizes,
+  fontSizes,
   typography
 }
 

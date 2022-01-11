@@ -1,10 +1,10 @@
-import styled, { color, space } from '@motor-js/theme'
+import styled from 'styled-components'
+import { color, space } from '@motor-js/theme'
 import { transparentize } from 'polished';
 
 export const FilterWrapper = styled.div`
   ${space};
   ${color};
-  font-size: ${props => props.theme.filter.size[props.size].fontSize};
   position: relative;
 `;
 
@@ -86,7 +86,7 @@ export const SelectButton = styled.button`
   padding: 0px 4px 0px 2px;
 
   &:hover {
-    background-color: ${props => transparentize(0.3, props.theme.colors[props.colorTheme][500])};
+    background-color: ${props => props.selections.length > 0 && props.selections[0].state === 'S' && transparentize(0.3, props.theme.colors[props.colorTheme][500])};
   }
 `
 

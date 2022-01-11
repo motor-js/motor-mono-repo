@@ -1,16 +1,55 @@
 import { Col } from "../../../components/grid/grid";
-import KPI from "../../../components/dashboard-one/kpi-placeholder"
+import KpiPlaceholder from "../../../components/kpi-placeholder"
+
+//import KPI from "../../../components/kpi"
+//import { useData } from "@motor-js/engine"
 
 const RowOne = () => {
 
-  const cards = [1,2,3,4]
+  /*
+  // Example to get you started....
+  const qMetrics = [
+    {
+      qName: "metric_name",
+      qExpr: "metric_expression",
+      qType: "qStringExpression", // qStringExpression or qValueExpression (if a pure number is to be returned)
+    },
+  ];
+
+  const { metrics } = useData({
+    qMetrics
+  });
+
+  const change = {
+    percentage: "10%",
+    growth: "up",
+    time: "than last week",
+  }
+
+*/
+
   return (
     <>
-    {cards.map((data) => (
-    <Col sm={6} lg={3} mt={["10px", null, null, "0px"]} key={data} >
-      <KPI data={data}/>
-    </Col>
-    ))}
+        <Col sm={6} lg={3} mt={["10px", null, null, "0px"]}>
+          <KpiPlaceholder />
+          {/*
+          <KPI 
+            title={"Example KPI"} 
+            rate={"1,000"} 
+            change={change}
+            chart={false}
+          />
+          */}
+        </Col>
+        <Col sm={6} lg={3} mt={["10px", null, null, "0px"]}>
+          <KpiPlaceholder />
+        </Col>
+        <Col sm={6} lg={3} mt={["10px", null, null, "0px"]}>
+          <KpiPlaceholder />
+        </Col>
+        <Col sm={6} lg={3} mt={["10px", null, null, "0px"]}>
+          <KpiPlaceholder />
+        </Col>
     </>
   );
 };

@@ -12,6 +12,7 @@ import {
 } from "./styles/FilterTheme";
 import XIcon from '../Icons/XIcon'
 import ChevronDownIcon from "../Icons/ChevronDownIcon";
+import { Lock } from '@styled-icons/feather/Lock'
 
 const useFocus = () => {
   const htmlElRef = useRef(null)
@@ -39,6 +40,8 @@ const FilterInput = ({
   ...rest
 }) => {
 
+  console.log('sL: ',selectionsLabels)
+
   const [inputRef, setInputFocus] = useFocus()
 
   const handleFocus = () => setInputFocus()
@@ -59,7 +62,10 @@ const FilterInput = ({
       <SelectTag size={size} {...rest}>
         <SelectTagText {...rest}>{`${numberOfSelections}`+' of '+`${numberOfItems}`}</SelectTagText>
         <SelectButton {...rest} onClick={deselectAllCallback}>
-        <XIcon stroke="black" strokeWidth={1} height="14px" width="14px" />
+          { selectionsLabels[0].state === 'S' ? 
+            <XIcon stroke="black" strokeWidth={1} height="14px" width="14px" padding="10px" /> :
+            <Lock stroke="black" strokeWidth={1} height="14px" width="14px" padding="10px" /> 
+          } 
         </SelectButton>
       </SelectTag>
       )
@@ -69,7 +75,10 @@ const FilterInput = ({
           <SelectTag {...rest} size={size} key={sel.key}>
             <SelectTagText {...rest}>{sel.text}</SelectTagText>
             <SelectButton {...rest} onClick={() => handleDeselectCallback(sel)}>
-              <XIcon stroke="black" strokeWidth={1} height="14px" width="14px" padding="10px" />
+              { sel.state === 'S' ? 
+                <XIcon stroke="black" strokeWidth={1} height="14px" width="14px" padding="10px" /> :
+                <Lock stroke="black" strokeWidth={1} height="14px" width="14px" padding="10px" /> 
+              } 
             </SelectButton>
           </SelectTag>
         ))
@@ -79,20 +88,20 @@ const FilterInput = ({
 
   return (
     <FilterInputOutline onClick={handleFocus} {...rest}>
-    <FilterInputWrapper {...rest}>
-      {renderItems()}
-      <InputContainer {...rest}>
-      <StyledFilterInput
-        ref={inputRef}
-        size={size}
-        onSelect={handleInputSelectCallback}
-        onChange={(e) => handleSearch(e)} 
-        onKeyDown={handleKeyDownCallback}
-        placeholder={placeholderState}
-        value={searchValue}
-        {...rest}
-      />
-      </InputContainer>
+      <FilterInputWrapper {...rest} onClick={() => handleInputSelectCallback()}>
+        {renderItems()}
+        <InputContainer {...rest}>
+          <StyledFilterInput
+            ref={inputRef}
+            size={size}
+           // onSelect={handleInputSelectCallback}
+            onChange={(e) => handleSearch(e)} 
+            onKeyDown={handleKeyDownCallback}
+            placeholder={placeholderState}
+            value={searchValue}
+            {...rest}
+          />
+        </InputContainer>
       </FilterInputWrapper>
       <div style={{ display: 'flex', flexDirection: 'row'}}>
       <IconWrapper onClick={deselectAllCallback}>

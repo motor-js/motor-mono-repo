@@ -49,7 +49,7 @@ const initialProps = {
     qTop: 0,
     qLeft: 0,
     qWidth: 1,
-    qHeight: 50,
+    qHeight: 25,
   },
 };
 
@@ -146,7 +146,7 @@ const useList = (props) => {
       });
 
       // Get Selections
-      const _selections = _listData && _listData.filter(row => row.state === "S");
+      const _selections = _listData && _listData.filter(row => row.state === "S" || row.state === "L");
       // Get Selection ID
       const _selId = _selections && _selections.map(d => d.key);
 
@@ -230,6 +230,15 @@ const useList = (props) => {
     []
   );
 
+  const cancelListSearch = useCallback(
+    () =>
+      qObject.current && qObject.current.abortListObjectSearch(
+        "/qListObjectDef"
+      ),
+    []
+  );
+
+
   const applyPatches = useCallback(
     (patches) => qObject.current.applyPatches(patches),
     []
@@ -265,6 +274,7 @@ const useList = (props) => {
     beginSelections,
     endSelections,
     searchList,
+    cancelListSearch,
     confirmListSearch,
     applyPatches,
     selections,
@@ -279,6 +289,7 @@ const useList = (props) => {
       endSelections,
       searchList,
       confirmListSearch,
+      cancelListSearch,
       changePage
     }
   };

@@ -7,6 +7,7 @@ import { menuData } from "../../components/data";
 import Logo from "../../components/logo";
 import SearchBar from "../../components/search-bar";
 import CurrentSelections from "../../components/current-selections";
+import FilterDropDown from "../../components/filter-dropdown"
 
 import {
   StyledHeader,
@@ -66,10 +67,13 @@ const Header = () => {
           </StyledNavbarMenu>
         </StyledNavbarWrap>
         <StyleNavbarRight>
-          <StyledNavbarElement mr={["8px", "15px"]}>
+          <StyledNavbarElement ml={["8px", "15px"]}>
             <CurrentSelections selections={selections} clear={clearSelections} />
           </StyledNavbarElement>
-          <StyledNavbarElement mr={["8px", "15px"]}>
+          <StyledNavbarElement ml={["8px", "15px"]}>
+            <FilterDropDown />
+          </StyledNavbarElement>
+          <StyledNavbarElement ml={["8px", "15px"]}>
           <Button variant="texted" onClick={searchHandler}>
             <Search className="header-icon" />
           </Button>

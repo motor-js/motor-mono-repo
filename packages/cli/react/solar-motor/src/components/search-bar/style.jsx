@@ -10,7 +10,7 @@ export const StyledSearch = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => hexTorgb(props.theme.colors.vulcan, 0.7)};
+  background-color: ${(props) => hexTorgb(props.theme.colors.primary, 0.4)};
   z-index: 99999;
   visibility: hidden;
   opacity: 0;

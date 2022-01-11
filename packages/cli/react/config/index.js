@@ -17,12 +17,13 @@ module.exports = [
     {
     choice: "Solar",
     dependencies1: [
-      "@motor-js/engine",
+      "@motor-js/engine@next",
       "@styled-system/theme-get",
       "classnames",
-      "@motor-js/nebula",
+      "@motor-js/theme@next",
+      "@motor-js/components@next",
       "react-feather",
-      "react-router-dom",
+      "react-router-dom@^5.2.0",
       "styled-bootstrap-grid",
       "styled-components",
       "styled-system",

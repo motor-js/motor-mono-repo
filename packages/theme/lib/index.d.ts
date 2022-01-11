@@ -1,5 +1,4 @@
-import styled, { css, ThemeProvider } from "styled-components";
-import { ThemeContext } from "./contexts/ThemeProvider";
+import { ThemeProvider, ThemeContext } from "styled-components";
 import defaultTheme from "./theme";
 import { extendTheme } from "./utils/extendTheme";
 export declare const device: {
@@ -9,6 +8,5 @@ export declare const device: {
     xlarge: string;
     xxlarge: string;
 };
-export { ThemeContext, ThemeProvider, defaultTheme, css, extendTheme, };
+export { ThemeContext, ThemeProvider, defaultTheme, extendTheme, };
 export * from "styled-system";
-export default styled;

@@ -1,15 +1,14 @@
 /* eslint-disable prefer-template */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import DropdownRef from './Dropdown'
 import useOutsideClick from "../../hooks/useOutsideClick";
 import FilterInput from "./FilterInput";
 import {
   FilterWrapper,
 } from "./styles/FilterTheme";
+import { ThemeContext } from '@motor-js/theme'
 
 function StyledFilter({
-  engine,
-  engineError,
   listData,
   motorListProps,
   singleSelection,
@@ -23,6 +22,8 @@ function StyledFilter({
   ...rest
 }) {
 
+  const theme = useContext(ThemeContext)
+
   // Ref for click outside functionality
   const filterRef = useRef();
   const dropRef = useRef();
@@ -33,18 +34,21 @@ function StyledFilter({
   const [currPageHeight, setCurrPageHeight] = useState(pageHeight)
   const [placeholderState, setPlaceholderState] = useState(placeholder)
   const [searchValue, setSearchValue] = useState("")
-  //const [defaultSelectionState, setDefaultSelections] = useState(null)
 
   useEffect(() => {
     listData && setCurrPageHeight(listData.length)
   },[listData])
 
+
   const { 
     layout,
     select,
+    endSelections,
+    beginSelections,
     selections,
     searchList,
     confirmListSearch,
+    cancelListSearch,
     clearSelections,
     changePage,
   } = motorListProps
@@ -70,16 +74,17 @@ function StyledFilter({
         setListOpen(!listOpen) 
         setSearchValue('')
         changePage({ qTop: 0, qHeight: pageHeight })
+        endSelections(true)
       }
     },[]
   );
 
-  const handleSearchCallback = (e) => setSearchValue(e.target.value)
-  
-  useEffect(() => {
-    searchList(searchValue)
-  },[searchValue])
-  
+  const handleSearchCallback = (e) => {
+    setSearchValue(e.target.value)
+    searchList(e.target.value)
+  }
+ 
+
   const handleKeyDownCallback = (e) => {
     if(e.key === 'Enter') {
       confirmListSearch() 
@@ -97,17 +102,30 @@ function StyledFilter({
     setSearchValue("")
   } 
 
-  const handleInputSelectCallback = () => setListOpen(true)
+  const handleInputSelectCallback = () => {
+    if (!listOpen) {
+      beginSelections()
+      setListOpen(true)
+    } 
+  }
 
-  const handleIconSelectCallback = () => setListOpen(!listOpen)
+  const handleIconSelectCallback = () => {
+    if (listOpen) {
+      endSelections(true)
+    } else {
+      beginSelections()
+    }
+    setListOpen(!listOpen)
+  }
 
   const handleSelectCallback = (item) => {
     setPlaceholderState("")
-    const { key } = item;
-    const toggleSelections = !singleSelection;
-    select([key],toggleSelections);
     setSearchValue("")
+    const { key } = item
+    const toggleSelections = !singleSelection
+    select([key],toggleSelections)
     onSelectionChange();
+    //endSelections(true)
   }
 
 
@@ -119,6 +137,7 @@ function StyledFilter({
 
   // PROPS
   const filterInputProps = {
+    theme,
     selectionsLabels,
     numberOfSelections,
     selectionLabelLimit,
@@ -138,6 +157,7 @@ function StyledFilter({
   }
 
   const dropdownProps = {
+    theme,
     items: listData,
     loadNextPage,
     pageHeight: currPageHeight || pageHeight,

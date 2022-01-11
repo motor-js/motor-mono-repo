@@ -5,23 +5,20 @@ import { useList } from '@motor-js/engine'
 import { useContext, useState } from "react";
 //import { NebulaConnection } from '@motor-js/nebula'
 import { Filter } from "@motor-js/components"
-import { ThemeContext } from "@motor-js/theme";
 
-const NewApp = ({ dimension}) => {
+
+const MotorFilter = ({ dimension, m}) => {
 
   const { 
     listData,
     motorListProps,
-    select
-  } = useList({ dimension,})
+  } = useList({ dimension })
   
-  
-  console.log('listData: ',listData)
+
   return (
     <>
         <Filter 
-          listData={listData}
-          size="small"
+          listData={listData}      
           motorListProps={motorListProps}
           colorTheme="orange"
         />
@@ -29,4 +26,4 @@ const NewApp = ({ dimension}) => {
   );
 };
 
-export default NewApp;
+export default MotorFilter;

@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
+import { getFieldsFromDimensions } from "../utils/hyperCubeUtilities";
 
 let qDoc = null;
-let qObject = null;
 
 const useSelectionObject = () => {
 
@@ -13,7 +13,6 @@ const useSelectionObject = () => {
   const [qLayout, setQLayout] = useState(null);
   const [selections, setSelections] = useState(null);
   const [selectionItems, setSelectionItems] = useState(null);
-  const [error, setError] = useState(null);
 
   const update = useCallback(async () => {
     const _qLayout = await qObject.current.getLayout();
@@ -21,6 +20,8 @@ const useSelectionObject = () => {
     if (qObject.current) {
       setQLayout(_qLayout);
       setSelections(sel);
+      /*
+      //Old logic
       setSelectionItems(
         sel.map((element, index) => {
           return {
@@ -29,6 +30,17 @@ const useSelectionObject = () => {
           };
         })
       );
+      */
+      setSelectionItems(
+        sel.map((element, index) => {
+          let items = []
+          element.qSelectedFieldSelectionInfo.map((e) => items.push(e.qName))  
+          return ({
+            qField: element.qField,
+            qItems: items,
+          })
+        })
+      )
     }
   }, []);
 
@@ -37,17 +49,27 @@ const useSelectionObject = () => {
     return selections;
   };
 
-  const clearSelections = async (field, value) => {
-    if (field) {
-      const qField = await qDoc.getField(field);
-      if (value) {
-        await qField.toggleSelect(value);
+  const clearSelections = async (dim, value) => {
+    (async () => {
+      const qDoc = await engine;
+      if (dim) {
+        const masterItem = await getFieldsFromDimensions(qDoc, dim)
+        let field
+        if(masterItem.length > 0) {
+          field = masterItem[0].qData.info[0].qName
+        } else {
+          field = dim
+        }
+        const qField = await qDoc.getField(field)
+        if (value) {
+          await qField.toggleSelect(value);
+        } else {
+          await qField.clear();
+        }
       } else {
-        await qField.clear();
+        qDoc.clearAll();
       }
-    } else {
-      qDoc.clearAll();
-    }
+    })()
   };
 
   useEffect(() => {

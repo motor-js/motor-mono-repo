@@ -175,7 +175,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: ${theme.fonts.body};
         font-weight: ${theme.fontWeights.body};
         color: ${theme.colors.text};
-        font-size: ${theme.fontSize.body};
+        font-size: ${theme.fontSizes.body};
         background: ${theme.colors.background};
     }
     a {
@@ -212,53 +212,53 @@ const GlobalStyle = createGlobalStyle`
     }
     h1,
     .h1 {
-        font-size: ${theme.fontSize.h1[0]};
+        font-size: ${theme.fontSizes.h1[0]};
         ${device.small} {
-            font-size: ${theme.fontSize.h1[1]};
+            font-size: ${theme.fontSizes.h1[1]};
         }
         ${device.medium} {
-            font-size: ${theme.fontSize.h1[2]};
+            font-size: ${theme.fontSizes.h1[2]};
         }
         ${device.large} {
-            font-size: ${theme.fontSize.h1[3]};
+            font-size: ${theme.fontSizes.h1[3]};
         }
     }
     h2,
     .h2 {
-        font-size: ${theme.fontSize.h2[0]};
+        font-size: ${theme.fontSizes.h2[0]};
         ${device.medium} {
-            font-size: ${theme.fontSize.h2[1]};
+            font-size: ${theme.fontSizes.h2[1]};
         }
         ${device.large} {
-            font-size: ${theme.fontSize.h2[2]};
+            font-size: ${theme.fontSizes.h2[2]};
         }
     }
     h3,
     .h3 {
-        font-size: ${theme.fontSize.h3[0]};
+        font-size: ${theme.fontSizes.h3[0]};
         ${device.large} {
-            font-size: ${theme.fontSize.h3[1]};
+            font-size: ${theme.fontSizes.h3[1]};
         }
     }
     h4,
     .h4 {
-        font-size: ${theme.fontSize.h4[0]};
+        font-size: ${theme.fontSizes.h4[0]};
         ${device.large} {
-            font-size: ${theme.fontSize.h4[1]};
+            font-size: ${theme.fontSizes.h4[1]};
         }
     }
     h5,
     .h5 {
-        font-size: ${theme.fontSize.h5[0]};
+        font-size: ${theme.fontSizes.h5[0]};
         ${device.large} {
-            font-size: ${theme.fontSize.h5[1]};
+            font-size: ${theme.fontSizes.h5[1]};
         }
     }
     h6,
     .h6 {
-        font-size: ${theme.fontSize.h6[0]};
+        font-size: ${theme.fontSizes.h6[0]};
         ${device.large} {
-            font-size: ${theme.fontSize.h6[1]};
+            font-size: ${theme.fontSizes.h6[1]};
         }
     }
     p {

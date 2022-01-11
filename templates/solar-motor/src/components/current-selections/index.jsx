@@ -13,8 +13,10 @@ import {
 } from "./style";
 
 const CurrentSelections = ({ selections, clear }) => {
+
   const handleClear = (field) => clear(field);
-  const { clearSelections, previousSelection, nextSelection } = useButton()
+  
+  const { previousSelection, nextSelection, clearSelections } = useButton()
 
   return (
     <Dropdown direction="down">

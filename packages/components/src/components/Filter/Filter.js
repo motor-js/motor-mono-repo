@@ -1,23 +1,17 @@
 /* eslint-disable prefer-template */
-import { useContext } from "react";
 import StyledFilter from "./StyledFilter";
-import { EngineContext, AppProvider } from "@motor-js/engine"
-import { ThemeContext, defaultTheme } from "@motor-js/theme"
 import PropTypes from "prop-types"
 
-function Filter({ ...rest }) {
-  const myTheme = useContext(ThemeContext) || defaultTheme;
-  const { engine, engineError } = useContext(EngineContext) || {}
+/**
+ * A multi-select Filter component
+ */
 
-  const theme =  useContext(ThemeContext)
+function Filter({ ...rest }) {
 
   return (
-    <StyledFilter
-      engine={engine}
-      theme={myTheme}
-      engineError={engineError}
-      {...rest}
-    />
+      <StyledFilter
+        {...rest}
+      />
   );
 }
 
