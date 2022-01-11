@@ -1,8 +1,9 @@
 import { useSelections, useButton, useList } from '@motor-js/engine'
+import MotorFilter from './MotorFilter'
 
 function App() {
 
-  const { clearSelections } = useSelections()  
+  const { clearSelections, selections } = useSelections()  
   const { lockField, unlockField } = useButton()
 
   const dimension = ['Row']
@@ -12,14 +13,13 @@ function App() {
     motorListProps,
   } = useList({ dimension })
 
-  console.log(motorListProps)
 
   return (
     <div className="App">
       <button onClick={() => lockField('Row')}>Lock</button>
       <button onClick={() => unlockField('Row')}>UnLock</button>
       <button onClick={ () => clearSelections()}>clearSelections</button>
-      {/*<MotorFilter dimension={['Row']}/>*/}
+      <MotorFilter dimension={['Row']}/>
     </div>
   );
 }

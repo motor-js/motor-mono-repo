@@ -22,6 +22,8 @@ function StyledFilter({
   ...rest
 }) {
 
+  const theme = useContext(ThemeContext)
+
   // Ref for click outside functionality
   const filterRef = useRef();
   const dropRef = useRef();
@@ -50,9 +52,6 @@ function StyledFilter({
     clearSelections,
     changePage,
   } = motorListProps
-
-  const newTheme = useContext(ThemeContext)
-  console.log('nT: ',newTheme)
 
   const numberOfItems = layout && layout.qListObject.qSize.qcy
   const viewportHeight = parseInt(dropHeight, 10);
@@ -138,6 +137,7 @@ function StyledFilter({
 
   // PROPS
   const filterInputProps = {
+    theme,
     selectionsLabels,
     numberOfSelections,
     selectionLabelLimit,
@@ -157,6 +157,7 @@ function StyledFilter({
   }
 
   const dropdownProps = {
+    theme,
     items: listData,
     loadNextPage,
     pageHeight: currPageHeight || pageHeight,

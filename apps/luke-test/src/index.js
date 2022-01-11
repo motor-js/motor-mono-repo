@@ -4,9 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Motor } from "@motor-js/engine"
+import { ThemeProvider, defaultTheme } from "@motor-js/theme"
 
 ReactDOM.render(
   <React.StrictMode>
+    <ThemeProvider theme={defaultTheme}>
     <Motor
       config={{
         host: "motor.eu.qlikcloud.com",
@@ -18,8 +20,10 @@ ReactDOM.render(
         qcs: true,
       }}
     >
+
       <App />
     </Motor>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

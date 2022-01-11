@@ -18,7 +18,7 @@ export const FilterInputWrapper = styled.div`
 export const FilterInputOutline = styled.div`
   display: flex;
   flexDirection: row;
-  border-radius: ${props => console.log(props.theme)} //props.theme.filter.borderRadius};
+  border-radius: ${props => props.theme.filter.borderRadius};
   border: ${props => props.theme.filter.border};
   &:hover {
     border:  ${props => props.theme.filter.borderHovered};
@@ -86,7 +86,7 @@ export const SelectButton = styled.button`
   padding: 0px 4px 0px 2px;
 
   &:hover {
-    background-color: ${props => transparentize(0.3, props.theme.colors[props.colorTheme][500])};
+    background-color: ${props => props.selections.length > 0 && props.selections[0].state === 'S' && transparentize(0.3, props.theme.colors[props.colorTheme][500])};
   }
 `
 

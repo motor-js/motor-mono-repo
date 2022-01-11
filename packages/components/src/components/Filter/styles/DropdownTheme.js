@@ -97,7 +97,7 @@ export const StyledCheckbox = styled.div`
   }
 
   ${Icon} {
-    visibility: ${props => props.selected === 'S' ? 'visible' : 'hidden'}
+    visibility: ${props => props.selected === 'S' | props.selected === 'L' ? 'visible' : 'hidden'}
   }
 `
 export const CheckboxContainer = styled.div`
