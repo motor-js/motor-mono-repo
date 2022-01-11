@@ -1,11 +1,12 @@
 /* eslint-disable prefer-template */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import DropdownRef from './Dropdown'
 import useOutsideClick from "../../hooks/useOutsideClick";
 import FilterInput from "./FilterInput";
 import {
   FilterWrapper,
 } from "./styles/FilterTheme";
+import { ThemeContext } from '@motor-js/theme'
 
 function StyledFilter({
   listData,
@@ -21,6 +22,8 @@ function StyledFilter({
   ...rest
 }) {
 
+  const theme = useContext(ThemeContext)
+
   // Ref for click outside functionality
   const filterRef = useRef();
   const dropRef = useRef();
@@ -35,6 +38,7 @@ function StyledFilter({
   useEffect(() => {
     listData && setCurrPageHeight(listData.length)
   },[listData])
+
 
   const { 
     layout,
@@ -133,6 +137,7 @@ function StyledFilter({
 
   // PROPS
   const filterInputProps = {
+    theme,
     selectionsLabels,
     numberOfSelections,
     selectionLabelLimit,
@@ -152,6 +157,7 @@ function StyledFilter({
   }
 
   const dropdownProps = {
+    theme,
     items: listData,
     loadNextPage,
     pageHeight: currPageHeight || pageHeight,

@@ -79,6 +79,18 @@ const useButton = (props) => {
     qDoc.doReload(qMode, qPartial, false)
   }
 
+  const lockField = async (field) => {
+    const qDoc = await engine;
+    const qField = await qDoc.getField(field)
+    qField.lock()
+  }
+
+  const unlockField = async (field) => {
+    const qDoc = await engine;
+    const qField = await qDoc.getField(field)
+    qField.unlock()
+  }
+
   const exportData = (filename) => {
     const { host, secure, port, prefix } = config;
     
@@ -104,6 +116,8 @@ const useButton = (props) => {
     select,
     selectValues,
     doReload,
+    lockField,
+    unlockField,
   };
 };
 

@@ -86,7 +86,7 @@ export const SelectButton = styled.button`
   padding: 0px 4px 0px 2px;
 
   &:hover {
-    background-color: ${props => transparentize(0.3, props.theme.colors[props.colorTheme][500])};
+    background-color: ${props => props.selections.length > 0 && props.selections[0].state === 'S' && transparentize(0.3, props.theme.colors[props.colorTheme][500])};
   }
 `
 

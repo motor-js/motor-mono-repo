@@ -9,9 +9,9 @@ import PropTypes from "prop-types"
 function Filter({ ...rest }) {
 
   return (
-    <StyledFilter
-      {...rest}
-    />
+      <StyledFilter
+        {...rest}
+      />
   );
 }
 

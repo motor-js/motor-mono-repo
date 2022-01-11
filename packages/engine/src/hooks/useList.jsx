@@ -146,7 +146,7 @@ const useList = (props) => {
       });
 
       // Get Selections
-      const _selections = _listData && _listData.filter(row => row.state === "S");
+      const _selections = _listData && _listData.filter(row => row.state === "S" || row.state === "L");
       // Get Selection ID
       const _selId = _selections && _selections.map(d => d.key);
 
