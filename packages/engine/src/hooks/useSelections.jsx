@@ -49,6 +49,16 @@ const useSelectionObject = () => {
     return selections;
   };
 
+  const lockAll = async () => {
+    const qDoc = await engine;
+    qDoc.lockAll()
+  }
+
+  const unlockAll = async () => {
+    const qDoc = await engine;
+    qDoc.unlockAll()
+  }
+
   const clearSelections = async (dim, value) => {
     (async () => {
       const qDoc = await engine;
@@ -100,7 +110,7 @@ const useSelectionObject = () => {
     })();
   }, [engine]);
 
-  return { qLayout, selections, selectionItems, clearSelections };
+  return { qLayout, selections, selectionItems, clearSelections, lockAll, unlockAll };
 };
 
 export default useSelectionObject;
