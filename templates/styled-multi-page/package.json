@@ -1,10 +1,10 @@
 {
   "name": "styled-multi-page",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "dependencies": {
-    "@motor-js/components": "^0.1.1",
-    "@motor-js/engine": "^0.4.1",
+    "@motor-js/components": "^0.1.2",
+    "@motor-js/engine": "^0.4.2",
     "@motor-js/nebula": "^0.3.1",
     "@motor-js/theme": "^0.1.1",
     "@reduxjs/toolkit": "^1.6.0",
