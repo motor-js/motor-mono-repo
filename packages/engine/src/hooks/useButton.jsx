@@ -22,7 +22,10 @@ const useButton = (props) => {
     props
   );
 
-  const { engine } = useContext( AppContext._currentValue !== undefined ? AppContext : EngineContext) || {};
+  const { engine } =
+    useContext(
+      AppContext._currentValue !== undefined ? AppContext : EngineContext
+    ) || {};
 
   const [qLayout, setQLayout] = useState(null);
 
@@ -63,37 +66,37 @@ const useButton = (props) => {
 
   const select = async (value, field) => {
     const qDoc = await engine;
-    const qField = await qDoc.getField(field)
-    qField.select(value)
-  }
+    const qField = await qDoc.getField(field);
+    qField.select(value);
+  };
 
-  const selectValues = async (values, field, toggle=false) => {
-    const sel = await values.map(d => ({'qText': d}))
+  const selectValues = async (values, field, toggle = false) => {
+    const sel = await values.map((d) => ({ qText: d }));
     const qDoc = await engine;
-    const qField = await qDoc.getField(field)
-    qField.selectValues(sel,toggle)
-  }
+    const qField = await qDoc.getField(field);
+    qField.selectValues(sel, toggle);
+  };
 
-  const doReload = async (qMode, qPartial ) => {
+  const doReload = async (qMode = 0, qPartial = false, qDebug = false) => {
     const qDoc = await engine;
-    qDoc.doReload(qMode, qPartial, false)
-  }
+    return await qDoc.doReload(qMode, qPartial, qDebug);
+  };
 
   const lockField = async (field) => {
     const qDoc = await engine;
-    const qField = await qDoc.getField(field)
-    qField.lock()
-  }
+    const qField = await qDoc.getField(field);
+    qField.lock();
+  };
 
   const unlockField = async (field) => {
     const qDoc = await engine;
-    const qField = await qDoc.getField(field)
-    qField.unlock()
-  }
+    const qField = await qDoc.getField(field);
+    qField.unlock();
+  };
 
   const exportData = (filename) => {
     const { host, secure, port, prefix } = config;
-    
+
     const id = qLayout.qInfo.qId;
     const filenameExport = filename || "Data Export";
     const _secure = secure ? "https://" : "http://";
@@ -101,7 +104,7 @@ const useButton = (props) => {
     const server = _secure + host + _port + prefix;
     engine.getObject(id).then((model) => {
       model.exportData("CSV_C", "/qHyperCubeDef", "Test", "P").then((url) => {
-         console.log(url.qUrl, url.qWarnings);
+        console.log(url.qUrl, url.qWarnings);
         // window.open(server + url.qUrl, '_blank')
       });
     });

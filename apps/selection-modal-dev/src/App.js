@@ -2,6 +2,7 @@ import "./App.css";
 import { Card } from "semantic-ui-react";
 import SelectionChart from "./components/SelectionChart";
 import ButtonComponent from "./components/Button";
+import ReloadButtonComponent from "./components/ReloadButton";
 import ChartComponent from "./components/ChartComponent";
 
 const cols = [
@@ -38,6 +39,7 @@ export default function App() {
             />
 
             <ButtonComponent />
+            <ReloadButtonComponent />
           </Card.Content>
         </Card>
       </div>

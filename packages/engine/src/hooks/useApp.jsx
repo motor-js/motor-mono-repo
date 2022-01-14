@@ -1,32 +1,36 @@
 import { useContext, useState, useEffect } from "react";
 import { EngineContext } from "../contexts/EngineProvider";
+import { AppContext } from "../contexts/AppContext";
 
 const useApp = () => {
-  const { engine } = useContext(EngineContext) || {};
+  const { engine } =
+    useContext(
+      AppContext._currentValue !== undefined ? AppContext : EngineContext
+    ) || {};
   const [qApp, setApp] = useState();
 
-  const doReload = async (qMode, qPartial) => {
+  const doReload = async (qMode = 0, qPartial = false, qDebug = false) => {
     const qDoc = await engine;
-    qDoc.doReload(qMode, qPartial, false);
+    return await qDoc.doReload(qMode, qPartial, qDebug);
   };
 
   useEffect(
     () =>
       (async () => {
-        if (engine === undefined) {
-        } else {
-          const qDoc = await engine;
+        if (!engine) return;
 
-          const appProperties = await qDoc.getAppProperties();
+        const qDoc = await engine;
 
-          setApp({
-            app: qDoc,
-            appProperties,
-            ...appProperties,
-            doReload,
-          });
-        }
+        const appProperties = await qDoc.getAppProperties();
+
+        setApp({
+          app: qDoc,
+          appProperties,
+          ...appProperties,
+          doReload,
+        });
       })(),
+    // })
     [engine]
   );
 
