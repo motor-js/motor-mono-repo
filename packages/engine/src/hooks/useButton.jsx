@@ -77,9 +77,29 @@ const useButton = (props) => {
     qField.selectValues(sel, toggle);
   };
 
-  const doReload = async (qMode = 0, qPartial = false, qDebug = false) => {
+  // const doReload = async (qMode = 0, qPartial = false, qDebug = false) => {
+  //   const qDoc = await engine;
+  //   return await qDoc.doReload(qMode, qPartial, qDebug);
+  // };
+
+  const doReload = async (
+    qMode = 0,
+    qPartial = false,
+    qDebug = false,
+    qReturnReloadTime = true
+  ) => {
     const qDoc = await engine;
-    return await qDoc.doReload(qMode, qPartial, qDebug);
+
+    const result = await qDoc.doReload(qMode, qPartial, qDebug);
+    const appInfo = await qDoc.getAppProperties({});
+    if (qReturnReloadTime) {
+      return {
+        qReloadResult: result,
+        qLastReloadTime: appInfo.qLastReloadTime,
+      };
+    }
+
+    return result;
   };
 
   const lockField = async (field) => {

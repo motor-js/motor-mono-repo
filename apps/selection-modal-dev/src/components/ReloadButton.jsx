@@ -1,9 +1,9 @@
 import React from "react";
-import { useApp } from "@motor-js/engine";
+import { useButton } from "@motor-js/engine";
 import { Button } from "semantic-ui-react";
 
 const ButtonComponent = () => {
-  const { doReload } = useApp();
+  const { doReload } = useButton();
 
   const handleClick = async () => {
     console.log(await doReload());
