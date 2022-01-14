@@ -82,19 +82,20 @@ const useButton = (props) => {
   //   return await qDoc.doReload(qMode, qPartial, qDebug);
   // };
 
-  const doReload = async (
+  const doReload = async ({
     qMode = 0,
     qPartial = false,
     qDebug = false,
-    qReturnReloadTime = true
-  ) => {
+    qReturnReloadTime = true,
+    qSuccessMessage = null,
+  } = {}) => {
     const qDoc = await engine;
 
-    const result = await qDoc.doReload(qMode, qPartial, qDebug);
+    const result = await qDoc.doReload({ qMode, qPartial, qDebug });
     const appInfo = await qDoc.getAppProperties({});
     if (qReturnReloadTime) {
       return {
-        qReloadResult: result,
+        qReloadResult: qSuccessMessage || result,
         qLastReloadTime: appInfo.qLastReloadTime,
       };
     }

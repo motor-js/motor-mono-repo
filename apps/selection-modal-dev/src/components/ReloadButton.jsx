@@ -6,7 +6,9 @@ const ButtonComponent = () => {
   const { doReload } = useButton();
 
   const handleClick = async () => {
-    console.log(await doReload());
+    console.log(
+      await doReload({ qSuccessMessage: "App successfully loaded." })
+    );
   };
 
   return (
