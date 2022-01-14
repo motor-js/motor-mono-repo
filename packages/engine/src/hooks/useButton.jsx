@@ -89,13 +89,21 @@ const useButton = (props) => {
     qReturnReloadTime = true,
     qSuccessMessage = null,
   } = {}) => {
+    // USAGE
+
+    // const handleClick = async () => {
+    //   console.log(
+    //     await doReload({ qSuccessMessage: "App successfully loaded." })
+    //   );
+    // };
+
     const qDoc = await engine;
 
     const result = await qDoc.doReload({ qMode, qPartial, qDebug });
     const appInfo = await qDoc.getAppProperties({});
     if (qReturnReloadTime) {
       return {
-        qReloadResult: qSuccessMessage || result,
+        qReloadResult: (result && qSuccessMessage) || result,
         qLastReloadTime: appInfo.qLastReloadTime,
       };
     }
