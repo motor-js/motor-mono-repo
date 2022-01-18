@@ -3,8 +3,31 @@ import React, { useRef, useLayoutEffect } from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "../tailwind.config";
+const { theme } = resolveConfig(tailwindConfig);
 
-am4core.useTheme(am4themes_animated);
+// in src type : ln -s ../tailwind.config.js ./
+console.log(theme.colors);
+
+function am4themes_myTheme(target) {
+  if (target instanceof am4core.ColorSet) {
+    target.list = [
+      am4core.color(theme.colors.blue),
+      am4core.color(theme.colors.purple),
+      am4core.color(theme.colors.pink),
+      // am4core.color("#1BA68D"),
+      // am4core.color("#E7DA4F"),
+      // am4core.color("#E77624"),
+      // am4core.color("#DF3520"),
+      // am4core.color("#64297B"),
+      // am4core.color("#232555"),
+    ];
+  }
+}
+
+// am4core.useTheme(am4themes_animated);
+am4core.useTheme(am4themes_myTheme);
 
 function AmChartsWrapper(props) {
   const chart = useRef(null);
