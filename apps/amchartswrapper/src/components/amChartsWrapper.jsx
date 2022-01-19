@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from "react";
 
 // https://codesandbox.io/s/6ovk5?file=/src/styles.css:123-206
+// https://codesandbox.io/s/99obk?file=/src/App.js
 
 import * as am5 from "@amcharts/amcharts5";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
