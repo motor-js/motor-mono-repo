@@ -1,80 +1,106 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+// https://codesandbox.io/s/6ovk5?file=/src/styles.css:123-206
+
+import * as am5 from "@amcharts/amcharts5";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
+import * as am5percent from "@amcharts/amcharts5/percent";
 const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
 console.log(theme.colors);
 
-function am4themes_myTheme(target) {
-  if (target instanceof am4core.ColorSet) {
-    target.list = [
-      am4core.color(theme.colors.blue),
-      am4core.color(theme.colors.purple),
-      am4core.color(theme.colors.pink),
-      // am4core.color("#1BA68D"),
-      // am4core.color("#E7DA4F"),
-      // am4core.color("#E77624"),
-      // am4core.color("#DF3520"),
-      // am4core.color("#64297B"),
-      // am4core.color("#232555"),
-    ];
-  }
-}
+//chart type
 
-// am4core.useTheme(am4themes_animated);
-am4core.useTheme(am4themes_myTheme);
-
-function AmChartsWrapper(props) {
-  const chart = useRef(null);
+function Pie(props) {
+  //const chart = useRef(null);
+  const chartID = props.chartID;
+  console.log({ chartID });
 
   useLayoutEffect(() => {
-    let x = am4core.create("chartdiv", am4charts.XYChart);
+    //var root = am5.Root.new("chartdiv2");
+    var root = am5.Root.new(chartID);
 
-    x.paddingRight = 20;
+    // Set themes
+    // https://www.amcharts.com/docs/v5/concepts/themes/
+    root.setThemes([am5themes_Animated.new(root)]);
 
-    let data = [];
-    let visits = 10;
+    // Create chart
+    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+    var chart = root.container.children.push(
+      am5percent.PieChart.new(root, {
+        endAngle: 270,
+      })
+    );
 
-    for (let i = 1; i < 366; i++) {
-      visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-      data.push({
-        date: new Date(2018, 0, i),
-        name: "name" + i,
-        value: visits,
-      });
-    }
+    // Create series
+    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+    var series = chart.series.push(
+      am5percent.PieSeries.new(root, {
+        valueField: "value",
+        categoryField: "category",
+        endAngle: 270,
+      })
+    );
 
-    x.data = data;
+    series
+      .get("colors")
+      .set("colors", [
+        am5.color(theme.colors.blue),
+        am5.color(theme.colors.purple),
+        am5.color(theme.colors.pink),
+        am5.color(theme.colors.orange),
+        am5.color(theme.colors.green),
+        am5.color(theme.colors.yellow),
+        am5.color(theme.colors.gray),
+      ]);
 
-    let dateAxis = x.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.grid.template.location = 0;
+    series.states.create("hidden", {
+      endAngle: -90,
+    });
 
-    let valueAxis = x.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.tooltip.disabled = true;
-    valueAxis.renderer.minWidth = 35;
+    //dataset
+    let data = [
+      {
+        category: "Lithuania",
+        value: 501.9,
+      },
+      {
+        category: "Czechia",
+        value: 301.9,
+      },
+      {
+        category: "Ireland",
+        value: 201.1,
+      },
+      {
+        category: "Germany",
+        value: 165.8,
+      },
+      {
+        category: "Australia",
+        value: 139.9,
+      },
+      {
+        category: "Austria",
+        value: 128.3,
+      },
+      {
+        category: "UK",
+        value: 99,
+      },
+    ];
 
-    let series = x.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = "date";
-    series.dataFields.valueY = "value";
-    series.tooltipText = "{valueY.value}";
-    x.cursor = new am4charts.XYCursor();
+    // Set data
+    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+    series.data.setAll(data);
 
-    let scrollbarX = new am4charts.XYChartScrollbar();
-    scrollbarX.series.push(series);
-    x.scrollbarX = scrollbarX;
+    series.appear(1000, 100);
+  }, [chartID]);
 
-    chart.current = x;
-
-    return () => {
-      x.dispose();
-    };
-  }, []);
-
-  return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
+  // return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
+  return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
 }
-export default AmChartsWrapper;
+export default Pie;
