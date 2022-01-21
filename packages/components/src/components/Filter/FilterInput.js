@@ -40,8 +40,6 @@ const FilterInput = ({
   ...rest
 }) => {
 
-  console.log('sL: ',selectionsLabels)
-
   const [inputRef, setInputFocus] = useFocus()
 
   const handleFocus = () => setInputFocus()
