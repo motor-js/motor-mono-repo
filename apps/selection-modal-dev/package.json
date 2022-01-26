@@ -1,10 +1,10 @@
 {
   "name": "selection-modal-dev",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "dependencies": {
-    "@motor-js/components": "^0.1.3",
-    "@motor-js/engine": "^0.4.3",
+    "@motor-js/components": "^0.1.4",
+    "@motor-js/engine": "^0.4.4",
     "@motor-js/theme": "^0.1.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
