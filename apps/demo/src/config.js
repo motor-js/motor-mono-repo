@@ -14,11 +14,20 @@ export const qlikApp2 = {
   secure: true,
   port: 19077,
   prefix: "",
-  appId: "a6dfbb9f-b02a-401e-af98-349b4dd71458",
-  redirectFileName: "auth.html",
-  qsServerType: "onPrem",
-  global: false
+  appId: "4359f6e1-0df6-43f8-bcd2-9aa13616f53b",
+  redirectFileName: "auth4.html",
+  qsServerType: "onPrem"
 };
+
+export const qlikAppProxy = {
+  host: "sense-motor.adviseinc.co.uk",
+  secure: true,
+  prefix: "motor",
+  appId: "4359f6e1-0df6-43f8-bcd2-9aa13616f53b",
+  redirectFileName: "auth4.html",
+  qsServerType: "onPrem"
+};
+
 
 export const globalConfig = {
   host: "sense-motor.adviseinc.co.uk",

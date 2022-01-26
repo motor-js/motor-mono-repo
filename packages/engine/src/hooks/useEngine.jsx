@@ -174,8 +174,9 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem') {
-        const reloadURI = encodeURIComponent(`https://${config.host}/content/Default/${config.redirectFileName}`);
-        const url = `wss:/${config.host}/app/${config.appId}?reloadURI=${reloadURI}`;
+        
+        const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
+        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?reloadURI=${reloadURI}`;
 
         const session = enigma.create({
           schema,
