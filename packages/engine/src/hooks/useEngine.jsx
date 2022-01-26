@@ -184,8 +184,6 @@ function useEngine(props) {
           suspendOnClose: false
         });
 
-       // session.on('traffic:*', (direction, msg) => console.log(direction, msg));
-
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
           
           if (authInfo.mustAuthenticate) {
