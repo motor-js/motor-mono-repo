@@ -233,11 +233,11 @@ export const validData = (qLayout) => {
   
   if (qDimensionInfo && qMeasureInfo) {
     DimCheck();
-    MeasCheck();
+  //  MeasCheck();
   } else if (qDimensionInfo && !qMeasureInfo) {
     DimCheck();
   } else if (!qDimensionInfo && qMeasureInfo) {
-    MeasCheck();
+  //  MeasCheck();
   } else { }
 
 };
