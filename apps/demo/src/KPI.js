@@ -1,6 +1,5 @@
+/*
 import { useData } from "@motor-js/engine";
-import { KPI } from "@motor-js/components";
-
 
 const MotorKPI = () => {
   const qMetrics = [
@@ -92,3 +91,4 @@ const MotorKPI = () => {
 };
 
 export default MotorKPI;
+*/

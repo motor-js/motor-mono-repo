@@ -128,6 +128,7 @@ const useTable = (props) => {
     selections,
   } = state;
 
+  console.log('render')
   // filter cols to just return the active cols
   const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
   const [newColsUnfiltered, setNewColsUnfiltered] = useState(cols)
@@ -174,7 +175,6 @@ const useTable = (props) => {
   //handle page change
   const handlePageChange = useCallback(
     (pageIndex) => {
-      console.log(pageIndex)
       setPage(pageIndex);
     },
     [setPage]
@@ -232,7 +232,7 @@ const useTable = (props) => {
 
   const generateQProp = useCallback(() => {
     const qProp = createDef(
-      newCols,
+      cols,
       qTitle,
       qHyperCubeDef,
       qSortByAscii,
@@ -251,11 +251,10 @@ const useTable = (props) => {
 
     return qProp;
   }, [
-    newCols,
+    cols,
     qTitle,
     qExpression,
     qHyperCubeDef,
-    qInterColumnSortOrder,
     qSortByAscii,
     qSortByExpression,
     qSortByLoadOrder,

@@ -19,16 +19,7 @@ const NewApp = () => {
         dimension={["BURGER"]}
         m={50}
       />
-
-      {/* 
-      <AppProvider config={qlikSAASConfig2}> 
-        <MotorFilter
-          dimension={["Country"]}
-          m={10}
-        />
-     </AppProvider> 
     <MaterialTable />
-    */}
     </div>
   );
 };
