@@ -128,7 +128,6 @@ const useTable = (props) => {
     selections,
   } = state;
 
-  console.log('render')
   // filter cols to just return the active cols
   const [newCols, setNewCols] = useState(cols.filter((col) => col.columnActive === undefined || col.columnActive))
   const [newColsUnfiltered, setNewColsUnfiltered] = useState(cols)
@@ -232,7 +231,7 @@ const useTable = (props) => {
 
   const generateQProp = useCallback(() => {
     const qProp = createDef(
-      cols,
+      newCols,
       qTitle,
       qHyperCubeDef,
       qSortByAscii,
@@ -251,16 +250,7 @@ const useTable = (props) => {
 
     return qProp;
   }, [
-    cols,
-    qTitle,
-    qExpression,
-    qHyperCubeDef,
-    qSortByAscii,
-    qSortByExpression,
-    qSortByLoadOrder,
-    qSuppressMissing,
-    qOtherTotalSpec,
-    qSuppressZero,
+    newCols,
   ]);
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);

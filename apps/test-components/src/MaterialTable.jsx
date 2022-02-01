@@ -69,6 +69,8 @@ export default function MaterialTable() {
     },
   });
 
+  console.log(dataSet)
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
