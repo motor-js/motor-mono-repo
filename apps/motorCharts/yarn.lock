@@ -560,10 +560,10 @@
     "@types/yargs" "^16.0.0"
     "chalk" "^4.0.0"
 
-"@motor-js/engine@^0.4.2":
-  "integrity" "sha512-FNMFC+/dRXXS9eCaJN+fGMXdEnZvQl5MSPrVC9VY2/3QppWFNWdbEdtgjUzMXmnQEn1PTgjjd30sBvR9sxzT+Q=="
-  "resolved" "https://registry.npmjs.org/@motor-js/engine/-/engine-0.4.2.tgz"
-  "version" "0.4.2"
+"@motor-js/engine@^0.4.8":
+  "integrity" "sha512-Zh83S4RVR6/xxjpcjd4bedJp3U1KSkR0I1pKuBdVeQLIdo2rolXZaov6JfZIaUd3pqgvPgSAg+m1U00vc7hQdQ=="
+  "resolved" "https://registry.npmjs.org/@motor-js/engine/-/engine-0.4.8.tgz"
+  "version" "0.4.8"
   dependencies:
     "crypto-js" "^3.3.0"
     "enigma.js" "^2.6.3"

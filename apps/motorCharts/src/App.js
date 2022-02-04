@@ -1,6 +1,7 @@
 import "./App.css";
 // import AmChartsWrapper from "./components/amChartsWrapper";
 import XYChart from "./components/XYChart";
+import PieChart from "./components/PieChart";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         {/* <div className="flex-container"> */}
         {/* <MultilevelTreeMap chartID="pie-one" />
           <Gauge chartID="gauge-one" /> */}
-        <XYChart chartID="pie-two" />
+        <XYChart chartID="main-bar" />
+        <PieChart chartID="main-pie" />
         {/* </div> */}
       </header>
     </div>

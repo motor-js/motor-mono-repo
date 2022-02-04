@@ -7,8 +7,12 @@ import { qlikConfig } from "./config";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <Motor config={qlikConfig}>
+  <Motor
+    config={qlikConfig}
+    licenseKey="U2FsdGVkX19vjmrWbhnS5zEHEGj2PxXnorHHCxZ55lg="
+  >
     <App />
   </Motor>,
+
   rootElement
 );
