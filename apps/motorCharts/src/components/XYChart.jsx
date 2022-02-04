@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
 
 // https://codesandbox.io/s/6ovk5?file=/src/styles.css:123-206
 // https://codesandbox.io/s/99obk?file=/src/App.js
@@ -15,9 +15,12 @@ const { theme } = resolveConfig(tailwindConfig);
 // console.log(theme.colors);
 
 //chart type
+let chart = null;
 
+let test = null;
 function XYChart(props) {
-  //const chart = useRef(null);
+  const amChart = useRef(null);
+  const [dataProvided, setDataProvided] = useState(false);
   const cols = [
     {
       qField: "BURGER",
@@ -34,15 +37,17 @@ function XYChart(props) {
     cols,
   });
 
-  // const { data } = dataSet;
+  const { data } = dataSet;
 
-  console.log(dataSet);
+  // console.log(dataSet);
   const chartID = props.chartID;
-  console.log({ chartID });
+  // console.log({ chartID });
 
   useLayoutEffect(() => {
-    //var root = am5.Root.new("chartdiv2");
     var root = am5.Root.new(chartID);
+    //var root = am5.Root.new("chartdiv2");
+
+    // console.log(amChart);
 
     // Create root and chart
 
@@ -51,12 +56,14 @@ function XYChart(props) {
     root.setThemes([am5themes_Animated.new(root)]);
 
     // Create chart
-    let chart = root.container.children.push(
+    amChart.current = root;
+    chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panY: false,
         layout: root.verticalLayout,
       })
     );
+    console.log("useEffectlayout");
 
     // const data2 = dataSet.data.map();
 
@@ -129,13 +136,34 @@ function XYChart(props) {
       tooltipY: 0,
     });
 
-    // Add legend
-    let legend = chart.children.push(am5.Legend.new(root, {}));
-    legend.data.setAll(chart.series.values);
+    test = chart.series.values;
 
-    // Add cursor
+    // Add legend
+    // let legend = chart.children.push(am5.Legend.new(root, {}));
+    // legend.data.setAll(chart.series.values);
+
+    // console.log("chart.series.values", chart.series.values);
+
+    // // Add cursor
     // chart.set("cursor", am5xy.XYCursor.new(root, {}));
   }, [chartID]);
+
+  // Load data into chart
+  useEffect(() => {
+    if (amChart.current && !dataProvided) {
+      // amChart.current.data = data;
+      // Add legend
+      // console.log("test", test);
+      let legend = chart.children.push(am5.Legend.new(amChart.current, {}));
+      console.log("legend", legend);
+      legend.data.setAll(test);
+      setDataProvided(true);
+      // console.log("data", data);
+
+      // chart.set("cursor", am5xy.XYCursor.new(amChart.current, {}));
+      // console.log("useEffect");
+    }
+  }, [data]);
 
   // return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
