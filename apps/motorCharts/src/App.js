@@ -14,7 +14,7 @@ function App() {
         {/* <MultilevelTreeMap chartID="pie-one" />
           <Gauge chartID="gauge-one" /> */}
         <XYChart chartID="main-bar" />
-        <PieChart chartID="main-pie" />
+        {/* <PieChart chartID="main-pie" /> */}
         {/* </div> */}
       </header>
     </div>

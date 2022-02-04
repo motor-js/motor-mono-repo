@@ -8,6 +8,7 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
+import { useData } from "@motor-js/engine";
 const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
@@ -17,6 +18,25 @@ const { theme } = resolveConfig(tailwindConfig);
 
 function XYChart(props) {
   //const chart = useRef(null);
+  const cols = [
+    {
+      qField: "BURGER",
+      qLabel: "Burger",
+    },
+
+    {
+      qField: "=sum(Calories)",
+      qLabel: "Total Calories",
+    },
+  ];
+
+  const { dataSet } = useData({
+    cols,
+  });
+
+  // const { data } = dataSet;
+
+  console.log(dataSet);
   const chartID = props.chartID;
   console.log({ chartID });
 
@@ -37,6 +57,8 @@ function XYChart(props) {
         layout: root.verticalLayout,
       })
     );
+
+    // const data2 = dataSet.data.map();
 
     // Define data
     let data = [
