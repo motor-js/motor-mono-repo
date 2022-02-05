@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // https://codesandbox.io/s/6ovk5?file=/src/styles.css:123-206
 // https://codesandbox.io/s/99obk?file=/src/App.js
@@ -24,8 +24,8 @@ function XYChart(props) {
     },
 
     {
-      qField: "=sum(Calories)",
-      qLabel: "Total Calories",
+      qField: "=Sum(COST_UK*SALES_QTY)",
+      qLabel: "Total Sales",
     },
   ];
 
@@ -39,7 +39,7 @@ function XYChart(props) {
   const chartID = props.chartID;
   // console.log({ chartID });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (Object.keys(dataSet).length === 0 && dataSet.constructor === Object)
       return;
     if (dataProvided) return;
@@ -56,34 +56,41 @@ function XYChart(props) {
         layout: root.verticalLayout,
       })
     );
-    console.log("useEffectlayout");
+    // console.log("useEffectlayout");
 
-    // const data2 = dataSet.data.map();
-
-    // const new_adat = kvArray.map((obj) => {
-    //   let rObj = {};
-    //   rObj[obj.key] = obj.value;
-    //   return rObj;
+    // const new_data = dataSet.data.map((obj) => {
+    //   // let rObj = {};
+    //   // rObj[obj.key] = obj.value;
+    //   // console.log(obj[dataSet.nameKey], obj[dataSet.valueKey]);
+    //   return {
+    //     [dataSet.nameKey]: obj[dataSet.nameKey],
+    //     [dataSet.valueKey]: obj[dataSet.valueKey],
+    //     // value2: 588,
+    //   };
     // });
 
+    // console.log(new_data);
+
+    const { data } = dataSet;
+
     // Define data
-    let data = [
-      {
-        category: "Research",
-        value1: 1000,
-        value2: 588,
-      },
-      {
-        category: "Marketing",
-        value1: 1200,
-        value2: 1800,
-      },
-      {
-        category: "Sales",
-        value1: 850,
-        value2: 1230,
-      },
-    ];
+    // let data = [
+    //   {
+    //     category: "Research",
+    //     value1: 1000,
+    //     value2: 588,
+    //   },
+    //   {
+    //     category: "Marketing",
+    //     value1: 1200,
+    //     value2: 1800,
+    //   },
+    //   {
+    //     category: "Sales",
+    //     value1: 850,
+    //     value2: 1230,
+    //   },
+    // ];
 
     // Create Y-axis
     let yAxis = chart.yAxes.push(
@@ -96,7 +103,7 @@ function XYChart(props) {
     let xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: "category",
+        categoryField: [dataSet.nameKey],
       })
     );
     xAxis.data.setAll(data);
@@ -107,8 +114,8 @@ function XYChart(props) {
         name: "Series",
         xAxis: xAxis,
         yAxis: yAxis,
-        valueYField: "value1",
-        categoryXField: "category",
+        valueYField: [dataSet.valueKey],
+        categoryXField: [dataSet.nameKey],
       })
     );
     series1.data.setAll(data);
@@ -144,7 +151,7 @@ function XYChart(props) {
     // // Add cursor
     // chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
-    console.log("dataSet", dataSet);
+    // console.log("dataSet", dataSet);
     setDataProvided(true);
   }, [chartID, dataProvided, dataSet]);
 
