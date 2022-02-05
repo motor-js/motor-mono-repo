@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
 
 // https://codesandbox.io/s/6ovk5?file=/src/styles.css:123-206
 // https://codesandbox.io/s/99obk?file=/src/App.js
@@ -9,13 +9,17 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
 import { useData } from "@motor-js/engine";
-// const { theme } = resolveConfig(tailwindConfig);
+const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
 // console.log(theme.colors);
 
 //chart type
+let chart = null;
+
+let test = null;
 function XYChart(props) {
+  const amChart = useRef(null);
   const [dataProvided, setDataProvided] = useState(false);
   const cols = [
     {
@@ -33,16 +37,13 @@ function XYChart(props) {
     cols,
   });
 
-  // const { data } = dataSet;
+  const { data } = dataSet;
 
   // console.log(dataSet);
   const chartID = props.chartID;
   // console.log({ chartID });
 
   useLayoutEffect(() => {
-    if (Object.keys(dataSet).length === 0 && dataSet.constructor === Object)
-      return;
-    if (dataProvided) return;
     var root = am5.Root.new(chartID);
     //var root = am5.Root.new("chartdiv2");
 
@@ -55,8 +56,8 @@ function XYChart(props) {
     root.setThemes([am5themes_Animated.new(root)]);
 
     // Create chart
-
-    let chart = root.container.children.push(
+    amChart.current = root;
+    chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panY: false,
         layout: root.verticalLayout,
@@ -135,20 +136,34 @@ function XYChart(props) {
       tooltipY: 0,
     });
 
+    test = chart.series.values;
+
     // Add legend
-    let legend = chart.children.push(am5.Legend.new(root, {}));
-    legend.data.setAll(chart.series.values);
+    // let legend = chart.children.push(am5.Legend.new(root, {}));
+    // legend.data.setAll(chart.series.values);
 
     // console.log("chart.series.values", chart.series.values);
 
     // // Add cursor
     // chart.set("cursor", am5xy.XYCursor.new(root, {}));
-
-    console.log("dataSet", dataSet);
-    setDataProvided(true);
-  }, [dataSet]);
+  }, [chartID]);
 
   // Load data into chart
+  useEffect(() => {
+    if (amChart.current && !dataProvided) {
+      // amChart.current.data = data;
+      // Add legend
+      // console.log("test", test);
+      let legend = chart.children.push(am5.Legend.new(amChart.current, {}));
+      console.log("legend", legend);
+      legend.data.setAll(test);
+      setDataProvided(true);
+      // console.log("data", data);
+
+      // chart.set("cursor", am5xy.XYCursor.new(amChart.current, {}));
+      // console.log("useEffect");
+    }
+  }, [data]);
 
   // return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;

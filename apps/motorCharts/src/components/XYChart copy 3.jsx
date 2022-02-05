@@ -33,15 +33,13 @@ function XYChart(props) {
     cols,
   });
 
-  // const { data } = dataSet;
+  const { data } = dataSet;
 
   // console.log(dataSet);
   const chartID = props.chartID;
   // console.log({ chartID });
 
   useLayoutEffect(() => {
-    if (Object.keys(dataSet).length === 0 && dataSet.constructor === Object)
-      return;
     if (dataProvided) return;
     var root = am5.Root.new(chartID);
     //var root = am5.Root.new("chartdiv2");
@@ -144,7 +142,7 @@ function XYChart(props) {
     // // Add cursor
     // chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
-    console.log("dataSet", dataSet);
+    console.log(dataSet);
     setDataProvided(true);
   }, [dataSet]);
 
