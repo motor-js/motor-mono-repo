@@ -56,20 +56,6 @@ function XYChart(props) {
         layout: root.verticalLayout,
       })
     );
-    // console.log("useEffectlayout");
-
-    // const new_data = dataSet.data.map((obj) => {
-    //   // let rObj = {};
-    //   // rObj[obj.key] = obj.value;
-    //   // console.log(obj[dataSet.nameKey], obj[dataSet.valueKey]);
-    //   return {
-    //     [dataSet.nameKey]: obj[dataSet.nameKey],
-    //     [dataSet.valueKey]: obj[dataSet.valueKey],
-    //     // value2: 588,
-    //   };
-    // });
-
-    // console.log(new_data);
 
     const { data } = dataSet;
 
@@ -99,23 +85,48 @@ function XYChart(props) {
       })
     );
 
+    var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+    xRenderer.labels.template.setAll({
+      rotation: -45,
+      centerY: am5.p50,
+      centerX: am5.p100,
+      paddingRight: 15,
+      fontSize: "0.5em",
+    });
+
     // Create X-Axis
     let xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        // renderer: am5xy.AxisRendererX.new(root, {}),
+        // categoryField: [dataSet.nameKey],
+        maxDeviation: 0.3,
         categoryField: [dataSet.nameKey],
+        renderer: xRenderer,
+        // tooltip: am5.Tooltip.new(root, {}),
       })
     );
     xAxis.data.setAll(data);
 
+    // console.log(dataSet);
+
+    // let xRenderer = xAxis.get("renderer");
+    // xRenderer.labels.template.setAll({
+    //   fill: am5.color(0xff0000),
+    //   fontSize: "0.5em",
+    // });
+
     // Create series
     let series1 = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: "Series",
+        name: [dataSet.nameKey],
         xAxis: xAxis,
         yAxis: yAxis,
         valueYField: [dataSet.valueKey],
         categoryXField: [dataSet.nameKey],
+        // userData: "elemNumber",
+        // userData: {
+        //   foo: "bar",
+        // },
       })
     );
     series1.data.setAll(data);
@@ -124,23 +135,37 @@ function XYChart(props) {
       width: am5.percent(90),
       tooltipY: 0,
     });
+    // series1.setAll("userData", {
+    //   foo: "bar",
+    // });
 
-    let series2 = chart.series.push(
-      am5xy.ColumnSeries.new(root, {
-        name: "Series",
-        xAxis: xAxis,
-        yAxis: yAxis,
-        valueYField: "value2",
-        categoryXField: "category",
-      })
-    );
-    series2.data.setAll(data);
+    series1.columns.template.events.on("click", function (ev) {
+      console.log("Clicked on a column", ev.target);
+      // console.log("Clicked on a column", ev.target.dataItem.get("valueY"));
+      // console.log(
+      //   "Clicked on a column",
+      //   ev.target.dataItem.dataContext.elemNumber
+      // );
 
-    series2.columns.template.setAll({
-      tooltipText: "{name}, {categoryX}:{valueY}",
-      width: am5.percent(90),
-      tooltipY: 0,
+      // console.log(series1.get("userData"));
     });
+
+    // let series2 = chart.series.push(
+    //   am5xy.ColumnSeries.new(root, {
+    //     name: "Series",
+    //     xAxis: xAxis,
+    //     yAxis: yAxis,
+    //     valueYField: "value2",
+    //     categoryXField: "category",
+    //   })
+    // );
+    // series2.data.setAll(data);
+
+    // series2.columns.template.setAll({
+    //   tooltipText: "{name}, {categoryX}:{valueY}",
+    //   width: am5.percent(90),
+    //   tooltipY: 0,
+    // });
 
     // Add legend
     let legend = chart.children.push(am5.Legend.new(root, {}));
