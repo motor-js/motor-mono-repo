@@ -6,8 +6,8 @@ import React, { useLayoutEffect, useState } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config";
+// import resolveConfig from "tailwindcss/resolveConfig";
+// import tailwindConfig from "../tailwind.config";
 import { useData } from "@motor-js/engine";
 // const { theme } = resolveConfig(tailwindConfig);
 
@@ -44,18 +44,12 @@ function XYChart(props) {
       return;
     if (dataProvided) return;
     var root = am5.Root.new(chartID);
-    //var root = am5.Root.new("chartdiv2");
-
-    // console.log(amChart);
-
-    // Create root and chart
 
     // Set themes
     // https://www.amcharts.com/docs/v5/concepts/themes/
     root.setThemes([am5themes_Animated.new(root)]);
 
     // Create chart
-
     let chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panY: false,
@@ -65,6 +59,12 @@ function XYChart(props) {
     console.log("useEffectlayout");
 
     // const data2 = dataSet.data.map();
+
+    // const new_adat = kvArray.map((obj) => {
+    //   let rObj = {};
+    //   rObj[obj.key] = obj.value;
+    //   return rObj;
+    // });
 
     // Define data
     let data = [
@@ -146,7 +146,7 @@ function XYChart(props) {
 
     console.log("dataSet", dataSet);
     setDataProvided(true);
-  }, [dataSet]);
+  }, [chartID, dataProvided, dataSet]);
 
   // Load data into chart
 

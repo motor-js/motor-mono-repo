@@ -1,7 +1,7 @@
 import "./App.css";
 // import AmChartsWrapper from "./components/amChartsWrapper";
 import XYChart from "./components/XYChart";
-import PieChart from "./components/PieChart";
+// import PieChart from "./components/PieChart";
 
 function App() {
   return (
