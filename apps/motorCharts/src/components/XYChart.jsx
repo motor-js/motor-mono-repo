@@ -66,7 +66,7 @@ function XYChart(props) {
   // const { data } = dataSet;
 
   // console.log(dataSet);
-  const chartID = props.chartID;
+  const { chartID } = props;
   // console.log({ chartID });
 
   useEffect(() => {
