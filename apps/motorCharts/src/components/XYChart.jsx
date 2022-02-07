@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import PropTypes from "prop-types";
 // import resolveConfig from "tailwindcss/resolveConfig";
 // import tailwindConfig from "../tailwind.config";
 import { useData } from "@motor-js/engine";
@@ -16,6 +17,35 @@ import { useData } from "@motor-js/engine";
 
 //chart type
 function XYChart(props) {
+  // XYChart.defaultProps = {
+  //   colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+  //   type: "bar",
+  //   width: "100%",
+  //   Height: "80%",
+  //   // plotOptions: {},
+  // };
+
+  // ApexChart.propTypes = {
+  //   id: PropTypes.string.isRequired,
+  //   type: PropTypes.string,
+  //   stacked: PropTypes.bool,
+  //   toolbar: PropTypes.object,
+  //   series: PropTypes.array,
+  //   sparkline: PropTypes.object,
+  //   animation: PropTypes.object,
+  //   tooltip: PropTypes.object,
+  //   colors: PropTypes.array,
+  //   dataLabels: PropTypes.object,
+  //   legend: PropTypes.object,
+  //   height: PropTypes.any,
+  //   width: PropTypes.any,
+  //   fill: PropTypes.object,
+  //   plotOptions: PropTypes.object,
+  //   stroke: PropTypes.object,
+  //   dropShadow: PropTypes.object,
+  //   markers: PropTypes.object,
+  // };
+
   const [dataProvided, setDataProvided] = useState(false);
   const cols = [
     {
