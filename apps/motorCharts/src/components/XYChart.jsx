@@ -121,7 +121,7 @@ function XYChart(props) {
       centerY: am5.p50,
       centerX: am5.p100,
       paddingRight: 15,
-      fontSize: "0.5em",
+      // fontSize: "0.5em",
     });
 
     // Create X-Axis
@@ -153,7 +153,7 @@ function XYChart(props) {
         yAxis: yAxis,
         valueYField: [dataSet.valueKey],
         categoryXField: [dataSet.nameKey],
-        // sequencedInterpolation: true,
+        sequencedInterpolation: true,
         // userData: "elemNumber",
         // userData: {
         //   foo: "bar",
@@ -216,6 +216,18 @@ function XYChart(props) {
     // chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
     // console.log("dataSet", dataSet);
+
+    // Make stuff animate on load
+    // https://www.amcharts.com/docs/v5/concepts/animations/
+    series1.appear(1000);
+    // series.animate({
+    //   key: "startAngle",
+    //   to: 180,
+    //   loops: Infinity,
+    //   duration: 2000,
+    //   easing: am5.ease.yoyo(am5.ease.cubic),
+    // });
+    chart.appear(1000, 100);
     setDataProvided(true);
   }, [chartID, dataProvided, dataSet]);
 
