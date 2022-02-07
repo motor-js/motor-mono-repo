@@ -123,6 +123,7 @@ function XYChart(props) {
         yAxis: yAxis,
         valueYField: [dataSet.valueKey],
         categoryXField: [dataSet.nameKey],
+        // sequencedInterpolation: true,
         // userData: "elemNumber",
         // userData: {
         //   foo: "bar",
@@ -138,6 +139,14 @@ function XYChart(props) {
     // series1.setAll("userData", {
     //   foo: "bar",
     // });
+    series1.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+    series1.columns.template.adapters.add("fill", (fill, target) => {
+      return chart.get("colors").getIndex(series1.columns.indexOf(target));
+    });
+
+    series1.columns.template.adapters.add("stroke", (stroke, target) => {
+      return chart.get("colors").getIndex(series1.columns.indexOf(target));
+    });
 
     series1.columns.template.events.on("click", function (ev) {
       console.log("Clicked on a column", ev.target);
