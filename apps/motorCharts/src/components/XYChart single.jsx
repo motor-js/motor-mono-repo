@@ -49,10 +49,6 @@ function XYChart(props) {
   const [dataProvided, setDataProvided] = useState(false);
   const cols = [
     {
-      qField: "SALES_DATE.autoCalendar.Year",
-      qLabel: "Year",
-    },
-    {
       qField: "BURGER",
       qLabel: "Burger",
     },
@@ -63,11 +59,9 @@ function XYChart(props) {
     },
   ];
 
-  const { dataSet, dataKeys } = useData({
+  const { dataSet } = useData({
     cols,
   });
-
-  console.log(dataSet);
 
   // const { data } = dataSet;
 
@@ -90,15 +84,6 @@ function XYChart(props) {
       am5xy.XYChart.new(root, {
         panY: false,
         layout: root.verticalLayout,
-      })
-    );
-
-    // Add scrollbar
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
-    chart.set(
-      "scrollbarX",
-      am5.Scrollbar.new(root, {
-        orientation: "horizontal",
       })
     );
 
@@ -171,131 +156,96 @@ function XYChart(props) {
     );
     xAxis.data.setAll(data);
 
+    // console.log(dataSet);
+
     // let xRenderer = xAxis.get("renderer");
     // xRenderer.labels.template.setAll({
     //   fill: am5.color(0xff0000),
     //   fontSize: "0.5em",
     // });
 
-    // // Create series
-    // let series1 = chart.series.push(
+    // Create series
+    let series1 = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        name: [dataSet.nameKey],
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: [dataSet.valueKey],
+        categoryXField: [dataSet.nameKey],
+        sequencedInterpolation: true,
+        // userData: "elemNumber",
+        // userData: {
+        //   foo: "bar",
+        // },
+      })
+    );
+    series1.data.setAll(data);
+    series1.columns.template.setAll({
+      tooltipText: "{name}, {categoryX}:{valueY}",
+      width: am5.percent(90),
+      tooltipY: 0,
+    });
+    // series1.setAll("userData", {
+    //   foo: "bar",
+    // });
+    series1.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+    series1.columns.template.adapters.add("fill", (fill, target) => {
+      return chart.get("colors").getIndex(series1.columns.indexOf(target));
+    });
+
+    series1.columns.template.adapters.add("stroke", (stroke, target) => {
+      return chart.get("colors").getIndex(series1.columns.indexOf(target));
+    });
+
+    series1.columns.template.events.on("click", function (ev) {
+      console.log("Clicked on a column", ev.target);
+      // console.log("Clicked on a column", ev.target.dataItem.get("valueY"));
+      // console.log(
+      //   "Clicked on a column",
+      //   ev.target.dataItem.dataContext.elemNumber
+      // );
+
+      // console.log(series1.get("userData"));
+    });
+
+    // let series2 = chart.series.push(
     //   am5xy.ColumnSeries.new(root, {
-    //     name: [dataSet.nameKey],
+    //     name: "Series",
     //     xAxis: xAxis,
     //     yAxis: yAxis,
-    //     valueYField: [dataSet.valueKey],
-    //     categoryXField: [dataSet.nameKey],
-    //     sequencedInterpolation: true,
-    //     // userData: "elemNumber",
-    //     // userData: {
-    //     //   foo: "bar",
-    //     // },
+    //     valueYField: "value2",
+    //     categoryXField: "category",
     //   })
     // );
-    // series1.data.setAll(data);
-    // series1.columns.template.setAll({
+    // series2.data.setAll(data);
+
+    // series2.columns.template.setAll({
     //   tooltipText: "{name}, {categoryX}:{valueY}",
     //   width: am5.percent(90),
     //   tooltipY: 0,
     // });
-    // // series1.setAll("userData", {
-    // //   foo: "bar",
-    // // });
-    // series1.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
-    // series1.columns.template.adapters.add("fill", (fill, target) => {
-    //   return chart.get("colors").getIndex(series1.columns.indexOf(target));
-    // });
 
-    // series1.columns.template.adapters.add("stroke", (stroke, target) => {
-    //   return chart.get("colors").getIndex(series1.columns.indexOf(target));
-    // });
-
-    // series1.columns.template.events.on("click", function (ev) {
-    //   console.log("Clicked on a column", ev.target);
-    //   // console.log("Clicked on a column", ev.target.dataItem.get("valueY"));
-    //   // console.log(
-    //   //   "Clicked on a column",
-    //   //   ev.target.dataItem.dataContext.elemNumber
-    //   // );
-
-    //   // console.log(series1.get("userData"));
-    // });
-
-    // // Add legend
+    // Add legend
     let legend = chart.children.push(am5.Legend.new(root, {}));
-    // legend.data.setAll(chart.series.values);
+    legend.data.setAll(chart.series.values);
 
-    // // console.log("chart.series.values", chart.series.values);
+    // console.log("chart.series.values", chart.series.values);
 
-    // // // Add cursor
-    // // chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    // // Add cursor
+    // chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
-    // // console.log("dataSet", dataSet);
-
-    // Add series
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-    function makeSeries(name, fieldName) {
-      var series = chart.series.push(
-        am5xy.ColumnSeries.new(root, {
-          name: name,
-          xAxis: xAxis,
-          yAxis: yAxis,
-          valueYField: fieldName,
-          categoryXField: [dataSet.nameKey],
-        })
-      );
-
-      series.columns.template.setAll({
-        tooltipText: "{name}, {categoryX}:{valueY}",
-        width: am5.percent(90),
-        tooltipY: 0,
-      });
-
-      series.data.setAll(data);
-
-      // Make stuff animate on load
-      // https://www.amcharts.com/docs/v5/concepts/animations/
-      series.appear();
-
-      series.bullets.push(function () {
-        return am5.Bullet.new(root, {
-          locationY: 0,
-          sprite: am5.Label.new(root, {
-            text: "{valueY}",
-            fill: root.interfaceColors.get("alternativeText"),
-            centerY: 0,
-            centerX: am5.p50,
-            populateText: true,
-          }),
-        });
-      });
-
-      legend.data.push(series);
-    }
-
-    // makeSeries("BigMac", "Big Mac");
-    // makeSeries("ChickenRoyale", "Chicken Royale");
-    // makeSeries("Whopper", "Whopper");
-
-    dataKeys.map((sweetItem) => {
-      // return sweetItem * 2;
-      makeSeries(sweetItem, sweetItem);
-    });
-
-    // // Make stuff animate on load
-    // // https://www.amcharts.com/docs/v5/concepts/animations/
-    // series1.appear(1000);
-    // // series.animate({
-    // //   key: "startAngle",
-    // //   to: 180,
-    // //   loops: Infinity,
-    // //   duration: 2000,
-    // //   easing: am5.ease.yoyo(am5.ease.cubic),
-    // // });
-    // chart.appear(1000, 100);
+    // console.log("dataSet", dataSet);
 
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
+    series1.appear(1000);
+    // series.animate({
+    //   key: "startAngle",
+    //   to: 180,
+    //   loops: Infinity,
+    //   duration: 2000,
+    //   easing: am5.ease.yoyo(am5.ease.cubic),
+    // });
     chart.appear(1000, 100);
     setDataProvided(true);
   }, [chartID, dataProvided, dataSet]);
