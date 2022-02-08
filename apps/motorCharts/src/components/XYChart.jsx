@@ -101,6 +101,12 @@ function XYChart(props) {
         orientation: "horizontal",
       })
     );
+    chart.set(
+      "scrollbarY",
+      am5.Scrollbar.new(root, {
+        orientation: "vertical",
+      })
+    );
 
     const { data } = dataSet;
 
