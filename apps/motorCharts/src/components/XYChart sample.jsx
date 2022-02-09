@@ -10,32 +10,10 @@ import PropTypes from "prop-types";
 // import resolveConfig from "tailwindcss/resolveConfig";
 // import tailwindConfig from "../tailwind.config";
 import { useData } from "@motor-js/engine";
-import { setScrollbarX, setScrollbarY } from "./helpers/scrollbars";
-import { setCursor } from "./helpers/cursor";
 // const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
 // console.log(theme.colors);
-
-// // Add scrollbar
-// // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
-// const setScrollbarX = (chart, root) => {
-//   chart.set(
-//     "scrollbarX",
-//     am5.Scrollbar.new(root, {
-//       orientation: "horizontal",
-//     })
-//   );
-// };
-
-// const setScrollbarY = (chart, root) => {
-//   chart.set(
-//     "scrollbarY",
-//     am5.Scrollbar.new(root, {
-//       orientation: "vertical",
-//     })
-//   );
-// };
 
 //chart type
 function XYChart({ chartID, cols }) {
@@ -69,10 +47,33 @@ function XYChart({ chartID, cols }) {
   // };
 
   const [dataProvided, setDataProvided] = useState(false);
+  // const cols = [
+  //   {
+  //     qField: "SALES_DATE.autoCalendar.Year",
+  //     qLabel: "Year",
+  //   },
+  //   {
+  //     qField: "BURGER",
+  //     qLabel: "Burger",
+  //   },
+
+  //   {
+  //     qField: "=Sum(COST_UK*SALES_QTY)",
+  //     qLabel: "Total Sales",
+  //   },
+  // ];
 
   const { dataSet, dataKeys } = useData({
     cols,
   });
+
+  // console.log(dataSet);
+
+  // const { data } = dataSet;
+
+  // console.log(dataSet);
+  // const { chartID } = props;
+  // console.log({ chartID });
 
   useEffect(() => {
     if (Object.keys(dataSet).length === 0 && dataSet.constructor === Object)
@@ -92,8 +93,20 @@ function XYChart({ chartID, cols }) {
       })
     );
 
-    setScrollbarX(chart, root);
-    setScrollbarY(chart, root);
+    // Add scrollbar
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+    chart.set(
+      "scrollbarX",
+      am5.Scrollbar.new(root, {
+        orientation: "horizontal",
+      })
+    );
+    chart.set(
+      "scrollbarY",
+      am5.Scrollbar.new(root, {
+        orientation: "vertical",
+      })
+    );
 
     const { data } = dataSet;
 
@@ -203,7 +216,6 @@ function XYChart({ chartID, cols }) {
 
     // // // Add cursor
     // // chart.set("cursor", am5xy.XYCursor.new(root, {}));
-    setCursor(chart, root);
 
     // // console.log("dataSet", dataSet);
 
@@ -248,7 +260,8 @@ function XYChart({ chartID, cols }) {
       legend.data.push(series);
     }
 
-    dataKeys.forEach(function (sweetItem) {
+    dataKeys.map((sweetItem) => {
+      // return sweetItem * 2;
       makeSeries(sweetItem, sweetItem);
     });
 
@@ -271,6 +284,8 @@ function XYChart({ chartID, cols }) {
   }, [chartID, dataProvided, dataSet]);
 
   // Load data into chart
+
+  // return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
 }
 export default XYChart;
