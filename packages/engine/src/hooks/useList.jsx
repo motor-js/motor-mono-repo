@@ -134,7 +134,7 @@ const useList = (props) => {
   const structureData = useCallback(async (_qData) => {     
       if (!_qData) return null;
       let _listData = []
-      _qData.qMatrix.map((d, i) => {
+      await _qData.qMatrix.map((d, i) => {
         _listData.push({
           key: d[0].qElemNumber,
           text: typeof d[0].qText !== "undefined" ? d[0].qText : "undefined",
@@ -146,9 +146,9 @@ const useList = (props) => {
       });
 
       // Get Selections
-      const _selections = _listData && _listData.filter(row => row.state === "S" || row.state === "L");
+      const _selections = _listData && await _listData.filter(row => row.state === "S" || row.state === "L");
       // Get Selection ID
-      const _selId = _selections && _selections.map(d => d.key);
+      const _selId = _selections && await _selections.map(d => d.key);
 
       return { _selId, _selections, _listData };
   }, [listData]);

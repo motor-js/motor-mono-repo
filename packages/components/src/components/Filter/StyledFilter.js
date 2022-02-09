@@ -53,8 +53,8 @@ function StyledFilter({
     changePage,
   } = motorListProps
 
-  const numberOfItems = layout && layout.qListObject.qSize.qcy
-  const viewportHeight = parseInt(dropHeight, 10);
+  let numberOfItems = layout && layout.qListObject.qSize.qcy
+  let viewportHeight = parseInt(dropHeight, 10);
 
   // selections for map
   useEffect(() => { 
@@ -102,10 +102,10 @@ function StyledFilter({
     setSearchValue("")
   } 
 
-  const handleInputSelectCallback = () => {
+  const handleInputSelectCallback = async () => {
     if (!listOpen) {
-      beginSelections()
-      setListOpen(true)
+      await beginSelections()
+      await setListOpen(true)
     } 
   }
 
@@ -118,13 +118,13 @@ function StyledFilter({
     setListOpen(!listOpen)
   }
 
-  const handleSelectCallback = (item) => {
+  const handleSelectCallback = async  (item) => {
     setPlaceholderState("")
     setSearchValue("")
-    const { key } = item
-    const toggleSelections = !singleSelection
-    select([key],toggleSelections)
-    onSelectionChange();
+    const { key } = await item
+    const toggleSelections = await !singleSelection
+    await select([key],toggleSelections)
+    await onSelectionChange();
     //endSelections(true)
   }
 

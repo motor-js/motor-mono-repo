@@ -1,5 +1,7 @@
 import { useSelections, useButton } from '@motor-js/engine'
 import MaterialTable from './MaterialTable';
+import MotorFilter from './components/MotorFilter';
+
 function App() {
 
   const { clearSelections } = useSelections()  
@@ -10,7 +12,9 @@ function App() {
       <button onClick={() => lockField('Row')}>Lock</button>
       <button onClick={() => unlockField('Row')}>UnLock</button>
       <button onClick={ () => clearSelections()}>clearSelections</button>
-      <MaterialTable />
+      <MotorFilter dimension={['Row1']}/>
+      <MotorFilter dimension={['Row2']}/>
+      <MotorFilter dimension={['Row3']}/>
     </div>
   );
 }

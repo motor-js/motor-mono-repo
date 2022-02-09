@@ -40,14 +40,14 @@ function useEngine(props) {
           error.code ===
           schema.enums.LocalizedErrorCode.LOCERR_HC_MODAL_OBJECT_ERROR
         ) {
-          return error.code;
+           return error.code;
         }
         // If it was not an aborted QIX call, or if we reached MAX_RETRIES, we let the error
         // trickle down to potential other interceptors, and finally down to resolving/rejecting
         // the initial promise that the user got when invoking the QIX method:
         console.warn(error);
 
-        return this.Promise.reject(error);
+        return this.Promise.resolve(error);
       },
     },
   ];

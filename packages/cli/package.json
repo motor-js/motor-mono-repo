@@ -17,6 +17,7 @@
   "author": "Motor",
   "license": "https://www.motor.so/license",
   "dependencies": {
+    "@motor-js/components": "^0.1.8",
     "@motor-js/engine": "^0.4.8",
     "chalk": "^4.1.1",
     "commander": "^8.0.0",
