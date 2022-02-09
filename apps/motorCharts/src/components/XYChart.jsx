@@ -16,7 +16,7 @@ import { useData } from "@motor-js/engine";
 // console.log(theme.colors);
 
 //chart type
-function XYChart(props) {
+function XYChart({ chartID, cols }) {
   // XYChart.defaultProps = {
   //   colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
   //   type: "bar",
@@ -47,32 +47,32 @@ function XYChart(props) {
   // };
 
   const [dataProvided, setDataProvided] = useState(false);
-  const cols = [
-    {
-      qField: "SALES_DATE.autoCalendar.Year",
-      qLabel: "Year",
-    },
-    {
-      qField: "BURGER",
-      qLabel: "Burger",
-    },
+  // const cols = [
+  //   {
+  //     qField: "SALES_DATE.autoCalendar.Year",
+  //     qLabel: "Year",
+  //   },
+  //   {
+  //     qField: "BURGER",
+  //     qLabel: "Burger",
+  //   },
 
-    {
-      qField: "=Sum(COST_UK*SALES_QTY)",
-      qLabel: "Total Sales",
-    },
-  ];
+  //   {
+  //     qField: "=Sum(COST_UK*SALES_QTY)",
+  //     qLabel: "Total Sales",
+  //   },
+  // ];
 
   const { dataSet, dataKeys } = useData({
     cols,
   });
 
-  console.log(dataSet);
+  // console.log(dataSet);
 
   // const { data } = dataSet;
 
   // console.log(dataSet);
-  const { chartID } = props;
+  // const { chartID } = props;
   // console.log({ chartID });
 
   useEffect(() => {
@@ -128,25 +128,6 @@ function XYChart(props) {
     //   }
     //   return component
     // }
-
-    // Define data
-    // let data = [
-    //   {
-    //     category: "Research",
-    //     value1: 1000,
-    //     value2: 588,
-    //   },
-    //   {
-    //     category: "Marketing",
-    //     value1: 1200,
-    //     value2: 1800,
-    //   },
-    //   {
-    //     category: "Sales",
-    //     value1: 850,
-    //     value2: 1230,
-    //   },
-    // ];
 
     // Create Y-axis
     let yAxis = chart.yAxes.push(
@@ -279,10 +260,6 @@ function XYChart(props) {
       legend.data.push(series);
     }
 
-    // makeSeries("BigMac", "Big Mac");
-    // makeSeries("ChickenRoyale", "Chicken Royale");
-    // makeSeries("Whopper", "Whopper");
-
     dataKeys.map((sweetItem) => {
       // return sweetItem * 2;
       makeSeries(sweetItem, sweetItem);
@@ -291,13 +268,13 @@ function XYChart(props) {
     // // Make stuff animate on load
     // // https://www.amcharts.com/docs/v5/concepts/animations/
     // series1.appear(1000);
-    // // series.animate({
-    // //   key: "startAngle",
-    // //   to: 180,
-    // //   loops: Infinity,
-    // //   duration: 2000,
-    // //   easing: am5.ease.yoyo(am5.ease.cubic),
-    // // });
+    // series.animate({
+    //   key: "startAngle",
+    //   to: 180,
+    //   loops: Infinity,
+    //   duration: 2000,
+    //   easing: am5.ease.yoyo(am5.ease.cubic),
+    // });
     // chart.appear(1000, 100);
 
     // Make stuff animate on load

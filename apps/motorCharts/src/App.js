@@ -3,6 +3,22 @@ import "./App.css";
 import XYChart from "./components/XYChart";
 // import PieChart from "./components/PieChart";
 
+const cols = [
+  {
+    qField: "SALES_DATE.autoCalendar.Year",
+    qLabel: "Year",
+  },
+  {
+    qField: "BURGER",
+    qLabel: "Burger",
+  },
+
+  {
+    qField: "=Sum(COST_UK*SALES_QTY)",
+    qLabel: "Total Sales",
+  },
+];
+
 function App() {
   return (
     <div className="App">
@@ -13,7 +29,7 @@ function App() {
         {/* <div className="flex-container"> */}
         {/* <MultilevelTreeMap chartID="pie-one" />
           <Gauge chartID="gauge-one" /> */}
-        <XYChart chartID="main-bar" />
+        <XYChart chartID="main-bar" cols={cols} />
         {/* <PieChart chartID="main-pie" /> */}
         {/* </div> */}
       </header>
