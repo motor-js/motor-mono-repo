@@ -17,55 +17,14 @@ const { theme } = resolveConfig(tailwindConfig);
 // in src type : ln -s ../tailwind.config.js ./
 console.log(theme.colors);
 
-// // Add scrollbar
-// // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
-// const setScrollbarX = (chart, root) => {
-//   chart.set(
-//     "scrollbarX",
-//     am5.Scrollbar.new(root, {
-//       orientation: "horizontal",
-//     })
-//   );
-// };
-
-// const setScrollbarY = (chart, root) => {
-//   chart.set(
-//     "scrollbarY",
-//     am5.Scrollbar.new(root, {
-//       orientation: "vertical",
-//     })
-//   );
-// };
-
 //chart type
 function XYChart({ chartID, cols }) {
   // XYChart.defaultProps = {
   //   colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
-  //   type: "bar",
-  //   width: "100%",
-  //   Height: "80%",
-  //   // plotOptions: {},
   // };
 
   XYChart.propTypes = {
     chartID: PropTypes.string.isRequired,
-    // type: PropTypes.string,
-    // stacked: PropTypes.bool,
-    // toolbar: PropTypes.object,
-    // series: PropTypes.array,
-    // sparkline: PropTypes.object,
-    // animation: PropTypes.object,
-    // tooltip: PropTypes.object,
-    // colors: PropTypes.array,
-    // dataLabels: PropTypes.object,
-    // legend: PropTypes.object,
-    // height: PropTypes.any,
-    // width: PropTypes.any,
-    // fill: PropTypes.object,
-    // plotOptions: PropTypes.object,
-    // stroke: PropTypes.object,
-    // dropShadow: PropTypes.object,
-    // markers: PropTypes.object,
   };
 
   const [dataProvided, setDataProvided] = useState(false);
@@ -96,25 +55,6 @@ function XYChart({ chartID, cols }) {
     setScrollbarY(chart, root);
 
     const { data } = dataSet;
-
-    // To be used e.g. fro axis category type
-    //      const { role } = props
-    //   let component
-    //   switch(role) {
-    //     case 'author':
-    //       component = <AuthorLayout>What will you write today?</AuthorLayout>
-    //     break
-    //     case 'admin':
-    //       component = <AdminLayout>Your latest reports </AdminLayout>
-    //     break
-    //     case 'moderator':
-    //       component = <ModeratorLayout>Your ongoing events</ModeratorLayout>
-    //     break
-    //     default:
-    //       component = <GuestLayout>Your current feed</GuestLayout>
-    //   }
-    //   return component
-    // }
 
     // Create Y-axis
     let yAxis = chart.yAxes.push(
@@ -149,50 +89,6 @@ function XYChart({ chartID, cols }) {
     // xRenderer.labels.template.setAll({
     //   fill: am5.color(0xff0000),
     //   fontSize: "0.5em",
-    // });
-
-    // // Create series
-    // let series1 = chart.series.push(
-    //   am5xy.ColumnSeries.new(root, {
-    //     name: [dataSet.nameKey],
-    //     xAxis: xAxis,
-    //     yAxis: yAxis,
-    //     valueYField: [dataSet.valueKey],
-    //     categoryXField: [dataSet.nameKey],
-    //     sequencedInterpolation: true,
-    //     // userData: "elemNumber",
-    //     // userData: {
-    //     //   foo: "bar",
-    //     // },
-    //   })
-    // );
-    // series1.data.setAll(data);
-    // series1.columns.template.setAll({
-    //   tooltipText: "{name}, {categoryX}:{valueY}",
-    //   width: am5.percent(90),
-    //   tooltipY: 0,
-    // });
-    // // series1.setAll("userData", {
-    // //   foo: "bar",
-    // // });
-    // series1.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
-    // series1.columns.template.adapters.add("fill", (fill, target) => {
-    //   return chart.get("colors").getIndex(series1.columns.indexOf(target));
-    // });
-
-    // series1.columns.template.adapters.add("stroke", (stroke, target) => {
-    //   return chart.get("colors").getIndex(series1.columns.indexOf(target));
-    // });
-
-    // series1.columns.template.events.on("click", function (ev) {
-    //   console.log("Clicked on a column", ev.target);
-    //   // console.log("Clicked on a column", ev.target.dataItem.get("valueY"));
-    //   // console.log(
-    //   //   "Clicked on a column",
-    //   //   ev.target.dataItem.dataContext.elemNumber
-    //   // );
-
-    //   // console.log(series1.get("userData"));
     // });
 
     // // Add legend
@@ -251,18 +147,6 @@ function XYChart({ chartID, cols }) {
     dataKeys.forEach(function (sweetItem) {
       makeSeries(sweetItem, sweetItem);
     });
-
-    // // Make stuff animate on load
-    // // https://www.amcharts.com/docs/v5/concepts/animations/
-    // series1.appear(1000);
-    // series.animate({
-    //   key: "startAngle",
-    //   to: 180,
-    //   loops: Infinity,
-    //   duration: 2000,
-    //   easing: am5.ease.yoyo(am5.ease.cubic),
-    // });
-    // chart.appear(1000, 100);
 
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/

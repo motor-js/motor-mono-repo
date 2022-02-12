@@ -16,7 +16,7 @@ const { theme } = resolveConfig(tailwindConfig);
 
 //chart type
 
-function Pie(props) {
+function Line(props) {
   //const chart = useRef(null);
   const chartID = props.chartID;
   console.log({ chartID });
@@ -127,4 +127,4 @@ function Pie(props) {
   // return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
 }
-export default Pie;
+export default Line;
