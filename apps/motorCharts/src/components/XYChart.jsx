@@ -7,15 +7,15 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import PropTypes from "prop-types";
-// import resolveConfig from "tailwindcss/resolveConfig";
-// import tailwindConfig from "../tailwind.config";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "../tailwind.config";
 import { useData } from "@motor-js/engine";
 import { setScrollbarX, setScrollbarY } from "./helpers/scrollbars";
 import { setCursor } from "./helpers/cursor";
-// const { theme } = resolveConfig(tailwindConfig);
+const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
-// console.log(theme.colors);
+console.log(theme.colors);
 
 // // Add scrollbar
 // // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
@@ -47,26 +47,26 @@ function XYChart({ chartID, cols }) {
   //   // plotOptions: {},
   // };
 
-  // ApexChart.propTypes = {
-  //   id: PropTypes.string.isRequired,
-  //   type: PropTypes.string,
-  //   stacked: PropTypes.bool,
-  //   toolbar: PropTypes.object,
-  //   series: PropTypes.array,
-  //   sparkline: PropTypes.object,
-  //   animation: PropTypes.object,
-  //   tooltip: PropTypes.object,
-  //   colors: PropTypes.array,
-  //   dataLabels: PropTypes.object,
-  //   legend: PropTypes.object,
-  //   height: PropTypes.any,
-  //   width: PropTypes.any,
-  //   fill: PropTypes.object,
-  //   plotOptions: PropTypes.object,
-  //   stroke: PropTypes.object,
-  //   dropShadow: PropTypes.object,
-  //   markers: PropTypes.object,
-  // };
+  XYChart.propTypes = {
+    chartID: PropTypes.string.isRequired,
+    // type: PropTypes.string,
+    // stacked: PropTypes.bool,
+    // toolbar: PropTypes.object,
+    // series: PropTypes.array,
+    // sparkline: PropTypes.object,
+    // animation: PropTypes.object,
+    // tooltip: PropTypes.object,
+    // colors: PropTypes.array,
+    // dataLabels: PropTypes.object,
+    // legend: PropTypes.object,
+    // height: PropTypes.any,
+    // width: PropTypes.any,
+    // fill: PropTypes.object,
+    // plotOptions: PropTypes.object,
+    // stroke: PropTypes.object,
+    // dropShadow: PropTypes.object,
+    // markers: PropTypes.object,
+  };
 
   const [dataProvided, setDataProvided] = useState(false);
 
@@ -268,7 +268,7 @@ function XYChart({ chartID, cols }) {
     // https://www.amcharts.com/docs/v5/concepts/animations/
     chart.appear(1000, 100);
     setDataProvided(true);
-  }, [chartID, dataProvided, dataSet]);
+  }, [chartID, dataProvided, dataSet, dataKeys]);
 
   // Load data into chart
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
