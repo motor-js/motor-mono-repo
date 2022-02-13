@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@amcharts/amcharts5@^5.0.21":
-  "integrity" "sha512-8d0TaspvBS9tmQXlNvsEQpyKynjrPjoaKW5uF0S+8eY5EbW8QsV1HG3BRSY96FkPKLUog1SAlB4u77kK7XkwAg=="
-  "resolved" "https://registry.npmjs.org/@amcharts/amcharts5/-/amcharts5-5.0.21.tgz"
-  "version" "5.0.21"
+"@amcharts/amcharts5@^5.1.4":
+  "integrity" "sha512-OZXl2ey5l/M5UpkSsN7NtSCgPU5bLq8KThEl5eZXiWuZ93yXG+E3oXddnhNC3fCpC+wdJxBEaq5qR2gngcgmBw=="
+  "resolved" "https://registry.npmjs.org/@amcharts/amcharts5/-/amcharts5-5.1.4.tgz"
+  "version" "5.1.4"
   dependencies:
     "@types/d3" "^6.7.0"
     "@types/d3-chord" "^2.0.1"

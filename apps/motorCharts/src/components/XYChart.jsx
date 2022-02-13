@@ -12,6 +12,7 @@ import tailwindConfig from "../tailwind.config";
 import { useData } from "@motor-js/engine";
 import { setScrollbarX, setScrollbarY } from "./helpers/scrollbars";
 import { setCursor } from "./helpers/cursor";
+import { setLegend } from "./helpers/legend";
 const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
@@ -50,7 +51,7 @@ function XYChart({ chartID, cols, showScrollbarX, showScrollbarY }) {
     let chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panY: false,
-        layout: root.verticalLayout,
+        layout: root.horizontalLayout,
       })
     );
 
@@ -93,11 +94,8 @@ function XYChart({ chartID, cols, showScrollbarX, showScrollbarY }) {
     );
     xAxis.data.setAll(data);
 
-    // // Add legend
-    let legend = chart.children.push(am5.Legend.new(root, {}));
-    // legend.data.setAll(chart.series.values);
-
-    // // console.log("chart.series.values", chart.series.values);
+    // Add legend
+    let legend = setLegend(chart, root);
 
     // // // Add cursor
     // // chart.set("cursor", am5xy.XYCursor.new(root, {}));
