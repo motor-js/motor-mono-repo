@@ -6,6 +6,7 @@ import XYChart from "./components/XYChart";
 const cols = [
   {
     qField: "SALES_DATE.autoCalendar.Year",
+    // qField: "SALES_DATE",
     qLabel: "Year",
   },
   {
@@ -15,8 +16,16 @@ const cols = [
 
   {
     qField: "=Sum(COST_UK*SALES_QTY)",
-    qLabel: "Total Sales",
+    qLabel: "Total_Sales",
   },
+  // {
+  //   qField: "=Sum(COST_UK)",
+  //   qLabel: "Cost",
+  // },
+  // {
+  //   qField: "=Sum(SALES_QTY)",
+  //   qLabel: "value",
+  // },
 ];
 
 function App() {
