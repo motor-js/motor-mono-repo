@@ -18,15 +18,18 @@ const { theme } = resolveConfig(tailwindConfig);
 console.log(theme.colors);
 
 //chart type
-function XYChart({ chartID, cols }) {
-  // XYChart.defaultProps = {
-  //   colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
-  // };
-
+function XYChart({ chartID, cols, showScrollbarX, showScrollbarY }) {
   XYChart.propTypes = {
     chartID: PropTypes.string.isRequired,
+    showScrollbarX: PropTypes.bool,
+    showScrollbarY: PropTypes.bool,
   };
 
+  XYChart.defaultProps = {
+    // colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+    showScrollbarX: false,
+    showScrollbarY: false,
+  };
   const [dataProvided, setDataProvided] = useState(false);
 
   const { dataSet, dataKeys } = useData({
@@ -51,8 +54,8 @@ function XYChart({ chartID, cols }) {
       })
     );
 
-    setScrollbarX(chart, root);
-    setScrollbarY(chart, root);
+    if (showScrollbarX) setScrollbarX(chart, root);
+    if (showScrollbarY) setScrollbarY(chart, root);
 
     const { data } = dataSet;
 
@@ -71,6 +74,11 @@ function XYChart({ chartID, cols }) {
       paddingRight: 15,
       // fontSize: "0.5em",
     });
+    // let xRenderer = xAxis.get("renderer");
+    // xRenderer.labels.template.setAll({
+    //   fill: am5.color(0xff0000),
+    //   fontSize: "0.5em",
+    // });
 
     // Create X-Axis
     let xAxis = chart.xAxes.push(
@@ -84,12 +92,6 @@ function XYChart({ chartID, cols }) {
       })
     );
     xAxis.data.setAll(data);
-
-    // let xRenderer = xAxis.get("renderer");
-    // xRenderer.labels.template.setAll({
-    //   fill: am5.color(0xff0000),
-    //   fontSize: "0.5em",
-    // });
 
     // // Add legend
     let legend = chart.children.push(am5.Legend.new(root, {}));
