@@ -4,7 +4,7 @@ import * as am5 from "@amcharts/amcharts5";
 export const setLegend = (chart, root) => {
   // Add legend
 
-  let legend = chart.children.push(
+  return chart.children.push(
     am5.Legend.new(root, {
       // active: null,
       background: am5.Rectangle.new(root, {
@@ -31,6 +31,4 @@ export const setLegend = (chart, root) => {
     })
   );
   // legend.data.setAll(chart.series.values);
-
-  return legend;
 };

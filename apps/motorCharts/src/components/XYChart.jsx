@@ -13,6 +13,7 @@ import { useData } from "@motor-js/engine";
 import { setScrollbarX, setScrollbarY } from "./helpers/scrollbars";
 import { setCursor } from "./helpers/cursor";
 import { setLegend } from "./helpers/legend";
+import { setYAxis, setXAxis } from "./helpers/axis";
 const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
@@ -60,48 +61,17 @@ function XYChart({ chartID, cols, showScrollbarX, showScrollbarY }) {
 
     const { data } = dataSet;
 
-    // Create Y-axis
-    let yAxis = chart.yAxes.push(
-      am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {}),
-      })
-    );
-
-    var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
-    xRenderer.labels.template.setAll({
-      rotation: -45,
-      centerY: am5.p50,
-      centerX: am5.p100,
-      paddingRight: 15,
-      // fontSize: "0.5em",
-    });
-    // let xRenderer = xAxis.get("renderer");
-    // xRenderer.labels.template.setAll({
-    //   fill: am5.color(0xff0000),
-    //   fontSize: "0.5em",
-    // });
+    // Create Y-Axis
+    let yAxis = setYAxis(chart, root);
 
     // Create X-Axis
-    let xAxis = chart.xAxes.push(
-      am5xy.CategoryAxis.new(root, {
-        // renderer: am5xy.AxisRendererX.new(root, {}),
-        // categoryField: [dataSet.nameKey],
-        maxDeviation: 0.3,
-        categoryField: [dataSet.nameKey],
-        renderer: xRenderer,
-        // tooltip: am5.Tooltip.new(root, {}),
-      })
-    );
-    xAxis.data.setAll(data);
+    let xAxis = setXAxis(chart, root, dataSet, data);
 
     // Add legend
     let legend = setLegend(chart, root);
 
-    // // // Add cursor
-    // // chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    // Add cursor
     setCursor(chart, root);
-
-    // // console.log("dataSet", dataSet);
 
     // Add series
     // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
