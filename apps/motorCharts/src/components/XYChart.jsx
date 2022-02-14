@@ -21,18 +21,23 @@ const { theme } = resolveConfig(tailwindConfig);
 console.log(theme.colors);
 
 //chart type
-function XYChart({ chartID, cols, showScrollbarX, showScrollbarY }) {
+function XYChart({
+  chartID,
+  cols,
+  showScrollbarX = false,
+  showScrollbarY = false,
+}) {
   XYChart.propTypes = {
     chartID: PropTypes.string.isRequired,
     showScrollbarX: PropTypes.bool,
     showScrollbarY: PropTypes.bool,
   };
 
-  XYChart.defaultProps = {
-    // colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
-    showScrollbarX: false,
-    showScrollbarY: false,
-  };
+  // XYChart.defaultProps = {
+  //   // colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+  //   showScrollbarX: true,
+  //   showScrollbarY: false,
+  // };
   const [dataProvided, setDataProvided] = useState(false);
 
   const { dataSet, dataKeys } = useData({
@@ -49,18 +54,10 @@ function XYChart({ chartID, cols, showScrollbarX, showScrollbarY }) {
     // https://www.amcharts.com/docs/v5/concepts/themes/
     root.setThemes([am5themes_Animated.new(root)]);
 
-    // Create chart
-    // let chart = root.container.children.push(
-    //   am5xy.XYChart.new(root, {
-    //     panY: false,
-    //     layout: root.horizontalLayout,
-    //   })
-    // );
-
     let chart = setContainer(root);
 
-    if (showScrollbarX) setScrollbarX(chart, root);
-    if (showScrollbarY) setScrollbarY(chart, root);
+    showScrollbarX && setScrollbarX(chart, root);
+    showScrollbarY && setScrollbarY(chart, root);
 
     const { data } = dataSet;
 
