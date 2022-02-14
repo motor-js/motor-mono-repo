@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 // https://codesandbox.io/s/99obk?file=/src/App.js
 
 import * as am5 from "@amcharts/amcharts5";
-// import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import PropTypes from "prop-types";
 import resolveConfig from "tailwindcss/resolveConfig";
@@ -19,7 +18,6 @@ import {
   setYAxis,
   setXAxis,
   setContainer,
-  // setBullets,
   makeSeries,
 } from "./helpers";
 
@@ -75,37 +73,6 @@ function XYChart({
 
     // Add cursor
     setCursor(chart, root);
-
-    // Add series
-    // makeSeries()
-    // // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-    // function makeSeries(name, fieldName) {
-    //   var series = chart.series.push(
-    //     am5xy.ColumnSeries.new(root, {
-    //       name: name,
-    //       xAxis: xAxis,
-    //       yAxis: yAxis,
-    //       valueYField: fieldName,
-    //       categoryXField: [dataSet.nameKey],
-    //     })
-    //   );
-
-    //   series.columns.template.setAll({
-    //     tooltipText: "{name}, {categoryX}:{valueY}",
-    //     width: am5.percent(90),
-    //     tooltipY: 0,
-    //   });
-
-    //   series.data.setAll(data);
-
-    //   // Make stuff animate on load
-    //   // https://www.amcharts.com/docs/v5/concepts/animations/
-    //   series.appear();
-
-    //   setBullets(root, series);
-
-    //   legend.data.push(series);
-    // }
 
     dataKeys.forEach(function (sweetItem) {
       // Add series
