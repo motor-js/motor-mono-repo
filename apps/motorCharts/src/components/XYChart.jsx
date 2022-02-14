@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 // https://codesandbox.io/s/99obk?file=/src/App.js
 
 import * as am5 from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
+// import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import PropTypes from "prop-types";
 import resolveConfig from "tailwindcss/resolveConfig";
@@ -19,7 +19,8 @@ import {
   setYAxis,
   setXAxis,
   setContainer,
-  setBullets,
+  // setBullets,
+  makeSeries,
 } from "./helpers";
 
 const { theme } = resolveConfig(tailwindConfig);
@@ -76,44 +77,63 @@ function XYChart({
     setCursor(chart, root);
 
     // Add series
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-    function makeSeries(name, fieldName) {
-      var series = chart.series.push(
-        am5xy.ColumnSeries.new(root, {
-          name: name,
-          xAxis: xAxis,
-          yAxis: yAxis,
-          valueYField: fieldName,
-          categoryXField: [dataSet.nameKey],
-        })
-      );
+    // makeSeries()
+    // // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+    // function makeSeries(name, fieldName) {
+    //   var series = chart.series.push(
+    //     am5xy.ColumnSeries.new(root, {
+    //       name: name,
+    //       xAxis: xAxis,
+    //       yAxis: yAxis,
+    //       valueYField: fieldName,
+    //       categoryXField: [dataSet.nameKey],
+    //     })
+    //   );
 
-      series.columns.template.setAll({
-        tooltipText: "{name}, {categoryX}:{valueY}",
-        width: am5.percent(90),
-        tooltipY: 0,
-      });
+    //   series.columns.template.setAll({
+    //     tooltipText: "{name}, {categoryX}:{valueY}",
+    //     width: am5.percent(90),
+    //     tooltipY: 0,
+    //   });
 
-      series.data.setAll(data);
+    //   series.data.setAll(data);
 
-      // Make stuff animate on load
-      // https://www.amcharts.com/docs/v5/concepts/animations/
-      series.appear();
+    //   // Make stuff animate on load
+    //   // https://www.amcharts.com/docs/v5/concepts/animations/
+    //   series.appear();
 
-      setBullets(root, series);
+    //   setBullets(root, series);
 
-      legend.data.push(series);
-    }
+    //   legend.data.push(series);
+    // }
 
     dataKeys.forEach(function (sweetItem) {
-      makeSeries(sweetItem, sweetItem);
+      // Add series
+      makeSeries(
+        sweetItem,
+        sweetItem,
+        root,
+        chart,
+        xAxis,
+        yAxis,
+        legend,
+        dataSet,
+        data
+      );
     });
 
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
     chart.appear(1000, 100);
     setDataProvided(true);
-  }, [chartID, dataProvided, dataSet, dataKeys]);
+  }, [
+    chartID,
+    dataProvided,
+    dataSet,
+    dataKeys,
+    showScrollbarX,
+    showScrollbarY,
+  ]);
 
   // Load data into chart
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
