@@ -1,4 +1,6 @@
 //www.amcharts.com/docs/v5/reference/legend/
+//www.amcharts.com/docs/v5/reference/icontainersettings/#paddingBottom_property
+
 import * as am5 from "@amcharts/amcharts5";
 
 export const setLegend = (chart, root) => {

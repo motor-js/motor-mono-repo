@@ -40,11 +40,6 @@ function XYChart({
     showScrollbarY: PropTypes.bool,
   };
 
-  // XYChart.defaultProps = {
-  //   // colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
-  //   showScrollbarX: true,
-  //   showScrollbarY: false,
-  // };
   const [dataProvided, setDataProvided] = useState(false);
 
   const { dataSet, dataKeys } = useData({
@@ -104,19 +99,6 @@ function XYChart({
       // Make stuff animate on load
       // https://www.amcharts.com/docs/v5/concepts/animations/
       series.appear();
-
-      // series.bullets.push(function () {
-      //   return am5.Bullet.new(root, {
-      //     locationY: 0,
-      //     sprite: am5.Label.new(root, {
-      //       text: "{valueY}",
-      //       fill: root.interfaceColors.get("alternativeText"),
-      //       centerY: 0,
-      //       centerX: am5.p50,
-      //       populateText: true,
-      //     }),
-      //   });
-      // });
 
       setBullets(root, series);
 
