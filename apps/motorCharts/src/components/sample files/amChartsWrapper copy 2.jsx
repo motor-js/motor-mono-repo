@@ -6,7 +6,7 @@ import React, { useLayoutEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config";
+import tailwindConfig from "../../tailwind.config";
 import * as am5percent from "@amcharts/amcharts5/percent";
 const { theme } = resolveConfig(tailwindConfig);
 
