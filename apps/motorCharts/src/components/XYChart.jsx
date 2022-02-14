@@ -10,11 +10,18 @@ import PropTypes from "prop-types";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
 import { useData } from "@motor-js/engine";
-import { setScrollbarX, setScrollbarY } from "./helpers/scrollbars";
-import { setCursor } from "./helpers/cursor";
-import { setLegend } from "./helpers/legend";
-import { setYAxis, setXAxis } from "./helpers/axis";
-import { setContainer } from "./helpers/container";
+
+import {
+  setCursor,
+  setLegend,
+  setScrollbarX,
+  setScrollbarY,
+  setYAxis,
+  setXAxis,
+  setContainer,
+  setBullets,
+} from "./helpers";
+
 const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
@@ -98,18 +105,20 @@ function XYChart({
       // https://www.amcharts.com/docs/v5/concepts/animations/
       series.appear();
 
-      series.bullets.push(function () {
-        return am5.Bullet.new(root, {
-          locationY: 0,
-          sprite: am5.Label.new(root, {
-            text: "{valueY}",
-            fill: root.interfaceColors.get("alternativeText"),
-            centerY: 0,
-            centerX: am5.p50,
-            populateText: true,
-          }),
-        });
-      });
+      // series.bullets.push(function () {
+      //   return am5.Bullet.new(root, {
+      //     locationY: 0,
+      //     sprite: am5.Label.new(root, {
+      //       text: "{valueY}",
+      //       fill: root.interfaceColors.get("alternativeText"),
+      //       centerY: 0,
+      //       centerX: am5.p50,
+      //       populateText: true,
+      //     }),
+      //   });
+      // });
+
+      setBullets(root, series);
 
       legend.data.push(series);
     }
