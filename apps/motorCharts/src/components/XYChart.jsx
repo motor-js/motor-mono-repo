@@ -14,6 +14,7 @@ import { setScrollbarX, setScrollbarY } from "./helpers/scrollbars";
 import { setCursor } from "./helpers/cursor";
 import { setLegend } from "./helpers/legend";
 import { setYAxis, setXAxis } from "./helpers/axis";
+import { setContainer } from "./helpers/container";
 const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
@@ -49,12 +50,14 @@ function XYChart({ chartID, cols, showScrollbarX, showScrollbarY }) {
     root.setThemes([am5themes_Animated.new(root)]);
 
     // Create chart
-    let chart = root.container.children.push(
-      am5xy.XYChart.new(root, {
-        panY: false,
-        layout: root.horizontalLayout,
-      })
-    );
+    // let chart = root.container.children.push(
+    //   am5xy.XYChart.new(root, {
+    //     panY: false,
+    //     layout: root.horizontalLayout,
+    //   })
+    // );
+
+    let chart = setContainer(root);
 
     if (showScrollbarX) setScrollbarX(chart, root);
     if (showScrollbarY) setScrollbarY(chart, root);
