@@ -5,6 +5,7 @@
 //   getStrokeFromSprite: true,
 //   autoTextColor: false,
 //   getLabelFillFromSprite: true,
+//  pointerOrientation: "horizontal";
 //   labelText: "[bold]{name}[/]\n{valueX.formatDate()}: {valueY}",
 // });
 
