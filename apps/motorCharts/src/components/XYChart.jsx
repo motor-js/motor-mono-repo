@@ -4,6 +4,9 @@ import React, { useEffect } from "react";
 // https://codesandbox.io/s/99obk?file=/src/App.js
 // https://codepen.io/team/amcharts/pen/podWdBM/369f78a1933e954d35c2379960ef229a?editors=0010
 
+// Chart with title adn legen on right
+// https://codepen.io/team/amcharts/pen/podWdBM/369f78a1933e954d35c2379960ef229a?editors=0010
+
 import * as am5 from "@amcharts/amcharts5";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import PropTypes from "prop-types";

@@ -2,6 +2,7 @@ import "./App.css";
 // import AmChartsWrapper from "./components/amChartsWrapper";
 import XYChart from "./components/XYChart";
 // import PieChart from "./components/PieChart";
+import { useButton } from "@motor-js/engine";
 
 const cols = [
   {
@@ -29,6 +30,7 @@ const cols = [
 ];
 
 function App() {
+  const { clearSelections } = useButton();
   return (
     <div className="App">
       <header className="App-header">
@@ -41,6 +43,7 @@ function App() {
         <XYChart chartID="main-bar" cols={cols} />
         {/* <PieChart chartID="main-pie" /> */}
         {/* </div> */}
+        <button onClick={clearSelections}>Clear Selections</button>
       </header>
     </div>
   );
