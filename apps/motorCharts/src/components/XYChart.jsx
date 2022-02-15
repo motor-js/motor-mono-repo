@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // https://codesandbox.io/s/6ovk5?file=/src/styles.css:123-206
 // https://codesandbox.io/s/99obk?file=/src/App.js
@@ -40,16 +40,24 @@ function XYChart({
     showScrollbarY: PropTypes.bool,
   };
 
-  const [dataProvided, setDataProvided] = useState(false);
-
   const { dataSet, dataKeys } = useData({
     cols,
   });
 
+  const maybeDisposeRoot = (divId) => {
+    am5.array.each(am5.registry.rootElements, function (root) {
+      if (root.dom.id === divId) {
+        root.dispose();
+      }
+    });
+  };
+
   useEffect(() => {
     if (Object.keys(dataSet).length === 0 && dataSet.constructor === Object)
       return;
-    if (dataProvided) return;
+
+    maybeDisposeRoot(chartID);
+
     var root = am5.Root.new(chartID);
 
     // Set themes
@@ -93,15 +101,7 @@ function XYChart({
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
     chart.appear(1000, 100);
-    setDataProvided(true);
-  }, [
-    chartID,
-    dataProvided,
-    dataSet,
-    dataKeys,
-    showScrollbarX,
-    showScrollbarY,
-  ]);
+  }, [chartID, dataSet, dataKeys, showScrollbarX, showScrollbarY]);
 
   // Load data into chart
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
