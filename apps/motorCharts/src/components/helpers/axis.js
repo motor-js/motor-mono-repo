@@ -1,9 +1,14 @@
 import * as am5 from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
+import {
+  ValueAxis,
+  CategoryAxis,
+  AxisRendererX,
+  AxisRendererY,
+} from "@amcharts/amcharts5/xy";
 
 export const setYAxis = (chart, root) => {
   // Create Y-axis
-  var yRenderer = am5xy.AxisRendererY.new(root, {});
+  var yRenderer = AxisRendererY.new(root, {});
   // xRenderer.labels.template.setAll({
   //   rotation: -45,
   //   centerY: am5.p50,
@@ -13,14 +18,14 @@ export const setYAxis = (chart, root) => {
   //   // fill: am5.color(0x0000ff),
   // });
   return chart.yAxes.push(
-    am5xy.ValueAxis.new(root, {
+    ValueAxis.new(root, {
       renderer: yRenderer,
     })
   );
 };
 
 export const setXAxis = (chart, root, dataSet, data) => {
-  var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+  var xRenderer = AxisRendererX.new(root, { minGridDistance: 30 });
   xRenderer.labels.template.setAll({
     rotation: -45,
     centerY: am5.p50,
@@ -37,7 +42,7 @@ export const setXAxis = (chart, root, dataSet, data) => {
 
   // Create X-Axis
   let xAxis = chart.xAxes.push(
-    am5xy.CategoryAxis.new(root, {
+    CategoryAxis.new(root, {
       // renderer: am5xy.AxisRendererX.new(root, {}),
       // categoryField: [dataSet.nameKey],
       maxDeviation: 0.3,

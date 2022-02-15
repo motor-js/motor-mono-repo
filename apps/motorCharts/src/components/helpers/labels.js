@@ -1,14 +1,18 @@
 // https://www.amcharts.com/docs/v5/concepts/common-elements/labels/
 
-// chart.children.unshift(
-//   am5.Label.new(root, {
-//     text: "This is a chart title",
-//     fontSize: 25,
-//     fontWeight: "500",
-//     textAlign: "center",
-//     x: am5.percent(50),
-//     centerX: am5.percent(50),
-//     paddingTop: 0,
-//     paddingBottom: 0,
-//   })
-// );
+import { Label } from "@amcharts/amcharts5";
+
+export const setLabel = (chart, root, text) => {
+  chart.children.push(
+    Label.new(root, {
+      text,
+    })
+  );
+};
+export const setLabelBefore = (chart, root, text) => {
+  chart.children.unshift(
+    Label.new(root, {
+      text,
+    })
+  );
+};

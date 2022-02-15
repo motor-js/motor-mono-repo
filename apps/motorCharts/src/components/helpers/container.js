@@ -2,8 +2,10 @@
 //www.amcharts.com/docs/v5/reference/root/#horizontalLayout_property
 //www.amcharts.com/docs/v5/reference/icontainersettings/#mask_property
 
-import * as am5 from "@amcharts/amcharts5";
+// import * as am5 from "@amcharts/amcharts5";
+import { Label } from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
+import { setLabel, setLabelBefore } from "./labels";
 
 export const setContainer = (root) => {
   // Create chart
@@ -35,15 +37,17 @@ export const setContainer = (root) => {
   //     y: am5.percent(50),
   //   })
   // );
-  chart.children.push(
-    am5.Label.new(root, {
-      text: "Copyright 2021 amCharts",
-    })
-  );
-  chart.children.unshift(
-    am5.Label.new(root, {
-      text: "Chart title",
-    })
-  );
+  // chart.children.push(
+  //   Label.new(root, {
+  //     text: "Copyright 2021 amCharts",
+  //   })
+  // );
+  setLabel(chart, root, "Copyright 2021 amCharts");
+  setLabelBefore(chart, root, "Chart title");
+  //   chart.children.unshift(
+  //     Label.new(root, {
+  //       text: "Chart title",
+  //     })
+  //   );
   return chart;
 };
