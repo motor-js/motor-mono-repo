@@ -1,5 +1,7 @@
 //www.amcharts.com/docs/v5/reference/legend/
 //www.amcharts.com/docs/v5/reference/icontainersettings/#paddingBottom_property
+//www.amcharts.com/docs/v5/reference/rectangle/#className_property
+//www.amcharts.com/docs/v5/reference/roundedrectangle/
 
 import * as am5 from "@amcharts/amcharts5";
 
@@ -8,11 +10,16 @@ export const setLegend = (chart, root) => {
 
   return chart.children.push(
     am5.Legend.new(root, {
-      // active: null,
+      active: null,
       background: am5.Rectangle.new(root, {
         fill: am5.color(0xff5599),
         fillOpacity: 0.2,
       }),
+      // background: am5.RoundedRectangle.new(root, {
+      //   fill: am5.color(0xff7272),
+      //   fillOpacity: 0.6,
+      //   cornerRadiusBR: 150,
+      // }),
       // calculateAggregates:null,
       // centerX:null,
       // centerY: null,
