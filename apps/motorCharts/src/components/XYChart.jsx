@@ -23,6 +23,8 @@ import {
   setXAxis,
   setContainer,
   makeSeries,
+  createRoot,
+  disposeRoot,
 } from "./helpers";
 
 const { theme } = resolveConfig(tailwindConfig);
@@ -47,21 +49,12 @@ function XYChart({
     cols,
   });
 
-  const maybeDisposeRoot = (divId) => {
-    am5.array.each(am5.registry.rootElements, function (root) {
-      if (root.dom.id === divId) {
-        root.dispose();
-      }
-    });
-  };
-
   useEffect(() => {
     if (Object.keys(dataSet).length === 0 && dataSet.constructor === Object)
       return;
 
-    maybeDisposeRoot(chartID);
-
-    var root = am5.Root.new(chartID);
+    disposeRoot(chartID);
+    var root = createRoot(chartID);
 
     // Set themes
     // https://www.amcharts.com/docs/v5/concepts/themes/

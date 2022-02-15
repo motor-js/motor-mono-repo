@@ -6,3 +6,4 @@ export { setContainer } from "./container";
 export { setBullets } from "./bullets";
 export { makeSeries } from "./series";
 export { setLabel, setLabelBefore } from "./labels";
+export { createRoot, disposeRoot } from "./root";
