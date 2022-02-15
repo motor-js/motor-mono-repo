@@ -3,15 +3,15 @@
 //www.amcharts.com/docs/v5/reference/icontainersettings/#mask_property
 
 // import * as am5 from "@amcharts/amcharts5";
-import { Label } from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
+// import { Label } from "@amcharts/amcharts5";
+import { XYChart } from "@amcharts/amcharts5/xy";
 import { setLabel, setLabelBefore } from "./labels";
 
 export const setContainer = (root) => {
   // Create chart
 
   const chart = root.container.children.push(
-    am5xy.XYChart.new(root, {
+    XYChart.new(root, {
       panY: false,
       layout: root.horizontalLayout,
       // background: am5.RoundedRectangle.new(root, {

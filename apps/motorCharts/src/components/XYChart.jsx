@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // https://codesandbox.io/s/6ovk5?file=/src/styles.css:123-206
 // https://codesandbox.io/s/99obk?file=/src/App.js
+// https://codepen.io/team/amcharts/pen/podWdBM/369f78a1933e954d35c2379960ef229a?editors=0010
 
 import * as am5 from "@amcharts/amcharts5";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
