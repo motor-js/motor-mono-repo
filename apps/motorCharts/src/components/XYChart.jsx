@@ -7,8 +7,8 @@ import React, { useEffect } from "react";
 // Chart with title adn legen on right
 // https://codepen.io/team/amcharts/pen/podWdBM/369f78a1933e954d35c2379960ef229a?editors=0010
 
-import * as am5 from "@amcharts/amcharts5";
-import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+// import * as am5 from "@amcharts/amcharts5";
+// import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import PropTypes from "prop-types";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
@@ -25,6 +25,7 @@ import {
   makeSeries,
   createRoot,
   disposeRoot,
+  setTheme,
 } from "./helpers";
 
 const { theme } = resolveConfig(tailwindConfig);
@@ -57,8 +58,8 @@ function XYChart({
     var root = createRoot(chartID);
 
     // Set themes
-    // https://www.amcharts.com/docs/v5/concepts/themes/
-    root.setThemes([am5themes_Animated.new(root)]);
+    // root.setThemes([am5themes_Animated.new(root)]);
+    setTheme(root);
 
     let chart = setContainer(root);
 
@@ -67,17 +68,13 @@ function XYChart({
 
     const { data } = dataSet;
 
-    // Create Y-Axis
-    let yAxis = setYAxis(chart, root);
+    let yAxis = setYAxis(chart, root); // Create Y-Axis
 
-    // Create X-Axis
-    let xAxis = setXAxis(chart, root, dataSet, data);
+    let xAxis = setXAxis(chart, root, dataSet, data); // Create X-Axis
 
-    // Add legend
-    let legend = setLegend(chart, root);
+    let legend = setLegend(chart, root); // Add legend
 
-    // Add cursor
-    setCursor(chart, root);
+    setCursor(chart, root); // Add cursor
 
     dataKeys.forEach(function (sweetItem) {
       // Add series
