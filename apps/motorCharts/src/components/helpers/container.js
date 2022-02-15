@@ -13,7 +13,7 @@ export const setContainer = (root) => {
   const chart = root.container.children.push(
     XYChart.new(root, {
       panY: false,
-      layout: root.horizontalLayout,
+      layout: root.verticalLayout,
       // background: am5.RoundedRectangle.new(root, {
       //   fill: am5.color(0xff5599),
       //   fillOpacity: 0.2,

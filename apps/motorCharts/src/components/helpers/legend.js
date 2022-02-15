@@ -8,13 +8,15 @@ import * as am5 from "@amcharts/amcharts5";
 export const setLegend = (chart, root) => {
   // Add legend
 
-  return chart.children.push(
+  return chart.rightAxesContainer.children.push(
+    // if leget on right
     am5.Legend.new(root, {
       active: null,
       background: am5.Rectangle.new(root, {
         fill: am5.color(0xff5599),
         fillOpacity: 0.2,
       }),
+
       // background: am5.RoundedRectangle.new(root, {
       //   fill: am5.color(0xff7272),
       //   fillOpacity: 0.6,

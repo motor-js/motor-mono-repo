@@ -57,9 +57,7 @@ function XYChart({
     disposeRoot(chartID);
     var root = createRoot(chartID);
 
-    // Set themes
-    // root.setThemes([am5themes_Animated.new(root)]);
-    setTheme(root);
+    setTheme(root); // Set themes
 
     let chart = setContainer(root);
 
@@ -90,6 +88,9 @@ function XYChart({
         data
       );
     });
+
+    // legend.data.setAll(chart.series.dataItems);
+    // console.log(chart.series.dataItems);
 
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/

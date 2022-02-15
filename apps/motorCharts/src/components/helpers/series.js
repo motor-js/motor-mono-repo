@@ -1,3 +1,4 @@
+//www.amcharts.com/docs/v5/concepts/legend/
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 
@@ -82,6 +83,7 @@ export function makeSeries(
 
   series.columns.template.setAll({
     tooltipText: "{name}, {categoryX}:{valueY}",
+    // showTooltipOn: "always",
     width: am5.percent(90),
     tooltipY: 0,
   });
@@ -95,4 +97,5 @@ export function makeSeries(
   setBullets(root, series);
 
   legend.data.push(series);
+  //   legend.data.setAll(series.dataItems);
 }
