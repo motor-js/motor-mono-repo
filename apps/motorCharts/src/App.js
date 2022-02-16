@@ -49,7 +49,8 @@ const config = {
 };
 
 function App() {
-  const { clearSelections } = useButton();
+  const { clearSelections, selectValues } = useButton();
+  const select = () => selectValues(["Big Mac"], "BURGER", false);
   return (
     <div className="App">
       <header className="App-header">
@@ -62,6 +63,7 @@ function App() {
         <XYChart chartID="main-bar" config={config} />
         {/* <PieChart chartID="main-pie" /> */}
         {/* </div> */}
+        <button onClick={select}>Select Big Mac</button>
         <button onClick={clearSelections}>Clear Selections</button>
       </header>
     </div>
