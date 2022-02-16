@@ -73,8 +73,6 @@ function XYChart({
 
     let xAxis = setXAxis(chart, root, dataSet, data); // Create X-Axis
 
-    let legend = setLegend(chart, root); // Add legend
-
     setCursor(chart, root); // Add cursor
 
     dataKeys.forEach(function (sweetItem) {
@@ -86,11 +84,14 @@ function XYChart({
         chart,
         xAxis,
         yAxis,
-        legend,
+        // legend,
         dataSet,
         data
       );
     });
+
+    setLegend(chart, root); // Add legend
+    // legend.data.setAll(chart.series.values);
 
     // legend.data.setAll(chart.series.dataItems);
     // console.log(chart.series.dataItems);

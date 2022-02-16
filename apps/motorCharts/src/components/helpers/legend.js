@@ -8,7 +8,7 @@ import * as am5 from "@amcharts/amcharts5";
 export const setLegend = (chart, root) => {
   // Add legend
 
-  return chart.rightAxesContainer.children.push(
+  const legend = chart.rightAxesContainer.children.push(
     // if leget on right
     am5.Legend.new(root, {
       active: null,
@@ -23,7 +23,9 @@ export const setLegend = (chart, root) => {
       //   cornerRadiusBR: 150,
       // }),
       // calculateAggregates:null,
+      // x:null,
       // centerX:null,
+      // y:null,
       // centerY: null,
       // clickTarget:null,
       // cursorOverStyle:null,
@@ -39,7 +41,15 @@ export const setLegend = (chart, root) => {
       paddingTop: null,
       reverseChildren: null,
       rotation: null,
+      // layout: am5.GridLayout.new(root, {
+      //   maxColumns: 2,
+      //   fixedWidthGrid: true,
+      // }),
     })
   );
+
+  legend.data.setAll(chart.series.values);
+
+  // return legend;
   // legend.data.setAll(chart.series.values);
 };

@@ -1,4 +1,3 @@
-//www.amcharts.com/docs/v5/concepts/legend/
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 
@@ -67,7 +66,6 @@ export function makeSeries(
   chart,
   xAxis,
   yAxis,
-  legend,
   dataSet,
   data
 ) {
@@ -95,7 +93,4 @@ export function makeSeries(
   series.appear();
 
   setBullets(root, series);
-
-  legend.data.push(series);
-  //   legend.data.setAll(series.dataItems);
 }
