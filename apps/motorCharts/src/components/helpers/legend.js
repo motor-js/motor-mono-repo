@@ -5,10 +5,12 @@
 
 import * as am5 from "@amcharts/amcharts5";
 
-export const setLegend = (chart, root) => {
+export const setLegend = (chart, root, legend) => {
   // Add legend
 
-  const legend = chart.rightAxesContainer.children.push(
+  if (!legend.show) return;
+
+  const chartLegend = chart.rightAxesContainer.children.push(
     // if leget on right
     am5.Legend.new(root, {
       active: null,
@@ -48,7 +50,7 @@ export const setLegend = (chart, root) => {
     })
   );
 
-  legend.data.setAll(chart.series.values);
+  chartLegend.data.setAll(chart.series.values);
 
   // return legend;
   // legend.data.setAll(chart.series.values);

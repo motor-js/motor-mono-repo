@@ -44,6 +44,7 @@ const config = {
   cols: cols,
   // themes: ["Material"],
   // themes: ["Frozen"],
+  legend: { show: true },
 };
 
 function App() {

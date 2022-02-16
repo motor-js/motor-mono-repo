@@ -47,7 +47,7 @@ function XYChart({
     showScrollbarY: PropTypes.bool,
   };
 
-  const { cols, themes } = config;
+  const { cols, themes, legend } = config;
 
   const { dataSet, dataKeys } = useData({
     cols,
@@ -90,7 +90,7 @@ function XYChart({
       );
     });
 
-    setLegend(chart, root); // Add legend
+    setLegend(chart, root, legend); // Add legend
     // legend.data.setAll(chart.series.values);
 
     // legend.data.setAll(chart.series.dataItems);
