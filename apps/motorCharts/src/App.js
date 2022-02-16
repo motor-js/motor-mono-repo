@@ -29,6 +29,23 @@ const cols = [
   // },
 ];
 
+const config = {
+  // // Create pie series
+  // series: [
+  //   {
+  //     type: "PieSeries",
+  //     dataFields: {
+  //       value: "litres",
+  //       category: "country",
+  //     },
+  //   },
+  // ],
+  // Add data
+  cols: cols,
+  // themes: ["Material"],
+  // themes: ["Frozen"],
+};
+
 function App() {
   const { clearSelections } = useButton();
   return (
@@ -40,7 +57,7 @@ function App() {
         {/* <div className="flex-container"> */}
         {/* <MultilevelTreeMap chartID="pie-one" />
           <Gauge chartID="gauge-one" /> */}
-        <XYChart chartID="main-bar" cols={cols} />
+        <XYChart chartID="main-bar" config={config} />
         {/* <PieChart chartID="main-pie" /> */}
         {/* </div> */}
         <button onClick={clearSelections}>Clear Selections</button>

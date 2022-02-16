@@ -36,7 +36,8 @@ console.log(theme.colors);
 //chart type
 function XYChart({
   chartID,
-  cols,
+  config,
+  // cols,
   showScrollbarX = false,
   showScrollbarY = false,
 }) {
@@ -45,6 +46,8 @@ function XYChart({
     showScrollbarX: PropTypes.bool,
     showScrollbarY: PropTypes.bool,
   };
+
+  const { cols, themes } = config;
 
   const { dataSet, dataKeys } = useData({
     cols,
@@ -57,7 +60,7 @@ function XYChart({
     disposeRoot(chartID);
     var root = createRoot(chartID);
 
-    setTheme(root); // Set themes
+    setTheme(root, themes); // Set themes
 
     let chart = setContainer(root);
 
@@ -95,7 +98,7 @@ function XYChart({
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
     chart.appear(1000, 100);
-  }, [chartID, dataSet, dataKeys, showScrollbarX, showScrollbarY]);
+  }, [chartID, dataSet, dataKeys, showScrollbarX, showScrollbarY, themes]);
 
   // Load data into chart
   return <div id={chartID} style={{ width: "100%", height: "500px" }}></div>;
