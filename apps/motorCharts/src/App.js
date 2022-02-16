@@ -44,6 +44,7 @@ const config = {
   cols: cols,
   // themes: ["Material"],
   // themes: ["Frozen"],
+  scrollbars: { showX: true, showY: true },
   legend: { show: true },
 };
 
