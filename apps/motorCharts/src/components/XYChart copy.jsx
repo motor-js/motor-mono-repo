@@ -9,7 +9,6 @@ import React, { useEffect } from "react";
 
 // import * as am5 from "@amcharts/amcharts5";
 // import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import { Root, registry, array } from "@amcharts/amcharts5";
 import PropTypes from "prop-types";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
@@ -24,9 +23,8 @@ import {
   setXAxis,
   setContainer,
   makeSeries,
-  // createRoot,
-  // disposeRoot,
-  // setRoot,
+  createRoot,
+  disposeRoot,
   setTheme,
 } from "./helpers";
 
@@ -36,9 +34,17 @@ const { theme } = resolveConfig(tailwindConfig);
 console.log(theme.colors);
 
 //chart type
-function XYChart({ chartID, config }) {
+function XYChart({
+  chartID,
+  config,
+  // cols,
+  // showScrollbarX = false,
+  // showScrollbarY = false,
+}) {
   XYChart.propTypes = {
     chartID: PropTypes.string.isRequired,
+    // showScrollbarX: PropTypes.bool,
+    // showScrollbarY: PropTypes.bool,
   };
 
   const { cols, themes, legend, scrollbars } = config;
@@ -51,23 +57,11 @@ function XYChart({ chartID, config }) {
     if (Object.keys(dataSet).length === 0 && dataSet.constructor === Object)
       return;
 
-    var root;
-    const createRoot = (divId) => Root.new(divId, {});
-    const setRoot = (chartID) => {
-      array.each(registry.rootElements, function (rootElement) {
-        if (rootElement.dom.id === chartID) {
-          root = rootElement;
-          return;
-        }
-      });
-      if (!root) root = createRoot(chartID);
-    };
-
-    setRoot(chartID);
+    disposeRoot(chartID);
+    var root = createRoot(chartID);
 
     setTheme(root, themes); // Set themes
-    // if(root === undefine)
-    // console.log(root);
+
     let chart = setContainer(root);
 
     scrollbars.showX && setScrollbarX(chart, root);
@@ -97,11 +91,14 @@ function XYChart({ chartID, config }) {
     });
 
     setLegend(chart, root, legend); // Add legend
+    // legend.data.setAll(chart.series.values);
+
+    // legend.data.setAll(chart.series.dataItems);
+    // console.log(chart.series.dataItems);
 
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
-    // chart.appear(1000, 100);
-    chart.appear(1000, 500);
+    chart.appear(1000, 100);
   }, [chartID, dataSet, dataKeys, themes]);
 
   // Load data into chart

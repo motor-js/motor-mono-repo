@@ -87,6 +87,24 @@ export function makeSeries(
   });
 
   series.data.setAll(data);
+  //   console.log(series.uid);
+
+  //   for (var i = data.length - 1; i >= 0; i--) {
+  //     var date = data[i].date;
+  //     // only add if first items date is bigger then newly added items date
+  //     //  if (seriesFirst[valueSeries.uid] > date) {
+  //     //    valueSeries.data.unshift(data[i]);
+  //     //  }
+  //     //  if (seriesFirst[volumeSeries.uid] > date) {
+  //     //    volumeSeries.data.unshift(data[i]);
+  //     //  }
+  //     //  if (seriesFirst[sbSeries.uid] > date) {
+  //     //    sbSeries.data.unshift(data[i]);
+  //     //  }
+  //     series.data.unshift(data[0]);
+  //     series.data.unshift(data[1]);
+  //     series.data.unshift(data[2]);
+  //   }
 
   // Make stuff animate on load
   // https://www.amcharts.com/docs/v5/concepts/animations/
