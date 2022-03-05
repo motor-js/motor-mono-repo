@@ -174,7 +174,6 @@ const useTable = (props) => {
   //handle page change
   const handlePageChange = useCallback(
     (pageIndex) => {
-      console.log(pageIndex)
       setPage(pageIndex);
     },
     [setPage]
@@ -252,16 +251,6 @@ const useTable = (props) => {
     return qProp;
   }, [
     newCols,
-    qTitle,
-    qExpression,
-    qHyperCubeDef,
-    qInterColumnSortOrder,
-    qSortByAscii,
-    qSortByExpression,
-    qSortByLoadOrder,
-    qSuppressMissing,
-    qOtherTotalSpec,
-    qSuppressZero,
   ]);
 
   const getLayout = useCallback(() => qObject.current.getLayout(), []);

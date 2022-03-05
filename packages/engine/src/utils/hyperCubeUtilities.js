@@ -232,12 +232,12 @@ export const validData = (qLayout) => {
   };
   
   if (qDimensionInfo && qMeasureInfo) {
-    DimCheck();
-    MeasCheck();
+  //  DimCheck();
+  //  MeasCheck();
   } else if (qDimensionInfo && !qMeasureInfo) {
-    DimCheck();
+  //  DimCheck();
   } else if (!qDimensionInfo && qMeasureInfo) {
-    MeasCheck();
+  //  MeasCheck();
   } else { }
 
 };

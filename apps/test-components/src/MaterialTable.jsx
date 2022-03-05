@@ -10,14 +10,14 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useTable } from '@motor-js/engine';
-import { qlikConfig } from "../config";
+import { qlikConfig } from "./config";
 
 
 export default function MaterialTable() {
   
   const config = qlikConfig
 
-  const [dataSize, setDataSize] = useState(null)
+  const [dataSize, setDataSize] = useState(50)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -48,6 +48,7 @@ export default function MaterialTable() {
     }
   }));
 
+  //const sortCriteria = { qInterColumnSortOrder: [4] };
 
   const { 
     dataSet,
@@ -59,6 +60,7 @@ export default function MaterialTable() {
   } = useTable({
     cols,
     config,
+    sortCriteria: { qInterColumnSortOrder: [0] },
     qPage: {
       qTop: 0,
       qLeft: 0,
@@ -66,6 +68,9 @@ export default function MaterialTable() {
       qHeight: 10,
     },
   });
+
+  console.log(dataSet)
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -123,15 +128,17 @@ export default function MaterialTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {<TablePagination
-        rowsPerPageOptions={[10, 20, 30]}
-        component="div"
-        count={dataSize}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />}
+      {
+        <TablePagination
+          rowsPerPageOptions={[10, 20, 30]}
+          component="div"
+          count={dataSize && dataSize}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      }
     </Paper>
   );
 }

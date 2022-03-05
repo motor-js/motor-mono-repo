@@ -5,20 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Motor } from "@motor-js/engine"
 import { ThemeProvider, defaultTheme } from "@motor-js/theme"
+import { qlikSAASConfig } from "./config"
 
 ReactDOM.render(
   <React.StrictMode>
-    <Motor
-      config={{
-        host: "motor.eu.qlikcloud.com",
-        secure: true,
-        port: null,
-        prefix: "",
-        appId: "18f7a1f3-4605-4c59-8d01-849119d82621",
-        webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-        qcs: true,
-      }}
-    >
+    <Motor config={qlikSAASConfig}>
       <ThemeProvider theme={defaultTheme}>
       <App />
       </ThemeProvider>

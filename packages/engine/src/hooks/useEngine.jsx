@@ -40,14 +40,14 @@ function useEngine(props) {
           error.code ===
           schema.enums.LocalizedErrorCode.LOCERR_HC_MODAL_OBJECT_ERROR
         ) {
-          return error.code;
+           return error.code;
         }
         // If it was not an aborted QIX call, or if we reached MAX_RETRIES, we let the error
         // trickle down to potential other interceptors, and finally down to resolving/rejecting
         // the initial promise that the user got when invoking the QIX method:
         console.warn(error);
 
-        return this.Promise.reject(error);
+        return this.Promise.resolve(error);
       },
     },
   ];
@@ -174,19 +174,14 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem') {
-
-        console.log('reloadURI:', reloadURI)
-        console.log('url:', reloadURI)
-        const reloadURI = encodeURIComponent(`https://${config.host}/content/Default/${config.redirectFileName}`);
-        const url = `wss:/${config.host}/app/${config.appId}?reloadURI=${reloadURI}`;
+        const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
+        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?reloadURI=${reloadURI}`;
 
         const session = enigma.create({
           schema,
           url: url,
           suspendOnClose: false
         });
-
-       // session.on('traffic:*', (direction, msg) => console.log(direction, msg));
 
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
           
