@@ -8,15 +8,61 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
+import { useData } from "@motor-js/engine";
 const { theme } = resolveConfig(tailwindConfig);
 
 // in src type : ln -s ../tailwind.config.js ./
 // console.log(theme.colors);
 
 //chart type
+const cols = [
+  // {
+  //   // qField: "SALES_DATE.autoCalendar.Year",
+  //   qField: "SALES_DATE.autoCalendar.Year",
+  //   // qField: "SALES_DATE",
+  //   // qLabel: "Year",
+  //   qLabel: "country",
+  // },
+  // {
+  //   // qField: "SALES_DATE.autoCalendar.Year",
+  //   qField: "RESTAURANT",
+  //   // qField: "SALES_DATE",
+  //   // qLabel: "Year",
+  //   qLabel: "country",
+  // },
+  {
+    // qField: "SALES_DATE.autoCalendar.Year",
+    qField: "BURGER",
+    // qField: "SALES_DATE",
+    // qLabel: "Year",
+    qLabel: "country",
+  },
+  // {
+  //   qField: "BURGER",
+  //   qLabel: "Burger",
+  // },
+
+  {
+    qField: "=Sum(COST_UK*SALES_QTY)",
+    // qLabel: "Total_Sales",
+    qLabel: "value",
+  },
+  // {
+  //   qField: "=Sum(COST_UK)",
+  //   qLabel: "Cost",
+  // },
+  // {
+  //   qField: "=Sum(SALES_QTY)",
+  //   qLabel: "value",
+  // },
+];
 
 function XYChart(props) {
   //const chart = useRef(null);
+
+  const { dataSet, dataKeys } = useData({
+    cols,
+  });
   const chartID = props.chartID;
   console.log({ chartID });
 
