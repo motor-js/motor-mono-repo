@@ -1,10 +1,10 @@
 {
   "name": "kpi-test",
-  "version": "0.3.19",
+  "version": "0.3.20",
   "private": true,
   "dependencies": {
-    "@motor-js/components": "^0.2.19",
-    "@motor-js/engine": "^0.5.18",
+    "@motor-js/components": "^0.2.20",
+    "@motor-js/engine": "^0.5.19",
     "@motor-js/theme": "^0.2.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
