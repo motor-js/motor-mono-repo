@@ -173,7 +173,7 @@ function useEngine(props) {
         }
       }
 
-      if (config && config.qsServerType === 'onPrem') {
+      if (config && config.qsServerType === 'onPrem' && config.authType !== 'ticket') {
         const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?reloadURI=${reloadURI}`;
 
