@@ -1,9 +1,9 @@
 {
   "name": "table-test",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "private": true,
   "dependencies": {
-    "@motor-js/engine": "^0.5.8",
+    "@motor-js/engine": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
