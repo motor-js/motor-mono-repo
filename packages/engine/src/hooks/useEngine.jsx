@@ -232,41 +232,17 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0) {
-        console.log('ticket log temp',ticket)
-        const url = `wss:/${config.host}:443${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
+        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
         
-        console.log('url new: ',url)
         const session = enigma.create({
           schema,
-          url: `wss://sense-motor.adviseinc.co.uk/motor-ticket/app/4359f6e1-0df6-43f8-bcd2-9aa13616f53b?QlikTicket=${ticket}`,
+          url: url,
           createSocket: (url) => new WebSocket(url),
         });
 
-        //createSocket: (url) => new WebSocket(url)
-        session.on('notification:OnAuthenticationInformation', (authInfo) => { 
-          if (authInfo.mustAuthenticate) {
-            console.warn("Not logged in");
-            setLoginUri(authInfo.loginUri)
-            seErrorCode(-1);
-             return -1;
-               // window.location.href = authInfo.loginUri;
-          } else {
-            session.on("closed", (t) => {
-              console.warn("Session was closed");
-              seErrorCode(-3);
-              return -3;
-          });
-          }
-        });
-
-        session.on("error", () => {
-                console.warn("Captured session error");
-        });
+        session.on("error", () => { console.warn("Captured session error"); });
         
-        session.on('suspended', () => {
-              console.log('Session was suspended');
-             // session.resume();
-        });
+        session.on('suspended', () => { console.log('Session was suspended') });
           
         session.on('traffic:received', (res) => {
           console.log('res: ',res)
