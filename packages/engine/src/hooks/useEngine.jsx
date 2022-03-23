@@ -238,16 +238,8 @@ function useEngine(props) {
         console.log('url new: ',url)
         const session = enigma.create({
           schema,
-          url: url,
-          suspendOnClose: false,
-          createSocket: (url) => new WebSocket(url, {
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Qlik-Xrfkey': 'abcdefghijklmnop',
-              'X-Qlik-User': `UserDirectory=ADVINC; UserId=Motor_User1`,
-            },
-          }),
-          responseInterceptors
+          url: `wss://sense-motor.adviseinc.co.uk/motor-ticket/app/4359f6e1-0df6-43f8-bcd2-9aa13616f53b?QlikTicket=${ticket}`,,
+          createSocket: (url) => new WebSocket(url),
         });
 
         //createSocket: (url) => new WebSocket(url)
@@ -276,15 +268,9 @@ function useEngine(props) {
              // session.resume();
         });
           
-        // Catch possible errors sent on WebSocket
         session.on('traffic:received', (res) => {
-          if (res.params && res.params.severity === 'fatal') {
-            possibleEnigmaErr = res.params.message;
-          }
+          console.log('res: ',res)
         });
-
-        // log all traffic
-        session.on('traffic:*', (direction, msg) => console.log(direction, msg));
 
         try {
           const _global = await session.open();
