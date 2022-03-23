@@ -1,0 +1,28 @@
+194 error Error: Command failed: git push --follow-tags --no-verify --atomic origin master
+194 error remote: Internal Server Error
+194 error To https://github.com/motor-js/motor-mono-repo.git
+194 error  ! [remote rejected]   master -> master (Internal Server Error)
+194 error  ! [remote rejected]   @motor-js/cli@0.4.10 -> @motor-js/cli@0.4.10 (Internal Server Error)
+194 error  ! [remote rejected]   @motor-js/components@0.2.10 -> @motor-js/components@0.2.10 (Internal Server Error)
+194 error  ! [remote rejected]   @motor-js/engine@0.5.9 -> @motor-js/engine@0.5.9 (Internal Server Error)
+194 error  ! [remote rejected]   @motor-js/nebula@0.4.10 -> @motor-js/nebula@0.4.10 (Internal Server Error)
+194 error  ! [remote rejected]   demo@0.7.10 -> demo@0.7.10 (Internal Server Error)
+194 error  ! [remote rejected]   kpi-test@0.3.10 -> kpi-test@0.3.10 (Internal Server Error)
+194 error  ! [remote rejected]   lock-feature@0.2.10 -> lock-feature@0.2.10 (Internal Server Error)
+194 error  ! [remote rejected]   luke-test@0.2.10 -> luke-test@0.2.10 (Internal Server Error)
+194 error  ! [remote rejected]   material-sense@0.3.10 -> material-sense@0.3.10 (Internal Server Error)
+194 error  ! [remote rejected]   material-ui-starter@0.4.10 -> material-ui-starter@0.4.10 (Internal Server Error)
+194 error  ! [remote rejected]   material-web-analytics@0.4.10 -> material-web-analytics@0.4.10 (Internal Server Error)
+194 error  ! [remote rejected]   multi-app-poc@1.2.10 -> multi-app-poc@1.2.10 (Internal Server Error)
+194 error  ! [remote rejected]   multi-page-mashup@0.5.10 -> multi-page-mashup@0.5.10 (Internal Server Error)
+194 error  ! [remote rejected]   selection-modal-dev@0.3.10 -> selection-modal-dev@0.3.10 (Internal Server Error)
+194 error  ! [remote rejected]   showcase-app-1@0.3.10 -> showcase-app-1@0.3.10 (Internal Server Error)
+194 error  ! [remote rejected]   single-page-mashup@0.5.10 -> single-page-mashup@0.5.10 (Internal Server Error)
+194 error  ! [remote rejected]   solar-motor@0.4.10 -> solar-motor@0.4.10 (Internal Server Error)
+194 error  ! [remote rejected]   styled-multi-page@0.4.10 -> styled-multi-page@0.4.10 (Internal Server Error)
+194 error  ! [remote rejected]   table-test@0.2.9 -> table-test@0.2.9 (Internal Server Error)
+194 error  ! [remote rejected]   test-components@0.3.10 -> test-components@0.3.10 (Internal Server Error)
+194 error error: failed to push some refs to 'https://github.com/motor-js/motor-mono-repo.git'
+194 error
+194 error     at makeError (/Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:174:9)
+194 error     at /Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:278:16
