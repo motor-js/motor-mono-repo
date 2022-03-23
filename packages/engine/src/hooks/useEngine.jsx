@@ -10,9 +10,6 @@ function useEngine(props) {
   const { config, engineState, state } = props;
 
   const { ticket } = state
-  console.log('RENDER!!', config)
-  console.log('ticket length',ticket.length)
-  console.log('true?',config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0)
 
   const responseInterceptors = [
     {
@@ -179,7 +176,6 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem' && config.authType !== 'ticket') {
-        console.log('called 182')
         const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?reloadURI=${reloadURI}`;
 
@@ -240,14 +236,17 @@ function useEngine(props) {
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0) {
         console.log('ticket log temp',ticket)
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
+        console.log(url)
 
         const session = enigma.create({
           schema,
           url: url,
           suspendOnClose: false,
+          createSocket: (url) => new WebSocket(url),
           responseInterceptors
         });
 
+        //createSocket: (url) => new WebSocket(url)
         session.on('notification:OnAuthenticationInformation', (authInfo) => { 
           if (authInfo.mustAuthenticate) {
             console.warn("Not logged in");
@@ -275,7 +274,7 @@ function useEngine(props) {
           
         try {
           const _global = await session.open();
-          console.log('GLOBAL! ',global)
+          console.log('GLOBAL! ',_global)
           const _user = await _global.getAuthenticatedUser()
          
           if(!config.global) {
@@ -293,7 +292,7 @@ function useEngine(props) {
           }
         }
       }
-      
+
     })();
   }, [engineState, config, state]);
 
