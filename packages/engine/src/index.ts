@@ -20,5 +20,6 @@ export { default as useBookmark } from "./hooks/useBookmark";
 //Contexts
 export { EngineContext } from "./contexts/EngineProvider";
 export { MotorTicketContext } from "./store/TicketStore";
+export { default as MotorTicketStore } from "./store/TicketStore";
 export { default as AppProvider } from "./components/AppProvider";
 
