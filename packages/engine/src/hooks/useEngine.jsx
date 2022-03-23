@@ -8,8 +8,11 @@ const MAX_RETRIES = 3;
 function useEngine(props) {
   
   const { config, engineState, state } = props;
+
   const { ticket } = state
-  console.log('RENDER!!')
+  console.log('RENDER!!', config)
+  console.log('ticket length',ticket.length)
+
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -271,6 +274,7 @@ function useEngine(props) {
           
         try {
           const _global = await session.open();
+          console.log('GLOBAL! ',global)
           const _user = await _global.getAuthenticatedUser()
          
           if(!config.global) {
