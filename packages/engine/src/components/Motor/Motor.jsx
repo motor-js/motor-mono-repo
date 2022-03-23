@@ -31,7 +31,6 @@ function Motor({
   NotConnectedButtonText,
 }) {
 
-  const test = useContext(MotorTicketContext)
   const [state] = useContext(MotorTicketContext)
   const engineState = engine
   const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
@@ -39,7 +38,7 @@ function Motor({
   const newLoginUri = newEngine && newEngine.loginUri
 
   console.log('newEngine! ',newEngine)
-  
+
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
 
