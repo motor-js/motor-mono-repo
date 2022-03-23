@@ -8,7 +8,6 @@ const MAX_RETRIES = 3;
 function useEngine(props) {
   
   const { config, engineState, state } = props;
-
   const { ticket } = state
 
   const responseInterceptors = [
