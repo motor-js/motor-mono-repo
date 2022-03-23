@@ -210,7 +210,6 @@ function useEngine(props) {
               console.log('Session was suspended');
              // session.resume();
         });
-            
 
           try {
             const _global = await session.open();
