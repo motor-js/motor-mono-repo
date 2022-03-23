@@ -1,7 +1,7 @@
 {
   "name": "@motor-js/components",
   "license": "https://www.motor.so/license",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
   "module": "lib/index.es.ts",
@@ -16,7 +16,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@motor-js/engine": "^0.5.21",
+    "@motor-js/engine": "^0.5.22",
     "@styled-icons/feather": "^10.34.0",
     "polished": "^4.1.3",
     "prop-types": "^15.7.2",

@@ -1,11 +1,11 @@
 {
   "name": "lock-feature",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.3",
-    "@motor-js/components": "^0.2.22",
-    "@motor-js/engine": "^0.5.21",
+    "@motor-js/components": "^0.2.23",
+    "@motor-js/engine": "^0.5.22",
     "@motor-js/theme": "^0.2.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
