@@ -233,7 +233,7 @@ function useEngine(props) {
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0) {
         console.log('ticket log temp',ticket)
-        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
+        const url = `wss:/${config.host}:443${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
         
         console.log('change url: ',url)
 
