@@ -284,6 +284,9 @@ function useEngine(props) {
           }
         });
 
+        // log all traffic
+        session.on('traffic:*', (direction, msg) => console.log(direction, msg));
+
         try {
           const _global = await session.open();
           const _user = await _global.getAuthenticatedUser()
