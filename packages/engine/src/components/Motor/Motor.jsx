@@ -10,6 +10,7 @@ import { LicenseCheck } from "../License/LicenseCheck"
 
 function Motor({
   engine,
+  ticket,
   children,
   licenseKey,
   config,
@@ -32,7 +33,7 @@ function Motor({
 
   const engineState = engine
   const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
-  const newEngine = useEngine({config, engineState})
+  const newEngine = useEngine({config, engineState, ticket})
   const newLoginUri = newEngine && newEngine.loginUri
 
   const text = `Powered by Motor`;
@@ -52,7 +53,7 @@ function Motor({
   return (
     <EngineContext.Provider value={newEngine}>
       <ConfigContext.Provider value={config}>
-      { config.qsServerType === 'onPrem' ?
+      { config.qsServerType === 'onPrem' && config.authType !== 'ticket' &&
       <div>
         <QSELogin
           config={config}
@@ -82,7 +83,23 @@ function Motor({
         loginfontFamily={loginfontFamily}
       />
       </div>
-        :
+      }
+       { config.qsServerType === 'onPrem' && config.authType === 'ticket' &&
+      <div>
+        <NotConnected
+          config={config}
+          header={NotConnectedheader}
+          body={NotConnectedBody}
+          size={size}
+          buttonText={NotConnectedButtonText}
+          backgroundColor={backgroundColor}
+          buttonFontColor={buttonFontColor}
+          buttonColor={buttonColor}
+          loginfontFamily={loginfontFamily}
+        />
+       </div>
+      }
+      { config.qsServerType !== 'onPrem' &&
       <div>
         <Login
           config={config}

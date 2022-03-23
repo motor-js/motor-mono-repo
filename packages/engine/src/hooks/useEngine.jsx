@@ -7,7 +7,7 @@ const MAX_RETRIES = 3;
 
 function useEngine(props) {
   
-  const { config, engineState } = props;
+  const { config, engineState, ticket } = props;
 
   const responseInterceptors = [
     {
@@ -180,7 +180,8 @@ function useEngine(props) {
         const session = enigma.create({
           schema,
           url: url,
-          suspendOnClose: false
+          suspendOnClose: false,
+          responseInterceptors
         });
 
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
@@ -228,6 +229,63 @@ function useEngine(props) {
               console.log('Tried to communicate on a session that is closed');
             }
           }
+      }
+
+      if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
+        
+        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
+
+        const session = enigma.create({
+          schema,
+          url: url,
+          suspendOnClose: false,
+          responseInterceptors
+        });
+
+        session.on('notification:OnAuthenticationInformation', (authInfo) => {
+          
+          if (authInfo.mustAuthenticate) {
+            console.warn("Not logged in");
+            setLoginUri(authInfo.loginUri)
+            seErrorCode(-1);
+             return -1;
+               // window.location.href = authInfo.loginUri;
+          } else {
+            session.on("closed", (t) => {
+              console.warn("Session was closed");
+              seErrorCode(-3);
+              return -3;
+          });
+          }
+        });
+
+        session.on("error", () => {
+                console.warn("Captured session error");
+        });
+        
+        session.on('suspended', () => {
+              console.log('Session was suspended');
+             // session.resume();
+        });
+          
+        try {
+          const _global = await session.open();
+          const _user = await _global.getAuthenticatedUser()
+         
+          if(!config.global) {
+            const _doc = await _global.openDoc(config.appId);
+            setEngine(_doc);
+          } else {
+            setEngine(_global);
+          }
+          setUser(_user)
+          seErrorCode(1);
+          return 1
+        } catch (err) {
+          if (err.code) {
+            console.log('Tried to communicate on a session that is closed');
+          }
+        }
       }
 
     })();

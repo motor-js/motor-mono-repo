@@ -1,23 +1,31 @@
 import logo from './logo.svg';
-import './App.css';
+import { useTable } from '@motor-js/engine'
 
 function App() {
+
+  const cols=[
+    {
+      qField: 'BURGER_TEST',
+      dataKey: 'BURGER_TEST',
+      qLabel: 'BURGER_TEST'
+    },
+    {
+      qField: '=1',
+      dataKey: '1',
+      qLabel: '1'
+    }
+  ];
+
+  const { 
+    dataSet,
+  } = useTable({
+    cols
+  });
+  
+  console.log(dataSet)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
