@@ -7,10 +7,10 @@ const initialState = {
 };
 
 const TicketStore = ({ children }) => {
-  const [ticketState, dispatch] = useReducer(TicketReducer, initialState);
+  const [state, dispatch] = useReducer(TicketReducer, initialState);
 
   return (
-    <MotorTicketContext.Provider value={[ticketState, dispatch]}>{children}</MotorTicketContext.Provider>
+    <MotorTicketContext.Provider value={[state, dispatch]}>{children}</MotorTicketContext.Provider>
   );
 };
 

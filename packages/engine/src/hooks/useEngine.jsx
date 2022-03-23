@@ -7,7 +7,7 @@ const MAX_RETRIES = 3;
 
 function useEngine(props) {
   
-  const { config, engineState, ticket } = props;
+  const { config, engineState, state } = props;
 
   const responseInterceptors = [
     {
@@ -233,7 +233,7 @@ function useEngine(props) {
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
         
-        const { ticket } = ticketState
+        const { ticket } = state
         console.log('ticket log temp',ticket)
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
 

@@ -31,10 +31,12 @@ function Motor({
   NotConnectedButtonText,
 }) {
 
-  const [ticketState] = useContext(MotorTicketContext)
+  const test = useContext(MotorTicketContext)
+  console.log('TEST STATE! ',test)
+  const [state] = useContext(MotorTicketContext)
   const engineState = engine
   const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
-  const newEngine = useEngine({config, engineState, ticketState})
+  const newEngine = useEngine({config, engineState, state})
   const newLoginUri = newEngine && newEngine.loginUri
 
   const text = `Powered by Motor`;
