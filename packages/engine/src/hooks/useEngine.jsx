@@ -238,7 +238,7 @@ function useEngine(props) {
         console.log('url new: ',url)
         const session = enigma.create({
           schema,
-          url: `wss://sense-motor.adviseinc.co.uk/motor-ticket/app/4359f6e1-0df6-43f8-bcd2-9aa13616f53b?QlikTicket=${ticket}`,,
+          url: `wss://sense-motor.adviseinc.co.uk/motor-ticket/app/4359f6e1-0df6-43f8-bcd2-9aa13616f53b?QlikTicket=${ticket}`,
           createSocket: (url) => new WebSocket(url),
         });
 
