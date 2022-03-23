@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactWaterMark from "../Watermark"
 import { EngineContext } from "../../contexts/EngineProvider";
 import { ConfigContext } from "../../contexts/ConfigProvider";
@@ -7,6 +7,7 @@ import QSELogin from "../QSELogin";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
 import { LicenseCheck } from "../License/LicenseCheck"
+import { MotorTicketContext } from "../../store/TicketStore"
 
 function Motor({
   engine,
@@ -30,12 +31,10 @@ function Motor({
   NotConnectedButtonText,
 }) {
 
-  //const { ticket } = useContext(AuthContext)
-  const ticket = 'test'
-  
+  const [ticketState] = useContext(MotorTicketContext)
   const engineState = engine
   const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
-  const newEngine = useEngine({config, engineState, ticket})
+  const newEngine = useEngine({config, engineState, ticketState})
   const newLoginUri = newEngine && newEngine.loginUri
 
   const text = `Powered by Motor`;

@@ -233,6 +233,8 @@ function useEngine(props) {
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
         
+        const { ticket } = ticketState
+        console.log('ticket log temp',ticket)
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
 
         const session = enigma.create({
