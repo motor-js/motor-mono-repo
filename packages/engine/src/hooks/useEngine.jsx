@@ -232,8 +232,8 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0) {
-        const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
-        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?reloadURI=${reloadURI}?QlikTicket=${ticket}`;
+        //const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
+        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
         
         const session = enigma.create({
           schema,
