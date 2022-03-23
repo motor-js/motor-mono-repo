@@ -7,19 +7,22 @@ function App() {
     {
       qField: 'BURGER_TEST',
       dataKey: 'BURGER_TEST',
-      qLabel: 'BURGER_TEST'
+      qLabel: 'BURGER_TEST',
+      qNullSuppression: false
     },
     {
-      qField: '=1',
-      dataKey: '1',
-      qLabel: '1'
+      qField: '=sum(BURGER_VALUE)',
+      dataKey: 'BURGER_VALUE',
+      qLabel: 'BURGER_VALUE',
     }
   ];
 
   const { 
     dataSet,
   } = useTable({
-    cols
+    cols,
+    qSuppressMissing: false,
+    qSuppressZero: false
   });
   
   console.log(dataSet)

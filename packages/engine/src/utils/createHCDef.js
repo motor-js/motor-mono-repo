@@ -75,6 +75,7 @@ function createDef(
         };
       }
       if (typeof col === "object" && !col.qLibraryId) {
+        console.log(col)
         return {
           qDef: {
             qGrouping: col.qGrouping || "N",
@@ -119,7 +120,7 @@ function createDef(
               id: "colorTheme",
             },
           ],
-          qNullSuppression: col.qNullSuppression ? col.qNullSuppression : true,
+          qNullSuppression: col.qNullSuppression,
           qSuppressMissing: true,
           qShowTotalsAbove: true,
         };
@@ -156,7 +157,7 @@ function createDef(
               id: "colorTheme",
             },
           ],
-          qNullSuppression: col.qNullSuppression ? col.qNullSuppression : true,
+          qNullSuppression: col.qNullSuppression,
           qSuppressMissing: true,
           qShowTotalsAbove: true,
         };

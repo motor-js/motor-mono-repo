@@ -10,7 +10,6 @@ import { LicenseCheck } from "../License/LicenseCheck"
 
 function Motor({
   engine,
-  ticket,
   children,
   licenseKey,
   config,
@@ -31,6 +30,9 @@ function Motor({
   NotConnectedButtonText,
 }) {
 
+  //const { ticket } = useContext(AuthContext)
+  const ticket = 'test'
+  
   const engineState = engine
   const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
   const newEngine = useEngine({config, engineState, ticket})
