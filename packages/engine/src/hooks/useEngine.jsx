@@ -12,6 +12,7 @@ function useEngine(props) {
   const { ticket } = state
   console.log('RENDER!!', config)
   console.log('ticket length',ticket.length)
+  console.log('true?',config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0)
 
   const responseInterceptors = [
     {
@@ -178,6 +179,7 @@ function useEngine(props) {
       }
 
       if (config && config.qsServerType === 'onPrem' && config.authType !== 'ticket') {
+        console.log('called 182')
         const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?reloadURI=${reloadURI}`;
 
@@ -246,8 +248,7 @@ function useEngine(props) {
           responseInterceptors
         });
 
-        session.on('notification:OnAuthenticationInformation', (authInfo) => {
-          
+        session.on('notification:OnAuthenticationInformation', (authInfo) => { 
           if (authInfo.mustAuthenticate) {
             console.warn("Not logged in");
             setLoginUri(authInfo.loginUri)
@@ -294,7 +295,7 @@ function useEngine(props) {
       }
 
     })();
-  }, [engineState, config]);
+  }, [engineState, config, state]);
 
   return { engine, engineError, errorCode, user, loginUri };
 }
