@@ -1,13 +1,13 @@
 {
   "name": "multi-app-poc",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.18",
-    "@motor-js/components": "^0.2.8",
-    "@motor-js/engine": "^0.5.7",
+    "@motor-js/components": "^0.2.9",
+    "@motor-js/engine": "^0.5.8",
     "@motor-js/theme": "^0.2.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
