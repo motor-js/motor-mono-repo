@@ -8,7 +8,8 @@ const MAX_RETRIES = 3;
 function useEngine(props) {
   
   const { config, engineState, state } = props;
-
+  const { ticket } = state
+  console.log('RENDER!!')
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -231,9 +232,7 @@ function useEngine(props) {
           }
       }
 
-      if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
-        
-        const { ticket } = state
+      if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0) {
         console.log('ticket log temp',ticket)
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
 
