@@ -235,7 +235,7 @@ function useEngine(props) {
         console.log('ticket log temp',ticket)
         const url = `wss:/${config.host}:443${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
         
-        console.log('change url: ',url)
+        console.log('url new: ',url)
 
         const session = enigma.create({
           schema,
