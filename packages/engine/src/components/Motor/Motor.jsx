@@ -37,7 +37,9 @@ function Motor({
   const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
   const newEngine = useEngine({config, engineState, state})
   const newLoginUri = newEngine && newEngine.loginUri
+
   console.log('newEngine! ',newEngine)
+  
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
 
