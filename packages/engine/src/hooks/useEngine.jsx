@@ -241,7 +241,13 @@ function useEngine(props) {
           schema,
           url: url,
           suspendOnClose: false,
-          createSocket: (url) => new WebSocket(url),
+          createSocket: (url) => new WebSocket(url, {
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Qlik-Xrfkey': 'abcdefghijklmnop',
+              'X-Qlik-User': `UserDirectory=ADVINC; UserId=Motor_User1`,
+            },
+          }),
           responseInterceptors
         });
 
@@ -271,13 +277,20 @@ function useEngine(props) {
              // session.resume();
         });
           
+        // Catch possible errors sent on WebSocket
+        session.on('traffic:received', (res) => {
+          if (res.params && res.params.severity === 'fatal') {
+            possibleEnigmaErr = res.params.message;
+          }
+        });
+
         try {
           const _global = await session.open();
-          console.log('GLOBAL! ',_global)
           const _user = await _global.getAuthenticatedUser()
          
           if(!config.global) {
             const _doc = await _global.openDoc(config.appId);
+            console.log('_doc! ',_doc)
             setEngine(_doc);
           } else {
             setEngine(_global);
