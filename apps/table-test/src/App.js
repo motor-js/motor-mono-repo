@@ -1,36 +1,37 @@
-import logo from './logo.svg';
-import { useTable } from '@motor-js/engine'
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from './pages/Home'
+import Login from './pages/Login'
+import "./App.css"
 
-function App() {
-
-  const cols=[
-    {
-      qField: 'BURGER_TEST',
-      dataKey: 'BURGER_TEST',
-      qLabel: 'BURGER_TEST',
-      qNullSuppression: false
-    },
-    {
-      qField: '=sum(BURGER_VALUE)',
-      dataKey: 'BURGER_VALUE',
-      qLabel: 'BURGER_VALUE',
-    }
-  ];
-
-  const { 
-    dataSet,
-  } = useTable({
-    cols,
-    qSuppressMissing: false,
-    qSuppressZero: false
-  });
-  
-  console.log(dataSet)
-
+export default function App() {
   return (
-    <div className="App">
-    </div>
+    <Router>
+      <div className="app">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL.*/}
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Home />} />
+        </Routes> 
+      </div>
+    </Router>
   );
 }
 
-export default App;

@@ -1,48 +1,12 @@
-194 error Error: Command failed: git push --follow-tags --no-verify --atomic origin master
-194 error remote: Internal Server Error
-194 error To https://github.com/motor-js/motor-mono-repo.git
-194 error  ! [remote rejected]   master -> master (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/cli@0.4.10 -> @motor-js/cli@0.4.10 (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/cli@0.4.11 -> @motor-js/cli@0.4.11 (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/components@0.2.10 -> @motor-js/components@0.2.10 (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/components@0.2.11 -> @motor-js/components@0.2.11 (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/engine@0.5.10 -> @motor-js/engine@0.5.10 (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/engine@0.5.9 -> @motor-js/engine@0.5.9 (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/nebula@0.4.10 -> @motor-js/nebula@0.4.10 (Internal Server Error)
-194 error  ! [remote rejected]   @motor-js/nebula@0.4.11 -> @motor-js/nebula@0.4.11 (Internal Server Error)
-194 error  ! [remote rejected]   demo@0.7.10 -> demo@0.7.10 (Internal Server Error)
-194 error  ! [remote rejected]   demo@0.7.11 -> demo@0.7.11 (Internal Server Error)
-194 error  ! [remote rejected]   kpi-test@0.3.10 -> kpi-test@0.3.10 (Internal Server Error)
-194 error  ! [remote rejected]   kpi-test@0.3.11 -> kpi-test@0.3.11 (Internal Server Error)
-194 error  ! [remote rejected]   lock-feature@0.2.10 -> lock-feature@0.2.10 (Internal Server Error)
-194 error  ! [remote rejected]   lock-feature@0.2.11 -> lock-feature@0.2.11 (Internal Server Error)
-194 error  ! [remote rejected]   luke-test@0.2.10 -> luke-test@0.2.10 (Internal Server Error)
-194 error  ! [remote rejected]   luke-test@0.2.11 -> luke-test@0.2.11 (Internal Server Error)
-194 error  ! [remote rejected]   material-sense@0.3.10 -> material-sense@0.3.10 (Internal Server Error)
-194 error  ! [remote rejected]   material-sense@0.3.11 -> material-sense@0.3.11 (Internal Server Error)
-194 error  ! [remote rejected]   material-ui-starter@0.4.10 -> material-ui-starter@0.4.10 (Internal Server Error)
-194 error  ! [remote rejected]   material-ui-starter@0.4.11 -> material-ui-starter@0.4.11 (Internal Server Error)
-194 error  ! [remote rejected]   material-web-analytics@0.4.10 -> material-web-analytics@0.4.10 (Internal Server Error)
-194 error  ! [remote rejected]   material-web-analytics@0.4.11 -> material-web-analytics@0.4.11 (Internal Server Error)
-194 error  ! [remote rejected]   multi-app-poc@1.2.10 -> multi-app-poc@1.2.10 (Internal Server Error)
-194 error  ! [remote rejected]   multi-app-poc@1.2.11 -> multi-app-poc@1.2.11 (Internal Server Error)
-194 error  ! [remote rejected]   multi-page-mashup@0.5.10 -> multi-page-mashup@0.5.10 (Internal Server Error)
-194 error  ! [remote rejected]   multi-page-mashup@0.5.11 -> multi-page-mashup@0.5.11 (Internal Server Error)
-194 error  ! [remote rejected]   selection-modal-dev@0.3.10 -> selection-modal-dev@0.3.10 (Internal Server Error)
-194 error  ! [remote rejected]   selection-modal-dev@0.3.11 -> selection-modal-dev@0.3.11 (Internal Server Error)
-194 error  ! [remote rejected]   showcase-app-1@0.3.10 -> showcase-app-1@0.3.10 (Internal Server Error)
-194 error  ! [remote rejected]   showcase-app-1@0.3.11 -> showcase-app-1@0.3.11 (Internal Server Error)
-194 error  ! [remote rejected]   single-page-mashup@0.5.10 -> single-page-mashup@0.5.10 (Internal Server Error)
-194 error  ! [remote rejected]   single-page-mashup@0.5.11 -> single-page-mashup@0.5.11 (Internal Server Error)
-194 error  ! [remote rejected]   solar-motor@0.4.10 -> solar-motor@0.4.10 (Internal Server Error)
-194 error  ! [remote rejected]   solar-motor@0.4.11 -> solar-motor@0.4.11 (Internal Server Error)
-194 error  ! [remote rejected]   styled-multi-page@0.4.10 -> styled-multi-page@0.4.10 (Internal Server Error)
-194 error  ! [remote rejected]   styled-multi-page@0.4.11 -> styled-multi-page@0.4.11 (Internal Server Error)
-194 error  ! [remote rejected]   table-test@0.2.10 -> table-test@0.2.10 (Internal Server Error)
-194 error  ! [remote rejected]   table-test@0.2.9 -> table-test@0.2.9 (Internal Server Error)
-194 error  ! [remote rejected]   test-components@0.3.10 -> test-components@0.3.10 (Internal Server Error)
-194 error  ! [remote rejected]   test-components@0.3.11 -> test-components@0.3.11 (Internal Server Error)
-194 error error: failed to push some refs to 'https://github.com/motor-js/motor-mono-repo.git'
-194 error
-194 error     at makeError (/Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:174:9)
-194 error     at /Users/lureilly/Repos/motor-mono-repo/node_modules/execa/index.js:278:16
+0 silly argv {
+0 silly argv   _: [ 'add' ],
+0 silly argv   globs: [],
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': '/opt/homebrew/bin/lerna',
+0 silly argv   pkg: '@motor-js/engina'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath /Users/lureilly/Repos/motor-mono-repo
+3 info versioning independent
+4 error Error: 404 Not Found - GET https://registry.npmjs.org/@motor-js%2fengina - Not found
+4 error     at /Users/lureilly/Repos/motor-mono-repo/node_modules/@evocateur/npm-registry-fetch/check-response.js:104:15

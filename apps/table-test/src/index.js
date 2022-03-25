@@ -1,25 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Motor } from '@motor-js/engine'
+import { Motor, MotorTicketStore } from '@motor-js/engine'
+import './index.css';
+import { qlikConfig } from './config';
 
 ReactDOM.render(
   <React.StrictMode>
-  <Motor
-      config={{
-        host: "motor.eu.qlikcloud.com",
-        secure: true,
-        port: null,
-        prefix: "",
-        appId: "f3c7c25f-90da-4286-ac1d-ca9885d89605",
-        webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
-        qcs: true,
-      }}
-    >
-    <App />
-    </Motor>
+    <MotorTicketStore>
+      <Motor config={qlikConfig}>
+        <App />
+      </Motor>
+    </MotorTicketStore>
   </React.StrictMode>,
   document.getElementById('root')
 );

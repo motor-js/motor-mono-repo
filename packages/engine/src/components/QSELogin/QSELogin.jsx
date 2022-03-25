@@ -6,7 +6,7 @@ import { EngineContext } from "../../contexts/EngineProvider";
 const QSELogin = ({ config, ...rest }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { errorCode } = useContext(EngineContext);
-
+  console.log('ERROR CODE: ',errorCode)
   return (
     <div style={{ display: errorCode === -1 ? "" : "none" }}>
       {config &&  <StyledLogin config={config} {...rest} />}

@@ -37,8 +37,6 @@ function Motor({
   const newEngine = useEngine({config, engineState, state})
   const newLoginUri = newEngine && newEngine.loginUri
 
-  console.log('newEngine! ',newEngine)
-
   const text = `Powered by Motor`;
   const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
 
@@ -130,7 +128,7 @@ function Motor({
           buttonColor={buttonColor}
           loginfontFamily={loginfontFamily}
         />
-       </div>
+      </div>
       }
       <div>
         { !validLicense ? 

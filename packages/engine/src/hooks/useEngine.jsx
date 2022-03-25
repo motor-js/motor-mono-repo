@@ -182,7 +182,7 @@ function useEngine(props) {
           schema,
           url: url,
           suspendOnClose: false,
-          responseInterceptors
+          //responseInterceptors
         });
 
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
@@ -231,23 +231,26 @@ function useEngine(props) {
           }
       }
 
-      if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket' && ticket.length > 0) {
-        //const reloadURI = encodeURIComponent(`https://${config.host}${config.prefix ? '/' + config.prefix : ''}/content/Default/${config.redirectFileName}`);
+      if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
+
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
         
         const session = enigma.create({
           schema,
           url: url,
           createSocket: (url) => new WebSocket(url),
+          responseInterceptors
         });
 
         session.on("error", () => { console.warn("Captured session error"); });
         
         session.on('suspended', () => { console.log('Session was suspended') });
-          
+         
+        /*
         session.on('traffic:received', (res) => {
           console.log('res: ',res)
         });
+        */
 
         try {
           const _global = await session.open();
@@ -255,7 +258,6 @@ function useEngine(props) {
          
           if(!config.global) {
             const _doc = await _global.openDoc(config.appId);
-            console.log('_doc! ',_doc)
             setEngine(_doc);
           } else {
             setEngine(_global);
