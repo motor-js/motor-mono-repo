@@ -6,10 +6,10 @@ const SenseUtilities = require("enigma.js/sense-utilities");
 const MAX_RETRIES = 3;
 
 function useEngine(props) {
-  
+ 
   const { config, engineState, state } = props;
   const { ticket } = state
-
+ 
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -46,7 +46,7 @@ function useEngine(props) {
         // If it was not an aborted QIX call, or if we reached MAX_RETRIES, we let the error
         // trickle down to potential other interceptors, and finally down to resolving/rejecting
         // the initial promise that the user got when invoking the QIX method:
-        console.warn(error);
+        // console.warn(error);
 
         return this.Promise.resolve(error);
       },
@@ -55,6 +55,7 @@ function useEngine(props) {
 
   const [engineError, setEngineError] = useState(false);
   const [errorCode, seErrorCode] = useState(null);
+  const [isSuspended, setIsSuspended] = useState(false)
   const [engine, setEngine] = useState(null);
   const [user, setUser] = useState(null)
   const [loginUri, setLoginUri] = useState(null)
@@ -233,19 +234,22 @@ function useEngine(props) {
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
 
+        console.log('called ticket')
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
         
         const session = enigma.create({
           schema,
           url: url,
           createSocket: (url) => new WebSocket(url),
-          responseInterceptors
+        //  responseInterceptors
         });
 
         session.on("error", () => { console.warn("Captured session error"); });
         
-        session.on('suspended', () => { console.log('Session was suspended') });
-         
+        session.on('suspended', () => { setIsSuspended(true) });
+        
+        session.on('closed', () => { console.warn('Session was closed') });
+
         /*
         session.on('traffic:received', (res) => {
           console.log('res: ',res)
@@ -262,12 +266,13 @@ function useEngine(props) {
           } else {
             setEngine(_global);
           }
+          console.log('called catch error!')
           setUser(_user)
           seErrorCode(1);
           return 1
         } catch (err) {
           if (err.code) {
-            console.log('Tried to communicate on a session that is closed');
+            console.error('Tried to communicate on a session that is closed');
           }
         }
       }
@@ -275,7 +280,7 @@ function useEngine(props) {
     })();
   }, [engineState, config, state]);
 
-  return { engine, engineError, errorCode, user, loginUri };
+  return { engine, engineError, errorCode, user, loginUri, isSuspended };
 }
 
 export default useEngine;
