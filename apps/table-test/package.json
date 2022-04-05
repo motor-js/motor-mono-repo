@@ -1,10 +1,10 @@
 {
   "name": "table-test",
-  "version": "0.2.26",
+  "version": "0.2.27",
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "@motor-js/engine": "^0.5.26",
+    "@motor-js/engine": "^0.5.27",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
