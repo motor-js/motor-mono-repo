@@ -56,6 +56,7 @@ function useEngine(props) {
   const [engineError, setEngineError] = useState(false);
   const [errorCode, seErrorCode] = useState(null);
   const [isSuspended, setIsSuspended] = useState(false)
+  const [isClosed, setIsClosed] = useState(false)
   const [engine, setEngine] = useState(null);
   const [user, setUser] = useState(null)
   const [loginUri, setLoginUri] = useState(null)
@@ -241,17 +242,27 @@ function useEngine(props) {
           schema,
           url: url,
           createSocket: (url) => new WebSocket(url),
-        //  responseInterceptors
+          suspendOnClose: true,
+          //responseInterceptors
         });
 
         session.on("error", () => { console.warn("Captured session error"); });
         
-        session.on('suspended', () => { setIsSuspended(true) });
-        
-        session.on('closed', () => { console.warn('Session was closed') });
+
+        session.on('closed', () => { 
+          setIsClosed(true) 
+          setIsSuspended(false)
+          console.warn('Session was closed') 
+        });
+
+        session.on('notification:OnSessionTimedOut', (res) => {
+          console.log('SUSPENDED!')
+          setIsSuspended(true)
+        })
 
         /*
         session.on('traffic:received', (res) => {
+          // res.method === ''
           console.log('res: ',res)
         });
         */
@@ -266,13 +277,16 @@ function useEngine(props) {
           } else {
             setEngine(_global);
           }
-          console.log('called catch error!')
           setUser(_user)
           seErrorCode(1);
+          setIsClosed(false)
+          setIsSuspended(false)
           return 1
         } catch (err) {
           if (err.code) {
-            console.error('Tried to communicate on a session that is closed');
+            console.warn('Tried to communicate on a session that is closed');
+            setIsClosed(true)
+            setIsSuspended(false)
           }
         }
       }
@@ -280,7 +294,7 @@ function useEngine(props) {
     })();
   }, [engineState, config, state]);
 
-  return { engine, engineError, errorCode, user, loginUri, isSuspended };
+  return { engine, engineError, errorCode, user, loginUri, isSuspended, isClosed };
 }
 
 export default useEngine;

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import {
   FilterInputWrapper,
   FilterInputOutline,
@@ -20,7 +20,6 @@ const useFocus = () => {
 
   return [ htmlElRef, setFocus ] 
 }
-
 
 const FilterInput = ({ 
   selectionsLabels,

@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from "react-router-dom";
+import { EngineContext } from '@motor-js/engine'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import "./App.css"
 
 export default function App() {
+
+  const data = useContext(EngineContext)
+  console.log(data)
+  
   return (
     <Router>
       <div className="app">

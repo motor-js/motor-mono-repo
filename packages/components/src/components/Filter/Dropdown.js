@@ -47,6 +47,8 @@ const Dropdown = ({
   // Pass an empty callback to InfiniteLoader in case it asks us to load more than once.
   const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage;
 
+
+
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = index => !hasNextPage || index < pageHeight;
 
