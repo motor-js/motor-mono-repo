@@ -184,7 +184,7 @@ function useEngine(props) {
           schema,
           url: url,
           suspendOnClose: false,
-          //responseInterceptors
+          // responseInterceptors
         });
 
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
@@ -235,7 +235,6 @@ function useEngine(props) {
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
 
-        console.log('called ticket')
         const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
         
         const session = enigma.create({
@@ -243,7 +242,7 @@ function useEngine(props) {
           url: url,
           createSocket: (url) => new WebSocket(url),
           suspendOnClose: true,
-          //responseInterceptors
+          responseInterceptors
         });
 
         session.on("error", () => { console.warn("Captured session error"); });
@@ -256,7 +255,6 @@ function useEngine(props) {
         });
 
         session.on('notification:OnSessionTimedOut', (res) => {
-          console.log('SUSPENDED!')
           setIsSuspended(true)
         })
 
