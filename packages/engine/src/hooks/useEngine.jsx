@@ -6,10 +6,9 @@ const SenseUtilities = require("enigma.js/sense-utilities");
 const MAX_RETRIES = 3;
 
 function useEngine(props) {
- 
+  
   const { config, engineState, state } = props;
-  const { ticket } = state
- 
+
   const responseInterceptors = [
     {
       // We only want to handle failed responses from QIX Engine:
@@ -235,7 +234,7 @@ function useEngine(props) {
 
       if (config && config.qsServerType === 'onPrem' && config.authType === 'ticket') {
 
-        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${ticket}`;
+        const url = `wss:/${config.host}${config.prefix ? '/' + config.prefix : ''}/app/${config.appId}?QlikTicket=${state.ticket}`;
         
         const session = enigma.create({
           schema,

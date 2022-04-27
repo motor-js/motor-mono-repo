@@ -469,7 +469,9 @@ const useTable = (props) => {
     const _exportType = exportType || "P";
     const _secure = secure ? "https://" : "http://";
     const _port = port ? `:${port}` : "";
-    const server = _secure + host //+ _port + prefix;
+    const _prefix = prefix.length > 0 ? `/${prefix}` : ""
+    const server = _secure + host + _prefix;
+    
     engine.getObject(id).then((model) => {
       //export type: P for Possible, A for All
       model.exportData("CSV_C", "/qHyperCubeDef", filenameExport, _exportType).then((url) => {

@@ -33,7 +33,7 @@ export const globalConfig = {
   host: "sense-motor.adviseinc.co.uk",
   secure: true,
   port: 19077,
-  prefix: "",
+  prefix: "motor",
   appId: "4359f6e1-0df6-43f8-bcd2-9aa13616f53b",
   redirectFileName: "auth.html",
   qsServerType: "onPrem",
