@@ -70,7 +70,6 @@ const useButton = (props) => {
   const selectValues = async (values, field, toggle=false, numeric=false) => {
     const key = numeric ? 'qNumber' : 'qText'
     const sel = await values.map(d => ({ [key]:d, qIsNumeric: numeric }))
-    console.log('sel: ',sel)
     const qDoc = await engine;
     const qField = await qDoc.getField(field)
     qField.selectValues(sel,toggle)
