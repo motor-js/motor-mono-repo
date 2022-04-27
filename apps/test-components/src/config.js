@@ -57,7 +57,7 @@ export const qlikSAASConfig = {
   secure: true, // Whether your host is secure of not (HTTPS / HTTP)
   port: null, // Qlik Sense site port
   prefix: "", // Prefix
-  appId: "18f7a1f3-4605-4c59-8d01-849119d82621",//"f3c7c25f-90da-4286-ac1d-ca9885d89605", // Application Id
+  appId: "7b635791-6944-47a0-a8e9-5fcdff5dae29",//"f3c7c25f-90da-4286-ac1d-ca9885d89605", // Application Id
   webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i", // Web Integration Id, for connection to Qlik cloud
   //qcs: true, // whether you are connecting to a Qlik Cloud site or not
   qsServerType: "cloud",
