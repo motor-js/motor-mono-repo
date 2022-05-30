@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
-import ReactWaterMark from "../Watermark"
 import { EngineContext } from "../../contexts/EngineProvider";
 import { ConfigContext } from "../../contexts/ConfigProvider";
 import Login from "../Login";
 import QSELogin from "../QSELogin";
 import NotConnected from "../NotConnected";
 import useEngine from "../../hooks/useEngine";
-import { LicenseCheck } from "../License/LicenseCheck"
 import { MotorTicketContext } from "../../store/TicketStore"
 
 function Motor({
@@ -33,23 +31,9 @@ function Motor({
 
   const [state] = useContext(MotorTicketContext)
   const engineState = engine
-  const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
+  // const validLicense = licenseKey ? LicenseCheck(licenseKey) : false  
   const newEngine = useEngine({config, engineState, state})
   const newLoginUri = newEngine && newEngine.loginUri
-
-  const text = `Powered by Motor`;
-  const beginAlarm = function() { console.error('License breach! Communicating to remote server'); };
-
-  const options = {
-    chunkWidth: 200,
-    chunkHeight: 90,
-    textAlign: "left",
-    textBaseline: "bottom",
-    globalAlpha: 0.47,
-    font: "18px Roboto sans-serif",
-    rotateAngle: -0.19,
-    fillStyle: "#EA4345",
-  };
 
   return (
     <EngineContext.Provider value={newEngine}>
@@ -131,21 +115,8 @@ function Motor({
       </div>
       }
       <div>
-        { !validLicense ? 
-            <ReactWaterMark
-              waterMarkText={text}
-              openSecurityDefense
-              securityAlarm={beginAlarm}
-              options={options}
-            >
-            {children}
-           </ReactWaterMark>
-           :
-           <div>
-            {children}
-           </div>
-        }
-        </div>
+        {children}
+      </div>
       </ConfigContext.Provider>
     </EngineContext.Provider>
   );
