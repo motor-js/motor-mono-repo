@@ -1,11 +1,11 @@
 {
   "name": "solar-motor",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "private": true,
   "dependencies": {
-    "@motor-js/components": "^0.3.3",
-    "@motor-js/engine": "^0.6.3",
-    "@motor-js/theme": "^0.3.3",
+    "@motor-js/components": "^0.3.4",
+    "@motor-js/engine": "^0.6.4",
+    "@motor-js/theme": "^0.3.4",
     "@styled-system/theme-get": "^5.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
