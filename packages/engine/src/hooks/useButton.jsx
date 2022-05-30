@@ -67,6 +67,12 @@ const useButton = (props) => {
     qField.select(value)
   }
 
+  const clearField = async (field) => {
+    const qDoc = await engine;
+    const qField = await qDoc.getField(field)
+    qField.clear()
+  }
+
   const selectLowLevelValues = async (values, field, toggle=false) => {
     const qDoc = await engine;
     const qField = await qDoc.getField(field)
@@ -125,7 +131,8 @@ const useButton = (props) => {
     doReload,
     lockField,
     unlockField,
-    selectLowLevelValues
+    selectLowLevelValues,
+    clearField
   };
 };
 
