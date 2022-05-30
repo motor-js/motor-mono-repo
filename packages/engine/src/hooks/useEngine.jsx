@@ -183,7 +183,7 @@ function useEngine(props) {
           schema,
           url: url,
           suspendOnClose: false,
-          // responseInterceptors
+          responseInterceptors
         });
 
         session.on('notification:OnAuthenticationInformation', (authInfo) => {
@@ -246,7 +246,6 @@ function useEngine(props) {
 
         session.on("error", () => { console.warn("Captured session error"); });
         
-
         session.on('closed', () => { 
           setIsClosed(true) 
           setIsSuspended(false)
