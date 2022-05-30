@@ -1,11 +1,11 @@
 {
   "name": "luke-test",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "dependencies": {
-    "@motor-js/components": "^0.3.2",
-    "@motor-js/engine": "^0.6.2",
-    "@motor-js/theme": "^0.3.2",
+    "@motor-js/components": "^0.3.3",
+    "@motor-js/engine": "^0.6.3",
+    "@motor-js/theme": "^0.3.3",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
