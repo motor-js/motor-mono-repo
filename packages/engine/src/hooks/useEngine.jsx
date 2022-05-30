@@ -47,7 +47,7 @@ function useEngine(props) {
         // the initial promise that the user got when invoking the QIX method:
         // console.warn(error);
 
-        return this.Promise.resolve(error);
+        return this.Promise.resolve(console.warn(error));
       },
     },
   ];
