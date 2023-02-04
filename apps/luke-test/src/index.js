@@ -10,12 +10,12 @@ ReactDOM.render(
     <ThemeProvider theme={defaultTheme}>
     <Motor
       config={{
-        host: "motor.eu.qlikcloud.com",
+        host: "x9m2ebuxmcerh4i.eu.qlikcloud.com",
         secure: true,
         port: null,
         prefix: "",
-        appId: "18f7a1f3-4605-4c59-8d01-849119d82621",
-        webIntId: "4Tx-ydWxSQEM_q1ajlYBVzGgVUVJUo-i",
+        appId: "dcbd66b8-c730-4b63-93cb-6c5ddf3374ef",
+        webIntId: "zNnemtlMedhloqXVsj_gZULkSExdpUzj",
         qcs: true,
       }}
     >

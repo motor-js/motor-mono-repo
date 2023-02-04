@@ -1,6 +1,6 @@
 {
   "name": "@motor-js/engine",
-  "license": "https://www.motor.so/license",
+  "license": "Apache-2.0",
   "version": "0.6.4",
   "main": "lib/index.ts",
   "umd:main": "lib/index.ts",
