@@ -6,8 +6,7 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "apps/*",
-    "templates/*"
+    "apps/*"
   ],
   "devDependencies": {
     "lerna": "^3.22.1",

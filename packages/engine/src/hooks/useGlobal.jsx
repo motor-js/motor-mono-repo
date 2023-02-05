@@ -53,7 +53,7 @@ function useGlobal(config) {
 
   const [errorCode, seErrorCode] = useState(null);
   const [global, setGlobal] = useState(() => {
-    (async () => {
+    const getGlobal = async () => {
       if(!config) {
         setEngine(engineState)
         seErrorCode(null)
@@ -201,8 +201,8 @@ function useGlobal(config) {
             }
           }
       }
-
-    })();
+    }
+    getGlobal();
   }, []);
 
   return {

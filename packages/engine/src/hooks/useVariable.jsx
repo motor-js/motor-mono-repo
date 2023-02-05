@@ -181,7 +181,7 @@ const useVariable = (props) => {
   useEffect(() => {
     if (!engine) return;
 
-    (async () => {
+    const getData = async () => {
       const qDoc = await engine;
 
       try {
@@ -206,7 +206,8 @@ const useVariable = (props) => {
           setError(err);
         }
       }
-    })();
+    }
+    getData();
   }, [id, name, engine]);
 
   if (qLayout && qLayout.qVariableList) {

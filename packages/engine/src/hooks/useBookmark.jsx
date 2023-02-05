@@ -119,7 +119,7 @@ const useBookmark = (props) => {
     if (!engine) return;
     if (qObject.current) return;
 
-    (async () => {
+    const getData = async () => {
       const qDoc = await engine;
 
       try {
@@ -136,7 +136,8 @@ const useBookmark = (props) => {
           setError(err);
         }
       }
-    })();
+    }
+    getData()
   }, [engine]);
 
   return {

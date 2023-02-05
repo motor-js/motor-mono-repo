@@ -60,7 +60,7 @@ const useSelectionObject = () => {
   }
 
   const clearSelections = async (dim, value) => {
-    (async () => {
+    const clearSelectionsAsync = async () => {
       const qDoc = await engine;
       if (dim) {
         const masterItem = await getFieldsFromDimensions(qDoc, dim)
@@ -79,14 +79,15 @@ const useSelectionObject = () => {
       } else {
         qDoc.clearAll();
       }
-    })()
+    }
+    clearSelectionsAsync()
   };
 
   useEffect(() => {
     if (!engine) return;
     if (qObject.current) return;
 
-    (async () => {
+    const getData = async () => {
       const qProp = {
         qInfo: { qType: "SelectionObject" },
         qSelectionObjectDef: {},
@@ -107,7 +108,8 @@ const useSelectionObject = () => {
           setError(err);
         }
       }
-    })();
+    }
+    getData();
   }, [engine]);
 
   return { qLayout, selections, selectionItems, clearSelections, lockAll, unlockAll };

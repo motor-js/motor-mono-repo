@@ -821,7 +821,7 @@ const useData = (props) => {
   useEffect(() => {
     if (!engine) return;
     if (qObject.current) return;
-    (async () => {
+    const getData = async () => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
@@ -829,10 +829,13 @@ const useData = (props) => {
         update(qProp.qHyperCubeDef.qMeasures);
       });
       update(qProp.qHyperCubeDef.qMeasures);
-    })();
+    }
+    getData();
   }, [generateQProp, engine, update]);
 
-  useEffect(() => () => (_isMounted.current = false), []);
+   // removed due to react 18 double calling useEffects
+  // useEffect(() => () => (_isMounted.current = false), []);
+  
   // const dataSet = { data: mData, dataKeys, dataList, nameKey };
   const dataSet = {};
 

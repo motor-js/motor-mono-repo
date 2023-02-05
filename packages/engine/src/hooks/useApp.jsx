@@ -11,8 +11,8 @@ const useApp = () => {
   };
 
   useEffect(
-    () =>
-      (async () => {
+    () => {
+      const getData = async () => {
         if (engine === undefined) {
         } else {
           const qDoc = await engine;
@@ -26,7 +26,8 @@ const useApp = () => {
             doReload,
           });
         }
-      })(),
+      } 
+      getData()},
     [engine]
   );
 

@@ -61,7 +61,7 @@ function useEngine(props) {
   const [loginUri, setLoginUri] = useState(null)
 
   useEffect(() => {
-    (async () => {
+    const getEngineData = async () => {
       if(!config) {
         setEngine(engineState)
         seErrorCode(null)
@@ -286,8 +286,8 @@ function useEngine(props) {
           }
         }
       }
-
-    })();
+    }
+    getEngineData();
   }, [engineState, config, state]);
 
   return { engine, engineError, errorCode, user, loginUri, isSuspended, isClosed };

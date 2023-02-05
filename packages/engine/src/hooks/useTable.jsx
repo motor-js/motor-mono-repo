@@ -448,7 +448,7 @@ const useTable = (props) => {
   useEffect(() => {
     if (!engine) return;
     //if (qObject.current) return;
-    (async () => {
+    const getData = async () => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
@@ -456,10 +456,12 @@ const useTable = (props) => {
         update(newCols);
       });
       update(newCols);
-    })();
+    }
+    getData();
   }, [generateQProp, engine, update]);
 
-  useEffect(() => () => (_isMounted.current = false), []);
+   // removed due to react 18 double calling useEffects
+  // useEffect(() => () => (_isMounted.current = false), []);
 
   const exportData = (filename, exportType) => {
     const { host, secure, port, prefix } = config;

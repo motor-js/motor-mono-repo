@@ -39,15 +39,17 @@ const useButton = (props) => {
   useEffect(() => {
     if (!engine || !cols) return;
     if (qObject.current) return;
-    (async () => {
+    const getData = async () => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
       setQLayout(await qObject.current.getLayout());
-    })();
+    }
+    getData();
   }, [generateQProp, engine]);
 
-  useEffect(() => () => (_isMounted.current = false), []);
+ // removed due to react 18 double calling useEffects
+  // useEffect(() => () => (_isMounted.current = false), []);
 
   const clearSelections = () => {
     engine && engine.clearAll();
@@ -114,7 +116,7 @@ const useButton = (props) => {
     const server = _secure + host + _port + prefix;
     engine.getObject(id).then((model) => {
       model.exportData("CSV_C", "/qHyperCubeDef", "Test", "P").then((url) => {
-         console.log(url.qUrl, url.qWarnings);
+        // console.log(url.qUrl, url.qWarnings);
         // window.open(server + url.qUrl, '_blank')
       });
     });

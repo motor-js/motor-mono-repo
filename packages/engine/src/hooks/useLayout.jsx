@@ -10,8 +10,8 @@ const useLayout = () => {
   const [error, setError] = useState(null);
 
   useEffect(
-    () =>
-      (async () => {
+    () => {
+      const getData = async () => {
         if (!engine) return;
         try {
           const qDoc = await engine;
@@ -24,7 +24,8 @@ const useLayout = () => {
         } catch (err) {
           setError(err);
         }
-      })(),
+      }
+      getData()},
     [engine]
   );
 

@@ -3,8 +3,8 @@ import { getFieldsFromDimensions } from "../utils/hyperCubeUtilities";
 import { EngineContext } from "../contexts/EngineProvider";
 import { AppContext } from "../contexts/AppContext";
 
-const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
-  
+const useSearch = (props) => {
+  const { searchValue, dimensions, qCount, qGroupItemCount } = props || {}
   const [groupResults, setGroupResults] = useState([]);
   const [flatResults, setFlatResults] = useState([]);
   const _isMounted = useRef(true);
@@ -14,7 +14,7 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
   useEffect(() => {
     if (engine === undefined) {
     } else {
-      (async () => {
+      const getData = async () => {
         try {
           const qDoc = await engine;
           const search = await qDoc.searchResults(
@@ -46,11 +46,13 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
         } catch (e) {
           console.warn(e);
         }
-      })();
+      }
+     getData();
     }
   }, [engine, searchValue, qCount, qGroupItemCount, dimensions]);
 
-  useEffect(() => () => (_isMounted.current = false), []);
+   // removed due to react 18 double calling useEffects
+  // useEffect(() => () => (_isMounted.current = false), []);
 
   const groupRes = v => {
     let arr = []
@@ -80,8 +82,8 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
 
   }
 
-  const groupSelect = useCallback((id) =>
-    (async () => {
+
+  const groupSelect = useCallback(async (id) => {
       const qDoc = await engine;
       // eslint-disable-next-line no-unused-expressions
       qDoc.selectAssociations(
@@ -93,11 +95,9 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
         id
         ),
       [];
-    })()
-  );
+    })
 
-  const flatSelect = useCallback((dim, value) =>
-    (async () => {
+  const flatSelect = useCallback(async(dim, value) => {
       const qDoc = await engine;
       // If the dimension is a master item, we are using this helper function
       // to identify the field in the data model
@@ -111,8 +111,8 @@ const useSearch = ({ searchValue, dimensions, qCount, qGroupItemCount }) => {
       // eslint-disable-next-line no-unused-expressions
       const qField = await qDoc.getField(field)
       qField.select(value)
-    })()
-  );
+    })
+
 
   return {
     groupResults,

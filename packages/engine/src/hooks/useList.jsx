@@ -158,6 +158,7 @@ const useList = (props) => {
   const update = useCallback(async () => {
     const _qLayout = await getLayout()
     const _qData = await getData();
+   
     const { _selId, _selections, _listData } = await structureData(_qData);
     if (_qData && _isMounted.current) {
      // const _selections = await getSelections(_qData);
@@ -193,7 +194,7 @@ const useList = (props) => {
 
   const beginSelections = async () => {
     // Make sure we close all other open selections. We usually get that when we have morethan one dropDown in the same page and while one is open, we click on the second one
-    await state.qDoc.abortModal(true);
+    await state?.qDoc?.abortModal(true);
     await qObject.current.beginSelections(["/qListObjectDef"]);
   };
 
@@ -251,7 +252,7 @@ const useList = (props) => {
 
   useEffect(() => {
     if (!engine || qObject.current) return;
-    (async () => {
+    const getData = async () => {
       const qProp = generateQProp();
       const qDoc = await engine;
       qObject.current = await qDoc.createSessionObject(qProp);
@@ -261,10 +262,16 @@ const useList = (props) => {
         update();
       });
       update();
-    })();
+    }
+    getData()
   }, [generateQProp, engine, update]);
 
-  useEffect(() => () => (_isMounted.current = false), []);
+  // removed due to react 18 double calling useEffects
+  /*
+   useEffect(() => () => {
+    _isMounted.current = false
+  }, []);
+  */
 
   return {
     layout,
