@@ -23,16 +23,13 @@ export const qlikConfig={
 */
 
 export const qlikConfig = {
-  host: "sense-motor.adviseinc.co.uk",
+  host,
   secure: true,
   port: 4243,
   prefix: "motor-ticket",
-  appId: "4359f6e1-0df6-43f8-bcd2-9aa13616f53b", 
+  appId,
   redirectFileName: "auth4.html",
   qsServerType: "onPrem",
-  authType: 'ticket',
-  global: false
+  authType: "ticket",
+  global: false,
 };
-
-
-
